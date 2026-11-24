@@ -18,4 +18,5 @@ src/*.pdf
 # Temporary smoke/work build directories
 build/smoke/
 build/gray_work/
+src/$outdir/
 qa/renders/test_style*
