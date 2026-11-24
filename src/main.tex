@@ -1,0 +1,84 @@
+% ============================================================================
+% main.tex — Master Production Driver for Science Olympiad 2026-2027
+% Division C Thermodynamics Competition Binder
+% Build: python build/build.py --target main|gray|quickref|device|all
+% ============================================================================
+\providecommand{\grayproof}{0}
+\ifnum\grayproof=1 \PassOptionsToPackage{gray}{xcolor}\fi
+\documentclass[10pt,twoside,openany,letterpaper]{book}
+\usepackage{thermobinder}
+
+\newcommand{\inputsec}[1]{%
+  \IfFileExists{#1}{\input{#1}}{%
+    \IfFileExists{sections/#1}{\input{sections/#1}}{%
+      \IfFileExists{appendices/#1}{\input{appendices/#1}}{\typeout{BINDER-SKIPPED #1}}}}}
+
+\begin{document}
+\mainmatter
+
+% ---------------- Front Matter (2 pp: Cover + 9-Tab Finder + Master TOC) --------
+\thermotabnoclear{1}
+\inputsec{frontmatter}
+
+% ---------------- Tab 1: CMD/QUICK (§§0--1, 19 pp) ------------------------------
+\thermotab{1}
+\inputsec{sec00}
+\inputsec{sec01}
+
+% ---------------- Tab 2: FOUNDATIONS (§§2--3, 14 pp) ----------------------------
+\thermotab{2}
+\inputsec{sec02}
+\inputsec{sec03}
+
+% ---------------- Tab 3: CAL/PHASE (§§4--5, 22 pp) ------------------------------
+\thermotab{3}
+\inputsec{sec04}
+\inputsec{sec05}
+
+% ---------------- Tab 4: GASES/LAWS (§§6--9, 44 pp) -----------------------------
+\thermotab{4}
+\inputsec{sec06}
+\inputsec{sec07}
+\inputsec{sec08}
+\inputsec{sec09}
+
+% ---------------- Tab 5: TRANSFER (§§10--13, 38 pp) -----------------------------
+\thermotab{5}
+\inputsec{sec10}
+\inputsec{sec11}
+\inputsec{sec12}
+\inputsec{sec13}
+
+% ---------------- Tab 6: DEVICE (§§14--16, 40 pp) -------------------------------
+\thermotab{6}
+\inputsec{sec14}
+\inputsec{sec15}
+\inputsec{sec16}
+
+% ---------------- Tab 7: LAB/DATA (§§17--18, 20 pp) -----------------------------
+\thermotab{7}
+\inputsec{sec17}
+\inputsec{sec18}
+
+% ---------------- Tab 8: PROBLEMS (§§19--23, 33 pp) -----------------------------
+\thermotab{8}
+\inputsec{sec19}
+\inputsec{sec20}
+\inputsec{sec21}
+\inputsec{sec22}
+\inputsec{sec23}
+
+% ---------------- Tab 9: INDEX/APP (Appendices A--H, 18 pp) ---------------------
+\thermotab{9}
+\appendix
+\inputsec{appA}
+\inputsec{appB}
+\inputsec{appC}
+\inputsec{appD}
+\inputsec{appE}
+\inputsec{appF}
+\inputsec{appG}
+\inputsec{appH}
+
+\label{LastContentPage}
+\end{document}

@@ -1,0 +1,430 @@
+% ============================================================================
+% sec19.tex — §19 Integrated Problem-Solving Playbook
+% Target: 8 pages | Figure: fig:19:coupled-router
+% ============================================================================
+\binderchapter{19}{Integrated Problem-Solving Playbook (Multi-Physics Coupling Templates \& Step-by-Step Decision Trees)}{Integrated Problem-Solving Playbook}{sec:19}
+\scopebanner{REQUIRED}[All 2027 Written Syllabus Clauses 5.c.i--vii \& Math Rules 5.d.i--iv]
+
+\idxtopic{problem-solving playbook!overview}\idxtopic{multi-physics coupled problems}
+On research-university invitational and national exams (\sref{sec:22}), multi-step quantitative derivations (\texttt{FMT-3}) carry $\mathbf{36.7\%}$ of all raw written points and dominate tiebreakers \src{S25,S26,S28}. High-difficulty ``separator'' problems rarely test a single isolated equation; instead, they chain \textbf{three or four thermodynamic domains} together (e.g., an electrical heater inside a leaking cylinder melting ice and pushing a weighted piston, or a selective radiative collector driving a heat engine coupled to a heat pump). This chapter provides a systematic decomposition protocol, a verbal-cue process recognizer, a 5-check answer audit, Fermi estimation anchors, four canonical coupled-system templates (\fref{fig:19:coupled-router}), and a Class~III calculator speed playbook.
+
+% ============================================================================
+\section{The Universal 6-Step Problem-Solving Architecture}\label{sec:19.1}
+\idxtopic{system boundary checklist}\idxtopic{process recognition decision tree}\idxtopic{heat-transfer mode selector}
+
+Execute these six steps in order on every free-response problem (even writing the symbolic setup earns $40\text{--}60\%$ partial credit on university rubrics \src{S25,S26,S28}):
+
+\begin{formulacard}[Step 1 (System Boundary) $\to$ Step 2 (State Ledger) $\to$ Step 3 (Conservation Accounting)]
+\begin{enumerate}
+  \item \textbf{Step 1 --- System-Boundary \& Wall-Constraint Checklist:}
+  Draw an explicit dashed boundary around your chosen system and classify:
+  \begin{itemize}
+    \item \emph{Mass transfer across boundary?} \textbf{Closed System / Control Mass} ($\Delta m = 0$: use $\Delta U = Q - W_{\mathrm{by}}$) vs.\ \textbf{Open Control Volume / Steady Flow} ($\dot{m}_{\mathrm{in}} = \dot{m}_{\mathrm{out}} = \dot{m}$: use enthalpy $\dot{Q} - \dot{W}_{\mathrm{sh}} = \dot{m}[\Delta h + \tfrac{1}{2}\Delta v^2 + g\Delta z]$) vs.\ \textbf{Isolated Composite System} ($Q_{\mathrm{ext}} = W_{\mathrm{ext}} = 0 \implies \sum \Delta U_i = 0$ and $\Delta S_{\mathrm{tot}} = S_{\mathrm{gen}} \ge 0$).
+    \item \emph{Mechanical boundary constraint?} \textbf{Rigid wall} ($\Delta V = 0 \implies W_{\mathrm{by}} = 0$) vs.\ \textbf{Freely floating weighted piston} ($P = P_{\mathrm{ext}} = P_{\mathrm{atm}} + \frac{m_p g}{A_p} = \text{const} \implies W_{\mathrm{by}} = P\Delta V$ and $Q_P = \Delta H$) vs.\ \textbf{Linear spring-loaded piston} ($P(V) = P_1 + \frac{k_s}{A_p^2}(V - V_1)$: straight chord on $P$--$V$, so $W_{\mathrm{by}} = \frac{P_1 + P_2}{2}(V_2 - V_1)$!) vs.\ \textbf{Vacuum free expansion} ($P_{\mathrm{ext}} = 0 \implies W_{\mathrm{by}} = 0$).
+    \item \emph{Thermal boundary constraint?} \textbf{Adiabatic / well-insulated} ($Q = 0$) vs.\ \textbf{Diathermal wall in contact with reservoir $T_R$} ($T_{\mathrm{final}} = T_R$) vs.\ \textbf{Conductive wall with finite resistance $R_{\mathrm{th}}$} ($\dot{Q}_{\mathrm{leak}} = \frac{T(t) - T_\infty}{R_{\mathrm{th}}}$).
+  \end{itemize}
+  \item \textbf{Step 2 --- Known/Unknown State-Variable Ledger \& Phase-Gate Check:}
+  Build a compact grid of states $1, 2, 3, \dots$ across columns $(P,\ V\text{ or }v,\ T\text{ in }\si{\kelvin},\ U\text{ or }u,\ H\text{ or }h,\ S\text{ or }s,\ \text{phase/quality }x)$ and path columns $(Q_{ij},\ W_{\mathrm{by},ij},\ \Delta U_{ij},\ S_{\mathrm{gen},ij})$.
+  \item \textbf{Step 3 --- Coupled Energy, Mass \& Entropy Accounting Workflow (\sref{sec:02}, \sref{sec:07}, \sref{sec:08}):}
+  \begin{equation}\label{eq:19:masterledger}
+    \underbrace{\Delta U = Q - W_{\mathrm{by}} = q + w_{\mathrm{on}}}_{\text{Closed System First Law}}, \qquad
+    \underbrace{\dot{Q} - \dot{W}_{\mathrm{sh}} = \dot{m}\left[(h_2 - h_1) + \tfrac{1}{2}(v_2^2 - v_1^2) + g(z_2 - z_1)\right]}_{\text{Steady-Flow Open System (SFEE)}}, \qquad
+    \underbrace{S_{\mathrm{gen}} = \Delta S_{\mathrm{sys}} - \sum_k \frac{Q_k}{T_{b,k}} \ge 0}_{\text{Second Law \& Gouy--Stodola } X_{\mathrm{dest}} = T_0 S_{\mathrm{gen}}}
+  \end{equation}
+\end{enumerate}
+\end{formulacard}
+
+\begin{table}[h!]
+\centering
+\captionof{table}{Step 4 \& Step 5 --- Verbal Cue Process Recognizer \& Heat-Transfer Mode Selector \src{S12,S13,S25,S26}.}\label{tab:19:cues}
+\footnotesize
+\setlength{\tabcolsep}{3.5pt}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.27\linewidth} >{\raggedright\arraybackslash}p{0.23\linewidth} >{\raggedright\arraybackslash}p{0.28\linewidth} >{\raggedright\arraybackslash}X@{}}
+\toprule
+\hdr{Problem Verbal Cue / Phrase} & \hdr{Thermodynamic Model} & \hdr{Exact Algebraic Constraint} & \hdr{Key Formula / Trap to Watch} \\
+\midrule
+\emph{``Rigid, sealed tank / bomb calorimeter''} &
+Isochoric closed system &
+$\Delta V = 0 \implies W_{\mathrm{by}} = 0$ &
+$Q_V = \Delta U = n C_{V,m}\Delta T$; on $P$--$T$: $\dfrac{P_2}{P_1} = \dfrac{T_2}{T_1}$. \\
+\rowcolor{rowalt}
+\emph{``Heavy frictionless piston / open to atmosphere / coffee cup''} &
+Isobaric closed system &
+$P = P_0 = \text{const}$ &
+$W_{\mathrm{by}} = P_0(V_2 - V_1) = nR\Delta T$; $Q_P = \Delta H = n C_{P,m}\Delta T$. \\
+\emph{``Slowly in thermal contact with a large constant-$T$ bath''} &
+Reversible isothermal &
+$\Delta T = 0 \implies \Delta U_{\mathrm{IG}} = \Delta H_{\mathrm{IG}} = 0$ &
+$Q = W_{\mathrm{by}} = nRT\ln\!\left(\dfrac{V_2}{V_1}\right) = nRT\ln\!\left(\dfrac{P_1}{P_2}\right)$. \\
+\rowcolor{rowalt}
+\emph{``Rapidly compressed/expanded in a well-insulated cylinder''} &
+Reversible adiabatic (isentropic if frictionless) &
+$Q = 0,\ \Delta S = 0$, \newline $P V^\gamma = \text{const},\ T V^{\gamma-1} = \text{const}$ &
+$\Delta U = -W_{\mathrm{by}} = n C_{V,m}(T_2 - T_1) = \dfrac{P_2 V_2 - P_1 V_1}{\gamma - 1}$. \\
+\emph{``Membrane bursts into an evacuated, insulated chamber''} &
+Adiabatic free expansion (Joule expansion) &
+$Q = 0,\ P_{\mathrm{ext}} = 0 \implies W_{\mathrm{by}} = 0$ \newline $\implies \Delta U = 0$ ($\Delta T_{\mathrm{IG}} = 0$) &
+\textbf{Irreversible!} $\Delta S = nR\ln\!\left(\dfrac{V_2}{V_1}\right) > 0$ even though $Q = 0$! \\
+\rowcolor{rowalt}
+\emph{``Flows steadily through a porous plug, capillary, or partially open valve''} &
+Steady-flow throttling (Joule--Thomson) &
+$\dot{Q} = 0,\ \dot{W}_{\mathrm{sh}} = 0 \implies \mathbf{h_2 = h_1}$ \newline (Isenthalpic, $\Delta H = 0$) &
+For ideal gas, $\Delta T = 0$; for wet steam/refrigerant, $h_1 = h_{f2} + x_2 h_{fg2}$ drops $T$! \\
+\emph{``Small metal sphere cools/warms in fluid ($h L_c / k_{\mathrm{solid}} < 0.1$)''} &
+Lumped-capacitance transient ($\mathrm{Bi} < 0.1$, \sref{sec:13}) &
+$T(t) = T_{\mathrm{ss}} - (T_{\mathrm{ss}} - T_i)e^{-t/\tau}$ &
+$\tau = R_{\mathrm{th}} C = \dfrac{m c_p}{h A}$; check $\mathrm{Bi} = \dfrac{h(V/A)}{k_{\mathrm{solid}}} < 0.1$ first! \\
+\rowcolor{rowalt}
+\emph{``Object in vacuum cavity / orbital satellite / tungsten filament''} &
+Pure radiative exchange ($h_{\mathrm{conv}} = 0$, \sref{sec:12}) &
+$\dot{Q}_{\mathrm{net}} = \varepsilon\sigma A\left(T^4 - T_{\mathrm{surr}}^4\right)$ &
+Vacuum cooling time ($T_{\mathrm{surr}} \to 0$): $\Delta t = \dfrac{m c}{3\varepsilon\sigma A}\!\left(\dfrac{1}{T_f^3} - \dfrac{1}{T_i^3}\right)$ (\texttt{E4 Q14d} \src{S28}). \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\textbf{Step 6 --- The Diagram-First Protocol:} Before solving multi-equation algebra, sketch a $3\times 3\text{ cm}$ diagnostic plot on scratch paper: (a)~for gas processes/cycles, sketch both $P$--$V$ and $T$--$S$ planes to verify clockwise ($W_{\mathrm{net}} > 0$) vs.\ counterclockwise loop orientation; (b)~for ice/water/steam mixing, sketch the 5-stage temperature--enthalpy ladder ($\SI{-273}{\celsius} \to \SI{0}{\celsius}\text{ ice} \to \SI{0}{\celsius}\text{ water} \to \SI{100}{\celsius}\text{ water} \to \SI{100}{\celsius}\text{ steam}$) to locate the final phase plateau before writing a single temperature equation (\sref{sec:04}, \fref{fig:04:ice-water-tree}); (c)~for composite conduction/convection/radiation, draw the series-parallel resistor node diagram (\sref{sec:10}, \fref{fig:10:composite-wall}).
+
+% ============================================================================
+\section{The 5-Check Answer Audit \& Fermi Estimation / Reverse-Engineering Playbook}\label{sec:19.2}
+\idxtopic{5-check answer audit}\idxtopic{Fermi estimation benchmarks}
+
+\begin{twocol}[0.51]
+\begin{shortcut}[The 15-Second 5-Check Answer Audit]
+Run every final numerical answer through these 5 gates:
+\begin{enumerate}
+  \item \textbf{Check 1 (Units \& Prefixes):} Did $\si{\kilo\joule}$ vs.\ $\si{\joule}$, $\si{\gram}$ vs.\ $\si{\kilogram}$ in $M$ ($\mathrm{N_2} = \SI{0.02801}{\kilogram\per\mole}$ in $v_{\mathrm{rms}} = \sqrt{3RT/M}$), and $\si{\kelvin}$ vs.\ $\si{\celsius}$ cancel cleanly?
+  \item \textbf{Check 2 (Signs):} Expansion $\Delta V > 0 \implies W_{\mathrm{by}} > 0$ ($w_{\mathrm{on}} < 0$). Cooling $\Delta T < 0 \implies \Delta S < 0$ and $\Delta U < 0$.
+  \item \textbf{Check 3 (Thermodynamic Bounds):}
+  \begin{itemize}
+    \item Engine: $0 < \eta = \dfrac{W_{\mathrm{net}}}{Q_H} \le \eta_C = 1 - \dfrac{T_C}{T_H} < 1$.
+    \item Refrigerator/Pump: $\mathrm{COP}_{\mathrm{HP}} = \mathrm{COP}_R + 1 \le \dfrac{T_H}{T_H - T_C}$.
+    \item Calorimetry mixture: $T_{\mathrm{cold,init}} \le T_{\mathrm{final}} \le T_{\mathrm{hot,init}}$.
+    \item Wet-steam quality: $0 \le x \le 1$; relative humidity: $0 \le \phi \le \SI{100}{\percent}$.
+  \end{itemize}
+  \item \textbf{Check 4 (Limiting Cases):} Does $t \to 0$ give $T = T_i$? Does $t \to \infty$ give $T = T_{\mathrm{ss}}$? Does $r_o \to r_i$ give $R_{\mathrm{cyl}} \to 0$?
+  \item \textbf{Check 5 (Independent Conservation):} Does $\sum Q_{\mathrm{in}} = \sum Q_{\mathrm{out}} + W_{\mathrm{net}}$ hold globally across the outer boundary?
+\end{enumerate}
+\end{shortcut}
+\nextcol[0.465]
+\begin{formulacard}[Fermi Anchor Benchmarks \& Reverse-Engineering]
+\textbf{Order-of-Magnitude Physical Anchors:}
+\begin{itemize}
+  \item Room air ($300\text{ K}, 1\text{ atm}$): $\rho \approx \SI{1.18}{\kilogram\per\cubic\meter}$, $c_p \approx \SI{1.007}{\kilo\joule\per\kilogram\per\kelvin}$, $k \approx \SI{0.026}{\watt\per\meter\per\kelvin}$, $v_{\mathrm{rms}} \approx \SI{508}{\meter\per\second}$, $\lambda_{\mathrm{mfp}} \approx \SI{68}{\nano\meter}$.
+  \item Liquid water ($\SI{25}{\celsius}$): $\rho \approx \SI{997}{\kilogram\per\cubic\meter}$, $c_p = \SI{4.184}{\kilo\joule\per\kilogram\per\kelvin}$ ($\rho c_p \approx \SI{4.17}{\mega\joule\per\cubic\meter\per\kelvin}$), $k \approx \SI{0.607}{\watt\per\meter\per\kelvin}$, $L_f = \SI{333.55}{\kilo\joule\per\kilogram}$, $L_v = \SI{2256.4}{\kilo\joule\per\kilogram}$ ($L_v/L_f = 6.76\times$).
+  \item Blackbody at $\SI{300}{\kelvin}$: $M = \sigma T^4 \approx \SI{459}{\watt\per\square\meter}$, $\lambda_{\max} \approx \SI{9.66}{\micro\meter}$. Solar constant at Earth: $G_{\mathrm{sc}} \approx \SI{1361}{\watt\per\square\meter}$. Resting human metabolic heat: $\dot{Q}_{\mathrm{human}} \approx \SI{100}{\watt}$.
+\end{itemize}
+\textbf{Reverse-Engineering Back-Solve Protocol:}
+When a problem specifies a \emph{desired final temperature, efficiency, or survival time} and asks for an unknown initial mass $m_0$, insulation thickness $L_{\mathrm{ins}}$, or electrical resistance $R_e$:
+\begin{enumerate}
+  \item Write the forward conservation equation symbolically keeping the target parameter isolated.
+  \item For logarithmic transients $T(t) = T_{\mathrm{ss}} - (T_{\mathrm{ss}}-T_i)e^{-t/\tau}$, invert directly: $\tau = R_{\mathrm{th}}C = \dfrac{-t}{\ln[(T_{\mathrm{ss}}-T(t))/(T_{\mathrm{ss}}-T_i)]}$.
+\end{enumerate}
+\end{formulacard}
+\end{twocol}
+
+% ============================================================================
+\section{Multi-Physics Coupled Problem Decomposition \& National-Tier Templates}\label{sec:19.3}
+\idxtopic{coupled multi-physics templates}\idxfig{Multi-Physics Coupled Problem Decomposition Map}
+
+Figure~\ref{fig:19:coupled-router} illustrates how to decouple a complex multi-subsystem problem into modular algebraic blocks linked by shared boundary fluxes ($\dot{Q}$, $\dot{W}$) and equilibrium interface conditions ($P_{\mathrm{eq}}, T_{\mathrm{eq}}, V_{\mathrm{tot}}$).
+
+\begin{center}
+\resizebox{0.99\linewidth}{!}{%
+\begin{tikzpicture}[font=\scriptsize, >=Latex,
+    block/.style={draw=navy, thick, rounded corners=2pt, fill=boxbglight, align=center, inner sep=4pt},
+    gate/.style={draw=rust, very thick, rounded corners=2pt, fill=white, align=center, inner sep=4pt},
+    audit/.style={draw=teal, very thick, rounded corners=2pt, fill=boxbg, align=center, inner sep=4pt}]
+
+  % Subsystem 1: Energy Source (Electrical / Radiative)
+  \node[block, minimum width=3.5cm, minimum height=1.85cm] (src) at (0,0) {
+    \textbf{SUBSYSTEM A: ENERGY SOURCE}\\[2pt]
+    $\bullet$~Joule Heater: $\dot{Q}_{\mathrm{elec}} = I V = \dfrac{V^2}{R_e} = I^2 R_e$\\[2pt]
+    $\bullet$~Radiative Lamp/Sun: $\dot{Q}_{\mathrm{rad,in}} = \alpha_{\mathrm{NIR}} A G$
+  };
+
+  % Subsystem 2: Thermal Leak / Resistance Network
+  \node[block, minimum width=3.5cm, minimum height=1.85cm] (leak) at (0,-2.55) {
+    \textbf{SUBSYSTEM B: WALL HEAT LEAK}\\[2pt]
+    $\bullet$~Composite Wall: $R_{\mathrm{th}} = \sum \dfrac{L_j}{k_j A} + \dfrac{1}{h A}$\\[2pt]
+    $\bullet$~Net Power: $\dot{Q}_{\mathrm{net}}(T) = \dot{Q}_{\mathrm{in}} - \dfrac{T - T_\infty}{R_{\mathrm{th}}}$
+  };
+
+  % Central Phase & Calorimetry Router
+  \node[gate, minimum width=4.6cm, minimum height=3.2cm] (phase) at (4.9,-1.28) {
+    \textbf{SUBSYSTEM C: MULTI-PHASE WORKING FLUID}\\[2pt]
+    \textbf{5-Stage Energy \& Time Budget ($\Delta t = \sum t_k$):}\\[1pt]
+    1.~Warm Solid ($T_1 \to T_m$): $Q_1 = m c_s(T_m - T_1)$\\
+    2.~Melt Plateau ($T = T_m$): $Q_2 = m L_f$\\
+    3.~Warm Liquid ($T_m \to T_b(P)$): $Q_3 = m c_\ell(T_b - T_m)$\\
+    4.~Vaporize Plateau ($T = T_b(P)$): $Q_4 = m L_v$\\
+    5.~Superheat Vapor ($T_b \to T_f$):\\
+    $C_p \dfrac{dT}{dt} = \dot{Q}_{\mathrm{in}} - \dfrac{T - T_\infty}{R_{\mathrm{th}}} \implies T_f = T_{\mathrm{ss}} - (T_{\mathrm{ss}}-T_b)e^{-t_5/\tau}$
+  };
+
+  % Subsystem 4: Mechanical Piston / Cycle Coupling
+  \node[block, minimum width=4.2cm, minimum height=1.85cm] (mech) at (10.1,0) {
+    \textbf{SUBSYSTEM D: MECHANICAL BOUNDARY}\\[2pt]
+    $\bullet$~Weighted Piston ($P = P_0$): $W_{\mathrm{by}} = P_0(V_f - V_i)$\\[1pt]
+    $\bullet$~Spring Piston: $W_{\mathrm{by}} = \tfrac{1}{2}(P_i + P_f)(V_f - V_i)$\\[1pt]
+    $\bullet$~Internal Energy: $\Delta U = \Delta H - \Delta(PV)$
+  };
+
+  % Subsystem 5: Global Audit & Second-Law Exergy Gate
+  \node[audit, minimum width=4.2cm, minimum height=1.85cm] (check) at (10.1,-2.55) {
+    \textbf{SUBSYSTEM E: 2ND LAW \& GLOBAL AUDIT}\\[2pt]
+    $\bullet$~Global Energy: $E_{\mathrm{elec}} = \Delta H_{\mathrm{tot}} + Q_{\mathrm{leak,tot}}$\\[1pt]
+    $\bullet$~Entropy Gen: $S_{\mathrm{gen}} = \Delta S_{\mathrm{fluid}} + \dfrac{Q_{\mathrm{leak}}}{T_\infty} \ge 0$\\[1pt]
+    $\bullet$~Exergy Destroyed: $X_{\mathrm{dest}} = T_0 S_{\mathrm{gen}}$
+  };
+
+  % Connecting Arrows with Flux Labels
+  \draw[->, navy, very thick] (src.east) -- node[above, sloped, font=\scriptsize\bfseries] {$\dot{Q}_{\mathrm{in}}$ $[\si{\watt}]$} ([yshift=0.65cm]phase.west);
+  \draw[->, rust, very thick] (leak.east) -- node[below, sloped, font=\scriptsize\bfseries] {$-\dot{Q}_{\mathrm{leak}}(T)$} ([yshift=-0.65cm]phase.west);
+  \draw[<->, navy, very thick] ([yshift=0.65cm]phase.east) -- node[above, sloped, font=\scriptsize\bfseries] {$P_{\mathrm{eq}},\ V(T,x)$} (mech.west);
+  \draw[->, teal, very thick] ([yshift=-0.65cm]phase.east) -- node[below, sloped, font=\scriptsize\bfseries] {$\Delta H,\ \Delta S$} (check.west);
+  \draw[->, navy, thick, dashed] (mech.south) -- node[right, font=\scriptsize] {$W_{\mathrm{by}}$} (check.north);
+\end{tikzpicture}%
+}
+\captionof{figure}{Multi-physics coupled problem decomposition map showing how an electrical or radiative power source (Subsystem~A), a conductive/convective wall heat leak (Subsystem~B), a 5-stage phase-changing fluid (Subsystem~C), and a moving piston boundary (Subsystem~D) decouple into sequential algebraic energy balances verified by a global First/Second-Law audit (Subsystem~E) \src{S12,S13,S25}.}\label{fig:19:coupled-router}
+\end{center}
+
+\begin{workedexample}[Template 1: Coupled Joule Heater + 5-Stage Ice-to-Steam Phase Change + Conductive Leak + Piston]{Rules 5.c.ii--iv}{ex:19.1}
+A vertical cylinder insulated on its sides except for a sight window of thermal resistance $R_{\mathrm{wall}} = \SI{2.50}{\kelvin\per\watt}$ to a $T_{\mathrm{room}} = \SI{20.0}{\celsius}$ room contains $m = \SI{0.250}{\kilogram}$ of ice initially at $T_1 = \SI{-15.0}{\celsius}$ under a frictionless piston maintaining constant absolute pressure $P_0 = \SI{101.325}{\kilo\pascal}$. An internal resistive heater ($V = \SI{48.0}{\volt}$, $R_e = \SI{4.608}{\ohm}$) is switched on for $t_{\mathrm{tot}} = \SI{1800.0}{\second}$ ($\SI{30.0}{\minute}$). Using $c_{\mathrm{ice}} = \SI{2100}{\joule\per\kilogram\per\kelvin}$, $L_f = \SI{333.55}{\kilo\joule\per\kilogram}$, $c_w = \SI{4184}{\joule\per\kilogram\per\kelvin}$, $L_v = \SI{2256.4}{\kilo\joule\per\kilogram}$ at $\SI{100.0}{\celsius}$, $c_{p,\mathrm{steam}} = \SI{2080}{\joule\per\kilogram\per\kelvin}$, and $\rho_{\mathrm{ice}} = \SI{916.7}{\kilogram\per\cubic\meter}$, find: (a)~the time required to reach $\SI{100.0}{\celsius}$ dry saturated steam, (b)~the final superheated steam temperature $T_f$ at $t = \SI{1800.0}{\second}$, and (c)~the total boundary work $W_{\mathrm{by}}$ done by the piston.
+\par\smallskip\noindent
+\textbf{Solution.}
+Electrical heating power: $P_{\mathrm{elec}} = \frac{V^2}{R_e} = \frac{48.0^2}{4.608} = \mathbf{\SI{500.0}{\watt}}$ (constant). Because $P_0 = \text{const}$, enthalpy changes satisfy $\frac{dH}{dt} = \dot{Q}_{\mathrm{net}}(T) = P_{\mathrm{elec}} - \frac{T - T_{\mathrm{room}}}{R_{\mathrm{wall}}}$.
+\par\noindent
+(a)~\textbf{Stages 1--4 Time Budget to Reach $\SI{100.0}{\celsius}$ Dry Saturated Vapor:}
+\begin{itemize}
+  \item \emph{Stage 1 (Warm ice $\SI{-15.0}{\celsius} \to \SI{0.0}{\celsius}$, mean $T_{\mathrm{avg},1} = \SI{-7.5}{\celsius} < T_{\mathrm{room}}$, so room leaks heat \textbf{into} cylinder!):}
+  $\Delta H_1 = m c_{\mathrm{ice}}\Delta T_1 = (0.250)(2100)(15.0) = \SI{7875.0}{\joule}$; $\dot{Q}_{\mathrm{net},1} = 500.0 - \frac{-7.5 - 20.0}{2.50} = 500.0 + 11.0 = \SI{511.0}{\watt} \implies t_1 = \frac{7875.0}{511.0} = \mathbf{\SI{15.411}{\second}}$.
+  \item \emph{Stage 2 (Melt ice at $T_m = \SI{0.0}{\celsius}$):}
+  $\Delta H_2 = m L_f = (0.250)(333550) = \SI{83387.5}{\joule}$; $\dot{Q}_{\mathrm{net},2} = 500.0 - \frac{0.0 - 20.0}{2.50} = \SI{508.0}{\watt} \implies t_2 = \frac{83387.5}{508.0} = \mathbf{\SI{164.149}{\second}}$.
+  \item \emph{Stage 3 (Warm liquid water $\SI{0.0}{\celsius} \to \SI{100.0}{\celsius}$, mean $T_{\mathrm{avg},3} = \SI{50.0}{\celsius}$):}
+  $\Delta H_3 = m c_w \Delta T_3 = (0.250)(4184)(100.0) = \SI{104600.0}{\joule}$; $\dot{Q}_{\mathrm{net},3} = 500.0 - \frac{50.0 - 20.0}{2.50} = \SI{488.0}{\watt} \implies t_3 = \frac{104600.0}{488.0} = \mathbf{\SI{214.344}{\second}}$.
+  \item \emph{Stage 4 (Vaporize water at $T_b = \SI{100.0}{\celsius}$):}
+  $\Delta H_4 = m L_v = (0.250)(2256400) = \SI{564100.0}{\joule}$; $\dot{Q}_{\mathrm{net},4} = 500.0 - \frac{100.0 - 20.0}{2.50} = \SI{468.0}{\watt} \implies t_4 = \frac{564100.0}{468.0} = \mathbf{\SI{1205.342}{\second}}$.
+\end{itemize}
+Total elapsed time to reach dry saturated steam at $\SI{100.0}{\celsius}$: $t_{1\dots 4} = 15.411 + 164.149 + 214.344 + 1205.342 = \mathbf{\SI{1599.25}{\second}}$ ($\SI{26.65}{\minute}$).
+\par\noindent
+(b)~\textbf{Stage 5 (Superheating Steam During Remaining $t_5 = 1800.0 - 1599.246 = \SI{200.754}{\second}$):}
+For isobaric steam warming with $C_{p,\mathrm{steam}} = m c_{p,\mathrm{steam}} = (0.250)(2080) = \SI{520.0}{\joule\per\kelvin}$, the exact lumped ODE $C_{p,\mathrm{steam}}\frac{dT}{dt} = P_{\mathrm{elec}} - \frac{T - T_{\mathrm{room}}}{R_{\mathrm{wall}}}$ has time constant $\tau_s = C_{p,\mathrm{steam}}R_{\mathrm{wall}} = (520.0)(2.50) = \SI{1300.0}{\second}$ and asymptote $T_{\mathrm{ss}} = 20.0 + (500.0)(2.50) = \SI{1270.0}{\celsius}$:
+$$T_f = T_{\mathrm{ss}} - (T_{\mathrm{ss}} - \SI{100.0}{\celsius})e^{-t_5/\tau_s} = 1270.0 - (1170.0)e^{-200.754/1300.0} = 1270.0 - 1002.58 = \mathbf{\SI{267.42}{\celsius}}\ (\SI{540.57}{\kelvin})$$
+(c)~\textbf{Total Isobaric Boundary Work $W_{\mathrm{by}} = P_0(V_f - V_i)$:}
+Initial ice volume: $V_i = \frac{\SI{0.250}{\kilogram}}{\SI{916.7}{\kilogram\per\cubic\meter}} = \SI{2.727e-4}{\cubic\meter}$. Final steam moles: $n = \frac{\SI{250.0}{\gram}}{\SI{18.01528}{\gram\per\mole}} = \SI{13.8771}{\mole}$, so ideal-gas steam volume at $T_f = \SI{540.57}{\kelvin}$ is $V_f = \frac{n R T_f}{P_0} = \frac{(13.8771)(8.31446)(540.57)}{101325} = \SI{0.61555}{\cubic\meter}$. Thus:
+$$W_{\mathrm{by}} = P_0(V_f - V_i) = (\SI{101.325}{\kilo\pascal})(\SI{0.61555}{\cubic\meter} - \SI{0.00027}{\cubic\meter}) = \mathbf{\SI{62.34}{\kilo\joule}}$$
+\verifiedby{Global enthalpy balance $\sum_{k=1}^5 \Delta H_k = 7.875 + 83.388 + 104.600 + 564.100 + 87.058 = \SI{847.02}{\kilo\joule}$ and Python check \texttt{sec19:ex19.1}.}
+\end{workedexample}
+
+\begin{workedexample}[Template 2: Wavelength-Selective Radiative Collector Driving a Carnot Engine \& Heat-Pump Cascade]{Rules 5.c.iii, 5.c.iv, 5.c.vi}{ex:19.2}
+A selective solar collector of area $A_c = \SI{2.00}{\square\meter}$ ($\alpha_{\mathrm{sol}} = 0.92$, thermal-IR emittance $\varepsilon_{\mathrm{IR}} = 0.10$, insulated back) receives solar irradiance $G = \SI{1000.0}{\watt\per\square\meter}$ in an ambient environment at $T_0 = \SI{300.0}{\kelvin}$ ($\sigma = \SI{5.670374e-8}{\watt\per\square\meter\per\kelvin\tothe{4}}$). The collector operates at steady temperature $T_H = \SI{450.0}{\kelvin}$ and supplies its net heat rate $\dot{Q}_H$ to a reversible Carnot heat engine rejecting heat at $T_0 = \SI{300.0}{\kelvin}$. All shaft power $\dot{W}$ from the engine drives a reversible heat pump that extracts heat from outdoor winter air at $T_{\mathrm{out}} = \SI{270.0}{\kelvin}$ to heat a building interior at $T_B = \SI{310.0}{\kelvin}$. Calculate: (a)~the net heat rate $\dot{Q}_H$ delivered to the engine, (b)~the engine power output $\dot{W}$, and (c)~the total heating power $\dot{Q}_B$ delivered to the building.
+\par\smallskip\noindent
+\textbf{Solution.}
+(a)~Collector radiative energy balance at $T_H = \SI{450.0}{\kelvin}$:
+\begin{align*}
+  \dot{Q}_H &= A_c\left[\alpha_{\mathrm{sol}} G - \varepsilon_{\mathrm{IR}}\sigma\left(T_H^4 - T_0^4\right)\right] = (\SI{2.00}{\square\meter})\left[(0.92)(1000.0) - (0.10)(\num{5.670374e-8})\left(450.0^4 - 300.0^4\right)\right] \\
+            &= 2.00\left(920.0 - 186.591\right) = \mathbf{\SI{1466.82}{\watt}}
+\end{align*}
+(b)~Carnot engine efficiency between $T_H = \SI{450.0}{\kelvin}$ and $T_0 = \SI{300.0}{\kelvin}$ is $\eta_C = 1 - \frac{300.0}{450.0} = \frac{1}{3} = 0.33333$, so shaft power output is:
+$$\dot{W} = \eta_C\,\dot{Q}_H = \frac{1}{3}(\SI{1466.82}{\watt}) = \mathbf{\SI{488.94}{\watt}}$$
+(c)~Reversible heat pump coefficient of performance between $T_{\mathrm{out}} = \SI{270.0}{\kelvin}$ and $T_B = \SI{310.0}{\kelvin}$ is $\mathrm{COP}_{\mathrm{HP}} = \frac{T_B}{T_B - T_{\mathrm{out}}} = \frac{310.0}{310.0 - 270.0} = \mathbf{7.750}$. Thus the total heating rate supplied to the building is:
+$$\dot{Q}_B = \mathrm{COP}_{\mathrm{HP}}\,\dot{W} = (7.750)(\SI{488.94}{\watt}) = \mathbf{\SI{3789.3}{\watt}} \quad (\text{a }\mathbf{2.58\times\text{\textbf{ thermal multiplier}}} \text{ over direct solar heating }\dot{Q}_H\text{!})$$
+\verifiedby{Reversible zero-entropy-generation check $\dot{Q}_H/T_H - (\dot{Q}_H-\dot{W})/T_0 = 0$ and $\dot{Q}_B/T_B - (\dot{Q}_B-\dot{W})/T_{\mathrm{out}} = 0$ in Python check \texttt{sec19:ex19.2}.}
+\end{workedexample}
+
+\begin{workedexample}[Template 3: Steam-Table Rankine Turbine Efficiency $\eta_t$, Wet-Steam Quality \& Gouy--Stodola Exergy]{\texttt{2027 Cornell E1 Q29} \src{S09,S25}}{ex:19.3}
+In a steam Rankine cycle (\texttt{2027 Cornell E1 Q29}), superheated steam enters an adiabatic turbine at $P_1 = \SI{3.00}{\mega\pascal}$, $T_1 = \SI{350.0}{\celsius}$ ($h_1 = \SI{3116.1}{\kilo\joule\per\kilogram}$, $s_1 = \SI{6.7450}{\kilo\joule\per\kilogram\per\kelvin}$) and expands to condenser pressure $P_2 = \SI{10.0}{\kilo\pascal}$ ($T_{\mathrm{sat}} = \SI{45.81}{\celsius} = \SI{318.96}{\kelvin}$, $h_f = \SI{191.81}{\kilo\joule\per\kilogram}$, $h_{fg} = \SI{2392.1}{\kilo\joule\per\kilogram}$, $s_f = \SI{0.6492}{\kilo\joule\per\kilogram\per\kelvin}$, $s_{fg} = \SI{7.4996}{\kilo\joule\per\kilogram\per\kelvin}$). If the turbine has an isentropic efficiency of $\eta_t = \SI{85.0}{\percent}$ and the dead-state environment is at $T_0 = \SI{25.00}{\celsius} = \SI{298.15}{\kelvin}$, compute: (a)~the isentropic exit quality $x_{2s}$ and enthalpy $h_{2s}$, (b)~the actual turbine work $w_t$, actual exit enthalpy $h_{2a}$, and actual exit quality $x_{2a}$, and (c)~the specific entropy generation $s_{\mathrm{gen}}$ and Gouy--Stodola exergy destruction $x_{\mathrm{dest}} = T_0 s_{\mathrm{gen}}$.
+\par\smallskip\noindent
+\textbf{Solution.}
+(a)~For an ideal isentropic expansion ($s_{2s} = s_1 = \SI{6.7450}{\kilo\joule\per\kilogram\per\kelvin}$):
+$$x_{2s} = \frac{s_1 - s_f}{s_{fg}} = \frac{6.7450 - 0.6492}{7.4996} = \mathbf{0.81282} \implies h_{2s} = h_f + x_{2s} h_{fg} = 191.81 + (0.81282)(2392.1) = \mathbf{\SI{2136.15}{\kilo\joule\per\kilogram}}$$
+(b)~Actual specific turbine work and exit state for $\eta_t = \frac{h_1 - h_{2a}}{h_1 - h_{2s}} = 0.850$:
+$$w_t = \eta_t(h_1 - h_{2s}) = 0.850(3116.1 - 2136.15) = \mathbf{\SI{832.96}{\kilo\joule\per\kilogram}}, \qquad h_{2a} = h_1 - w_t = 3116.1 - 832.96 = \mathbf{\SI{2283.14}{\kilo\joule\per\kilogram}}$$
+$$x_{2a} = \frac{h_{2a} - h_f}{h_{fg}} = \frac{2283.14 - 191.81}{2392.1} = \mathbf{0.87427} \quad (\text{irreversible friction }\emph{increases}\text{ exit vapor quality from }81.3\%\text{ to }87.4\%\text{!})$$
+(c)~Actual exit entropy: $s_{2a} = s_f + x_{2a} s_{fg} = 0.6492 + (0.87427)(7.4996) = \SI{7.20585}{\kilo\joule\per\kilogram\per\kelvin}$. Because the turbine is adiabatic ($\dot{Q}=0$):
+$$s_{\mathrm{gen}} = s_{2a} - s_1 = 7.20585 - 6.7450 = \mathbf{\SI{0.46085}{\kilo\joule\per\kilogram\per\kelvin}}, \qquad x_{\mathrm{dest}} = T_0\,s_{\mathrm{gen}} = (\SI{298.15}{\kelvin})(\SI{0.46085}{\kilo\joule\per\kilogram\per\kelvin}) = \mathbf{\SI{137.40}{\kilo\joule\per\kilogram}}$$
+\verifiedby{Identity $s_{2a} - s_1 = (h_{2a} - h_{2s})/T_{\mathrm{sat}} = (1 - \eta_t)(h_1 - h_{2s})/T_{\mathrm{sat}} = 146.99/318.96 = \SI{0.46085}{\kilo\joule\per\kilogram\per\kelvin}$ and Python check \texttt{sec19:ex19.3}.}
+\end{workedexample}
+
+\begin{workedexample}[Template 4: Two-Compartment Insulated Cylinder with Diathermal Frictionless Sliding Piston]{\texttt{MIT E3 Q24} \src{S26,S27}}{ex:19.4}
+A rigid, well-insulated cylinder of total volume $V_{\mathrm{tot}} = \SI{30.00}{\liter}$ is divided by a frictionless, thermally conducting (diathermal) piston of negligible heat capacity into Compartment~A containing $n_A = \SI{1.000}{\mole}$ of monatomic helium ($\mathrm{He}$, $f_A = 3$) and Compartment~B containing $n_B = \SI{1.500}{\mole}$ of diatomic nitrogen ($\mathrm{N_2}$, $f_B = 5$). Initially both gases are in equilibrium at $T_i = \SI{300.0}{\kelvin}$. An electrical coil adds $Q = \SI{12.4717}{\kilo\joule}$ of heat to the system. Find the final equilibrium temperature $T_f$, final volumes $V_{A,f}$ and $V_{B,f}$, and final pressure $P_f$.
+\par\smallskip\noindent
+\textbf{Solution.}
+Choose the \textbf{combined gas A + B + piston} as our closed system. Because the outer cylinder is rigid ($W_{\mathrm{ext}} = 0$) and insulated except for the heater input $Q$, the First Law for the composite system is simply $\Delta U_{\mathrm{tot}} = \Delta U_A + \Delta U_B = Q$. Since the piston is diathermal, both gases reach a common final temperature $T_f$:
+$$C_{V,\mathrm{tot}} = n_A C_{V,m,A} + n_B C_{V,m,B} = \left[(1.000)\!\left(\tfrac{3}{2}\right) + (1.500)\!\left(\tfrac{5}{2}\right)\right]R = 5.250\,R = (5.250)(\SI{8.3144626}{\joule\per\mole\per\kelvin}) = \mathbf{\SI{43.6509}{\joule\per\kelvin}}$$
+$$T_f = T_i + \frac{Q}{C_{V,\mathrm{tot}}} = 300.0 + \frac{\SI{12471.7}{\joule}}{\SI{43.6509}{\joule\per\kelvin}} = 300.0 + 285.714 = \mathbf{\SI{585.71}{\kelvin}}$$
+Because the piston is frictionless and diathermal, mechanical and thermal equilibrium require $P_{A,f} = P_{B,f} = P_f$ and $T_{A,f} = T_{B,f} = T_f$, so $\frac{V_{A,f}}{V_{B,f}} = \frac{n_A R T_f / P_f}{n_B R T_f / P_f} = \frac{n_A}{n_B}$ (the piston does not move!). Thus $V_{A,f} = \frac{1.000}{2.500}(\SI{30.00}{\liter}) = \mathbf{\SI{12.00}{\liter}}$, $V_{B,f} = \mathbf{\SI{18.00}{\liter}}$, and:
+$$P_f = \frac{(n_A + n_B) R T_f}{V_{\mathrm{tot}}} = \frac{(\SI{2.500}{\mole})(\SI{8.3144626}{\joule\per\mole\per\kelvin})(\SI{585.714}{\kelvin})}{\SI{0.03000}{\cubic\meter}} = \SI{405817}{\pascal} = \mathbf{\SI{405.82}{\kilo\pascal}}$$
+\verifiedby{Individual subsystem check $P_{A,f} = (1.000)(8.31446)(585.714)/0.0120 = \SI{405.82}{\kilo\pascal} = P_{B,f}$ and Python check \texttt{sec19:ex19.4}.}
+\end{workedexample}
+
+\begin{table}[h!]
+\centering
+\captionof{table}{Master Atlas of the 10 Canonical Multi-Physics Coupling Archetypes Across the Exam Corpus (\texttt{E1--E8}) \src{S12,S25,S26,S27,S28}.}\label{tab:19:archetypes}
+\footnotesize
+\setlength{\tabcolsep}{3.5pt}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.23\linewidth} >{\raggedright\arraybackslash}p{0.24\linewidth} >{\raggedright\arraybackslash}p{0.31\linewidth} >{\raggedright\arraybackslash}X@{}}
+\toprule
+\hdr{Coupling Archetype} & \hdr{Subsystems Linked} & \hdr{Bridging Algebraic Equations} & \hdr{Exam Precedent \& Section Link} \\
+\midrule
+\textbf{1.~Container Dilatometer + Liquid Compressibility} &
+Glass bulb expansion ($3\alpha_g$) + liquid expansion ($\beta_\ell$) + pressure ($\kappa_T$) &
+$\Delta V_{\mathrm{app}} = V_0\left[(\beta_\ell - 3\alpha_g)\Delta T - \kappa_{T,\mathrm{eff}}\Delta P\right] = A_{\mathrm{cap}}\Delta h$ &
+\texttt{2027 Cornell E1 FRQ 1 (Q26)} \src{S25} (\sref{sec:03}, Ex.~\ref{ex:19.5}) \\
+\rowcolor{rowalt}
+\textbf{2.~Spring-Loaded Piston + Ideal-Gas or Phase Heating} &
+Hooke's law spring ($k_s$) + cylinder gas/steam ($P,V,T$) &
+$P(V) = P_1 + \dfrac{k_s}{A_p^2}(V - V_1)$;\quad $W_{\mathrm{by}} = \dfrac{P_1 + P_2}{2}(V_2 - V_1)$;\quad $\Delta U = Q - W_{\mathrm{by}}$ &
+\texttt{MIT E2/E3} \& classic Olympiad piston-spring FRQ (\sref{sec:07}, Ex.~\ref{ex:19.6}) \\
+\textbf{3.~Planetary / Lamp Flux + Selective Gray Radiative Balance} &
+Inverse-square irradiance + two-band surface ($\alpha_{\mathrm{SW}}, \varepsilon_{\mathrm{LW}}$) &
+$I(D) = \dfrac{\sigma R_S^2 T_S^4}{D^2}$;\quad $T_{\mathrm{eq}} = \left(\dfrac{\alpha_{\mathrm{SW}}\,A_{\mathrm{proj}}\,I(D)}{\varepsilon_{\mathrm{LW}}\,A_{\mathrm{emit}}\,\sigma}\right)^{1/4}$ &
+\texttt{MIT E3 Q23}, \texttt{Cornell E1 Q36--37} \src{S25,S27} (\sref{sec:12}, Ex.~\ref{ex:19.7}) \\
+\rowcolor{rowalt}
+\textbf{4.~Vacuum $T^4$ Radiative Cooling Transient} &
+Sensible heat capacity ($mc$) + Stefan--Boltzmann radiation ($T_{\mathrm{surr}}\to 0$) &
+$m c\dfrac{dT}{dt} = -\varepsilon\sigma A T^4 \implies \Delta t = \dfrac{m c}{3\varepsilon\sigma A}\!\left(\dfrac{1}{T_f^3} - \dfrac{1}{T_i^3}\right)$ &
+\texttt{GGSO E4 Q14d} \src{S28} (\sref{sec:12}, \sref{sec:13}, Ex.~\ref{ex:19.7}) \\
+\textbf{5.~Intercooled Multi-Stage Gas Compression} &
+$N$-stage adiabatic compression + isobaric intercoolers back to $T_1$ &
+Optimal intermediate pressure: $P_{\mathrm{mid}} = \sqrt{P_1 P_2}$;\quad $W_{\mathrm{on,min}} = \dfrac{N\gamma}{\gamma-1}nRT_1\!\left[\left(\dfrac{P_2}{P_1}\right)^{\frac{\gamma-1}{N\gamma}} - 1\right]$ &
+\texttt{MIT E2 P4b} (\texttt{TB \#1}) \src{S26} (\sref{sec:07}) \\
+\rowcolor{rowalt}
+\textbf{6.~Binary Eutectic Cooling + Phase-Fraction Calorimetry} &
+Lever-rule mass fractions ($f_L, f_\alpha$) + proeutectic \& eutectic latent heats &
+$f_{\mathrm{eut}} = f_L(T_{\mathrm{eut}}^+) = \dfrac{w_0 - w_\alpha}{w_E - w_\alpha}$;\quad $Q_{\mathrm{eut}} = m_{\mathrm{tot}}\,f_{\mathrm{eut}}\,\Delta h_{\mathrm{eut}}$ &
+\texttt{2027 Cornell E1 Q10--14, Q30} (\texttt{TB \#4}) \src{S25} (\sref{sec:05}, \sref{sec:18}) \\
+\textbf{7.~Drude Electron Gas + Wiedemann--Franz Conduction} &
+Kinetic theory of electrons + electrical ($\sigma_e$) \& thermal ($\kappa$) conductivity &
+$\dfrac{\kappa}{\sigma_e T} = L = \dfrac{3}{2}\!\left(\dfrac{k_B}{e}\right)^2$ (Drude) or $\dfrac{\pi^2}{3}\!\left(\dfrac{k_B}{e}\right)^2 = \SI{2.44e-8}{\watt\ohm\per\kelvin\squared}$ (Sommerfeld) &
+\texttt{2027 Cornell E1 FRQ 4 (Q32--34)} \src{S25} (\sref{sec:06}, \sref{sec:10}) \\
+\rowcolor{rowalt}
+\textbf{8.~Open-Cup Evaporative Mass Transfer + Convection/Radiation} &
+Vapor concentration boundary layer ($g_m$) + latent heat $L_v$ + sensible $h$ &
+$\dot{Q}_{\mathrm{tot}} = h A(T_s - T_e) + \varepsilon\sigma A(T_s^4 - T_e^4) + L_v A g_m(m_{\mathrm{H_2O},s} - m_{\mathrm{H_2O},e})$ &
+Lienhard Ex.~11.11 \src{S12} \& 2027 Collector (\sref{sec:11}, \sref{sec:15.4}) \\
+\textbf{9.~Temperature-Dependent $\Delta H_{\mathrm{rxn}}(T)$ + Gibbs Crossover $T^*$} &
+Kirchhoff's enthalpy/entropy laws ($\Delta C_P$) + $\Delta G = \Delta H - T\Delta S$ &
+$\Delta H(T_2) = \Delta H(T_1) + \Delta C_P(T_2 - T_1)$;\quad $\Delta S(T_2) = \Delta S(T_1) + \Delta C_P\ln(T_2/T_1)$ &
+\texttt{MIT E2 P3b,e}, \texttt{GGSO E5 Q14--16}, \texttt{Cornell E6 Sec V} \src{S26,S29,S30} (\sref{sec:08}) \\
+\rowcolor{rowalt}
+\textbf{10.~Gravity Hydrostatic Atmosphere + Adiabatic Lapse Rate} &
+Hydrostatic balance ($dP/dz = -\rho g$) + ideal gas + adiabatic $T P^{(1-\gamma)/\gamma} = C$ &
+Dry adiabatic lapse rate: $\Gamma_d = -\dfrac{dT}{dz} = \dfrac{M_{\mathrm{air}} g}{C_{P,m}} = \dfrac{g}{c_{p,\mathrm{air}}} = \SI{9.76}{\kelvin\per\kilo\meter}$ &
+\texttt{MIT E2/E3} \& atmospheric thermodynamics (\sref{sec:06}, \sref{sec:07}) \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{workedexample}[Template 5: Pressurized Glass-Bulb Liquid Dilatometer with Container Expansion Correction]{\texttt{2027 Cornell E1 Q26} \src{S25}}{ex:19.5}
+A precision borosilicate glass dilatometer (\texttt{2027 Cornell E1 Q26}) has an internal bulb volume $V_0 = \SI{50.000}{\cubic\centi\meter}$ attached to a vertical capillary tube of cross-sectional area $A_c = \SI{0.0200}{\square\centi\meter}$ at $T_0 = \SI{20.00}{\celsius}$ and $P_0 = \SI{1.000}{\text{atm}}$. The borosilicate glass has linear thermal expansion coefficient $\alpha_g = \SI{3.25e-6}{\per\kelvin}$, while the test liquid filling the bulb up to initial capillary height $h_0 = \SI{5.00}{\centi\meter}$ has volumetric thermal expansion coefficient $\beta_\ell = \SI{9.50e-4}{\per\kelvin}$ and effective isothermal compressibility (relative to glass) $\kappa_{T,\mathrm{eff}} = \SI{8.20e-5}{\per\text{atm}}$. If the dilatometer is warmed to $T_1 = \SI{70.00}{\celsius}$ ($\Delta T = \SI{50.00}{\kelvin}$) while the overhead gas pressure in the capillary is raised to $P_1 = \SI{26.00}{\text{atm}}$ ($\Delta P = \SI{25.00}{\text{atm}}$), find: (a)~the initial total liquid volume $V_{\ell,0}$, (b)~the apparent volume change $\Delta V_{\mathrm{app}}$ measured against the glass capillary graduations, and (c)~the new capillary meniscus reading $h_1$.
+\par\smallskip\noindent
+\textbf{Solution.}
+(a)~Initial total liquid volume occupying the bulb plus the first $\SI{5.00}{\centi\meter}$ of the capillary stem:
+$$V_{\ell,0} = V_0 + A_c h_0 = \SI{50.000}{\cubic\centi\meter} + (\SI{0.0200}{\square\centi\meter})(\SI{5.00}{\centi\meter}) = \mathbf{\SI{50.100}{\cubic\centi\meter}}$$
+(b)~As temperature increases by $\Delta T = \SI{50.00}{\kelvin}$ and pressure increases by $\Delta P = \SI{25.00}{\text{atm}}$, the liquid volume changes while the glass bulb and capillary container expand with volumetric coefficient $\beta_g = 3\alpha_g = 3(\num{3.25e-6}) = \SI{9.75e-6}{\per\kelvin}$. By Archetype~1 in Table~\ref{tab:19:archetypes}:
+$$\Delta V_{\mathrm{app}} = V_{\ell,0}\left[\left(\beta_\ell - 3\alpha_g\right)\Delta T - \kappa_{T,\mathrm{eff}}\,\Delta P\right] = (\SI{50.100}{\cubic\centi\meter})\left[(\num{9.50e-4} - \num{9.75e-6})(50.00) - (\num{8.20e-5})(25.00)\right]$$
+$$\Delta V_{\mathrm{app}} = (\SI{50.100}{\cubic\centi\meter})\left[\num{0.0470125} - \num{0.0020500}\right] = (\SI{50.100}{\cubic\centi\meter})(0.0449625) = \mathbf{\SI{+2.2526}{\cubic\centi\meter}}$$
+*(Notice that neglecting the glass bulb expansion $3\alpha_g\Delta T$ would overestimate $\Delta V_{\mathrm{app}}$ by $+\SI{0.0244}{\cubic\centi\meter}$ or $+\SI{1.22}{\centi\meter}$ of capillary height!)*
+\par\noindent
+(c)~New capillary column height reading (neglecting the tiny $2\alpha_g\Delta T = 0.03\%$ cross-sectional expansion of $A_c$):
+$$h_1 = h_0 + \frac{\Delta V_{\mathrm{app}}}{A_c} = \SI{5.00}{\centi\meter} + \frac{\SI{2.25262}{\cubic\centi\meter}}{\SI{0.0200}{\square\centi\meter}} = 5.00 + 112.631 = \mathbf{\SI{117.63}{\centi\meter}}$$
+\verifiedby{Absolute volume difference $[V_{\ell,0}(1 + \beta_\ell\Delta T - \kappa\Delta P) - V_0(1+3\alpha_g\Delta T)]/A_c = \SI{117.631}{\centi\meter}$ and Python check \texttt{sec19:ex19.5}.}
+\end{workedexample}
+
+\begin{workedexample}[Template 6: Linear Spring-Loaded Piston Expansion + Ideal-Gas First-Law Accounting]{Rules 5.c.ii, 5.c.iv}{ex:19.6}
+A vertical cylinder of cross-sectional area $A_p = \SI{0.0100}{\square\meter}$ contains $n = \SI{0.500}{\mole}$ of a diatomic ideal gas ($C_{V,m} = \frac{5}{2}R$) initially at $P_1 = \SI{120.0}{\kilo\pascal}$ and $V_1 = \SI{10.00}{\liter}$ ($\SI{0.0100}{\cubic\meter}$). The frictionless piston is restrained by a linear Hookean spring of spring constant $k_s = \SI{1.600}{\kilo\newton\per\meter}$ ($\SI{1600}{\newton\per\meter}$). Heat $Q$ is transferred slowly to the gas until its volume doubles to $V_2 = \SI{20.00}{\liter}$ ($\SI{0.0200}{\cubic\meter}$). Find: (a)~the initial and final gas temperatures $T_1, T_2$ and final pressure $P_2$, (b)~the boundary work $W_{\mathrm{by}}$ done by the gas (separating work against the initial pressure force vs.\ elastic energy stored in the spring), and (c)~the total heat $Q$ added.
+\par\smallskip\noindent
+\textbf{Solution.}
+(a)~Piston displacement: $\Delta x = \frac{V_2 - V_1}{A_p} = \frac{\SI{0.0100}{\cubic\meter}}{\SI{0.0100}{\square\meter}} = \SI{1.000}{\meter}$. By mechanical force balance on the piston, gas pressure increases linearly with volume:
+$$P_2 = P_1 + \frac{k_s\,\Delta x}{A_p} = P_1 + \frac{k_s}{A_p^2}(V_2 - V_1) = \SI{120.0}{\kilo\pascal} + \frac{\SI{1.600}{\kilo\newton\per\meter}}{\SI{0.0100}{\square\meter}}(\SI{1.000}{\meter}) = 120.0 + 160.0 = \mathbf{\SI{280.0}{\kilo\pascal}}$$
+By the ideal-gas law $T = \frac{P V}{n R}$:
+$$T_1 = \frac{(\SI{120.0e3}{\pascal})(\SI{0.0100}{\cubic\meter})}{(0.500)(\SI{8.3144626}{\joule\per\mole\per\kelvin})} = \mathbf{\SI{288.65}{\kelvin}}, \qquad T_2 = \frac{(\SI{280.0e3}{\pascal})(\SI{0.0200}{\cubic\meter})}{(0.500)(\SI{8.3144626}{\joule\per\mole\per\kelvin})} = \mathbf{\SI{1347.05}{\kelvin}}$$
+(b)~Because $P(V)$ is a straight line from $(V_1, P_1)$ to $(V_2, P_2)$, the area under the $P$--$V$ path is a trapezoid \eref{eq:18:chordwork}:
+$$W_{\mathrm{by}} = \frac{P_1 + P_2}{2}\,(V_2 - V_1) = \frac{120.0 + 280.0}{2}\,\si{\kilo\pascal}\times(\SI{20.00}{\liter} - \SI{10.00}{\liter}) = (\SI{200.0}{\kilo\pascal})(\SI{10.00}{\liter}) = \mathbf{\SI{2000.0}{\joule}} = \mathbf{\SI{2.000}{\kilo\joule}}$$
+*(Physical Decomposition Check: Work against the constant baseline load $P_1$ is $P_1\Delta V = (\SI{120.0}{\kilo\pascal})(\SI{10.00}{\liter}) = \SI{1200.0}{\joule}$, and elastic potential energy stored in the spring is $\Delta E_{\mathrm{spring}} = \frac{1}{2}k_s(\Delta x)^2 = \frac{1}{2}(\SI{1600}{\newton\per\meter})(\SI{1.000}{\meter})^2 = \SI{800.0}{\joule}$; total $W_{\mathrm{by}} = 1200.0 + 800.0 = \SI{2000.0}{\joule}$!).*
+\par\noindent
+(c)~For a diatomic ideal gas, $\Delta U = n C_{V,m}(T_2 - T_1) = \frac{5}{2}nR(T_2 - T_1) = \frac{5}{2}(P_2 V_2 - P_1 V_1)$:
+$$\Delta U = \frac{5}{2}\left[(\SI{280.0}{\kilo\pascal})(\SI{20.00}{\liter}) - (\SI{120.0}{\kilo\pascal})(\SI{10.00}{\liter})\right] = 2.5\left(5600.0 - 1200.0\right) = \mathbf{\SI{11000.0}{\joule}} = \mathbf{\SI{11.000}{\kilo\joule}}$$
+By the First Law $\Delta U = Q - W_{\mathrm{by}}$:
+$$Q = \Delta U + W_{\mathrm{by}} = \SI{11.000}{\kilo\joule} + \SI{2.000}{\kilo\joule} = \mathbf{\SI{13.000}{\kilo\joule}}$$
+\verifiedby{Spring-energy + enthalpy/internal-energy conservation and Python check \texttt{sec19:ex19.6}.}
+\end{workedexample}
+
+\begin{workedexample}[Template 7: Planetary Radiative Equilibrium \& Deep-Space $T^4$ Vacuum Cooling Time]{\texttt{MIT E3 Q23 \& GGSO E4 Q14d} \src{S27,S28}}{ex:19.7}
+A spherical probe of diameter $D_p = \SI{0.500}{\meter}$ (projected disk area $A_{\mathrm{proj}} = \frac{\pi}{4}D_p^2$, total spherical surface area $A_{\mathrm{surf}} = \pi D_p^2 = 4 A_{\mathrm{proj}}$), total thermal capacitance $C_p = m c = \SI{12.50}{\kilo\joule\per\kelvin}$, solar absorptance $\alpha_{\mathrm{sol}} = 0.800$, and thermal-IR emittance $\varepsilon_{\mathrm{IR}} = 0.250$ orbits in vacuum at a distance where solar irradiance is $I_0 = \SI{1361.0}{\watt\per\square\meter}$. (a)~Find the probe's steady-state radiative equilibrium temperature $T_{\mathrm{eq}}$ in sunlight (assuming rapid rotation or high internal conductivity so $\mathrm{Bi} \ll 1$). (b)~The probe then enters a total planetary eclipse (deep-space background $T_{\mathrm{space}} \approx \SI{0}{\kelvin}$). Using the closed-form $T^4$ radiative cooling formula (Archetype~4 in Table~\ref{tab:19:archetypes}), calculate the elapsed time $\Delta t$ for the probe to cool from $T_i = T_{\mathrm{eq}}$ down to $T_f = \SI{280.0}{\kelvin}$.
+\par\smallskip\noindent
+\textbf{Solution.}
+(a)~In steady radiative equilibrium, solar power absorbed over the projected cross-section $\alpha_{\mathrm{sol}} A_{\mathrm{proj}} I_0$ equals thermal-IR power emitted over the full spherical surface $\varepsilon_{\mathrm{IR}} A_{\mathrm{surf}} \sigma T_{\mathrm{eq}}^4$. Since $A_{\mathrm{proj}} / A_{\mathrm{surf}} = 1/4$:
+$$T_{\mathrm{eq}} = \left(\frac{\alpha_{\mathrm{sol}}\,I_0}{4\,\varepsilon_{\mathrm{IR}}\,\sigma}\right)^{1/4} = \left(\frac{(0.800)(\SI{1361.0}{\watt\per\square\meter})}{4(0.250)(\SI{5.670374e-8}{\watt\per\square\meter\per\kelvin\tothe{4}})}\right)^{1/4} = \left(\num{1.920155e10}\right)^{1/4} = \mathbf{\SI{372.25}{\kelvin}}\ (\SI{99.10}{\celsius})$$
+(b)~Total spherical emitting area: $A_{\mathrm{surf}} = \pi(\SI{0.500}{\meter})^2 = \SI{0.785398}{\square\meter}$. During eclipse in vacuum ($T_{\mathrm{surr}} \to \SI{0}{\kelvin}$), $C_p\frac{dT}{dt} = -\varepsilon_{\mathrm{IR}}\sigma A_{\mathrm{surf}} T^4$. Applying the pre-integrated algebraic formula from Table~\ref{tab:19:archetypes} (Row~4):
+$$\Delta t = \frac{C_p}{3\,\varepsilon_{\mathrm{IR}}\,\sigma\,A_{\mathrm{surf}}}\left(\frac{1}{T_f^3} - \frac{1}{T_i^3}\right) = \frac{\SI{12500}{\joule\per\kelvin}}{3(0.250)(\num{5.670374e-8})(\SI{0.785398}{\square\meter})}\left(\frac{1}{280.0^3} - \frac{1}{372.251^3}\right)$$
+$$\Delta t = (\num{3.74232e11})\left(\num{4.55539e-8} - \num{1.93855e-8}\right) = (\num{3.74232e11})(\num{2.61684e-8}) = \mathbf{\SI{9793.0}{\second}} = \mathbf{\SI{163.22}{\minute}}\ (\SI{2.720}{\hour})$$
+\verifiedby{Direct ODE numerical quadrature $\int_{280}^{372.251} C_p(\varepsilon\sigma A T^4)^{-1}dT = \SI{9793.0}{\second}$ and Python check \texttt{sec19:ex19.7}.}
+\end{workedexample}
+
+\begin{workedexample}[Template 8: Two-Stage Intercooled Adiabatic Gas Compression vs.\ Single-Stage Compression]{\texttt{MIT E2 P4b TB \#1} \src{S26}}{ex:19.8}
+An industrial compressor compresses $n = \SI{2.000}{\mole}$ of dry air (treated as a diatomic ideal gas with $\gamma = 1.400$, $C_{P,m} = \frac{7}{2}R = \SI{29.1006}{\joule\per\mole\per\kelvin}$) from intake state $P_1 = \SI{100.0}{\kilo\pascal}$, $T_1 = \SI{300.0}{\kelvin}$ to final discharge pressure $P_3 = \SI{900.0}{\kilo\pascal}$. Compare: (a)~the work input $W_{\mathrm{on,1\text{-}stage}}$ and final temperature $T_{f,1\text{-}stage}$ for a single reversible adiabatic compression from $P_1$ to $P_3$, versus (b)~the total work input $W_{\mathrm{on,2\text{-}stage}}$ and intercooler heat rejected $Q_{\mathrm{ic}}$ when compressed in \textbf{two reversible adiabatic stages} through the optimal geometric-mean intermediate pressure $P_2 = \sqrt{P_1 P_3}$ with isobaric intercooling back to $T_1 = \SI{300.0}{\kelvin}$ between stages, and (c)~the isothermal lower bound $W_{\mathrm{on,iso}}$ at $T_1 = \SI{300.0}{\kelvin}$.
+\par\smallskip\noindent
+\textbf{Solution.}
+(a)~\textbf{Single-Stage Reversible Adiabatic Compression ($P_1 = \SI{100.0}{\kilo\pascal} \to P_3 = \SI{900.0}{\kilo\pascal}$, pressure ratio $r_p = 9.000$):}
+With $\frac{\gamma - 1}{\gamma} = \frac{0.400}{1.400} = \frac{2}{7} \approx 0.285714$:
+$$T_{f,1\text{-}stage} = T_1\left(\frac{P_3}{P_1}\right)^{(\gamma-1)/\gamma} = (\SI{300.0}{\kelvin})(9.000)^{2/7} = (300.0)(1.87344) = \mathbf{\SI{562.03}{\kelvin}}\ (\SI{288.88}{\celsius})$$
+For a steady-flow adiabatic compressor (shaft work $\dot{W}_{\mathrm{on,sh}} = \Delta H = n C_{P,m}\Delta T$, or closed-system adiabatic work $W_{\mathrm{on,closed}} = \Delta U = n C_{V,m}\Delta T = \frac{1}{\gamma}\Delta H$):
+$$W_{\mathrm{on,sh,1\text{-}stage}} = n C_{P,m}(T_{f,1} - T_1) = (2.000)(\SI{29.1006}{\joule\per\mole\per\kelvin})(562.033 - 300.0) = \mathbf{\SI{15250.6}{\joule}} = \mathbf{\SI{15.251}{\kilo\joule}}$$
+*(Closed-system piston work without flow work $\Delta(PV)$ is $W_{\mathrm{on,closed,1}} = \frac{15.2506}{1.400} = \mathbf{\SI{10.893}{\kilo\joule}}$).*
+\par\smallskip\noindent
+(b)~\textbf{Two-Stage Intercooled Compression Through Optimal $P_2 = \sqrt{P_1 P_3} = \sqrt{(100.0)(900.0)} = \mathbf{\SI{300.0}{\kilo\pascal}}$:}
+Each stage has pressure ratio $\frac{P_2}{P_1} = \frac{P_3}{P_2} = 3.000$, so both stages exit at identical temperature $T_{\mathrm{exit}}$:
+$$T_{\mathrm{exit}} = T_1(3.000)^{2/7} = (\SI{300.0}{\kelvin})(1.36874) = \mathbf{\SI{410.62}{\kelvin}}\ (\SI{137.47}{\celsius})$$
+Total two-stage steady-flow shaft work input:
+$$W_{\mathrm{on,sh,2\text{-}stage}} = 2\,n C_{P,m}(T_{\mathrm{exit}} - T_1) = 2(2.000)(\SI{29.1006}{\joule\per\mole\per\kelvin})(410.621 - 300.0) = \mathbf{\SI{12876.6}{\joule}} = \mathbf{\SI{12.877}{\kilo\joule}}$$
+*(Closed-system piston work: $W_{\mathrm{on,closed,2}} = \frac{12.8766}{1.400} = \mathbf{\SI{9.198}{\kilo\joule}}$).* The isobaric intercooler at $P_2 = \SI{300.0}{\kilo\pascal}$ cools the gas from $\SI{410.62}{\kelvin}$ back to $\SI{300.0}{\kelvin}$, rejecting heat $Q_{\mathrm{out,ic}} = n C_{P,m}(410.621 - 300.0) = \mathbf{\SI{6.438}{\kilo\joule}}$ and saving $15.251 - 12.877 = \mathbf{\SI{2.374}{\kilo\joule}}$ ($\mathbf{15.6\%}$) of compressor shaft work!
+\par\smallskip\noindent
+(c)~\textbf{Reversible Isothermal Compression Lower Bound ($N \to \infty$ stages at $T_1 = \SI{300.0}{\kelvin}$):}
+$$W_{\mathrm{on,iso}} = n R T_1 \ln\!\left(\frac{P_3}{P_1}\right) = (2.000)(\SI{8.3144626}{\joule\per\mole\per\kelvin})(\SI{300.0}{\kelvin})\ln(9.000) = \mathbf{\SI{10961.2}{\joule}} = \mathbf{\SI{10.961}{\kilo\joule}}$$
+*(Ordering Check: $W_{\mathrm{on,iso}} = \SI{10.961}{\kilo\joule} < W_{\mathrm{on,sh,2\text{-}stage}} = \SI{12.877}{\kilo\joule} < W_{\mathrm{on,sh,1\text{-}stage}} = \SI{15.251}{\kilo\joule}$. Confirmed!)*
+\verifiedby{Exact equality of stage pressure ratios $P_2/P_1 = P_3/P_2 = 3.0$ and Python check \texttt{sec19:ex19.8}.}
+\end{workedexample}
+
+% ============================================================================
+\section{Class~III Scientific Calculator Speed Playbook (\texttt{Rule 2.b} --- TI-36X Pro / Casio fx-991EX)}\label{sec:19.4}
+\idxtopic{calculator speed playbook (Class III, Rule 2.b)}\idxtopic{CODATA 2022 constants!calculator memory registers}
+
+Under 2027 Rule~\texttt{2.b} and the Science Olympiad Calculator Policy \src{S01}, each competitor may bring a dedicated \textbf{Class~III non-programmable, non-graphing scientific calculator} (two calculators per team). Storing the 8 fundamental CODATA~2022 constants \src{S07} in non-volatile memory registers before the event block saves $\SIrange{3}{5}{\minute}$ of keystroke entry and prevents transcription typos:
+
+\begin{table}[h!]
+\centering
+\captionof{table}{Pre-Block Class~III Calculator Memory Register Map \& Built-In Solver Workflows (\texttt{TI-36X Pro} \& \texttt{Casio fx-115ES/991EX}) \src{S01,S07}.}\label{tab:19:calc}
+\footnotesize
+\setlength{\tabcolsep}{3.5pt}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabularx}{\linewidth}{@{}C{0.10\linewidth} >{\raggedright\arraybackslash}p{0.23\linewidth} R{0.19\linewidth} >{\raggedright\arraybackslash}p{0.22\linewidth} >{\raggedright\arraybackslash}X@{}}
+\toprule
+\hdr{Register} & \hdr{Constant Stored} & \hdr{Exact Value to Store} & \hdr{SI Units} & \hdr{Instant Competition Keystroke Macro} \\
+\midrule
+\textbf{\texttt{A}} & Universal gas constant $R$ & $\num{8.314462618}$ & $\si{\joule\per\mole\per\kelvin}$ & $C_{V,m} = 1.5\texttt{A}$ (mono), $2.5\texttt{A}$ (di); $P = n\texttt{A}T/V$ \\
+\rowcolor{rowalt}
+\textbf{\texttt{B}} & Stefan--Boltzmann $\sigma$ & $\num{5.670374419e-8}$ & $\si{\watt\per\square\meter\per\kelvin\tothe{4}}$ & $\dot{Q}_{\mathrm{rad}} = \varepsilon\texttt{B}A(T^4 - T_0^4)$ \\
+\textbf{\texttt{C}} & Boltzmann constant $k_B$ & $\num{1.380649e-23}$ & $\si{\joule\per\kelvin}$ & $S = \texttt{C}\ln\Omega$;\quad $\bar{K}_{\mathrm{tr}} = 1.5\texttt{C}T$ \\
+\rowcolor{rowalt}
+\textbf{\texttt{D}} & Avogadro constant $N_A$ & $\num{6.02214076e23}$ & $\si{\per\mole}$ & $N = n\texttt{D}$;\quad $m_{\mathrm{molecule}} = M/\texttt{D}$ \\
+\textbf{\texttt{E}} & Specific heat of water $c_w$ & $\num{4184}$ & $\si{\joule\per\kilogram\per\kelvin}$ & $Q_w = m\texttt{E}\Delta T$;\quad $\SI{1}{\text{cal}_{\mathrm{th}}} = \texttt{E}/1000\,\si{\joule}$ \\
+\rowcolor{rowalt}
+\textbf{\texttt{F}} & Standard atmosphere $P_{\mathrm{atm}}$ & $\num{101325}$ & $\si{\pascal}$ & $P_{\mathrm{abs}} = P_{\mathrm{gauge}} + \texttt{F}$;\quad $\SI{1}{\liter\cdot\text{atm}} = \texttt{F}/1000\,\si{\joule}$ \\
+\textbf{\texttt{X}} (or \texttt{M}) & Water fusion latent heat $L_f$ & $\num{333550}$ & $\si{\joule\per\kilogram}$ & $Q_{\mathrm{melt}} = m\texttt{X}$ ($\SI{333.55}{\joule\per\gram}$) \\
+\rowcolor{rowalt}
+\textbf{\texttt{Y}} & Water vaporization $L_v(\SI{100}{\celsius})$ & $\num{2256400}$ & $\si{\joule\per\kilogram}$ & $Q_{\mathrm{boil}} = m\texttt{Y}$ ($\SI{2256.4}{\joule\per\gram}$) \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{itemize}
+  \item \textbf{30-Second 2-Variable Linear Regression (\texttt{data} / \texttt{stat-reg} $\to$ \texttt{2-Var Stats} $y = a + bx$):} Enter $X_k$ in \texttt{L1} and $Y_k$ in \texttt{L2} (you can type $\ln(62 - 26.95)$ or $1000/(60 + 273.15)$ directly into the list cell!). Select \texttt{LinReg(a+bx)} to read slope $b$ (or $m$), intercept $a$, and correlation $r$ to 9 digits in $\SI{5}{\second}$.
+  \item \textbf{Numerical Solver (\texttt{num-solv} / \texttt{SHIFT-SOLVE}) for Mixed Convection + $T^4$ Radiation (\texttt{2027 Cornell E1 Q16}):} To solve $h(T_s - T_\infty) + \varepsilon\sigma(T_s^4 - T_\infty^4) = q''_{\mathrm{abs}}$ for surface temperature $T_s$ without fourth-degree algebra, enter the equation with unknown $X$, seed $X_0 = \SI{330}{\kelvin}$ (always seed a positive Kelvin temperature $T_0 \in \SIrange{250}{1000}{\kelvin}$ so Newton's method never locks onto the unphysical negative root $-T_s$!), and press \texttt{Solve}.
+\end{itemize}
+
+\alsosee{\sref{sec:00} (`fig:00:router` 10-Second Router), \sref{sec:01} (`QS-01`..`QS-14`), \sref{sec:04}--\sref{sec:13} (Core Physics \& Transfer), \sref{sec:17}--\sref{sec:18} (Lab \& Data Analysis), \sref{sec:20} (Error Catalog), \sref{sec:21} (Partner Exam Strategy), and \sref{app:B} (Target-Variable Equation Chooser).}

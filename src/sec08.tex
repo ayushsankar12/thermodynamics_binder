@@ -1,0 +1,664 @@
+% ============================================================================
+% sec08.tex — §8 Second Law, Entropy (Delta S), Enthalpy (Delta H),
+%             Gibbs/Helmholtz Potentials, Exergy & Third Law (Target: 10 pages)
+% ============================================================================
+\binderchapter{8}{Second Law, Entropy ($\Delta S$), Enthalpy ($\Delta H$), Gibbs/Helmholtz Potentials, Exergy \& Third Law}{Second Law, Entropy, Enthalpy \& Third Law}{sec:08}
+\scopebanner{TIER-DEPENDENT}[2027 Rule 5.c.iv (Core 2nd Law: All Levels) \textbar\ Rule 5.c.vi--vii (Third Law, Entropy $\Delta S$, Enthalpy $\Delta H$: States \& Nationals --- Tested on 8/8 Invitational Exams!)]
+
+\idxtopic{Second Law of Thermodynamics}\idxtopic{Kelvin--Planck statement}\idxtopic{Clausius statement}\idxtopic{entropy}\idxtopic{enthalpy}\idxtopic{Hess's law}\idxtopic{Gibbs free energy}\idxtopic{exergy and Gouy--Stodola theorem}\idxtopic{Third Law of Thermodynamics}\idxtopic{residual entropy}
+
+\begin{tierbox}[2027 Rules Scope vs.\ Observed Invitational Tournament Reality (\texttt{8/8} Corpus Alert)]
+Under the 2027 Division~C Rules Manual \src{S01}, the \textbf{Second Law of Thermodynamics, heat engines, and Carnot efficiency bounds} fall under Clause~\texttt{5.c.iv} (\textbf{REQUIRED at ALL levels: Regionals, States, and Nationals}). The \textbf{Third Law of Thermodynamics} (\texttt{5.c.vi}) and quantitative \textbf{Entropy ($\Delta S$) and Enthalpy ($\Delta H$)} (\texttt{5.c.vii}) are formally designated for \textbf{State and National tournaments}. However, our 8-exam corpus audit (\sref{sec:22}) revealed that \textbf{$\mathbf{8/8}$ ($\mathbf{100\%}$) of invitational and regional exams} (\texttt{E1}--\texttt{E8}) tested $\Delta S$, $\Delta H$, and $\Delta G$ — including \texttt{2027 Cornell E1 Q28--Q29} (\texttt{TB~\#1} \& \texttt{TB~\#8}, 37 points on steam-table $h, s$, Gouy--Stodola exergy destruction $X_{\mathrm{dest}} = T_0 S_{\mathrm{gen}}$, and Second-Law efficiency $\eta_{\mathrm{II}}$) \src{S25,S26,S27}! Teams at \emph{every} tournament level must keep this section in their active binder.
+\end{tierbox}
+
+% ============================================================================
+\section{The Second Law: Kelvin--Planck \& Clausius Equivalence, Irreversibility \& Arrow of Time}\label{sec:08.1}
+% ============================================================================
+\idxtopic{Kelvin--Planck statement}\idxtopic{Clausius statement}\idxtopic{perpetual motion machine of the second kind (PMM2)}\idxtopic{reversibility vs. irreversibility}
+
+While the First Law requires total energy to be conserved ($\Delta U_{\mathrm{univ}} = 0$), the \textbf{Second Law of Thermodynamics} establishes the directional \emph{arrow of time}, forbidding $100\%$ conversion of heat into work in a cycle and forbidding spontaneous heat flow from cold to hot \src{S13,S16,S23}:
+\begin{enumerate}
+  \item \textbf{Kelvin--Planck Statement (Heat-Engine Formulation, 1851/1897):} \emph{It is impossible to construct a device operating in a thermodynamic cycle whose sole effect is to absorb heat from a single thermal reservoir and deliver an equivalent amount of net mechanical work} ($Q_C > 0$ is mandatory $\implies \eta = W_{\mathrm{net}}/Q_H < 1$; forbids a \textbf{Perpetual Motion Machine of the Second Kind, PMM2}).
+  \item \textbf{Clausius Statement (Refrigerator / Heat-Flow Formulation, 1850):} \emph{It is impossible to construct a device operating in a thermodynamic cycle whose sole effect is to transfer heat from a colder body ($T_C$) to a hotter body ($T_H > T_C$) without external work input} ($W_{\mathrm{in}} > 0$ is mandatory $\implies \mathrm{COP}_R = Q_C/W_{\mathrm{in}} < \infty$).
+\end{enumerate}
+
+\par\smallskip\noindent
+\begin{minipage}{\linewidth}
+\centering
+\begin{tikzpicture}[font=\scriptsize]
+% Left Panel: KP Violator -> Clausius Violator
+\begin{scope}[shift={(0,0)}]
+  \node[font=\scriptsize\bfseries, navy] at (3.6, 3.65) {(a) Kelvin--Planck Violator $\Longrightarrow$ Clausius Violator};
+  \draw[thick, fill=rust!15] (0.4, 2.85) rectangle (6.8, 3.35) node[midway, font=\scriptsize\bfseries] {Hot Reservoir at $T_H$ (Net Heat Gain: $Q_C > 0$)};
+  \draw[thick, fill=teal!15] (0.4, 0.25) rectangle (6.8, 0.75) node[midway, font=\scriptsize\bfseries] {Cold Reservoir at $T_C < T_H$ (Net Heat Loss: $Q_C > 0$)};
+  \draw[navy, dashed, thick, rounded corners=3pt] (0.7, 0.90) rectangle (6.5, 2.70);
+  % Hypothetical KP violator engine on left
+  \draw[rust, very thick, fill=white] (1.9, 1.80) circle (0.58cm) node[align=center] {\textbf{Hyp.\ KP}\\\textbf{Engine}\\($\eta=100\%$)};
+  \draw[rust, very thick, -{Stealth[length=2mm]}] (1.9, 2.85) -- (1.9, 2.38) node[midway, left] {$Q_H$};
+  % Real Carnot Refrigerator on right
+  \draw[teal, very thick, fill=white] (5.1, 1.80) circle (0.58cm) node[align=center] {\textbf{Standard}\\\textbf{Refrig.}};
+  \draw[navy, very thick, -{Stealth[length=2mm]}] (2.48, 1.80) -- (4.52, 1.80) node[midway, above] {$W = Q_H$} node[midway, below] {(coupled shaft)};
+  \draw[teal, very thick, -{Stealth[length=2mm]}] (5.1, 0.75) -- (5.1, 1.22) node[midway, right] {$Q_C > 0$};
+  \draw[rust, very thick, -{Stealth[length=2mm]}] (5.1, 2.38) -- (5.1, 2.85) node[midway, right] {$Q_H + Q_C$};
+\end{scope}
+
+% Right Panel: Clausius Violator -> KP Violator
+\begin{scope}[shift={(8.2,0)}]
+  \node[font=\scriptsize\bfseries, navy] at (3.6, 3.65) {(b) Clausius Violator $\Longrightarrow$ Kelvin--Planck Violator};
+  \draw[thick, fill=rust!15] (0.4, 2.85) rectangle (6.8, 3.35) node[midway, font=\scriptsize\bfseries] {Hot Reservoir at $T_H$ (Net Extraction: $Q_H - Q_C = W$)};
+  \draw[thick, fill=teal!15] (0.4, 0.25) rectangle (6.8, 0.75) node[midway, font=\scriptsize\bfseries] {Cold Reservoir at $T_C < T_H$ (Net Heat Transfer: $Q_C - Q_C = 0$!)};
+  \draw[navy, dashed, thick, rounded corners=3pt] (0.7, 0.90) rectangle (6.5, 2.70);
+  % Hypothetical Clausius violator on left
+  \draw[teal, very thick, fill=white] (1.9, 1.80) circle (0.58cm) node[align=center] {\textbf{Hyp.\ Cl.}\\\textbf{Pump}\\($W_{\mathrm{in}}=0$)};
+  \draw[teal, very thick, -{Stealth[length=2mm]}] (1.9, 0.75) -- (1.9, 1.22) node[midway, left] {$Q_C$};
+  \draw[rust, very thick, -{Stealth[length=2mm]}] (1.9, 2.38) -- (1.9, 2.85) node[midway, left] {$Q_C$};
+  % Standard Engine on right
+  \draw[rust, very thick, fill=white] (4.8, 1.80) circle (0.58cm) node[align=center] {\textbf{Standard}\\\textbf{Engine}};
+  \draw[rust, very thick, -{Stealth[length=2mm]}] (4.8, 2.85) -- (4.8, 2.38) node[midway, right] {$Q_H > Q_C$};
+  \draw[teal, very thick, -{Stealth[length=2mm]}] (4.8, 1.22) -- (4.8, 0.75) node[midway, right] {$Q_C$};
+  \draw[navy, very thick, -{Stealth[length=2mm]}] (5.38, 1.80) -- (6.75, 1.80) node[ above left] {$W = Q_H - Q_C$};
+\end{scope}
+\end{tikzpicture}
+\captionof{figure}{Proof of logical equivalence between the Kelvin--Planck and Clausius statements via contrapositive coupling \src{S13,S33}. (a) A hypothetical $100\%$-efficient engine ($W = Q_H$) driving a refrigerator pumps net heat $Q_C$ from $T_C$ to $T_H$ with zero external work (violating Clausius). (b) A hypothetical zero-work heat pump returning $Q_C$ from $T_C$ to $T_H$ leaves the cold reservoir unchanged while a standard engine converts $Q_H - Q_C$ from $T_H$ $100\%$ into work $W$ (violating Kelvin--Planck).}\label{fig:08:carnot-clausius}
+\idxfig{Logical equivalence of Kelvin--Planck and Clausius Second-Law statements}
+\end{minipage}
+\par\smallskip
+
+\begin{formulacard}[Reversible vs.\ Irreversible Processes \& The 6 Sources of Irreversibility \src{S13,S33}]
+A process is \textbf{reversible} ($\Delta S_{\mathrm{univ}} = S_{\mathrm{gen}} = 0$) if and only if both the system and its surroundings can be restored to their exact initial states without leaving any net change elsewhere. Every real process is \textbf{irreversible} ($S_{\mathrm{gen}} > 0$) due to one or more of the 6 dissipative mechanisms:
+\begin{enumerate}
+  \item \textbf{Heat transfer across a finite temperature difference} ($T_H > T_C \implies S_{\mathrm{gen}} = Q(1/T_C - 1/T_H) > 0$).
+  \item \textbf{Unrestrained / free expansion or throttling across a finite pressure drop} ($P_1 > P_2$, e.g., Joule expansion or valve throttling).
+  \item \textbf{Mechanical sliding friction or viscous fluid dissipation} (converts ordered work $W$ into disordered internal energy $\Delta U$).
+  \item \textbf{Spontaneous mixing of distinct chemical species} at different concentrations or partial pressures ($\Delta S_{\mathrm{mix}} > 0$).
+  \item \textbf{Ohmic electrical dissipation} ($Q_{\mathrm{Joule}} = I^2 R_\Omega t$ dissipated inside a resistor at temperature $T \implies S_{\mathrm{gen}} = I^2 R_\Omega t / T > 0$).
+  \item \textbf{Spontaneous chemical reactions or phase transitions away from equilibrium} ($\Delta G < 0 \implies S_{\mathrm{gen}} = -\Delta G / T > 0$).
+\end{enumerate}
+\emph{Exam distinction (\texttt{2018 MIT E3 MC1--MC2}):} ``Quasistatic'' means infinitely slow (internal equilibrium); a process with dry sliding friction can be quasistatic yet \textbf{irreversible}! Only a \emph{frictionless} quasistatic process is internally reversible.\idxerr{confusing quasistatic with reversible when friction is present}
+\end{formulacard}
+
+% ============================================================================
+\section{Macroscopic Entropy ($\Delta S = Q_{\mathrm{rev}}/T$), Clausius Inequality \& Master $\Delta S$ Atlas}\label{sec:08.2}
+% ============================================================================
+\idxtopic{Clausius inequality}\idxtopic{entropy generation $S_{\mathrm{gen}}$}\idxtopic{Trouton's rule}\idxtopic{entropy of mixing}\idxtopic{Gibbs paradox}
+
+Rudolf Clausius (1865) proved from Carnot's theorem that for \emph{any} closed thermodynamic cycle exchanging heats $Q_k$ with reservoirs at boundary temperatures $T_{b,k}$, the \textbf{Clausius Inequality} holds \src{S13,S23,S33}:
+\begin{equation}\label{eq:08:clausius-ineq}
+  \boxed{\sum_{\mathrm{cycle}} \frac{Q_k}{T_{b,k}} \le 0} \quad (\text{with } = 0 \text{ iff the cycle is completely reversible})
+\end{equation}
+\idxformula{Clausius inequality: $\sum_{\mathrm{cycle}} Q_k/T_{b,k} \le 0$}
+Because the cyclic sum of $Q_{\mathrm{rev}}/T$ vanishes for every reversible cycle, Clausius defined the \textbf{state function Entropy $S$} ($\si{\joule\per\kelvin}$) such that between any two equilibrium states $1$ and $2$:
+\begin{equation}\label{eq:08:entropy-def}
+  \boxed{\Delta S_{\mathrm{sys}} = S_2 - S_1 = \left(\sum \frac{\delta Q_{\mathrm{rev}}}{T}\right)_{\text{along ANY reversible path } 1\to 2}}, \qquad \boxed{\Delta S_{\mathrm{univ}} = \Delta S_{\mathrm{sys}} + \Delta S_{\mathrm{surr}} = S_{\mathrm{gen}} \ge 0}
+\end{equation}
+\idxformula{Clausius macroscopic entropy: $\Delta S_{\mathrm{sys}} = (Q_{\mathrm{rev}}/T)_{\mathrm{rev\ path}}$, $\Delta S_{\mathrm{univ}} = S_{\mathrm{gen}} \ge 0$}
+\emph{Golden Rule for Irreversible Processes:} Because $S$ is a \textbf{state function}, $\Delta S_{\mathrm{sys}} = S_2 - S_1$ for an \emph{irreversible} process from State~$1$ to State~$2$ is calculated by inventing a convenient \textbf{reversible path} connecting the exact same endpoints $(1, 2)$!
+
+\begin{formulacard}[Master Algebraic $\Delta S$ Formula Atlas (Rule 5.d.iv Zero-Calculus Toolkit) \src{S13,S16,S18}]
+\par\smallskip\noindent
+\footnotesize\setlength{\tabcolsep}{3.5pt}\renewcommand{\arraystretch}{1.20}
+\begin{tabularx}{\linewidth}{@{}l l X@{}}
+\toprule
+\textbf{Physical Process / System} & \textbf{Closed Algebraic $\Delta S$ Formula ($T$ in $\si{\kelvin}$!)} & \textbf{Key Competition Rules \& Shortcuts} \\
+\midrule
+\textbf{1. Thermal Reservoir} ($T_{\mathrm{res}} = \mathrm{const}$) & $\displaystyle \Delta S_{\mathrm{res}} = \frac{Q_{\mathrm{res}}}{T_{\mathrm{res}}} = \frac{-Q_{\mathrm{sys}}}{T_{\mathrm{res}}}$ & $Q_{\mathrm{res}} > 0$ if reservoir \emph{absorbs} heat; $<0$ if it \emph{supplies} heat. \\[5pt]
+\textbf{2. Isothermal Phase Change} ($T_{\mathrm{tr}}$) & $\displaystyle \Delta S_{\mathrm{phase}} = \frac{\pm m L}{T_{\mathrm{tr}}} = \frac{\pm n\Delta_{\mathrm{tr}}H_m}{T_{\mathrm{tr}}}$ & $+$ for melting/boiling/sublimation; $-$ for freezing/condensing. \textbf{Trouton's Rule:} $\Delta_{\mathrm{vap}}S_m^\circ \approx 10.5R \approx \SI{87}{\joule\per\mole\per\kelvin}$ ($\mathrm{H_2O}$: $\SI{108.9}{\joule\per\mole\per\kelvin}$). \\[5pt]
+\textbf{3. Solid or Liquid Warming} (const $c$) & $\displaystyle \Delta S = mc\ln\left(\frac{T_2}{T_1}\right) = nC_m\ln\left(\frac{T_2}{T_1}\right)$ & Derived from geometric-mean steps; valid for any constant-$c$ condensed phase ($T_1, T_2$ in $\si{\kelvin}$!). \\[5pt]
+\textbf{4. Two Identical Blocks Mixing} ($m, c$ at $T_1, T_2 \to T_f = \frac{T_1+T_2}{2}$) & $\displaystyle \Delta S_{\mathrm{univ}} = mc\ln\left(\frac{T_f^2}{T_1 T_2}\right) = 2mc\ln\left(\frac{(T_1+T_2)/2}{\sqrt{T_1 T_2}}\right) > 0$ & By AM--GM inequality, $\frac{T_1+T_2}{2} > \sqrt{T_1 T_2}$ for $T_1 \ne T_2$. If a \textbf{reversible Carnot engine} runs between them, $\Delta S_{\mathrm{univ}}=0 \implies \boxed{T_{f,\mathrm{rev}} = \sqrt{T_1 T_2}}$ and $\boxed{W_{\max} = mc(\sqrt{T_1}-\sqrt{T_2})^2}$! \\[5pt]
+\textbf{5. Ideal Gas State Change} $(P_1,V_1,T_1)\to(P_2,V_2,T_2)$ & $\displaystyle \begin{aligned}\Delta S &= nC_{V,m}\ln\frac{T_2}{T_1} + nR\ln\frac{V_2}{V_1} \quad [(T,V)]\\ &= nC_{P,m}\ln\frac{T_2}{T_1} - nR\ln\frac{P_2}{P_1} \quad [(T,P)]\\ &= nC_{V,m}\ln\frac{P_2}{P_1} + nC_{P,m}\ln\frac{V_2}{V_1} \quad [(P,V)]\end{aligned}$ & Holds for \textbf{BOTH reversible and irreversible} paths between $(1)$ and $(2)$ (e.g., for adiabatic free expansion $T_2=T_1 \implies \Delta S_{\mathrm{gas}} = +nR\ln(V_2/V_1) > 0$ while $\Delta S_{\mathrm{surr}} = 0$). \\[5pt]
+\textbf{6. Mixing of $K$ Distinct Ideal Gases} (at constant $T, P$) & $\displaystyle \Delta S_{\mathrm{mix}} = -R\sum_{i=1}^K n_i\ln x_i = -n_{\mathrm{tot}}R\sum_{i=1}^K x_i\ln x_i > 0$ & For $1\,\si{\mole}\ A + 1\,\si{\mole}\ B$: $\Delta S_{\mathrm{mix}} = 2R\ln 2 = \SI{11.526}{\joule\per\kelvin}$. \textbf{Gibbs Paradox:} If gases $A$ and $B$ are \textbf{identical}, $\Delta S_{\mathrm{mix}} = \mathbf{0}$! \\[5pt]
+\textbf{7. Steady Conduction Bar} ($T_H \to T_C$) & $\displaystyle \dot{S}_{\mathrm{gen}} = \dot{Q}\left(\frac{1}{T_C} - \frac{1}{T_H}\right) = \dot{Q}\left(\frac{T_H - T_C}{T_H T_C}\right) > 0$ & Bar itself is in steady state ($\Delta S_{\mathrm{bar}} = 0$), while reservoirs gain net entropy $\dot{S}_{\mathrm{gen}} > 0$. \\
+\bottomrule
+\end{tabularx}
+\idxformula{Solid/liquid entropy change: $\Delta S = mc\ln(T_2/T_1)$}\idxformula{Ideal gas entropy change: $\Delta S = nC_{V,m}\ln(T_2/T_1) + nR\ln(V_2/V_1) = nC_{P,m}\ln(T_2/T_1) - nR\ln(P_2/P_1)$}\idxformula{Entropy of mixing: $\Delta S_{\mathrm{mix}} = -R\sum n_i\ln x_i$}\idxformula{Carnot work between finite bodies: $T_{f,\mathrm{rev}} = \sqrt{T_1T_2}$, $W_{\max} = mc(\sqrt{T_1}-\sqrt{T_2})^2$}
+\end{formulacard}
+
+\par\smallskip\noindent
+\begin{minipage}{\linewidth}
+\centering
+\begin{tikzpicture}[font=\scriptsize]
+\begin{axis}[
+    width=0.86\linewidth,
+    height=4.3cm,
+    xlabel={Specific Entropy $s$ ($\si{\kilo\joule\per\kilogram\per\kelvin}$)},
+    ylabel={Absolute Temperature $T$ ($\si{\kelvin}$)},
+    xmin=0.0, xmax=9.2,
+    ymin=250, ymax=720,
+    grid=both,
+    grid style={gray!25},
+    tick label style={font=\scriptsize},
+    label style={font=\scriptsize\bfseries}
+]
+% Shaded reversible heat area under isobar at 373.15 K from s_f=1.307 to s_g=7.354
+\addplot[fill=teal!18, draw=none] coordinates {(1.307,250) (1.307,373.15) (7.354,373.15) (7.354,250)} \closedcycle;
+\draw[teal, thick, dashed] (axis cs:1.307,250) -- (axis cs:1.307,373.15);
+\draw[teal, thick, dashed] (axis cs:7.354,250) -- (axis cs:7.354,373.15);
+\node[teal, align=center, fill=white, inner sep=1.5pt] at (axis cs:4.33,308) {\textbf{Shaded Area} $= q_{\mathrm{rev}} = T_b(s_g - s_f) = h_{fg}$\\($\SI{2256.4}{\kilo\joule\per\kilogram}$ at $\SI{373.15}{\kelvin}$)};
+
+% Saturation Dome for Water (approximate locus from 273.16 K to Tc = 647.1 K at s_c = 4.41 kJ/kgK)
+\addplot[navy, ultra thick, smooth] coordinates {
+  (0.000, 273.16) (0.704, 323.15) (1.307, 373.15) (1.861, 423.15) (2.331, 473.15)
+  (2.797, 523.15) (3.255, 573.15) (3.770, 623.15) (4.412, 647.10)
+  (5.210, 623.15) (5.705, 573.15) (6.073, 523.15) (6.432, 473.15)
+  (6.838, 423.15) (7.354, 373.15) (8.076, 323.15) (9.156, 273.16)
+};
+
+% Isobar P = 1 atm (101.325 kPa): subcooled liquid -> horizontal two-phase plateau -> superheated vapor
+\addplot[rust, very thick] coordinates {
+  (0.30, 293.15) (1.307, 373.15) (7.354, 373.15) (7.829, 473.15) (8.25, 580.0)
+};
+% Steep isochore v = const in superheated region (steeper than isobar on T-s!)
+\addplot[amber, very thick, dashed] coordinates {
+  (7.354, 373.15) (7.68, 473.15) (7.98, 590.0)
+};
+
+\fill[navy] (axis cs:4.412,647.10) circle (2.2pt) node[above, fill=white, inner sep=1pt] {\textbf{Critical Point} ($\SI{647.1}{\kelvin}$)};
+\node[navy, fill=white, inner sep=1pt] at (axis cs:1.25,520) {Sat.\ Liquid ($x=0$)};
+\node[navy, fill=white, inner sep=1pt] at (axis cs:7.20,520) {Sat.\ Vapor ($x=1$)};
+\node[rust, fill=white, inner sep=1pt] at (axis cs:4.33,396) {Isobar $P = \SI{1}{\text{atm}}$ ($T_{\mathrm{sat}}=\SI{373.15}{\kelvin}$)};
+\node[amber, fill=white, inner sep=1pt] at (axis cs:7.95,625) {Isochore $v=\mathrm{const}$ (steeper)};
+\end{axis}
+\end{tikzpicture}
+\captionof{figure}{Temperature--entropy ($T$--$s$) diagram of water showing the liquid--vapor saturation dome, the $\SI{1}{\text{atm}}$ isobar, a superheated isochore (which has steeper slope $(\Delta T/\Delta s)_v = T/c_v > (\Delta T/\Delta s)_P = T/c_p$), and the rectangular area $q_{\mathrm{rev}} = T_{\mathrm{sat}}s_{fg} = h_{fg}$ representing latent heat of vaporization \src{S09,S13,S33}.}\label{fig:08:ts-dome}
+\idxfig{Pure-substance T--s saturation dome and reversible heat area}
+\end{minipage}
+\par\smallskip
+
+\begin{workedexample}[Melting Ice in a Lake vs.\ Reversible Carnot Engine Between Finite Bodies]{State/National Standard \textbar\ Tier 2}{ex:08.1}
+(a) A block of subcooled ice of mass $m = \SI{2.000}{\kilogram}$ at $T_1 = \SI{-20.00}{\celsius}$ ($\SI{253.15}{\kelvin}$, $c_{\mathrm{ice}} = \SI{2090}{\joule\per\kilogram\per\kelvin}, L_f = \SI{334.0}{\kilo\joule\per\kilogram}$) is dropped into a large lake at $T_{\mathrm{lake}} = \SI{20.00}{\celsius}$ ($\SI{293.15}{\kelvin}$, $c_w = \SI{4184}{\joule\per\kilogram\per\kelvin}$) and comes to thermal equilibrium with the lake. Calculate $\Delta S_{\mathrm{ice}}$, $\Delta S_{\mathrm{lake}}$, and $\Delta S_{\mathrm{univ}} = S_{\mathrm{gen}}$.
+(b) Two identical copper blocks (each of mass $m_{\mathrm{Cu}} = \SI{5.000}{\kilogram}$ and $c_{\mathrm{Cu}} = \SI{385.0}{\joule\per\kilogram\per\kelvin}$) are initially at $T_H = \SI{500.0}{\kelvin}$ and $T_C = \SI{200.0}{\kelvin}$. Compare their final temperature and $\Delta S_{\mathrm{univ}}$ when placed in direct thermal contact versus when a reversible Carnot engine operates between them until they reach a common temperature $T_{f,\mathrm{rev}}$, and compute the maximum work $W_{\max}$ extracted.
+\par\smallskip\noindent
+\textbf{Solution.}
+\begin{enumerate}
+  \item \textbf{(a) Three-stage reversible path for the $\SI{2.000}{\kilogram}$ ice block ($\SI{253.15}{\kelvin}\to\SI{273.15}{\kelvin}\text{ melt}\to\SI{293.15}{\kelvin}$):}
+  \[
+    Q_{\mathrm{tot}} = m c_{\mathrm{ice}}(20.00) + m L_f + m c_w(20.00) = 83.60 + 668.00 + 167.36 = \mathbf{+\SI{918.96}{\kilo\joule}}
+  \]
+  \[
+    \Delta S_{\mathrm{ice}} = (2.000)(2090)\ln\left(\frac{273.15}{253.15}\right) + \frac{\SI{668000}{\joule}}{\SI{273.15}{\kelvin}} + (2.000)(4184)\ln\left(\frac{293.15}{273.15}\right) = 317.80 + 2445.54 + 591.36 = \mathbf{+\SI{3354.70}{\joule\per\kelvin}}
+  \]
+  \[
+    \Delta S_{\mathrm{lake}} = \frac{-Q_{\mathrm{tot}}}{T_{\mathrm{lake}}} = \frac{\SI{-918960}{\joule}}{\SI{293.15}{\kelvin}} = \mathbf{\SI{-3134.78}{\joule\per\kelvin}} \implies \Delta S_{\mathrm{univ}} = 3354.70 - 3134.78 = \mathbf{+\SI{219.92}{\joule\per\kelvin}} > 0
+  \]
+  \item \textbf{(b) Direct contact vs.\ reversible Carnot engine between finite blocks ($C = m_{\mathrm{Cu}}c_{\mathrm{Cu}} = \SI{1925.0}{\joule\per\kelvin}$):}
+  \begin{itemize}
+    \item \emph{Direct contact ($W = 0$):} $T_f = \frac{500.0 + 200.0}{2} = \mathbf{\SI{350.0}{\kelvin}}$, and $\Delta S_{\mathrm{univ}} = C\ln\left(\frac{350.0^2}{500.0\times 200.0}\right) = 1925.0\ln(1.2250) = \mathbf{+\SI{390.6}{\joule\per\kelvin}}$.
+    \item \emph{Reversible Carnot engine ($\Delta S_{\mathrm{univ}} = 0$):}
+    \[
+      T_{f,\mathrm{rev}} = \sqrt{T_H T_C} = \sqrt{(500.0)(200.0)} = \mathbf{\SI{316.23}{\kelvin}}, \qquad W_{\max} = C(T_H + T_C - 2\sqrt{T_H T_C}) = 1925.0(700.0 - 632.46) = \mathbf{+\SI{130.02}{\kilo\joule}}
+    \]
+  \end{itemize}
+\end{enumerate}
+\verifiedby{Note that $W_{\max}$ is NOT equal to $T_{f,\mathrm{rev}}\Delta S_{\mathrm{direct}}$; direct check $Q_H = C(500-316.23)=\SI{353.76}{\kilo\joule}$, $Q_C = C(316.23-200)=\SI{223.74}{\kilo\joule}$, $Q_H - Q_C = \SI{130.02}{\kilo\joule}$ (\texttt{check\_sec06\_09.py::ex08\_1}).}
+\end{workedexample}
+
+\begin{workedexample}[Two-Compartment Piston Entropy Generation \& Gibbs Mixing Paradox]{2018 MIT E3 Q24e \textbar\ Tier 3}{ex:08.2}
+(a) In Worked Example~\ref{ex:06.7}, an insulated rigid cylinder ($V_{\mathrm{tot}} = \SI{30.00}{\liter}$) with a conducting piston held $n_1 = \SI{2.000}{\mole}$ of $\mathrm{He}$ ($C_{V,m,1} = 1.5R, V_{1i} = \SI{10.00}{\liter}, T_{1i} = \SI{600.0}{\kelvin}$) and $n_2 = \SI{3.000}{\mole}$ of $\mathrm{N_2}$ ($C_{V,m,2} = 2.5R, V_{2i} = \SI{20.00}{\liter}, T_{2i} = \SI{300.0}{\kelvin}$), equilibrating to $T_f = \SI{385.714}{\kelvin}, V_{1f} = \SI{12.00}{\liter}, V_{2f} = \SI{18.00}{\liter}$. Compute the total entropy generated $\Delta S_{\mathrm{univ}} = \Delta S_1 + \Delta S_2$.
+(b) If the piston at $(T_f, P_f)$ is now dissolved so the $\SI{2.000}{\mole}$ of $\mathrm{He}$ and $\SI{3.000}{\mole}$ of $\mathrm{N_2}$ mix isothermally throughout $V_{\mathrm{tot}} = \SI{30.00}{\liter}$, calculate the additional entropy of mixing $\Delta S_{\mathrm{mix}}$. What would $\Delta S_{\mathrm{mix}}$ be if both compartments contained $\mathrm{N_2}$?
+\par\smallskip\noindent
+\textbf{Solution.}
+\begin{enumerate}
+  \item \textbf{(a) Piston equilibration entropy generation using the $(T, V)$ ideal-gas formula:}
+  \[
+    \Delta S_1 = n_1 C_{V,m,1}\ln\left(\frac{T_f}{T_{1i}}\right) + n_1 R\ln\left(\frac{V_{1f}}{V_{1i}}\right) = R\left[3.000\ln\left(\frac{385.714}{600.0}\right) + 2.000\ln\left(\frac{12.00}{10.00}\right)\right] = R(-1.32550 + 0.36464) = \SI{-7.9890}{\joule\per\kelvin}
+  \]
+  \[
+    \Delta S_2 = n_2 C_{V,m,2}\ln\left(\frac{T_f}{T_{2i}}\right) + n_2 R\ln\left(\frac{V_{2f}}{V_{2i}}\right) = R\left[7.500\ln\left(\frac{385.714}{300.0}\right) + 3.000\ln\left(\frac{18.00}{20.00}\right)\right] = R(+1.88486 - 0.31608) = \SI{+13.0435}{\joule\per\kelvin}
+  \]
+  \[
+    \Delta S_{\mathrm{univ}} = \Delta S_1 + \Delta S_2 = -7.9890 + 13.0435 = \mathbf{+\SI{5.0545}{\joule\per\kelvin}} > 0
+  \]
+  \item \textbf{(b) Isothermal mixing at $(T_f, P_f)$ with mole fractions $x_{\mathrm{He}} = 2/5 = 0.400$ and $x_{\mathrm{N_2}} = 3/5 = 0.600$:}
+  \[
+    \Delta S_{\mathrm{mix}} = -R\left(n_1\ln x_{\mathrm{He}} + n_2\ln x_{\mathrm{N_2}}\right) = -(8.314463)\left[2.000\ln(0.400) + 3.000\ln(0.600)\right] = \mathbf{+\SI{27.979}{\joule\per\kelvin}}
+  \]
+  If both sides contained $\mathrm{N_2}$ at identical $(T_f, P_f)$, removing the partition produces \textbf{zero macroscopic or quantum change} (Gibbs Paradox), so $\Delta S_{\mathrm{mix}} = \mathbf{\SI{0.000}{\joule\per\kelvin}}$!\idxerr{applying $\Delta S_{\mathrm{mix}}$ formula to identical gases (Gibbs paradox)}
+\end{enumerate}
+\verifiedby{Volume-expansion check for mixing: $n_1R\ln(30/12) + n_2R\ln(30/18) = R(2\ln 2.5 + 3\ln(5/3)) = \SI{27.979}{\joule\per\kelvin}$ (\texttt{check\_sec06\_09.py::ex08\_2}).}
+\end{workedexample}
+
+% ============================================================================
+\section{Microscopic Statistical Entropy ($S = k_B\ln\Omega$), Einstein Solids \& ``Disorder'' Traps}\label{sec:08.3}
+% ============================================================================
+\idxtopic{Boltzmann entropy $S = k_B\ln\Omega$}\idxtopic{microstate vs. macrostate}\idxtopic{Einstein solid}\idxtopic{entropy disorder misconception}
+
+Ludwig Boltzmann (1877) and Max Planck (1900) connected macroscopic thermodynamics to statistical mechanics by proving that the entropy $S$ of a macrostate equals $k_B$ times the natural logarithm of its \textbf{multiplicity $\Omega$} (the number of distinct microscopic quantum states consistent with the macroscopic constraints $U, V, N$) \src{S13,S15,S18}:
+\begin{equation}\label{eq:08:boltzmann-s}
+  \boxed{S = k_B \ln\Omega}, \qquad \Delta S = S_2 - S_1 = k_B\ln\left(\frac{\Omega_2}{\Omega_1}\right), \qquad \frac{\Omega_2}{\Omega_1} = \exp\left(\frac{\Delta S}{k_B}\right) = \exp\left(\frac{N_A\Delta S}{R}\right)
+\end{equation}
+\idxformula{Boltzmann statistical entropy: $S = k_B\ln\Omega$, $\Delta S = k_B\ln(\Omega_2/\Omega_1)$}
+
+\begin{twocol}[0.50]
+\begin{formulacard}[Microstate Multiplicity ($\Omega$) Models \src{S15,S18}]
+\begin{itemize}
+  \item \textbf{$N$-Particle Spatial Volume Scaling:} For $N$ independent gas molecules expanding isothermally from $V_1$ to $V_2$:
+  \[
+    \frac{\Omega_2}{\Omega_1} = \left(\frac{V_2}{V_1}\right)^N \implies \Delta S = N k_B\ln\frac{V_2}{V_1} = nR\ln\frac{V_2}{V_1}
+  \]
+  \item \textbf{Two-State Paramagnet / Coin Lattice ($N$ sites, $k$ ``up''):}
+  \begin{equation}\label{eq:08:two-state-omega}
+    \Omega(N, k) = \binom{N}{k} = \frac{N!}{k!\,(N - k)!}, \qquad \Omega_{\mathrm{tot}} = \sum_{k=0}^N \binom{N}{k} = 2^N
+  \end{equation}
+  \item \textbf{Einstein Solid ($N$ harmonic oscillators sharing $q$ quanta):}
+  \begin{equation}\label{eq:08:einstein-solid}
+    \Omega(N, q) = \binom{q + N - 1}{q} = \frac{(q + N - 1)!}{q!\,(N - 1)!}
+  \end{equation}
+  \idxformula{Einstein solid multiplicity: $\Omega(N,q) = \binom{q+N-1}{q}$}
+  \item \textbf{Boltzmann Factor \& Partition Function $Z_{\mathrm{part}}$:} At thermal equilibrium with a reservoir at temperature $T$, the probability of occupying a single microstate $i$ of energy $E_i$ is $P_i = \frac{e^{-E_i/(k_BT)}}{Z_{\mathrm{part}}}$, so the population ratio of two levels with degeneracies $g_1, g_2$ is:
+  \begin{equation}\label{eq:08:boltzmann-factor}
+    \frac{N_2}{N_1} = \frac{g_2}{g_1}\exp\left(-\frac{E_2 - E_1}{k_B T}\right)
+  \end{equation}
+\end{itemize}
+\end{formulacard}
+\nextcol[0.48]
+\begin{trapbox}[Why ``Entropy = Visual Disorder'' Fails on Exams!]
+\idxerr{equating entropy with subjective visual ``disorder''}
+Entropy is strictly a measure of \textbf{energy and spatial microstate multiplicity $\Omega$}, NOT human visual ``messiness'' \src{S18,S35}:
+\begin{enumerate}
+  \item \textbf{Spontaneous Freezing of Supercooled Water at $\SI{-5}{\celsius}$:} Visually, liquid water freezes into an ordered hexagonal ice crystal ($\Delta S_{\mathrm{sys}} < 0$), yet the process is $100\%$ spontaneous because the latent heat released into the surroundings increases the surroundings' vibrational multiplicity by $\Delta S_{\mathrm{surr}} > |\Delta S_{\mathrm{sys}}| \implies \Delta S_{\mathrm{univ}} > 0$!
+  \item \textbf{Hard-Sphere Colloidal Crystallization \& Oil/Water Separation:} At high packing fraction ($\phi > 0.494$), hard spheres with \emph{zero} potential energy spontaneously crystallize into an ordered FCC lattice because locking particles onto lattice sites gives each sphere more local ``rattle'' free volume than a jammed random fluid ($\Omega_{\mathrm{FCC}} > \Omega_{\mathrm{jammed}}$)!
+\end{enumerate}
+\end{trapbox}
+\begin{workedexample}[Einstein Solid \& Spin Lattice $S$]{Tier 2}{ex:08.3}
+Find the multiplicity $\Omega$ and entropy $S/k_B$ of (a) an Einstein solid of $N = 4$ oscillators sharing $q = 6$ energy quanta, and (b) the macrostate of $N = 100$ spin-$1/2$ dipoles with $k = 50$ spins up.
+\par\smallskip\noindent
+\textbf{Solution.}
+(a) From \eref{eq:08:einstein-solid}: $\Omega(4,6) = \binom{6+4-1}{6} = \binom{9}{6} = \frac{9\times 8\times 7}{3\times 2\times 1} = \mathbf{84} \implies S/k_B = \ln(84) = \mathbf{4.4308}$ ($S = \SI{6.117e-23}{\joule\per\kelvin}$).
+(b) From \eref{eq:08:two-state-omega}: $\Omega(100,50) = \frac{100!}{(50!)^2} = \mathbf{1.0089\times 10^{29}} \implies S/k_B = \ln\Omega = \mathbf{66.7839}$ (vs.\ $\ln(2^{100}) = 69.3147$ for all microstates).
+\verifiedby{Exact factorial evaluation in Python \texttt{math.comb(9,6)=84}, \texttt{math.comb(100,50)=1.0089e29} (\texttt{check\_sec06\_09.py::ex08\_3}).}
+\end{workedexample}
+\end{twocol}
+
+% ============================================================================
+\section{Enthalpy ($H = U + PV$), Hess's Law, Kirchhoff's Correction \& Steam Table Construction}\label{sec:08.4}
+% ============================================================================
+\idxtopic{enthalpy}\idxtopic{Hess's law}\idxtopic{standard enthalpy of formation}\idxtopic{Kirchhoff's law of thermochemistry}\idxtopic{steam table construction}
+
+Defining \textbf{Enthalpy} as the state function $H \equiv U + PV$ ($\Delta H = \Delta U + \Delta(PV)$) simplifies any constant-pressure process with only $PV$ expansion work ($W_{\mathrm{by}} = P\Delta V$): by the First Law, $\Delta H = \Delta U + P\Delta V = (Q_P - P\Delta V) + P\Delta V = \mathbf{Q_P}$ \src{S16}.
+
+\begin{formulacard}[Hess's Law, Kirchhoff's Temperature Shift \& Saturation Steam-Table Construction \src{S09,S10,S16,S25}]
+\begin{enumerate}
+  \item \textbf{Hess's Law of Constant Heat Summation ($\Delta_r H^\circ, \Delta_r S^\circ, \Delta_r G^\circ$ at $P^\circ = \SI{1}{\bar}, T = \SI{298.15}{\kelvin}$):}
+  For any balanced reaction $\sum \nu_r \mathrm{R} \to \sum \nu_p \mathrm{P}$:
+  \begin{equation}\label{eq:08:hess}
+    \boxed{\Delta_r H^\circ = \sum_p \nu_p \Delta_f H^\circ(\mathrm{products}) - \sum_r \nu_r \Delta_f H^\circ(\mathrm{reactants})}, \qquad \boxed{\Delta_r S^\circ = \sum_p \nu_p S^\circ(\mathrm{products}) - \sum_r \nu_r S^\circ(\mathrm{reactants})}
+  \end{equation}
+  \idxformula{Hess's law: $\Delta_r H^\circ = \sum \nu_p \Delta_f H^\circ(\mathrm{prod}) - \sum \nu_r \Delta_f H^\circ(\mathrm{react})$}
+  \begin{itemize}
+    \item \emph{Zero vs.\ Non-Zero Reference Trap:} By convention, $\Delta_f H^\circ = 0$ and $\Delta_f G^\circ = 0$ for pure elements in their most stable reference state at $\SI{1}{\bar}, \SI{298.15}{\kelvin}$ (e.g., $\mathrm{O_2}(g), \mathrm{N_2}(g), \mathrm{H_2}(g), \mathrm{C(graphite)}, \mathrm{Fe}(s), \mathrm{Br_2}(l)$), \textbf{BUT their absolute standard entropies $S^\circ(\SI{298.15}{\kelvin})$ are NEVER zero} ($S^\circ > 0$ by the Third Law)!\idxerr{setting standard molar entropy $S^\circ$ of a pure element to zero}
+    \item \emph{Bond Dissociation Estimate (Gas Phase Only — Opposite Order!):} $\Delta_r H_{\mathrm{gas}} \approx \sum D(\text{bonds \textbf{broken}}) - \sum D(\text{bonds \textbf{formed}})$.
+  \end{itemize}
+  \item \textbf{Kirchhoff's Law of Thermochemistry (Temperature Correction from $T_0$ to $T$, \texttt{2019 MIT E2 P3e TB \#3}):}
+  With $\Delta_r C_P^\circ = \sum \nu_p C_{P,m}^\circ(\mathrm{prod}) - \sum \nu_r C_{P,m}^\circ(\mathrm{react})$ constant over $[T_0, T]$:
+  \begin{equation}\label{eq:08:kirchhoff}
+    \boxed{\Delta_r H^\circ(T) = \Delta_r H^\circ(T_0) + \Delta_r C_P^\circ (T - T_0)}, \qquad \boxed{\Delta_r S^\circ(T) = \Delta_r S^\circ(T_0) + \Delta_r C_P^\circ \ln\left(\frac{T}{T_0}\right)}
+  \end{equation}
+  \idxformula{Kirchhoff's enthalpy temperature correction: $\Delta_r H^\circ(T) = \Delta_r H^\circ(T_0) + \Delta_r C_P^\circ(T - T_0)$}
+  \item \textbf{Saturation Steam-Table Construction Identities (\texttt{2027 Cornell E1 Q28 TB \#1}, Reference State $u_f = s_f = 0$ at $T_{\mathrm{tp}} = \SI{273.16}{\kelvin}$):}
+  \begin{equation}\label{eq:08:steam-table-build}
+    h_f = u_f + P_{\mathrm{sat}}v_f \approx c_{p,f}(T - T_{\mathrm{tp}}), \quad h_g = h_f + h_{fg}, \quad \boxed{u_g = h_g - P_{\mathrm{sat}}v_g}, \quad \boxed{s_f = c_{p,f}\ln\left(\frac{T}{\SI{273.16}{\kelvin}}\right)}, \quad \boxed{s_g = s_f + \frac{h_{fg}}{T}}
+  \end{equation}
+  \idxformula{Steam-table cell relations: $u_g = h_g - P_{\mathrm{sat}}v_g$, $s_f = c_{p,f}\ln(T/273.16)$, $s_g = s_f + h_{fg}/T$}
+  *(Unit warning: when $P_{\mathrm{sat}}$ is in $\si{\kilo\pascal}$ and $v_g$ is in $\si{\cubic\meter\per\kilogram}$, their product $P_{\mathrm{sat}}v_g$ is already in $\mathbf{\si{\kilo\joule\per\kilogram}}$!)*
+\end{enumerate}
+\end{formulacard}
+
+\begin{table}[!htbp]
+\centering
+\captionof{table}{NIST Standard Thermochemical Reference Values at $T = \SI{298.15}{\kelvin}$ ($\SI{25.0}{\celsius}$) and $P^\circ = \SI{1.000}{\bar}$ ($\SI{100}{\kilo\pascal}$) \src{S09,S10}.}\label{tab:08:thermochem}
+\footnotesize\setlength{\tabcolsep}{3.8pt}\renewcommand{\arraystretch}{1.08}
+\begin{tabularx}{\linewidth}{@{}l l r r r | l l r r r@{}}
+\toprule
+\textbf{Species} & \textbf{Phase} & $\Delta_f H^\circ$ & $S^\circ$ & $\Delta_f G^\circ$ & \textbf{Species} & \textbf{Phase} & $\Delta_f H^\circ$ & $S^\circ$ & $\Delta_f G^\circ$ \\
+ & & ($\si{\kilo\joule\per\mole}$) & ($\si{\joule\per\mole\per\kelvin}$) & ($\si{\kilo\joule\per\mole}$) & & & ($\si{\kilo\joule\per\mole}$) & ($\si{\joule\per\mole\per\kelvin}$) & ($\si{\kilo\joule\per\mole}$) \\
+\midrule
+$\mathrm{H_2O}$ & liquid ($l$) & $-285.83$ & $69.95$ & $-237.14$ & $\mathrm{CH_4}$ & gas ($g$) & $-74.87$ & $186.25$ & $-50.74$ \\
+$\mathrm{H_2O}$ & gas ($g$) & $-241.83$ & $188.84$ & $-228.59$ & $\mathrm{C_2H_5OH}$ & liquid ($l$) & $-277.69$ & $159.86$ & $-174.78$ \\
+$\mathrm{CO_2}$ & gas ($g$) & $-393.51$ & $213.79$ & $-394.39$ & $\mathrm{NH_3}$ & gas ($g$) & $-45.94$ & $192.77$ & $-16.41$ \\
+$\mathrm{CO}$ & gas ($g$) & $-110.53$ & $197.66$ & $-137.17$ & $\mathrm{NO}$ & gas ($g$) & $+90.29$ & $210.76$ & $+86.58$ \\
+$\mathrm{H_2}$ & gas ($g$) & $0.00$ & $130.68$ & $0.00$ & $\mathrm{NO_2}$ & gas ($g$) & $+33.10$ & $240.04$ & $+51.23$ \\
+$\mathrm{O_2}$ & gas ($g$) & $0.00$ & $205.15$ & $0.00$ & $\mathrm{SO_2}$ & gas ($g$) & $-296.81$ & $248.22$ & $-300.13$ \\
+$\mathrm{N_2}$ & gas ($g$) & $0.00$ & $191.61$ & $0.00$ & $\mathrm{HCl}$ & gas ($g$) & $-92.31$ & $186.90$ & $-95.30$ \\
+$\mathrm{Cu}$ & solid ($s$) & $0.00$ & $33.15$ & $0.00$ & $\mathrm{Al_2O_3}$ & solid ($s$) & $-1675.70$ & $50.92$ & $-1582.30$ \\
+$\mathrm{Al}$ & solid ($s$) & $0.00$ & $28.30$ & $0.00$ & $\mathrm{NaCl}$ & solid ($s$) & $-411.12$ & $72.11$ & $-384.04$ \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{workedexample}[Steam-Table Construction (\texttt{Cornell 2027 TB \#1}) \& Kirchhoff Sweat Cooling (\texttt{MIT 2019 TB \#3})]{2027 Cornell E1 Q28 \& 2019 MIT E2 P3e \textbar\ Tier 3}{ex:08.4}
+(a) In \texttt{2027 Cornell E1 Q28} (\texttt{TB~\#1}), experimental measurements on saturated water at $T = \SI{120.0}{\celsius}$ ($\SI{393.15}{\kelvin}$) yield $P_{\mathrm{sat}} = \SI{198.67}{\kilo\pascal}$, $v_f = \SI{0.001060}{\cubic\meter\per\kilogram}$, $v_g = \SI{0.8919}{\cubic\meter\per\kilogram}$, and $h_{fg} = \SI{2202.6}{\kilo\joule\per\kilogram}$ (using mean liquid specific heat $c_w = \SI{4.217}{\kilo\joule\per\kilogram\per\kelvin}$ above $T_{\mathrm{tp}} = \SI{273.16}{\kelvin}$ where $u_f = s_f = 0$). Compute $h_f$, $u_f$, $h_g$, $u_g$, $s_f$, and $s_g$ at $\SI{120.0}{\celsius}$.
+(b) In \texttt{2019 MIT E2 P3e} (\texttt{TB~\#3}), human sweat evaporates at body temperature $T_{\mathrm{body}} = \SI{37.00}{\celsius}$ ($\SI{310.15}{\kelvin}$). Given $\Delta_{\mathrm{vap}}H_m^\circ(\SI{373.15}{\kelvin}) = \SI{40.65}{\kilo\joule\per\mole}$, $C_{P,m}(\mathrm{H_2O},l) = \SI{75.33}{\joule\per\mole\per\kelvin}$, and $C_{P,m}(\mathrm{H_2O},g) = \SI{33.58}{\joule\per\mole\per\kelvin}$, apply Kirchhoff's law \eref{eq:08:kirchhoff} to find $\Delta_{\mathrm{vap}}H_m^\circ(\SI{310.15}{\kelvin})$ and the mass of sweat ($M = \SI{18.0153}{\gram\per\mole}$) required to remove $\SI{5000.0}{\kilo\joule}$ of metabolic heat.
+\par\smallskip\noindent
+\textbf{Solution.}
+\begin{enumerate}
+  \item \textbf{(a) Constructing the $\SI{120.0}{\celsius}$ saturation steam table row from \eref{eq:08:steam-table-build}:}
+  \[
+    h_f = c_w(393.15 - 273.16) = (4.217)(119.99) = \mathbf{\SI{506.00}{\kilo\joule\per\kilogram}}, \qquad u_f = h_f - P_{\mathrm{sat}}v_f = 506.00 - (198.67)(0.001060) = \mathbf{\SI{505.79}{\kilo\joule\per\kilogram}}
+  \]
+  \[
+    h_g = h_f + h_{fg} = 506.00 + 2202.6 = \mathbf{\SI{2708.60}{\kilo\joule\per\kilogram}}, \quad u_g = h_g - P_{\mathrm{sat}}v_g = 2708.60 - 177.19 = \mathbf{\SI{2531.41}{\kilo\joule\per\kilogram}}
+  \]
+  \[
+    s_f = c_w\ln\left(\frac{393.15}{273.16}\right) = \mathbf{\SI{1.5355}{\kilo\joule\per\kilogram\per\kelvin}}, \quad s_g = s_f + \frac{h_{fg}}{T} = 1.5355 + \frac{2202.6}{393.15} = \mathbf{\SI{7.1379}{\kilo\joule\per\kilogram\per\kelvin}}
+  \]
+  \item \textbf{(b) Kirchhoff temperature correction of $\Delta_{\mathrm{vap}}H_m^\circ$ from $T_0 = \SI{373.15}{\kelvin}$ to $T = \SI{310.15}{\kelvin}$:}
+  For $\mathrm{H_2O}(l) \to \mathrm{H_2O}(g)$, $\Delta_{\mathrm{vap}}C_P^\circ = C_{P,m}(g) - C_{P,m}(l) = 33.58 - 75.33 = \SI{-41.75}{\joule\per\mole\per\kelvin} = \SI{-0.04175}{\kilo\joule\per\mole\per\kelvin}$:
+  \[
+    \Delta_{\mathrm{vap}}H_m^\circ(\SI{310.15}{\kelvin}) = 40.65 + (-0.04175)(310.15 - 373.15) = 40.65 + 2.630 = \mathbf{\SI{43.280}{\kilo\joule\per\mole}} \quad (L_v = \SI{2402.4}{\kilo\joule\per\kilogram})
+  \]
+  \[
+    m_{\mathrm{sweat}} = \frac{Q_{\mathrm{remove}}}{L_v(\SI{37}{\celsius})} = \frac{\SI{5000.0}{\kilo\joule}}{\SI{2402.4}{\kilo\joule\per\kilogram}} = \mathbf{\SI{2.0813}{\kilogram}}
+  \]
+\end{enumerate}
+\verifiedby{Table~3.1 NIST IAPWS-95 exact value at $\SI{37.0}{\celsius}$ is $L_v = \SI{2413.1}{\kilo\joule\per\kilogram}$ ($0.44\%$ agreement with linear Kirchhoff!) (\texttt{check\_sec06\_09.py::ex08\_4}).}
+\end{workedexample}
+
+% ============================================================================
+\section{Thermodynamic Potentials ($U, H, F, G$), 4-Quadrant Spontaneity \& Van't Hoff Equilibrium}\label{sec:08.5}
+% ============================================================================
+\idxtopic{Gibbs free energy}\idxtopic{Helmholtz free energy}\idxtopic{Maxwell relations}\idxtopic{spontaneity 4-quadrant map}\idxtopic{Van't Hoff equation}\idxtopic{chemical equilibrium constant $K_{\mathrm{eq}}$}
+
+For a system in thermal and mechanical contact with an environment at constant temperature $T$ and pressure $P$, the surroundings' entropy change is $\Delta S_{\mathrm{surr}} = -\Delta H_{\mathrm{sys}}/T$. Multiplying the Second Law $\Delta S_{\mathrm{univ}} = \Delta S_{\mathrm{sys}} - \Delta H_{\mathrm{sys}}/T \ge 0$ by $-T$ defines the \textbf{Gibbs Free Energy $G \equiv H - TS$} \src{S15,S16}:
+\begin{equation}\label{eq:08:gibbs}
+  \boxed{\Delta G_{\mathrm{sys}} = \Delta H_{\mathrm{sys}} - T\Delta S_{\mathrm{sys}} = -T\Delta S_{\mathrm{univ}} \le 0} \quad (\text{at constant } T, P), \qquad \boxed{T^* = T_{\mathrm{eq}} = \frac{\Delta H}{\Delta S}} \quad (\text{where } \Delta G = 0)
+\end{equation}
+\idxformula{Gibbs free energy and spontaneity: $\Delta G = \Delta H - T\Delta S = -T\Delta S_{\mathrm{univ}} \le 0$, crossover $T^* = \Delta H/\Delta S$}
+
+\begin{formulacard}[The 4 Thermodynamic Potentials, Maximum Work Bounds \& Van't Hoff Equation \src{S15,S16,S18}]
+\par\smallskip\noindent
+\footnotesize\setlength{\tabcolsep}{3.5pt}\renewcommand{\arraystretch}{1.14}
+\begin{tabularx}{\linewidth}{@{}l l l l X@{}}
+\toprule
+\textbf{Potential Name} & \textbf{Definition} & \textbf{Natural Vars.} & \textbf{Maxwell Relation} & \textbf{Equilibrium \& Maximum Work Meaning (\texttt{2019 MIT E2 MC10--11})} \\
+\midrule
+\textbf{Internal Energy ($U$)} & $U$ & $(S, V)$ & $(\partial T/\partial V)_S = -(\partial P/\partial S)_V$ & Minimized at constant $(S, V)$; $\Delta U = Q_V$ in rigid bomb. \\
+\textbf{Enthalpy ($H$)} & $U + PV$ & $(S, P)$ & $(\partial T/\partial P)_S = (\partial V/\partial S)_P$ & Minimized at constant $(S, P)$; $\Delta H = Q_P$ in open vessel. \\
+\textbf{Helmholtz ($F$ or $A$)} & $U - TS$ & $(T, V)$ & $(\partial S/\partial V)_T = (\partial P/\partial T)_V$ & Minimized at constant $(T, V)$; $\mathbf{W_{\mathrm{tot,max,by}} = -\Delta F}$ (total isothermal work). \\
+\textbf{Gibbs ($G$)} & $H - TS$ & $(T, P)$ & $-(\partial S/\partial P)_T = (\partial V/\partial T)_P$ & Minimized at constant $(T, P)$; $\mathbf{W_{\mathrm{non\text{-}PV,max,by}} = -\Delta G}$ (electrical/fuel-cell work). \\
+\bottomrule
+\end{tabularx}
+\par\smallskip\noindent
+\idxformula{Maximum total vs. non-expansion work: $W_{\mathrm{tot,\max}} = -\Delta F$, $W_{\mathrm{non\text{-}PV,\max}} = -\Delta G$}
+\textbf{Chemical Equilibrium Constant $K_{\mathrm{eq}}$ and Algebraic Two-Point Van't Hoff Equation:}
+\begin{equation}\label{eq:08:vant-hoff}
+  \Delta_r G = \Delta_r G^\circ + RT\ln Q_r, \qquad \boxed{\Delta_r G^\circ = -RT\ln K_{\mathrm{eq}} \iff K_{\mathrm{eq}} = \exp\left(-\frac{\Delta_r G^\circ}{RT}\right)}, \qquad \boxed{\ln\left(\frac{K_2}{K_1}\right) = -\frac{\Delta_r H^\circ}{R}\left(\frac{1}{T_2} - \frac{1}{T_1}\right)}
+\end{equation}
+\idxformula{Equilibrium constant and Van't Hoff equation: $\Delta_r G^\circ = -RT\ln K_{\mathrm{eq}}$, $\ln(K_2/K_1) = -(\Delta_r H^\circ/R)(1/T_2 - 1/T_1)$}
+\end{formulacard}
+
+\par\smallskip\noindent
+\begin{minipage}{\linewidth}
+\centering
+\begin{tikzpicture}[font=\scriptsize]
+% Left Panel: 4-Quadrant Delta G(T) = Delta H - T Delta S vs T
+\begin{axis}[
+    name=gplot,
+    width=0.47\linewidth,
+    height=4.2cm,
+    xlabel={Absolute Temperature $T$ ($\si{\kelvin}$)},
+    ylabel={Gibbs Free Energy $\Delta G(T)$ ($\si{\kilo\joule\per\mole}$)},
+    xmin=0, xmax=1000,
+    ymin=-80, ymax=80,
+    grid=both,
+    grid style={gray!25},
+    tick label style={font=\scriptsize},
+    label style={font=\scriptsize\bfseries},
+    title={\textbf{(a) Four-Quadrant $\Delta G(T) = \Delta H - T\Delta S$ Lines}}
+]
+\addplot[fill=teal!12, draw=none] coordinates {(0,0) (1000,0) (1000,-80) (0,-80)} \closedcycle;
+\draw[black, very thick] (axis cs:0,0) -- (axis cs:1000,0) node[pos=0.18, above] {Equilibrium $\Delta G = 0$};
+% Q1: dH < 0, dS > 0 (Always spontaneous)
+\addplot[teal, ultra thick, domain=0:1000] {-25 - 0.05*x};
+\node[teal, fill=white, inner sep=1pt] at (axis cs:640,-66) {\textbf{I:} $\Delta H<0, \Delta S>0$ (Always spont.)};
+% Q2: dH > 0, dS < 0 (Never spontaneous)
+\addplot[rust, ultra thick, domain=0:1000] {25 + 0.05*x};
+\node[rust, fill=white, inner sep=1pt] at (axis cs:640,66) {\textbf{II:} $\Delta H>0, \Delta S<0$ (Never spont.)};
+% Q3: dH < 0, dS < 0 (Spontaneous at Low T < T*)
+\addplot[navy, very thick, dashed, domain=0:1000] {-40 + 0.08*x};
+\node[navy, fill=white, inner sep=1pt] at (axis cs:730,32) {\textbf{III:} $\Delta H<0, \Delta S<0$ ($T < T^*$)};
+% Q4: dH > 0, dS > 0 (Spontaneous at High T > T*)
+\addplot[amber, very thick, dashdotted, domain=0:1000] {40 - 0.08*x};
+\node[amber, fill=white, inner sep=1pt] at (axis cs:730,-32) {\textbf{IV:} $\Delta H>0, \Delta S>0$ ($T > T^*$)};
+\fill[black] (axis cs:500,0) circle (2.2pt) node[below, fill=white, inner sep=1pt] {$T^* = \Delta H/\Delta S$};
+\end{axis}
+
+% Right Panel: Van't Hoff ln K vs 1/T
+\begin{axis}[
+    at={(gplot.east)}, anchor=west, xshift=1.1cm,
+    width=0.47\linewidth,
+    height=4.2cm,
+    xlabel={Reciprocal Temperature $1000/T$ ($\si{\per\kelvin}$)},
+    ylabel={$\ln K_{\mathrm{eq}} = -\dfrac{\Delta_r H^\circ}{R}\left(\dfrac{1}{T}\right) + \dfrac{\Delta_r S^\circ}{R}$},
+    xmin=1.0, xmax=4.0,
+    ymin=-10, ymax=10,
+    grid=both,
+    grid style={gray!25},
+    tick label style={font=\scriptsize},
+    label style={font=\scriptsize\bfseries},
+    title={\textbf{(b) Linearized Van't Hoff Plot ($\ln K_{\mathrm{eq}}$ vs.\ $1/T$)}}
+]
+\draw[black, dashed, thick] (axis cs:1.0,0) -- (axis cs:4.0,0) node[pos=0.85, above] {$K_{\mathrm{eq}} = 1$};
+% Exothermic (dH < 0 -> positive slope -dH/R > 0)
+\addplot[navy, ultra thick, domain=1.2:3.8] {-7.5 + 4.5*x};
+\node[navy, fill=white, inner sep=1pt, align=center] at (axis cs:2.25,6.5) {\textbf{Exothermic ($\Delta_r H^\circ < 0$)}\\Slope $= -\Delta_r H^\circ/R > 0$\\($K_{\mathrm{eq}}$ drops at high $T$)};
+% Endothermic (dH > 0 -> negative slope -dH/R < 0)
+\addplot[rust, ultra thick, dashed, domain=1.2:3.8] {8.0 - 4.5*x};
+\node[rust, fill=white, inner sep=1pt, align=center] at (axis cs:2.55,-6.5) {\textbf{Endothermic ($\Delta_r H^\circ > 0$)}\\Slope $= -\Delta_r H^\circ/R < 0$\\($K_{\mathrm{eq}}$ rises at high $T$)};
+\end{axis}
+\end{tikzpicture}
+\captionof{figure}{(a) Four-quadrant spontaneity plot of $\Delta G(T) = \Delta H - T\Delta S$ showing temperature-independent regimes (I and II) and crossover temperature $T^* = \Delta H/\Delta S$ for enthalpy-driven (III) vs.\ entropy-driven (IV) reactions. (b) Van't Hoff plot of $\ln K_{\mathrm{eq}}$ vs.\ $1/T$ with slope $-\Delta_r H^\circ/R$ and intercept $\Delta_r S^\circ/R$ \src{S16}.}\label{fig:08:gibbs-spontaneity}
+\idxfig{Four-quadrant Gibbs spontaneity map and Van't Hoff plot}
+\end{minipage}
+\par\smallskip
+
+\begin{workedexample}[Water-Gas Shift Hess's Law, Crossover Temperature $T^*$ \& Van't Hoff $K_{\mathrm{eq}}$]{State/National Standard \textbar\ Tier 3}{ex:08.5}
+Using the NIST data in \tref{tab:08:thermochem}, analyze the industrial water-gas shift reaction $\mathrm{CO}(g) + \mathrm{H_2O}(g) \rightleftharpoons \mathrm{CO_2}(g) + \mathrm{H_2}(g)$: (a) Calculate $\Delta_r H^\circ$, $\Delta_r S^\circ$, and $\Delta_r G^\circ$ at $T_1 = \SI{298.15}{\kelvin}$. (b) Find the equilibrium constant $K_{\mathrm{eq}}(\SI{298.15}{\kelvin})$ and the crossover temperature $T^*$ above which $\Delta_r G^\circ > 0$ ($K_{\mathrm{eq}} < 1$). (c) Assuming $\Delta_r H^\circ$ and $\Delta_r S^\circ$ are approximately constant, use the Van't Hoff equation \eref{eq:08:vant-hoff} to compute $K_{\mathrm{eq}}$ at $T_2 = \SI{800.0}{\kelvin}$.
+\par\smallskip\noindent
+\textbf{Solution.}
+\begin{enumerate}
+  \item \textbf{(a) Hess's Law at $\SI{298.15}{\kelvin}$ from \tref{tab:08:thermochem}:}
+  \[
+    \Delta_r H^\circ = \left[-393.51 + 0.00\right] - \left[-110.53 + (-241.83)\right] = -393.51 - (-352.36) = \mathbf{\SI{-41.15}{\kilo\joule\per\mole}} \quad (\text{exothermic})
+  \]
+  \[
+    \Delta_r S^\circ = \left[213.79 + 130.68\right] - \left[197.66 + 188.84\right] = 344.47 - 386.50 = \mathbf{\SI{-42.03}{\joule\per\mole\per\kelvin}} \quad (\text{Quad.\ III: } \Delta H < 0, \Delta S < 0)
+  \]
+  \[
+    \Delta_r G^\circ(\SI{298.15}{\kelvin}) = \Delta_r H^\circ - T_1\Delta_r S^\circ = -41.15 - (298.15)(-0.04203) = -41.15 + 12.53 = \mathbf{\SI{-28.62}{\kilo\joule\per\mole}} < 0
+  \]
+  \item \textbf{(b) Equilibrium constant $K_{\mathrm{eq}}(\SI{298.15}{\kelvin})$ and crossover temperature $T^*$:}
+  \[
+    K_{\mathrm{eq}}(\SI{298.15}{\kelvin}) = \exp\left(\frac{-\Delta_r G^\circ}{RT_1}\right) = \exp\left(\frac{+28619}{(8.314463)(298.15)}\right) = e^{11.5448} = \mathbf{1.032\times 10^5}, \quad T^* = \frac{\Delta_r H^\circ}{\Delta_r S^\circ} = \frac{\SI{-41150}{\joule\per\mole}}{\SI{-42.03}{\joule\per\mole\per\kelvin}} = \mathbf{\SI{979.06}{\kelvin}}
+  \]
+  \item \textbf{(c) Van't Hoff equilibrium constant at $T_2 = \SI{800.0}{\kelvin}$:}
+  \[
+    \ln K_{\mathrm{eq}}(\SI{800.0}{\kelvin}) = \ln K_{\mathrm{eq}}(T_1) - \frac{\Delta_r H^\circ}{R}\left(\frac{1}{T_2} - \frac{1}{T_1}\right) = 11.5447 - \frac{-41150}{8.314463}\left(\frac{1}{800.0} - \frac{1}{298.15}\right) = 11.5447 - 10.4132 = \mathbf{1.1315}
+  \]
+  \[
+    \implies K_{\mathrm{eq}}(\SI{800.0}{\kelvin}) = e^{1.1315} = \mathbf{3.100}
+  \]
+\end{enumerate}
+\verifiedby{Direct check $\Delta_r G^\circ(\SI{800}{\kelvin}) = -41150 - 800(-42.03) = \SI{-7526}{\joule\per\mole} \implies e^{7526/(8.314463\times 800)} = 3.100$ (\texttt{check\_sec06\_09.py::ex08\_5}).}
+\end{workedexample}
+
+\begin{workedexample}[Coupled Biochemical ATP Spontaneity (\texttt{MIT 2019}) \& Fuel-Cell Maximum Electrical Work]{2019 MIT E2 P3b \& MC10--11 \textbar\ Tier 2}{ex:08.8}
+(a) In cellular metabolism at $T = \SI{310.15}{\kelvin}$ ($\SI{37.0}{\celsius}$), the synthesis of Acetyl-CoA from acetate and CoA-SH is endergonic with $\Delta G_1 = \SI{+31.50}{\kilo\joule\per\mole} > 0$. Compare coupling this reaction to: (i) ATP hydrolysis to $\mathrm{ADP} + \mathrm{P_i}$ ($\Delta G_2 = \SI{-30.50}{\kilo\joule\per\mole}$), versus (ii) ATP pyrophosphate cleavage to $\mathrm{AMP} + \mathrm{PP_i}$ ($\Delta G_3 = \SI{-45.90}{\kilo\joule\per\mole}$). Determine which pathway drives Acetyl-CoA synthesis spontaneously and compute the equilibrium ratio $K_{\mathrm{coupled},2}/K_{\mathrm{coupled},1}$.
+(b) A hydrogen--oxygen PEM fuel cell ($\mathrm{H_2}(g) + \frac{1}{2}\mathrm{O_2}(g) \to \mathrm{H_2O}(l)$) operates isothermally and isobarically at $T = \SI{298.15}{\kelvin}$ and $P = \SI{1.000}{\bar}$. Using \tref{tab:08:thermochem}, compute $\Delta_r H^\circ$, $\Delta_r S^\circ$, $\Delta_r G^\circ$, the maximum electrical work $W_{\mathrm{elec,\max}}$ per mole of $\mathrm{H_2}$, the reversible cell voltage $E_{\mathrm{cell}}^\circ = -\Delta_r G^\circ / (n_e F)$ ($n_e = 2$ electrons per $\mathrm{H_2}$, Faraday constant $F = \SI{96485.33}{\coulomb\per\mole}$), and the reversible heat $Q_{\mathrm{rev}} = T\Delta_r S^\circ$ rejected by the cell.
+\par\smallskip\noindent
+\textbf{Solution.}
+\begin{enumerate}
+  \item \textbf{(a) Coupled reaction Gibbs additivity (\texttt{2019 MIT E2 P3b}):}
+  \begin{itemize}
+    \item \emph{Pathway (i) ($\mathrm{ATP}\to\mathrm{ADP}+\mathrm{P_i}$):} $\Delta G_{\mathrm{net,i}} = \Delta G_1 + \Delta G_2 = +31.50 - 30.50 = \mathbf{+\SI{1.00}{\kilo\joule\per\mole}} > 0$ (\textbf{non-spontaneous!}).
+    \item \emph{Pathway (ii) ($\mathrm{ATP}\to\mathrm{AMP}+\mathrm{PP_i}$):} $\Delta G_{\mathrm{net,ii}} = \Delta G_1 + \Delta G_3 = +31.50 - 45.90 = \mathbf{\SI{-14.40}{\kilo\joule\per\mole}} < 0$ (\textbf{spontaneous!}).
+    \item \emph{Equilibrium constant enhancement at $\SI{310.15}{\kelvin}$:}
+    \[
+      \frac{K_{\mathrm{coupled,ii}}}{K_{\mathrm{coupled,i}}} = \exp\left(\frac{-(\Delta G_{\mathrm{net,ii}} - \Delta G_{\mathrm{net,i}})}{RT}\right) = \exp\left(\frac{+15400}{(8.314463)(310.15)}\right) = e^{5.9720} = \mathbf{392.3}
+    \]
+  \end{itemize}
+  \item \textbf{(b) $\mathrm{H_2/O_2}$ fuel-cell thermodynamics from \tref{tab:08:thermochem}:}
+  \[
+    \Delta_r H^\circ = \Delta_f H^\circ(\mathrm{H_2O},l) = \mathbf{\SI{-285.83}{\kilo\joule\per\mole}}, \qquad \Delta_r S^\circ = 69.95 - \left[130.68 + \frac{1}{2}(205.15)\right] = \mathbf{\SI{-163.305}{\joule\per\mole\per\kelvin}}
+  \]
+  \[
+    \Delta_r G^\circ = \Delta_r H^\circ - T\Delta_r S^\circ = -285.83 - (298.15)(-0.163305) = -285.83 + 48.69 = \mathbf{\SI{-237.14}{\kilo\joule\per\mole}}
+  \]
+  \[
+    W_{\mathrm{elec,\max}} = -\Delta_r G^\circ = \mathbf{\SI{237.14}{\kilo\joule\per\mole}}, \quad E_{\mathrm{cell}}^\circ = \frac{-\Delta_r G^\circ}{2F} = \frac{\SI{237140}{\joule\per\mole}}{2(\SI{96485.33}{\coulomb\per\mole})} = \mathbf{\SI{1.2289}{\volt}}, \quad Q_{\mathrm{rev}} = T\Delta_r S^\circ = \mathbf{\SI{-48.69}{\kilo\joule\per\mole}}
+  \]
+  Even an ideal $100\%$-reversible fuel cell must reject $\SI{48.69}{\kilo\joule\per\mole}$ of heat to the surroundings because $1.5\,\si{\mole}$ of gas condenses into $1\,\si{\mole}$ of liquid water ($\Delta_r S^\circ < 0$)!
+\end{enumerate}
+\verifiedby{First-Law check on fuel cell: $\Delta_r H^\circ = Q_{\mathrm{rev}} - W_{\mathrm{elec,\max}} = -48.69 - 237.14 = \SI{-285.83}{\kilo\joule\per\mole}$ (\texttt{check\_sec06\_09.py::ex08\_8}).}
+\end{workedexample}
+
+% ============================================================================
+\section{Exergy (Availability), Gouy--Stodola Destruction ($X_{\mathrm{dest}} = T_0 S_{\mathrm{gen}}$) \& Second-Law Efficiency}\label{sec:08.6}
+% ============================================================================
+\idxtopic{exergy (availability)}\idxtopic{Gouy--Stodola theorem}\idxtopic{Second-Law efficiency $\eta_{\mathrm{II}}$}\idxtopic{dead state $T_0$}
+
+In \texttt{2027 Cornell E1 Q29b--e} (\texttt{TB~\#8}), competitors were required to compute \textbf{exergy supplied}, \textbf{Gouy--Stodola exergy destruction}, and \textbf{Second-Law efficiency $\eta_{\mathrm{II}}$} \src{S25}. Relative to a surrounding ``dead-state'' environment at temperature $T_0$ (typically $\SI{298.15}{\kelvin}$ or $\SI{300.0}{\kelvin}$) and pressure $P_0$, \textbf{Exergy $X$} is the \emph{maximum useful work} obtainable as a system or heat stream is brought reversibly to equilibrium with $(T_0, P_0)$ \src{S33}:
+
+\begin{formulacard}[Exergy Ledger, Gouy--Stodola Theorem \& Second-Law Efficiency ($\eta_{\mathrm{II}}$) \src{S25,S33}]
+\begin{enumerate}
+  \item \textbf{Exergy of a Heat Transfer $Q_{\mathrm{in}}$ from a Source at Temperature $T_{\mathrm{source}}$:}
+  \begin{equation}\label{eq:08:exergy-heat}
+    \boxed{X_{Q,\mathrm{in}} = W_{\mathrm{rev,max}} = Q_{\mathrm{in}}\left(1 - \frac{T_0}{T_{\mathrm{source}}}\right)}, \qquad x_{q,\mathrm{in}} = q_{\mathrm{in}}\left(1 - \frac{T_0}{T_{\mathrm{source}}}\right)
+  \end{equation}
+  \idxformula{Exergy of heat transfer: $X_{Q,\mathrm{in}} = Q_{\mathrm{in}}(1 - T_0/T_{\mathrm{source}})$}
+  \item \textbf{Gouy--Stodola Exergy Destruction Theorem (Lost Work $W_{\mathrm{lost}} = X_{\mathrm{dest}}$):}
+  Every real irreversible process generates entropy $S_{\mathrm{gen}} = \Delta S_{\mathrm{univ}} > 0$ and permanently destroys exergy equal to:
+  \begin{equation}\label{eq:08:gouy-stodola}
+    \boxed{X_{\mathrm{dest}} = W_{\mathrm{lost}} = W_{\mathrm{rev,max}} - W_{\mathrm{actual}} = T_0 S_{\mathrm{gen}} \ge 0}, \qquad \boxed{x_{\mathrm{dest}} = T_0 s_{\mathrm{gen}}}
+  \end{equation}
+  \idxformula{Gouy--Stodola exergy destruction: $X_{\mathrm{dest}} = T_0 S_{\mathrm{gen}} \ge 0$}
+  \begin{itemize}
+    \item \emph{Boiler / Heat Exchanger receiving $q_{\mathrm{in}}$ from source at $T_{\mathrm{source}}$:} $s_{\mathrm{gen,boiler}} = (s_{\mathrm{out}} - s_{\mathrm{in}}) - \dfrac{q_{\mathrm{in}}}{T_{\mathrm{source}}} \ge 0$.
+    \item \emph{Adiabatic Turbine or Compressor ($q = 0$):} $s_{\mathrm{gen,turb}} = s_{\mathrm{out},a} - s_{\mathrm{in}} \ge 0 \implies x_{\mathrm{dest,turb}} = T_0(s_{\mathrm{out},a} - s_{\mathrm{in}})$.
+  \end{itemize}
+  \item \textbf{Second-Law Efficiency ($\eta_{\mathrm{II}}$ or $\eta_2$):} Measures how closely a real device approaches the reversible Second-Law limit ($\eta_{\mathrm{II}} \in [0, 1]$):
+  \begin{equation}\label{eq:08:eta-ii}
+    \boxed{\eta_{\mathrm{II,engine}} = \frac{W_{\mathrm{net,actual}}}{X_{Q,\mathrm{in}}} = \frac{\eta_{\mathrm{I}}}{\eta_{\mathrm{Carnot}}} = 1 - \frac{X_{\mathrm{dest,cycle}}}{X_{Q,\mathrm{in}}}}, \qquad \boxed{\eta_{\mathrm{II,refrig}} = \frac{\mathrm{COP}_{R,\mathrm{actual}}}{\mathrm{COP}_{R,\mathrm{Carnot}}}}, \qquad \boxed{\eta_{\mathrm{II,HP}} = \frac{\mathrm{COP}_{\mathrm{HP,actual}}}{\mathrm{COP}_{\mathrm{HP,Carnot}}}}
+  \end{equation}
+  \idxformula{Second-Law efficiency: $\eta_{\mathrm{II}} = W_{\mathrm{net}}/X_{\mathrm{in}} = \eta_{\mathrm{I}}/\eta_{\mathrm{Carnot}}$}
+\end{enumerate}
+\end{formulacard}
+
+\begin{workedexample}[Gouy--Stodola Exergy Destruction \& Second-Law Efficiency of a Steam Plant]{2027 Cornell E1 Q29b--e (TB \#8) \textbar\ Tier 3}{ex:08.6}
+In \texttt{2027 Cornell E1 Q29}, a Rankine steam cycle operates in an environment at dead-state temperature $T_0 = \SI{300.0}{\kelvin}$. In the boiler, water enters at State~4 ($h_4 = \SI{461.42}{\kilo\joule\per\kilogram}, s_4 = \SI{1.4188}{\kilo\joule\per\kilogram\per\kelvin}$) and exits as dry saturated steam at State~1 ($T_1 = \SI{130.0}{\celsius} = \SI{403.15}{\kelvin}, h_1 = \SI{2718.6}{\kilo\joule\per\kilogram}, s_1 = \SI{6.9931}{\kilo\joule\per\kilogram\per\kelvin}$) by absorbing heat $q_{\mathrm{in}} = h_1 - h_4 = \SI{2257.2}{\kilo\joule\per\kilogram}$ from a furnace reservoir at $T_{\mathrm{source}} = \SI{600.0}{\kelvin}$. Ideal isentropic expansion in the turbine to the $\SI{110.0}{\celsius}$ ($\SI{383.15}{\kelvin}$) condenser produces work $w_{t,s} = \SI{109.92}{\kilo\joule\per\kilogram}$ (neglecting tiny pump work, so $\eta_{\mathrm{I,ideal}} = w_{t,s}/q_{\mathrm{in}} = 4.870\%$). (a) Calculate the specific exergy supplied by the furnace $x_{\mathrm{in}}$, the boiler entropy generation $s_{\mathrm{gen,boiler}}$, the exergy destroyed in the boiler $x_{\mathrm{dest,boiler}}$, and the cycle's Second-Law efficiency $\eta_{\mathrm{II}}$. (b) If the real adiabatic turbine has isentropic efficiency $\eta_s = 0.8000$, find the actual turbine work $w_{t,a}$, the turbine entropy generation $s_{\mathrm{gen,turb}}$, and the turbine exergy destruction $x_{\mathrm{dest,turb}}$.
+\par\smallskip\noindent
+\textbf{Solution.}
+\begin{enumerate}
+  \item \textbf{(a) Furnace exergy input, boiler exergy destruction, and Second-Law efficiency from \eref{eq:08:exergy-heat}--\eref{eq:08:eta-ii}:}
+  \[
+    x_{\mathrm{in}} = q_{\mathrm{in}}\left(1 - \frac{T_0}{T_{\mathrm{source}}}\right) = (\SI{2257.2}{\kilo\joule\per\kilogram})\left(1 - \frac{300.0}{600.0}\right) = \mathbf{\SI{1128.6}{\kilo\joule\per\kilogram}}
+  \]
+  \[
+    s_{\mathrm{gen,boiler}} = (s_1 - s_4) - \frac{q_{\mathrm{in}}}{T_{\mathrm{source}}} = (6.9931 - 1.4188) - \frac{2257.2}{600.0} = 5.5743 - 3.7620 = \mathbf{\SI{1.8123}{\kilo\joule\per\kilogram\per\kelvin}}
+  \]
+  \[
+    x_{\mathrm{dest,boiler}} = T_0 s_{\mathrm{gen,boiler}} = (\SI{300.0}{\kelvin})(\SI{1.8123}{\kilo\joule\per\kilogram\per\kelvin}) = \mathbf{\SI{543.69}{\kilo\joule\per\kilogram}} \quad (48.2\%\text{ of } x_{\mathrm{in}}\text{ destroyed by finite }\Delta T\text{ in boiler!})
+  \]
+  \[
+    \eta_{\mathrm{II}} = \frac{w_{t,s}}{x_{\mathrm{in}}} = \frac{109.92}{1128.6} = \frac{\eta_{\mathrm{I}}}{1 - T_0/T_{\mathrm{source}}} = \frac{4.870\%}{0.5000} = \mathbf{9.740\%}
+  \]
+  \item \textbf{(b) Real turbine ($\eta_s = 0.8000$) entropy generation and Gouy--Stodola exergy destruction:}
+  \[
+    w_{t,a} = \eta_s w_{t,s} = 0.8000(109.92) = \mathbf{\SI{87.936}{\kilo\joule\per\kilogram}}
+  \]
+  The lost work inside the turbine is dissipated into the condensing steam at $T_{\mathrm{cond}} = \SI{110.0}{\celsius} = \SI{383.15}{\kelvin}$ ($\Delta h_{2a-2s} = w_{t,s} - w_{t,a} = \SI{21.984}{\kilo\joule\per\kilogram}$ inside the two-phase dome at constant $T_{\mathrm{cond}}$):
+  \[
+    s_{\mathrm{gen,turb}} = s_{2a} - s_1 = s_{2a} - s_{2s} = \frac{h_{2a} - h_{2s}}{T_{\mathrm{cond}}} = \frac{\SI{21.984}{\kilo\joule\per\kilogram}}{\SI{383.15}{\kelvin}} = \mathbf{\SI{0.05738}{\kilo\joule\per\kilogram\per\kelvin}}
+  \]
+  \[
+    x_{\mathrm{dest,turb}} = T_0 s_{\mathrm{gen,turb}} = (\SI{300.0}{\kelvin})(0.05738) = \mathbf{\SI{17.213}{\kilo\joule\per\kilogram}}
+  \]
+\end{enumerate}
+\verifiedby{Note $x_{\mathrm{dest,turb}} = (T_0/T_{\mathrm{cond}})(w_{t,s}-w_{t,a}) = (300/383.15)(21.984) = \SI{17.213}{\kilo\joule\per\kilogram}$ (\texttt{check\_sec06\_09.py::ex08\_6}).}
+\end{workedexample}
+
+% ============================================================================
+\section{The Third Law of Thermodynamics, Quantum $C_V \to 0$ Freeze-Out \& Residual Entropy}\label{sec:08.7}
+% ============================================================================
+\idxtopic{Third Law of Thermodynamics}\idxtopic{Nernst heat theorem}\idxtopic{Planck Third Law statement}\idxtopic{unattainability of absolute zero}\idxtopic{residual entropy}\idxtopic{Pauling ice residual entropy}
+
+\begin{formulacard}[Three Equivalent Formulations of the Third Law \& Residual Entropy ($T \to \SI{0}{\kelvin}$) \src{S11,S15,S25}]
+\begin{enumerate}
+  \item \textbf{Nernst--Simon Heat Theorem (1906):} For any isothermal reversible process between internal equilibrium states of condensed phases, $\lim_{T\to\SI{0}{\kelvin}} \Delta S = 0$.
+  \item \textbf{Planck Absolute-Zero Entropy Statement (1911):} The entropy of any pure, perfectly crystalline substance with a unique non-degenerate ground state ($\Omega_0 = 1$) vanishes identically at absolute zero:
+  \begin{equation}\label{eq:08:third-law}
+    \boxed{\lim_{T\to\SI{0}{\kelvin}} S_{\text{perfect crystal}} = k_B\ln(1) = 0}
+  \end{equation}
+  \idxformula{Third Law of Thermodynamics (Planck): $\lim_{T\to 0} S_{\mathrm{perfect\ crystal}} = 0$}
+  \item \textbf{Nernst Unattainability Principle (1912):} It is impossible to cool any system to $T = \SI{0}{\kelvin}$ in a finite number of cyclic or adiabatic steps.
+  \item \textbf{Why Heat Capacity MUST Vanish as $T \to \SI{0}{\kelvin}$ (\texttt{2027 Cornell E1 Q35c--d}):}
+  Integrating $C_V/T$ from $\SI{0}{\kelvin}$ to $T$ gives absolute entropy $S(T) = S_0 + \sum \frac{C_V\,\Delta T'}{T'}$. If $C_V$ remained positive at $\SI{0}{\kelvin}$ (as classical Dulong--Petit $C_{V,m} = 3R$ predicts), $S(T)$ would diverge as $\ln T \to -\infty$! Quantum phonon freeze-out ($\hbar\omega \gg k_B T$) forces $C_{V,\mathrm{Debye}} \propto T^3 \to 0$ (and electronic $C_{V,\mathrm{elec}} \propto T \to 0$), keeping $S(\SI{0}{\kelvin}) = 0$ finite.
+  \item \textbf{Residual Entropy of Frustrated / Disordered Crystals ($S_{0,m} = R\ln w > 0$):}
+  When a crystal freezes into $w > 1$ nearly degenerate orientations per molecule across $N = n N_A$ sites ($\Omega_0 = w^N$):
+  \begin{equation}\label{eq:08:residual-s}
+    \boxed{S_0 = k_B\ln(w^N) = N k_B\ln w = n R\ln w}, \qquad S_{0,m} = R\ln w = \begin{cases} R\ln 2 = \mathbf{\SI{5.763}{\joule\per\mole\per\kelvin}} & (\mathrm{CO, N_2O, NO}: w = 2)\\ R\ln 4 = \mathbf{\SI{11.526}{\joule\per\mole\per\kelvin}} & (\mathrm{FClO_3}: w = 4)\\ R\ln(3/2) = \mathbf{\SI{3.371}{\joule\per\mole\per\kelvin}} & (\text{Pauling Ice Ih}: w = 3/2) \end{cases}
+  \end{equation}
+  \idxformula{Residual molar entropy: $S_{0,m} = R\ln w$ ($\mathrm{CO}: R\ln 2$, Ice Ih: $R\ln(3/2)$)}
+\end{enumerate}
+\end{formulacard}
+
+\begin{workedexample}[Pauling Residual Entropy of Hexagonal Ice Ih \& Disordered $\mathrm{CO}$ Crystal]{National/Invitational \textbar\ Tier 3}{ex:08.7}
+(a) In hexagonal Ice~Ih, each oxygen atom is tetrahedrally surrounded by 4 hydrogen-bond positions; the Bernal--Fowler ice rules require 2 hydrogens close ($\mathrm{O-H}$ covalent bonds) and 2 hydrogens far ($\mathrm{O\cdots H}$ hydrogen bonds) among the $\binom{4}{2} = 6$ ways around each oxygen, while each of the $2N$ hydrogen bonds is independently shared with probability $1/2$, giving $\Omega_0 = \left(6 \times (1/2)^2\right)^N = (3/2)^N$ (Linus Pauling, 1935). Calculate the residual entropy of $m = \SI{100.0}{\gram}$ of Ice~Ih ($M = \SI{18.0153}{\gram\per\mole}$) at $T \to \SI{0}{\kelvin}$.
+(b) How many moles of solid carbon monoxide ($\mathrm{CO}$, random head-to-tail dipole orientation $w = 2$) have the exact same theoretical residual entropy as $\SI{100.0}{\gram}$ of Ice~Ih?
+\par\smallskip\noindent
+\textbf{Solution.}
+\begin{enumerate}
+  \item \textbf{(a) Residual entropy of $n_{\mathrm{ice}} = 100.0 / 18.0153 = \SI{5.55084}{\mole}$ of Ice~Ih:}
+  \[
+    S_{0,\mathrm{ice}} = n_{\mathrm{ice}} R \ln\left(\frac{3}{2}\right) = (5.55084)(8.314463)\ln(1.500) = (46.1523)(0.405465) = \mathbf{\SI{18.713}{\joule\per\kelvin}}
+  \]
+  \item \textbf{(b) Equivalent moles of solid $\mathrm{CO}$ ($S_{0,m,\mathrm{CO}} = R\ln 2 = \SI{5.7631}{\joule\per\mole\per\kelvin}$):}
+  \[
+    n_{\mathrm{CO}} = n_{\mathrm{ice}}\,\frac{\ln(3/2)}{\ln 2} = (5.55084)\left(\frac{0.405465}{0.693147}\right) = \mathbf{\SI{3.2470}{\mole}}
+  \]
+\end{enumerate}
+\verifiedby{Measured calorimetric vs.\ spectroscopic residual entropy of Ice~Ih is $\SI{3.4\pm 0.2}{\joule\per\mole\per\kelvin}$, matching $R\ln(3/2) = \SI{3.371}{\joule\per\mole\per\kelvin}$ within $1\%$ (\texttt{check\_sec06\_09.py::ex08\_7}).}
+\end{workedexample}
+
+\begin{workedexample}[Debye $T^3$ Cryogenic Entropy, Steady-Conduction $\dot{S}_{\mathrm{gen}}$ \& Ohmic Exergy Loss]{National/Invitational \textbar\ Tier 3}{ex:08.9}
+(a) At cryogenic temperatures ($T \ll \Theta_D$), the molar heat capacity of a non-metallic insulating crystal obeys Debye's $T^3$ law: $C_{V,m}(T) = A T^3$. Given that dividing $C_{V,m}(T)/T = A T^2$ and accumulating from $\SI{0}{\kelvin}$ to $T$ yields $S_m(T) = \frac{1}{3}A T^3 = \frac{1}{3}C_{V,m}(T)$, calculate the absolute molar entropy $S_m(\SI{10.00}{\kelvin})$ and internal energy $U_m(\SI{10.00}{\kelvin}) - U_m(\SI{0}{\kelvin}) = \frac{1}{4}A T^4 = \frac{1}{4}T C_{V,m}(T)$ of diamond ($\Theta_D = \SI{2230}{\kelvin}$, $A = \frac{12\pi^4 R}{5\Theta_D^3} = \SI{1.751e-7}{\joule\per\mole\per\kelvin^4}$) at $T = \SI{10.00}{\kelvin}$.
+(b) A cylindrical copper rod ($k = \SI{398.0}{\watt\per\meter\per\kelvin}, A = \SI{5.000e-4}{\square\meter}, L = \SI{0.2500}{\meter}$) with insulated sides connects a hot reservoir at $T_H = \SI{500.0}{\kelvin}$ to a cold reservoir at $T_C = \SI{300.0}{\kelvin}$ in an environment at $T_0 = \SI{300.0}{\kelvin}$. In steady state, find the heat conduction rate $\dot{Q}$, the entropy change rate of the copper rod itself $\dot{S}_{\mathrm{rod}}$, the universe entropy generation rate $\dot{S}_{\mathrm{gen}}$, and the Gouy--Stodola rate of exergy destruction $\dot{X}_{\mathrm{dest}}$.
+\par\smallskip\noindent
+\textbf{Solution.}
+\begin{enumerate}
+  \item \textbf{(a) Debye cryogenic heat capacity, absolute entropy, and thermal energy of diamond at $T = \SI{10.00}{\kelvin}$:}
+  \[
+    C_{V,m}(\SI{10.00}{\kelvin}) = A T^3 = (\SI{1.751e-7}{\joule\per\mole\per\kelvin^4})(10.00\,\si{\kelvin})^3 = \mathbf{\SI{1.751e-4}{\joule\per\mole\per\kelvin}}
+  \]
+  \[
+    S_m(\SI{10.00}{\kelvin}) = \frac{1}{3}C_{V,m}(\SI{10.00}{\kelvin}) = \mathbf{\SI{5.837e-5}{\joule\per\mole\per\kelvin}}, \qquad \Delta U_m(\SI{0}{\kelvin}\to\SI{10.00}{\kelvin}) = \frac{1}{4}T C_{V,m}(T) = \mathbf{\SI{4.378e-4}{\joule\per\mole}}
+  \]
+  \item \textbf{(b) Steady-state conduction bar entropy generation and exergy destruction (\texttt{2027 Cornell E1 Q7} trap):}
+  \[
+    \dot{Q} = k A\,\frac{T_H - T_C}{L} = \frac{(398.0)(5.000\times 10^{-4})(500.0 - 300.0)}{0.2500} = \mathbf{\SI{159.20}{\watt}}
+  \]
+  Because the copper rod's temperature profile $T(x)$ is time-independent in steady state, its own state function entropy is constant ($\mathbf{\dot{S}_{\mathrm{rod}} = \SI{0.000}{\watt\per\kelvin}}$!). All entropy is generated at the reservoir boundaries:
+  \[
+    \dot{S}_{\mathrm{gen}} = \dot{S}_{\mathrm{univ}} = -\frac{\dot{Q}}{T_H} + \frac{\dot{Q}}{T_C} = (159.20)\left(\frac{1}{300.0} - \frac{1}{500.0}\right) = \mathbf{+\SI{0.21227}{\watt\per\kelvin}}, \qquad \dot{X}_{\mathrm{dest}} = T_0\dot{S}_{\mathrm{gen}} = (\SI{300.0}{\kelvin})(0.21227) = \mathbf{\SI{63.68}{\watt}}
+  \]
+  Notice that $\dot{X}_{\mathrm{dest}} = \dot{Q}(1 - T_0/T_H) = 159.20(1 - 300/500) = \SI{63.68}{\watt}$ is the exact Carnot power that could have been generated had $\dot{Q}$ driven a reversible engine between $T_H$ and $T_C$ instead of conducting directly!
+\end{enumerate}
+\verifiedby{Carnot lost-work identity $\dot{W}_{\mathrm{Carnot,lost}} = \dot{Q}(1 - T_C/T_H) = 159.20(0.400) = \SI{63.68}{\watt} = T_C\dot{S}_{\mathrm{gen}}$ (\texttt{check\_sec06\_09.py::ex08\_9}).}
+\end{workedexample}
+
+\begin{trapbox}[Top 5 Second-Law, Entropy, Enthalpy \& Gibbs Exam Traps (\S8 Diagnostic Matrix)]
+\par\smallskip\noindent
+\begin{errtab}
+Claiming $\Delta S_{\mathrm{sys}} \ge 0$ for every spontaneous process & Falsely rejects spontaneous freezing, condensation, or exothermic gas-consuming reactions where $\Delta S_{\mathrm{sys}} < 0$.\idxerr{claiming $\Delta S_{\mathrm{sys}} \ge 0$ instead of $\Delta S_{\mathrm{univ}} \ge 0$ for non-isolated systems} & Only $\mathbf{\Delta S_{\mathrm{univ}} = \Delta S_{\mathrm{sys}} + \Delta S_{\mathrm{surr}} \ge 0}$ is required! A non-isolated system can decrease its entropy whenever $\Delta S_{\mathrm{surr}} \ge |\Delta S_{\mathrm{sys}}|$. \\
+Unit mismatch between $\Delta H$ ($\si{\kilo\joule\per\mole}$) and $T\Delta S$ ($\si{\joule\per\mole}$) in $\Delta G = \Delta H - T\Delta S$ & Off by $1000\times$ on the entropy term, destroying $\Delta G$ and $T^*$.\idxerr{kJ/mol vs. J/(mol K) factor of 1000 mismatch in $\Delta G = \Delta H - T\Delta S$} & Always divide $\Delta S[\si{\joule\per\mole\per\kelvin}]$ by $\mathbf{1000}$ to convert to $\si{\kilo\joule\per\mole\per\kelvin}$ before subtracting $T\Delta S$ from $\Delta H[\si{\kilo\joule\per\mole}]$! \\
+Setting $S^\circ(\SI{298.15}{\kelvin}) = 0$ for pure elements ($\mathrm{O_2}, \mathrm{H_2}, \mathrm{C}$) in $\Delta_r S^\circ$ & Confuses the formation convention $\Delta_f H^\circ = 0$ with absolute Third-Law entropy $S^\circ > 0$. & Only at $T = \SI{0}{\kelvin}$ is $S = 0$; at $\SI{298.15}{\kelvin}$, look up every element's positive $S^\circ$ in \tref{tab:08:thermochem}! \\
+Using arithmetic mean $T_f = (T_1+T_2)/2$ for a reversible engine between finite blocks & Violates $\Delta S_{\mathrm{univ}} = 0$, overestimating $T_f$ and miscalculating $W_{\max}$.\idxerr{using arithmetic mean instead of geometric mean $\sqrt{T_1T_2}$ for reversible engine between finite bodies} & Direct contact $\to T_f = (T_1+T_2)/2$; reversible Carnot engine $\to T_{f,\mathrm{rev}} = \sqrt{T_1 T_2}$ and $W_{\max} = mc(\sqrt{T_1}-\sqrt{T_2})^2$. \\
+Using $\Delta S = Q_{\mathrm{actual}}/T$ for an irreversible adiabatic process ($Q=0$) & Concludes $\Delta S = 0$ for free expansion, throttling, or real adiabatic turbines!\idxerr{setting $\Delta S = 0$ whenever $Q = 0$ in an irreversible adiabatic process} & $Q = 0$ implies $\Delta S = 0$ \textbf{only if the process is also reversible}! Irreversible adiabatic processes always have $\Delta S = S_{\mathrm{gen}} > 0$. \\
+\end{errtab}
+\end{trapbox}
+
+\begin{devicebox}[Second-Law Exergy Budget \& Why Post-Heating Swirling Destroys Stratification Score]
+\idxdev{swirling cup entropy generation and stratification score loss}
+In the 2027 Heat-Lamp Collector (\sref{sec:15}), near-IR lamp radiation ($\sim\SI{2400}{\kelvin}$) absorbed mostly in the top $\SI{10}{\milli\meter}$ of the water column creates a warm, buoyant top layer at $T_{\mathrm{top}} \approx \SI{52}{\celsius}$ over a cooler bottom layer at $T_{\mathrm{bot}} \approx \SI{42}{\celsius}$. Under Official Clarifications~\texttt{\#1--\#4} \src{S02}, the Event Supervisor measures $T_f$ near the top center without stirring. If a competitor accidentally swirls the cup while extracting it during the 1-minute post-heating window (\texttt{Rule 5.II.g}), irreversible internal mixing generates entropy $S_{\mathrm{gen,mix}} \approx \frac{1}{2}m_w c_w \frac{(T_{\mathrm{top}} - T_{\mathrm{bot}})^2}{4\bar{T}^2} > 0$ and collapses the top-layer temperature down to the bulk mean $\bar{T} \approx \SI{47}{\celsius}$ — costing $\mathbf{\SI{5}{\celsius}}$ of Temperature Gain ($\mathrm{TG}$) and ruining the team's Prediction Estimate ($\mathrm{PE}$)!
+\end{devicebox}
+
+\alsosee{Quick Sheet \texttt{QS-07} (\sref{sec:01.7}); Phase Transitions \& Quality (\sref{sec:05}); First Law \& Throttling (\sref{sec:07}); Heat Engines, Carnot \& Rankine Cycles (\sref{sec:09}); Blackbody Radiation (\sref{sec:12}); Steam Tables (\sref{app:A}).}

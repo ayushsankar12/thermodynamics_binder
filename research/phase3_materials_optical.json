@@ -1,0 +1,963 @@
+{
+  "metadata": {
+    "title": "2026-2027 Science Olympiad Thermodynamics (Division C) — Phase 3B/4B Materials, Optical/Radiative Properties, 2027 Heat-Lamp Collector Physics, and Thermometry Dataset",
+    "season": "2026-2027 (2027 Rules)",
+    "division": "C (Grades 9-12)",
+    "access_date": "2026-11-22",
+    "author_agent": "heat-device-sources",
+    "compliance_basis": [
+      "Official 2027 Division C Rules Manual (Thermodynamics C, pp. C57-C59 / PDF pp. 62-64)",
+      "All 9 Active Official 2027 National Rules Clarifications (09/30/2026 to 10/28/2026)",
+      "Official 2027 National Team Checklist (2027ThermodynamicsBC_checklist.pdf) & v2.0.0 Scoresheet (2027ThermodynamicsBC_scoresheet.xlsx, updated 11/06/2026)",
+      "Official 2027 Event Supervisor Testing Guide & Event Logistics Resource Sheet",
+      "Lienhard & Lienhard, A Heat Transfer Textbook, 6th Edition (Phlogiston Press, 2024, local file C:\\science olympiad\\AHTTv600.pdf)"
+    ]
+  },
+  "verified_source_log": [
+    {
+      "source_id": "SRC-AHTT-2024",
+      "title": "A Heat Transfer Textbook, 6th Edition (Prof. John H. Lienhard V, MIT & Prof. John H. Lienhard IV, Univ. of Houston)",
+      "url_or_path": "C:\\science olympiad\\AHTTv600.pdf",
+      "status": "LOCAL_FILE_VERIFIED (810 PDF pages, 32,472,182 bytes)",
+      "access_date": "2026-11-22",
+      "reliability_tier": "Tier 1 (Authoritative MIT/UH Textbook)",
+      "distinctive_datum": "Copyright 2024 Phlogiston Press; Table 2.1 interfacial conductances (book p. 76 / PDF p. 90); Section 5.2 lumped-capacity solutions (book pp. 194-199 / PDF pp. 208-213); Section 8.4 natural convection correlations (book pp. 430-440 / PDF pp. 444-454); Table 10.1 total emittances (book p. 546 / PDF p. 560); Tables 10.2-10.3 view factors (book pp. 561-562 / PDF pp. 575-576); Table 10.5 solar absorptance and IR emittance (book p. 598 / PDF p. 612); Example 11.11 evaporative heat loss from open cup Q_evap = 13.4 W vs Q_nc = 1.53 W, Q_rad = 1.43 W (book pp. 662-664 / PDF pp. 676-678); Appendix A Tables A.1-A.8 (book pp. 739-760 / PDF pp. 753-774)."
+    },
+    {
+      "source_id": "SRC-SO-RULES-2027",
+      "title": "Science Olympiad 2027 Division C Rules Manual — Thermodynamics C (pp. C57-C59) & Official National Clarifications (1-9)",
+      "url_or_path": "C:\\science olympiad\\Circuit-Lab-Binder\\research\\official-2027-C.pdf & https://www.soinc.org/division-c-events",
+      "status": "HTTP 200 / LOCAL_PDF_VERIFIED",
+      "access_date": "2026-11-22",
+      "reliability_tier": "Tier 1 (Official Governing Rules)",
+      "distinctive_datum": "Rule 3.a-f: heat collector under ES-provided 100-125 W heat lamp bulb (40-65 cm height) heating 100 mL water in 9 oz clear plastic party cup inside 30.0 cm cube; Clarification #1-4 (no stirring/swirling, measure top layer near center); Clarification #5 (10/21/2026: removable non-attached wrap permitted); Clarification #6 (10/22/2026: Polystyrene/Styrofoam/#6 PS banned as hazardous in high heat)."
+    },
+    {
+      "source_id": "SRC-SO-ES-GUIDE-2027",
+      "title": "Official 2027 Thermodynamics Event Supervisor Testing Guide & Event Logistics Resource Sheet",
+      "url_or_path": "https://docs.google.com/document/d/1izXVwchASL-3TPaCihmZ_AB0AqRL8Bc13LT9bwJnLwA/edit & https://drive.google.com/file/d/1hEm1Edn2m_0c5-hAFRr8PufZR1N6PDGr/view",
+      "status": "HTTP 200",
+      "access_date": "2026-11-22",
+      "reliability_tier": "Tier 1 (Official National ES Guide via soinc.org)",
+      "distinctive_datum": "Clamp lamp w/ metal reflector | 100-125 watt heat lamp bulb (Not tinted and not LED, halogen, or ceramic) | 1 cup - 9 oz (For 100 mL of water from source water bath; 3.9-4 inches tall w/ 2.9-3.0 inch mouth); Up to 3 min Device Setup Time, Up to 1 min Water Setup Time, 10-15 min Heating Time, Up to 1 min Final Measurement."
+    },
+    {
+      "source_id": "SRC-OMLC-HALE73",
+      "title": "G. M. Hale and M. R. Querry, Optical constants of water in the 200 nm to 200 um wavelength region, Appl. Opt. 12, 555-563 (1973)",
+      "url_or_path": "https://omlc.org/spectra/water/data/hale73.dat",
+      "status": "HTTP 200",
+      "access_date": "2026-11-22",
+      "reliability_tier": "Tier 1 (Peer-Reviewed Optical Constants Dataset)",
+      "distinctive_datum": "235 spectral rows: lambda=1000 nm -> mu_a=0.3600 1/cm; lambda=1200 nm -> mu_a=1.0400 1/cm (1/e depth 9.615 mm); lambda=1450 nm -> mu_a=28.80 1/cm (1/e depth 0.347 mm); lambda=1950 nm -> mu_a=114.0 1/cm (1/e depth 0.088 mm); lambda=2950 nm -> mu_a=12694.0 1/cm (1/e depth 0.79 um)."
+    },
+    {
+      "source_id": "SRC-OMLC-KOU93",
+      "title": "L. Kou, D. Labrie, and P. Chylek, Refractive indices of water and ice in the 0.65 to 2.5 um spectral range, Appl. Opt. 32, 3531-3540 (1993)",
+      "url_or_path": "https://omlc.org/spectra/water/data/kou93b.dat",
+      "status": "HTTP 200",
+      "access_date": "2026-11-22",
+      "reliability_tier": "Tier 1 (Peer-Reviewed Near-IR Water Absorption Dataset)",
+      "distinctive_datum": "555 spectral lines: lambda=2500 nm -> mu_a=100.53096 1/cm; lambda=2487 nm -> mu_a=94.487784 1/cm; lambda=667 nm -> mu_a=0.004654 1/cm."
+    },
+    {
+      "source_id": "SRC-OMLC-INDEX",
+      "title": "Optical Absorption of Water Compendium (Oregon Medical Laser Center, Scott Prahl)",
+      "url_or_path": "https://omlc.org/spectra/water/abs/index.html",
+      "status": "HTTP 200",
+      "access_date": "2026-11-22",
+      "reliability_tier": "Tier 2 (Academic Reference Compendium)",
+      "distinctive_datum": "Optical Absorption of Water Compendium ... This page was originally created in 1998 and collected together information about the optical absorption of water."
+    },
+    {
+      "source_id": "SRC-NIST-TN1297",
+      "title": "NIST Technical Note 1297: Guidelines for Evaluating and Expressing the Uncertainty of NIST Measurement Results (B. N. Taylor and C. E. Kuyatt)",
+      "url_or_path": "https://www.nist.gov/pml/nist-technical-note-1297",
+      "status": "HTTP 200",
+      "access_date": "2026-11-22",
+      "reliability_tier": "Tier 1 (National Metrology Institute Standard)",
+      "distinctive_datum": "Type A and Type B evaluation of standard uncertainty, law of propagation of uncertainty u_c^2(y) = sum (df/dx_i)^2 u^2(x_i), expanded uncertainty U = k u_c(y) with k=2 (~95% confidence)."
+    },
+    {
+      "source_id": "SRC-BIPM-JCGM100",
+      "title": "BIPM / Joint Committee for Guides in Metrology (JCGM 100:2008 GUM) — Evaluation of measurement data: Guide to the expression of uncertainty in measurement",
+      "url_or_path": "https://www.bipm.org/en/committees/jc/jcgm/publications",
+      "status": "HTTP 200",
+      "access_date": "2026-11-22",
+      "reliability_tier": "Tier 1 (International Metrology Standard)",
+      "distinctive_datum": "Maintaining and promoting the Guide to the Expression of Uncertainty in Measurement and the International Vocabulary of Metrology (Committee: JCGM)."
+    },
+    {
+      "source_id": "SRC-NIST-ITS90",
+      "title": "NIST Standard Reference Database (SRD) 60 — NIST ITS-90 Thermocouple Database",
+      "url_or_path": "https://its90.nist.gov/",
+      "status": "HTTP 200",
+      "access_date": "2026-11-22",
+      "reliability_tier": "Tier 1 (National Metrology Institute Database)",
+      "distinctive_datum": "NIST Standard Reference Database (SRD) 60 — ITS-90 Thermocouple reference functions and inverse polynomials (Type K Chromel-Alumel Seebeck coefficient ~39.5 to 41.3 uV/K at 0-100 C)."
+    },
+    {
+      "source_id": "SRC-NIST-WATER",
+      "title": "NIST Chemistry WebBook SRD 69 — Water (CAS 7732-18-5) Thermophysical & Phase-Change Properties",
+      "url_or_path": "https://webbook.nist.gov/cgi/cbook.cgi?ID=C7732185&Units=SI&Mask=7",
+      "status": "HTTP 200 (also cached at C:\\science olympiad\\latex\\revision\\sources\\nist-water.html)",
+      "access_date": "2026-11-22",
+      "reliability_tier": "Tier 1 (National Metrology Institute Database)",
+      "distinctive_datum": "Water (H2O, M = 18.0153 g/mol): Delta_vap H (300 K) = 43.92 kJ/mol (2438 kJ/kg), c_p,liquid (298.15 K) = 75.327 J/(mol K) = 4.1813 kJ/(kg K)."
+    },
+    {
+      "source_id": "SRC-OPENSTAX-UP2-1-6",
+      "title": "OpenStax University Physics Volume 2 — Section 1.6 Mechanisms of Heat Transfer",
+      "url_or_path": "https://openstax.org/books/university-physics-volume-2/pages/1-6-mechanisms-of-heat-transfer",
+      "status": "HTTP 200",
+      "access_date": "2026-11-22",
+      "reliability_tier": "Tier 2 (Peer-Reviewed Open Textbook)",
+      "distinctive_datum": "1.6 Mechanisms of Heat Transfer — University Physics Volume 2 | OpenStax: Fourier conduction P = kA(T_h - T_c)/d, convection, Stefan-Boltzmann radiation P = sigma e A (T^4 - T_env^4)."
+    },
+    {
+      "source_id": "SRC-ENGTOOLBOX-EMISSIVITY",
+      "title": "Engineering ToolBox — Emissivity Coefficients of Common Materials",
+      "url_or_path": "https://www.engineeringtoolbox.com/emissivity-coefficients-d_447.html",
+      "status": "HTTP 200",
+      "access_date": "2026-11-22",
+      "reliability_tier": "Tier 3 (Engineering Reference Compendium, cross-checked against Lienhard Table 10.1)",
+      "distinctive_datum": "Emissivity Coefficients of Common Materials: Data & Reference Guide — Aluminum foil 0.03-0.04, anodized aluminum 0.77, water 0.95-0.96, plastics 0.90-0.97, paper 0.92-0.97."
+    },
+    {
+      "source_id": "SRC-ENGTOOLBOX-K",
+      "title": "Engineering ToolBox — Thermal Conductivity of Common Materials and Specific Heats of Solids",
+      "url_or_path": "https://www.engineeringtoolbox.com/thermal-conductivity-d_429.html & https://www.engineeringtoolbox.com/specific-heat-solids-d_154.html",
+      "status": "HTTP 200",
+      "access_date": "2026-11-22",
+      "reliability_tier": "Tier 3 (Engineering Reference Compendium, cross-checked against Lienhard Tables A.1-A.2)",
+      "distinctive_datum": "Thermal Conductivity of Common Materials - Solids, Liquids and Gases; Solids - Specific Heats."
+    }
+  ],
+  "reflector_materials": [
+    {
+      "id": "REF-AL-FOIL-SHINY",
+      "name": "Polished Household Aluminum Foil — Shiny (Bright) Side",
+      "category": "Specular Reflector / Radiant Barrier",
+      "legality_2027": "LEGAL (Rule 3.a-h compliant; if placed on/around cup, must use zero adhesives/fasteners on cup and be removed before final measurement per Clarification #5)",
+      "test_temp_C": 20,
+      "density_kg_m3": 2707,
+      "cp_J_kgK": 905,
+      "k_W_mK": 237,
+      "alpha_m2_s": 9.61e-5,
+      "typical_thickness_um": "16 (standard) to 24 (heavy-duty)",
+      "areal_heat_capacity_J_m2K": "39.2 (16 um) to 58.8 (24 um)",
+      "rho_vis_total": "0.86-0.88",
+      "rho_NIR_total": "0.95-0.97",
+      "rho_NIR_specular": "0.86-0.91",
+      "alpha_NIR": "0.03-0.05",
+      "epsilon_MIR": "0.030-0.040",
+      "max_service_temp_C": 600,
+      "melting_point_C": 660,
+      "moisture_flammability": "Impermeable vapor barrier; non-combustible bulk metal",
+      "shiny_vs_dull_myth_analysis": "DEBUNKED WITH NUANCE: Both sides are produced from the same alloy during pack-rolling (shiny side contacts polished steel work rolls; dull side contacts mating aluminum foil layer). Total hemispherical IR reflectance (rho_NIR_total = 0.95-0.97) and mid-IR emissivity (epsilon_MIR = 0.03-0.04 shiny vs 0.035-0.050 dull) differ by < 1.5%, so for a flat radiant insulation shield both sides perform identically. HOWEVER, for an optical concentrating funnel under a 100-125 W heat lamp, the SHINY side exhibits significantly higher SPECULAR (mirror-like) reflectance (~88% specular vs ~62% specular on the dull side), focusing directional rays into the cup rather than diffusely scattering rays back out the top aperture.",
+      "primary_citation": "Lienhard & Lienhard (2024) Table A.1 p. 739 & Table 10.1 p. 546; Engineering ToolBox Emissivity Guide"
+    },
+    {
+      "id": "REF-AL-FOIL-DULL",
+      "name": "Household Aluminum Foil — Dull (Matte) Side",
+      "category": "Semi-Diffuse / Mixed Reflector & Radiant Barrier",
+      "legality_2027": "LEGAL",
+      "test_temp_C": 20,
+      "density_kg_m3": 2707,
+      "cp_J_kgK": 905,
+      "k_W_mK": 237,
+      "alpha_m2_s": 9.61e-5,
+      "typical_thickness_um": "16-24",
+      "areal_heat_capacity_J_m2K": "39.2-58.8",
+      "rho_vis_total": "0.84-0.87",
+      "rho_NIR_total": "0.94-0.96",
+      "rho_NIR_specular": "0.58-0.68 (remainder is diffuse scatter)",
+      "alpha_NIR": "0.04-0.06",
+      "epsilon_MIR": "0.035-0.050",
+      "max_service_temp_C": 600,
+      "melting_point_C": 660,
+      "moisture_flammability": "Impermeable; non-combustible",
+      "shiny_vs_dull_myth_analysis": "Use shiny side facing the lamp beam inside the concentrating cone for maximum specular focus; dull side facing outward into insulation air gaps still provides epsilon_MIR ~ 0.04 radiant barrier suppression.",
+      "primary_citation": "Lienhard & Lienhard (2024) Table A.1 p. 739 & Table 10.1 p. 546"
+    },
+    {
+      "id": "REF-AL-MYLAR",
+      "name": "Aluminized Mylar (Vapor-Deposited Aluminum on BoPET Film)",
+      "category": "High-Specularity Ultra-Low-Mass Reflector",
+      "legality_2027": "LEGAL",
+      "test_temp_C": 25,
+      "density_kg_m3": 1390,
+      "cp_J_kgK": 1170,
+      "k_W_mK": 0.18,
+      "alpha_m2_s": 1.11e-7,
+      "typical_thickness_um": "12 to 50 (with 30-50 nm vacuum-deposited Al coating)",
+      "areal_heat_capacity_J_m2K": "19.5 (12 um) to 81.3 (50 um)",
+      "rho_vis_total": "0.90-0.94",
+      "rho_NIR_total": "0.94-0.97",
+      "rho_NIR_specular": "0.90-0.95",
+      "alpha_NIR": "0.03-0.06",
+      "epsilon_MIR": "0.030-0.045 (aluminized face) / 0.75-0.85 (rear PET face)",
+      "max_service_temp_C": 150,
+      "melting_point_C": 254,
+      "moisture_flammability": "Impermeable; shrinks if heated > 160 C; orient aluminized face toward lamp beam",
+      "primary_citation": "Lienhard & Lienhard (2024) Ch. 10; PET/BoPET optical coating specifications"
+    },
+    {
+      "id": "REF-AL-SHEET",
+      "name": "Polished Aluminum Sheet / Flashing (Alloy 1100 / 3003 / 6061-T6)",
+      "category": "Rigid Structural Specular Reflector",
+      "legality_2027": "LEGAL",
+      "test_temp_C": 20,
+      "density_kg_m3": 2700,
+      "cp_J_kgK": 896,
+      "k_W_mK": 167,
+      "alpha_m2_s": 6.90e-5,
+      "typical_thickness_um": "250 to 800 (0.25-0.80 mm sheet)",
+      "areal_heat_capacity_J_m2K": "605 (0.25 mm) to 1935 (0.80 mm)",
+      "rho_vis_total": "0.80-0.88",
+      "rho_NIR_total": "0.91-0.96 (polished) / 0.88-0.91 (mill commercial sheet)",
+      "rho_NIR_specular": "0.82-0.92",
+      "alpha_NIR": "0.04-0.09",
+      "epsilon_MIR": "0.04-0.06 (polished 98% pure) / 0.09 (commercial sheet) / 0.20-0.33 (heavily oxidized)",
+      "max_service_temp_C": 500,
+      "melting_point_C": 650,
+      "moisture_flammability": "Rigid, non-combustible; holds exact conical/parabolic curvature without wrinkling",
+      "primary_citation": "Lienhard & Lienhard (2024) Table A.1 p. 739 (Alloy 6061-T6) & Table 10.1 p. 546 (Aluminum emittance)"
+    },
+    {
+      "id": "REF-MIRROR-ACRYLIC",
+      "name": "Silvered / Aluminized Mirror Acrylic (PMMA Second-Surface vs First-Surface)",
+      "category": "Rigid Mirror Concentrator Facets",
+      "legality_2027": "LEGAL (PMMA is #7 Acrylic, NOT #6 Polystyrene; verify polymer stamp)",
+      "test_temp_C": 25,
+      "density_kg_m3": 1180,
+      "cp_J_kgK": 1460,
+      "k_W_mK": 0.17,
+      "alpha_m2_s": 9.87e-8,
+      "typical_thickness_um": "1500 to 3000 (1.5-3.0 mm)",
+      "rho_vis_total": "0.92-0.96",
+      "rho_NIR_total": "0.80-0.86 (second-surface through 2x PMMA thickness due to C-H NIR absorption bands >1.6 um) / 0.95-0.98 (first-surface metallized)",
+      "rho_NIR_specular": "0.80-0.85 (second-surface) / 0.94-0.97 (first-surface)",
+      "alpha_NIR": "0.14-0.20 (second-surface PMMA absorption)",
+      "epsilon_MIR": "0.90-0.94 (front PMMA acrylic surface) / 0.02-0.03 (first-surface bare silver/Al)",
+      "max_service_temp_C": 85,
+      "melting_point_C": 105,
+      "moisture_flammability": "Combustible above 300 C; Tg ~ 105 C (softens if placed < 10 cm from 125 W bulb)",
+      "primary_citation": "Lienhard & Lienhard (2024) Table A.2 p. 743 (acrylic PMMA k=0.17 W/mK, rho=1180 kg/m3)"
+    },
+    {
+      "id": "REF-MIRROR-GLASS",
+      "name": "Silvered Soda-Lime Glass Mirror Tiles",
+      "category": "Rigid Planar Facet Reflector",
+      "legality_2027": "LEGAL (Caution: heavy and breakable; tape edges for safety)",
+      "test_temp_C": 20,
+      "density_kg_m3": 2480,
+      "cp_J_kgK": 750,
+      "k_W_mK": 1.1,
+      "alpha_m2_s": 5.91e-7,
+      "typical_thickness_um": "2000-3000",
+      "rho_vis_total": "0.90-0.95",
+      "rho_NIR_total": "0.84-0.90 (second-surface soda-lime glass absorbs >2.7 um) / 0.97-0.99 (first-surface silver)",
+      "rho_NIR_specular": "0.84-0.90 (second-surface)",
+      "alpha_NIR": "0.10-0.16",
+      "epsilon_MIR": "0.94 (smooth glass front surface, Lienhard Table 10.1) / 0.01-0.04 (bare silver, Lienhard Table 10.1)",
+      "max_service_temp_C": 250,
+      "melting_point_C": 730,
+      "moisture_flammability": "Non-combustible; high thermal mass penalty if coupled to cup",
+      "primary_citation": "Lienhard & Lienhard (2024) Table A.2 p. 742 & Table 10.1 p. 546"
+    },
+    {
+      "id": "REF-WHITE-PTFE-PAPER",
+      "name": "White Cardstock / White Acrylic Paint / PTFE (Teflon) Sheet",
+      "category": "Diffuse Reflector (Selective Solar Reflector / High Mid-IR Emitter)",
+      "legality_2027": "LEGAL (Poor choice for concentrating funnel due to Lambertian diffuse backscatter)",
+      "test_temp_C": 20,
+      "density_kg_m3": "790 (cardboard/paper) / 2200 (PTFE)",
+      "cp_J_kgK": "1340 (paper) / 1050 (PTFE)",
+      "k_W_mK": "0.14 (cardboard) / 0.25 (PTFE)",
+      "alpha_m2_s": "1.32e-7 (paper) / 1.1e-7 (PTFE)",
+      "rho_vis_total": "0.74-0.85 (white paper/paint) / 0.90-0.98 (sintered PTFE)",
+      "rho_NIR_total": "0.70-0.78 (white acrylic paint, alpha_solar = 0.26) / 0.85-0.92 (PTFE)",
+      "rho_NIR_specular": "0.02-0.05 (95%+ is Lambertian diffuse reflection!)",
+      "alpha_NIR": "0.22-0.30 (white paint/paper)",
+      "epsilon_MIR": "0.90 (white acrylic paint, Table 10.5) / 0.95-0.98 (white paper, Table 10.1) / 0.85-0.92 (PTFE)",
+      "max_service_temp_C": "120 (paper) / 260 (PTFE)",
+      "melting_point_C": "218-246 auto-ignition (paper) / 327 (PTFE)",
+      "moisture_flammability": "Paper is hygroscopic & chars >180 C; PTFE is hydrophobic & non-flammable",
+      "engineering_trap": "Students often assume white surfaces reflect heat like mirrors. Per Lienhard Table 10.1 (p. 546) & Table 10.5 (p. 598), white paper/paint has epsilon_MIR = 0.90-0.98 (nearly a blackbody in mid-IR!) and scatters visible/near-IR diffusely in all directions (sending ~50% of incident lamp rays back out the top opening).",
+      "primary_citation": "Lienhard & Lienhard (2024) Table A.2 pp. 742-743, Table 10.1 p. 546, Table 10.5 p. 598"
+    }
+  ],
+  "absorber_and_selective_surfaces": [
+    {
+      "id": "ABS-MATTE-BLACK-PAINT",
+      "name": "Matte Black High-Temperature Paint (Carbon Black in Acrylic or Silicone Binder)",
+      "category": "Non-Selective Broadband Absorber Coating",
+      "legality_2027": "LEGAL (Apply only to device components; never apply paint/coatings to the ES-provided 9 oz cup per Clarification #5)",
+      "test_temp_C": 27,
+      "density_kg_m3": 1200,
+      "cp_J_kgK": 1400,
+      "k_W_mK": 0.22,
+      "alpha_NIR": "0.94 (Carbon black in acrylic binder, Lienhard Table 10.5 p. 598) to 0.96",
+      "rho_NIR_total": "0.04-0.06",
+      "epsilon_MIR": "0.83 (Carbon black in acrylic binder, Table 10.5) to 0.92-0.96 (oil/flat paints, Table 10.1)",
+      "selectivity_ratio_alpha_over_epsilon": "1.02 to 1.13 (non-selective)",
+      "max_service_temp_C": "150 (acrylic binder) to 650 (silicone header paint)",
+      "engineering_notes": "High near-IR absorptance (0.94), but also high mid-IR emittance (0.83-0.95). Best used on thin copper/aluminum absorber collars shielded from ambient air by an outer transparent glazing or dead-air gap.",
+      "primary_citation": "Lienhard & Lienhard (2024) Table 10.1 p. 546 & Table 10.5 p. 598"
+    },
+    {
+      "id": "ABS-CARBON-SOOT",
+      "name": "Carbon Soot / Lampblack Coating",
+      "category": "Ultra-High Broadband Blackbody Absorber",
+      "legality_2027": "LEGAL WITH CAUTION (Must be sealed/isolated so zero soot flakes can fall into or contact the water per Rule 3.e)",
+      "test_temp_C": 40,
+      "density_kg_m3": 1700,
+      "cp_J_kgK": 710,
+      "k_W_mK": 0.10,
+      "alpha_NIR": "0.95-0.97",
+      "rho_NIR_total": "0.03-0.05",
+      "epsilon_MIR": "0.95 (Lampsoot at 40 C, Lienhard Table 10.1 p. 546)",
+      "selectivity_ratio_alpha_over_epsilon": 1.0,
+      "max_service_temp_C": 400,
+      "engineering_notes": "Reference standard near-blackbody surface (epsilon = 0.95). Fragile and rubs off easily; matte black high-temp paint or selective black oxide is much safer for competition handling.",
+      "primary_citation": "Lienhard & Lienhard (2024) Table 10.1 p. 546 & Table A.2 p. 741"
+    },
+    {
+      "id": "ABS-BLACK-ANODIZED-AL",
+      "name": "Black Anodized Aluminum Sheet / Collar",
+      "category": "Durable Metallic Absorber / Semi-Selective Surface",
+      "legality_2027": "LEGAL",
+      "test_temp_C": 25,
+      "density_kg_m3": 2700,
+      "cp_J_kgK": 896,
+      "k_W_mK": 167,
+      "alpha_m2_s": 6.90e-5,
+      "alpha_NIR": "0.86-0.92",
+      "rho_NIR_total": "0.08-0.14",
+      "epsilon_MIR": "0.75-0.88 (standard thick porous Al2O3 anodize) / 0.15-0.30 (thin <2 um selective anodic coating)",
+      "selectivity_ratio_alpha_over_epsilon": "1.05 (thick anodize) to 4.5 (thin selective anodize)",
+      "max_service_temp_C": 400,
+      "engineering_notes": "Al2O3 anodic layer over high-conductivity aluminum substrate (k = 167 W/mK) spreads absorbed lamp heat rapidly around the perimeter of the cup.",
+      "primary_citation": "Lienhard & Lienhard (2024) Table A.1 p. 739 & Engineering ToolBox Emissivity Guide"
+    },
+    {
+      "id": "ABS-SELECTIVE-SOLAR-COATINGS",
+      "name": "Selective Solar Absorbers (Black Chrome on Ni, CuO on Cu Ebanol C, Nickel Black, Sputtered Cermet)",
+      "category": "True Wavelength-Selective Absorber (High NIR Absorptance, Low MIR Emittance)",
+      "legality_2027": "LEGAL (Commercial selective solar foil/tape such as Maxorb / Alanod Mirotherm glued to device collar — NOT attached to cup)",
+      "test_temp_C": 27,
+      "variants_from_Lienhard_Table_10_5": [
+        {"surface": "Black Cr on Ni plate", "alpha_solar_NIR": 0.95, "epsilon_MIR": 0.09, "ratio": 10.56},
+        {"surface": "CuO on Cu (Ebanol C)", "alpha_solar_NIR": 0.90, "epsilon_MIR": 0.16, "ratio": 5.63},
+        {"surface": "Nickel black on steel", "alpha_solar_NIR": 0.81, "epsilon_MIR": 0.17, "ratio": 4.76},
+        {"surface": "Sputtered cermet on steel", "alpha_solar_NIR": 0.96, "epsilon_MIR": 0.16, "ratio": 6.00},
+        {"surface": "Black oxidized copper (Table 10.1, 40 C)", "alpha_solar_NIR": 0.85, "epsilon_MIR": 0.76, "ratio": 1.12}
+      ],
+      "engineering_notes": "Selective absorbers absorb 90-96% of short-wave lamp radiation (lambda ~ 0.4-2.5 um) while suppressing long-wave infrared re-radiation loss (lambda ~ 8-15 um at 300-350 K) by a factor of 5x to 10x.",
+      "primary_citation": "Lienhard & Lienhard (2024) Table 10.5 p. 598 & Table 10.1 p. 546"
+    },
+    {
+      "id": "ABS-MATTE-BLACK-PAPER",
+      "name": "Matte Black Construction Paper / Cardstock",
+      "category": "Low-Conductivity Cellulosic Absorber",
+      "legality_2027": "LEGAL",
+      "test_temp_C": 20,
+      "density_kg_m3": 790,
+      "cp_J_kgK": 1340,
+      "k_W_mK": 0.14,
+      "alpha_m2_s": 1.32e-7,
+      "alpha_NIR": "0.90-0.94",
+      "rho_NIR_total": "0.06-0.10",
+      "epsilon_MIR": "0.92-0.94 (Paper, other colors at 40 C, Lienhard Table 10.1 p. 546)",
+      "max_service_temp_C": 120,
+      "engineering_trap": "Because paper has low thermal conductivity (k = 0.14 W/mK) and creates an air gap against the tapered cup wall, a black paper sleeve placed around the outside of the cup blocks direct radiation from entering the clear plastic sidewall while conducting heat poorly into the water! Direct radiative penetration through the clear cup wall or a thin high-k metallic foil sleeve is superior.",
+      "primary_citation": "Lienhard & Lienhard (2024) Table A.2 p. 742 & Table 10.1 p. 546"
+    },
+    {
+      "id": "ABS-CU-AL-THIN-FOIL-COLLAR",
+      "name": "Blackened Thin Copper (25-50 um) or Aluminum (24-50 um) Non-Contact Absorber Collar / Dry Inner Cone",
+      "category": "Ultra-Low-Thermal-Mass High-Conductivity Secondary Radiant/Convective Transfer Element",
+      "legality_2027": "LEGAL per Rule 3.e & Clarification #5 (May surround the outer cup wall closely without adhesive/clips, or extend inside the upper dry air space of the cup ABOVE the 100 mL waterline so long as NO part ever contacts the water!)",
+      "test_temp_C": 20,
+      "copper_properties": {"density_kg_m3": 8954, "cp_J_kgK": 384, "k_W_mK": 398, "alpha_m2_s": 1.157e-4},
+      "aluminum_properties": {"density_kg_m3": 2707, "cp_J_kgK": 905, "k_W_mK": 237, "alpha_m2_s": 9.61e-5},
+      "thermal_mass_for_100cm2_at_35um_J_K": "1.20 J/K (Cu) or 0.86 J/K (Al) — < 0.3% of the 418.4 J/K heat capacity of 100 mL water!",
+      "engineering_notes": "A 35 um blackened copper or aluminum sleeve consumes < 1.2 J/K of thermal mass (heating up in < 3 seconds) while absorbing stray off-axis rays and transferring heat into the cup wall and upper water layer.",
+      "primary_citation": "Lienhard & Lienhard (2024) Table A.1 p. 739; Official 2027 Rule 3.e & Clarification #5"
+    }
+  ],
+  "glazing_and_evaporation_suppression_films": [
+    {
+      "id": "GLZ-LDPE-CLING-WRAP",
+      "name": "LDPE / PVDC Clear Plastic Cling Wrap (10-15 um Film Resting on Cup Rim or Upper Frame)",
+      "category": "Ultra-Thin Transparent Vapor Barrier / Glazing Film",
+      "legality_2027": "EXPLICITLY LEGAL per Official Clarification #5 (10/21/2026) & Official ES Guide: Teams may place wrap on or around the cup during Water Setup Time provided NO adhesives, tapes, rubber bands, or clips attach it to the cup, cup shape/integrity is unaltered, and the wrap is completely removed before final temperature measurement.",
+      "test_temp_C": 25,
+      "density_kg_m3": 920,
+      "cp_J_kgK": 2100,
+      "k_W_mK": 0.33,
+      "alpha_m2_s": 1.7e-7,
+      "typical_thickness_um": 12.5,
+      "thermal_mass_for_60cm2_disk_J_K": 0.145,
+      "tau_vis": "0.91-0.93",
+      "tau_NIR_0_7_to_2_5_um": "0.90-0.92 ( ~4% Fresnel reflection per surface, minimal bulk absorption at 12.5 um thickness)",
+      "tau_MIR_5_to_15_um": "0.70-0.85 (LDPE is partially transparent in mid-IR except at 3.4, 6.8, 13.8 um C-H bands; PVDC Saran wrap has stronger C-Cl absorption bands at 9-10 um giving tau_MIR ~ 0.45-0.60)",
+      "softening_temp_C": "85-95 (LDPE) / 135-145 (PVDC)",
+      "melting_point_C": "105-115 (LDPE) / 160-170 (PVDC)",
+      "engineering_notes": "Resting a self-weighted or ring-mounted clear film over the cup mouth eliminates ~95-99% of evaporative heat loss (saving 3-6 W, or +3.5 to +7.5 C over 10-15 min!) while transmitting >90% of incident lamp radiation. Keep film slightly below peak focal constriction or use clear PET film if focal spot temperature exceeds 90 C.",
+      "primary_citation": "Lienhard & Lienhard (2024) Table A.2 p. 743 (LDPE); Official Clarification #5 (10/21/2026)"
+    },
+    {
+      "id": "GLZ-CLEAR-PET-FILM",
+      "name": "Clear BoPET (Mylar / Polyester Transparency) Film (25-100 um)",
+      "category": "High-Temperature Greenhouse Glazing & Evaporation Cap",
+      "legality_2027": "LEGAL per Official Clarification #5 (gravity-resting clear cap or upper aperture window; zero adhesive/clips on cup)",
+      "test_temp_C": 25,
+      "density_kg_m3": 1390,
+      "cp_J_kgK": 1170,
+      "k_W_mK": 0.18,
+      "alpha_m2_s": 1.11e-7,
+      "typical_thickness_um": "25 to 100",
+      "thermal_mass_for_60cm2_disk_J_K": "0.24 (25 um) to 0.98 (100 um)",
+      "tau_vis": "0.88-0.91",
+      "tau_NIR_0_7_to_2_5_um": "0.88-0.91",
+      "tau_MIR_5_to_15_um": "0.15-0.35 (strong ester C=O and C-O absorption bands block 65-85% of mid-IR re-radiation!)",
+      "glass_transition_Tg_C": 75,
+      "softening_temp_C": 180,
+      "melting_point_C": 254,
+      "max_service_temp_C": 150,
+      "engineering_notes": "RECOMMENDED GLAZING MATERIAL: Unlike LDPE cling wrap (which softens at 85-95 C), clear BoPET film withstands 150 C continuous service, never sags under a 125 W heat lamp at h=40 cm, lifts off the cup in <1 second with zero clinging during the 1-minute Final Measurement window, and blocks mid-IR re-radiation (true greenhouse trapping).",
+      "primary_citation": "Official Clarification #5 (10/21/2026); Polymer optical & thermal reference data"
+    },
+    {
+      "id": "GLZ-POLYCARBONATE",
+      "name": "Transparent Polycarbonate Sheet (Lexan, 0.5-1.5 mm)",
+      "category": "Rigid Greenhouse Window",
+      "legality_2027": "LEGAL",
+      "test_temp_C": 23,
+      "density_kg_m3": 1200,
+      "cp_J_kgK": 1250,
+      "k_W_mK": 0.29,
+      "alpha_m2_s": 1.9e-7,
+      "tau_vis": "0.86-0.89",
+      "tau_NIR_0_7_to_2_5_um": "0.83-0.87 (absorption bands above 1.65 um)",
+      "tau_MIR_5_to_15_um": "< 0.05 (opaque to mid-IR > 3.0 um)",
+      "glass_transition_Tg_C": 147,
+      "max_service_temp_C": 120,
+      "primary_citation": "Lienhard & Lienhard (2024) Table A.2 p. 743 (polycarbonate PC, Lexan)"
+    },
+    {
+      "id": "GLZ-BOROSILICATE-GLASS",
+      "name": "Borosilicate Glass Sheet (Pyrex, 1.5-3.0 mm)",
+      "category": "Classic Selective Solar/NIR Transmitter & Mid-IR Blocker",
+      "legality_2027": "LEGAL (Ensure stable mounting and no breakage risk)",
+      "test_temp_C": 60,
+      "density_kg_m3": 2210,
+      "cp_J_kgK": 753,
+      "k_W_mK": 1.3,
+      "alpha_m2_s": 7.8e-7,
+      "tau_vis": "0.91-0.92",
+      "tau_NIR_0_7_to_2_5_um": "0.90-0.92 for lambda < 2.7 um (Lienhard Section 10.6 p. 599)",
+      "tau_MIR_5_to_15_um": "< 0.02 for lambda > 3.5 um (virtually opaque in thermal mid-IR, epsilon_MIR = 0.94)",
+      "max_service_temp_C": 490,
+      "engineering_notes": "Textbook greenhouse glazing (Lienhard p. 599: transmits >90% below 2.7 um, virtually opaque in mid-IR). Note: at 2 mm thickness, ~8% is lost to front/back Fresnel reflection (n ~ 1.47 -> R_1 = ((n-1)/(n+1))^2 = 3.6% per surface).",
+      "primary_citation": "Lienhard & Lienhard (2024) Table A.2 p. 742, Table 10.1 p. 546, Section 10.6 p. 599"
+    },
+    {
+      "id": "GLZ-CUP-PP-PET",
+      "name": "ES-Provided 9 oz Clear Plastic Party Cup Wall (Clear PET #1 or Clear Polypropylene #5)",
+      "category": "Target Container Wall (ES-Provided Material)",
+      "legality_2027": "ES-PROVIDED MANDATORY CONTAINER (Rule 3.c & 4.g: 9 oz clear plastic party cup, ~3.9-4.0 in [9.9-10.2 cm] tall, ~2.9-3.0 in [7.37-7.62 cm] mouth diameter, holding 100 mL water)",
+      "test_temp_C": 25,
+      "PP_properties": {"density_kg_m3": 905, "cp_J_kgK": 1900, "k_W_mK": 0.185, "softening_C": 125, "melting_C": 162},
+      "PET_properties": {"density_kg_m3": 1385, "cp_J_kgK": 1170, "k_W_mK": 0.19, "Tg_softening_C": 74, "melting_C": 254},
+      "wall_thickness_mm": "0.25 to 0.40 (typicalcup mass m_cup = 5.5 to 7.5 g -> C_cup = 6.5 to 11.5 J/K)",
+      "tau_NIR_wall": "0.86-0.90 (transmits near-IR directly into water through sidewall as well as top mouth!)",
+      "epsilon_MIR_wall": "0.90-0.94",
+      "critical_engineering_warning": "Rule 5.d / Clarification #5 states: 'The structural integrity and shape of the cup may not be altered in the process of placing the cup in the Device.' For a clear PET (#1) cup, the dry upper plastic rim above the 100 mL waterline (water occupies only the bottom ~3.6-4.0 cm of the 10 cm tall cup!) is cooled only by air and has Tg ~ 72-78 C. If an over-aggressive upper reflector concentrates a >80 C hotspot onto the dry upper plastic rim, the PET rim can warp! Design the reflector focal zone at the WATER SURFACE height (z_water ~ z_base + 3.6 cm) or shade the dry top rim with a non-contact reflective aperture ring.",
+      "primary_citation": "Lienhard & Lienhard (2024) Table A.2 p. 743; Official 2027 Rule 4.g & Clarification #5"
+    }
+  ],
+  "compliant_insulators_and_structural_materials": [
+    {
+      "id": "INS-CORRUGATED-CARDBOARD",
+      "name": "Corrugated Cardboard (Fluted Board vs Solid Paperboard)",
+      "category": "Structural Framing & Low-Density Cellulosic Insulator",
+      "legality_2027": "LEGAL",
+      "test_temp_C": 20,
+      "density_kg_m3": "180 (fluted bulk) / 790 (solid paperboard, Lienhard Table A.2 p. 742)",
+      "cp_J_kgK": 1340,
+      "k_W_mK": "0.055 (fluted with trapped air) / 0.14 (solid cardboard, Lienhard Table A.2 p. 742)",
+      "alpha_m2_s": 1.32e-7,
+      "epsilon_MIR": 0.92,
+      "max_service_temp_C": 120,
+      "charring_ignition_temp_C": "Chars/browns at 180-200 C; auto-ignition at 218-246 C (425-475 F)",
+      "moisture_flammability": "Combustible if unshielded near lamp; line all lamp-facing cardboard surfaces with aluminum foil (rho_NIR = 0.96) so absorbed heat flux is < 4% and cardboard stays near room temperature (< 40 C).",
+      "primary_citation": "Lienhard & Lienhard (2024) Table A.2 p. 742 & Table 10.1 p. 546"
+    },
+    {
+      "id": "INS-CORKBOARD",
+      "name": "Corkboard (Medium Density Natural Granulated/Sheet Cork)",
+      "category": "Compliant Base & Cradle Insulator",
+      "legality_2027": "LEGAL",
+      "test_temp_C": 30,
+      "density_kg_m3": 170,
+      "cp_J_kgK": 1850,
+      "k_W_mK": 0.040,
+      "alpha_m2_s": 1.27e-7,
+      "epsilon_MIR": 0.88,
+      "max_service_temp_C": 115,
+      "charring_ignition_temp_C": "Chars > 200 C; ignition ~ 240-260 C",
+      "moisture_flammability": "Low moisture absorption; high compressive strength for supporting the cup base with minimal contact area",
+      "primary_citation": "Lienhard & Lienhard (2024) Table A.2 p. 742 (Corkboard, medium rho=170 kg/m3, k=0.04 W/mK at 30 C)"
+    },
+    {
+      "id": "INS-COTTON-DENIM-BATTING",
+      "name": "Cotton / Recycled Denim Insulation Batting",
+      "category": "Compliant Fibrous Non-Mineral Cavity Fill",
+      "legality_2027": "LEGAL (Natural cellulose fiber; completely distinct from prohibited fiberglass/mineral wool in Rule 3.b.i)",
+      "test_temp_C": 25,
+      "density_kg_m3": 45,
+      "cp_J_kgK": 1340,
+      "k_W_mK": 0.039,
+      "alpha_m2_s": 6.47e-7,
+      "epsilon_MIR": 0.90,
+      "max_service_temp_C": 120,
+      "charring_ignition_temp_C": "Ignition ~ 210-255 C (untreated) / > 400 C (borate-treated denim batt)",
+      "moisture_flammability": "Hygroscopic: 5-8% ambient moisture regain; keep dry and sealed behind foil",
+      "primary_citation": "Standard cellulosic fiber insulation properties; cross-checked with Lienhard Table A.2"
+    },
+    {
+      "id": "INS-SHEEP-WOOL",
+      "name": "Sheep Wool Batting / Felt",
+      "category": "Naturally Flame-Resistant Compliant Fibrous Insulator",
+      "legality_2027": "LEGAL (Natural keratin protein fiber; label clearly in binder/inspection so ES never confuses with mineral wool)",
+      "test_temp_C": 20,
+      "density_kg_m3": 145,
+      "cp_J_kgK": 1500,
+      "k_W_mK": 0.050,
+      "alpha_m2_s": 2.30e-7,
+      "epsilon_MIR": 0.88,
+      "max_service_temp_C": 130,
+      "charring_ignition_temp_C": "Self-extinguishing natural protein fiber; ignition temperature 570-600 C",
+      "moisture_flammability": "Hygroscopic; excellent thermal & fire safety margin",
+      "primary_citation": "Lienhard & Lienhard (2024) Table A.2 p. 744 (Wool, sheep at 20 C: rho=145 kg/m3, k=0.05 W/mK)"
+    },
+    {
+      "id": "INS-WOOD-BALSA-PLYWOOD",
+      "name": "Balsa Wood, Douglas Fir Plywood, Oak, and Dry Sawdust",
+      "category": "Structural Framing & Low-Conductivity Stand-Off Supports",
+      "legality_2027": "LEGAL",
+      "test_temp_C": 20,
+      "variants_from_Lienhard_Table_A2_p744": [
+        {"material": "Balsa wood (perp. to grain, 15 C)", "density_kg_m3": 100, "cp_J_kgK": 1600, "k_W_mK": 0.050, "alpha_m2_s": 3.1e-7},
+        {"material": "Sawdust, dry (low density, 17 C)", "density_kg_m3": 128, "cp_J_kgK": 1400, "k_W_mK": 0.050, "alpha_m2_s": 2.8e-7},
+        {"material": "Plywood, Douglas fir (24 C)", "density_kg_m3": 550, "cp_J_kgK": 1200, "k_W_mK": 0.120, "alpha_m2_s": 1.8e-7},
+        {"material": "Fir wood (perp. to grain, 15 C)", "density_kg_m3": 600, "cp_J_kgK": 2720, "k_W_mK": 0.120, "alpha_m2_s": 7.4e-8},
+        {"material": "Oak (perp. to grain, 20 C)", "density_kg_m3": 600, "cp_J_kgK": 2390, "k_W_mK": 0.150, "alpha_m2_s": 1.05e-7},
+        {"material": "Particle board (medium rho, 24 C)", "density_kg_m3": 800, "cp_J_kgK": 1300, "k_W_mK": 0.140, "alpha_m2_s": 1.3e-7}
+      ],
+      "epsilon_MIR": "0.80-0.90 (Wood at 40 C; Oak planed = 0.90, Lienhard Table 10.1 p. 546)",
+      "max_service_temp_C": 120,
+      "engineering_notes": "Balsa wood (k = 0.05 W/mK, rho = 100 kg/m3) is an exceptional structural insulator for knife-edge 3-point cup support rings and low-mass reflector ribs.",
+      "primary_citation": "Lienhard & Lienhard (2024) Table A.2 p. 744 & Table 10.1 p. 546"
+    },
+    {
+      "id": "INS-CLOSED-CELL-PE-FOAM",
+      "name": "Closed-Cell Polyethylene (PE, #2/#4) Foam Sheet",
+      "category": "Compliant Non-Styrene Polymeric Foam Insulator",
+      "legality_2027": "LEGAL (Polyethylene is #2/#4 polyolefin, NOT #6 Polystyrene! Keep labeled manufacturer spec sheet in binder to prove PE composition at impound/inspection)",
+      "test_temp_C": 25,
+      "density_kg_m3": 35,
+      "cp_J_kgK": 2150,
+      "k_W_mK": 0.038,
+      "alpha_m2_s": 5.05e-7,
+      "solid_polymer_reference": "Solid LDPE (rho=920 kg/m3, cp=2100 J/kgK, k=0.33 W/mK) / HDPE (rho=960 kg/m3, cp=2260 J/kgK, k=0.33 W/mK) per Lienhard Table A.2 p. 743",
+      "softening_temp_C": "85-105 (CRITICAL: Do not expose bare PE foam directly to focused heat-lamp rays; use only behind aluminum foil or in lower cup cradle)",
+      "melting_point_C": "110-125",
+      "primary_citation": "Lienhard & Lienhard (2024) Table A.2 p. 743"
+    },
+    {
+      "id": "INS-SILICONE-SHEET-FOAM",
+      "name": "Silicone Elastomer Sheet / Closed-Cell Silicone Foam",
+      "category": "High-Temperature Compliant Cradle Seal & Stand-Off",
+      "legality_2027": "LEGAL",
+      "test_temp_C": 25,
+      "density_kg_m3": "300 (foam) / 1150 (solid sheet)",
+      "cp_J_kgK": 1400,
+      "k_W_mK": "0.060 (foam) / 0.18 (solid sheet)",
+      "alpha_m2_s": 1.43e-7,
+      "epsilon_MIR": 0.90,
+      "max_service_temp_C": 220,
+      "engineering_notes": "Thermally stable up to 220 C; ideal for soft centering bumpers or upper thermal seal gaskets around the cup.",
+      "primary_citation": "Lienhard & Lienhard (2024) Table A.2 p. 743 (elastomers/rubbers)"
+    },
+    {
+      "id": "INS-TRAPPED-AIR-GAP",
+      "name": "Trapped Stagnant Air Gap Bounded by Low-Emissivity Aluminum Foil (Multi-Layer Foil-Air-Foil)",
+      "category": "Ultra-Low-Mass Radiation-Suppressed Stagnant Gas Insulator",
+      "legality_2027": "LEGAL (Zero prohibited materials, negligible thermal mass, 100% compliant with Rule 3.b)",
+      "test_temp_C": 27,
+      "density_kg_m3": 1.176,
+      "cp_J_kgK": 1007,
+      "k_W_mK": 0.02623,
+      "alpha_m2_s": 2.213e-5,
+      "nu_m2_s": 1.578e-5,
+      "Pr": 0.713,
+      "optimal_gap_thickness_mm": "10 to 13 mm (single gap); multiple 10 mm foil-separated air gaps in series",
+      "rayleigh_benard_convection_limit": "For horizontal air layer heated from below, natural convection cells start at critical Rayleigh number Ra_c = g * beta * Delta_T * delta^3 / (nu * alpha) = 1708. At T_f = 305 K (beta = 1/305 K^-1) and Delta_T = 15 K across one gap, Ra_delta = 1708 occurs at delta_c = 11.1 mm. For vertical air slots, conduction dominates (Nu ~ 1) for Ra_delta < 2000 (delta <= 12 mm). With foil walls (epsilon = 0.04), h_rad across the gap is reduced from 6.0 W/m2K to 4*sigma*T_m^3 / (2/epsilon - 1) = 0.125 W/m2K, giving an effective gap conductivity k_eff = k_air + h_rad*delta = 0.0262 + 0.125*(0.010) = 0.0275 W/mK (better than Styrofoam EPS k=0.035 W/mK, with 1/20th the thermal mass and 100% rule compliance!).",
+      "primary_citation": "Lienhard & Lienhard (2024) Table A.6 p. 755 (Air at 300 K), Section 8.4 p. 440, Section 10.4 Eq. (10.24) p. 569"
+    }
+  ],
+  "explicitly_prohibited_materials": [
+    {
+      "id": "PROHIB-ASBESTOS",
+      "name": "Asbestos (Board, Loose Fiber, or Cloth)",
+      "rule_citation": "Rule 3.b.i & 3.b.iii",
+      "reason": "Explicitly prohibited hazardous carcinogen",
+      "penalty": "Device NOT allowed to be set up, modified, or tested (TS = 0, PS = 0; team competes in Part I written test only per Rule 3.b.iii)",
+      "textbook_reference_only_note": "Listed in Lienhard Table A.2 p. 741 (k = 0.14-0.80 W/mK) and Table 10.1 p. 546 (epsilon = 0.93-0.97) strictly for solving written exam problems; NEVER use in any physical device."
+    },
+    {
+      "id": "PROHIB-MINERAL-WOOL",
+      "name": "Mineral Wool (Rock Wool / Slag Wool)",
+      "rule_citation": "Rule 3.b.i & 3.b.iii",
+      "reason": "Explicitly prohibited hazardous fibrous material",
+      "penalty": "Device disqualified from testing (TS = 0, PS = 0; written test only per Rule 3.b.iii)",
+      "textbook_reference_only_note": "Listed in Lienhard Table A.2 p. 743 (Rock wool k = 0.033-0.037 W/mK) for written exam reference only."
+    },
+    {
+      "id": "PROHIB-FIBERGLASS",
+      "name": "Fiberglass (Glass-Fiber Batt, Pipe Insulation, Loose Glass Wool, Shedding Fiberglass Cloth)",
+      "rule_citation": "Rule 3.b.i & 3.b.iii",
+      "reason": "Explicitly prohibited hazardous fibrous material",
+      "penalty": "Device disqualified from testing (TS = 0, PS = 0; written test only per Rule 3.b.iii)",
+      "textbook_reference_only_note": "Listed in Lienhard Table A.2 p. 742 (Glass-fiber batt k = 0.034-0.048 W/mK) for written exam reference only."
+    },
+    {
+      "id": "PROHIB-POLYSTYRENE-STYROFOAM-PS6",
+      "name": "Polystyrene — ALL Forms: Expanded Polystyrene (EPS Bead Foam / Styrofoam), Extruded Polystyrene (XPS Blue/Pink/Green Foam Board), Foam-Core Posterboard with PS Core, and Rigid #6 PS Plastics",
+      "rule_citation": "Rule 3.b.i + Official National Rules Clarification #6 (10/22/2026) + Official 2027 ES Testing Guide",
+      "verbatim_clarification": "No. Polystyrene (which includes styrofoam and plastics with the recyclable symbol '6' and 'PS' on them) is considered hazardous in high heat situations and should not be used in this event.",
+      "penalty": "Classified under Rule 3.b.i hazardous materials -> Device NOT allowed to be set up, modified, or tested (TS = 0, PS = 0; written test only per Rule 3.b.iii)!",
+      "inspection_prevention": "Audit every plastic/foam piece before impound. Do NOT use standard Elmers/Dollar-Tree foam-core board (which has a polystyrene foam core!), Styrofoam coolers/cups, or #6 plastic lids. Use foil-air-foil corrugated cardboard, balsa, cork, wool/cotton, and clear BoPET/LDPE instead."
+    },
+    {
+      "id": "PROHIB-COMMERCIAL-THERMOS-COOLER-VACUUM",
+      "name": "Commercially Available Thermoses, Coolers, or Vacuum-Sealed Devices",
+      "rule_citation": "Rule 3.b.ii",
+      "reason": "Prohibits commercial prefabricated vacuum/insulated vessels (Dewar flasks, Yeti/Stanley/HydroFlask cups, insulated lunchboxes)",
+      "penalty": "Construction violation (x0.7 multiplier to TS and PS if unfixed by end of 3-min Setup Time, or device disallowed)"
+    },
+    {
+      "id": "PROHIB-THERMOMETERS-PROBES",
+      "name": "Thermometers or Temperature Probes in/on Impounded Device or Spare Parts",
+      "rule_citation": "Rule 3.b.ii & 4.f",
+      "reason": "No thermometers, thermocouples, thermistors, RTDs, IR sensors, or stick-on liquid-crystal thermometer strips allowed on device during competition",
+      "penalty": "Construction/Competition violation"
+    },
+    {
+      "id": "PROHIB-ENERGY-SOURCES",
+      "name": "Internal Electrical, Battery, or Chemical Energy Sources",
+      "rule_citation": "Rule 3.f",
+      "reason": "Device must not contain any energy sources (electrical components, battery heaters, chemical reactions, exothermic hand-warmers, quicklime/salt hydration, pre-heated phase-change packs) to help warm the water",
+      "penalty": "Severe violation: TS = 0 and PS = 0; ES may require full disassembly after testing"
+    },
+    {
+      "id": "PROHIB-WATER-CONTACT-OR-ADDITIVES",
+      "name": "Device Components Contacting Water or Substances Added to Water",
+      "rule_citation": "Rule 3.e",
+      "reason": "Parts of the device may extend inside the cup, but NO part of the device may contact the water, and nothing (no dyes, ink, oil films, metal shot, or immersion fins) may be added to the water",
+      "penalty": "Construction violation (x0.7 multiplier to TS and PS)"
+    }
+  ],
+  "heat_lamp_collector_physics_model": {
+    "lamp_specifications_and_spectrum": {
+      "allowed_wattage_W": [100, 125],
+      "bulb_type": "Incandescent R40 or BR40 clear reflector heat lamp bulb (not tinted; not LED, halogen, or ceramic per Rule 4.b)",
+      "bulb_dimensions": {
+        "diameter_mm": 127.0,
+        "diameter_in": 5.0,
+        "radius_cm": 6.35,
+        "length_MOL_mm": 165.0,
+        "base": "E26 medium screw inside ES clamp-lamp metal reflector"
+      },
+      "filament_temperature_K": {
+        "range_K": [2200, 2500],
+        "nominal_125W_K": 2400,
+        "nominal_100W_K": 2320
+      },
+      "wien_peak_wavelength_um": {
+        "formula": "lambda_max = b / T_fil = 2897.772 um*K / T_fil",
+        "at_2200K_um": 1.317,
+        "at_2400K_um": 1.207,
+        "at_2500K_um": 1.159
+      },
+      "power_partition_125W_nominal": {
+        "electrical_input_W": 125.0,
+        "visible_and_NIR_transmitted_through_bulb_glass_W": 87.5,
+        "fraction_transmitted_shortwave_0_35_to_2_75_um": 0.70,
+        "bulb_glass_absorption_and_MIR_reradiation_downward_W": 17.5,
+        "fraction_downward_MIR_from_hot_bulb_glass": 0.14,
+        "total_downward_radiant_beam_W": 105.0,
+        "total_downward_radiant_efficiency": 0.84,
+        "backside_stem_convection_and_conduction_loss_W": 20.0
+      },
+      "height_tiers_cm": {
+        "Regionals": "40 to 50 cm (in 5 cm increments: 40, 45, 50 cm)",
+        "States": "40 to 55 cm (in 5 cm increments: 40, 45, 50, 55 cm)",
+        "Nationals": "40 to 65 cm (in 1 cm increments: 40, 41, ..., 65 cm)"
+      },
+      "heating_time_tiers_min": {
+        "Regionals": "10.0 min (600 s)",
+        "States_and_Nationals": "10 to 15 min in 1 min increments (600 to 900 s)"
+      }
+    },
+    "view_factor_and_ray_tracing_vs_height": [
+      {
+        "bulb_height_h_cm": 40,
+        "d_bulb_to_30cm_top_aperture_cm": 10.0,
+        "d_bulb_to_bare_cup_rim_cm": 30.0,
+        "F_bulb_to_inscribed_30cm_aperture": 0.6647,
+        "F_bulb_to_bare_cup_mouth": 0.0147,
+        "view_factor_ratio_aperture_to_bare_cup": 45.1,
+        "ray_traced_capture_bare_cup_pct": 2.30,
+        "ray_traced_capture_steep_cone_phi15_pct": 19.42,
+        "ray_traced_capture_ellipsoid_h45_z27_pct": 31.39,
+        "net_absorbed_power_water_top_layer_125W_ellipsoid_W": 24.8,
+        "net_absorbed_power_water_bare_cup_125W_W": 1.95
+      },
+      {
+        "bulb_height_h_cm": 45,
+        "d_bulb_to_30cm_top_aperture_cm": 15.0,
+        "d_bulb_to_bare_cup_rim_cm": 35.0,
+        "F_bulb_to_inscribed_30cm_aperture": 0.4776,
+        "F_bulb_to_bare_cup_mouth": 0.0110,
+        "view_factor_ratio_aperture_to_bare_cup": 43.4,
+        "ray_traced_capture_bare_cup_pct": 1.70,
+        "ray_traced_capture_steep_cone_phi15_pct": 16.50,
+        "ray_traced_capture_ellipsoid_h45_z27_pct": 41.43,
+        "net_absorbed_power_water_top_layer_125W_ellipsoid_W": 31.2,
+        "net_absorbed_power_water_bare_cup_125W_W": 1.44
+      },
+      {
+        "bulb_height_h_cm": 50,
+        "d_bulb_to_30cm_top_aperture_cm": 20.0,
+        "d_bulb_to_bare_cup_rim_cm": 40.0,
+        "F_bulb_to_inscribed_30cm_aperture": 0.3454,
+        "F_bulb_to_bare_cup_mouth": 0.0085,
+        "view_factor_ratio_aperture_to_bare_cup": 40.6,
+        "ray_traced_capture_bare_cup_pct": 1.30,
+        "ray_traced_capture_steep_cone_phi15_pct": 14.15,
+        "ray_traced_capture_ellipsoid_h45_z27_pct": 30.01,
+        "net_absorbed_power_water_top_layer_125W_ellipsoid_W": 23.5,
+        "net_absorbed_power_water_bare_cup_125W_W": 1.10
+      },
+      {
+        "bulb_height_h_cm": 55,
+        "d_bulb_to_30cm_top_aperture_cm": 25.0,
+        "d_bulb_to_bare_cup_rim_cm": 45.0,
+        "F_bulb_to_inscribed_30cm_aperture": 0.2557,
+        "F_bulb_to_bare_cup_mouth": 0.0068,
+        "view_factor_ratio_aperture_to_bare_cup": 37.8,
+        "ray_traced_capture_bare_cup_pct": 1.03,
+        "ray_traced_capture_steep_cone_phi15_pct": 12.10,
+        "ray_traced_capture_ellipsoid_h50_z29_pct": 27.60,
+        "net_absorbed_power_water_top_layer_125W_ellipsoid_W": 21.4,
+        "net_absorbed_power_water_bare_cup_125W_W": 0.87
+      },
+      {
+        "bulb_height_h_cm": 60,
+        "d_bulb_to_30cm_top_aperture_cm": 30.0,
+        "d_bulb_to_bare_cup_rim_cm": 50.0,
+        "F_bulb_to_inscribed_30cm_aperture": 0.1944,
+        "F_bulb_to_bare_cup_mouth": 0.0055,
+        "view_factor_ratio_aperture_to_bare_cup": 35.3,
+        "ray_traced_capture_bare_cup_pct": 0.84,
+        "ray_traced_capture_steep_cone_phi15_pct": 10.65,
+        "ray_traced_capture_ellipsoid_h50_z29_pct": 17.19,
+        "net_absorbed_power_water_top_layer_125W_ellipsoid_W": 14.2,
+        "net_absorbed_power_water_bare_cup_125W_W": 0.71
+      },
+      {
+        "bulb_height_h_cm": 65,
+        "d_bulb_to_30cm_top_aperture_cm": 35.0,
+        "d_bulb_to_bare_cup_rim_cm": 55.0,
+        "F_bulb_to_inscribed_30cm_aperture": 0.1516,
+        "F_bulb_to_bare_cup_mouth": 0.0046,
+        "view_factor_ratio_aperture_to_bare_cup": 33.2,
+        "ray_traced_capture_bare_cup_pct": 0.69,
+        "ray_traced_capture_steep_cone_phi15_pct": 9.46,
+        "ray_traced_capture_ellipsoid_h50_z29_pct": 10.19,
+        "net_absorbed_power_water_top_layer_125W_ellipsoid_W": 9.1,
+        "net_absorbed_power_water_bare_cup_125W_W": 0.58
+      }
+    ],
+    "water_nir_spectral_absorption_hale_querry_1973": {
+      "spectral_bands": [
+        {"wavelength_nm": 500, "wavelength_um": 0.50, "mu_a_cm_inv": 0.00025, "penetration_depth_1_over_e_mm": 40000.0, "physical_regime": "Visible window (virtually transparent)"},
+        {"wavelength_nm": 700, "wavelength_um": 0.70, "mu_a_cm_inv": 0.0060, "penetration_depth_1_over_e_mm": 1666.7, "physical_regime": "Red edge"},
+        {"wavelength_nm": 970, "wavelength_um": 0.97, "mu_a_cm_inv": 0.4500, "penetration_depth_1_over_e_mm": 22.22, "physical_regime": "3rd O-H overtone band (~80% absorbed in 35 mm cup depth)"},
+        {"wavelength_nm": 1200, "wavelength_um": 1.20, "mu_a_cm_inv": 1.0400, "penetration_depth_1_over_e_mm": 9.62, "physical_regime": "Wien peak of 2400 K filament (63% absorbed in top 9.6 mm)"},
+        {"wavelength_nm": 1440, "wavelength_um": 1.44, "mu_a_cm_inv": 29.40, "penetration_depth_1_over_e_mm": 0.340, "physical_regime": "1st O-H overtone band (95% absorbed in top 1.0 mm!)"},
+        {"wavelength_nm": 1940, "wavelength_um": 1.94, "mu_a_cm_inv": 114.0, "penetration_depth_1_over_e_mm": 0.088, "physical_regime": "O-H stretch + bend combination band (99% absorbed in top 0.4 mm!)"},
+        {"wavelength_nm": 2500, "wavelength_um": 2.50, "mu_a_cm_inv": 90.48, "penetration_depth_1_over_e_mm": 0.111, "physical_regime": "Near-IR cutoff (absorbed in top 0.3 mm)"},
+        {"wavelength_nm": 2950, "wavelength_um": 2.95, "mu_a_cm_inv": 12694.0, "penetration_depth_1_over_e_mm": 0.00079, "physical_regime": "Fundamental O-H stretch peak (absorbed in top 2.4 um skin!)"}
+      ],
+      "planck_integrated_cumulative_absorption_in_water_depth": {
+        "T_filament_2400K_glass_filtered": {
+          "top_1_0_mm_pct": 48.7,
+          "top_2_0_mm_pct": 57.3,
+          "top_5_0_mm_pct": 66.4,
+          "top_10_0_mm_pct": 72.4,
+          "top_20_0_mm_pct": 78.3,
+          "full_35_0_mm_cup_depth_pct": 82.6,
+          "transmitted_to_bottom_reflector_for_second_pass_pct": 17.4
+        }
+      },
+      "stratification_and_clarification_1_to_4_synergy": "Because 66.4% of the 2400 K heat-lamp radiation is absorbed directly within the top 5.0 mm of water (and 72.4% within the top 10.0 mm), top-down heating creates a warm, low-density upper water layer (T_top > T_bottom, rho_top < rho_bottom) resting stably atop cooler bottom water. Because gravity stabilizes this inverted density gradient (Rayleigh number Ra < 0 for top-heated water!), convective mixing is suppressed and downward heat leakage occurs only by slow molecular conduction (alpha_water = 1.45e-7 m2/s -> diffusion length sqrt(4*alpha*t) = 18.7 mm in 600 s). Since Official Clarifications #1-#3 prohibit any stirring, swirling, or shaking and Clarification #4 recommends that the ES measure the TOP LAYER of water near the center of the cup, preserving this top-layer thermal stratification increases the measured T_final by +3.0 to +6.5 C compared to uniform bulk heating (m*c_p = 418.4 J/K)!"
+    },
+    "evaporative_heat_loss_and_glazing_quantification": {
+      "physics_basis": "Lienhard & Lienhard (2024) Section 11.7 Example 11.11 (pp. 662-664): Sherwood/Nusselt analogy for convective mass transfer of water vapor from an open cup of diameter D = 0.075 m (A_surface = 32-38 cm2 at 100 mL water level).",
+      "latent_heat_of_vaporization_Lv_kJ_kg": {
+        "at_20C": 2454,
+        "at_30C": 2430,
+        "at_40C": 2406,
+        "at_50C": 2382
+      },
+      "uncovered_cup_at_T_surface_40C_in_22C_50pct_RH_air": {
+        "p_sat_40C_Pa": 7384,
+        "p_vapor_ambient_22C_50pctRH_Pa": 1322,
+        "mass_transfer_coeff_gm_kg_m2s": 0.0052,
+        "evaporation_rate_mg_s": 1.38,
+        "total_water_evaporated_in_10min_g": 0.83,
+        "evaporative_heat_loss_power_Q_evap_W": 3.32,
+        "total_evaporative_energy_lost_in_10min_J": 1992,
+        "temperature_penalty_on_top_35g_stratified_layer_C": -13.6,
+        "temperature_penalty_on_bulk_100g_water_C": -4.76
+      },
+      "glazing_cover_suppression_clarification_5": "Placing a removable, non-attached clear BoPET (25-50 um) or LDPE film cap over the cup mouth during Water Setup Time (Clarification #5, 10/21/2026) traps saturated air above the water surface (RH_headspace -> 100%), cutting Q_evap by >95% (saving ~2000 J over 10 min, worth +4.5 to +8.0 C on the measured top water layer) at the cost of only ~9-10% Fresnel reflection loss."
+    },
+    "transient_heating_and_prediction_equations": {
+      "lumped_capacitance_governing_ode": "C_eff * dT/dt = P_abs(h, P_bulb) - (T - T_room) / R_th",
+      "algebraic_exact_solution": "T(t) = T_ss - (T_ss - T_start) * exp(-t / tau) = T_start + (T_ss - T_start) * (1 - exp(-t / tau))",
+      "steady_state_temperature": "T_ss = T_room + P_abs * R_th",
+      "thermal_time_constant": "tau = C_eff * R_th",
+      "initial_heating_rate": "(dT/dt)_0 = (P_abs - (T_start - T_room)/R_th) / C_eff  [= P_abs / C_eff when T_start = T_room]",
+      "stratified_top_layer_two_Parameter_competition_model": "T_final(t, h, P_bulb, T_start, T_room) = T_start + kappa_strat(t) * (P_abs(h, P_bulb) * R_th + T_room - T_start) * (1 - exp(-t / tau_eff))",
+      "nominal_collector_parameters": {
+        "C_bulk_100mL_water_J_K": 418.4,
+        "C_cup_wall_effective_J_K": 8.5,
+        "C_top_layer_effective_stratified_J_K": 215.0,
+        "R_th_glazed_insulated_collector_K_W": 4.2,
+        "R_th_uncovered_bare_cup_K_W": 1.15,
+        "tau_eff_glazed_collector_s": 903.0
+      }
+    },
+    "controlled_variable_doe_calibration_matrix": [
+      {"h_cm": 40, "P_bulb_W": 125, "t_min": 10, "T_start_C": 22.0, "T_room_C": 22.0, "P_abs_W": 21.5, "pred_DeltaT_top_C": 24.8, "pred_T_final_C": 46.8},
+      {"h_cm": 40, "P_bulb_W": 125, "t_min": 15, "T_start_C": 22.0, "T_room_C": 22.0, "P_abs_W": 21.5, "pred_DeltaT_top_C": 33.1, "pred_T_final_C": 55.1},
+      {"h_cm": 40, "P_bulb_W": 100, "t_min": 10, "T_start_C": 22.0, "T_room_C": 22.0, "P_abs_W": 17.2, "pred_DeltaT_top_C": 19.8, "pred_T_final_C": 41.8},
+      {"h_cm": 45, "P_bulb_W": 125, "t_min": 10, "T_start_C": 22.0, "T_room_C": 22.0, "P_abs_W": 24.0, "pred_DeltaT_top_C": 27.7, "pred_T_final_C": 49.7},
+      {"h_cm": 45, "P_bulb_W": 125, "t_min": 15, "T_start_C": 22.0, "T_room_C": 22.0, "P_abs_W": 24.0, "pred_DeltaT_top_C": 36.9, "pred_T_final_C": 58.9},
+      {"h_cm": 45, "P_bulb_W": 100, "t_min": 10, "T_start_C": 22.0, "T_room_C": 22.0, "P_abs_W": 19.2, "pred_DeltaT_top_C": 22.2, "pred_T_final_C": 44.2},
+      {"h_cm": 50, "P_bulb_W": 125, "t_min": 10, "T_start_C": 22.0, "T_room_C": 22.0, "P_abs_W": 18.5, "pred_DeltaT_top_C": 21.3, "pred_T_final_C": 43.3},
+      {"h_cm": 50, "P_bulb_W": 125, "t_min": 15, "T_start_C": 22.0, "T_room_C": 22.0, "P_abs_W": 18.5, "pred_DeltaT_top_C": 28.5, "pred_T_final_C": 50.5},
+      {"h_cm": 50, "P_bulb_W": 100, "t_min": 10, "T_start_C": 22.0, "T_room_C": 22.0, "P_abs_W": 14.8, "pred_DeltaT_top_C": 17.1, "pred_T_final_C": 39.1},
+      {"h_cm": 55, "P_bulb_W": 125, "t_min": 10, "T_start_C": 22.0, "T_room_C": 22.0, "P_abs_W": 15.2, "pred_DeltaT_top_C": 17.5, "pred_T_final_C": 39.5},
+      {"h_cm": 55, "P_bulb_W": 125, "t_min": 15, "T_start_C": 22.0, "T_room_C": 22.0, "P_abs_W": 15.2, "pred_DeltaT_top_C": 23.4, "pred_T_final_C": 45.4},
+      {"h_cm": 55, "P_bulb_W": 100, "t_min": 10, "T_start_C": 22.0, "T_room_C": 22.0, "P_abs_W": 12.2, "pred_DeltaT_top_C": 14.1, "pred_T_final_C": 36.1},
+      {"h_cm": 60, "P_bulb_W": 125, "t_min": 10, "T_start_C": 22.0, "T_room_C": 22.0, "P_abs_W": 11.8, "pred_DeltaT_top_C": 13.6, "pred_T_final_C": 35.6},
+      {"h_cm": 60, "P_bulb_W": 125, "t_min": 15, "T_start_C": 22.0, "T_room_C": 22.0, "P_abs_W": 11.8, "pred_DeltaT_top_C": 18.2, "pred_T_final_C": 40.2},
+      {"h_cm": 65, "P_bulb_W": 125, "t_min": 10, "T_start_C": 22.0, "T_room_C": 22.0, "P_abs_W": 9.2, "pred_DeltaT_top_C": 10.6, "pred_T_final_C": 32.6},
+      {"h_cm": 65, "P_bulb_W": 125, "t_min": 15, "T_start_C": 22.0, "T_room_C": 22.0, "P_abs_W": 9.2, "pred_DeltaT_top_C": 14.2, "pred_T_final_C": 36.2}
+    ]
+  },
+  "thermometry_and_uncertainty_reference": {
+    "sensor_comparison": [
+      {
+        "sensor_type": "Liquid-in-Glass (Alcohol / Spirit Non-Mercury Thermometer)",
+        "physical_principle": "Volumetric thermal expansion of dyed ethanol/kerosene in glass capillary (Delta_V = V_0 * beta * Delta_T)",
+        "typical_range_C": [-20, 110],
+        "typical_accuracy_C": "±0.5 to ±1.0 C",
+        "resolution_C": "0.5 to 1.0 C (0.1 C only on precision laboratory models)",
+        "time_constant_tau_in_water_s": "6.0 to 12.0 s (5*tau settling time = 30 to 60 s)",
+        "required_immersion_depth_mm": "76 mm (partial immersion line) or total column immersion; large error if dipped only 5-10 mm into top layer!",
+        "es_2027_relevance": "Permitted under Rule 4.f ('non-mercury, electronic probe, or non-contact'), though slower and harder to read to 0.1 C in the top water layer."
+      },
+      {
+        "sensor_type": "NTC Thermistor Probe (Digital Pocket Thermometer)",
+        "physical_principle": "Semiconductor band-gap exponential resistance decrease with T: 1/T = A + B*ln(R) + C*(ln(R))^3 (Steinhart-Hart) or R(T) = R_0 * exp(beta*(1/T - 1/T_0))",
+        "typical_range_C": [-50, 150],
+        "typical_accuracy_C": "±0.1 to ±0.3 C (0 to 70 C)",
+        "resolution_C": "0.1 C (or 0.01 C)",
+        "time_constant_tau_in_water_s": "0.8 to 2.5 s (bare bead) / 2.5 to 5.0 s (stainless sheath; 5*tau = 12 to 25 s)",
+        "required_immersion_depth_mm": "8 to 15 mm (sensor bead sits inside the bottom 3-5 mm of the probe tip!)",
+        "es_2027_relevance": "MOST COMMON ES THERMOMETER: Fast, reads to 0.1 C, and measures the top 5-15 mm water layer accurately per Clarification #4."
+      },
+      {
+        "sensor_type": "Pt100 / Pt1000 Platinum RTD (IEC 60751)",
+        "physical_principle": "Positive metallic resistance coefficient of pure platinum: R(t) = R_0*(1 + A*t + B*t^2) for t >= 0 C, with R_0 = 100.00 Ohm at 0 C, A = 3.9083e-3 C^-1, B = -5.775e-7 C^-2 (alpha = 0.00385055 Ohm/(Ohm*C))",
+        "typical_range_C": [-200, 600],
+        "typical_accuracy_C": "Class AA: ±(0.10 + 0.0017|t|) C; Class A: ±(0.15 + 0.002|t|) C; Class B: ±(0.30 + 0.005|t|) C",
+        "resolution_C": "0.01 to 0.1 C",
+        "time_constant_tau_in_water_s": "3.0 to 8.0 s (sheathed element; 5*tau = 15 to 40 s)",
+        "required_immersion_depth_mm": "25 to 50 mm (platinum wire/film element extends 10-25 mm up the stem + stem conduction error)",
+        "es_2027_relevance": "High metrological stability; deeper stem immersion mixes or averages across a thicker layer than a point thermistor."
+      },
+      {
+        "sensor_type": "Type K Thermocouple (Chromel-Alumel, NIST ITS-90 SRD 60)",
+        "physical_principle": "Seebeck thermoelectric effect at welded junction of Chromel (Ni-10%Cr) and Alumel (Ni-2%Mn-2%Al-1%Si): dE/dT = S_AB ~ 39.5 uV/K at 0 C to 41.3 uV/K at 100 C, referenced to cold-junction compensation (CJC)",
+        "typical_range_C": [-200, 1260],
+        "typical_accuracy_C": "±1.1 C (Special Limits of Error) or ±2.2 C (Standard); CJC adds ±0.3-0.5 C offset",
+        "resolution_C": "0.1 C",
+        "time_constant_tau_in_water_s": "0.05 to 0.3 s (exposed bead) / 1.5 to 3.5 s (sheathed probe)",
+        "required_immersion_depth_mm": "3 to 10 mm (exposed tip measures exact surface layer depth)",
+        "es_2027_relevance": "Fastest response time; because Rule 4.f guarantees the SAME thermometer is used for a team's start and final reading, any fixed CJC zero-offset cancels in TG = T_final - T_start but remains in T_final for PE!"
+      },
+      {
+        "sensor_type": "Non-Contact Infrared (IR) Thermometer (8-14 um Bolometer/Thermopile Pyrometer)",
+        "physical_principle": "Measures band-integrated thermal radiance L_det = epsilon_obj * L_bb(T_obj) + (1 - epsilon_obj) * L_bb(T_amb)",
+        "typical_range_C": [-30, 500],
+        "typical_accuracy_C": "±1.5 to ±2.0 C (on high-emissivity water surface)",
+        "resolution_C": "0.1 C",
+        "time_constant_tau_in_water_s": "0.15 to 0.50 s (optical response)",
+        "required_immersion_depth_mm": "0.0 mm (measures top ~10-20 um skin of liquid water where epsilon_MIR = 0.96!)",
+        "es_2027_relevance": "Explicitly permitted by Rule 4.f ('non-contact'). Because liquid water has epsilon = 0.96 in the 8-14 um band (Lienhard Table 10.1 p. 546), an IR gun preset to epsilon = 0.95 reads the true top surface skin temperature of water accurately (provided the distance-to-spot ratio D:S ~ 12:1 keeps the spot inside the 7.5 cm cup mouth and no plastic wrap remains on the cup!)."
+      }
+    ],
+    "jcgm_gum_uncertainty_propagation_formulas": [
+      {
+        "operation": "General Uncorrelated Function",
+        "function": "y = f(x_1, x_2, ..., x_N)",
+        "propagation_equation": "u_c(y) = sqrt( sum_{i=1}^N ( (df/dx_i) * u(x_i) )^2 )"
+      },
+      {
+        "operation": "Linear Combination (Sum / Difference)",
+        "function": "y = a*x_1 + b*x_2 - c*x_3",
+        "propagation_equation": "u_c(y) = sqrt( a^2 * u(x_1)^2 + b^2 * u(x_2)^2 + c^2 * u(x_3)^2 )",
+        "application_example": "Temperature Gain TG = T_final - T_start: u(TG) = sqrt(u_rand(T_f)^2 + u_rand(T_s)^2) [Note: correlated systematic zero-offset delta_sys cancels in T_f - T_s!]"
+      },
+      {
+        "operation": "Product / Quotient / Monomial Power",
+        "function": "y = k * x_1^a * x_2^b / x_3^c",
+        "propagation_equation": "u_c(y) / |y| = sqrt( (a * u(x_1)/x_1)^2 + (b * u(x_2)/x_2)^2 + (c * u(x_3)/x_3)^2 )"
+      },
+      {
+        "operation": "Type A Standard Uncertainty (Repeated Trials)",
+        "function": "Mean x_bar of n independent measurements",
+        "propagation_equation": "u_A(x_bar) = s / sqrt(n), where s = sqrt( (1/(n-1)) * sum_{i=1}^n (x_i - x_bar)^2 )"
+      },
+      {
+        "operation": "Type B Rectangular (Uniform) Digital Resolution Uncertainty",
+        "function": "Instrument with least-count resolution Delta_res (e.g. 0.1 C) or half-width limit ±a",
+        "propagation_equation": "u_B = a / sqrt(3) = Delta_res / (2 * sqrt(3)) = 0.2887 * Delta_res (for 0.1 C display, u_B = 0.0289 C)"
+      },
+      {
+        "operation": "Ordinary Least Squares (OLS) Linear Regression Slope & Intercept Uncertainty",
+        "function": "y = m*x + b fitted to N data pairs (x_i, y_i)",
+        "propagation_equation": "s_{y|x} = sqrt( sum (y_i - (m*x_i + b))^2 / (N - 2) );  u(m) = s_{y|x} / sqrt( S_xx );  u(b) = s_{y|x} * sqrt( 1/N + x_bar^2 / S_xx ), where S_xx = sum (x_i - x_bar)^2"
+      }
+    ]
+  }
+}

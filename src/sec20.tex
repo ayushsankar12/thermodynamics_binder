@@ -1,0 +1,397 @@
+% ============================================================================
+% sec20.tex — §20 Misconceptions, Classic Sign/Unit Traps & Wrong-Answer Diagnostic Catalog
+% Target: 8 pages | Structured Symptom -> Likely Cause -> Diagnostic -> Fix Catalog
+% ============================================================================
+\binderchapter{20}{Misconceptions, Classic Sign/Unit Traps \& Wrong-Answer Diagnostic Catalog}{Misconceptions \& Wrong-Answer Diagnostic Catalog}{sec:20}
+\scopebanner{REQUIRED}[All 2027 Written Syllabus Clauses 5.c.i--vii \& Part II Device Testing]
+
+\idxtopic{misconceptions and error catalog!overview}\idxerr{overview of classic thermodynamics traps}
+Empirical analysis of official answer keys across the $N = 8$ Division~C tournament corpus (\texttt{E1--E8}, \sref{sec:22}) \src{S25,S26,S27,S28,S29,S30,S31,S32} and physics education research (Meltzer 2004; Loverude et al.\ 2002 \src{S35}) proves that over $70\%$ of lost calculation points stem from \textbf{16 recurring conceptual, sign, unit, and phase-boundary traps} rather than unfamiliar physics. Exam writers deliberately construct multiple-choice distractors and multi-part FRQ pitfalls around these exact traps. This chapter organizes all 16 trap families into a fast **Symptom $\to$ Likely Cause $\to$ 5-Second Diagnostic $\to$ Exact Fix** lookup catalog, followed by a numerical multiplier reverse-diagnostic table and six worked diagnostic case studies.
+
+% ============================================================================
+\section{Master Diagnostic Catalog Part I: Foundations, Temperature Scales, Calorimetry \& Phase Traps (\texttt{ERR-01}--\texttt{ERR-06})}\label{sec:20.1}
+
+\begin{table}[h!]
+\centering
+\captionof{table}{Symptom $\to$ Cause $\to$ Diagnostic $\to$ Fix Catalog for Foundations, Scales, Calorimetry, and Phase Changes (\texttt{ERR-01} to \texttt{ERR-06}) \src{S13,S25,S26,S35}.}\label{tab:20:err1to6}
+\footnotesize
+\setlength{\tabcolsep}{3.2pt}
+\renewcommand{\arraystretch}{1.18}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.18\linewidth} >{\raggedright\arraybackslash}p{0.25\linewidth} >{\raggedright\arraybackslash}p{0.26\linewidth} >{\raggedright\arraybackslash}X@{}}
+\toprule
+\hdr{Trap ID \& Domain} & \hdr{Wrong Move / Symptom} & \hdr{Likely Cause / Why It Fails} & \hdr{5-Second Diagnostic \& Exact Fix} \\
+\midrule
+\textbf{\texttt{ERR-01}: Heat ($Q$) vs.\ Temperature ($T$) vs.\ Internal Energy ($U$)} \newline (\sref{sec:03}, \sref{sec:07}) \idxerr{heat vs temperature vs internal energy confusion}\idxerr{assuming Delta_T=0 means Q=0 or Q=0 means Delta_T=0} &
+$\bullet$~Saying ``Object A contains more heat than B.'' \newline
+$\bullet$~Assuming $\Delta T = 0 \implies Q = 0$. \newline
+$\bullet$~Assuming $Q = 0 \implies \Delta T = 0$. &
+Confusing \emph{state functions} ($T$, internal energy $U$) with \emph{boundary transit energy} ($Q$, path function). In isothermal expansion or phase changes, $\Delta T = 0$ while $Q \ne 0$; in adiabatic work, $Q = 0$ while $\Delta T \ne 0$ \src{S35}. &
+\textbf{Diagnostic:} Ask: ``Is energy crossing the boundary due to $\Delta T$ ($Q$), due to force$\times$displacement ($W$), or stored inside ($U$)?'' \newline
+\textbf{Fix:} Always write $\Delta U = Q - W_{\mathrm{by}}$. Only for an ideal gas does $\Delta T = 0 \iff \Delta U = 0$ (which gives $Q = W_{\mathrm{by}}$, NOT $Q = 0$!). \\
+\rowcolor{rowalt}
+\textbf{\texttt{ERR-02}: ``Cold Flows'' \& Thermal Sensation / Effusivity Myth} \newline (\sref{sec:03}, \sref{sec:10}) \idxerr{cold flows myth and metal vs wood effusivity trap} &
+$\bullet$~Saying ``cold flows from the ice into the water.'' \newline
+$\bullet$~Claiming a metal doorknob in a $\SI{20}{\celsius}$ room is at a lower temperature than a wooden door. &
+Human skin does not measure temperature $T$; it senses transient heat flux $q'' \propto \sqrt{k\rho c_p}\,(T_{\mathrm{skin}} - T_{\mathrm{obj}})$ governed by \textbf{thermal effusivity} $e = \sqrt{k\rho c_p}$ \src{S12}. &
+\textbf{Diagnostic:} Are both objects in thermal equilibrium with the same room? \newline
+\textbf{Fix:} By the Zeroth Law, $T_{\mathrm{metal}} = T_{\mathrm{wood}} = T_{\mathrm{room}} = \SI{20}{\celsius}$. Heat $\vec{q} = -k\nabla T$ \textbf{always} flows from higher $T$ to lower $T$ (from your $\SI{33}{\celsius}$ fingers into the $\SI{20}{\celsius}$ metal faster because $e_{\mathrm{metal}} \gg e_{\mathrm{wood}}$). \\
+\textbf{\texttt{ERR-03}: Temperature Additivity \& Point vs.\ Interval ($\Delta T$) Trap} \newline (\sref{sec:02}, \sref{sec:03}) \idxerr{temperature point vs interval Delta_T conversion (+273.15 or +32 error)}\idxerr{adding two temperatures directly} &
+$\bullet$~Converting a temperature \emph{difference} $\Delta T = \SI{20}{\celsius}$ to Kelvin as $20 + 273.15 = \SI{293.15}{\kelvin}$! \newline
+$\bullet$~Converting $\Delta T = \SI{20}{\celsius}$ to $\si{\fahrenheit}$ as $1.8(20) + 32 = \SI{68}{\fahrenheit}$. \newline
+$\bullet$~Adding $T_1 + T_2$ of two merged identical cups. &
+Failing to distinguish an \emph{affine scale point} ($T_K = T_C + 273.15$, $T_F = \frac{9}{5}T_C + 32$) from a \emph{linear difference interval} ($\Delta T_K = T_{K,2} - T_{K,1} = T_{C,2} - T_{C,1} = \Delta T_C$), where additive zero-offsets cancel! &
+\textbf{Diagnostic:} Does the formula have $\Delta T = T_2 - T_1$ (like $mc\Delta T$ or $kA\Delta T/L$) or an absolute $T$? \newline
+\textbf{Fix:} For \textbf{intervals} $\Delta T$: \newline
+$\boxed{\Delta T_K = \Delta T_C = \frac{5}{9}\Delta T_F = \frac{5}{9}\Delta T_R}$ \newline
+(\textbf{Never} add $273.15$ or $32$ to a $\Delta T$ or to a specific heat unit $\si{\joule\per\kilogram\per\celsius} \equiv \si{\joule\per\kilogram\per\kelvin}$!). Temperature is intensive: merging two $\SI{25}{\celsius}$ cups gives $\SI{25}{\celsius}$, not $\SI{50}{\celsius}$. \\
+\rowcolor{rowalt}
+\textbf{\texttt{ERR-04}: Celsius in Absolute-$T$ Ratios, $PV=nRT$, Carnot \& $T^4$ Radiation} \newline (\sref{sec:06}--\sref{sec:12}) \idxerr{Celsius used instead of Kelvin in gas laws, Carnot, Stefan-Boltzmann, entropy}\idxerr{Stefan-Boltzmann (T1 - T2)^4 algebraic fallacy} &
+$\bullet$~Computing $\eta_C = 1 - \frac{27\ ^\circ\mathrm{C}}{227\ ^\circ\mathrm{C}} = \SI{88.1}{\percent}$ (true value: $\SI{40.0}{\percent}$!). \newline
+$\bullet$~Using $T$ in $\si{\celsius}$ in $PV=nRT$, $\Delta S = mc\ln(T_2/T_1)$, or $v_{\mathrm{rms}}$. \newline
+$\bullet$~Replacing $T_1^4 - T_2^4$ with $(T_1 - T_2)^4$ in Stefan--Boltzmann radiation! &
+Celsius and Fahrenheit have arbitrary non-zero origins ($\SI{0}{\celsius} = \SI{273.15}{\kelvin}$), so $T_C \le 0$ gives zero, negative, or infinite pressures and efficiencies. Also, $(a - b)^4 \ne a^4 - b^4$. &
+\textbf{Diagnostic:} Circle every standalone $T$, $T_2/T_1$, $T^4$, or $1/T$ in your equation. \newline
+\textbf{Fix:} Convert \textbf{every} non-difference temperature to absolute \textbf{Kelvin} ($T_K = T_C + 273.15$) or Rankine ($T_R = T_F + 459.67$) \emph{before} writing ratios, logs, roots, or fourth powers. In radiation, compute $T_1^4$ and $T_2^4$ separately in Kelvin: $T_1^4 - T_2^4 = (T_1^2 + T_2^2)(T_1 + T_2)(T_1 - T_2)$. \\
+\textbf{\texttt{ERR-05}: Latent-Heat Plateau Bypass, Missing Subcooled Ice Warming, or Wrong $c_{\mathrm{ice}}$} \newline (\sref{sec:04}, \sref{sec:05}) \idxerr{latent heat plateau bypass (getting T_f < 0 C for water)}\idxerr{using liquid water c = 4.184 J/(g K) for ice or steam} &
+$\bullet$~Setting $m_i c_i(0 - T_i) + m_i L_f + m_i c_w(T_f - 0) = m_w c_w(T_w - T_f)$ blindly and solving to get $T_f = -\SI{19.9}{\celsius}$! \newline
+$\bullet$~Forgetting $m_i c_{\mathrm{ice}}(0 - T_i)$ for ice starting at $\SI{-20}{\celsius}$, or using $c = \SI{4.184}{\joule\per\gram\per\kelvin}$ for ice! &
+Assuming all ice melts (or all steam condenses) without checking whether available heat $Q_{\mathrm{avail}}$ is sufficient to cross the $\SI{0.0}{\celsius}$ fusion plateau ($m_i L_f$) or $\SI{100.0}{\celsius}$ boiling plateau ($m_s L_v$). &
+\textbf{Diagnostic:} Did your single-equation solve yield $T_f < \SI{0}{\celsius}$ when assuming liquid water, or $T_f > \SI{100}{\celsius}$? \newline
+\textbf{Fix:} Always run the \textbf{3-Gate Inequality Check} (\sref{sec:04}, \fref{fig:04:ice-water-tree}) first: compare $Q_{\mathrm{avail}}$ to cool hot water to $\SI{0}{\celsius}$ against $Q_{\mathrm{warm,ice}} = m_i c_{\mathrm{ice}}(0 - T_i)$ ($\text{use } c_{\mathrm{ice}} = \SI{2.10}{\joule\per\gram\per\kelvin}$) and $Q_{\mathrm{melt}} = m_i L_f$ ($L_f = \SI{333.55}{\joule\per\gram}$). If $Q_{\mathrm{warm,ice}} \le Q_{\mathrm{avail}} \le Q_{\mathrm{warm,ice}} + Q_{\mathrm{melt}}$, \textbf{stop}: $\mathbf{T_f = \SI{0.00}{\celsius}}$ and $m_{\mathrm{melted}} = \dfrac{Q_{\mathrm{avail}} - Q_{\mathrm{warm,ice}}}{L_f}$! \\
+\rowcolor{rowalt}
+\textbf{\texttt{ERR-06}: Calorimeter Sign Flip, Missing $C_{\mathrm{cal}}$, \& Bomb ($\Delta U$) vs.\ Coffee-Cup ($\Delta H$)} \newline (\sref{sec:04}, \sref{sec:07}, \sref{sec:08}) \idxerr{calorimeter sign flip q_rxn = -q_cal}\idxerr{bomb calorimeter Delta_U vs coffee-cup Delta_H} &
+$\bullet$~Reporting $\Delta H_{\mathrm{rxn}} = +\SI{50}{\kilo\joule\per\mole}$ (endothermic) when water temperature \emph{rose}! \newline
+$\bullet$~Omitting calorimeter cup heat capacity $C_{\mathrm{cal}}\Delta T$. \newline
+$\bullet$~Equating bomb-calorimeter $q_V$ directly to $\Delta H_{\mathrm{rxn}}$ when $\Delta n_{\mathrm{gas}} \ne 0$. &
+Writing $q_{\mathrm{rxn}} = q_{\mathrm{water}}$ instead of $q_{\mathrm{rxn}} + q_{\mathrm{water}} + q_{\mathrm{cal}} = 0$. Also, a rigid bomb calorimeter measures constant-volume $q_V = \Delta U$, whereas an isobaric coffee cup measures $q_P = \Delta H$. &
+\textbf{Diagnostic:} If $T_{\mathrm{water}}$ rises ($\Delta T_w > 0$), the reaction released heat into the water, so the reaction itself is \textbf{exothermic} ($\Delta H_{\mathrm{rxn}} < 0$)! \newline
+\textbf{Fix:} Always use the zero-sum algebraic form: \newline
+$\boxed{q_{\mathrm{rxn}} = -\left(m_w c_w + C_{\mathrm{cal}}\right)(T_f - T_i)}$ \newline
+For a rigid bomb calorimeter ($\Delta V = 0$), $\Delta U_{\mathrm{rxn},m} = \dfrac{q_{\mathrm{rxn}}}{n_{\mathrm{rxn}}}$, and convert to enthalpy via $\boxed{\Delta H_{\mathrm{rxn},m} = \Delta U_{\mathrm{rxn},m} + \Delta n_{\mathrm{gas}} R T}$! \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+% ============================================================================
+\section{Master Diagnostic Catalog Part II: Gas Laws, First/Second Laws, Cycles \& Entropy Traps (\texttt{ERR-07}--\texttt{ERR-11})}\label{sec:20.2}
+
+\begin{table}[h!]
+\centering
+\captionof{table}{Symptom $\to$ Cause $\to$ Diagnostic $\to$ Fix Catalog for Gas Laws, Work Sign Conventions, Heat Capacities, Cycles, and Entropy (\texttt{ERR-07} to \texttt{ERR-11}) \src{S07,S13,S15,S25,S26,S35}.}\label{tab:20:err7to11}
+\footnotesize
+\setlength{\tabcolsep}{3.2pt}
+\renewcommand{\arraystretch}{1.18}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.18\linewidth} >{\raggedright\arraybackslash}p{0.25\linewidth} >{\raggedright\arraybackslash}p{0.26\linewidth} >{\raggedright\arraybackslash}X@{}}
+\toprule
+\hdr{Trap ID \& Domain} & \hdr{Wrong Move / Symptom} & \hdr{Likely Cause / Why It Fails} & \hdr{5-Second Diagnostic \& Exact Fix} \\
+\midrule
+\textbf{\texttt{ERR-07}: Gauge vs.\ Absolute Pressure \& $R$ / Molar-Mass Unit Mismatches} \newline (\sref{sec:02}, \sref{sec:06}) \idxerr{gauge pressure vs absolute pressure in PV=nRT}\idxerr{gas constant R = 0.08206 vs 8.3145 J/(mol K) mismatch}\idxerr{molar mass M in g/mol instead of kg/mol in v_rms} &
+$\bullet$~Using tire/boiler gauge pressure $P_g = \SI{200}{\kilo\pascal}$ directly in $PV = nRT$. \newline
+$\bullet$~Using $R = \SI{0.082057}{\liter\cdot\text{atm}\per\mole\per\kelvin}$ inside $\Delta U = \frac{f}{2}nRT$ or $W = nRT\ln(V_2/V_1)$ and writing $\si{\joule}$ (off by $101.325\times$!). \newline
+$\bullet$~Getting $v_{\mathrm{rms}} = \SI{16.3}{\meter\per\second}$ for $\mathrm{N_2}$ at $\SI{300}{\kelvin}$ (off by $\sqrt{1000} = 31.62\times$!). &
+Ideal-gas and phase laws require \textbf{absolute pressure} $P_{\mathrm{abs}} = P_{\mathrm{gauge}} + P_{\mathrm{atm}}$ ($P_{\mathrm{abs}} = P_{\mathrm{atm}} - P_{\mathrm{vac}}$). Also, $\SI{1}{\liter\cdot\text{atm}} = \SI{101.325}{\joule}$, and SI kinetic speed formulas require $M$ in $\si{\kilogram\per\mole}$ ($\SI{1}{\joule} = \SI{1}{\kilogram\cdot\square\meter\per\square\second}$). &
+\textbf{Diagnostic:} Look for keywords \emph{``gauge,'' ``psig,'' ``kPag,'' ``manometer difference,''} or check if $v_{\mathrm{rms}} < \SI{100}{\meter\per\second}$ for a room-temp gas. \newline
+\textbf{Fix:} Add $P_{\mathrm{atm}} = \SI{101.325}{\kilo\pascal}$ ($\SI{14.696}{\text{psi}}$) to every gauge pressure. Use $\mathbf{R = \SI{8.3144626}{\joule\per\mole\per\kelvin}}$ for \textbf{all} energy, work, entropy, and speed calculations, and convert molar mass to $\si{\kilogram\per\mole}$ ($M_{\mathrm{N_2}} = \SI{0.028013}{\kilogram\per\mole} \implies v_{\mathrm{rms}} = \SI{516.8}{\meter\per\second}$). \\
+\rowcolor{rowalt}
+\textbf{\texttt{ERR-08}: Physics ($\Delta U = Q - W_{\mathrm{by}}$) vs.\ Chemistry ($\Delta U = q + w_{\mathrm{on}}$) Work Sign Flip} \newline (\sref{sec:02}, \sref{sec:07}) \idxerr{Physics W_by vs Chemistry w_on First Law sign flip}\idxerr{counterclockwise vs clockwise P-V loop work sign} &
+$\bullet$~Gas is compressed by $W = \SI{400}{\joule}$ while losing $\SI{100}{\joule}$ of heat; student computes $\Delta U = -100 - 400 = -\SI{500}{\joule}$ instead of $+\SI{300}{\joule}$! \newline
+$\bullet$~Assigning $W_{\mathrm{net,by}} > 0$ to a counterclockwise $P$--$V$ cycle. &
+Plugging a positive magnitude for ``work done \emph{on} the gas'' directly into $+W_{\mathrm{by}}$ in $\Delta U = Q - W_{\mathrm{by}}$. &
+\textbf{Diagnostic:} Ignore the symbol on the page for 3 seconds and ask physically: \emph{``Did the volume expand ($\Delta V > 0$) or compress ($\Delta V < 0$)?''} \newline
+\textbf{Fix:}
+\begin{itemize}
+  \item \textbf{Compression ($\Delta V < 0$):} Outside world pushes energy \textbf{INTO} gas ($\Delta U$ tends to \textbf{increase}): $W_{\mathrm{by}} < 0$ ($w_{\mathrm{on}} = -W_{\mathrm{by}} > 0$).
+  \item \textbf{Expansion ($\Delta V > 0$):} Gas spends energy pushing world \textbf{OUT} ($\Delta U$ tends to \textbf{decrease}): $W_{\mathrm{by}} > 0$ ($w_{\mathrm{on}} < 0$).
+\end{itemize} \\
+\textbf{\texttt{ERR-09}: Confusing $C_P$ vs.\ $C_V$, Molar $C_m$ vs.\ Specific $c$, \& Quantum Freeze-Out} \newline (\sref{sec:04}, \sref{sec:06}, \sref{sec:07}) \idxerr{using C_P instead of C_V in Delta_U = n*C_V*Delta_T}\idxerr{molar C_m vs mass-specific c confusion}\idxerr{vibrational degrees of freedom at room temperature trap} &
+$\bullet$~Writing $\Delta U = n C_{P,m}\Delta T$ for an isobaric ideal-gas expansion! \newline
+$\bullet$~Multiplying mass $m$ $[\si{\kilogram}]$ by molar $C_{P,m}$ $[\si{\joule\per\mole\per\kelvin}]$. \newline
+$\bullet$~Using $f = 7$ ($C_{V,m} = \frac{7}{2}R$) for $\mathrm{N_2}$ or $\mathrm{O_2}$ at room temperature $\SI{300}{\kelvin}$. &
+Thinking $\Delta U$ depends on whether the process is isochoric or isobaric. For an ideal gas, $U(T)$ is a function of $T$ \textbf{alone}, so $\Delta U = n C_{V,m}\Delta T$ holds for \textbf{ALL} processes (isobaric, adiabatic, polytropic)! &
+\textbf{Diagnostic:} For any ideal gas: \newline
+$\boxed{\Delta U = n C_{V,m}\Delta T \ \ (\text{ALWAYS!})}$ \newline
+$\boxed{\Delta H = n C_{P,m}\Delta T \ \ (\text{ALWAYS!})}$ \newline
+whereas $Q_V = \Delta U$ only at constant $V$ and $Q_P = \Delta H$ only at constant $P$! At $\SI{300}{\kelvin}$, vibrational modes of light diatomics ($\mathrm{H_2, N_2, O_2, CO}$) are \textbf{frozen out} ($k_B T \ll \hbar\omega_{\mathrm{vib}}$), so use $f = 3$ (monatomic, $\gamma = 5/3 = 1.667$), $f = 5$ (diatomic / linear polyatomic at $\SI{300}{\kelvin}$, $\gamma = 7/5 = 1.400$), and $f = 6$ (non-linear triatomic at $\SI{300}{\kelvin}$, $\gamma = 4/3 = 1.333$). \\
+\rowcolor{rowalt}
+\textbf{\texttt{ERR-10}: Engine Efficiency $\eta > \eta_C$, Denominator $Q_C$ vs.\ $Q_H$, \& $\mathrm{COP}_R$ vs.\ $\mathrm{COP}_{\mathrm{HP}}$} \newline (\sref{sec:08}, \sref{sec:09}) \idxerr{heat engine efficiency denominator Q_C vs Q_H}\idxerr{confusing refrigerator COP_R with heat pump COP_HP} &
+$\bullet$~Computing $\eta = W_{\mathrm{net}}/Q_C$ instead of $W_{\mathrm{net}}/Q_H = 1 - Q_C/Q_H$. \newline
+$\bullet$~Using $\mathrm{COP}_R = \frac{T_C}{T_H - T_C}$ for a \emph{heat pump} warming a house, or thinking $\mathrm{COP} = 4.5 > 1$ violates the First Law! &
+Efficiency / COP is always $\frac{\text{What You Want (Benefit)}}{\text{What You Pay For (Work/Fuel Cost)}}$. For a refrigerator, the benefit is cooling $Q_C$; for a heat pump, the benefit is heating $Q_H = Q_C + W_{\mathrm{in}}$. &
+\textbf{Diagnostic:} Check the identity: \newline
+$\boxed{\mathrm{COP}_{\mathrm{HP}} = \frac{Q_H}{W_{\mathrm{in}}} = \mathrm{COP}_R + 1 > 1}$ \newline
+A heat pump's $\mathrm{COP}_{\mathrm{HP}}$ is \textbf{always} $> 1$ (since $Q_H = Q_C + W_{\mathrm{in}}$); it does not create energy --- it uses $1\text{ J}$ of work to \emph{move} $\mathrm{COP}_R\text{ J}$ of heat from outdoors plus dump that $1\text{ J}$ indoors! \\
+\textbf{\texttt{ERR-11}: Entropy ``Disorder'' Myths, $\Delta S_{\mathrm{sys}} < 0$, \& Irreversible $\Delta S \ne Q/T$} \newline (\sref{sec:08}) \idxerr{claiming system entropy Delta_S_sys cannot be negative}\idxerr{applying Delta_S = Q/T to irreversible free expansion} &
+$\bullet$~Claiming water freezing into ice ($\Delta S_{\mathrm{water}} < 0$) violates the Second Law! \newline
+$\bullet$~Writing $\Delta S = \int \frac{\delta Q}{T} = 0$ for adiabatic free expansion into vacuum (or irreversible adiabatic throttling / friction). &
+The Second Law ($\Delta S_{\mathrm{univ}} = \Delta S_{\mathrm{sys}} + \Delta S_{\mathrm{surr}} = S_{\mathrm{gen}} \ge 0$) requires the entropy of the \textbf{universe (isolated composite)} to increase, NOT a non-isolated subsystem that exports heat $Q < 0$! Also, $dS = \frac{\delta Q_{\mathrm{rev}}}{T}$ holds \textbf{only along a reversible path}. &
+\textbf{Diagnostic:} Is the system isolated, and is the path reversible? \newline
+\textbf{Fix:} Because entropy $S$ is a \textbf{state function}, compute $\Delta S_{\mathrm{sys}}$ between states $(T_1, V_1)$ and $(T_2, V_2)$ by replacing the irreversible path with ANY convenient \textbf{reversible path} connecting the same endpoints: \newline
+$\boxed{\Delta S_{\mathrm{IG}} = n C_{V,m}\ln\!\left(\frac{T_2}{T_1}\right) + nR\ln\!\left(\frac{V_2}{V_1}\right)}$ \newline
+For adiabatic free expansion ($Q=0, W=0, \Delta T=0$), $\Delta S_{\mathrm{sys}} = +nR\ln(V_2/V_1) > 0$ and $\Delta S_{\mathrm{surr}} = 0 \implies S_{\mathrm{gen}} = +nR\ln(V_2/V_1) > 0$! \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+% ============================================================================
+\section{Master Diagnostic Catalog Part III: Heat Transfer, Materials \& 2027 Collector Traps (\texttt{ERR-12}--\texttt{ERR-16})}\label{sec:20.3}
+
+\begin{table}[h!]
+\centering
+\captionof{table}{Symptom $\to$ Cause $\to$ Diagnostic $\to$ Fix Catalog for Heat Transfer, Optical Materials, and 2027 Collector Testing (\texttt{ERR-12} to \texttt{ERR-16}) \src{S01,S02,S12,S25}.}\label{tab:20:err12to16}
+\footnotesize
+\setlength{\tabcolsep}{3.2pt}
+\renewcommand{\arraystretch}{1.18}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.18\linewidth} >{\raggedright\arraybackslash}p{0.25\linewidth} >{\raggedright\arraybackslash}p{0.26\linewidth} >{\raggedright\arraybackslash}X@{}}
+\toprule
+\hdr{Trap ID \& Domain} & \hdr{Wrong Move / Symptom} & \hdr{Likely Cause / Why It Fails} & \hdr{5-Second Diagnostic \& Exact Fix} \\
+\midrule
+\textbf{\texttt{ERR-12}: ``Radiation Only at High $T$'' \& Omitting Ambient $T_{\mathrm{surr}}^4$ Absorption} \newline (\sref{sec:12}) \idxerr{radiation only at high temperature myth}\idxerr{forgetting ambient T_surr^4 back-radiation in Stefan-Boltzmann} &
+$\bullet$~Assuming radiative heat transfer is negligible near room temperature $\SI{300}{\kelvin}$. \newline
+$\bullet$~Computing net heat loss from a $\SI{315}{\kelvin}$ cup in a $\SI{295}{\kelvin}$ room as $\dot{Q} = \varepsilon\sigma A(315)^4 = \SI{536}{\watt\per\square\meter}$ (ignoring $\SI{412}{\watt\per\square\meter}$ absorbed from room walls!). &
+Every object at $T > \SI{0}{\kelvin}$ continuously emits AND absorbs thermal radiation. In still room air ($h_{\mathrm{conv}} \approx \SI{6}{\watt\per\square\meter\per\kelvin}$), linearized radiation $h_{\mathrm{rad}} = 4\varepsilon\sigma T_m^3 \approx \SI{5.9}{\watt\per\square\meter\per\kelvin}$ at $\SI{300}{\kelvin}$ is \textbf{equal in magnitude to natural convection}! &
+\textbf{Diagnostic:} Did you include the $-T_{\mathrm{surr}}^4$ absorption term? \newline
+\textbf{Fix:} Always use net radiative exchange: \newline
+$\boxed{\dot{Q}_{\mathrm{rad,net}} = \varepsilon\sigma A\left(T_s^4 - T_{\mathrm{surr}}^4\right)}$ \newline
+($\approx h_{\mathrm{rad}} A(T_s - T_{\mathrm{surr}})$). Only when radiating into deep space ($T_{\mathrm{surr}} \approx \SI{3}{\kelvin} \ll T_s$) can $T_{\mathrm{surr}}^4$ be dropped. \\
+\rowcolor{rowalt}
+\textbf{\texttt{ERR-13}: Shiny vs.\ Dull Aluminum Foil Myth \& White-Paint Thermal-IR Trap} \newline (\sref{sec:12}, \sref{sec:14}) \idxerr{shiny vs dull aluminum foil total emissivity myth}\idxerr{white paint or white paper as thermal IR reflector trap}\idxdev{using white paper or dull foil in concentrating cone} &
+$\bullet$~Claiming dull-side aluminum foil has high IR emissivity ($\varepsilon \sim 0.5$) vs.\ shiny side ($\varepsilon \sim 0.04$). \newline
+$\bullet$~Lining the concentrating cone with \textbf{white cardstock or white paint} thinking ``white reflects all radiation,'' or using the dull foil side for optical ray focusing. &
+\textbf{1.~Foil Myth:} Both shiny ($\varepsilon_{\mathrm{MIR}} = 0.030\text{--}0.040$) and dull ($\varepsilon_{\mathrm{MIR}} = 0.035\text{--}0.050$) sides of household aluminum foil are bare metallic $\mathrm{Al}$, so their \emph{total hemispherical} reflectance and radiant-barrier performance match within $1.5\%$! However, the shiny side has much higher \textbf{specular (mirror) reflectance} ($\rho_{\mathrm{spec}} \approx 0.88$ vs.\ $0.62$ semi-diffuse on dull side). \newline
+\textbf{2.~White Paint Trap:} White paint/paper reflects visible light ($\alpha_{\mathrm{vis}} \approx 0.20$ diffusely), but in the $\SI{9.5}{\micro\meter}$ thermal-IR band it is a \textbf{near-blackbody ($\varepsilon_{\mathrm{MIR}} = 0.90\text{--}0.95$)} \src{S12}! &
+\textbf{Fix for 2027 Collector:}
+\begin{itemize}
+  \item For the \textbf{optical concentrating cone}, ALWAYS face the \textbf{shiny side} of aluminum foil (or aluminized Mylar, $\rho_{\mathrm{spec}} \ge 0.90$) toward the heat lamp so directional rays focus into the cup rather than scattering backward.
+  \item For \textbf{internal concentric air-gap radiation shields}, either foil side reduces $\mathcal{F}_{1\text{--}2}$ by $>40\times$.
+  \item \textbf{Never} use white paper/paint as a concentrator (diffusely scatters $\sim 50\%$ of lamp rays back out the top and radiates mid-IR at $\varepsilon = 0.92$!).
+\end{itemize} \\
+\textbf{\texttt{ERR-14}: ``Insulation Creates Heat'' Myth \& Critical-Radius ($r_{\mathrm{crit}} = k/h$) Misapplication} \newline (\sref{sec:10}) \idxerr{insulation creates heat misconception}\idxerr{critical radius r_crit = k/h misapplied to flat wall or wide cup} &
+$\bullet$~Predicting that wrapping a thermometer or cold water bottle in wool in a constant-temperature room makes it warmer than $T_{\mathrm{room}}$. \newline
+$\bullet$~Claiming that adding insulation around the $\SI{7.5}{\centi\meter}$ cup (or a flat wall) increases heat loss because of critical radius $r_{\mathrm{crit}}$. &
+Passive insulation has zero internal energy source ($\dot{q}_{\mathrm{gen}} = 0$); it only increases thermal resistance $R_{\mathrm{th}}$, slowing approach to $T_{\mathrm{room}}$. Also, the critical radius $r_{\mathrm{crit,cyl}} = k/h$ ($r_{\mathrm{crit,sph}} = 2k/h$) only increases heat loss when outer radius $r_o < r_{\mathrm{crit}}$ (where outer surface area growth $2\pi r_o l$ beats conduction thickness $\ln(r_o/r_i)$) \src{S12}. &
+\textbf{Diagnostic:} Compare cylinder radius $r_i$ to $r_{\mathrm{crit}} = k/h$ (for plane walls, $r_i \to \infty$, so a critical radius \textbf{never exists} on a flat wall!). \newline
+\textbf{Fix:} For compliant insulators ($k \approx \SI{0.040}{\watt\per\meter\per\kelvin}$) in room air ($h \approx \SI{10}{\watt\per\square\meter\per\kelvin}$), $r_{\mathrm{crit}} = \frac{0.040}{10} = \SI{4.0}{\milli\meter}$. Because the $\SI{9}{oz}$ cup has radius $r_i \approx \SI{34}{\milli\meter} \gg \SI{4.0}{\milli\meter}$, adding insulation around the cup \textbf{ALWAYS decreases heat loss}! ($r_i < r_{\mathrm{crit}}$ occurs only on thin electrical wires or capillary tubes). \\
+\rowcolor{rowalt}
+\textbf{\texttt{ERR-15}: Confusing Conductivity $k$, Heat Capacity $\rho c_p$, \& Diffusivity $\alpha = k/(\rho c_p)$} \newline (\sref{sec:10}, \sref{sec:13}--\sref{sec:15}) \idxerr{thermal conductivity k vs heat capacity rho*c_p vs diffusivity alpha}\idxdev{heavy metal or glass absorber thermal mass penalty} &
+$\bullet$~Choosing an insulator solely by high specific heat $c_p$, or placing a heavy $\SI{150}{\gram}$ black metal/glass block around the 2027 cup ``to absorb more heat.'' \newline
+$\bullet$~Confusing steady-state flux $\dot{Q} \propto k$ with transient temperature propagation speed $\alpha = \frac{k}{\rho c_p}$. &
+In a finite 10-minute run, any solid mass $m_{\mathrm{abs}}$ thermally coupled to the water adds parasitic thermal capacitance $C_{\mathrm{abs}} = m_{\mathrm{abs}}c_{p,\mathrm{abs}}$, stealing sensible energy and cutting $\mathrm{TG}$ by $\frac{C_w}{C_w + C_{\mathrm{abs}}}$ (\sref{sec:15.5})! Meanwhile, room air has tiny $k = \SI{0.026}{\watt\per\meter\per\kelvin}$ \emph{and} tiny $\rho c_p = \SI{1.18}{\kilo\joule\per\cubic\meter\per\kelvin}$, giving a \textbf{huge thermal diffusivity} $\alpha_{\mathrm{air}} = \SI{2.21e-5}{\square\meter\per\second}$ ($150\times$ larger than liquid water $\alpha_w = \SI{1.45e-7}{\square\meter\per\second}$!). &
+\textbf{Diagnostic Matrix:}
+\begin{itemize}
+  \item \textbf{Steady-state barrier:} Minimize $k$ $[\si{\watt\per\meter\per\kelvin}]$.
+  \item \textbf{Energy storage per volume:} $\rho c_p$ $[\si{\joule\per\cubic\meter\per\kelvin}]$ (keep $\sum C_{\mathrm{parasitic}} < \SI{5}{\joule\per\kelvin}$ near the cup!).
+  \item \textbf{Transient thermal front speed:} $\alpha = \dfrac{k}{\rho c_p}$ $[\si{\square\meter\per\second}]$ (penetration depth $\delta_{\mathrm{th}} \approx \sqrt{4\alpha t}$).
+  \item \textbf{Contact touch temperature / skin flux:} Thermal effusivity $e = \sqrt{k\rho c_p}$ $[\si{\joule\per\square\meter\per\kelvin\per\second\tothe{1/2}}]$.
+\end{itemize} \\
+\textbf{\texttt{ERR-16}: 2027 Device Rules, Overfitting, \texttt{\#6 PS} Ban, Evaporation, Swirling \& $\mathrm{PE}$ Formula} \newline (\sref{sec:00}, \sref{sec:14}--\sref{sec:17}) \idxerr{2027 device PE denominator T_f vs Delta_T trap}\idxdev{Clarification #6 polystyrene / #6 PS disqualification}\idxdev{swirling cup destroys top-layer stratification}\idxdev{omitting Clarification #5 evaporation film cover}\idxerr{overfitting device calibration polynomial} &
+$\bullet$~Using \textbf{Styrofoam / XPS foam board / \texttt{\#6 PS}} in the collector (\texttt{Clarif.~\#6}). \newline
+$\bullet$~Leaving the $\SI{9}{oz}$ cup open without a removable vapor barrier (\texttt{Clarif.~\#5}). \newline
+$\bullet$~Swirling or tilting the cup during removal (\texttt{Clarif.~\#1--\#4}). \newline
+$\bullet$~Fitting a degree-5 polynomial to 6 heights $h$, or computing $\mathrm{PE} = 1 - \frac{|T_f - T_{\mathrm{pred}}|}{\mathrm{TG}}$! &
+1.~Under \texttt{Rule 3.b.i, iii} \& \texttt{Clarif.~\#6}, \textbf{any Polystyrene (\texttt{\#6 PS} / Styrofoam) bars the device from being set up, modified, or tested ($\mathrm{TS}=0, \mathrm{PS}=0$)}! \newline
+2.~Uncovered evaporation removes $\sim\SI{2.5}{\watt}$ directly from the top water skin ($-\SIrange{4}{7}{\celsius}$ loss!). \newline
+3.~Swirling mixes the hot top layer with the cold bottom layer ($-\SIrange{3}{5}{\celsius}$ loss!). \newline
+4.~Rule~\texttt{6.f} divides $|T_f - T_{\mathrm{pred}}|$ by $\mathbf{T_f}$ (in $\si{\celsius}$), NOT $\mathrm{TG}$. &
+\textbf{5-Point 2027 Device Survival Lock:}
+\begin{enumerate}
+  \item \textbf{Zero \texttt{\#6 PS}:} Use foil-lined $\SI{10}{\milli\meter}$ air gaps + cardboard/cork/balsa.
+  \item \textbf{Evaporation Cap (\texttt{Clarif.~\#5}):} Use a non-attached clear BoPET film resting on the cup rim, lifted off before final reading.
+  \item \textbf{Zero Swirl (\texttt{Clarif.~\#1--\#4}):} Extract cup vertically without sloshing.
+  \item \textbf{Physical Model:} Fit the 3-parameter physical law (\sref{sec:16.1}), never a high-degree polynomial.
+  \item \textbf{Exact $\mathrm{PE}$:} $\mathrm{PE} = 1 - \dfrac{|T_f - T_{\mathrm{pred}}|}{T_f}$ ($T$ in $\si{\celsius}$).
+\end{enumerate} \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+% ============================================================================
+\section{Rapid Wrong-Answer Factor Reverse-Diagnostic Table}\label{sec:20.4}
+\idxtopic{wrong-answer multiplier reverse diagnostic}\idxerr{multiplier diagnostic table (1.8, 4.184, 101.325, 2.3026)}
+
+When your calculated number on a multiple-choice item (or a partner cross-check) does not match any answer choice, compute the \textbf{ratio} $\mathcal{R} = \frac{\text{Answer Choice}}{\text{Your Value}}$ (or difference $\Delta = \text{Choice} - \text{Your Value}$) and look it up in Table~\ref{tab:20:multipliers} to pinpoint the exact slip in $<5\text{ seconds}$:
+
+\begin{table}[h!]
+\centering
+\captionof{table}{5-Second Reverse-Diagnostic Lookup by Ratio $\mathcal{R}$ or Additive Offset $\Delta$ Between Your Answer and Exam Choices \src{S07,S08,S25,S26}.}\label{tab:20:multipliers}
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabularx}{\linewidth}{@{}R{0.18\linewidth} R{0.18\linewidth} >{\raggedright\arraybackslash}p{0.31\linewidth} >{\raggedright\arraybackslash}X@{}}
+\toprule
+\hdr{Ratio $\mathcal{R} = \text{True}/\text{Yours}$} & \hdr{Reciprocal $1/\mathcal{R}$} & \hdr{Exact Physical / Mathematical Origin} & \hdr{Where You Made the Slip \& Instant Correction} \\
+\midrule
+$\mathbf{1.8000}$ ($9/5$) & $\mathbf{0.5556}$ ($5/9$) & Fahrenheit / Rankine vs.\ Celsius / Kelvin degree size ($\SI{1}{\kelvin} = \SI{1.8}{\rankine}$) & Converted $\Delta T_C \leftrightarrow \Delta T_F$ backwards, or used $c$ per $\si{\fahrenheit}$ instead of per $\si{\celsius}$. \\
+\rowcolor{rowalt}
+$\mathbf{2.302585}$ ($\ln 10$) & $\mathbf{0.434294}$ ($\log_{10} e$) & Natural log $\ln x$ vs.\ common log $\log_{10} x$ ($\ln x = 2.302585\log_{10} x$) & Read slope from a $\log_{10} P$ plot or used calculator $\texttt{log}$ button instead of $\texttt{ln}$ in $\Delta S = mc\ln(T_2/T_1)$, $W = nRT\ln(V_2/V_1)$, or $R_{\mathrm{cyl}}$. \\
+$\mathbf{4.1840}$ (or $4.1868$) & $\mathbf{0.239006}$ & Thermochemical calorie vs.\ Joule ($\SI{1}{\text{cal}_{\mathrm{th}}} = \SI{4.184}{\joule}$) & Left specific heat of water as $\SI{1.00}{\text{cal}\per\gram\per\celsius}$ or $R = \SI{1.987}{\text{cal}\per\mole\per\kelvin}$ when answer is in Joules (or vice versa). \\
+\rowcolor{rowalt}
+$\mathbf{101.325}$ & $\mathbf{0.0098692}$ & $\SI{1}{\liter\cdot\text{atm}} = \SI{101.325}{\joule}$ ($R = 8.31446 / 0.0820574 = 101.325$) & Used $R = \SI{0.082057}{\liter\cdot\text{atm}\per\mole\per\kelvin}$ or $P\Delta V$ in $\si{\liter\cdot\text{atm}}$ without multiplying by $\SI{101.325}{\joule\per(\liter\cdot\text{atm})}$. \\
+$\mathbf{1.4000}$ ($7/5$) or $\mathbf{1.6667}$ ($5/3$) & $\mathbf{0.7143}$ ($5/7$) or $\mathbf{0.6000}$ ($3/5$) & Adiabatic index $\gamma = C_P / C_V$ (diatomic $7/5$ vs.\ monatomic $5/3$) & Used $C_P$ instead of $C_V$ in $\Delta U = n C_{V,m}\Delta T$, or computed closed-system work $\Delta U$ instead of steady-flow compressor shaft work $\Delta H = \gamma\Delta U$. \\
+\rowcolor{rowalt}
+$\mathbf{31.6228}$ ($\sqrt{1000}$) & $\mathbf{0.031623}$ ($1/\sqrt{1000}$) & Square root of $\si{\gram} \leftrightarrow \si{\kilogram}$ conversion in molecular speed $v = \sqrt{3RT/M}$ & Plugged molar mass $M$ in $\si{\gram\per\mole}$ (e.g., $28.01$ for $\mathrm{N_2}$) instead of $\si{\kilogram\per\mole}$ ($0.02801$) inside square root! \\
+$\mathbf{2.000}$ or $\mathbf{4.000}$ & $\mathbf{0.500}$ or $\mathbf{0.250}$ & Diameter $D$ vs.\ radius $r = D/2$ in area $A = \pi r^2 = \frac{\pi}{4}D^2$ or sphere $A_{\mathrm{surf}} / A_{\mathrm{proj}} = 4$ & Plugged pipe/rod diameter $D$ into $\pi r^2$ without dividing by $2$ ($4\times$ area error!), or forgot $1/2$ in triangle area $\frac{1}{2}\Delta P\Delta V$. \\
+\rowcolor{rowalt}
+$\mathbf{1000}$ ($10^3$) or $\mathbf{10^6}$ & $\mathbf{10^{-3}}$ or $\mathbf{10^{-6}}$ & Metric prefixes: $\si{\kilo\joule}\leftrightarrow\si{\joule}$, $\si{\gram}\leftrightarrow\si{\kilogram}$, $\si{\liter}\leftrightarrow\si{\cubic\meter}$, $\si{\square\centi\meter}\leftrightarrow\si{\square\meter}$ ($10^4$) & Mixed $L_f = \SI{333.55}{\kilo\joule\per\kilogram}$ with $c_w = \SI{4184}{\joule\per\kilogram\per\kelvin}$, or forgot $\SI{1}{\square\centi\meter} = \SI{1e-4}{\square\meter}$ and $\SI{1}{\cubic\centi\meter} = \SI{1e-6}{\cubic\meter}$. \\
+\textbf{Offset $\Delta = \pm 273.15$} & — & Kelvin vs.\ Celsius additive offset ($T_K = T_C + 273.15$) & Forgot to convert final Kelvin answer back to requested $\si{\celsius}$ (or accidentally added $273.15$ to a temperature difference $\Delta T$). \\
+\rowcolor{rowalt}
+\textbf{Offset $\Delta = \pm 101.325\,\si{\kilo\pascal}$} & — & Absolute vs.\ gauge pressure ($P_{\mathrm{abs}} = P_{\mathrm{gauge}} + \SI{101.325}{\kilo\pascal}$) & Forgot to add (or subtract) $P_{\mathrm{atm}} = \SI{101.325}{\kilo\pascal}$ ($\SI{14.70}{\text{psi}}$) when converting between gauge and absolute pressure. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+% ============================================================================
+\section{Worked Wrong-Answer Diagnostic Case Studies (\texttt{Trap Path} vs.\ \texttt{Verified Fix})}\label{sec:20.5}
+
+\begin{workedexample}[Case Study 1 (\texttt{ERR-05}): The Ice--Water Two-Phase Plateau Bypass Trap]{\texttt{Cornell E1 Q30d, GGSO E4 Q9a} \src{S25,S28}}{ex:20.1}
+In an insulated calorimeter of negligible heat capacity, $m_{\mathrm{ice}} = \SI{80.0}{\gram}$ of subcooled ice at $T_{\mathrm{ice}} = \SI{-15.0}{\celsius}$ ($c_{\mathrm{ice}} = \SI{2.10}{\joule\per\gram\per\kelvin}$, $L_f = \SI{333.55}{\joule\per\gram}$) is mixed with $m_w = \SI{120.0}{\gram}$ of liquid water at $T_w = \SI{25.0}{\celsius}$ ($c_w = \SI{4.184}{\joule\per\gram\per\kelvin}$). Find the final equilibrium temperature $T_f$ and phase composition.
+\par\smallskip\noindent
+\textbf{\xmark\ Naive Trap Path (What $65\%$ of Contestants Write):} Assuming all ice melts to liquid at $T_f > \SI{0}{\celsius}$ and solving a single linear equation:
+$$m_{\mathrm{ice}}c_{\mathrm{ice}}(0 - (-15.0)) + m_{\mathrm{ice}}L_f + m_{\mathrm{ice}}c_w(T_f - 0) = m_w c_w(25.0 - T_f) \implies 2520.0 + 26684.0 + 334.72\,T_f = 12552.0 - 502.08\,T_f$$
+$$836.80\,T_f = -16652.0 \implies T_{f,\mathrm{naive}} = \mathbf{\SI{-19.90}{\celsius}} \quad (\text{\textbf{PHYSICALLY IMPOSSIBLE:} colder than the initial }\SI{-15.0}{\celsius}\text{ ice!})$$
+\textbf{\cmark\ Diagnostic \& Correct 3-Gate Energy-Budget Solution:}
+Why did the naive equation yield $\SI{-19.90}{\celsius}$? Because it subtracted the full latent heat $\SI{26684}{\joule}$ of all $\SI{80.0}{\gram}$ of ice even though the warm water did not have enough thermal energy to melt all the ice! Running the 3-Gate Inequality Check (\sref{sec:04}):
+\begin{enumerate}
+  \item \textbf{Maximum heat available from cooling $\SI{120.0}{\gram}$ liquid water to $\SI{0.00}{\celsius}$:} $Q_{\mathrm{avail}} = m_w c_w(25.0 - 0.0) = (120.0)(4.184)(25.0) = \mathbf{\SI{12552.0}{\joule}}$.
+  \item \textbf{Heat required to warm $\SI{80.0}{\gram}$ ice from $\SI{-15.0}{\celsius}$ to $\SI{0.00}{\celsius}$:} $Q_{\mathrm{warm,ice}} = m_{\mathrm{ice}}c_{\mathrm{ice}}(0.0 - (-15.0)) = (80.0)(2.10)(15.0) = \mathbf{\SI{2520.0}{\joule}}$.
+  \item \textbf{Heat required to melt all $\SI{80.0}{\gram}$ ice at $\SI{0.00}{\celsius}$:} $Q_{\mathrm{melt,all}} = m_{\mathrm{ice}}L_f = (80.0)(333.55) = \mathbf{\SI{26684.0}{\joule}}$.
+\end{enumerate}
+Since $Q_{\mathrm{warm,ice}} = \SI{2520.0}{\joule} < Q_{\mathrm{avail}} = \SI{12552.0}{\joule} < Q_{\mathrm{warm,ice}} + Q_{\mathrm{melt,all}} = \SI{29204.0}{\joule}$, the system arrests on the \textbf{$\SI{0.00}{\celsius}$ two-phase fusion plateau}:
+$$\boxed{T_f = \mathbf{\SI{0.00}{\celsius}}\ (\SI{273.15}{\kelvin})}, \qquad m_{\mathrm{melted}} = \frac{Q_{\mathrm{avail}} - Q_{\mathrm{warm,ice}}}{L_f} = \frac{12552.0 - 2520.0}{333.55} = \frac{\SI{10032.0}{\joule}}{\SI{333.55}{\joule\per\gram}} = \mathbf{\SI{30.08}{\gram}}$$
+Final equilibrium composition at $\SI{0.00}{\celsius}$: $120.0 + 30.08 = \mathbf{\SI{150.08}{\gram}\text{\textbf{ liquid water}}}$ and $80.0 - 30.08 = \mathbf{\SI{49.92}{\gram}\text{\textbf{ solid ice}}}$.
+\verifiedby{Enthalpy conservation relative to $\SI{0}{\celsius}$ ice reference state and Python check \texttt{sec20:ex20.1}.}
+\end{workedexample}
+
+\begin{workedexample}[Case Study 2 (\texttt{ERR-04}): Celsius vs.\ Kelvin \& $(T_1 - T_2)^4$ Fallacy in Carnot \& Stefan--Boltzmann]{Rules 5.c.iv, 5.c.vi}{ex:20.2}
+(a)~A heat engine operates between hot reservoir $T_H = \SI{227.0}{\celsius}$ and cold reservoir $T_C = \SI{27.0}{\celsius}$. Compare the false Celsius Carnot calculation against the true Kelvin Carnot efficiency $\eta_C$.
+(b)~A blackbody plate ($\varepsilon = 1.000$, $A = \SI{1.000}{\square\meter}$) at $T_1 = \SI{127.0}{\celsius}$ radiates inside a large room at $T_2 = \SI{27.0}{\celsius}$ ($\sigma = \SI{5.670374e-8}{\watt\per\square\meter\per\kelvin\tothe{4}}$). Compare the three common wrong answers --- (i)~$\sigma A(T_1 - T_2)^4$, (ii)~$\sigma A(T_{1,C}^4 - T_{2,C}^4)$ in Celsius, and (iii)~omitting back-radiation $\sigma A T_{1,K}^4$ --- against the true net radiative heat transfer rate $\dot{Q}_{\mathrm{net}}$.
+\par\smallskip\noindent
+\textbf{Solution.}
+(a)~\textbf{\xmark\ Wrong (Celsius ratio):} $\eta_{\mathrm{false}} = 1 - \frac{27.0}{227.0} = \SI{88.11}{\percent}$.
+\textbf{\cmark\ Correct (Absolute Kelvin $T_H = \SI{500.15}{\kelvin}$, $T_C = \SI{300.15}{\kelvin}$):}
+$$\eta_C = 1 - \frac{T_C}{T_H} = 1 - \frac{\SI{300.15}{\kelvin}}{\SI{500.15}{\kelvin}} = \frac{200.00}{500.15} = \mathbf{0.39988}\ (\mathbf{\SI{39.99}{\percent}}) \quad (\text{the Celsius calculation is off by }\mathbf{+48.12\text{ percentage points}}\text{!})$$
+(b)~With $T_{1,K} = 127.0 + 273.15 = \SI{400.15}{\kelvin}$ and $T_{2,K} = 27.0 + 273.15 = \SI{300.15}{\kelvin}$ ($\Delta T = \SI{100.00}{\kelvin}$):
+\begin{itemize}
+  \item \textbf{\xmark\ Wrong Move (i) --- Factoring $(T_1 - T_2)^4$:} $\sigma(100.0)^4 = \mathbf{\SI{5.67}{\watt}}$ (underestimates true heat loss by $\mathbf{175\times}$!).
+  \item \textbf{\xmark\ Wrong Move (ii) --- Fourth Powers in Celsius:} $\sigma(127.0^4 - 27.0^4) = \mathbf{\SI{14.72}{\watt}}$ (underestimates true heat loss by $\mathbf{67.5\times}$!).
+  \item \textbf{\xmark\ Wrong Move (iii) --- Omitting Room Back-Radiation $T_2^4$:} $\sigma(400.15)^4 = \mathbf{\SI{1453.85}{\watt}}$ (overestimates net heat loss by $+\SI{460.28}{\watt}$!).
+  \item \textbf{\cmark\ Correct Net Radiative Exchange in Kelvin:}
+  $$\dot{Q}_{\mathrm{net}} = \varepsilon\sigma A\left(T_{1,K}^4 - T_{2,K}^4\right) = (\num{5.670374e-8})(\SI{1.000}{\square\meter})\left(400.15^4 - 300.15^4\right) = 1453.850 - 460.275 = \mathbf{\SI{993.57}{\watt}}$$
+\end{itemize}
+\verifiedby{Exact polynomial identity $T_1^4 - T_2^4 = (T_1^2+T_2^2)(T_1+T_2)(T_1-T_2) = (\num{2.5021e5})(700.30)(100.0) = \num{1.75222e10}\,\si{\kelvin\tothe{4}}$ and Python check \texttt{sec20:ex20.2}.}
+\end{workedexample}
+
+\begin{workedexample}[Case Study 3 (\texttt{ERR-16}): Audit of Points Lost from Evaporation, Swirling \& Wrong $\mathrm{PE}$ Denominator]{2027 Rules 5.II, 6.e--f \& Clarif.\ \#1--\#5 \src{S01,S02}}{ex:20.3}
+During pre-tournament calibration with a covered, unswirled cup ($T_{\mathrm{start}} = \SI{21.0}{\celsius}$), a team's collector achieves $T_{f,\mathrm{cal}} = \SI{45.0}{\celsius}$ ($\mathrm{TG}_{\mathrm{cal}} = \SI{24.0}{\celsius}$, which is also the highest $\mathrm{TG}$ in the tournament field). At the tournament ($T_{\mathrm{start}} = \SI{21.0}{\celsius}$), the team submits $T_{\mathrm{pred}} = \SI{45.0}{\celsius}$, but makes two operational errors: (1)~they forget to place their Clarification~\texttt{\#5} removable vapor cover on the cup (losing $\SI{5.2}{\celsius}$ to evaporative cooling), and (2)~they swirl the cup when setting it on the table (destroying a $\SI{3.8}{\celsius}$ top-layer stratification advantage under Clarifications~\texttt{\#1--\#4}), so the ES measures $T_f = 45.0 - 5.2 - 3.8 = \SI{36.0}{\celsius}$ ($\mathrm{TG} = \SI{15.0}{\celsius}$). (a)~Compute the team's true 2027 Rule~\texttt{6.f} Prediction Estimate $\mathrm{PE}$ (vs.\ the false $\Delta T$-denominator calculation) and total tournament points lost across $\mathrm{TS}$ ($30\text{ pts}$) and $\mathrm{PS}$ ($20\text{ pts}$).
+\par\smallskip\noindent
+\textbf{Solution.}
+(a)~Under 2027 Rule~\texttt{6.f} \src{S01}, $\mathrm{PE} = 1 - \frac{|T_f - T_{\mathrm{pred}}|}{T_f}$ with $T_f$ in $\si{\celsius}$ in the denominator:
+$$\mathrm{PE}_{\mathrm{true}} = 1 - \frac{|36.0 - 45.0|}{36.0} = 1 - \frac{9.0}{36.0} = \mathbf{0.7500} \quad\Longrightarrow\quad \mathrm{PS} = 20 \times \frac{0.7500}{1.0000} = \mathbf{\SI{15.00}{\text{pts}}}\ (\text{losing }\mathbf{\SI{5.00}{\text{pts}}}\text{ on }\mathrm{PS})$$
+*(Note: Falsely dividing by $\mathrm{TG} = \SI{15.0}{\celsius}$ instead of $T_f = \SI{36.0}{\celsius}$ would yield $\mathrm{PE}_{\mathrm{false}} = 1 - 9.0/15.0 = 0.4000$).* Meanwhile, on the Temperature Score (\texttt{Rule 6.e}, where the best team achieved $\mathrm{TG}_{\max} = \SI{24.0}{\celsius}$):
+$$\mathrm{TS} = 30 \times \frac{15.0}{24.0} = \mathbf{\SI{18.75}{\text{pts}}}\ (\text{losing }\mathbf{\SI{11.25}{\text{pts}}}\text{ on }\mathrm{TS}) \quad\Longrightarrow\quad \text{\textbf{Total Points Lost}} = 5.00 + 11.25 = \mathbf{\SI{16.25}{\text{pts out of 50}}}\text{!}$$
+\verifiedby{Exact 2027 Scoresheet v2.0.0 formula audit \src{S04} and Python check \texttt{sec20:ex20.3}.}
+\end{workedexample}
+
+\begin{workedexample}[Case Study 4 (\texttt{ERR-07}, \texttt{ERR-08}, \texttt{ERR-09}): Isobaric Compression Work Sign, $C_P$ vs.\ $C_V$ \& Gauge Pressure]{Rules 5.c.ii, 5.c.iv}{ex:20.4}
+A cylinder fitted with a weighted piston at constant \textbf{gauge pressure} $P_{\mathrm{gauge}} = \SI{150.0}{\kilo\pascal}$ (in standard atmospheric pressure $P_{\mathrm{atm}} = \SI{101.325}{\kilo\pascal}$) contains $n = \SI{0.800}{\mole}$ of diatomic nitrogen ($\mathrm{N_2}$, $f = 5$ at $\SI{300}{\kelvin}$). The gas is cooled isobarically so its volume contracts from $V_1 = \SI{12.00}{\liter}$ to $V_2 = \SI{8.00}{\liter}$. Find: (a)~the work $W_{\mathrm{by}}$ done \emph{by} the gas and work $w_{\mathrm{on}}$ done \emph{on} the gas, (b)~the internal energy change $\Delta U$, and (c)~the heat $Q$ transferred into the gas.
+\par\smallskip\noindent
+\textbf{Solution.}
+(a)~\textbf{Trap 1 (\texttt{ERR-07} Gauge vs.\ Absolute Pressure):} Using $P_{\mathrm{gauge}} = \SI{150.0}{\kilo\pascal}$ gives $|W| = \SI{600.0}{\joule}$ (wrong by $\SI{405.3}{\joule}$!). True absolute pressure is:
+$$P_{\mathrm{abs}} = P_{\mathrm{gauge}} + P_{\mathrm{atm}} = 150.0 + 101.325 = \mathbf{\SI{251.325}{\kilo\pascal}}$$
+\textbf{Trap 2 (\texttt{ERR-08} Work Sign on Compression $\Delta V = \SI{-4.00}{\liter} < 0$):} Because the gas contracts, work done \emph{by} the gas is \textbf{negative}:
+$$W_{\mathrm{by}} = P_{\mathrm{abs}}(V_2 - V_1) = (\SI{251.325}{\kilo\pascal})(\SI{8.00}{\liter} - \SI{12.00}{\liter}) = \mathbf{\SI{-1005.3}{\joule}}, \qquad w_{\mathrm{on}} = -W_{\mathrm{by}} = \mathbf{\SI{+1005.3}{\joule}}$$
+(b)~\textbf{Trap 3 (\texttt{ERR-09} Using $C_P$ instead of $C_V$ for $\Delta U$ in an Isobaric Process):} Even though pressure is constant, internal energy change of an ideal gas is \textbf{always} $\Delta U = n C_{V,m}\Delta T = \frac{f}{2}nR\Delta T = \frac{5}{2}P_{\mathrm{abs}}(V_2 - V_1)$:
+$$\Delta U = \frac{5}{2}(\SI{-1005.3}{\joule}) = \mathbf{\SI{-2513.25}{\joule}}$$
+(c)~By the First Law $\Delta U = Q - W_{\mathrm{by}}$ (or $Q_P = \Delta H = n C_{P,m}\Delta T = \frac{7}{2}P_{\mathrm{abs}}\Delta V$):
+$$Q = \Delta U + W_{\mathrm{by}} = \SI{-2513.25}{\joule} + (\SI{-1005.30}{\joule}) = \mathbf{\SI{-3518.55}{\joule}} \quad (\SI{3518.55}{\joule}\text{ of heat flows \textbf{out} of the gas})$$
+\verifiedby{Identity $Q_P / \Delta U = C_P / C_V = \gamma = 7/5 = (-3518.55)/(-2513.25) = 1.4000$ and Python check \texttt{sec20:ex20.4}.}
+\end{workedexample}
+
+\begin{workedexample}[Case Study 5 (\texttt{ERR-06}, \texttt{ERR-11}): Bomb Calorimeter $\Delta U \to \Delta H$ \& Freezing Water Entropy $\Delta S_{\mathrm{univ}} > 0$]{Rules 5.c.iv, 5.c.vii}{ex:20.5}
+(a)~Combustion of $n_{\mathrm{sample}} = \SI{0.0250}{\mole}$ of liquid benzene ($\mathrm{C_6H_6(\ell)} + \frac{15}{2}\mathrm{O_2(g)} \to 6\mathrm{CO_2(g)} + 3\mathrm{H_2O(\ell)}$) in a rigid constant-volume bomb calorimeter at $T = \SI{298.15}{\kelvin}$ warms the calorimeter bath ($C_{\mathrm{tot}} = m_w c_w + C_{\mathrm{bomb}} = \SI{10.500}{\kilo\joule\per\kelvin}$) by $\Delta T = +\SI{7.780}{\kelvin}$. Compute the molar internal energy of combustion $\Delta U_{c,m}^\circ$ and molar enthalpy of combustion $\Delta H_{c,m}^\circ$.
+(b)~When $m = \SI{1.000}{\kilogram}$ of supercooled liquid water freezes into ice at $T_m = \SI{0.00}{\celsius} = \SI{273.15}{\kelvin}$ inside a freezer room held at $T_{\mathrm{surr}} = \SI{-10.00}{\celsius} = \SI{263.15}{\kelvin}$ (releasing $Q_{\mathrm{out}} = m L_f = \SI{333.55}{\kilo\joule}$ to the freezer room), calculate $\Delta S_{\mathrm{water}}$, $\Delta S_{\mathrm{surr}}$, and $\Delta S_{\mathrm{univ}}$ to prove why freezing does not violate the Second Law.
+\par\smallskip\noindent
+\textbf{Solution.}
+(a)~\textbf{Sign \& Bomb Volume Correction (\texttt{ERR-06}):} Because the bath warmed ($\Delta T > 0$), heat left the reaction: $q_V = -C_{\mathrm{tot}}\Delta T = -(\SI{10.500}{\kilo\joule\per\kelvin})(\SI{7.780}{\kelvin}) = \SI{-81.690}{\kilo\joule}$. In a rigid bomb ($\Delta V = 0$), this equals $\Delta U$, so per mole of benzene:
+$$\Delta U_{c,m}^\circ = \frac{q_V}{n_{\mathrm{sample}}} = \frac{\SI{-81.690}{\kilo\joule}}{\SI{0.0250}{\mole}} = \mathbf{\SI{-3267.6}{\kilo\joule\per\mole}}$$
+From the balanced stoichiometry, gaseous moles change by $\Delta n_{\mathrm{gas}} = n_{\mathrm{gas,prod}} - n_{\mathrm{gas,react}} = 6 - 7.5 = \mathbf{-1.500\,\si{\mole\text{ gas per mole }\mathrm{C_6H_6}}}$. Thus:
+$$\Delta H_{c,m}^\circ = \Delta U_{c,m}^\circ + \Delta n_{\mathrm{gas}} R T = \SI{-3267.60}{\kilo\joule\per\mole} + (-1.500)(\SI{8.31446e-3}{\kilo\joule\per\mole\per\kelvin})(\SI{298.15}{\kelvin}) = -3267.60 - 3.718 = \mathbf{\SI{-3271.32}{\kilo\joule\per\mole}}$$
+(b)~\textbf{Second-Law Entropy Ledger (\texttt{ERR-11}):} At the reversible phase-change temperature $T_m = \SI{273.15}{\kelvin}$, the freezing water loses heat $Q_{\mathrm{sys}} = -\SI{333550}{\joule}$, while the $\SI{263.15}{\kelvin}$ freezer air absorbs $Q_{\mathrm{surr}} = +\SI{333550}{\joule}$:
+$$\Delta S_{\mathrm{water}} = \frac{Q_{\mathrm{sys}}}{T_m} = \frac{\SI{-333550}{\joule}}{\SI{273.15}{\kelvin}} = \mathbf{\SI{-1221.12}{\joule\per\kelvin}} < 0, \qquad \Delta S_{\mathrm{surr}} = \frac{Q_{\mathrm{surr}}}{T_{\mathrm{surr}}} = \frac{\SI{+333550}{\joule}}{\SI{263.15}{\kelvin}} = \mathbf{\SI{+1267.53}{\joule\per\kelvin}} > 0$$
+$$\Delta S_{\mathrm{univ}} = \Delta S_{\mathrm{water}} + \Delta S_{\mathrm{surr}} = -1221.12 + 1267.53 = \mathbf{\SI{+46.40}{\joule\per\kelvin}} > 0 \quad (\text{Second Law satisfied!})$$
+\verifiedby{Direct identity $\Delta S_{\mathrm{univ}} = Q_{\mathrm{out}}(1/T_{\mathrm{surr}} - 1/T_m) = 333550(10.00)/(263.15\times 273.15) = \SI{+46.404}{\joule\per\kelvin}$ and Python check \texttt{sec20:ex20.5}.}
+\end{workedexample}
+
+\begin{workedexample}[Case Study 6 (\texttt{ERR-10}): Two-Law Filter for Inventor Engine \& Heat-Pump Claims]{Rules 5.c.iv, 5.c.vii}{ex:20.6}
+Three inventors propose cyclic devices operating between a hot reservoir at $T_H = \SI{600.0}{\kelvin}$ and a cold reservoir at $T_C = \SI{300.0}{\kelvin}$:
+(1)~\emph{Engine A} absorbs $Q_H = \SI{1000}{\joule}$, produces work $W = \SI{450}{\joule}$, and rejects $Q_C = \SI{500}{\joule}$.
+(2)~\emph{Engine B} absorbs $Q_H = \SI{1000}{\joule}$, produces work $W = \SI{550}{\joule}$, and rejects $Q_C = \SI{450}{\joule}$.
+(3)~\emph{Heat Pump C} consumes work $W_{\mathrm{in}} = \SI{250}{\joule}$ to deliver $Q_H = \SI{450}{\joule}$ of heat to the $\SI{600.0}{\kelvin}$ reservoir while extracting $Q_C = \SI{200}{\joule}$ from $\SI{300.0}{\kelvin}$.
+Audit each claim against \textbf{both} the First Law and the Second Law (Clausius inequality $\oint \frac{\delta Q}{T} \le 0$ / Carnot limit).
+\par\smallskip\noindent
+\textbf{Solution.}
+The Carnot efficiency bound is $\eta_C = 1 - \frac{300.0}{600.0} = \mathbf{0.5000}$ ($\SI{50.0}{\percent}$) and the Carnot heat-pump bound is $\mathrm{COP}_{\mathrm{HP,C}} = \frac{T_H}{T_H - T_C} = \frac{600.0}{300.0} = \mathbf{2.000}$:
+\begin{itemize}
+  \item \textbf{Engine A:} $\eta_A = \frac{450}{1000} = 0.450 < \eta_C = 0.500$ (passes naive Carnot check!), \textbf{TRAP:} Check the First Law $Q_H \stackrel{?}{=} W + Q_C$: $1000 \ne 450 + 500 = 950\,\si{\joule}$ ($\SI{50}{\joule}$ of energy disappears per cycle!). \textbf{Verdict: Impossible --- violates the First Law!}
+  \item \textbf{Engine B:} First Law holds ($Q_H = 550 + 450 = \SI{1000}{\joule}$), \textbf{TRAP:} $\eta_B = \frac{550}{1000} = \mathbf{0.550} > \eta_C = 0.500$ (entropy generated per cycle is $S_{\mathrm{gen}} = \frac{Q_C}{T_C} - \frac{Q_H}{T_H} = \frac{450}{300} - \frac{1000}{600} = 1.500 - 1.667 = \SI{-0.167}{\joule\per\kelvin} < 0$). \textbf{Verdict: Impossible --- violates the Second Law!}
+  \item \textbf{Heat Pump C:} First Law holds ($Q_H = Q_C + W_{\mathrm{in}} = 200 + 250 = \SI{450}{\joule}$), and actual $\mathrm{COP}_{\mathrm{HP}} = \frac{Q_H}{W_{\mathrm{in}}} = \frac{450}{250} = \mathbf{1.800} \le \mathrm{COP}_{\mathrm{HP,C}} = 2.000$ (with $S_{\mathrm{gen}} = \frac{450}{600} - \frac{200}{300} = 0.750 - 0.667 = \mathbf{\SI{+0.0833}{\joule\per\kelvin}} > 0$). *(Notice that if a student mistakenly compared $\mathrm{COP}_{\mathrm{HP}} = 1.800$ against the refrigerator Carnot bound $\mathrm{COP}_{R,C} = \frac{300}{300} = 1.000$, they would falsely reject Heat Pump C!).* \textbf{Verdict: Physically feasible irreversible heat pump!}
+\end{itemize}
+\verifiedby{First-Law conservation $\Delta U_{\mathrm{cycle}} = 0$ and Clausius integral $S_{\mathrm{gen}} = Q_H/T_H - Q_C/T_C \ge 0$ in Python check \texttt{sec20:ex20.6}.}
+\end{workedexample}
+
+\begin{workedexample}[Case Study 7 (\texttt{ERR-14}, \texttt{ERR-15}): Critical Radius Paradox ($r_{\mathrm{crit}} = k/h$) vs.\ 2027 Cup \& Parasitic Thermal Mass]{Rules 3.a--e, 5.c.iii \src{S12}}{ex:20.7}
+(a)~An electrical wire of bare radius $r_{i,\mathrm{wire}} = \SI{1.00}{\milli\meter}$ and a 2027 competition cup of outer radius $r_{i,\mathrm{cup}} = \SI{34.0}{\milli\meter}$ are each wrapped with a $\delta = \SI{3.00}{\milli\meter}$ layer of polymer insulation having thermal conductivity $k = \SI{0.0400}{\watt\per\meter\per\kelvin}$ in room air with external combined convection+radiation coefficient $h = \SI{10.0}{\watt\per\square\meter\per\kelvin}$. Compute the critical radius $r_{\mathrm{crit}} = k/h$ and determine the percentage change in steady-state heat loss per unit length $\dot{Q}/l$ caused by adding the $\SI{3.00}{\milli\meter}$ insulation to the wire versus to the cup.
+(b)~A team places a $\SI{140.0}{\gram}$ black-painted aluminum sleeve ($c_{\mathrm{Al}} = \SI{900.0}{\joule\per\kilogram\per\kelvin}$) in tight thermal contact with the $\SI{100.0}{\gram}$ water sample ($c_w = \SI{4184}{\joule\per\kilogram\per\kelvin}$) inside their collector. If net absorbed energy over $\SI{10}{\minute}$ is $E_{\mathrm{net}} = \SI{9200}{\joule}$, how much bulk temperature gain $\mathrm{TG}$ is lost to the heavy metal sleeve's parasitic heat capacity?
+\par\smallskip\noindent
+\textbf{Solution.}
+(a)~For any cylindrical shell, $r_{\mathrm{crit}} = \frac{k}{h} = \frac{\SI{0.0400}{\watt\per\meter\per\kelvin}}{\SI{10.0}{\watt\per\square\meter\per\kelvin}} = \SI{0.00400}{\meter} = \mathbf{\SI{4.00}{\milli\meter}}$, and total resistance per unit length is $R'_L(r_o) = \frac{\ln(r_o/r_i)}{2\pi k} + \frac{1}{2\pi r_o h}$:
+\begin{itemize}
+  \item \textbf{Thin Wire ($r_i = \SI{1.00}{\milli\meter} < r_{\mathrm{crit}} = \SI{4.00}{\milli\meter} \to r_o = \SI{4.00}{\milli\meter}$):}
+  Bare resistance: $R'_{\mathrm{bare,wire}} = \frac{1}{2\pi(\SI{0.00100}{\meter})(10.0)} = \SI{15.9155}{\meter\cdot\kelvin\per\watt}$. Insulated at $r_o = \SI{4.00}{\milli\meter}$:
+  $$R'_{\mathrm{ins,wire}} = \frac{\ln(4.00/1.00)}{2\pi(0.0400)} + \frac{1}{2\pi(0.00400)(10.0)} = 5.5159 + 3.9789 = \mathbf{\SI{9.4948}{\meter\cdot\kelvin\per\watt}} < R'_{\mathrm{bare,wire}}\text{!}$$
+  Heat loss \textbf{INCREASES} by $\frac{15.9155}{9.4948} - 1 = \mathbf{+67.62\%}$ because $r_i < r_{\mathrm{crit}}$!
+  \item \textbf{2027 Competition Cup ($r_i = \SI{34.0}{\milli\meter} \gg r_{\mathrm{crit}} = \SI{4.00}{\milli\meter} \to r_o = \SI{37.0}{\milli\meter}$):}
+  Bare resistance: $R'_{\mathrm{bare,cup}} = \frac{1}{2\pi(0.0340)(10.0)} = \SI{0.46810}{\meter\cdot\kelvin\per\watt}$. Insulated at $r_o = \SI{37.0}{\milli\meter}$:
+  $$R'_{\mathrm{ins,cup}} = \frac{\ln(37.0/34.0)}{2\pi(0.0400)} + \frac{1}{2\pi(0.0370)(10.0)} = 0.33648 + 0.43015 = \mathbf{\SI{0.76663}{\meter\cdot\kelvin\per\watt}} > R'_{\mathrm{bare,cup}}\text{!}$$
+  Heat loss \textbf{DECREASES} by $1 - \frac{0.46810}{0.76663} = \mathbf{-38.94\%}$ because $r_i \gg r_{\mathrm{crit}}$!
+\end{itemize}
+(b)~\textbf{Parasitic Thermal Mass Drain (\texttt{ERR-15}):} Water heat capacity is $C_w = (0.1000)(4184) = \SI{418.4}{\joule\per\kelvin}$, while the heavy aluminum sleeve has $C_{\mathrm{Al}} = (0.1400)(900.0) = \SI{126.0}{\joule\per\kelvin}$ ($30.1\%$ of the water!). Without the heavy sleeve, $\mathrm{TG}_{\mathrm{ideal}} = \frac{\SI{9200}{\joule}}{\SI{418.4}{\joule\per\kelvin}} = \mathbf{\SI{21.99}{\celsius}}$; with the coupled sleeve, $\mathrm{TG}_{\mathrm{with\text{ }Al}} = \frac{\SI{9200}{\joule}}{418.4 + 126.0} = \mathbf{\SI{16.90}{\celsius}}$ --- the heavy absorber robs $\mathbf{\SI{5.09}{\celsius}}$ ($\mathbf{23.1\%}$) of temperature gain!
+\verifiedby{Exact cylindrical thermal circuit ratios and Python check \texttt{sec20:ex20.7}.}
+\end{workedexample}
+
+% ============================================================================
+\section{Fast True/False \& Multiple-Choice Conceptual Trap-Buster Matrix}\label{sec:20.6}
+\idxtopic{true/false conceptual trap-buster matrix}
+
+\begin{table}[h!]
+\centering
+\captionof{table}{Twelve Classic ``Sounds True But Is FALSE'' Exam Statements \& Their Instant Counterexamples (\texttt{E1--E8}) \src{S13,S25,S26,S35}.}\label{tab:20:tftraps}
+\footnotesize
+\setlength{\tabcolsep}{3.5pt}
+\renewcommand{\arraystretch}{1.14}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.44\linewidth} C{0.08\linewidth} >{\raggedright\arraybackslash}X@{}}
+\toprule
+\hdr{Exam Statement (Common Distractor)} & \hdr{Truth} & \hdr{Exact Physical Counterexample \& Governing Law} \\
+\midrule
+1.~\emph{``In every isothermal process ($dT=0$), no heat enters or leaves the system ($Q=0$).''} & \textbf{FALSE} & During boiling/melting ($Q = mL \ne 0$) and ideal-gas isothermal expansion ($Q = W_{\mathrm{by}} = nRT\ln(V_2/V_1) \ne 0$), $dT = 0$ while $Q \ne 0$. ($Q=0$ is \emph{adiabatic}, not isothermal!). \\
+\rowcolor{rowalt}
+2.~\emph{``In every adiabatic process ($Q=0$), the temperature of the system remains constant.''} & \textbf{FALSE} & Adiabatic compression warms a gas ($\Delta U = -W_{\mathrm{by}} > 0 \implies \Delta T > 0$) and adiabatic expansion against a piston cools it ($T V^{\gamma-1} = \text{const}$). Only adiabatic \emph{free expansion} of an ideal gas into vacuum keeps $\Delta T = 0$. \\
+3.~\emph{``Because $Q = 0$ in adiabatic free expansion into a vacuum, the entropy change $\Delta S$ of the gas is zero.''} & \textbf{FALSE} & Free expansion is \textbf{irreversible} ($\Delta S > \int \delta Q/T = 0$). Since $S$ is a state function, evaluating along a reversible isotherm gives $\Delta S = +nR\ln(V_2/V_1) > 0$. \\
+\rowcolor{rowalt}
+4.~\emph{``The Second Law of Thermodynamics forbids the entropy of any system from decreasing ($\Delta S_{\mathrm{sys}} < 0$).''} & \textbf{FALSE} & Any non-isolated system that transfers heat out ($Q < 0$, e.g., cooling coffee or freezing water) has $\Delta S_{\mathrm{sys}} < 0$, provided $\Delta S_{\mathrm{surr}} \ge |\Delta S_{\mathrm{sys}}|$ so $\Delta S_{\mathrm{univ}} \ge 0$. \\
+5.~\emph{``For an ideal gas undergoing a constant-pressure (isobaric) expansion, $\Delta U = n C_{P,m}\Delta T$.''} & \textbf{FALSE} & For an ideal gas, internal energy depends ONLY on $T$, so $\Delta U = n C_{V,m}\Delta T$ for \textbf{all} processes! At constant pressure, $Q_P = \Delta H = n C_{P,m}\Delta T$ and $\Delta U = Q_P - P\Delta V = n C_{V,m}\Delta T$. \\
+\rowcolor{rowalt}
+6.~\emph{``A heat pump with a Coefficient of Performance $\mathrm{COP}_{\mathrm{HP}} = 4.2$ violates conservation of energy because efficiency cannot exceed $100\%$.''} & \textbf{FALSE} & Heat engine efficiency $\eta = W/Q_H \le 1 - T_C/T_H < 1$, whereas a heat pump moves ambient heat: $\mathrm{COP}_{\mathrm{HP}} = Q_H/W_{\mathrm{in}} = 1 + Q_C/W_{\mathrm{in}} \ge 1$ (Carnot limit $T_H/(T_H - T_C)$ can easily exceed $4$!). \\
+7.~\emph{``At the same temperature $T$, all gas molecules have the same rms speed $v_{\mathrm{rms}}$.''} & \textbf{FALSE} & By equipartition, all gases at $T$ have the same mean translational \emph{kinetic energy} $\bar{K}_{\mathrm{tr}} = \frac{3}{2}k_B T$, so lighter molecules move faster: $v_{\mathrm{rms}} = \sqrt{3RT/M} \propto M^{-1/2}$ ($\mathrm{H_2}$ moves $3.74\times$ faster than $\mathrm{N_2}$). \\
+\rowcolor{rowalt}
+8.~\emph{``Raising the pressure on any solid always raises its melting point temperature.''} & \textbf{FALSE} & By Clapeyron $\frac{dP}{dT} = \frac{L_f}{T(v_\ell - v_s)}$: because ordinary ice ($\mathrm{Ice\ Ih}$), bismuth, and gallium contract upon melting ($v_\ell < v_s$), increasing pressure \textbf{lowers} their melting point ($\frac{dP}{dT} < 0$). \\
+9.~\emph{``Passing a real gas or ideal gas through an insulated throttling valve ($h_2 = h_1$) always cools the gas.''} & \textbf{FALSE} & An ideal gas has $h = h(T) \implies \Delta T = 0$ in throttling ($\mu_{\mathrm{JT}} = 0$). A real gas cools upon throttling ($\mu_{\mathrm{JT}} = (\partial T/\partial P)_H > 0$) \textbf{only} below its Joule--Thomson inversion temperature $T_{\mathrm{inv}}$ ($\mathrm{He}$ and $\mathrm{H_2}$ warm at $\SI{300}{\kelvin}$!). \\
+\rowcolor{rowalt}
+10.~\emph{``A good reflector of visible light (such as white paint or snow) is also a good reflector of room-temperature thermal infrared radiation.''} & \textbf{FALSE} & White paint and snow reflect visible solar radiation ($\alpha_{\mathrm{vis}} \approx 0.15\text{--}0.26$), but at room-temperature mid-IR ($\lambda \approx \SI{10}{\micro\meter}$) both have $\varepsilon_{\mathrm{MIR}} \approx 0.90\text{--}0.98$ (nearly black!). \\
+11.~\emph{``Adding insulation to any pipe or wire always decreases the rate of heat loss.''} & \textbf{FALSE} & If bare cylinder radius $r_i < r_{\mathrm{crit}} = k_{\mathrm{ins}}/h_{\mathrm{ext}}$ (or sphere $r_i < 2k/h$), adding insulation \textbf{increases} heat loss until outer radius reaches $r_o = r_{\mathrm{crit}}$ (Ex.~\ref{ex:20.7}). \\
+\rowcolor{rowalt}
+12.~\emph{``The Biot number $\mathrm{Bi} = h L_c / k$ and Nusselt number $\mathrm{Nu} = h L / k$ are identical dimensionless numbers.''} & \textbf{FALSE} & $\mathrm{Bi} = h L_c / k_{\mathrm{solid}}$ uses the \textbf{solid body's} conductivity (testing internal temperature uniformity $\mathrm{Bi}<0.1$), whereas $\mathrm{Nu} = h L / k_{\mathrm{fluid}}$ uses the \textbf{moving fluid's} conductivity! \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\alsosee{\sref{sec:00} (Rules \& Penalty Multipliers), \sref{sec:01} (Quick Sheets `QS-01`..`QS-14`), \sref{sec:02} (Physics vs.\ Chemistry Sign Lock), \sref{sec:04}--\sref{sec:16} (Core Theory \& 2027 Collector), \sref{sec:19} (5-Check Audit), \sref{sec:23} (Pre-Block Cram Checklist), and \sref{app:C} (Printed Error Index).}

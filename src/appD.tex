@@ -1,0 +1,108 @@
+% ============================================================================
+% appD.tex — Appendix D: Print-Ready 2027 Heat-Lamp Collector Test Log,
+% Calibration Sheet & Design-Change Forms (Target: 2 Pages)
+% ============================================================================
+\setcounter{chapter}{3}
+\binderapp{D}{2027 Heat-Lamp Collector Test Log \& Design-Change Forms}{App.\ D Collector Test Log \& Forms}{app:D}
+\scopebanner{REQUIRED}[2027 Rules 2.d, 3.a--h, 4.a--g, 5.II.a--h \& Official Clarifications \#1--\#9 {\src{S01,S02,S04}}]
+\idxtopic{device test log and calibration worksheet}
+\idxdev{DOE calibration trial log form}
+\idxdev{day-of competition prediction worksheet}
+
+\section{Day-Of Competition Block Worksheet \& 20-Run DOE Calibration Trial Log}\label{app:D.1}
+
+\begin{devicebox}[Event-Day Block Parameter Entry \& $T_{\mathrm{pred}}$ Computation Ledger (\texttt{DO NOT IMPOUND --- Rule 2.d})]
+\par\smallskip\noindent
+{\footnotesize\setlength{\tabcolsep}{3.5pt}\renewcommand{\arraystretch}{1.22}
+\begin{tabularx}{\linewidth}{@{}l X l X l X@{}}
+\toprule
+\textbf{Tournament:} & \dotfill & \textbf{Date:} & \dotfill & \textbf{Team \# / Block:} & \dotfill \\
+\textbf{Bulb Power $P_{\mathrm{bulb}}$:} & $\underline{\hspace{1.2cm}}\,\si{\watt}$ (\texttt{100--125 W}) & \textbf{Bulb Shape/Brand:} & \dotfill & \textbf{Bulb Height $h_{\mathrm{bulb}}$:} & $\underline{\hspace{1.2cm}}\,\si{\centi\meter}$ (\texttt{40--65 cm}) \\
+\textbf{Heating Time $t_{\mathrm{heat}}$:} & $\underline{\hspace{1.2cm}}\,\si{\minute}$ (\texttt{10--15 min}) & \textbf{Room Temp $T_{\mathrm{room}}$:} & $\underline{\hspace{1.2cm}}\,\si{\celsius}$ & \textbf{Bath Temp $T_{\mathrm{bath}}$:} & $\underline{\hspace{1.2cm}}\,\si{\celsius}$ \\
+\textbf{ES Thermometer Type:} & \multicolumn{3}{l}{$\square$ Digital Probe \quad $\square$ Non-Mercury Glass \quad $\square$ Non-Contact IR} & \textbf{Probe Protocol:} & $\square$ Top-Center (\texttt{Clarif.\ \#4}) \\
+\midrule
+\textbf{1.\ Starting Water $T_i$:} & $\mathbf{\underline{\hspace{1.4cm}}\,\si{\celsius}}$ (\texttt{5.II.c}) & \textbf{2.\ Model Base $\mathrm{TG}_0(h,t,P)$:} & $+\,\underline{\hspace{1.3cm}}\,\si{\celsius}$ (\sref{sec:16}) & \textbf{3.\ Drift Corr.\ $\Delta\mathrm{TG}_{\mathrm{amb}}$:} & $\pm\,\underline{\hspace{1.3cm}}\,\si{\celsius}$ \\
+\textbf{4.\ Predicted $T_{\mathrm{pred}}$:} & $\mathbf{\underline{\hspace{1.4cm}}\,\si{\celsius}}$ (\texttt{File $<t_{\mathrm{end}}$!}) & \textbf{5.\ Actual Final $T_f$:} & $\mathbf{\underline{\hspace{1.4cm}}\,\si{\celsius}}$ (\texttt{5.II.g}) & \textbf{6.\ Achieved $\mathrm{TG} / \mathrm{PE}$:} & $\mathrm{TG}=\underline{\hspace{0.8cm}}\,\si{\celsius}$ \textbar\ $\mathrm{PE}=\underline{\hspace{0.9cm}}$ \\
+\bottomrule
+\end{tabularx}}
+\par\vspace{2pt}\noindent
+{\scriptsize\textbf{Quick Formula Audit (\texttt{Rule 6.b, 6.e--f}):} $T_{\mathrm{pred}} = T_i + \mathrm{TG}_0(h_{\mathrm{bulb}}, t_{\mathrm{heat}}, P_{\mathrm{bulb}}) + k_{\mathrm{amb}}(T_{\mathrm{room}} - T_i) - \Delta T_{\mathrm{cool}}(t_{\mathrm{wait}})$. Verify $T_{\mathrm{pred}}$ is in $\si{\celsius}$ to $\SI{0.1}{\celsius}$, checked by Partner A, and handed to ES at $t = \SI{5}{\minute}$ into Heating Time. At Lamp-OFF, lift cup vertically \textbf{without swirling}, strip off unattached BoPET cap, and set bare cup on table in $\le \SI{20}{\second}$.}
+\end{devicebox}
+
+\par\noindent\textbf{Master 20-Run Controlled-Variable Calibration Log (Unstirred Top-Layer Protocol \src{S02,S05}).}
+Record baseline and verification runs across Regional ($h=\SIrange{40}{50}{\centi\meter}, t=\SI{10}{\minute}$), State ($h=\SIrange{40}{55}{\centi\meter}, t=\SIrange{10}{15}{\minute}$), and National ($h=\SIrange{40}{65}{\centi\meter}, \SI{1}{\centi\meter}$ steps) envelopes:
+\par\smallskip\noindent
+{\scriptsize\setlength{\tabcolsep}{2.5pt}\renewcommand{\arraystretch}{1.34}
+\begin{tabularx}{\linewidth}{@{}c c c c c c c c c c c >{\raggedright\arraybackslash}X@{}}
+\toprule
+\textbf{Run} & \textbf{Date} & \textbf{Dev} & $P_{\mathrm{bulb}}$ & $h_{\mathrm{bulb}}$ & $t_{\mathrm{heat}}$ & $T_{\mathrm{room}}$ & $T_i$ & $T_{\mathrm{pred}}$ & $T_{f,\mathrm{top}}$ & $\mathrm{TG}$ & \textbf{Residual $r = T_f - T_{\mathrm{pred}}$ / $\mathrm{PE}$ / Notes} \\
+\textbf{\#} & & \textbf{Rev} & ($\si{\watt}$) & ($\si{\centi\meter}$) & ($\si{\minute}$) & ($\si{\celsius}$) & ($\si{\celsius}$) & ($\si{\celsius}$) & ($\si{\celsius}$) & ($\si{\celsius}$) & (\emph{Cap type, probe depth $\si{\milli\meter}$, $t_{\mathrm{wait}}$ $\si{\second}$}) \\
+\midrule
+01 & \dotfill & \dotfill & \dotfill & 40.0 & 10.0 & \dotfill & \dotfill & \dotfill & \dotfill & \dotfill & \dotfill \\
+\rowcolor{rowalt}02 & \dotfill & \dotfill & \dotfill & 45.0 & 10.0 & \dotfill & \dotfill & \dotfill & \dotfill & \dotfill & \dotfill \\
+03 & \dotfill & \dotfill & \dotfill & 50.0 & 10.0 & \dotfill & \dotfill & \dotfill & \dotfill & \dotfill & \dotfill \\
+\rowcolor{rowalt}04 & \dotfill & \dotfill & \dotfill & 55.0 & 10.0 & \dotfill & \dotfill & \dotfill & \dotfill & \dotfill & \dotfill \\
+05 & \dotfill & \dotfill & \dotfill & 60.0 & 10.0 & \dotfill & \dotfill & \dotfill & \dotfill & \dotfill & \dotfill \\
+\rowcolor{rowalt}06 & \dotfill & \dotfill & \dotfill & 65.0 & 10.0 & \dotfill & \dotfill & \dotfill & \dotfill & \dotfill & \dotfill \\
+07 & \dotfill & \dotfill & \dotfill & 40.0 & 12.0 & \dotfill & \dotfill & \dotfill & \dotfill & \dotfill & \dotfill \\
+\rowcolor{rowalt}08 & \dotfill & \dotfill & \dotfill & 45.0 & 12.0 & \dotfill & \dotfill & \dotfill & \dotfill & \dotfill & \dotfill \\
+09 & \dotfill & \dotfill & \dotfill & 50.0 & 12.0 & \dotfill & \dotfill & \dotfill & \dotfill & \dotfill & \dotfill \\
+\rowcolor{rowalt}10 & \dotfill & \dotfill & \dotfill & 55.0 & 12.0 & \dotfill & \dotfill & \dotfill & \dotfill & \dotfill & \dotfill \\
+11 & \dotfill & \dotfill & \dotfill & 40.0 & 15.0 & \dotfill & \dotfill & \dotfill & \dotfill & \dotfill & \dotfill \\
+\rowcolor{rowalt}12 & \dotfill & \dotfill & \dotfill & 45.0 & 15.0 & \dotfill & \dotfill & \dotfill & \dotfill & \dotfill & \dotfill \\
+13 & \dotfill & \dotfill & \dotfill & 50.0 & 15.0 & \dotfill & \dotfill & \dotfill & \dotfill & \dotfill & \dotfill \\
+\rowcolor{rowalt}14 & \dotfill & \dotfill & \dotfill & 55.0 & 15.0 & \dotfill & \dotfill & \dotfill & \dotfill & \dotfill & \dotfill \\
+15 & \dotfill & \dotfill & \dotfill & 60.0 & 15.0 & \dotfill & \dotfill & \dotfill & \dotfill & \dotfill & \dotfill \\
+\rowcolor{rowalt}16 & \dotfill & \dotfill & \dotfill & 65.0 & 15.0 & \dotfill & \dotfill & \dotfill & \dotfill & \dotfill & \dotfill \\
+17 & \dotfill & \dotfill & \dotfill & \dotfill & \dotfill & \dotfill & \dotfill & \dotfill & \dotfill & \dotfill & \dotfill \\
+\rowcolor{rowalt}18 & \dotfill & \dotfill & \dotfill & \dotfill & \dotfill & \dotfill & \dotfill & \dotfill & \dotfill & \dotfill & \dotfill \\
+19 & \dotfill & \dotfill & \dotfill & \dotfill & \dotfill & \dotfill & \dotfill & \dotfill & \dotfill & \dotfill & \dotfill \\
+\rowcolor{rowalt}20 & \dotfill & \dotfill & \dotfill & \dotfill & \dotfill & \dotfill & \dotfill & \dotfill & \dotfill & \dotfill & \dotfill \\
+\bottomrule
+\end{tabularx}}
+
+\clearpage
+\section{Physical Design-Change Version Log \& Pre-Impound Compliance Certificate}\label{app:D.2}
+\idxdev{design-change version control log}
+\idxdev{pre-impound materials and dimensions compliance form}
+
+\par\noindent\textbf{Hardware Iteration \& Empirical Parameter Fitting Ledger (\sref{sec:15}, \sref{sec:16}).}
+Whenever any reflector geometry, foil/BoPET lining, cup cradle insulation, or unattached glazing ring is modified, assign a new Device Revision ID and refit $(\dot{Q}_{\mathrm{abs}}, R_{\mathrm{th}}, C_{\mathrm{eff}}, \tau, \kappa_{\mathrm{strat}})$:
+\par\smallskip\noindent
+{\scriptsize\setlength{\tabcolsep}{3pt}\renewcommand{\arraystretch}{1.35}
+\begin{tabularx}{\linewidth}{@{}l l >{\raggedright\arraybackslash}p{0.34\linewidth} c c c c >{\raggedright\arraybackslash}X@{}}
+\toprule
+\textbf{Rev} & \textbf{Date} & \textbf{Geometry / Optical / Insulation Modification} & \textbf{Outer Cube} & $\dot{Q}_{\mathrm{abs}}(40\text{cm})$ & $R_{\mathrm{th}}$ & $\tau$ & \textbf{Measured $\Delta\mathrm{TG}$ vs.\ Prior Rev} \\
+\textbf{ID} & & (\emph{Cone angle, aperture, cradle, glazing cap}) & ($\si{\centi\meter}$) & ($\si{\watt}$, 125W) & ($\si{\kelvin\per\watt}$) & ($\si{\second}$) & (\emph{Keep or revert decision}) \\
+\midrule
+\textbf{v1.0} & \texttt{11/22/26} & Baseline 1-stage truncated pyramid ($\SI{29.4}{\centi\meter}$ ap., shiny Al foil, cork cradle, unattached $50\,\si{\micro\meter}$ BoPET cap) & $29.4^3$ & $14.2$ & $3.10$ & $1320$ & Baseline reference ($\mathrm{TG}_{\mathrm{top}} = \SI{13.8}{\celsius}$ at $h=\SI{40}{\centi\meter}, \SI{10}{\minute}$) \\
+\rowcolor{rowalt}\textbf{v1.1} & \dotfill & \dotfill & \dotfill & \dotfill & \dotfill & \dotfill & \dotfill \\
+\textbf{v1.2} & \dotfill & \dotfill & \dotfill & \dotfill & \dotfill & \dotfill & \dotfill \\
+\rowcolor{rowalt}\textbf{v2.0} & \dotfill & \dotfill & \dotfill & \dotfill & \dotfill & \dotfill & \dotfill \\
+\textbf{v2.1} & \dotfill & \dotfill & \dotfill & \dotfill & \dotfill & \dotfill & \dotfill \\
+\rowcolor{rowalt}\textbf{v2.2} & \dotfill & \dotfill & \dotfill & \dotfill & \dotfill & \dotfill & \dotfill \\
+\textbf{v3.0} & \dotfill & \dotfill & \dotfill & \dotfill & \dotfill & \dotfill & \dotfill \\
+\bottomrule
+\end{tabularx}}
+\par\smallskip
+
+\begin{rulebox}[Pre-Impound Materials, Dimensions \& Safety Sign-Off Certificate (Copy \& Place Inside Device at Impound)]
+\par\smallskip\noindent
+{\footnotesize\setlength{\tabcolsep}{3.5pt}\renewcommand{\arraystretch}{1.18}
+\begin{tabularx}{\linewidth}{@{}c l >{\raggedright\arraybackslash}X l@{}}
+\toprule
+\textbf{Check} & \textbf{2027 Rule} & \textbf{Physical Compliance Verification Item (\src{S01,S02,S04,S05})} & \textbf{Measured / Verified Value} \\
+\midrule
+$\square$ & \texttt{Rule 3.b.i} \& \textbf{Clarif.\ \#6} & \textbf{ZERO Hazardous Materials / ZERO Polystyrene:} Device and spare parts contain \textbf{NO asbestos, mineral wool, fiberglass, Styrofoam (EPS/XPS), or \texttt{\#6 PS} plastic}. & All polymers labeled (\texttt{\#1 BoPET}, \texttt{\#2 HDPE}, cork, balsa, cardboard, cotton) \\
+\rowcolor{rowalt}$\square$ & \texttt{Rule 3.b.ii} & \textbf{ZERO Prohibited Commercial Gear:} No thermometers, probes, commercial thermoses, coolers, or vacuum-sealed vessels anywhere in device. & Custom student-built housing (\texttt{3.h}) \\
+$\square$ & \texttt{Rule 3.c} \& \texttt{4.g} & \textbf{9 oz Party Cup Fit:} Standard ES-provided 9 oz clear plastic party cup ($\approx\SI{10.0}{\centi\meter}$ tall, $\approx\SI{7.5}{\centi\meter}$ mouth) inserts and extracts in $< \SI{10}{\second}$ without binding. & Cradle ID $=\underline{\hspace{1.2cm}}\,\si{\centi\meter}$ \\
+\rowcolor{rowalt}$\square$ & \texttt{Rule 3.d} & \textbf{Maximum $\SI{30.0}{\centi\meter}$ Cubic Envelope:} Device \emph{with cup inserted and lid closed} measures $\le \SI{30.0}{\centi\meter}$ along Length, Width, and Height. & $L=\underline{\hspace{0.9cm}}$ $W=\underline{\hspace{0.9cm}}$ $H=\underline{\hspace{0.9cm}}\,\si{\centi\meter}$ \\
+$\square$ & \texttt{Rule 3.e} & \textbf{Zero Water Contact \& Zero Additives:} Internal upper reflector overhang/collar and unattached BoPET cap clear the $\SI{100}{\milli\liter}$ water meniscus ($z_{\mathrm{water}}\approx\SI{3.8}{\centi\meter}$) by $\ge \SI{2.0}{\centi\meter}$. & Min clearance above water $=\underline{\hspace{1.0cm}}\,\si{\centi\meter}$ \\
+\rowcolor{rowalt}$\square$ & \texttt{Rule 3.f} & \textbf{Zero Internal Energy Sources:} No batteries, wires, electrical components, or chemical reactants. Modular joints ready for post-test disassembly inspection if requested. & 100\% passive collector \\
+$\square$ & \texttt{Rule 2.d} \& \texttt{3.g} & \textbf{Room-Temperature Open Impound:} Device and spare parts impounded with lid open/ventilated so all components are at room temperature. & $T_{\mathrm{dev}} = T_{\mathrm{room}} = \underline{\hspace{1.0cm}}\,\si{\celsius}$ \\
+\rowcolor{rowalt}$\square$ & \texttt{Rule 5.II.d} \& \textbf{Clarif.\ \#5} & \textbf{Unattached Removable Vapor Cap:} Clear BoPET film ring rests by gravity alone; \textbf{ZERO tape, glue, rubber bands, or clips attach to the cup}; removed completely before $T_f$. & Mass of cap $=\underline{\hspace{1.0cm}}\,\si{\gram}$ \\
+\bottomrule
+\end{tabularx}}
+\par\vspace{3pt}\noindent
+{\footnotesize\textbf{Student Builders (\texttt{Rule 3.h} \& Building Policy \src{S01}):} Partner A: \dotfill\quad Partner B: \dotfill\quad Date: \dotfill}
+\end{rulebox}

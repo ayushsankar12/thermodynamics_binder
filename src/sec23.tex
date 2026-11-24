@@ -1,0 +1,418 @@
+% ============================================================================
+% src/sec23.tex — §23 Final Review & Last-Week Cram Layer (Target: 8 pp)
+% ============================================================================
+\binderchapter{23}{Final Review \& Last-Week Cram Layer}{§23 Final Review / Cram Layer}{sec:23}
+\scopebanner{REQUIRED}[All 2027 Syllabus Clauses 5.c.i--vii \& Part II Heat-Lamp Collector Testing]
+
+\idxtopic{final review and last-week cram layer}
+\idxtopic{Top-40 master equations for Thermodynamics Division C}
+\idxtopic{Top-25 constants and water/ice/steam reference values}
+\idxtopic{Top-15 exam-day point-losing traps}
+\idxdev{pre-block collector sanity and impound checklist}
+
+This standalone 8-page review layer condenses the highest-yield equations, constants, 8-scientist attribution keys (\texttt{5.c.v}), process/cycle comparison tables, heat-transfer mode choosers, rubric trap diagnostics, and 2027 heat-lamp collector checklists across \sref{sec:00}--\sref{sec:22}. Every equation is written in closed algebraic form (\texttt{Rule 5.d.iv} compliant: zero trigonometry or calculus required) with locked Physics First-Law signs ($\Delta U = Q - W_{\mathrm{by}}$) \src{S01,S06}.
+
+\section{Top-40 Master Competition Equations (\texttt{[C01]}--\texttt{[C40]})}\label{sec:23.1}
+
+{\centering
+\captionof{table}{Top-40 Master Competition Equations (\texttt{[C01]}--\texttt{[C20]}: Foundations, Calorimetry, Phases, Gases \& Processes) \src{S01,S07,S09,S13}.}\label{tab:23:eq1}
+\scriptsize
+\setlength{\tabcolsep}{2.5pt}
+\renewcommand{\arraystretch}{1.08}
+\begin{tabularx}{\linewidth}{@{}l L{0.35\linewidth} L{0.25\linewidth} X@{}}
+\toprule
+\hdr{ID} & \hdr{Closed-Form Algebraic Equation (\texttt{5.d.iv})} & \hdr{Variables \& SI Units} & \hdr{Validity Flags \& Competition Cue} \\
+\midrule
+\texttt{[C01]} & $\frac{T_A - A_{\mathrm{ice}}}{A_{\mathrm{boil}} - A_{\mathrm{ice}}} = \frac{T_B - B_{\mathrm{ice}}}{B_{\mathrm{boil}} - B_{\mathrm{ice}}} = \frac{T_{\mathrm{C}}}{100}$ & $A_{\mathrm{ice}}, A_{\mathrm{boil}}$: freeze/boil pts at \SI{1}{atm}; $T_{\mathrm{C}}$ $[\si{\celsius}]$ & \CONSTC\ Universal 2-point linear scale converter (\texttt{K, \textdegree C, \textdegree F, \textdegree R, \textdegree R\'{e}, \textdegree De, \textdegree N, \textdegree R\o}). \\
+\rowcolor{rowalt}
+\texttt{[C02]} & $\Delta T_{\mathrm{K}} = \Delta T_{\mathrm{C}} = \frac{5}{9}\Delta T_{\mathrm{F}} = \frac{5}{9}\Delta T_{\mathrm{R}} = -\frac{2}{3}\Delta T_{\mathrm{De}}$ & $\Delta T$: temp \textit{interval} $[\si{\kelvin}]$ or $[\si{\celsius}]$ & \textbf{NEVER add $+273.15$ or $+32$ to a difference $\Delta T$ or specific heat unit!} \\
+\texttt{[C03]} & $\Delta L = \alpha_L L_0 \Delta T$; $\Delta A \approx 2\alpha_L A_0 \Delta T$; $\Delta V = \beta_V V_0 \Delta T$ & $\alpha_L, \beta_V \approx 3\alpha_L$ $[\si{\per\kelvin}]$; $L_0, A_0, V_0$ & Isotropic solids; holes/cavities expand identically to solid material! \\
+\rowcolor{rowalt}
+\texttt{[C04]} & $\Delta V_{\mathrm{over}} = (\beta_{\mathrm{liq}} - 3\alpha_{\mathrm{vessel}})V_0\Delta T$; $V_{b,f} = V_0(1+\beta_g\Delta T)$ & $\beta_{\mathrm{liq}}, \beta_g$ $[\si{\per\kelvin}]$; $V_0$ $[\si{\cubic\meter}]$ & Liquid overflow / Regnault dilatometer bulb expansion correction (\texttt{E1 Q26d}). \\
+\texttt{[C05]} & $\sigma_{\mathrm{th}} = \frac{F}{A} = -E\,\alpha_L\,\Delta T$; $\frac{\Delta P_{\mathrm{pend}}}{P_{\mathrm{pend}}} \approx +\frac{1}{2}\alpha_L\Delta T$ & $E$: Young's modulus $[\si{\pascal}]$; $\sigma_{\mathrm{th}}$ $[\si{\pascal}]$ & Rigidly clamped rod thermal stress; heated pendulum clock runs slow. \\
+\rowcolor{rowalt}
+\texttt{[C06]} & $Q_{\mathrm{sens}} = m c \Delta T = n C_m \Delta T = C \Delta T$; $Q_{\mathrm{lat}} = \pm m L$ & $c$ $[\si{\joule\per\kilogram\per\kelvin}]$; $C_m = M c$; $L$ $[\si{\joule\per\kilogram}]$ & \CONSTC\ Sensible ($+$ warming) vs.\ isothermal phase-change latent heat. \\
+\texttt{[C07]} & $T_f = \frac{\sum m_i c_i T_i + C_{\mathrm{cal}} T_{\mathrm{cal},i}}{\sum m_i c_i + C_{\mathrm{cal}}}$; $m_{\mathrm{eq}} = \frac{C_{\mathrm{cal}}}{c_w}$ & $C_{\mathrm{cal}}$ $[\si{\joule\per\kelvin}]$; $m_{\mathrm{eq}}$ $[\si{\kilogram}]$ & \CLSD\ Single-phase $N$-body method of mixtures with calorimeter heat capacity. \\
+\rowcolor{rowalt}
+\texttt{[C08]} & $E_{\mathrm{net},0} = E_w + E_s - m_{\mathrm{ice}}c_{\mathrm{ice}}(0-T_{\mathrm{ice}}) - m_{\mathrm{ice}}L_f$ & $E_{\mathrm{net},0}$ $[\si{\joule}]$ rel.\ to $\SI{0}{\celsius}$ liquid & 5-Zone ice--water--steam ledger: if $-m_{\mathrm{ice}}L_f \le E_{\mathrm{net},0} \le 0 \implies T_f = \SI{0.0}{\celsius}$! \\
+\texttt{[C09]} & $\Delta H_{\mathrm{rxn}} = \Delta U_{\mathrm{rxn}} + (\Delta n_{\mathrm{gas}})RT$; $Q_V = \Delta U$; $Q_P = \Delta H$ & $\Delta n_{\mathrm{gas}} = \sum \nu_{p,g} - \sum \nu_{r,g}$ $[\si{\mole}]$ & Bomb calorimeter ($\Delta V=0 \implies \Delta U$) to isobaric coffee-cup ($\Delta H$) conversion. \\
+\rowcolor{rowalt}
+\texttt{[C10]} & $\Delta H_{\mathrm{vap}}(T) = \Delta H_{\mathrm{vap}}(T_b) + (C_{P,l} - C_{P,g})(T_b - T)$ & $C_{P,l} \approx \SI{75.3}{}, C_{P,g} \approx \SI{33.6}{\joule\per\mole\per\kelvin}$ & Kirchhoff enthalpy cycle for room/body-temp evaporation (\texttt{E2 P3e TB\#3}). \\
+\texttt{[C11]} & $\frac{\Delta P}{\Delta T} = \frac{\Delta H_m}{T\,\Delta V_m} = \frac{L}{T(v_2 - v_1)} = \frac{\Delta S_m}{\Delta V_m}$ & $\Delta P/\Delta T$ $[\si{\pascal\per\kelvin}]$; $T$ $[\si{\kelvin}]$ & Exact Clapeyron phase-boundary slope ($\mathrm{H_2O}$ S--L: $\Delta v < 0 \implies -13.5\text{ MPa/K}$). \\
+\rowcolor{rowalt}
+\texttt{[C12]} & $\ln\!\left(\frac{P_2}{P_1}\right) = -\frac{\Delta H_{\mathrm{vap},m}}{R}\!\left(\frac{1}{T_2} - \frac{1}{T_1}\right)$; $f_L = \frac{C_0 - C_S}{C_L - C_S}$ & $P$ in any consistent unit; $T$ $[\si{\kelvin}]$ & 2-pt Clausius--Clapeyron ($v_g \gg v_f$) \& binary alloy tie-line lever rule (\texttt{E1 Q30c}). \\
+\texttt{[C13]} & $y = y_f + x\,y_{fg}$ ($y \in \{v, u, h, s\}$); $F = C - P + 2$ & $x = m_g/m_{\mathrm{tot}} \in [0,1]$; $y_{fg} = y_g - y_f$ & Wet-steam quality lever rule inside dome (\texttt{E1 Q28--29}) \& Gibbs Phase Rule. \\
+\rowcolor{rowalt}
+\texttt{[C14]} & $PV = nRT = Nk_BT = mR_sT$; $\rho = \frac{PM}{RT} = \frac{m_0 P}{k_B T}$ & $P_{\mathrm{abs}}$ $[\si{\pascal}]$; $M$ $[\si{\kilogram\per\mole}]$; $R_s = R/M$ & \IG\ Always convert gauge pressure $P_{\mathrm{abs}} = P_{\mathrm{gauge}} + P_{\mathrm{atm}}$ and $T$ to Kelvin! \\
+\texttt{[C15]} & $P = \frac{1}{3}\rho v_{\mathrm{rms}}^2 = \frac{2}{3}\left(\frac{N}{V}\right)K_{\mathrm{trans}}$; $K_{\mathrm{trans}} = \frac{3}{2}k_BT$ & $v_{\mathrm{rms}} = \sqrt{\langle v^2\rangle}$ $[\si{\meter\per\second}]$ & \IG\ Microscopic temperature depends on $\langle v^2\rangle \ne \langle v\rangle^2$ (\texttt{E3 Q21b}). \\
+\rowcolor{rowalt}
+\texttt{[C16]} & $v_{\mathrm{mp}} = \sqrt{\frac{2RT}{M}} < v_{\mathrm{avg}} = \sqrt{\frac{8RT}{\pi M}} < v_{\mathrm{rms}} = \sqrt{\frac{3RT}{M}}$ & $M$ in $\si{\kilogram\per\mole}$ (e.g.\ $\mathrm{N_2} = \num{0.02801}$) & \IG\ Speed ratios $1 : 1.1284 : 1.2247$; sound speed $c_s = \sqrt{\gamma RT/M}$. \\
+\texttt{[C17]} & $U = \frac{f}{2}nRT$; $C_{V,m} = \frac{f}{2}R = \frac{R}{\gamma-1}$; $C_{P,m} = \frac{\gamma R}{\gamma-1}$ & $f$: active quadratic modes; $\gamma = \frac{f+2}{f}$ & \IG\ Mayer's relation $C_{P,m}-C_{V,m}=R$; 3D solid Dulong--Petit $C_m = 3R$ (2D: $2R$). \\
+\rowcolor{rowalt}
+\texttt{[C18]} & $\lambda = \frac{k_B T}{\sqrt{2}\,\pi d^2 P}$; $\left(P + \frac{an^2}{V^2}\right)(V - nb) = nRT$ & $d$: diameter $[\si{\meter}]$; $Z = \frac{PV}{nRT}$ & Mean free path \& van der Waals ($a$: attraction $Z<1$; $b$: excluded volume $Z>1$). \\
+\texttt{[C19]} & $\Delta U = Q - W_{\mathrm{by}} = q + w_{\mathrm{on}}$; $W_{\mathrm{by,isob}} = P\Delta V = nR\Delta T$ & $Q > 0$ in; $W_{\mathrm{by}} > 0$ expansion out & \CLSD\ Physics vs.\ Chemistry First Law; isobaric work fraction $W_{\mathrm{by}}/Q_P = 1 - 1/\gamma$. \\
+\rowcolor{rowalt}
+\texttt{[C20]} & $W_{\mathrm{by,isoth}} = nRT\ln\!\left(\frac{V_2}{V_1}\right)$; $W_{\mathrm{by,adiab}} = \frac{P_1V_1 - P_2V_2}{\gamma - 1}$ & $P_1V_1^\gamma = P_2V_2^\gamma$; $T_1V_1^{\gamma-1} = T_2V_2^{\gamma-1}$ & \IG\ \REV\ Isothermal ($\Delta U=0 \implies Q=W_{\mathrm{by}}$) vs.\ Adiabatic ($Q=0 \implies W_{\mathrm{by}}=-\Delta U$). \\
+\bottomrule
+\end{tabularx}
+\par}\smallskip
+
+{\centering
+\captionof{table}{Top-40 Master Competition Equations (\texttt{[C21]}--\texttt{[C40]}: Cycles, Entropy/Exergy, Heat Transfer, 2027 Collector \& Uncertainty) \src{S01,S12,S21,S25}.}\label{tab:23:eq2}
+\scriptsize
+\setlength{\tabcolsep}{2.5pt}
+\renewcommand{\arraystretch}{1.08}
+\begin{tabularx}{\linewidth}{@{}l L{0.35\linewidth} L{0.25\linewidth} X@{}}
+\toprule
+\hdr{ID} & \hdr{Closed-Form Algebraic Equation (\texttt{5.d.iv})} & \hdr{Variables \& SI Units} & \hdr{Validity Flags \& Competition Cue} \\
+\midrule
+\texttt{[C21]} & $\eta = \frac{W_{\mathrm{net}}}{Q_H} = 1 - \frac{Q_C}{Q_H} \le \eta_C = 1 - \frac{T_C}{T_H}$ & $T_C, T_H$ in \textbf{Kelvin}; $W_{\mathrm{net}} = Q_H - Q_C$ & Heat engine 1st/2nd Law efficiency; series cascade $\eta_{\mathrm{casc}} = \eta_1 + \eta_2 - \eta_1\eta_2$. \\
+\rowcolor{rowalt}
+\texttt{[C22]} & $\mathrm{COP}_R = \frac{Q_C}{W_{\mathrm{in}}} \le \frac{T_C}{T_H - T_C}$; $\mathrm{COP}_{\mathrm{HP}} = \mathrm{COP}_R + 1$ & $W_{\mathrm{in}} = Q_H - Q_C > 0$ $[\si{\joule}]$ & Refrigerator vs.\ Heat Pump exact identity ($\mathrm{COP}_{\mathrm{HP,C}} = 1/\eta_C$). \\
+\texttt{[C23]} & $\eta_{\mathrm{Otto}} = 1 - \frac{1}{r^{\gamma-1}}$; $\eta_{\mathrm{Brayton}} = 1 - \frac{1}{r_p^{(\gamma-1)/\gamma}}$ & $r = V_{\max}/V_{\min}$; $r_p = P_{\max}/P_{\min}$ & \IG\ Air-standard Otto (spark-ignition) and Brayton (gas-turbine) efficiencies. \\
+\rowcolor{rowalt}
+\texttt{[C24]} & $\eta_{\mathrm{Diesel}} = 1 - \frac{1}{r^{\gamma-1}}\left[\frac{r_c^\gamma - 1}{\gamma(r_c - 1)}\right]$ & $r_c = V_3/V_2$: isobaric cutoff ratio & \IG\ Diesel cycle: for equal compression ratio $r$, $\eta_{\mathrm{Otto}} > \eta_{\mathrm{Diesel}}$ ($r_c > 1$). \\
+\texttt{[C25]} & $w_{t,s} = h_1 - h_{2s}$; $w_{t,a} = \eta_s w_{t,s}$; $\eta_{\mathrm{Rank}} = \frac{w_{t,a} - w_p}{h_1 - h_4}$ & $h = u + Pv$ $[\si{\kilo\joule\per\kilogram}]$; $w_p \approx v_f\Delta P$ & \SSFL\ Rankine steam cycle with isentropic turbine efficiency $\eta_s$ (\texttt{E1 Q29}). \\
+\rowcolor{rowalt}
+\texttt{[C26]} & $T_{2i} = \frac{n_1 V_{2i}}{n_2 V_{1i}}T_{1i}$; $T_f = \frac{n_1 C_{V,1}T_{1i} + n_2 C_{V,2}T_{2i}}{n_1 C_{V,1} + n_2 C_{V,2}}$ & Insulated 2-compartment mobile piston & \IG\ Mechanical balance $P_1=P_2$ + total $\Delta U_1+\Delta U_2=0$ (\texttt{E3 Q24}: if $\gamma_1=\gamma_2$, $P_f=P_i$!). \\
+\texttt{[C27]} & $\Delta S_{\mathrm{const-}C} = m c \ln\!\left(\frac{T_2}{T_1}\right)$; $\Delta S_{\mathrm{tr}} = \frac{\pm m L}{T_{\mathrm{tr}}}$ & $\Delta S$ $[\si{\joule\per\kelvin}]$; $T_1, T_2, T_{\mathrm{tr}}$ $[\si{\kelvin}]$ & \TIERf\ Entropy of finite-body heating/cooling \& isothermal phase transition. \\
+\rowcolor{rowalt}
+\texttt{[C28]} & $\Delta S_{\mathrm{IG}} = nC_{V,m}\ln\!\left(\frac{T_2}{T_1}\right) + nR\ln\!\left(\frac{V_2}{V_1}\right)$; $S = k_B\ln\Omega$ & $\Omega$: microstate multiplicity & \TIERf\ \IG\ Ideal-gas entropy (also $nC_{P,m}\ln(T_2/T_1) - nR\ln(P_2/P_1)$) \& Boltzmann law. \\
+\texttt{[C29]} & $S_{\mathrm{gen}} = \Delta S_{\mathrm{sys}} - \sum \frac{Q_k}{T_k} \ge 0$; $X_{\mathrm{dest}} = T_0\,S_{\mathrm{gen}}$ & $T_0$: dead-state ambient $[\si{\kelvin}]$ & \TIERf\ Gouy--Stodola exergy destruction \& 2nd-Law efficiency $\eta_2 = \eta_1/\eta_C$ (\texttt{E1 Q29}). \\
+\rowcolor{rowalt}
+\texttt{[C30]} & $\Delta G = \Delta H - T\Delta S$; $T_{\mathrm{eq}} = \frac{\Delta H^\circ}{\Delta S^\circ}$; $\Delta G^\circ = -RT\ln K_{\mathrm{eq}}$ & $\Delta G < 0$: spontaneous at const $T,P$ & \TIERf\ 4-quadrant reaction spontaneity \& crossover temperature (\texttt{E6 Sec V Q1}). \\
+\texttt{[C31]} & $\dot{Q} = \frac{\Delta T}{R_{\mathrm{th}}}$; $R_{\mathrm{slab}} = \frac{L}{kA}$; $R_{\mathrm{cyl}} = \frac{\ln(r_2/r_1)}{2\pi k \ell}$; $R_{\mathrm{sph}} = \frac{r_2-r_1}{4\pi k r_1 r_2}$ & $\dot{Q}$ $[\si{\watt}]$; $R_{\mathrm{th}}$ $[\si{\kelvin\per\watt}]$; $k$ $[\si{\watt\per\meter\per\kelvin}]$ & \SSFL\ Steady Fourier conduction (\texttt{E4 Q11} cylindrical pipe); $r_{\mathrm{crit,cyl}} = k/h$, $r_{\mathrm{crit,sph}} = 2k/h$. \\
+\rowcolor{rowalt}
+\texttt{[C32]} & $\frac{\kappa}{\sigma_{\mathrm{el}} T} = L_0$; $L_{\mathrm{Drude}} = \frac{3}{2}\!\left(\frac{k_B}{e}\right)^{\!2} = \SI{1.11e-8}{\watt\ohm\per\kelvin\squared}$ & $\sigma_{\mathrm{el}} = \frac{ne^2\tau}{m}$; $\kappa = \frac{3nk_B^2 T\tau}{2m}$ & Wiedemann--Franz Law for metals ($L_{\mathrm{quantum}} = \frac{\pi^2}{3}(k_B/e)^2 = \SI{2.44e-8}{\watt\ohm\per\kelvin\squared}$, \texttt{E1 Q34}). \\
+\texttt{[C33]} & $\dot{Q}_{\mathrm{conv}} = h A (T_s - T_\infty)$; $\mathrm{Ra}_L = \frac{g\beta\Delta T L^3}{\nu\alpha}$; $\mathrm{Nu} = \frac{hL}{k_f}$ & $\mathrm{Ra}_{\delta} < 1708 \implies$ stagnant air gap & Natural convection onset ($\delta_{\mathrm{opt}} \approx \SIrange{10}{12}{\milli\meter}$ dead-air gap); top-heated water has $\mathrm{Ra} < 0$. \\
+\rowcolor{rowalt}
+\texttt{[C34]} & $M_e = \varepsilon\sigma T^4$; $L_e = \frac{\varepsilon\sigma T^4}{\pi}$; $\lambda_{\max}T = b = \SI{2897.8}{\micro\meter\kelvin}$ & $M_e$ $[\si{\watt\per\square\meter}]$; $L_e$ $[\si{\watt\per\square\meter\per\steradian}]$ & \TIERf\ Stefan--Boltzmann exitance vs.\ Lambertian directional radiance (\texttt{E1 Q36e}) \& Wien peak. \\
+\texttt{[C35]} & $\dot{Q}_{\mathrm{rad},N} = \frac{\sigma A (T_1^4 - T_2^4)}{\frac{1}{\varepsilon_1} + \frac{1}{\varepsilon_2} - 1 + N\left(\frac{2}{\varepsilon_s} - 1\right)}$ & $N$: radiation shields of emissivity $\varepsilon_s$ & For equal $\varepsilon$, $N$ shields cut radiative transfer by $\frac{1}{N+1}$; Earth temp $T_E = T_S\sqrt{\frac{R_S}{2D}}$ (\texttt{E3 Q23}). \\
+\rowcolor{rowalt}
+\texttt{[C36]} & $T(t) = T_{\mathrm{ss}} - (T_{\mathrm{ss}} - T_0)e^{-t/\tau}$; $\tau = R_{\mathrm{th}}C_{\mathrm{eff}}$; $T_{\mathrm{ss}} = T_\infty + \dot{Q}_{\mathrm{abs}}R_{\mathrm{th}}$ & $\mathrm{Bi} = \frac{h L_c}{k_s} < 0.1$; $t = -\tau\ln\!\left(\frac{T_{\mathrm{ss}}-T}{T_{\mathrm{ss}}-T_0}\right)$ & \LUMP\ Lumped heating/cooling ODE solution (\texttt{E1 Q23a} scone baking \& 2027 collector curve). \\
+\texttt{[C37]} & $\Delta t_{\mathrm{rad,vac}} = \frac{m c}{3\,\varepsilon\,\sigma\,A}\!\left(\frac{1}{T_f^3} - \frac{1}{T_i^3}\right)$ & $T_i, T_f$ in \textbf{Kelvin}; $0\text{ K}$ vacuum surroundings & \TIERf\ Closed-form time to radiatively cool from $T_i$ to $T_f$ in vacuum (\texttt{E4 Q14d} iron cube). \\
+\rowcolor{rowalt}
+\texttt{[C38]} & $I(z) = I_0 e^{-\mu_a(\lambda) z}$; $\dot{Q}_{\mathrm{evap}} = \dot{m}_{\mathrm{evap}} L_v = g_m A_{\mathrm{surf}}\Delta m_{\mathrm{H_2O}} L_v$ & $\delta_p = 1/\mu_a$ ($<\SI{1}{\milli\meter}$ for $\lambda > \SI{1.4}{\micro\meter}$) & 2027 Collector: near-IR heats top water skin directly; BoPET cap blocks $\dot{Q}_{\mathrm{evap}} \approx \SI{2.5}{\watt}$! \\
+\texttt{[C39]} & $T_{\mathrm{pred}} = \mathrm{TG}_{\mathrm{tab}}(h, P_{\mathrm{bulb}}, t) + e^{-t/\tau}T_{\mathrm{start}} + (1 - e^{-t/\tau})T_{\mathrm{room}}$ & $T_{\mathrm{pred}}, T_{\mathrm{start}}, T_{\mathrm{room}}$ in $\si{\celsius}$ (\texttt{Rule 6.f}) & 2027 Collector 15-sec prediction formula ($\mathrm{PE} = 1 - |T_f - T_{\mathrm{pred}}|/T_f$ in $\si{\celsius}$). \\
+\rowcolor{rowalt}
+\texttt{[C40]} & $u_c(y) = \sqrt{\sum \!\left(\frac{\partial f}{\partial x_i}u(x_i)\right)^{\!2}}$; $\frac{u(x^n)}{|x^n|} = |n|\frac{u(x)}{|x|}$ & $u_A = s/\sqrt{n}$; $u_{B,\mathrm{res}} = \Delta_{\mathrm{res}}/(2\sqrt{3})$ & JCGM GUM uncertainty propagation; probe $99.3\%$ settling time $t_{\mathrm{settle}} = 5\tau_p$. \\
+\bottomrule
+\end{tabularx}
+\par}\smallskip
+
+\section{Top-25 Constants, Water Fixed Points \& 8-Scale Conversion Flash Card}\label{sec:23.2}
+
+{\centering
+\captionof{table}{Left: Top-25 CODATA 2022 Constants, Gas Constant $R$ Forms \& Energy/Pressure Units \src{S07,S08}. Right: NIST Water/Ice/Steam Properties at Competition Benchmarks ($P = \SI{101.325}{\kilo\pascal}$ unless noted) \src{S09,S11}.}\label{tab:23:consts}
+\scriptsize
+\setlength{\tabcolsep}{2.4pt}
+\renewcommand{\arraystretch}{1.08}
+\begin{tabularx}{\linewidth}{@{}L{0.19\linewidth} L{0.28\linewidth} | L{0.21\linewidth} X@{}}
+\toprule
+\hdr{Constant / Unit} & \hdr{Exact / CODATA 2022 Value} & \hdr{Water / Gas State} & \hdr{NIST Reference Properties} \\
+\midrule
+$k_B$ (Boltzmann exact) & $\SI{1.380649e-23}{\joule\per\kelvin}$ & $\mathrm{H_2O}$ Triple Point & $T_{\mathrm{tp}} = \SI{273.16}{\kelvin} = \SI{0.01}{\celsius}$; $P_{\mathrm{tp}} = \SI{611.657}{\pascal}$ ($\SI{0.006037}{\text{atm}}$) \\
+\rowcolor{rowalt}
+$N_A$ (Avogadro exact) & $\SI{6.02214076e23}{\per\mole}$ & $\mathrm{H_2O}$ Critical Point & $T_c = \SI{647.096}{\kelvin} = \SI{373.95}{\celsius}$; $P_c = \SI{22.064}{\mega\pascal}$; $\rho_c = \SI{322.0}{\kilogram\per\cubic\meter}$ \\
+$R = N_A k_B$ (SI) & $\SI{8.314462618}{\joule\per\mole\per\kelvin}$ & $\mathrm{CO_2}$ Triple / Subl. & $T_{\mathrm{tp}}=\SI{-56.56}{\celsius}, P_{\mathrm{tp}}=\SI{5.18}{\text{bar}}$; sublimes at $\SI{-78.46}{\celsius}$ (\SI{1}{\text{atm}}) \\
+\rowcolor{rowalt}
+$R$ ($\mathrm{L\cdot atm}$ / $\mathrm{L\cdot Torr}$) & $\num{0.082057366}$ / $\SI{62.363598}{\liter\text{Torr}\per\mole\per\kelvin}$ & Ice Ih ($\SI{0.0}{\celsius}$) & $\rho = \SI{916.7}{\kilogram\per\cubic\meter}$; $c_p = \SI{2.093}{\kilo\joule\per\kilogram\per\kelvin}$; $k = \SI{2.22}{\watt\per\meter\per\kelvin}$ \\
+$R$ ($\mathrm{cal}_{\mathrm{th}}$) & $\SI{1.987204259}{\text{cal}_{\mathrm{th}}\per\mole\per\kelvin}$ & $\mathrm{H_2O}$ Fusion ($\SI{0.0}{\celsius}$) & $L_f = \SI{333.55}{\kilo\joule\per\kilogram} \approx \SI{334}{\joule\per\gram}$ ($\Delta H_{\mathrm{fus}} = \SI{6.009}{\kilo\joule\per\mole}$) \\
+\rowcolor{rowalt}
+$R_{s,\mathrm{air}}$ ($M=\SI{28.965}{\gram\per\mole}$) & $\SI{287.053}{\joule\per\kilogram\per\kelvin}$ & Water ($\SI{0.0}{\celsius}$ liq.) & $\rho = \SI{999.84}{\kilogram\per\cubic\meter}$; $c_p = \SI{4.2176}{\kilo\joule\per\kilogram\per\kelvin}$; $k = \SI{0.561}{\watt\per\meter\per\kelvin}$ \\
+$R_{s,\mathrm{steam}}$ ($M=\SI{18.015}{\gram\per\mole}$) & $\SI{461.523}{\joule\per\kilogram\per\kelvin}$ & Water ($\SI{4.0}{\celsius}$ max $\rho$) & $\rho_{\max} = \SI{999.972}{\kilogram\per\cubic\meter}$; $\beta_V(\SI{4}{\celsius}) = \SI{0.000}{\per\kelvin}$ (buoyancy inversion!) \\
+\rowcolor{rowalt}
+$h$ (Planck); $c_0$ (light) & $\SI{6.62607015e-34}{\joule\second}$; $\SI{2.99792458e8}{\meter\per\second}$ & Water ($\SI{20.0}{\celsius}$) & $\rho = \SI{998.21}{\kilogram\per\cubic\meter}$; $c_p = \SI{4.1844}{\kilo\joule\per\kilogram\per\kelvin}$; $P_{\mathrm{sat}} = \SI{2.339}{\kilo\pascal}$ \\
+$\sigma$ (Stefan--Boltzmann) & $\SI{5.670374419e-8}{\watt\per\square\meter\per\kelvin\tothe{4}}$ & Water ($\SI{25.0}{\celsius}$) & $\rho = \SI{997.05}{\kilogram\per\cubic\meter}$; $c_p = \SI{4.1813}{\kilo\joule\per\kilogram\per\kelvin}$; $L_v = \SI{2441.7}{\kilo\joule\per\kilogram}$ \\
+\rowcolor{rowalt}
+$b_{\mathrm{Wien}}$ ($\lambda_{\max}T$) & $\SI{2.897771955e-3}{\meter\kelvin}$ ($\SI{2897.8}{\micro\meter\kelvin}$) & Water ($\SI{37.0}{\celsius}$ body) & $\rho = \SI{993.33}{\kilogram\per\cubic\meter}$; $P_{\mathrm{sat}} = \SI{6.282}{\kilo\pascal}$; $L_v = \SI{2413.1}{\kilo\joule\per\kilogram}$ ($\SI{43.47}{\kilo\joule\per\mole}$) \\
+$e$ (charge); $F = N_A e$ & $\SI{1.602176634e-19}{\coulomb}$; $\SI{96485.332}{\coulomb\per\mole}$ & Water ($\SI{100.0}{\celsius}$ sat.) & $\rho = \SI{958.37}{\kilogram\per\cubic\meter}$; $c_p = \SI{4.2157}{\kilo\joule\per\kilogram\per\kelvin}$; $k = \SI{0.679}{\watt\per\meter\per\kelvin}$ \\
+\rowcolor{rowalt}
+$\SI{1}{\text{cal}_{\mathrm{th}}}$ (thermochem.) & $\SI{4.184}{\joule}$ ($\SI{1}{\text{kcal}} = \SI{1}{\text{Cal}} = \SI{4184}{\joule}$) & Vaporization ($\SI{100}{\celsius}$) & $L_v = \SI{2256.4}{\kilo\joule\per\kilogram} \approx \SI{2260}{\joule\per\gram}$ ($\Delta H_{\mathrm{vap}} = \SI{40.65}{\kilo\joule\per\mole}$) \\
+$\SI{1}{\text{BTU}_{\mathrm{IT}}}$; $\SI{1}{\text{CHU}}$ & $\SI{1055.056}{\joule}$ ($\SI{252.16}{\text{cal}}$); $\SI{1899.10}{\joule}$ & Steam ($\SI{100}{\celsius}$, \SI{1}{\text{atm}}) & $\rho_v = \SI{0.5977}{\kilogram\per\cubic\meter}$ ($v_g = \SI{1.673}{\cubic\meter\per\kilogram}$); $c_{p,v} = \SI{2.080}{\kilo\joule\per\kilogram\per\kelvin}$ \\
+\rowcolor{rowalt}
+$\SI{1}{\text{L}\cdot\text{atm}}$; $\SI{1}{\text{ft}\cdot\text{lbf}}$ & $\SI{101.325}{\joule}$; $\SI{1.355818}{\joule}$ ($\SI{1}{\text{erg}}=\SI{e-7}{\joule}$) & Dry Air ($\SI{25}{\celsius}$, \SI{1}{\text{atm}}) & $\rho = \SI{1.184}{\kilogram\per\cubic\meter}$; $c_p = \SI{1.006}{\kilo\joule\per\kilogram\per\kelvin}$; $k = \SI{0.0262}{\watt\per\meter\per\kelvin}$ \\
+$\SI{1}{\text{atm}}$ (std.\ pressure) & $\SI{101325}{\pascal} = \SI{1.01325}{\text{bar}} = \SI{760}{\text{Torr}} = \SI{14.696}{\text{psi}}$ & Mercury ($\SI{20}{\celsius}$) & $\rho_{\mathrm{Hg}} = \SI{13545.8}{\kilogram\per\cubic\meter}$; $c_p = \SI{0.1395}{\kilo\joule\per\kilogram\per\kelvin}$; $\beta_V = \SI{1.81e-4}{\per\kelvin}$ \\
+\bottomrule
+\end{tabularx}
+\par}\smallskip
+
+{\centering
+\captionof{table}{Master 8-Scale Temperature Conversion \& Equal-Reading Crossover Flash Card (\texttt{Rule 5.c.i}; tested on \texttt{E1, E2, E3, E4, E6, E7, E8}) \src{S01,S25,S28,S30}.}\label{tab:23:scales}
+\scriptsize
+\setlength{\tabcolsep}{2.8pt}
+\renewcommand{\arraystretch}{1.08}
+\begin{tabularx}{\linewidth}{@{}l l r r r r r l X@{}}
+\toprule
+\hdr{Scale Name} & \hdr{Sym.} & \hdr{Abs.\ Zero} & \hdr{Ice Pt} & \hdr{$\SI{20}{\celsius}$} & \hdr{Body $\SI{37}{\celsius}$} & \hdr{Steam Pt} & \hdr{From Celsius ($T_{\mathrm{C}}$)} & \hdr{To Celsius ($T_{\mathrm{C}}$)} \\
+\midrule
+\textbf{Kelvin} (2019 SI: fixed $k_B$) & $\si{\kelvin}$ & $0.00$ & $273.15$ & $293.15$ & $310.15$ & $373.15$ & $T_{\mathrm{K}} = T_{\mathrm{C}} + 273.15$ & $T_{\mathrm{C}} = T_{\mathrm{K}} - 273.15$ \\
+\rowcolor{rowalt}
+\textbf{Celsius} (Pre-1743 inverted!) & $\si{\celsius}$ & $-273.15$ & $0.00$ & $20.00$ & $37.00$ & $100.00$ & $T_{\mathrm{C}} = T_{\mathrm{C}}$ & $T_{\mathrm{C}} = T_{\mathrm{C}}$ \\
+\textbf{Fahrenheit} & $^{\circ}\mathrm{F}$ & $-459.67$ & $32.00$ & $68.00$ & $98.60$ & $212.00$ & $T_{\mathrm{F}} = \frac{9}{5}T_{\mathrm{C}} + 32$ & $T_{\mathrm{C}} = \frac{5}{9}(T_{\mathrm{F}} - 32)$ \\
+\rowcolor{rowalt}
+\textbf{Rankine} (Absolute Fahr.) & $^{\circ}\mathrm{R}$ & $0.00$ & $491.67$ & $527.67$ & $558.27$ & $671.67$ & $T_{\mathrm{R}} = \frac{9}{5}T_{\mathrm{K}} = T_{\mathrm{F}} + 459.67$ & $T_{\mathrm{C}} = \frac{5}{9}T_{\mathrm{R}} - 273.15$ \\
+\textbf{R\'{e}aumur} (Octogesimal) & $^{\circ}\mathrm{R\acute{e}}$ & $-218.52$ & $0.00$ & $16.00$ & $29.60$ & $80.00$ & $T_{\mathrm{R\acute{e}}} = \frac{4}{5}T_{\mathrm{C}} = 0.8\,T_{\mathrm{C}}$ & $T_{\mathrm{C}} = \frac{5}{4}T_{\mathrm{R\acute{e}}} = 1.25\,T_{\mathrm{R\acute{e}}}$ \\
+\rowcolor{rowalt}
+\textbf{Delisle} (\textbf{Inverted!} Boil $= 0$) & $^{\circ}\mathrm{De}$ & $+559.725$ & $150.00$ & $120.00$ & $94.50$ & $0.00$ & $T_{\mathrm{De}} = \frac{3}{2}(100 - T_{\mathrm{C}})$ & $T_{\mathrm{C}} = 100 - \frac{2}{3}T_{\mathrm{De}}$ \\
+\textbf{Newton} & $^{\circ}\mathrm{N}$ & $-90.14$ & $0.00$ & $6.60$ & $12.21$ & $33.00$ & $T_{\mathrm{N}} = \frac{33}{100}T_{\mathrm{C}} = 0.33\,T_{\mathrm{C}}$ & $T_{\mathrm{C}} = \frac{100}{33}T_{\mathrm{N}}$ \\
+\rowcolor{rowalt}
+\textbf{R\o{}mer} & $^{\circ}\mathrm{R\o}$ & $-135.90$ & $7.50$ & $18.00$ & $26.925$ & $60.00$ & $T_{\mathrm{R\o}} = \frac{21}{40}T_{\mathrm{C}} + 7.5$ & $T_{\mathrm{C}} = \frac{40}{21}(T_{\mathrm{R\o}} - 7.5)$ \\
+\midrule
+\multicolumn{9}{@{}l@{}}{\textbf{Equal-Reading Intersections:} $T_{\mathrm{C}} = T_{\mathrm{F}} = \mathbf{-40.0^\circ}$ $\cdot$ $T_{\mathrm{K}} = T_{\mathrm{F}} = \mathbf{+574.5875^\circ}$ ($\SI{301.44}{\celsius}$) $\cdot$ $T_{\mathrm{C}} = T_{\mathrm{De}} = \mathbf{+60.0^\circ}$ $\cdot$ $T_{\mathrm{F}} = T_{\mathrm{De}} = \mathbf{+96.3636^\circ}$ $\cdot$ $T_{\mathrm{C}} = T_{\mathrm{R\o}} = \mathbf{+15.7895^\circ}$} \\
+\bottomrule
+\end{tabularx}
+\par}\smallskip
+
+\section{2027 Rule \texttt{5.c.v} Eight-Scientist Instant Flash Matrix \& Decoy Disambiguator}\label{sec:23.3}
+
+\idxtopic{eight named scientists (2027 Rule 5.c.v flash matrix)}
+
+{\centering
+\captionof{table}{Complete 2027 Rule \texttt{5.c.v} Eight Named Scientists Dossier \& Historical Decoy Disambiguation Matrix \src{S01,S23}.}\label{tab:23:scientists}
+\scriptsize
+\setlength{\tabcolsep}{2.5pt}
+\renewcommand{\arraystretch}{1.08}
+\begin{tabularx}{\linewidth}{@{}L{0.16\linewidth} L{0.27\linewidth} L{0.28\linewidth} X@{}}
+\toprule
+\hdr{2027 Scientist (\texttt{5.c.v})} & \hdr{Landmark Experiments \& Works} & \hdr{Governing Laws, Equations \& Units} & \hdr{Exam Decoy / Confusion Trap \& Distinction} \\
+\midrule
+\textbf{1.\ Lord Kelvin} (William Thomson) \newline \texttt{1824--1907} (Scot./UK) & \textbf{1848:} \textit{On an Absolute Thermometric Scale}; \textbf{1851:} \textit{On the Dynamical Theory of Heat} (coined ``thermodynamics'' \texttt{E3 MC16}); \textbf{1852:} Porous-plug expansion w/ Joule. & Absolute Kelvin scale ($\SI{0}{\kelvin} = \SI{-273.15}{\celsius}$); Kelvin--Planck 2nd Law statement; Joule--Thomson coeff.\ $\mu_{\mathrm{JT}} = (\partial T/\partial P)_H$; dubbed ``Maxwell's demon'' (1874). & \textbf{Decoys:} \textit{Guillaume Amontons} (1702 air-pressure absolute zero estimate \texttt{E3 MC12}); \textit{W.\ J.\ M.\ Rankine} (1859 $^{\circ}\mathrm{R}$ scale); \textit{Walther Nernst} (1906 3rd Law, NOT 2nd Law \texttt{E8 Q14}). \\
+\rowcolor{rowalt}
+\textbf{2.\ Joseph Black} \newline \texttt{1728--1799} (Scottish) & \textbf{1754:} Isolated $\mathrm{CO_2}$ (``fixed air''); \textbf{1760:} Discovered specific heat capacity (mercury vs.\ water); \textbf{1761--1762:} Discovered \textbf{latent heat} of fusion \& vaporization of water. & Sharp distinction between \textbf{temperature} (intensity) and \textbf{heat} (quantity); $Q = m c \Delta T$ and $Q = m L$; ice-melting calorimetry; mentored \textit{James Watt} (1765 steam condenser). & \textbf{Decoys:} \textit{Lavoisier \& Laplace} (built the first double-wall \textit{ice calorimeter} in 1782--1783 applying Black's latent heat, and proposed caloric fluid theory); \textit{Carnot} (\texttt{E1 Q9} distractor A/E!). \\
+\textbf{3.\ James Prescott Joule} \newline \texttt{1818--1889} (English) & \textbf{1840:} Ohmic heating $P = I^2 R$; \textbf{1845:} Twin-cylinder free expansion of gas into vacuum ($\Delta T = 0$); \textbf{1845--1850:} \textbf{Falling-weight paddle-wheel calorimeter}. & Mechanical \& electrical equivalent of heat ($W = J Q$, measured $\SI{772.7}{\text{ft}\cdot\text{lbf/BTU}}$ vs.\ modern $778.2$, or $\SI{4.184}{\joule\per\text{cal}}$); SI unit \textbf{joule ($\si{\joule}$)}; Joule's 2nd Law $U_{\mathrm{IG}} = U(T)$ only (\texttt{E7 Q25--26}). & \textbf{Decoys:} \textit{Count Rumford / Benjamin Thompson} (1798 qualitative cannon-boring friction heat); \textit{J.\ R.\ von Mayer} (1842 $C_P - C_V = R$ conservation of energy); \textit{Helmholtz} (1847 mathematical treatise). \\
+\rowcolor{rowalt}
+\textbf{4.\ Sadi Carnot} \newline \texttt{1796--1832} (French) & \textbf{1824:} Sole book \textit{Reflections on the Motive Power of Fire} (at age 28); \textbf{Father of Thermodynamics} (\texttt{E1 Q9, E5 Q10, E6 V.5b}); pre-1832 notes calculated $J \approx \SI{3.7}{\joule\per\text{cal}}$. & Ideal 4-step reversible \textbf{Carnot cycle} (2 isotherms + 2 adiabats); \textbf{Carnot's Theorem} ($\eta_{\max} = 1 - T_C/T_H$ depends only on reservoir temps, independent of working fluid!). & \textbf{Decoys:} \textit{\'{E}mile Clapeyron} (1834 converted Carnot's verbal cycle into $P$--$V$ indicator diagrams and derived $dP/dT = L/(T\Delta v)$); Carnot in 1824 still used the caloric waterfall analogy. \\
+\textbf{5.\ Max Planck} \newline \texttt{1858--1947} (German) \newline \textit{1918 Nobel Prize} & \textbf{1897:} \textit{Treatise on Thermodynamics}; \textbf{Dec 14, 1900:} Solved blackbody ultraviolet catastrophe via energy quanta $E = h\nu$; \textbf{1911:} Formulated absolute-zero 3rd Law ($S \to 0$). & \textbf{Planck's constant} $h = \SI{6.626e-34}{\joule\second}$; \textbf{Planck Blackbody Law} $M_\lambda = \frac{2\pi hc^2/\lambda^5}{e^{hc/(\lambda k_B T)}-1}$; first wrote $S = k\ln W$ explicitly and evaluated both $h$ and $k_B$; Planck 3rd Law $S_{\mathrm{cryst}}(\SI{0}{\kelvin}) = 0$. & \textbf{Decoys:} \textit{Walther Nernst} (1906 discovered 3rd Law / Nernst Heat Theorem $\Delta S \to 0$); \textit{Wilhelm Wien} (1893 displacement law $\lambda_{\max}T = b$); \textit{Rayleigh--Jeans} (classical long-$\lambda$ limit). \\
+\rowcolor{rowalt}
+\textbf{6.\ Rudolf Clausius} \newline \texttt{1822--1888} (German) & \textbf{1850:} \textit{On the Moving Force of Heat} (reconciled Carnot \& Joule: $Q_H = W + Q_C$); \textbf{1858:} Introduced gas mean free path $\lambda$; \textbf{1865:} Coined \textbf{``Entropy''} and introduced symbol $S$ (\texttt{E4 Q1d}). & Macroscopic entropy $dS = \delta Q_{\mathrm{rev}}/T$; Clausius Inequality $\oint \delta Q/T \le 0$; \textbf{Clausius 2nd Law statement} (no spontaneous heat flow cold $\to$ hot); \textbf{Clausius--Clapeyron equation}. & \textbf{Decoys:} \textit{Ludwig Boltzmann} (1877 microscopic $S = k_B\ln W$, whereas Clausius formulated macroscopic $dS = \delta Q_{\mathrm{rev}}/T$ in 1865 \texttt{E3 MC14, E7 Q14}); \textit{Maxwell} (added exact $1/\sqrt{2}$ factor to $\lambda$). \\
+\textbf{7.\ Ludwig Boltzmann} \newline \texttt{1844--1906} (Austrian) & \textbf{1868--1871:} Boltzmann factor $e^{-E/(k_B T)}$ \& equipartition; \textbf{1872:} Boltzmann transport eq.\ \& \textbf{$H$-theorem} (\texttt{E4 Q1b}); \textbf{1877:} Statistical entropy; \textbf{1884:} Thermodynamic proof of $M = \sigma T^4$. & \textbf{Boltzmann entropy} $S = k_B\ln\Omega$ (``$S = k.\log W$'' on Vienna tombstone); \textbf{Boltzmann constant} $k_B$ (2019 SI Kelvin definition \texttt{E4 Q3}); \textbf{Stefan--Boltzmann Law} $M_e = \sigma T^4$. & \textbf{Decoys:} \textit{Josef Stefan} (Boltzmann's advisor; discovered $M = \sigma T^4$ empirically in 1879, proved theoretically by Boltzmann in 1884); \textit{J.\ Willard Gibbs} (1902 ensembles \& $\Delta G$ \texttt{E4 Q1a}). \\
+\rowcolor{rowalt}
+\textbf{8.\ James Clerk Maxwell} \newline \texttt{1831--1879} (Scottish) & \textbf{1860:} Derived molecular speed distribution $f(v)$ \& exact mean free path; \textbf{1866:} Measured pressure-independent gas viscosity w/ Katherine Maxwell; \textbf{1871:} \textit{Theory of Heat}. & \textbf{Maxwell--Boltzmann speed distribution} ($v_{\mathrm{mp}} < v_{\mathrm{avg}} < v_{\mathrm{rms}}$); \textbf{Four Maxwell Relations} from $dU, dH, dF, dG$; \textbf{Maxwell's Demon} (1867/1871); Maxwell equal-area van der Waals rule. & \textbf{Decoys:} \textit{Lord Kelvin} coined the name ``demon'' in 1874 for Maxwell's 1867 ``finite being''; \textit{Francis Bacon} (\texttt{E2 MC24} distractor for kinetic theory). \\
+\bottomrule
+\end{tabularx}
+\par}\smallskip
+
+\noindent\textbf{Secondary Invitational Pioneers Quick-Match:} \textbf{Galileo Galilei} (1592 open air thermoscope \texttt{E7 Q9}); \textbf{Daniel Fahrenheit} (1714 closed mercury thermometer \texttt{E3 MC13, E7 Q24}); \textbf{Anders Celsius} (1742 inverted scale $100^\circ$ freeze / $0^\circ$ boil, flipped by Linnaeus 1743 \texttt{E4 Q3}); \textbf{Robert Boyle} (1662 $PV=k$, earliest gas law \texttt{E2 MC22, E5 Q7}); \textbf{Henri Victor Regnault \& R.\ H.\ Thurston} (1843/1891 precision steam tables \texttt{E1 FRQ 2}); \textbf{Fran\c{c}ois Marcet} (1826 high-pressure steam boiler \texttt{E1 Q27}); \textbf{J.\ Willard Gibbs} ($G = H - TS$, chemical potential $\mu$, phase rule $F = C - P + 2$, ensembles \texttt{E4 Q1a}); \textbf{Hermann von Helmholtz} ($F = U - TS$, 1882 free energy paper \texttt{E4 Q1c}); \textbf{Paul Drude} (1900 free-electron thermal/electrical transport \texttt{E1 FRQ 4}).
+
+\section{Master Closed-System Process \& Thermodynamic Cycle Flash Cards}\label{sec:23.4}
+
+\idxtopic{closed-system process comparison flash card}
+\idxtopic{thermodynamic power and refrigeration cycles flash card}
+
+{\centering
+\captionof{table}{Master Closed-System Ideal-Gas Process Comparison Flash Card ($n$ moles, $C_{V,m} = \frac{f}{2}R = \frac{R}{\gamma-1}$, $C_{P,m} = \frac{\gamma R}{\gamma-1}$, $\Delta U = Q - W_{\mathrm{by}}$) \src{S13,S25,S30}.}\label{tab:23:processes}
+\scriptsize
+\setlength{\tabcolsep}{2.2pt}
+\renewcommand{\arraystretch}{1.08}
+\begin{tabularx}{\linewidth}{@{}L{0.11\linewidth} L{0.10\linewidth} L{0.12\linewidth} L{0.15\linewidth} L{0.11\linewidth} L{0.11\linewidth} L{0.09\linewidth} X@{}}
+\toprule
+\hdr{Process} & \hdr{Constraint} & \hdr{$P, V, T$ Law} & \hdr{Work $W_{\mathrm{by}}$ ($=-w_{\mathrm{on}}$)} & \hdr{$\Delta U$} & \hdr{Heat $Q$ Added} & \hdr{$\Delta H$} & \hdr{Entropy $\Delta S$ \& $PV / TS$ Cues} \\
+\midrule
+\textbf{Isochoric} (Isometric) & $V = \mathrm{const}$ ($\Delta V = 0$) & $\frac{P_1}{T_1} = \frac{P_2}{T_2}$ & $0$ & $nC_{V,m}\Delta T = \frac{V\Delta P}{\gamma-1}$ & $nC_{V,m}\Delta T$ & $nC_{P,m}\Delta T = \gamma\Delta U$ & $\Delta S = nC_{V,m}\ln(T_2/T_1)$; vertical on $PV$; steeper on $TS$ (slope $T/C_V$). \\
+\rowcolor{rowalt}
+\textbf{Isobaric} & $P = \mathrm{const}$ ($\Delta P = 0$) & $\frac{V_1}{T_1} = \frac{V_2}{T_2}$ & $P(V_2 - V_1) = nR\Delta T$ & $nC_{V,m}\Delta T = \frac{P\Delta V}{\gamma-1}$ & $nC_{P,m}\Delta T = \frac{\gamma P\Delta V}{\gamma-1}$ & $nC_{P,m}\Delta T = Q_P$ & $\Delta S = nC_{P,m}\ln(T_2/T_1)$; horizontal on $PV$; shallower on $TS$ ($T/C_P$). \\
+\textbf{Isothermal} (Reversible) & $T = \mathrm{const}$ ($\Delta T = 0$) & $P_1 V_1 = P_2 V_2$ & $nRT\ln(V_2/V_1) = nRT\ln(P_1/P_2)$ & $0$ & $W_{\mathrm{by}} = nRT\ln(V_2/V_1)$ & $0$ & $\Delta S = Q/T = nR\ln(V_2/V_1)$; hyperbola on $PV$; horizontal on $TS$. \\
+\rowcolor{rowalt}
+\textbf{Adiabatic} (Isentropic) & $Q = 0$ ($\Delta S = 0$) & $PV^\gamma = \mathrm{c.}$, $TV^{\gamma-1} = \mathrm{c.}$ & $-\Delta U = \frac{P_1V_1 - P_2V_2}{\gamma-1}$ & $nC_{V,m}\Delta T$ & $0$ & $nC_{P,m}\Delta T = \gamma\Delta U$ & $\Delta S = 0$ (rev.); steeper than isotherm on $PV$ ($-\gamma P/V$); vertical on $TS$. \\
+\textbf{Polytropic} ($n_{\mathrm{p}} \ne 1$) & $PV^n = \mathrm{const}$ & $TV^{n-1} = \mathrm{const}$ & $\frac{P_1V_1 - P_2V_2}{n - 1} = \frac{n_{\mathrm{mol}}R(T_1 - T_2)}{n - 1}$ & $n_{\mathrm{mol}}C_{V,m}\Delta T$ & $n_{\mathrm{mol}}C_n\Delta T$ & $n_{\mathrm{mol}}C_{P,m}\Delta T$ & $C_n = C_V\frac{n-\gamma}{n-1}$; $\Delta S = n_{\mathrm{mol}}C_n\ln(T_2/T_1)$; unifies $n \in \{0, 1, \gamma, \infty\}$. \\
+\rowcolor{rowalt}
+\textbf{Free Exp.} (Vacuum) & $Q = 0$, $P_{\mathrm{ext}} = 0$ & $T_1 = T_2$ (IG), $P_1V_1 = P_2V_2$ & $0$ (unresisted expansion) & $0$ (IG) & $0$ & $0$ (IG) & $\Delta S_{\mathrm{sys}} = \Delta S_{\mathrm{univ}} = +nR\ln(V_2/V_1) > 0$ (\textbf{irrev.} adiabat; \texttt{E2 MC6, E3 MC1}). \\
+\textbf{Throttling} (J--T Plug) & Adiabatic porous plug & $H_1 = H_2$ ($\Delta H = 0$) & Flow work $P_1V_1 - P_2V_2 = U_2 - U_1$ & $U_2 - U_1$ ($0$ for IG) & $0$ & $0$ (\textbf{isenthalpic}) & $\Delta S_{\mathrm{IG}} = +nR\ln(P_1/P_2) > 0$; cools if $\mu_{\mathrm{JT}} = (\partial T/\partial P)_H > 0$ (\texttt{E2 MC7}). \\
+\bottomrule
+\end{tabularx}
+\par}\smallskip
+
+{\centering
+\captionof{table}{Master Comparison Flash Card of the 7 Named Power \& Refrigeration Cycles (\texttt{Rule 5.c.iv}; tested on \texttt{E1, E2, E3, E4, E5, E6, E7, E8}) \src{S13,S25,S26,S30}.}\label{tab:23:cycles}
+\scriptsize
+\setlength{\tabcolsep}{2.5pt}
+\renewcommand{\arraystretch}{1.08}
+\begin{tabularx}{\linewidth}{@{}L{0.15\linewidth} L{0.27\linewidth} L{0.26\linewidth} X@{}}
+\toprule
+\hdr{Cycle Name} & \hdr{Four Constituent Legs ($1\to 2\to 3\to 4\to 1$)} & \hdr{Heat In ($Q_H$) \& Out ($Q_C$) Legs} & \hdr{Efficiency $\eta$ / COP \& Non-Standard Coordinate Cues} \\
+\midrule
+\textbf{1.\ Carnot} (Reversible Limit) & $1\to 2$: Isothermal exp.\ ($T_H$); $2\to 3$: Adiabatic exp.\ ($T_H\to T_C$); $3\to 4$: Isothermal comp.\ ($T_C$); $4\to 1$: Adiabatic comp.\ ($T_C\to T_H$). & $Q_H = nRT_H\ln(V_2/V_1)$ ($1\to 2$); $Q_C = nRT_C\ln(V_3/V_4)$ ($3\to 4$); adiabats force $V_2/V_1 = V_3/V_4$. & $\eta_C = 1 - \frac{T_C}{T_H}$ ($T$ in $\si{\kelvin}$!). \textbf{Rectangle on $T$--$S$ diagram} ($W_{\mathrm{net}} = (T_H-T_C)\Delta S$, \texttt{E4 Q12}). On \textbf{$P$--$T$ diagram} (\texttt{E2 P2b}), isotherms are vertical lines and adiabats follow $P \propto T^{\gamma/(\gamma-1)}$ ($W$ requires knowing $n$!). \\
+\rowcolor{rowalt}
+\textbf{2.\ Stirling} (Regenerative) & $1\to 2$: Isothermal exp.\ ($T_H, V_1\to V_2$); $2\to 3$: Isochoric cooling ($V_2$); $3\to 4$: Isothermal comp.\ ($T_C, V_2\to V_1$); $4\to 1$: Isochoric heating ($V_1$). & $W_{\mathrm{net}} = nR(T_H - T_C)\ln(V_2/V_1)$. Internal regenerator transfers $Q_{\mathrm{regen}} = nC_{V,m}(T_H - T_C)$ between $2\to 3$ and $4\to 1$. & \textbf{With ideal regenerator:} $\eta_{\mathrm{Stirling,ideal}} = 1 - \frac{T_C}{T_H} = \eta_C$. \textbf{Without regenerator (\texttt{E6 Sec IV}):} $Q_{\mathrm{in}} = nRT_H\ln(V_2/V_1) + nC_{V,m}(T_H - T_C)$, so $\eta_{\mathrm{no-regen}} = W_{\mathrm{net}}/Q_{\mathrm{in}} < \eta_C$! \\
+\textbf{3.\ Ericsson} (Regenerative) & $1\to 2$: Isothermal exp.\ ($T_H$); $2\to 3$: Isobaric cooling ($P_2$); $3\to 4$: Isothermal comp.\ ($T_C$); $4\to 1$: Isobaric heating ($P_1$). & Isobaric regenerator transfers $Q_{\mathrm{regen}} = nC_{P,m}(T_H - T_C)$ internally between $2\to 3$ and $4\to 1$. & With ideal regenerator: $\eta_{\mathrm{Ericsson,ideal}} = 1 - \frac{T_C}{T_H} = \eta_C$. Notice Ericsson uses \textbf{2 isotherms + 2 isobars} (whereas Stirling uses 2 isotherms + 2 isochores; \texttt{E1 Q18}). \\
+\rowcolor{rowalt}
+\textbf{4.\ Otto} (Gasoline Spark) & $1\to 2$: Adiabatic comp.\ ($V_1\to V_2$); $2\to 3$: Isochoric heat add ($V_2$); $3\to 4$: Adiabatic exp.\ ($V_2\to V_1$); $4\to 1$: Isochoric heat rej.\ ($V_1$). & $Q_H = nC_{V,m}(T_3 - T_2)$ ($2\to 3$); $Q_C = nC_{V,m}(T_4 - T_1)$ ($4\to 1$). & $\eta_{\mathrm{Otto}} = 1 - \frac{1}{r^{\gamma-1}} = 1 - \frac{T_1}{T_2}$, where compression ratio $r = V_1/V_2$ (\texttt{E6} formula sheet). Higher $r$ and higher $\gamma$ increase efficiency. \\
+\textbf{5.\ Diesel} (Compression Ign.) & $1\to 2$: Adiabatic comp.\ ($r = V_1/V_2$); $2\to 3$: \textbf{Isobaric} heat add ($r_c = V_3/V_2$); $3\to 4$: Adiabatic exp.; $4\to 1$: Isochoric heat rej.\ ($V_1$). & $Q_H = nC_{P,m}(T_3 - T_2)$ ($2\to 3$, constant $P$); $Q_C = nC_{V,m}(T_4 - T_1)$ ($4\to 1$, constant $V$). & $\eta_{\mathrm{Diesel}} = 1 - \frac{1}{r^{\gamma-1}}\left[\frac{r_c^\gamma - 1}{\gamma(r_c - 1)}\right]$. Because bracket $>1$ for $r_c > 1$, $\eta_{\mathrm{Diesel}} < \eta_{\mathrm{Otto}}$ at the same $r$, but Diesel engines operate at higher $r$ ($15\text{--}22$ vs.\ $9\text{--}12$) without knock. \\
+\rowcolor{rowalt}
+\textbf{6.\ Brayton} (Gas Turbine / Jet) & $1\to 2$: Adiabatic comp.\ ($P_1\to P_2$); $2\to 3$: Isobaric heat add ($P_2$); $3\to 4$: Adiabatic exp.\ ($P_2\to P_1$); $4\to 1$: Isobaric heat rej.\ ($P_1$). & $Q_H = nC_{P,m}(T_3 - T_2)$ ($2\to 3$); $Q_C = nC_{P,m}(T_4 - T_1)$ ($4\to 1$). & $\eta_{\mathrm{Brayton}} = 1 - \frac{1}{r_p^{(\gamma-1)/\gamma}} = 1 - \frac{T_1}{T_2}$, where pressure ratio $r_p = P_2/P_1$. Consists of \textbf{2 adiabats + 2 isobars}. \\
+\textbf{7.\ Rankine} (Steam Power Plant) & $1\to 2$: Adiabatic turbine exp.\ (boiler $P_{\mathrm{high}} \to$ condenser $P_{\mathrm{low}}$); $2\to 3$: Isobaric/isothermal condenser ($x_2 \to$ sat.\ liq.\ $3$); $3\to 4$: Adiabatic pump; $4\to 1$: Isobaric boiler. & $q_{\mathrm{in}} = h_1 - h_4$ (boiler); $q_{\mathrm{out}} = h_2 - h_3$ (condenser); $w_t = h_1 - h_2$; $w_p = h_4 - h_3 \approx v_{f,3}(P_{\mathrm{high}}-P_{\mathrm{low}})$. & \textbf{Cornell 2027 \texttt{E1 Q18, Q28--29} Focus:} Ideal turbine is isentropic ($s_{2s} = s_1 \implies x_{2s} = (s_1 - s_{f,\mathrm{low}})/s_{fg,\mathrm{low}}$, $h_{2s} = h_{f,\mathrm{low}} + x_{2s}h_{fg,\mathrm{low}}$). Real work: $w_{t,a} = \eta_s(h_1 - h_{2s})$; $s_{\mathrm{gen}} = s_{2a} - s_1$; $X_{\mathrm{dest}} = T_0 s_{\mathrm{gen}}$. \\
+\bottomrule
+\end{tabularx}
+\par}\smallskip
+
+\begin{formulacard}[Cycle Coordinate Translator: How the 4 Canonical Processes Appear on $P$--$V$, $T$--$S$, and $P$--$T$ Plots]
+\scriptsize
+\par\smallskip\noindent
+\begin{tabularx}{\linewidth}{@{}l X X X@{}}
+\toprule
+\hdr{Process} & \hdr{On $P$--$V$ Diagram ($\text{Area} = \int P\,dV = W_{\mathrm{by}}$)} & \hdr{On $T$--$S$ Diagram ($\text{Area} = \int T\,dS = Q_{\mathrm{rev}}$)} & \hdr{On $P$--$T$ Diagram (\texttt{E2 P2b})} \\
+\midrule
+\textbf{Isochoric} ($V=\mathrm{const}$) & \textbf{Vertical straight line} ($\Delta V = 0 \implies W_{\mathrm{by}} = 0$) & Curve with positive slope $(\partial T/\partial S)_V = T/C_V$ (steeper than isobar) & Straight line through origin: $P = (nR/V)T$ \\
+\rowcolor{rowalt}
+\textbf{Isobaric} ($P=\mathrm{const}$) & \textbf{Horizontal straight line} ($W_{\mathrm{by}} = P\Delta V$) & Curve with positive slope $(\partial T/\partial S)_P = T/C_P$ (shallower than isochor) & \textbf{Horizontal straight line} ($P = \mathrm{const}$) \\
+\textbf{Isothermal} ($T=\mathrm{const}$) & Rectangular hyperbola $P \propto V^{-1}$ (slope $-P/V$) & \textbf{Horizontal straight line} ($Q_{\mathrm{rev}} = T\Delta S$) & \textbf{Vertical straight line} ($T = \mathrm{const}$) \\
+\rowcolor{rowalt}
+\textbf{Adiabatic / Isentropic} & Steep curve $P \propto V^{-\gamma}$ (slope $-\gamma P/V$, $\gamma\times$ steeper than isotherm) & \textbf{Vertical straight line} ($\Delta S = 0 \implies Q_{\mathrm{rev}} = 0$) & Curve $P \propto T^{\gamma/(\gamma-1)}$; on $\ln P$ vs.\ $\ln T$, slope $= \frac{\gamma}{\gamma-1} = \frac{C_{P,m}}{R} = \frac{C_{V,m}+R}{R}$! \\
+\bottomrule
+\end{tabularx}
+\end{formulacard}
+
+\section{Heat-Transfer Mode Chooser, Resistance Networks \& 2027 Collector Physics}\label{sec:23.5}
+
+\idxtopic{heat-transfer mode chooser flash card}
+\idxdev{2027 heat-lamp collector physics summary sheet}
+
+{\centering
+\captionof{table}{Master Heat-Transfer Mode Chooser \& Resistance Network Flash Card (\texttt{Rules 5.c.iii, 5.c.vi} \& 2027 Part II Collector) \src{S12,S19,S25}.}\label{tab:23:transfer}
+\scriptsize
+\setlength{\tabcolsep}{2.5pt}
+\renewcommand{\arraystretch}{1.08}
+\begin{tabularx}{\linewidth}{@{}L{0.17\linewidth} L{0.31\linewidth} L{0.25\linewidth} X@{}}
+\toprule
+\hdr{Mechanism / System} & \hdr{Governing Algebraic Formula (\texttt{5.d.iv})} & \hdr{Thermal Resistance $R_{\mathrm{th}}$ $[\si{\kelvin\per\watt}]$} & \hdr{Competition Cues, Traps \& 2027 Collector Link} \\
+\midrule
+\textbf{1D Plane Wall} (Steady Fourier) & $\dot{Q} = \frac{k A (T_1 - T_2)}{L} = \frac{\Delta T}{R_{\mathrm{slab}}}$ & $R_{\mathrm{slab}} = \frac{L}{k A}$; $R_{\mathrm{val}} = \frac{L}{k} = R_{\mathrm{th}}A$ & Acoustic phonons carry heat in insulators (\texttt{E1 Q17c}); free electrons in metals ($\kappa/\sigma T = L_0$, \texttt{E1 Q34}). \\
+\rowcolor{rowalt}
+\textbf{Series \& Parallel Composite Wall} & $\dot{Q} = \frac{T_{\infty,1} - T_{\infty,2}}{R_{\mathrm{tot}}}$; $T_X = T_1 - \dot{Q}R_1$ & $R_{\mathrm{ser}} = \sum R_i + \frac{1}{h_c A}$; $G_{\mathrm{par}} = \sum \frac{1}{R_i}$ & Interface temp $T_X = \frac{R_2 T_1 + R_1 T_2}{R_1 + R_2}$ depends only on ratio $R_1/R_2 = (L_1/k_1)/(L_2/k_2)$ --- arbitrary units cancel (\texttt{E3 Q19b})! \\
+\textbf{Cylindrical Pipe \& Critical Radius} & $\dot{Q} = \frac{2\pi k \ell (T_1 - T_2)}{\ln(r_2/r_1)}$ (\texttt{E4 Q11}) & $R_{\mathrm{cyl}} = \frac{\ln(r_2/r_1)}{2\pi k \ell} + \frac{1}{2\pi r_2 \ell h}$ & Adding insulation of conductivity $k_{\mathrm{ins}}$ to a pipe of outer radius $r_1 < r_{\mathrm{crit,cyl}} = k_{\mathrm{ins}}/h$ \textbf{increases} heat loss until $r_2 > r_{\mathrm{crit}}$! \\
+\rowcolor{rowalt}
+\textbf{Spherical Shell \& Critical Radius} & $\dot{Q} = \frac{4\pi k r_1 r_2 (T_1 - T_2)}{r_2 - r_1}$ & $R_{\mathrm{sph}} = \frac{r_2 - r_1}{4\pi k r_1 r_2} + \frac{1}{4\pi r_2^2 h}$ & Critical insulation radius for a sphere is $r_{\mathrm{crit,sph}} = 2 k_{\mathrm{ins}}/h$ (twice the cylindrical value). \\
+\textbf{Convection \& Dead-Air Gaps} & $\dot{Q}_{\mathrm{conv}} = h A (T_s - T_\infty)$; $\mathrm{Nu}_L = \frac{hL}{k_f} = C\,\mathrm{Ra}_L^n$ & $R_{\mathrm{conv}} = \frac{1}{h A}$; $\mathrm{Ra}_\delta = \frac{g\beta\Delta T \delta^3}{\nu\alpha}$ & Rayleigh number $\mathrm{Ra}$ governs conduction vs.\ \textbf{free convection} (NOT radiation! \texttt{E1 Q17e}). Enclosed air gap: $\mathrm{Ra}_\delta < 1708 \implies \delta_{\mathrm{opt}} \approx \SIrange{10}{12}{\milli\meter}$. \\
+\rowcolor{rowalt}
+\textbf{Blackbody \& Gray Radiation} (\texttt{5.c.vi}) & $M_e = \varepsilon\sigma T^4$; $L_e = \frac{\varepsilon\sigma T^4}{\pi}$; $\lambda_{\max}T = \SI{2897.8}{\micro\meter\kelvin}$ & $R_{\mathrm{rad}} = \frac{1}{h_{\mathrm{rad}} A}$, $h_{\mathrm{rad}} = \varepsilon\sigma(T_s+T_\infty)(T_s^2+T_\infty^2)$ & \textbf{Lambertian radiance} $L_e = M_e/\pi$ divides exitance by $\pi\text{ sr}$ (\texttt{E1 Q36e TB\#2})! Combined loss: $\dot{Q}_{\mathrm{tot}} = \dot{Q}_{\mathrm{conv}} + \dot{Q}_{\mathrm{rad}}$ (\texttt{E1 Q16}). \\
+\textbf{Two-Body / Shield Radiation} & $\dot{Q}_{12} = \sigma(T_1^4 - T_2^4) / R_{\mathrm{rad},12}$ & $R_{\mathrm{rad},12} = \frac{1-\varepsilon_1}{\varepsilon_1 A_1} + \frac{1}{A_1 F_{12}} + \frac{1-\varepsilon_2}{\varepsilon_2 A_2}$ & $N$ low-$\varepsilon$ shiny aluminum foil shields ($\varepsilon = 0.04$) give $R_{\mathrm{tot}} = (N+1)R_0$, cutting radiative heat loss by $\ge (N+1)\times$. Reciprocity: $A_1 F_{12} = A_2 F_{21}$. \\
+\rowcolor{rowalt}
+\textbf{Lumped Transient \& $T^4$ Vacuum Cooling} & $T(t) = T_{\mathrm{ss}} - (T_{\mathrm{ss}} - T_0)e^{-t/\tau}$ ($\mathrm{Bi} = \frac{hL_c}{k_s} < 0.1$) & $\tau = R_{\mathrm{th}}C_{\mathrm{eff}} = \frac{mc}{hA}$; $T_{\mathrm{ss}} = T_\infty + \dot{Q}_{\mathrm{abs}}R_{\mathrm{th}}$ & For pure radiative cooling into $\SI{0}{\kelvin}$ vacuum ($\dot{Q} = -\varepsilon\sigma A T^4$, \texttt{E4 Q14d}): $\Delta t = \frac{mc}{3\varepsilon\sigma A}(T_f^{-3} - T_i^{-3})$. \\
+\bottomrule
+\end{tabularx}
+\par}\smallskip
+
+\begin{devicebox}[2027 Heat-Lamp Collector Physics \& Optical/Thermal Design Summary (\texttt{Rules 3--6} \& \texttt{Clarifications \#1--\#9})]
+\begin{enumerate}
+  \item \textbf{Lamp Spectrum \& Aperture Concentration:} A $\SIrange{100}{125}{\watt}$ incandescent heat-lamp tungsten filament ($T_{\mathrm{fil}} \approx \SIrange{2300}{2450}{\kelvin}$) peaks at $\lambda_{\max} = \SI{2897.8}{\micro\meter\kelvin} / \SI{2400}{\kelvin} = \mathbf{\SI{1.21}{\micro\meter}}$ (near-IR) and emits $\approx 82\%\text{--}86\%$ of its electrical power as radiation. Funneling the full allowed $\SI{29.6}{\centi\meter} \times \SI{29.6}{\centi\meter}$ top aperture ($A_{\mathrm{ap}} = \SI{876}{\square\centi\meter}$) down onto the $\SI{7.5}{\centi\meter}$ mouth of the \SI{9}{oz} clear plastic cup ($A_{\mathrm{cup}} = \SI{44.2}{\square\centi\meter}$) via a specular shiny-side aluminum foil compound reflector ($\rho_{\mathrm{NIR,spec}} = 0.88\text{--}0.91$ shiny side vs.\ $0.58\text{--}0.68$ dull side!) provides a geometric concentration potential of $C_{\mathrm{geom}} = 876 / 44.2 = \mathbf{19.8\times}$ \src{S12,S19}.
+  \item \textbf{Near-IR Water Surface Absorption \& Stable Stratification (\texttt{Clarifications \#1--\#4}):} From Hale \& Querry (1973) and Kou et al.\ (1993) \src{S19,S20}, liquid water's absorption coefficient jumps from $\mu_a(\SI{1.0}{\micro\meter}) = \SI{0.36}{\per\centi\meter}$ to $\mu_a(\SI{1.45}{\micro\meter}) = \SI{28.8}{\per\centi\meter}$ ($\delta_p = \SI{0.35}{\milli\meter}$) and $\mu_a(\SI{1.95}{\micro\meter}) = \SI{114}{\per\centi\meter}$ ($\delta_p = \SI{0.088}{\milli\meter}$). Thus \textbf{$>68\%$ of absorbed lamp power is deposited directly into the top $\SI{10}{\milli\meter}$ water layer}. Because warmer water above $\SI{4}{\celsius}$ is less dense than cooler water below it ($\partial\rho/\partial z > 0, \mathrm{Ra} < 0$), natural convection is completely suppressed! Under \texttt{Clarifications \#1--\#4} (zero stirring/swirling; ES measures top water layer near cup center) \src{S02}, this stratified top layer ($C_{\mathrm{top,eff}} \approx \SI{215}{\joule\per\kelvin}$ vs.\ bulk $\SI{418.4}{\joule\per\kelvin}$) boosts measured $\mathrm{TG}$ by \textbf{$1.5\times\text{--}1.9\times$} over a mixed cup.
+  \item \textbf{Why Non-Attached Glazing (\texttt{Clarification \#5}) Saves $\SIrange{3.5}{7.0}{\celsius}$:} As proved in Lienhard Example 11.11 (pp.\ 662--664) \src{S12}, evaporative mass transfer from an uncovered $\SI{40}{\celsius}$ water cup ($\dot{Q}_{\mathrm{evap}} \approx \SI{2.22}{\watt}$, $L_v = \SI{2406}{\kilo\joule\per\kilogram}$) accounts for \textbf{$73\%\text{--}82\%$ of all top-surface heat loss} and cools the exact top skin the ES thermometer measures! Resting a non-attached clear BoPET film window ($\tau_{\mathrm{NIR}} = 0.90$, no tape/adhesives/clips on the cup per \texttt{Clarification \#5}) traps saturated $100\%\ \mathrm{RH}$ air above the cup and eliminates evaporative loss.
+\end{enumerate}
+\end{devicebox}
+
+\section{Top-15 Exam-Day Point-Losing Traps \& Rapid Cram Verification Drills}\label{sec:23.6}
+
+{\centering
+\captionof{table}{Top-15 Point-Losing Exam Traps \& 5-Second Diagnostic Fixes Synthesized from \texttt{E1--E8} Official Rubrics \src{S25,S26,S27,S28,S29,S30,S31,S32}.}\label{tab:23:traps}
+\scriptsize
+\setlength{\tabcolsep}{2.5pt}
+\renewcommand{\arraystretch}{1.08}
+\begin{tabularx}{\linewidth}{@{}l L{0.28\linewidth} X L{0.31\linewidth}@{}}
+\toprule
+\hdr{\#} & \hdr{Trap / Wrong Move} & \hdr{What It Produces / Why It Fails on Rubrics} & \hdr{5-Second Diagnostic \& Fix} \\
+\midrule
+\textbf{T01} & Using gauge pressure $P_{\mathrm{gauge}}$ in $PV=nRT$ or steam tables (\texttt{E1 Q27c, Q28}) & Underestimates $P_{\mathrm{abs}}$ by $\SI{101.3}{\kilo\pascal}$, ruining $v_g$, $h = u + Pv$, and all 8 steam-table cells (\texttt{TB \#1}). & Circle ``gauge'' in problem text $\implies$ immediately write $P_{\mathrm{abs}} = P_{\mathrm{gauge}} + \SI{101.3}{\kilo\pascal}$! \\
+\rowcolor{rowalt}
+\textbf{T02} & Multiplying/dividing by $T$ in \si{\celsius} instead of \si{\kelvin} (\texttt{E8 Q26}) & Gives $27^\circ\mathrm{C} \times 8/7 = \SI{30.9}{\celsius}$ (distractor \texttt{c}) instead of $\SI{300.15}{\kelvin} \times 8/7 = \SI{343.0}{\kelvin} = \SI{69.9}{\celsius}$. & Convert \textbf{every} single-state temperature to Kelvin before touching $PV=nRT, \eta_C, \Delta S$, or $\sigma T^4$. \\
+\textbf{T03} & Adding $+273.15$ or $+32$ to a temperature \textit{difference} $\Delta T$ (\texttt{E7 Q5, E8 Q5}) & Turns $\Delta T = \SI{100}{\celsius}$ into $\SI{373}{\kelvin}$ (distractor \texttt{d}) instead of $\Delta T = \SI{100}{\kelvin} = 180\ ^\circ\mathrm{F}$. & Check for $\Delta$ or $\si{\per\kelvin}$: intervals scale by slope only ($1\text{ C}^\circ = 1\text{ K} = 1.8\text{ F}^\circ = 1.8\text{ R}^\circ$). \\
+\rowcolor{rowalt}
+\textbf{T04} & Assuming all ice melts or all steam condenses without checking plateau (\texttt{E1 Q30d, E4 Q9a}) & Predicts impossible $T_f < \SI{0}{\celsius}$ or $T_f > \SI{100}{\celsius}$ when the mixture actually stops at $T_f = T_{\mathrm{melt}}$ or $T_{\mathrm{boil}}$. & Always compute $E_{\mathrm{net},0}$ relative to $\SI{0}{\celsius}$ liquid water first (\texttt{[C08]} 5-Zone Ledger). \\
+\textbf{T05} & Using $L_v(\SI{100}{\celsius}) = \SI{40.68}{\kilo\joule\per\mole}$ for evaporation at $T < \SI{100}{\celsius}$ (\texttt{E2 P3e TB\#3}) & Loses 6 of 9 rubric points on MIT 2019 \texttt{P3e} ($L_v$ at $\SI{37}{\celsius}$ is $\SI{43.3}{\kilo\joule\per\mole} = \SI{2413}{\kilo\joule\per\kilogram}$, not $\SI{2257}{}$!). & When $C_{P,l}$ and $C_{P,g}$ are given for sub-boiling evaporation, apply Kirchhoff shift \texttt{[C10]}. \\
+\rowcolor{rowalt}
+\textbf{T06} & Confusing Heat Capacity $C$ $[\si{\joule\per\kelvin}]$ with Specific Heat $c$ $[\si{\joule\per\kilogram\per\kelvin}]$ (\texttt{E1 Q5,17a}) & Misclassifies Heat Capacity $C = mc$ as intensive (\texttt{E1 Q5}) instead of \textbf{extensive}; or omits mass $m$. & ``Specific'' or ``molar'' $=$ Intensive; bare ``Heat Capacity'' $C$ $=$ Extensive! \\
+\textbf{T07} & Omitting calorimeter $C_{\mathrm{cal}}$ or glass bulb expansion $\beta_g V_0 \Delta T$ (\texttt{E1 Q26d, E7 Q16}) & Underestimates total heat $Q = (m_w c_w + C_{\mathrm{cal}})\Delta T$ by $54\%$ on \texttt{E7 Q16} (distractor \texttt{b})! & Always check whether vessel $C_{\mathrm{cal}}$ or $\beta_{\mathrm{glass}}$ is given in the problem header. \\
+\rowcolor{rowalt}
+\textbf{T08} & Flipping First-Law work sign $W_{\mathrm{by}}$ vs.\ $w_{\mathrm{on}}$ (\texttt{E4 Q13}: $-\SI{2}{\text{pts}}$/subpart) & Subtracts instead of adds $Q = \Delta U + W_{\mathrm{by}}$ during gas expansion ($\Delta V > 0$). & Expansion ($\Delta V > 0$) ALWAYS has $W_{\mathrm{by}} > 0$ ($w_{\mathrm{on}} < 0$) and $\Delta U = Q - W_{\mathrm{by}}$. \\
+\textbf{T09} & Confusing exitance $M = \sigma T^4$ with Lambertian radiance $L = \sigma T^4/\pi$ (\texttt{E1 Q36e TB\#2}) & Overestimates directional radiance $L$ $[\si{\watt\per\square\meter\per\steradian}]$ by a factor of $\pi = 3.1416$! & Check units: $\si{\watt\per\square\meter}$ $=$ exitance $M = \sigma T^4$; $\si{\watt\per\square\meter\per\steradian}$ $=$ radiance $L = \sigma T^4/\pi$. \\
+\rowcolor{rowalt}
+\textbf{T10} & Averaging $\gamma_i$ directly in a gas mixture or using $M$ in $\si{\gram\per\mole}$ in $v_{\mathrm{rms}}$ & $M$ in $\si{\gram\per\mole}$ makes $v_{\mathrm{rms}} = \sqrt{3RT/M}$ too small by $\sqrt{1000} = 31.6\times$! & Always put $M$ in $\si{\kilogram\per\mole}$ ($\mathrm{O_2} = \num{0.032}$) and compute $\gamma_{\mathrm{mix}} = C_{P,\mathrm{mix}}/C_{V,\mathrm{mix}}$. \\
+\textbf{T11} & Using $C_V = \frac{3}{2}Nk_B$ for a 2D crystal lattice (\texttt{E1 Q35a TB\#3}) & Assumes 2D lattice is $\frac{1}{2}$ of 3D ($3Nk_B$), forgetting each 2D atom has 2 KE + 2 PE $= 4$ modes! & A $d$-dimensional harmonic crystal has $2d$ quadratic modes/atom $\implies C_V = d\cdot Nk_B$ ($2Nk_B$ in 2D). \\
+\rowcolor{rowalt}
+\textbf{T12} & Confusing Rayleigh number $\mathrm{Ra}$ with thermal radiation (\texttt{E1 Q17e TB\#12}) & Marks True on ``$\mathrm{Ra}$ determines whether transfer is by radiation or free convection.'' & $\mathrm{Ra} = \mathrm{Gr}\cdot\mathrm{Pr}$ compares \textbf{buoyancy vs.\ viscous/thermal diffusion} (conduction vs.\ convection). \\
+\textbf{T13} & Leaving units or exact sig figs off final answers (\texttt{E1, E2, E4, E6}) & Loses $\SI{1.0}{\text{pt}}$ per problem ($25\%\text{--}33\%$ of score) on \texttt{E2} MIT and \texttt{E4} GGSO rubrics! & In the final 3 minutes, audit every answer box for explicit units and requested sig figs. \\
+\rowcolor{rowalt}
+\textbf{T14} & Blind guessing on $+3\text{ correct} / +1\text{ blank} / 0\text{ wrong}$ MCQs (\texttt{E2}) & Expected value of 4-choice blind guess is $\SI{0.75}{\text{pts}} < \SI{1.00}{\text{pt}}$ blank credit! & When blank credit $= 1/3$ of correct credit, guess \textbf{only} after eliminating $\ge 2$ choices (\sref{sec:21.4}). \\
+\textbf{T15} & Swirling the \SI{9}{oz} cup during removal or using \texttt{\#6 PS} Styrofoam (\texttt{2027 Part II}) & Swirling destroys top-layer stratification ($-5\text{ to }-\SI{9}{\celsius}$ in $\mathrm{TG}$!); \texttt{\#6 PS} disqualifies device ($\mathrm{TS}=\mathrm{PS}=0$)! & Lift cup straight up with zero tilt/swirl (\texttt{Clarif.\ \#1--4}); purge all \texttt{\#6 PS} (\texttt{Clarif.\ \#6}). \\
+\bottomrule
+\end{tabularx}
+\par}\smallskip
+
+\begin{workedexample}[Rapid Cram Drill 1: Eight-Scale Temperature Crossovers]{Rule 5.c.i}{ex:23.1}
+Prove algebraically the exact temperatures where \textbf{(a)} Kelvin and Fahrenheit read the same number ($T_{\mathrm{K}} = T_{\mathrm{F}}$), and \textbf{(b)} Celsius and Delisle read the same number ($T_{\mathrm{C}} = T_{\mathrm{De}}$) \src{S25,S27}.
+
+\textbf{Solution.}
+\textbf{(a)} Substitute $T_{\mathrm{C}} = T_{\mathrm{K}} - 273.15$ into $T_{\mathrm{F}} = 1.8\,T_{\mathrm{C}} + 32$ and set $T_{\mathrm{K}} = T_{\mathrm{F}} = x$: $x = 1.8(x - 273.15) + 32 \implies 0.8x = 459.67 \implies x = \mathbf{574.5875\text{ K} = 574.5875\ ^\circ\mathrm{F}}$.
+\textbf{(b)} Set $T_{\mathrm{C}} = T_{\mathrm{De}} = y$ in $T_{\mathrm{De}} = 150 - 1.5\,T_{\mathrm{C}}$: $y = 150 - 1.5y \implies 2.5y = 150 \implies y = \mathbf{+60.0\ ^\circ\mathrm{C} = +60.0\ ^\circ\mathrm{De}}$.
+\verifiedby{Independent Python script \texttt{check\_sec21\_23.py} (\texttt{SEC23\_SCALE\_INTERSECTIONS}): $x = 574.5875$, $y = 60.0$.}
+\end{workedexample}
+
+\begin{workedexample}[Rapid Cram Drill 2: Open-Cup Evaporation Loss vs.\ BoPET Glazing Cap]{Clarification \#5}{ex:23.2}
+During a 10-minute 2027 collector run, an uncovered \SI{9}{oz} cup holding \SI{100}{\milli\liter} ($\SI{100.0}{\gram}$) of water at mean surface temperature $\SI{40.0}{\celsius}$ ($L_v = \SI{2406}{\joule\per\gram}$) loses $\Delta m_{\mathrm{evap}} = \SI{0.550}{\gram}$ of water by evaporation \src{S12}. How many degrees Celsius of temperature gain $\mathrm{TG}$ are lost from \textbf{(a)} the ES-measured top stratified layer ($C_{\mathrm{top,eff}} = \SI{215.0}{\joule\per\kelvin}$), and \textbf{(b)} the bulk water ($C_{\mathrm{bulk}} = \SI{418.4}{\joule\per\kelvin}$)?
+
+\textbf{Solution.}
+The latent heat removed directly from the water surface skin by evaporating $\SI{0.550}{\gram}$ is $Q_{\mathrm{evap}} = \Delta m_{\mathrm{evap}}\,L_v = (\SI{0.550}{\gram})(\SI{2406}{\joule\per\gram}) = \mathbf{\SI{1323.3}{\joule}}$.
+\textbf{(a) Top stratified layer loss:} $\Delta T_{\mathrm{top,lost}} = Q_{\mathrm{evap}}/C_{\mathrm{top,eff}} = \SI{1323.3}{\joule} / \SI{215.0}{\joule\per\kelvin} = \mathbf{\SI{6.155}{\celsius}}$ (\textbf{\SI{6.2}{\celsius} saved by a non-attached BoPET cap!}).
+\textbf{(b) Bulk-averaged loss:} $\Delta T_{\mathrm{bulk,lost}} = Q_{\mathrm{evap}}/C_{\mathrm{bulk}} = \SI{1323.3}{\joule} / \SI{418.4}{\joule\per\kelvin} = \mathbf{\SI{3.163}{\celsius}}$.
+\verifiedby{Independent Python script \texttt{check\_sec21\_23.py} (\texttt{SEC23\_EVAPORATION\_PENALTY\_DRILL}): $Q_{\mathrm{evap}} = \SI{1323.3}{\joule}$, $\Delta T_{\mathrm{top}} = \SI{6.155}{\celsius}$.}
+\end{workedexample}
+
+\begin{workedexample}[Rapid Cram Drill 3: Rankine First-Law vs.\ Second-Law Exergy Efficiency]{Cornell 2027 E1 Q29}{ex:23.3}
+In Cornell 2027 (\texttt{E1 Q29}) \src{S25}, a Rankine steam cycle absorbs $q_{\mathrm{in}} = \SI{2257.19}{\kilo\joule\per\kilogram}$ in a boiler heated by a furnace at $T_{\mathrm{source}} = \SI{600}{\kelvin}$ (ambient dead state $T_0 = \SI{300}{\kelvin}$) and produces net turbine work $w_{\mathrm{net}} = \SI{109.92}{\kilo\joule\per\kilogram}$. Compute \textbf{(a)} the First-Law thermal efficiency $\eta_1$, \textbf{(b)} the supplied exergy $X_{\mathrm{in}}$, and \textbf{(c)} the Second-Law exergy efficiency $\eta_2$ (\texttt{TB \#8}).
+
+\textbf{Solution.}
+\textbf{(a)} First-Law efficiency: $\eta_1 = w_{\mathrm{net}}/q_{\mathrm{in}} = 109.92 / 2257.19 = 0.048698 = \mathbf{4.870\%}$.
+\textbf{(b)} Maximum reversible (Carnot) work extractable from $q_{\mathrm{in}}$ between $\SI{600}{\kelvin}$ and $\SI{300}{\kelvin}$ ($\eta_C = 1 - 300/600 = 0.5000$): $X_{\mathrm{in}} = q_{\mathrm{in}}(1 - T_0/T_{\mathrm{source}}) = 2257.19(0.5000) = \mathbf{\SI{1128.60}{\kilo\joule\per\kilogram}}$.
+\textbf{(c)} Second-Law efficiency: $\eta_2 = w_{\mathrm{net}}/X_{\mathrm{in}} = \eta_1/\eta_C = 4.8698\% / 50.00\% = \mathbf{9.740\%}$.
+\verifiedby{Independent Python script \texttt{check\_sec21\_23.py} (\texttt{SEC23\_EXERGY\_SECOND\_LAW\_EFF}): $\eta_1 = 4.870\%$, $X_{\mathrm{in}} = \SI{1128.6}{\kilo\joule\per\kilogram}$, $\eta_2 = 9.740\%$.}
+\end{workedexample}
+
+\section{2027 Heat-Lamp Collector Pre-Block Sanity Checklist \& 60-Second Partner Card}\label{sec:23.7}
+
+\begin{rulebox}[Master Pre-Impound \& Competition-Block Compliance Checklist (\texttt{official-2027-C.pdf} pp.\ C57--C59 \& \texttt{Clarifications \#1--\#9})]
+\scriptsize
+\par\smallskip\noindent
+\begin{tabularx}{\linewidth}{@{}l L{0.23\linewidth} X L{0.23\linewidth}@{}}
+\toprule
+\hdr{Check} & \hdr{2027 Rule / Clarification} & \hdr{Mandatory Verification Criterion Before \& During Block} & \hdr{Penalty If Violated} \\
+\midrule
+\ding{111} \textbf{1} & \textbf{Rule \texttt{3.b.i} \& Clarif.\ \#6} (\texttt{10/22/2026}) & \textbf{ZERO Polystyrene / Styrofoam / \texttt{\#6 PS} plastic}, fiberglass, mineral wool, or asbestos anywhere in device or spare parts! & \textbf{Device banned from testing ($\mathrm{TS}=0, \mathrm{PS}=0$)!} \\
+\rowcolor{rowalt}
+\ding{111} \textbf{2} & \textbf{Rule \texttt{3.b.ii} \& \texttt{3.f}} & Zero thermometers, probes, commercial thermoses/coolers/vacuum vessels, batteries, electrical parts, or chemical heaters. & $\mathrm{TS}=0, \mathrm{PS}=0$ (or $0.7\times$ construction penalty). \\
+\ding{111} \textbf{3} & \textbf{Rule \texttt{2.d} \& Clarif.\ \#9} (\texttt{10/28/2026}) & Impound \textbf{device and spare parts only} at \textbf{room temperature} before impound deadline. Keep binder, calculators, tools, and \sref{sec:16} DOE tables with you! & $1$ Construction Violation ($\mathbf{0.7\times}$ on $\mathrm{TS}$ and $\mathrm{PS}$!). \\
+\rowcolor{rowalt}
+\ding{111} \textbf{4} & \textbf{Rule \texttt{3.c} \& \texttt{3.d}} & Device + inserted \SI{9}{oz} clear plastic cup fits inside a $\mathbf{\SI{30.0}{\centi\meter} \times \SI{30.0}{\centi\meter} \times \SI{30.0}{\centi\meter}}$ cube (build to $\le \SI{29.5}{\centi\meter}$ external envelope!). & $1$ Construction Violation ($\mathbf{0.7\times}$ on $\mathrm{TS}$ and $\mathrm{PS}$). \\
+\ding{111} \textbf{5} & \textbf{Rule \texttt{3.e}} & Parts of device/funnel may extend inside top of cup, but \textbf{NO part of the device may touch the \SI{100}{\milli\liter} water} ($\ge \SI{15}{\milli\meter}$ clearance above water line) and nothing added to water. & $1$ Construction Violation ($\mathbf{0.7\times}$ on $\mathrm{TS}$ and $\mathrm{PS}$). \\
+\rowcolor{rowalt}
+\ding{111} \textbf{6} & \textbf{Rule \texttt{5.II.b}} (3-Min Device Setup) & Adjust internal pedestal slot to announced bulb height $h$ ($\SIrange{40}{65}{\centi\meter}$) and fix any construction issues \textbf{within $\SI{3.0}{\minute}$}. No device modifications after Setup Time! & $0.9\times$ Competition or $0.7\times$ Construction Penalty. \\
+\ding{111} \textbf{7} & \textbf{Rule \texttt{5.II.d} \& Clarif.\ \#5, \#7, \#8} & Within $\SI{1.0}{\minute}$ Water Setup: lift hood/lid (\texttt{Clarif.\ \#7--8}), seat cup on cradle, rest non-attached BoPET vapor cap over cup \textbf{with ZERO tape, glue, rubber bands, or clips} (\texttt{Clarif.\ \#5}), center under lamp. & $0.9\times$ Competition or $0.7\times$ Construction Penalty. \\
+\rowcolor{rowalt}
+\ding{111} \textbf{8} & \textbf{Rule \texttt{5.II.e--f}} (Heating Window) & \textbf{NEVER touch device or lamp setup during Heating Time!} Submit final temperature prediction $T_{\mathrm{pred}}$ (in $\mathbf{\si{\celsius}}$ to $\SI{0.1}{\celsius}$) \textbf{before Heating Time ends} (target: at $t_{\mathrm{heat}} = \SI{3}{\minute}$). & Touching $\implies \mathrm{TS}=\mathrm{PS}=0$; late $T_{\mathrm{pred}} \implies \mathbf{\mathrm{PS}=0}$! \\
+\ding{111} \textbf{9} & \textbf{Rule \texttt{5.II.g} \& Clarif.\ \#1--\#4} & At lamp-off, remove cup completely from all device parts/wraps and set on Testing Surface within $\SI{1}{\minute}$ \textbf{with ZERO swirling, shaking, tilting, or stirring}! & Swirling destroys top-layer stratification \& violates Clarif.\ \#1--\#3! \\
+\bottomrule
+\end{tabularx}
+\end{rulebox}
+
+\begin{formulacard}[60-Second Last-Minute Partner Execution Card (Read Together 2 Minutes Before Block Start)]
+\begin{twocol}[0.485]
+\textbf{\sffamily\color{navy} PARTNER A (Lead Theorist: \texttt{5.c.ii, iv, vii})}
+\begin{enumerate}
+  \item \textbf{At $t = 0{:}00$:} Unstaple/split written packet; place detached \texttt{QS-01, 03, 04, 06, 07, 08, 14} across desk (\fref{fig:21:workspace-layout}). Flag all \textbf{Tiebreaker (\texttt{TB})} items.
+  \item \textbf{At $t = 5{:}30$:} Cross-check Partner B's 15-second $T_{\mathrm{pred}}$ addition on Calculator \#1: $T_{\mathrm{pred}} = \mathrm{TG}_{\mathrm{tab}}(h, P, t) + k_{\mathrm{start}}\,T_{\mathrm{start}} + k_{\mathrm{room}}\,T_{\mathrm{room}}$. Confirm $T_{\mathrm{pred}}$ is written in \textbf{\si{\celsius}} (never Kelvin!) and handed to ES.
+  \item \textbf{Pass 1 \& Pass 2 ($t = 2\text{--}\SI{38}{\minute}$):} Sweep phase diagrams (\texttt{QS-04}), 5-zone ice-water-steam calorimetry (\texttt{QS-03}), gas laws (\texttt{QS-05}), Carnot/Stirling/Rankine cycles (\texttt{QS-08}), and $\Delta S/\Delta H/\Delta G$/exergy (\texttt{QS-07}).
+  \item \textbf{Pass 3 ($t = 38\text{--}\SI{47}{\minute}$):} Write symbolic governing equations on every remaining Tier 3 subpart + carry-forward values.
+  \item \textbf{Final 3 Min ($t = 47\text{--}\SI{50}{\minute}$):} Audit Pages 1--5 for \textbf{units, requested sig figs, and $P_{\mathrm{abs}} = P_{\mathrm{gauge}} + P_{\mathrm{atm}}$}.
+\end{enumerate}
+\nextcol[0.485]
+\textbf{\sffamily\color{slate} PARTNER B (Device Lead + \texttt{5.c.i, iii, v, vi})}
+\begin{enumerate}
+  \item \textbf{Minutes $0\text{--}5$ (3-Min Setup):} Log ES-announced $h$ ($\SIrange{40}{65}{\centi\meter}$), $t_{\mathrm{heat}}$ ($\SIrange{10}{15}{\minute}$), $P_{\mathrm{bulb}}$ ($\SIrange{100}{125}{\watt}$), and $T_{\mathrm{room}}$. Set pedestal slot for height $h$; look up $\mathrm{TG}_{\mathrm{tab}}, k_{\mathrm{start}}, k_{\mathrm{room}}$ on \texttt{QS-13} / \sref{sec:16}.
+  \item \textbf{Minute $5\text{--}6$ (1-Min Water Setup):} Log $T_{\mathrm{start}}$ (to $\SI{0.1}{\celsius}$); seat \SI{9}{oz} cup on 3-fin cradle ($\le \SI{12}{\second}$); lower reflector hood w/ unattached BoPET vapor cap (\texttt{Clarif.\ \#5}); center under lamp.
+  \item \textbf{Minute $6\text{--}9$ (Submit $T_{\mathrm{pred}}$):} Compute $T_{\mathrm{pred}}$ on Calculator \#2, verify w/ Partner A, and \textbf{submit $T_{\mathrm{pred}}$ in \si{\celsius} to ES immediately}.
+  \item \textbf{Minutes $9\text{--}15$ \& $17\text{--}47$ ($\SI{40}{\minute}$ Written Sprint):} Sweep Pile B: 8 temperature scales \& energy units (\texttt{QS-01}), 8 named scientists (\texttt{QS-14}), conduction/convection/Newton heating (\texttt{QS-09, 10, 12}), and blackbody Stefan--Boltzmann/Wien (\texttt{QS-11}).
+  \item \textbf{Lamp-Off Window ($\SI{1}{\minute}$):} Lift hood straight up (removing BoPET cap), lift cup smoothly onto Testing Surface \textbf{with ZERO swirl/tilt (\texttt{Clarif.\ \#1--4})} in $\le \SI{8}{\second}$!
+\end{enumerate}
+\end{twocol}
+\end{formulacard}
+
+\alsosee{\sref{sec:00} (Command Center), \sref{sec:01} (14 Standalone One-Page Quick Sheets \texttt{QS-01}..\texttt{QS-14}), \sref{sec:15}--\sref{sec:16} (2027 Collector Engineering \& Calibration), \sref{sec:20} (Misconceptions \& Error Catalog), \sref{sec:21} (Exam Strategy \& Partner Protocol), \sref{sec:22} (Evidence-Based Tournament Intelligence), \sref{app:A} (Master Constants \& NIST Steam Tables), and \sref{app:F} (One-Page Rules \& Host-Modifications Verification Checklist).}

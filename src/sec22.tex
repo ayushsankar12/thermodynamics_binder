@@ -1,0 +1,240 @@
+% ============================================================================
+% src/sec22.tex — §22 Evidence-Based Tournament Intelligence (Target: 4 pp)
+% ============================================================================
+\binderchapter{22}{Evidence-Based Tournament Intelligence}{§22 Tournament Intelligence}{sec:22}
+\scopebanner{REQUIRED}[Empirical Corpus E1--E8 (N=8 Exams, 328 Graded Items, 1,120.0 Raw Points)]
+
+\idxtopic{tournament intelligence and exam corpus analysis}
+\idxtopic{Cornell 2026-2027 Invitational baseline (Exam E1)}
+\idxtopic{syllabus clause frequency distribution (5.c.i--vii)}
+\idxtopic{difficulty distribution (Tier 1, Tier 2, Tier 3)}
+
+This section synthesizes empirical tournament intelligence from \textbf{$N = 8$ legally public, unauthenticated Science Olympiad Division C Thermodynamics exams and official grading keys} (\texttt{217} numbered questions, \texttt{328} individually graded items/subparts, \texttt{1,120.0} total raw written points) accessed on \texttt{2026-11-22} \src{S25,S26,S27,S28,S29,S30,S31,S32}. Every finding is tagged strictly as \OBS\ (directly counted from the accessed corpus), \REC\ (actionable engineering/study priorities derived from observed frequencies + 2027 rules), or \SPEC\ (falsifiable hypotheses regarding 2026--2027 test-writer adaptations).
+
+\section{Corpus Inventory \& Prominent Methodological Limitations}\label{sec:22.1}
+
+\begin{table}[h!]
+\centering
+\caption{\OBS\ Verified $N = 8$ Division C Thermodynamics Tournament Exam Corpus Inventory (\texttt{Accessed 2026-11-22}) \src{S25,S26,S27,S28,S29,S30,S31,S32}.}\label{tab:22:corpus}
+\footnotesize
+\setlength{\tabcolsep}{3.2pt}
+\renewcommand{\arraystretch}{1.12}
+\begin{tabularx}{\linewidth}{@{}l L{0.27\linewidth} l l r r r X@{}}
+\toprule
+\hdr{ID} & \hdr{Tournament \& Host Institution} & \hdr{Date} & \hdr{Rules Season} & \hdr{Qs} & \hdr{Items} & \hdr{Points} & \hdr{Format \& Companion Artifacts Analyzed} \\
+\midrule
+\textbf{\texttt{E1}} & \textbf{Cornell Univ.\ Invitational} (Div C) \src{S25} & \texttt{2026-11-14} & \textbf{2026--2027 (\texttt{2027})} & 37 & 74 & \textbf{238.0} & 20 MC/Match/TF (44 pt) + 5 FRQs (194 pt); 31-p.\ key + $n=55$ team score histogram \\
+\rowcolor{rowalt}
+\textbf{\texttt{E2}} & \textbf{MIT Invitational} (Div C) \src{S26} & \texttt{2019-01-12} & 2018--2019 (\texttt{2019}) & 30 & 68 & \textbf{220.0} & 5 multi-part Problems (145 pt) + 25 MC (75 pt); 12-p.\ rubric + top score $\SI{93.81}{\text{pts}}$ \\
+\textbf{\texttt{E3}} & \textbf{MIT Invitational} (Div C) \src{S27} & \texttt{2018-01-20} & 2017--2018 (\texttt{2018}) & 24 & 37 & \textbf{168.0} & 16 MC (64 pt) + 8 multi-part Short Answer derivations (104 pt); 12-p.\ key \\
+\rowcolor{rowalt}
+\textbf{\texttt{E4}} & \textbf{Golden Gate Inv.\ (UCB/Stanford)} \src{S28} & \texttt{2019-01-17} & 2018--2019 (\texttt{2019}) & 14 & 32 & \textbf{189.0} & 25-min station sprint; 14 multi-part FRQs; 5-p.\ partial-credit rubric \\
+\textbf{\texttt{E5}} & \textbf{Golden Gate Inv.\ (UCB/Stanford)} \src{S29} & \texttt{2018-02-10} & 2017--2018 (\texttt{2018}) & 21 & 26 & \textbf{45.0} & 45-min written test (\SI{45}{\text{pts}} of \SI{105}{\text{pts}} event total); DOCX key \& scoresheet \\
+\rowcolor{rowalt}
+\textbf{\texttt{E6}} & \textbf{Cornell Univ.\ Invitational} (Div C) \src{S30} & \texttt{2018-02-24} & 2017--2018 (\texttt{2018}) & 31 & 31 & \textbf{140.0} & Sec.\ I--V: 7 scale conv., 8 units, 3 heat exchangers, 7 Stirling cycle, 6 short calc \\
+\textbf{\texttt{E7}} & \textbf{UT Austin (ATX) Invitational} (B/C) \src{S31} & \texttt{2018-10-27} & 2018--2019 (\texttt{2019}) & 30 & 30 & \textbf{60.0} & Standard Regional-style B/C packet: 4 conversions (8 pt) + 26 MC (52 pt) \\
+\rowcolor{rowalt}
+\textbf{\texttt{E8}} & \textbf{UT Austin (ATX) Regional} (B/C) \src{S32} & \texttt{2019-03-02} & 2018--2019 (\texttt{2019}) & 30 & 30 & \textbf{60.0} & Official Spring Regional B/C packet: 4 conversions (8 pt) + 26 MC (52 pt) \\
+\midrule
+\textbf{Sum} & \textbf{4 Hosts (\texttt{Cornell, MIT, GGSO, ATX})} & \texttt{2018--2026} & \textbf{3 Seasons} & \textbf{217} & \textbf{328} & \textbf{1,120.0} & \textbf{6 Research-Univ.\ Exams ($\SI{1000.0}{\text{pts}}$) + 2 Standard B/C Exams ($\SI{120.0}{\text{pts}}$)} \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{trapbox}[Prominent Corpus Limitations \& Epistemic Boundary Conditions]
+\begin{enumerate}
+  \item \textbf{No Single Target Host Specified \& $n=2$ Per-Host Sample Limit:} Each of the 4 host institutions in \tref{tab:22:corpus} is represented by exactly $n=2$ exams (below the $N \ge 3$ threshold required to infer an idiosyncratic single-host habit). Rather than making unsupported ``Host X always asks Y'' claims, we separate the \textbf{Research-University Invitational profile (\texttt{E1--E6}, $n=6$, $\SI{1000.0}{\text{pts}}$)} from the \textbf{Standard Regional / B-C Packet profile (\texttt{E7--E8}, $n=2$, $\SI{120.0}{\text{pts}}$)}.
+  \item \textbf{2018--2019 Historical Rotation Boundary vs.\ 2027 Heat-Lamp Collector Shift:} Seven of the 8 exams (\texttt{E2--E8}, $\SI{882.0}{\text{pts}}$) were written during the 2018--2019 cycle when Part II was an \textit{insulating box holding a beaker of hot water} (with a 10-pt Plot Score). Only \textbf{1 exam (\texttt{E1}, Cornell Invitational, \texttt{2026-11-14}, $\SI{238.0}{\text{pts}}$)} comes from the active 2026--2027 season under the new \textbf{100--125 W heat-lamp collector} rules ($\mathrm{ES}=50, \mathrm{TS}=30, \mathrm{PS}=20$) \src{S01,S25}.
+  \item \textbf{Honest Non-Access of Gated / Anti-Bot / Paid Repositories:} Community test exchanges behind anti-bot proof-of-work challenges and forum checkout logins (\texttt{scioly.org/wiki/index.php/Test\_Exchange}), authenticated client apps (\texttt{scio.ly}), and paid downloads (\texttt{store.soinc.org} \$12 Starter Pack) were not bypassed and are logged as inaccessible in \sref{app:G} and \texttt{deliverables/RESEARCH\_LOG.md}.
+\end{enumerate}
+\end{trapbox}
+
+\section{\texttt{OBSERVED} Syllabus Clause Frequencies \& Format/Difficulty Matrices}\label{sec:22.2}
+
+\begin{table}[h!]
+\centering
+\caption{\OBS\ Topic Distribution Mapped to 2027 Division C Syllabus Clauses \texttt{5.c.i--vii} Across All 8 Exams (\texttt{328} Items, \texttt{1,120.0} Points) \src{S01,S25,S26,S27,S28,S29,S30,S31,S32}.}\label{tab:22:clauses}
+\footnotesize
+\setlength{\tabcolsep}{3.0pt}
+\renewcommand{\arraystretch}{1.13}
+\begin{tabularx}{\linewidth}{@{}l X l r r r r r r@{}}
+\toprule
+\hdr{Clause} & \hdr{2027 Official Syllabus Scope (\texttt{Rule 5.I.c})} & \hdr{Rule Tier} & \hdr{Items} & \hdr{Item \%} & \hdr{Total Pts} & \hdr{Corpus \%} & \hdr{2027 \texttt{E1} \%} & \hdr{Reg.\ \texttt{E7--8} \%} \\
+\midrule
+\textbf{\texttt{5.c.i}} & Systems, intensive/extensive, Zeroth Law, 8 temp scales, heat units & All Levels & 62 & 18.9\% & 154.0 & \textbf{13.8\%} & 4.2\% (\SI{10}{\text{pt}}) & \textbf{21.7\%} (\SI{26}{\text{pt}}) \\
+\rowcolor{rowalt}
+\textbf{\texttt{5.c.ii}} & Phases, phase diagrams, latent/sensible heat, Clapeyron, gas laws & All Levels & 78 & 23.8\% & 259.0 & \textbf{23.1\%} & \textbf{36.6\%} (\SI{87}{\text{pt}}) & \textbf{23.3\%} (\SI{28}{\text{pt}}) \\
+\textbf{\texttt{5.c.iii}} & Heat transfer modes, conductivity $k$, specific/molar heat capacity & All Levels & 49 & 14.9\% & 178.0 & \textbf{15.9\%} & \textbf{20.6\%} (\SI{49}{\text{pt}}) & 15.0\% (\SI{18}{\text{pt}}) \\
+\rowcolor{rowalt}
+\textbf{\texttt{5.c.iv}} & Processes (isochoric/isobaric/isothermal/adiabatic), cycles, 1st/2nd Laws & All Levels & 51 & 15.5\% & 225.0 & \textbf{20.1\%} & 9.2\% (\SI{22}{\text{pt}}) & 10.0\% (\SI{12}{\text{pt}}) \\
+\textbf{\texttt{5.c.v}} & History of \textbf{8 named scientists} (\texttt{Kelvin..Maxwell}) + pioneers & All Levels & 28 & 8.5\% & 69.0 & \textbf{6.2\%} & 0.8\% (\SI{2}{\text{pt}}) & 13.3\% (\SI{16}{\text{pt}}) \\
+\rowcolor{rowalt}
+\textbf{\texttt{5.c.vi}} & Radiant exitance, blackbody radiation, Stefan--Boltzmann, 3rd Law & State/Natl* & 18 & 5.5\% & 74.0 & \textbf{6.6\%} & 9.7\% (\SI{23}{\text{pt}}) & 1.7\% (\SI{2}{\text{pt}}) \\
+\textbf{\texttt{5.c.vii}} & Entropy ($\Delta S, S_{\mathrm{gen}}$) \& enthalpy ($\Delta H$), steam tables, $\Delta G$, exergy & State/Natl* & 42 & 12.8\% & 161.0 & \textbf{14.4\%} & \textbf{18.9\%} (\SI{45}{\text{pt}}) & 15.0\% (\SI{18}{\text{pt}}) \\
+\midrule
+\textbf{Total} & \textbf{All 7 Clauses ($\ge 3$ questions/clause required by Rule \texttt{5.c})} & — & \textbf{328} & \textbf{100.0\%} & \textbf{1,120.0} & \textbf{100.0\%} & \textbf{100\%} (\SI{238}{\text{pt}}) & \textbf{100\%} (\SI{120}{\text{pt}}) \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{center}
+\begin{tikzpicture}[font=\scriptsize]
+\begin{axis}[
+    ybar=2pt,
+    bar width=8.5pt,
+    width=14.6cm,
+    height=4.7cm,
+    ymin=0, ymax=42,
+    ylabel={Share of Written Exam Points (\%)},
+    symbolic x coords={5.c.ii (Phases/Gas), 5.c.iv (Cycles/1-2Law), 5.c.iii (Transfer/Cp), 5.c.vii (S/H/Exergy)*, 5.c.i (Scales/Units), 5.c.vi (Rad/3rdLaw)*, 5.c.v (8 Scientists)},
+    xtick=data,
+    x tick label style={rotate=12, anchor=east, font=\sffamily\scriptsize},
+    ymajorgrids=true,
+    grid style={dotted, gray},
+    legend style={at={(0.98,0.96)}, anchor=north east, font=\sffamily\scriptsize, draw=navy, fill=white},
+    nodes near coords,
+    every node near coord/.append style={font=\sffamily\scriptsize, /pgf/number format/fixed, /pgf/number format/precision=1},
+    enlarge x limits=0.10
+]
+  % Full Corpus (1,120.0 pts)
+  \addplot[fill=navy, draw=navy] coordinates {
+    (5.c.ii (Phases/Gas), 23.1)
+    (5.c.iv (Cycles/1-2Law), 20.1)
+    (5.c.iii (Transfer/Cp), 15.9)
+    (5.c.vii (S/H/Exergy)*, 14.4)
+    (5.c.i (Scales/Units), 13.8)
+    (5.c.vi (Rad/3rdLaw)*, 6.6)
+    (5.c.v (8 Scientists), 6.2)
+  };
+  % 2027 Cornell E1 (238.0 pts)
+  \addplot[fill=boxbg, draw=rust, thick, postaction={pattern=north east lines, pattern color=rust}] coordinates {
+    (5.c.ii (Phases/Gas), 36.6)
+    (5.c.iv (Cycles/1-2Law), 9.2)
+    (5.c.iii (Transfer/Cp), 20.6)
+    (5.c.vii (S/H/Exergy)*, 18.9)
+    (5.c.i (Scales/Units), 4.2)
+    (5.c.vi (Rad/3rdLaw)*, 9.7)
+    (5.c.v (8 Scientists), 0.8)
+  };
+  \legend{Full 8-Exam Corpus ($1{,}120.0\text{ pts}$), 2027 Season Cornell \texttt{E1} ($238.0\text{ pts}$)}
+\end{axis}
+\end{tikzpicture}
+\captionof{figure}{\OBS\ Pareto distribution of written exam point weights across the seven 2027 syllabus clauses \texttt{5.c.i--vii}, comparing the full 8-exam corpus ($1{,}120.0\text{ pts}$) against the November 14, 2026 Cornell University Invitational (\texttt{E1}, $238.0\text{ pts}$). Clauses marked with $*$ (\texttt{5.c.vi} and \texttt{5.c.vii}) are nominal State/National topics that appear on $100\%$ of invitational exams.}\label{fig:22:corpus-pareto}
+\idxfig{Pareto distribution of written exam points across 2027 clauses 5.c.i--vii}
+\end{center}
+
+\subsection{Three Critical \texttt{OBSERVED} Laws from the Corpus}
+\begin{enumerate}
+  \item \OBS\ \textbf{The ``Big Four'' Quantitative Dominance (\texttt{5.c.ii} + \texttt{5.c.iv} + \texttt{5.c.iii} + \texttt{5.c.vii} $= 73.5\%$ of All Points; $85.3\%$ on 2027 Cornell \texttt{E1}):} Phases/latent heat/gas laws (\texttt{5.c.ii}: $23.1\%$ overall, $36.6\%$ on \texttt{E1}), cycles/processes (\texttt{5.c.iv}: $20.1\%$), heat transfer/calorimetry (\texttt{5.c.iii}: $15.9\%$ overall, $20.6\%$ on \texttt{E1}), and entropy/enthalpy/steam tables (\texttt{5.c.vii}: $14.4\%$ overall, $18.9\%$ on \texttt{E1}) account for \textbf{$823.0$ of $1{,}120.0$ corpus points ($73.5\%$)} and \textbf{$203.0$ of $238.0$ points ($85.3\%$)} on the 2026--2027 Cornell Invitational!
+  \item \OBS\ \textbf{State/National Clauses (\texttt{5.c.vi--vii}) Are Universally Tested at Invitationals \& Regionals:} Even though Rule \texttt{5.c.vi} (blackbody radiation, Stefan--Boltzmann, 3rd Law) and Rule \texttt{5.c.vii} (entropy \& enthalpy) carry a \textit{State and National Levels Only} label \src{S01}, \textbf{8 of 8 exams ($100\%$) tested \texttt{5.c.vii}} and \textbf{6 of 8 exams ($75\%$, including the UT Austin Regional \texttt{E8}!) tested \texttt{5.c.vi}}. Together they represent \textbf{$21.0\%$ of all corpus points ($\SI{235.0}{\text{pts}}$)} and \textbf{$28.6\%$ of 2027 Cornell \texttt{E1} ($\SI{68.0}{\text{pts}}$)}.
+  \item \OBS\ \textbf{Bimodal Format \& Difficulty Split Between University Invitationals (\texttt{E1--E6}) and Regional Packets (\texttt{E7--E8}):} As documented in \tref{tab:22:fmt-hist}, multi-step derivations (\texttt{FMT-3}: $36.7\%$ of corpus points) and Tier 3 separators ($41.1\%$ of points on \texttt{E1--E6}) dominate university invitationals, whereas MCQ/short-conversion Tier 1 items ($65.0\%$ of points on \texttt{E7--E8}) dominate standard regional tests.
+\end{enumerate}
+
+\begin{table}[h!]
+\centering
+\caption{\OBS\ Left: Question Format \& Difficulty Tier Distributions ($328\text{ items}, 1{,}120.0\text{ pts}$). Right: 2026--2027 Cornell Invitational (\texttt{E1}, \texttt{2026-11-14}) 55-Team Raw Score Histogram \src{S25}.}\label{tab:22:fmt-hist}
+\footnotesize
+\setlength{\tabcolsep}{2.6pt}
+\renewcommand{\arraystretch}{1.11}
+\begin{twocol}[0.51]
+\begin{tabularx}{\linewidth}{@{}l X r r r@{}}
+\toprule
+\hdr{Code / Tier} & \hdr{Format / Difficulty Category} & \hdr{Items} & \hdr{Pts} & \hdr{Pt \%} \\
+\midrule
+\texttt{FMT-1} & Multiple Choice \& True/False & 106 & 266.0 & 23.8\% \\
+\rowcolor{rowalt}
+\texttt{FMT-2} & Short Calc, Scale \& Unit Conv. & 35 & 116.0 & 10.4\% \\
+\texttt{FMT-3} & \textbf{Multi-Step Calorim./Cycle/Deriv.} & \textbf{78} & \textbf{411.0} & \textbf{36.7\%} \\
+\rowcolor{rowalt}
+\texttt{FMT-4} & $PV/TS$/Phase/Blackbody Graphs & 43 & 137.0 & 12.2\% \\
+\texttt{FMT-5} & Exp.\ Apparatus \& Steam Tables & 13 & 48.0 & 4.3\% \\
+\rowcolor{rowalt}
+\texttt{FMT-6} & History \& Concept Matching & 53 & 142.0 & 12.7\% \\
+\midrule
+\textbf{Tier 1} & Foundational (Univ 20\% / Reg 65\%) & 125 & 278.0 & \textbf{24.8\%} \\
+\rowcolor{rowalt}
+\textbf{Tier 2} & Intermediate (Univ 39\% / Reg 32\%) & 121 & 427.0 & \textbf{38.1\%} \\
+\textbf{Tier 3} & Advanced Separator (Univ 41\%) & 82 & 415.0 & \textbf{37.1\%} \\
+\bottomrule
+\end{tabularx}
+\nextcol[0.47]
+\begin{tabularx}{\linewidth}{@{}l r r r r@{}}
+\toprule
+\hdr{\texttt{E1} Raw Bin ($/238$)} & \hdr{\% Max} & \hdr{Teams} & \hdr{Cum.\ \%} & \hdr{Scaled $\mathrm{ES}$ ($/50$)} \\
+\midrule
+$5.00\text{--}16.43$ & $2.1\text{--}6.9\%$ & 5 & 9.1\% & $2.9\text{--}9.7$ \\
+\rowcolor{rowalt}
+$16.43\text{--}27.86$ & $6.9\text{--}11.7\%$ & 3 & 14.5\% & $9.7\text{--}16.4$ \\
+\textbf{$27.86\text{--}39.29$ (Mode)} & $11.7\text{--}16.5\%$ & \textbf{21} & \textbf{52.7\%} & \textbf{$16.4\text{--}23.1$} \\
+\rowcolor{rowalt}
+$39.29\text{--}50.71$ & $16.5\text{--}21.3\%$ & 16 & 81.8\% & $23.1\text{--}29.8$ \\
+$50.71\text{--}62.14$ & $21.3\text{--}26.1\%$ & 5 & 90.9\% & $29.8\text{--}36.6$ \\
+\rowcolor{rowalt}
+$62.14\text{--}73.57$ & $26.1\text{--}30.9\%$ & 3 & 96.4\% & $36.6\text{--}43.3$ \\
+\textbf{$73.57\text{--}85.00$ (Top)} & $30.9\text{--}35.7\%$ & \textbf{2} & \textbf{100.0\%} & \textbf{$43.3\text{--}50.0$} \\
+\midrule
+\multicolumn{5}{@{}l@{}}{\textbf{Total Field:} $n=55\text{ teams}$ $\cdot$ \textbf{Median} $\approx \SI{38.5}{\text{pts}}$ ($\mathrm{ES}=\SI{22.65}{\text{pts}}$)} \\
+\multicolumn{5}{@{}l@{}}{\textbf{Tier 1 (\SI{25}{\text{pt}}) + Tier 2 (\SI{65}{\text{pt}})} $= \mathbf{\SI{90.0}{\text{pts}}} > \SI{85.00}{\text{pt}}$ Winning Score!} \\
+\bottomrule
+\end{tabularx}
+\end{twocol}
+\end{table}
+
+\begin{workedexample}[Cornell 2027 (\texttt{E1}) Histogram Normalization \& Tier 1+2 Sufficiency Proof]{Empirical ROI}{ex:22.1}
+Using the official 2026--2027 Cornell Invitational score distribution (\tref{tab:22:fmt-hist}, $N_{\mathrm{max}} = \SI{238.0}{\text{pts}}$, winning raw score $R_{\max} = \SI{85.00}{\text{pts}}$, median raw score $R_{\mathrm{med}} = \SI{38.50}{\text{pts}}$) \src{S25}:
+\textbf{(a)} Verify the total competing team count $n$, the normalized Exam Score multiplier $(\text{ES pts per raw pt})$, and the normalized point deficit between the median team and 1st place.
+\textbf{(b)} If a team skips all 34 Tier 3 items ($\SI{148.0}{\text{pts}}$) except for writing symbolic equations on 6 of them ($6 \times \SI{1.5}{\text{pts}} = \SI{9.0}{\text{pts}}$), and scores $88\%$ on Tier 1 ($\SI{25.0}{\text{pts}}$) and Tier 2 ($\SI{65.0}{\text{pts}}$) items, what is their normalized Exam Score $\mathrm{ES}$?
+
+\textbf{Solution.}
+\textbf{(a) Team count, normalization factor, and median deficit:}
+\[
+  n = 5 + 3 + 21 + 16 + 5 + 3 + 2 = \mathbf{55\text{ teams}}, \qquad
+  \frac{\partial \mathrm{ES}}{\partial R} = \frac{50.0}{85.00} = \mathbf{\SI{0.58824}{\text{ES pts/raw pt}}}.
+\]
+The median team ($R_{\mathrm{med}} = \SI{38.50}{\text{pts}}$) earns $\mathrm{ES}_{\mathrm{med}} = 50 \times (38.50 / 85.00) = \SI{22.647}{\text{pts}}$, trailing the top written score ($\SI{50.00}{\text{pts}}$) by:
+\[
+  \Delta\mathrm{ES}_{\mathrm{deficit}} = 50.000 - 22.647 = \mathbf{\SI{27.353}{\text{normalized tournament points}}}.
+\]
+\textbf{(b) Tier 1 + Tier 2 + Symbolic Partial-Credit Strategy:}
+Scoring $88\%$ on Tier 1 + Tier 2 ($0.88 \times \SI{90.0}{\text{pts}} = \SI{79.20}{\text{pts}}$) plus $\SI{9.0}{\text{pts}}$ of Tier 3 symbolic equations yields $R_{\mathrm{team}} = 79.20 + 9.00 = \mathbf{\SI{88.20}{\text{raw pts}}} > \SI{85.00}{\text{pts}}$, setting the new tournament high score and earning \textbf{$\mathrm{ES} = \SI{50.00}{\text{pts}}$}!
+\verifiedby{Independent Python script \texttt{check\_sec21\_23.py} (\texttt{SEC22\_CORNELL2027\_HISTOGRAM}): $n=55$, $\partial\mathrm{ES}/\partial R = 0.588235$, $\Delta\mathrm{ES}_{\mathrm{deficit}} = 27.35294\text{ pts}$.}
+\end{workedexample}
+
+\section{\texttt{RECOMMENDED} Priorities \& \texttt{SPECULATIVE} 2026--2027 Forecasts}\label{sec:22.3}
+
+\idxtopic{point-losing exam traps from E1--E8 rubrics}
+\idxtopic{2026-2027 speculative written exam adaptations}
+
+\begin{table}[h!]
+\centering
+\caption{\REC\ High-ROI Binder Prioritization \& Top-10 Rubric Trap Forensics Derived from \texttt{E1--E8} \src{S25,S26,S27,S28,S29,S30,S31,S32}.}\label{tab:22:rec-traps}
+\footnotesize
+\setlength{\tabcolsep}{3.0pt}
+\renewcommand{\arraystretch}{1.12}
+\begin{tabularx}{\linewidth}{@{}l L{0.28\linewidth} X L{0.26\linewidth}@{}}
+\toprule
+\hdr{Rank} & \hdr{\REC\ Priority \& Corpus Weight} & \hdr{Observed Rubric Trap in \texttt{E1--E8} Answer Keys} & \hdr{Binder Countermeasure Locator} \\
+\midrule
+\textbf{1} & \textbf{Multiphase Calorimetry \& Phase Diagrams (\texttt{5.c.ii}: $23.1\%$ / $36.6\%$ \texttt{E1})} & Assuming all ice melts or all steam condenses without checking plateau bounds (\texttt{E1 Q30d, E4 Q9a, E6 III.2}); omitting $L_v(T)$ Kirchhoff shift at $T < \SI{100}{\celsius}$ (\texttt{E2 P3e TB\#3}); binary alloy lever-rule inversion (\texttt{E1 Q10--14, Q30c}). & \sref{sec:04} 5-Zone Ledger, \sref{sec:05} Binary Eutectic Lever Rule, \texttt{QS-03}, \texttt{QS-04} \\
+\rowcolor{rowalt}
+\textbf{2} & \textbf{Processes, Cycles \& Non-Standard Axes (\texttt{5.c.iv}: $20.1\%$)} & Flipping work sign $W_{\mathrm{by}}$ vs.\ $w_{\mathrm{on}}$ (\texttt{E4 Q13}: $-\SI{2}{\text{pts}}$/part); failing to spot that extensive work $W$ is uncomputable on a $P$--$T$ Carnot plot without $n$ or $V$ (\texttt{E2 P2b TB\#4}); using $C_V$ instead of $C_P$ in isobaric work (\texttt{E3 MC5}). & \sref{sec:07} Process Atlas, \sref{sec:09} Cycle Coordinate Translator, \texttt{QS-06}, \texttt{QS-08} \\
+\textbf{3} & \textbf{Conduction, Convection, Newton Heating \& $C_v$ (\texttt{5.c.iii}: $15.9\%$ / $20.6\%$ \texttt{E1})} & Omitting calorimeter $C_{\mathrm{cal}}$ (\texttt{E7 Q16}) or glass-bulb thermal expansion $\beta_{\mathrm{glass}}V_0\Delta T$ (\texttt{E1 Q26d TB\#9}); confusing Rayleigh number $\mathrm{Ra}$ with radiation (\texttt{E1 Q17e}); forgetting 2D lattice equipartition has $4$ quadratic modes ($C_v = 2Nk_B$, \texttt{E1 Q35a TB\#3}). & \sref{sec:04}, \sref{sec:06}, \sref{sec:10}--\sref{sec:13}, \texttt{QS-09}, \texttt{QS-10}, \texttt{QS-12} \\
+\rowcolor{rowalt}
+\textbf{4} & \textbf{Steam Tables, Entropy, Enthalpy \& Exergy (\texttt{5.c.vii}: $14.4\%$ / $18.9\%$ \texttt{E1})} & Plugging gauge pressure instead of $P_{\mathrm{abs}} = P_{\mathrm{gauge}} + P_{\mathrm{atm}}$ into $Pv=RT$ and steam tables (\texttt{E1 Q27c, Q28 TB\#1}); forgetting $h = u + Pv$ when only $u, P, v$ are tabulated (\texttt{E1 Q29a}); confusing $\eta_1 = W/Q_{\mathrm{in}}$ with exergy efficiency $\eta_2 = \eta_1/\eta_{\mathrm{Carnot}}$ (\texttt{E1 Q29c TB\#8}). & \sref{sec:05}, \sref{sec:08}, \sref{sec:09}, \sref{app:A} NIST Steam Table, \texttt{QS-07} \\
+\textbf{5} & \textbf{8-Scale Temp \& Energy Unit Conversions (\texttt{5.c.i}: $18.9\%$ of items)} & Adding $+273.15$ or $+32$ to temperature \textit{intervals} $\Delta T$ (\texttt{E7 Q5, E8 Q5}); using \si{\celsius} instead of \si{\kelvin} in gas-law ratios (\texttt{E8 Q26}); missing historical scales (\texttt{°R, °De, °N, °Ré, °Rø}) or units (\texttt{ft$\cdot$lbf, CHU, erg, foe}) (\texttt{E1 Q8,22b, E4 Q2,5, E6 I--II}). & \sref{sec:02}, \sref{sec:03}, \texttt{QS-01} 8-Scale \& Unit Matrix \\
+\rowcolor{rowalt}
+\textbf{6} & \textbf{Blackbody Radiation, $T^4$ Cooling \& 3rd Law (\texttt{5.c.vi}: $6.6\%$ / $9.7\%$ \texttt{E1})} & Confusing hemispherical exitance $M = \sigma T^4$ with Lambertian directional radiance $L = \sigma T^4/\pi$ (\texttt{E1 Q36e}); failing to link quantum vibrational freeze-out ($\hbar\omega \gg k_B T \implies C_v \to 0$) to convergence of $S(T) = \int_0^T (C_v/T')\,dT'$ under the Third Law (\texttt{E1 Q35c--d}). & \sref{sec:08}, \sref{sec:12}, \sref{sec:13}, \texttt{QS-11} \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Five \texttt{SPECULATIVE} Forward-Looking Hypotheses for 2026--2027 Exams}
+\begin{itemize}
+  \item \SPEC\ \textbf{Hypothesis S1 (Part I Written Questions Modeling the 2027 Heat-Lamp Apparatus --- \texttt{5.c.iii, vi}):} Just as \texttt{E3 Q23} tested inverse-square solar irradiance and radiative equilibrium, expect 2027 invitationals, regionals, and states to test (a) Wien's peak $\lambda_{\max} = b / T_{\mathrm{fil}} \approx \SI{1.21}{\micro\meter}$ for a $\SI{2400}{\kelvin}$ tungsten heat lamp, (b) geometric concentration ratio $C_{\mathrm{geom}} = A_{\mathrm{ap}} / A_{\mathrm{cup}} = \SI{900}{\square\centi\meter} / \SI{44.2}{\square\centi\meter} \approx 20.4\times$, and (c) exponential lumped-capacitance heating $T(t) = T_{\mathrm{ss}} - (T_{\mathrm{ss}} - T_{\mathrm{start}})e^{-t/\tau}$ (\sref{sec:13}, \sref{sec:15}).
+  \item \SPEC\ \textbf{Hypothesis S2 (Near-IR Surface Absorption \& Stable Thermal Stratification --- \texttt{Clarifications \#1--\#4}):} Because Official Clarifications \#1--\#4 \src{S02} mandate \textbf{zero stirring/swirling} and top-layer temperature measurement, expect conceptual and quantitative questions asking why top-down near-IR heating of water above $\SI{4}{\celsius}$ creates a \textbf{buoyantly stable stratified hot surface layer} ($\partial\rho/\partial z > 0$, $\mathrm{Ra} < 0$, suppressing Rayleigh--B\'{e}nard convection) whereas bottom heating drives vigorous convective mixing (\sref{sec:11}, \sref{sec:15}).
+  \item \SPEC\ \textbf{Hypothesis S3 (Open-Cup Evaporative Cooling vs.\ Vapor-Barrier Glazing Calorimetry --- \texttt{Clarification \#5}):} Following Clarification \#5 (permitting an unattached cling-wrap/BoPET cover) and Lienhard Example 11.11 \src{S02,S12}, expect calorimetry problems calculating the temperature penalty when $0.5\text{--}\SI{2.0}{\gram}$ of water evaporates from a $\SI{100}{\milli\liter}$ cup ($L_v \approx \SI{2420}{\joule\per\gram}$ at $\SI{35}{\celsius} \implies \SIrange{3}{12}{\celsius}$ temperature loss!).
+  \item \SPEC\ \textbf{Hypothesis S4 (Polymer Thermal Softening \& \texttt{\#6 PS} Hazard Physics --- \texttt{Clarification \#6}):} Following the \texttt{10/22/2026} ban on polystyrene (\texttt{\#6 PS}/Styrofoam) under heat lamps \src{S02}, expect material-comparison problems contrasting polymer glass-transition temperatures ($T_g \approx \SI{95}{\celsius}$ for PS vs.\ $T_m = \SI{254}{\celsius}$ for BoPET Mylar and char-resistant cork/balsa/cardboard) and specular vs.\ diffuse reflectance of shiny vs.\ dull aluminum foil (\sref{sec:14}).
+  \item \SPEC\ \textbf{Hypothesis S5 (Strict Alignment of \texttt{5.c.v} History Questions with the 2027 8-Scientist List):} Because Rule \texttt{5.c.v} mandates at least 3 questions from the exact 8 named scientists (\textbf{Kelvin, Joseph Black, Joule, Carnot, Planck, Clausius, Boltzmann, Maxwell}) \src{S01}, expect Regional and State exams to feature direct matching across all 8 figures---with increased weight on \textbf{Joseph Black} (latent vs.\ sensible heat, ice calorimetry) and \textbf{Max Planck} (blackbody law, $E=h\nu$, 3rd Law crystal entropy) alongside \textbf{Carnot, Clausius, Kelvin, and Boltzmann} (\sref{sec:03}, \texttt{QS-14}).
+\end{itemize}
+
+\alsosee{\sref{sec:00} (Command Center), \sref{sec:03} (8 Named Scientists \texttt{5.c.v}), \sref{sec:14}--\sref{sec:16} (2027 Heat-Lamp Collector Engineering \& Calibration), \sref{sec:20} (Misconceptions \& Error Catalog), \sref{sec:21} (Exam Strategy \& Partner Protocol), and \sref{sec:23} (Final Review / Cram Layer).}

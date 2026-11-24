@@ -1,0 +1,552 @@
+\binderchapter{5}{Phases of Matter, Latent vs.\ Sensible Heat, Phase Diagrams ($\mathrm{H_2O}, \mathrm{CO_2}$, Binary Eutectic Lever Rule), Clausius--Clapeyron \& Psychrometrics}{§5 Phases, Diagrams \& Psychrometrics}{sec:05}
+\scopebanner{REQUIRED}[Rule 5.c.ii (Phases of Matter, Phase Transitions \& Phase Diagrams), 5.c.vi (Enthalpy \& Entropy of Phase Change), 5.d.iv (Algebra/Geometry Only)]
+
+\begin{formulacard}[§5 Core Formula Card --- Phase Transitions, Lever Rules, Clausius--Clapeyron \& Psychrometrics]
+\begin{ftab}
+Latent Heat \& Sublimation Cycle & $\displaystyle Q = \pm m L = \pm n \Delta_{\mathrm{trs}}H_m, \qquad \Delta_{\mathrm{sub}}H_m(T) = \Delta_{\mathrm{fus}}H_m(T) + \Delta_{\mathrm{vap}}H_m(T)$ & $\si{\joule}$ (\ref{eq:05:sublimation}) \\
+Phase-Transition Entropy \& Trouton & $\displaystyle \Delta_{\mathrm{trs}}S_m = \frac{\Delta_{\mathrm{trs}}H_m}{T_{\mathrm{trs}}}, \qquad \Delta_{\mathrm{vap}}S_m^\circ = \frac{\Delta_{\mathrm{vap}}H_m^\circ}{T_b} \approx 10.5 R \approx \SI{87}{\joule\per\mole\per\kelvin}$ & $\si{\joule\per\mole\per\kelvin}$ (\ref{eq:05:trouton}) \\
+Supercooled Adiabatic Freeze Jump & $\displaystyle f_{\mathrm{frozen}} = \frac{m_{\mathrm{ice}}}{m_{\mathrm{tot}}} = \frac{c_w(T_m - T_{\mathrm{sc}})}{L_f}$ & $T_{\mathrm{sc}} < T_m$ (\ref{eq:05:supercool}) \\
+Gibbs Phase Rule (Full / Isobaric) & $\displaystyle F = C - P + 2 \quad (\text{general } P,T), \qquad F_P = C - P + 1 \quad (P = \text{const})$ & Degrees of freedom (\ref{eq:05:gibbs}) \\
+Pure-Substance Quality \& Lever Rule & $\displaystyle x = \frac{m_g}{m_f + m_g} = \frac{y - y_f}{y_g - y_f}, \qquad y = (1-x)y_f + x y_g = y_f + x y_{fg}$ & $y \in \{v,u,h,s\}$ (\ref{eq:05:quality}) \\
+Binary Eutectic Tie-Line Lever Rule & $\displaystyle f_L = \frac{w_0 - w_S}{w_L - w_S}, \qquad f_S = \frac{w_L - w_0}{w_L - w_S}, \qquad f_L + f_S = 1$ & Two-phase field (\ref{eq:05:eutecticlever}) \\
+Exact Clapeyron Slope (\texttt{SUPP}) & $\displaystyle \frac{\Delta P}{\Delta T} = \frac{L}{T(v_2 - v_1)} = \frac{\Delta_{\mathrm{trs}}S_m}{\Delta_{\mathrm{trs}}V_m}$ & Coexistence line (\ref{eq:05:clapeyron}) \\
+Algebraic Clausius--Clapeyron (\texttt{SUPP}) & $\displaystyle \ln\!\left(\frac{P_2}{P_1}\right) = -\frac{\Delta_{\mathrm{vap}}H_m}{R}\left(\frac{1}{T_2} - \frac{1}{T_1}\right) \implies T_2 = \left[\frac{1}{T_1} - \frac{R}{\Delta_{\mathrm{vap}}H_m}\ln\!\left(\frac{P_2}{P_1}\right)\right]^{-1}$ & Ideal vapor (\ref{eq:05:cc}) \\
+Antoine Vapor-Pressure Equation & $\displaystyle \log_{10} P_{\mathrm{sat}} = A - \frac{B}{T + C} \implies P_{\mathrm{sat}} = 10^{\,A - B/(T+C)}$ & NIST WebBook (\ref{eq:05:antoine}) \\
+Psychrometrics: $\mathrm{RH}$ \& Humidity Ratio & $\displaystyle \mathrm{RH} = \frac{P_v}{P_{\mathrm{sat}}(T)}\times 100\%, \qquad \omega = \frac{m_v}{m_a} = 0.62198\,\frac{P_v}{P - P_v}$ & $\si{\kilogram\per\kilogram}$ (\ref{eq:05:psychro}) \\
+Colligative Boiling/Freezing Shifts & $\displaystyle P_{\mathrm{soln}} = x_{\mathrm{solv}}P_{\mathrm{solv}}^\circ, \qquad \Delta T_b = +i K_b m, \qquad \Delta T_f = -i K_f m$ & Molality $m$ (\ref{eq:05:colligative}) \\
+\end{ftab}
+\end{formulacard}
+
+\section{Microscopic States of Matter, All 6 Phase Transitions \& Metastable States}
+\label{sec:05.1}
+\idxtopic{phases of matter!solid, liquid, gas, supercritical fluid, plasma}
+\idxtopic{phase transitions!6 transitions, Trouton's rule, and sublimation identity}
+\idxtopic{metastable states!supercooling, superheating, supersaturation, glass transition}
+
+The macroscopic phase of a substance is governed by the competition between intermolecular attractive potential energy $|\epsilon_{\mathrm{attr}}|$ and thermal kinetic energy $k_B T$ \src{S04,S05}:
+\begin{enumerate}
+  \item \textbf{Crystalline Solid ($k_B T \ll |\epsilon_{\mathrm{attr}}|$):} Atoms vibrate harmonically about fixed 3D lattice sites (long-range translational and orientational order); definite shape and volume, low compressibility ($\kappa_T \sim 10^{-11}\,\si{\per\pascal}$).
+  \item \textbf{Liquid ($k_B T \sim |\epsilon_{\mathrm{attr}}|$):} Molecules remain in close contact (short-range order within $2\text{--}3$ molecular diameters, $\rho_{\mathrm{liq}} \sim \rho_{\mathrm{solid}}$) but translate past one another; definite volume, takes container shape, exhibits a free meniscus and surface tension $\gamma_{\mathrm{surf}}$.
+  \item \textbf{Gas / Vapor ($k_B T \gg |\epsilon_{\mathrm{attr}}|$):} Molecules move freely with mean separation $d \gg \sigma_{\mathrm{mol}}$; no fixed shape or volume, expands to fill any container, highly compressible ($\kappa_T \approx 1/P$). (Conventionally called a \textbf{vapor} when $T < T_c$ so isothermal compression alone can liquefy it, and a \textbf{permanent gas} when $T > T_c$.)
+  \item \textbf{Supercritical Fluid ($T > T_c$ and $P > P_c$):} Above the critical point (\tref{tab:05:h2oco2}), the liquid--vapor meniscus and latent heat $L_v$ \textbf{vanish identically} ($L_v(T_c) = 0$). A gas compressed above $T_c$ and $P_c$ transitions continuously into a dense fluid combining liquid-like solvent density ($\rho \sim \SIrange{200}{800}{\kilogram\per\cubic\meter}$) with gas-like diffusivity and zero surface tension (e.g., supercritical $\mathrm{CO_2}$ above $\SI{31.0}{\celsius}, \SI{7.38}{\mega\pascal}$ used for caffeine extraction).
+  \item \textbf{Plasma ($k_B T \gtrsim E_{\mathrm{ion}} \sim \SIrange{1}{10}{\electronvolt}$):} High-temperature quasi-neutral ionized gas of free electrons and positive ions exhibiting collective electromagnetic (Debye-shielded) behavior.
+\end{enumerate}
+
+\begin{center}
+\captionof{table}{Complete thermodynamics of the 6 first-order phase transitions at constant pressure $P$ \src{S04,S05,S19}.}\label{tab:05:sixtransitions}
+\footnotesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.14}
+\begin{tabularx}{\linewidth}{@{}l l c c c X@{}}\toprule
+\textbf{Transition} & \textbf{Direction} & \textbf{$\Delta H = Q_P$} & \textbf{$\Delta S$} & \textbf{$\Delta G(T_{\mathrm{trs}})$} & \textbf{$\mathrm{H_2O}$ Benchmark Values \& Physical Notes} \\\midrule
+\textbf{1. Melting (Fusion)} & Solid $\to$ Liquid & $+m L_f > 0$ & $+ > 0$ & $0$ & $L_f(\SI{0}{\celsius}) = \SI{333.55}{\kilo\joule\per\kilogram} = \SI{6.009}{\kilo\joule\per\mole}$; $\Delta V < 0$ for $\mathrm{H_2O}, \mathrm{Bi}, \mathrm{Ga}, \mathrm{Si}$ \\
+\textbf{2. Freezing (Fusion$^{-1}$)} & Liquid $\to$ Solid & $-m L_f < 0$ & $- < 0$ & $0$ & Exothermic; releases exact latent heat $L_f$ at $T_m$ \\
+\textbf{3. Vaporization} & Liquid $\to$ Gas & $+m L_v > 0$ & $+ \gg 0$ & $0$ & $L_v(\SI{100}{\celsius}) = \SI{2256.4}{\kilo\joule\per\kilogram} = \SI{40.65}{\kilo\joule\per\mole}$; $L_v(\SI{25}{\celsius}) = \SI{2441.7}{\kilo\joule\per\kilogram}$ \\
+\textbf{4. Condensation} & Gas $\to$ Liquid & $-m L_v < 0$ & $- \ll 0$ & $0$ & Exothermic; makes $\SI{100}{\celsius}$ steam burns far worse than $\SI{100}{\celsius}$ water \\
+\textbf{5. Sublimation} & Solid $\to$ Gas & $+m L_{\mathrm{sub}} > 0$ & $+ \gg 0$ & $0$ & $\mathrm{H_2O}(\SI{0}{\celsius})$: $L_{\mathrm{sub}} = \SI{2834.8}{\kilo\joule\per\kilogram}$; Dry ice $\mathrm{CO_2}(-\SI{78.5}{\celsius})$: $\SI{571.3}{\kilo\joule\per\kilogram}$ \\
+\textbf{6. Deposition} & Gas $\to$ Solid & $-m L_{\mathrm{sub}} < 0$ & $- \ll 0$ & $0$ & Frost formation at $T < \SI{0}{\celsius}$ when $T_{\mathrm{dp}} < \SI{0}{\celsius}$ (\emph{frost point}) \\\bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{itemize}
+  \item \textbf{Hess's Law Sublimation Identity \& Temperature Dependence of Latent Heat:} Because enthalpy $H$ is a state function, subliming a solid to vapor at the triple point (or any temperature $T$ where all three phases are referenced) equals melting plus vaporizing at that same temperature \src{S05,S19}:
+  \begin{equation}\label{eq:05:sublimation}
+    \Delta_{\mathrm{sub}}H_m(T) = \Delta_{\mathrm{fus}}H_m(T) + \Delta_{\mathrm{vap}}H_m(T) \iff L_{\mathrm{sub}}(T) = L_f(T) + L_v(T).
+  \end{equation}
+  For $\mathrm{H_2O}$ at the triple point $T_{\mathrm{tp}} = \SI{0.01}{\celsius}$, $L_f(\SI{0.01}{\celsius}) = \SI{333.55}{\kilo\joule\per\kilogram}$ and $L_v(\SI{0.01}{\celsius}) = \SI{2501.3}{\kilo\joule\per\kilogram}$ sum to $L_{\mathrm{sub}}(\SI{0.01}{\celsius}) = \SI{2834.8}{\kilo\joule\per\kilogram}$ ($\SI{51.07}{\kilo\joule\per\mole}$). Notice that $L_v$ decreases as $T$ rises toward $T_c$ ($\partial L_v/\partial T \approx c_{p,g} - c_{p,\ell} < 0$, Kirchhoff's equation) and vanishes at the critical point: $L_v(\SI{0}{\celsius}) = \SI{2501.3}{\kilo\joule\per\kilogram} \to L_v(\SI{25}{\celsius}) = \SI{2441.7}{\kilo\joule\per\kilogram} \to L_v(\SI{100}{\celsius}) = \SI{2256.4}{\kilo\joule\per\kilogram} \to L_v(\SI{373.95}{\celsius}) = 0$.
+  \item \textbf{Trouton's Rule (1884):} At any reversible phase transition, $\Delta G_{\mathrm{trs}} = \Delta H_{\mathrm{trs}} - T_{\mathrm{trs}}\Delta S_{\mathrm{trs}} = 0$, so:
+  \begin{equation}\label{eq:05:trouton}
+    \Delta_{\mathrm{trs}}S_m = \frac{\Delta_{\mathrm{trs}}H_m}{T_{\mathrm{trs}}}, \qquad
+    \Delta_{\mathrm{vap}}S_m^\circ = \frac{\Delta_{\mathrm{vap}}H_m^\circ}{T_b} \approx 10.5 R \approx \mathbf{\SIrange{85}{88}{\joule\per\mole\per\kelvin}} \quad (\text{non-polar liquids}).
+  \end{equation}
+  Hydrogen-bonded liquids (water: $\SI{40650}{\joule\per\mole}/\SI{373.15}{\kelvin} = \mathbf{\SI{108.9}{\joule\per\mole\per\kelvin}}$; ethanol: $\SI{109.7}{\joule\per\mole\per\kelvin}$) exceed Trouton's rule because hydrogen bonds make the liquid unusually ordered (abnormally low $S_{\mathrm{liq}}$).
+  \item \textbf{Metastable States (Supercooling, Superheating, Supersaturation) \& Glass Transition ($T_g$):}
+  First-order phase transitions require creating a new interface of surface energy $\gamma_{\mathrm{surf}}$, creating a nucleation barrier $\Delta G^* \propto \gamma_{\mathrm{surf}}^3 / (\Delta T_{\mathrm{undercool}})^2$:
+  \begin{enumerate}
+    \item \textbf{Supercooled Liquid:} Ultra-pure dust-free liquid water at $\SI{1}{\text{atm}}$ can be cooled below $T_m = \SI{0}{\celsius}$ down to the homogeneous nucleation limit $T_H \approx \SI{-40}{\celsius}$ while remaining liquid. When disturbed by a seed crystal at $T_{\mathrm{sc}} < T_m$, crystallization proceeds adiabatically ($Q = 0$), releasing latent heat that warms the mixture back up to the coexistence plateau $T_m = \SI{0.00}{\celsius}$ and freezes the exact mass fraction:
+    \begin{equation}\label{eq:05:supercool}
+      m_{\mathrm{ice}} L_f = m_{\mathrm{tot}} c_w (T_m - T_{\mathrm{sc}}) \implies
+      f_{\mathrm{frozen}} = \frac{m_{\mathrm{ice}}}{m_{\mathrm{tot}}} = \frac{c_w(T_m - T_{\mathrm{sc}})}{L_f}.
+    \end{equation}
+    (Example: liquid water supercooled to $T_{\mathrm{sc}} = -\SI{10.0}{\celsius}$ freezes a fraction $f_{\mathrm{frozen}} = (4.184)(10.0)/333.55 = \mathbf{12.54\%}$ upon nucleation, leaving $87.46\%$ liquid water at $\SI{0.00}{\celsius}$!)
+    \item \textbf{Superheated Liquid \& Bumping:} Smooth glass vessels lacking porous nucleation crevices allow liquid water to exceed $\SI{100}{\celsius}$ at $\SI{1}{\text{atm}}$ before flashing violently into vapor (\emph{bumping}); prevented by porous boiling chips.
+    \item \textbf{Amorphous Glass Transition ($T_g$):} If a viscous liquid (silica, glycerol, \texttt{\#1 PET}) is cooled rapidly enough to bypass crystal nucleation below $T_m$, its viscosity exceeds $\SI{e12}{\pascal\second}$ at the \textbf{glass transition temperature} $T_g$, forming an amorphous solid (glass). Unlike true melting at $T_m$, the glass transition at $T_g$ exhibits \textbf{zero latent heat} ($L_f = 0$) and only a step decrease in $c_p$ and $\alpha_L$.
+  \end{enumerate}
+\end{itemize}
+
+\section{Gibbs Phase Rule \& Comparative $P$--$T$ Phase Diagrams ($\mathrm{H_2O}$ vs.\ $\mathrm{CO_2}$)}
+\label{sec:05.2}
+\idxtopic{Gibbs phase rule!F = C - P + 2}
+\idxtopic{phase diagrams!H2O vs.\ CO2 side-by-side comparison}
+\idxtopic{regelation and anomalous negative fusion slope of water}
+
+In 1876, J.~Willard Gibbs proved that a thermodynamic system of $C$ chemically independent components distributed among $P$ coexisting phases in thermal, mechanical, and chemical equilibrium possesses $F$ intensive \textbf{degrees of freedom} (independent intensive variables such as $T, P$, or phase mole fractions that can be varied without changing the number of phases $P$) \src{S05,S19}:
+\begin{equation}\label{eq:05:gibbs}
+  F = C - P + 2 \qquad (\text{or } F_P = C - P + 1 \text{ when pressure } P \text{ is fixed externally, e.g., at } \SI{1}{\text{atm}}).
+\end{equation}
+For a \textbf{pure substance ($C = 1$)}, $F = 3 - P$:
+\begin{itemize}
+  \item \textbf{Single-Phase Area ($P = 1 \implies F = 2$, Bivariant):} Both $T$ and $P$ can be varied independently inside the solid, liquid, or gas region.
+  \item \textbf{Two-Phase Coexistence Boundary Curve ($P = 2 \implies F = 1$, Univariant):} Along the fusion (melting), vaporization, or sublimation curve, choosing $T$ fixes $P_{\mathrm{sat}}(T)$ uniquely.
+  \item \textbf{Three-Phase Triple Point ($P = 3 \implies F = 0$, Invariant):} Solid, liquid, and vapor coexist in equilibrium at \textbf{one unique point} $(T_{\mathrm{tp}}, P_{\mathrm{tp}})$ with zero degrees of freedom.
+\end{itemize}
+
+\begin{center}
+\begin{tikzpicture}[>=Stealth,font=\scriptsize]
+  % Left: H2O P-T Phase Diagram (schematic axes)
+  \begin{scope}[xshift=0cm]
+    \node[font=\scriptsize\bfseries,navy] at (3.4,4.45) {(a) Water ($\mathrm{H_2O}$): Negative Fusion Slope ($dP/dT < 0$)};
+    \draw[->,thick,navy] (0.5,0.4) -- (6.6,0.4) node[right,font=\bfseries] {$T$};
+    \draw[->,thick,navy] (0.5,0.4) -- (0.5,4.15) node[above,font=\bfseries] {$P$};
+    % Sublimation curve
+    \draw[very thick,teal] (0.7,0.5) .. controls (1.6,0.7) and (2.2,1.0) .. (2.6,1.45);
+    % Fusion curve (NEGATIVE SLOPE!)
+    \draw[ultra thick,rust] (2.6,1.45) -- (2.05,3.85);
+    % Vaporization curve
+    \draw[very thick,navy] (2.6,1.45) .. controls (3.8,1.9) and (4.8,2.6) .. (5.5,3.45);
+    % 1 atm horizontal dashed line
+    \draw[dashed,amber!90!black,thick] (0.5,2.25) -- (6.3,2.25) node[right,font=\scriptsize\bfseries] {$\SI{1}{\text{atm}}$};
+    % Points: Triple Point, Normal Tm, Normal Tb, Critical Point
+    \fill[rust] (2.6,1.45) circle (2.2pt);
+    \node[below right,font=\scriptsize,rust] at (2.6,1.42) {$\mathrm{TP}\;(\SI{0.01}{\celsius},\SI{0.006}{\text{atm}})$};
+    \fill[navy] (5.5,3.45) circle (2.2pt);
+    \node[above left,font=\scriptsize,navy] at (5.55,3.48) {$\mathrm{CP}\;(\SI{374.0}{\celsius},\SI{217.8}{\text{atm}})$};
+    \fill[amber!90!black] (2.41,2.25) circle (1.8pt);
+    \fill[amber!90!black] (3.92,2.25) circle (1.8pt);
+    \node[above right,font=\scriptsize] at (2.42,2.25) {$\SI{0}{\celsius}$};
+    \node[above left,font=\scriptsize] at (3.90,2.25) {$\SI{100}{\celsius}$};
+    % Region labels
+    \node[font=\scriptsize\bfseries,navy] at (1.35,2.9) {SOLID};
+    \node[font=\scriptsize,navy] at (1.35,2.55) {(Ice Ih)};
+    \node[font=\scriptsize\bfseries,teal] at (3.45,3.1) {LIQUID};
+    \node[font=\scriptsize\bfseries,rust] at (4.8,1.15) {VAPOR (GAS)};
+    \node[font=\scriptsize\bfseries,slate] at (5.9,3.95) {SCF};
+  \end{scope}
+
+  % Right: CO2 P-T Phase Diagram (schematic axes)
+  \begin{scope}[xshift=8.1cm]
+    \node[font=\scriptsize\bfseries,rust] at (3.4,4.45) {(b) Carbon Dioxide ($\mathrm{CO_2}$): Positive Slope \& $P_{\mathrm{tp}} > \SI{1}{\text{atm}}$};
+    \draw[->,thick,navy] (0.5,0.4) -- (6.6,0.4) node[right,font=\bfseries] {$T$};
+    \draw[->,thick,navy] (0.5,0.4) -- (0.5,4.15) node[above,font=\bfseries] {$P$};
+    % Sublimation curve
+    \draw[very thick,teal] (0.7,0.5) .. controls (1.7,0.9) and (2.4,1.5) .. (2.9,2.25);
+    % Fusion curve (POSITIVE SLOPE!)
+    \draw[ultra thick,rust] (2.9,2.25) -- (3.55,3.85);
+    % Vaporization curve
+    \draw[very thick,navy] (2.9,2.25) .. controls (3.9,2.6) and (4.7,3.0) .. (5.4,3.45);
+    % 1 atm horizontal dashed line (BELOW triple point!)
+    \draw[dashed,amber!90!black,thick] (0.5,1.25) -- (6.3,1.25) node[right,font=\scriptsize\bfseries] {$\SI{1}{\text{atm}}$};
+    % Points: Triple Point, Normal Tsub, Critical Point
+    \fill[rust] (2.9,2.25) circle (2.2pt);
+    \node[below right,font=\scriptsize,rust] at (2.92,2.22) {$\mathrm{TP}\;(-\SI{56.6}{\celsius},\SI{5.11}{\text{atm}})$};
+    \fill[navy] (5.4,3.45) circle (2.2pt);
+    \node[above left,font=\scriptsize,navy] at (5.45,3.48) {$\mathrm{CP}\;(\SI{31.0}{\celsius},\SI{72.8}{\text{atm}})$};
+    \fill[amber!90!black] (1.98,1.25) circle (1.8pt);
+    \node[above left,font=\scriptsize] at (1.96,1.26) {$T_{\mathrm{sub}} = -\SI{78.5}{\celsius}$};
+    % Region labels
+    \node[font=\scriptsize\bfseries,navy] at (1.75,3.1) {SOLID};
+    \node[font=\scriptsize,navy] at (1.75,2.75) {(Dry Ice)};
+    \node[font=\scriptsize\bfseries,teal] at (4.1,3.3) {LIQUID};
+    \node[font=\scriptsize\bfseries,rust] at (4.8,0.85) {VAPOR (GAS)};
+    \node[font=\scriptsize\bfseries,slate] at (5.9,3.95) {SCF};
+  \end{scope}
+\end{tikzpicture}
+\captionof{figure}{Side-by-side $P$--$T$ phase diagrams (not to scale) comparing (a) $\mathrm{H_2O}$, where $\rho_{\mathrm{ice}} < \rho_{\mathrm{liq}}$ gives an anomalous \textbf{negative} fusion slope $dP/dT = -\SI{133.2}{\text{atm}\per\kelvin}$ and $P_{\mathrm{tp}} = \SI{0.00604}{\text{atm}} < \SI{1}{\text{atm}}$, against (b) $\mathrm{CO_2}$, where $\rho_{\mathrm{solid}} > \rho_{\mathrm{liq}}$ gives a normal \textbf{positive} fusion slope and $P_{\mathrm{tp}} = \SI{5.112}{\text{atm}} > \SI{1}{\text{atm}}$ (so dry ice sublimes directly at $\SI{1}{\text{atm}}, -\SI{78.46}{\celsius}$) \src{S04,S05,S16}.}\label{fig:05:h2o-co2-phase}
+\idxfig{P-T phase diagrams of H2O and CO2 compared}
+\end{center}
+
+\begin{center}
+\captionof{table}{Quantitative side-by-side comparison of $\mathrm{H_2O}$ and $\mathrm{CO_2}$ phase diagram benchmarks \src{S04,S16,S17}.}\label{tab:05:h2oco2}
+\footnotesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.14}
+\begin{tabularx}{\linewidth}{@{}l X X@{}}\toprule
+\textbf{Phase Diagram Feature} & \textbf{Water ($\mathrm{H_2O}$, $M = \SI{18.015}{\gram\per\mole}$)} & \textbf{Carbon Dioxide ($\mathrm{CO_2}$, $M = \SI{44.010}{\gram\per\mole}$)} \\\midrule
+\textbf{Triple Point $(T_{\mathrm{tp}}, P_{\mathrm{tp}})$} & $T_{\mathrm{tp}} = \SI{273.16}{\kelvin} = \mathbf{\SI{0.01}{\celsius}}$; $P_{\mathrm{tp}} = \mathbf{\SI{611.657}{\pascal}} = \SI{0.006037}{\text{atm}}$ & $T_{\mathrm{tp}} = \SI{216.59}{\kelvin} = \mathbf{-\SI{56.56}{\celsius}}$; $P_{\mathrm{tp}} = \mathbf{\SI{517.96}{\kilo\pascal}} = \SI{5.112}{\text{atm}}$ \\
+\textbf{Critical Point $(T_c, P_c, \rho_c)$} & $T_c = \SI{647.10}{\kelvin} = \mathbf{\SI{373.95}{\celsius}}$; $P_c = \mathbf{\SI{22.064}{\mega\pascal}} = \SI{217.75}{\text{atm}}$; $\rho_c = \SI{322}{\kilogram\per\cubic\meter}$ & $T_c = \SI{304.13}{\kelvin} = \mathbf{\SI{30.98}{\celsius}}$; $P_c = \mathbf{\SI{7.377}{\mega\pascal}} = \SI{72.81}{\text{atm}}$; $\rho_c = \SI{467.6}{\kilogram\per\cubic\meter}$ \\
+\textbf{Phase Behavior at $\SI{1}{\text{atm}}$ ($\SI{101.325}{\kilo\pascal}$)} & Since $P_{\mathrm{tp}} < \SI{1}{\text{atm}} < P_c$, liquid water exists over $\SI{0.00}{\celsius}\text{--}\SI{100.00}{\celsius}$ & Since $\SI{1}{\text{atm}} < P_{\mathrm{tp}} = \SI{5.112}{\text{atm}}$, \textbf{liquid $\mathrm{CO_2}$ cannot exist at $\SI{1}{\text{atm}}$}; sublimes at $\mathbf{-\SI{78.46}{\celsius}}$ ($\SI{194.69}{\kelvin}$) \\
+\textbf{Solid vs.\ Liquid Density} & $\rho_{\mathrm{ice}} = \SI{916.7}{\kilogram\per\cubic\meter} < \rho_{\mathrm{liq}} = \SI{999.84}{\kilogram\per\cubic\meter}$ ($\Delta v_{\mathrm{fus}} = \mathbf{-\SI{9.05e-5}{\cubic\meter\per\kilogram}} < 0$; ice floats!) & $\rho_{\mathrm{solid}} = \SI{1562}{\kilogram\per\cubic\meter} > \rho_{\mathrm{liq}} = \SI{1178}{\kilogram\per\cubic\meter}$ at $\mathrm{TP}$ ($\Delta v_{\mathrm{fus}} > 0$; solid $\mathrm{CO_2}$ sinks in liquid $\mathrm{CO_2}$) \\
+\textbf{Fusion Curve Slope $dP/dT$} & \textbf{NEGATIVE:} $dP/dT = \mathbf{-\SI{13.50}{\mega\pascal\per\kelvin}} = -\SI{133.2}{\text{atm}\per\kelvin}$ ($dT_m/dP = -\SI{0.00751}{\kelvin\per\text{atm}}$) & \textbf{POSITIVE:} $dP/dT \approx +\SI{4.4}{\mega\pascal\per\kelvin} = +\SI{43}{\text{atm}\per\kelvin}$ (raising $P$ raises $T_m$) \\
+\textbf{High-Pressure / Regelation Note} & Isothermal compression of Ice~Ih at $-\SI{1}{\celsius}$ above $\SI{13.5}{\mega\pascal}$ melts it to liquid (\emph{regelation}). Above $\SI{209.9}{\mega\pascal}$ ($-\SI{22.0}{\celsius}$), Ice~Ih converts to dense Ice~III ($\rho > \rho_{\mathrm{liq}}$) and $dP/dT$ turns positive. & Fire extinguishers store saturated liquid + vapor $\mathrm{CO_2}$ at $\SI{20}{\celsius}$, where $P_{\mathrm{sat}}(\SI{20}{\celsius}) = \SI{5.73}{\mega\pascal} = \SI{56.5}{\text{atm}}$. \\\bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{center}
+\captionof{table}{Sourced triple points $(T_{\mathrm{tp}}, P_{\mathrm{tp}})$, normal boiling points $T_b$ ($\SI{1}{\text{atm}}$), critical points $(T_c, P_c, \rho_c)$, and van~der~Waals constants $(a,b)$ for 15 common fluids from NIST Chemistry WebBook \src{S16,S17}.}\label{tab:05:triplecrit}
+\scriptsize\setlength{\tabcolsep}{3.0pt}\renewcommand{\arraystretch}{1.08}
+\begin{tabularx}{\linewidth}{@{}l r r r r r r r r r X@{}}\toprule
+\textbf{Substance} & \textbf{$M$ ($\si{\gram\per\mole}$)} & \textbf{$T_{\mathrm{tp}}$ ($\si{\kelvin}$)} & \textbf{$P_{\mathrm{tp}}$ ($\si{\kilo\pascal}$)} & \textbf{$T_b$ ($\si{\kelvin}$)} & \textbf{$T_c$ ($\si{\kelvin}$)} & \textbf{$P_c$ ($\si{\mega\pascal}$)} & \textbf{$\rho_c$ ($\si{\kilogram\per\cubic\meter}$)} & \textbf{$a$ ($\mathrm{Pa\,m^6/mol^2}$)} & \textbf{$b$ ($\SI{e-5}{\cubic\meter\per\mole}$)} & \textbf{Key Phase Note at $\SI{1}{\text{atm}}$} \\\midrule
+Helium-4 ($\mathrm{He}$) & $4.003$ & $2.177$ & $5.043$ & $4.222$ & $5.195$ & $0.2275$ & $69.6$ & $0.00346$ & $2.380$ & $\lambda$-superfluid transition at $\SI{2.177}{\kelvin}$; no solid at $\SI{1}{\text{atm}}$ \\
+Hydrogen ($\mathrm{H_2}$) & $2.016$ & $13.803$ & $7.042$ & $20.271$ & $33.145$ & $1.296$ & $31.3$ & $0.02476$ & $2.661$ & Inversion $T_{\mathrm{inv}} \approx \SI{202}{\kelvin}$ ($\mu_{\mathrm{JT}} < 0$ at $\SI{298}{\kelvin}$) \\
+Neon ($\mathrm{Ne}$) & $20.180$ & $24.556$ & $43.38$ & $27.104$ & $44.492$ & $2.679$ & $481.9$ & $0.02135$ & $1.709$ & Monatomic noble gas ($\gamma = 5/3 = 1.667$) \\
+Nitrogen ($\mathrm{N_2}$) & $28.013$ & $63.151$ & $12.52$ & $77.355$ & $126.19$ & $3.396$ & $313.3$ & $0.1370$ & $3.870$ & $\mathrm{LN_2}$ boils at $\SI{77.36}{\kelvin} = -\SI{195.79}{\celsius}$, $L_v = \SI{199}{\kilo\joule\per\kilogram}$ \\
+Carbon Monoxide ($\mathrm{CO}$) & $28.010$ & $68.15$ & $15.37$ & $81.64$ & $132.86$ & $3.494$ & $303.9$ & $0.1505$ & $3.985$ & Residual entropy $S_m(0) \approx R\ln 2 = \SI{5.76}{\joule\per\mole\per\kelvin}$ \\
+Argon ($\mathrm{Ar}$) & $39.948$ & $83.806$ & $68.89$ & $87.302$ & $150.69$ & $4.863$ & $535.6$ & $0.1355$ & $3.201$ & ITS-90 fixed triple point ($\SI{83.8058}{\kelvin}$) \\
+Oxygen ($\mathrm{O_2}$) & $31.999$ & $54.361$ & $0.1463$ & $90.188$ & $154.58$ & $5.043$ & $436.1$ & $0.1382$ & $3.186$ & Paramagnetic pale-blue liquid ($\mathrm{LOX}$, $L_v = \SI{213}{\kilo\joule\per\kilogram}$) \\
+Methane ($\mathrm{CH_4}$) & $16.043$ & $90.694$ & $11.70$ & $111.67$ & $190.56$ & $4.599$ & $162.7$ & $0.2283$ & $4.278$ & $\mathrm{LNG}$ carrier fuel ($L_v = \SI{510}{\kilo\joule\per\kilogram}$) \\
+Carbon Dioxide ($\mathrm{CO_2}$) & $44.010$ & $\mathbf{216.59}$ & $\mathbf{517.96}$ & $194.69^*$ & $304.13$ & $7.377$ & $467.6$ & $0.3640$ & $4.267$ & $*$Sublimes at $\SI{1}{\text{atm}}$ ($P_{\mathrm{tp}} = \SI{5.112}{\text{atm}} > \SI{1}{\text{atm}}$) \\
+Nitrous Oxide ($\mathrm{N_2O}$) & $44.013$ & $182.33$ & $87.85$ & $184.67$ & $309.52$ & $7.245$ & $452.0$ & $0.3832$ & $4.415$ & Linear triatomic; residual entropy at $\SI{0}{\kelvin}$ \\
+Ammonia ($\mathrm{NH_3}$) & $17.031$ & $195.48$ & $6.077$ & $239.82$ & $405.40$ & $11.33$ & $225.0$ & $0.4225$ & $3.713$ & Refrigerant R-717 ($T_b = -\SI{33.33}{\celsius}, L_v = \SI{1371}{\kilo\joule\per\kilogram}$) \\
+Sulfur Dioxide ($\mathrm{SO_2}$) & $64.064$ & $197.68$ & $1.674$ & $263.13$ & $430.64$ & $7.884$ & $525.0$ & $0.6803$ & $5.636$ & Historic compressor refrigerant \\
+Ethanol ($\mathrm{C_2H_5OH}$) & $46.068$ & $159.0$ & $\num{4.3e-7}$ & $351.39$ & $514.71$ & $6.268$ & $276.0$ & $1.218$ & $8.407$ & Normal $T_b = \SI{78.24}{\celsius}$, $L_v = \SI{846}{\kilo\joule\per\kilogram}$ \\
+Water ($\mathrm{H_2O}$) & $18.015$ & $\mathbf{273.16}$ & $\mathbf{0.6117}$ & $373.15$ & $647.10$ & $22.064$ & $322.0$ & $0.5536$ & $3.049$ & Highest $T_c, P_c$ of common hydrides (H-bonding) \\
+Mercury ($\mathrm{Hg}$) & $200.59$ & $234.32$ & $\num{1.65e-7}$ & $629.88$ & $1750.0$ & $172.0$ & $5800$ & $0.8200$ & $1.696$ & ITS-90 triple point $-\SI{38.8344}{\celsius}$ \\\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Pure-Substance $P$--$v$ Saturation Dome, Vapor Quality $x$ \& Lever Rule}
+\label{sec:05.3}
+\idxtopic{saturation dome!P-v diagram, vapor quality x, and two-phase lever rule}
+\idxtopic{steam tables!saturated water properties and linear interpolation}
+
+When a pure liquid--vapor mixture coexists inside the \textbf{saturation dome} on a pressure--specific volume ($P$--$v$) or temperature--specific volume ($T$--$v$) diagram (\fref{fig:05:pv-dome}), $T$ and $P = P_{\mathrm{sat}}(T)$ are no longer independent ($F = 1 - 2 + 2 = 1$). To specify the state uniquely inside the wet region, define the \textbf{vapor quality (dryness fraction)} $x \in [0,1]$ \src{S13,S16}:
+\begin{equation}\label{eq:05:quality}
+  x = \frac{m_g}{m_f + m_g}, \qquad 1 - x = \frac{m_f}{m_f + m_g},
+\end{equation}
+where subscript $f$ (\emph{fluid}) denotes saturated liquid ($x = 0$), subscript $g$ (\emph{gas}) denotes saturated vapor ($x = 1$), and $y_{fg} \equiv y_g - y_f$. Since total volume, internal energy, enthalpy, and entropy are extensive ($Y = m_f y_f + m_g y_g$), dividing by $m_{\mathrm{tot}} = m_f + m_g$ yields the \textbf{pure-substance two-phase lever rule}:
+\begin{equation}\label{eq:05:purelever}
+  y = (1 - x)y_f + x y_g = y_f + x\,y_{fg} \iff x = \frac{y - y_f}{y_g - y_f} = \frac{y - y_f}{y_{fg}} \qquad \text{for } y \in \{v, u, h, s\}.
+\end{equation}
+
+\begin{center}
+\begin{tikzpicture}[>=Stealth,font=\scriptsize]
+  \draw[->,thick,navy] (0.6,0.4) -- (9.8,0.4) node[right,font=\bfseries] {Specific Volume $v$ (log scale)};
+  \draw[->,thick,navy] (0.6,0.4) -- (0.6,4.2) node[above,font=\bfseries] {Pressure $P$};
+  % Saturation dome
+  \draw[ultra thick,navy,fill=boxbg] (1.3,0.4) .. controls (1.8,2.2) and (2.9,3.4) .. (4.4,3.4)
+    .. controls (5.9,3.4) and (7.3,2.0) .. (8.4,0.4);
+  % Subcritical isotherm T1 < Tc
+  \draw[very thick,rust] (1.1,3.9) -- (1.85,1.8) -- (6.95,1.8) .. controls (7.8,1.3) and (8.6,0.9) .. (9.4,0.7);
+  \node[right,font=\scriptsize,rust] at (8.7,1.05) {Isotherm $T_1 < T_c$};
+  % Critical isotherm T = Tc
+  \draw[thick,teal,dashed] (1.35,4.1) .. controls (2.5,3.5) and (3.6,3.4) .. (4.4,3.4)
+    .. controls (5.4,3.4) and (6.9,2.4) .. (9.2,1.6) node[right,font=\scriptsize,teal] {$T = T_c$};
+  % Critical point
+  \fill[rust] (4.4,3.4) circle (2.3pt) node[above,font=\scriptsize\bfseries,rust] {Critical Point $(v_c, P_c, T_c)$};
+  % Tie line at P_sat(T1) showing lever rule
+  \fill[navy] (1.85,1.8) circle (2pt) node[above left,font=\scriptsize\bfseries] {$f\;(x=0, v_f)$};
+  \fill[navy] (6.95,1.8) circle (2pt) node[above right,font=\scriptsize\bfseries] {$g\;(x=1, v_g)$};
+  \fill[amber!90!black] (4.9,1.8) circle (2.2pt) node[above,font=\scriptsize\bfseries,rust] {State $M\;(v, x)$};
+  \draw[<->,thick,teal] (1.85,1.35) -- (4.9,1.35) node[midway,below,font=\scriptsize] {$v - v_f = x\,v_{fg}$};
+  \draw[<->,thick,teal] (4.9,1.35) -- (6.95,1.35) node[midway,below,font=\scriptsize] {$v_g - v = (1-x)v_{fg}$};
+  % Region labels
+  \node[font=\scriptsize\bfseries,navy,align=center] at (1.3,2.75) {Compressed\\Liquid};
+  \node[font=\scriptsize\bfseries,teal,align=center] at (4.4,2.45) {Wet Liquid--Vapor Dome\\$x = (v-v_f)/(v_g-v_f)$};
+  \node[font=\scriptsize\bfseries,rust,align=center] at (8.2,2.6) {Superheated\\Vapor};
+\end{tikzpicture}
+\captionof{figure}{Pure-substance $P$--$v$ saturation dome showing the saturated liquid curve ($f, x=0$), saturated vapor curve ($g, x=1$), critical point $(v_c, P_c)$, horizontal isobaric--isothermal tie-line inside the dome, and lever-rule segments $x = (v - v_f)/(v_g - v_f)$ \src{S13,S16}.}\label{fig:05:pv-dome}
+\idxfig{pure-substance P-v saturation dome and vapor quality lever rule}
+\end{center}
+
+\begin{center}
+\captionof{table}{Sourced NIST IAPWS-95 saturation properties of $\mathrm{H_2O}$ from the triple point ($\SI{0.01}{\celsius}$) to the critical point ($\SI{373.95}{\celsius}$) \src{S14,S16}.}\label{tab:05:steamtables}
+\scriptsize\setlength{\tabcolsep}{3.5pt}\renewcommand{\arraystretch}{1.08}
+\begin{tabularx}{\linewidth}{@{}r r r r r r r r r X@{}}\toprule
+\textbf{$T$ ($\si{\celsius}$)} & \textbf{$P_{\mathrm{sat}}$ ($\si{\kilo\pascal}$)} & \textbf{$v_f$ ($\si{\cubic\meter\per\kilogram}$)} & \textbf{$v_g$ ($\si{\cubic\meter\per\kilogram}$)} & \textbf{$h_f$ ($\si{\kilo\joule\per\kilogram}$)} & \textbf{$h_{fg} = L_v$} & \textbf{$h_g$ ($\si{\kilo\joule\per\kilogram}$)} & \textbf{$s_f$ ($\si{\kilo\joule\per\kilogram\per\kelvin}$)} & \textbf{$s_g$ ($\si{\kilo\joule\per\kilogram\per\kelvin}$)} & \textbf{$\rho_f$ ($\si{\kilogram\per\cubic\meter}$) / Note} \\\midrule
+$0.01$ & $0.6117$ & $0.0010002$ & $205.99$ & $0.00$ & $2500.9$ & $2500.9$ & $0.0000$ & $9.1555$ & $999.84$ (Triple Point) \\
+$4.00$ & $0.8135$ & $0.0010000$ & $157.12$ & $16.81$ & $2491.4$ & $2508.2$ & $0.0611$ & $9.0505$ & $999.97$ ($\rho_{\max}$ at $\SI{3.984}{\celsius}$) \\
+$10.00$ & $1.2282$ & $0.0010003$ & $106.30$ & $42.02$ & $2477.2$ & $2519.2$ & $0.1511$ & $8.8998$ & $999.70$ \\
+$15.00$ & $1.7057$ & $0.0010009$ & $77.88$ & $62.98$ & $2465.4$ & $2528.3$ & $0.2245$ & $8.7803$ & $999.10$ \\
+$20.00$ & $2.3393$ & $0.0010018$ & $57.76$ & $83.91$ & $2453.5$ & $2537.4$ & $0.2965$ & $8.6660$ & $998.21$ \\
+$25.00$ & $3.1699$ & $0.0010030$ & $43.34$ & $104.83$ & $2441.7$ & $2546.5$ & $0.3672$ & $8.5567$ & $997.05$ (Standard $\SI{298.15}{\kelvin}$) \\
+$30.00$ & $4.2470$ & $0.0010044$ & $32.88$ & $125.73$ & $2429.8$ & $2555.5$ & $0.4368$ & $8.4520$ & $995.65$ \\
+$40.00$ & $7.3849$ & $0.0010079$ & $19.52$ & $167.53$ & $2406.0$ & $2573.5$ & $0.5724$ & $8.2556$ & $992.22$ \\
+$50.00$ & $12.352$ & $0.0010121$ & $12.03$ & $209.34$ & $2382.0$ & $2591.3$ & $0.7038$ & $8.0748$ & $988.03$ \\
+$60.00$ & $19.946$ & $0.0010171$ & $7.667$ & $251.18$ & $2357.7$ & $2608.8$ & $0.8313$ & $7.9082$ & $983.20$ \\
+$80.00$ & $47.414$ & $0.0010291$ & $3.405$ & $335.01$ & $2308.0$ & $2643.0$ & $1.0756$ & $7.6111$ & $971.79$ \\
+$100.00$ & $101.325$ & $0.0010435$ & $1.673$ & $419.06$ & \textbf{2256.4} & $2675.5$ & $1.3072$ & $7.3541$ & $958.35$ (Normal $T_b$, $\SI{1}{\text{atm}}$) \\
+$120.00$ & $198.67$ & $0.0010603$ & $0.8913$ & $503.81$ & $2202.1$ & $2706.0$ & $1.5279$ & $7.1292$ & $943.11$ (Autoclave steam) \\
+$150.00$ & $476.16$ & $0.0010905$ & $0.3925$ & $632.18$ & $2113.8$ & $2745.9$ & $1.8418$ & $6.8371$ & $917.01$ \\
+$200.00$ & $1554.9$ & $0.0011565$ & $0.1272$ & $852.27$ & $1939.7$ & $2792.0$ & $2.3305$ & $6.4302$ & $864.66$ \\
+$373.95$ & $22064.0$ & $0.003106$ & $0.003106$ & $2084.3$ & \textbf{0.0} & $2084.3$ & $4.4070$ & $4.4070$ & $322.00$ (Critical Point) \\\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Binary Eutectic Alloy Phase Diagrams \& Tie-Line Lever Rule (\texttt{2027 Cornell E1})}
+\label{sec:05.4}
+\idxtopic{binary eutectic phase diagram!liquidus, solidus, eutectic point, and tie-line lever rule}
+\idxtopic{lever rule!mass conservation derivation and primary vs.\ eutectic microconstituent}
+
+Modern Division~C Invitational and National exams (exemplified by the \textbf{2027 Cornell Invitational Section~E1} phase-diagram problem \src{S31}) test two-component ($C = 2$) temperature--composition ($T$ vs.\ mass fraction $w_B$) \textbf{binary eutectic phase diagrams} (\fref{fig:05:binary-eutectic}) such as $\mathrm{Pb\text{--}Sn}$ solder, $\mathrm{Ag\text{--}Cu}$, or $\mathrm{NaCl\text{--}H_2O}$:
+
+\begin{derivation}[Algebraic Mass-Conservation Proof of the Binary Tie-Line Lever Rule \src{S05,S31}]
+Consider an alloy of overall mass $m_{\mathrm{tot}}$ and overall component-$B$ weight fraction $w_0$ held at a temperature $T$ inside a two-phase coexistence field (such as $\alpha + L$ in \fref{fig:05:binary-eutectic}). Draw a horizontal \textbf{isothermal tie-line} at temperature $T$: its intersection with the solidus curve gives the composition $w_S$ of the solid phase $\alpha$, and its intersection with the liquidus curve gives the composition $w_L$ of the liquid phase $L$. Let $f_S = m_S/m_{\mathrm{tot}}$ and $f_L = m_L/m_{\mathrm{tot}}$ be the mass fractions of solid and liquid phases present. Total mass conservation and component-$B$ mass conservation require:
+\begin{equation}\label{eq:05:leverproof}
+  f_S + f_L = 1, \qquad w_S f_S + w_L f_L = w_0.
+\end{equation}
+Substituting $f_S = 1 - f_L$ into the second equation gives $w_S(1 - f_L) + w_L f_L = w_0 \implies (w_L - w_S)f_L = w_0 - w_S$:
+\begin{equation}\label{eq:05:eutecticlever}
+  \mathbf{f_L = \frac{w_0 - w_S}{w_L - w_S} = \frac{\text{opposite arm (to solidus)}}{\text{total tie-line length}}}, \qquad
+  \mathbf{f_S = \frac{w_L - w_0}{w_L - w_S} = \frac{\text{opposite arm (to liquidus)}}{\text{total tie-line length}}}.
+\end{equation}
+\textbf{Fulcrum Rule:} Think of $w_0$ as the fulcrum of a mechanical seesaw balanced between mass $f_S$ at $w_S$ and mass $f_L$ at $w_L$: $(w_0 - w_S)f_S = (w_L - w_0)f_L$. The fraction of either phase is always the \textbf{opposite} tie-line segment divided by the total tie-line length $(w_L - w_S)$!
+\end{derivation}
+
+\begin{center}
+\begin{tikzpicture}[>=Stealth,font=\scriptsize]
+  \begin{axis}[
+    width=0.88\linewidth,
+    height=5.6cm,
+    xlabel={Composition: Weight Percentage of Component $B$ ($\mathrm{Sn}$ in $\mathrm{Pb}$--$\mathrm{Sn}$), $w_B$ ($\mathrm{wt\%}$)},
+    ylabel={Temperature $T$ ($\si{\celsius}$)},
+    xmin=0, xmax=100,
+    ymin=100, ymax=350,
+    xtick={0,18.3,35,61.9,80,97.8,100},
+    xticklabels={$0$, $18.3$, $35$, $61.9\;(w_E)$, $80$, $97.8$, $100$},
+    ytick={100,183,232,250,327},
+    yticklabels={$100$, $183\;(T_E)$, $232\;(T_{m,B})$, $250$, $327\;(T_{m,A})$},
+    grid=both,
+    grid style={draw=gray!22},
+    axis line style={thick,navy},
+    tick label style={font=\scriptsize},
+    label style={font=\scriptsize\bfseries}
+  ]
+    % Liquidus curves: (0,327.5) -> (61.9,183) -> (100,231.9)
+    \addplot[ultra thick,navy] coordinates {(0,327.5) (61.9,183) (100,231.9)};
+    % Solidus & solvus boundaries for alpha (left) and beta (right)
+    \addplot[very thick,teal] coordinates {(0,327.5) (18.3,183) (4,100)};
+    \addplot[very thick,teal] coordinates {(100,231.9) (97.8,183) (99,100)};
+    % Eutectic horizontal isotherm at T_E = 183 C
+    \addplot[ultra thick,rust] coordinates {(18.3,183) (97.8,183)};
+    % Eutectic point E
+    \addplot[only marks,mark=*,mark size=2.4pt,rust] coordinates {(61.9,183)};
+    \node[above right,font=\scriptsize\bfseries,rust] at (axis cs:62.5,186) {Eutectic $E\;(61.9\%, \SI{183}{\celsius})$};
+    % Example tie-line at T = 250 C for w0 = 35%
+    \addplot[very thick,amber!90!black,mark=*,mark size=1.9pt] coordinates {(10.0,250) (35.0,250) (33.5,250)};
+    \draw[ultra thick,amber!90!black] (axis cs:9.6,250) -- (axis cs:42.5,250);
+    \fill[teal] (axis cs:9.6,250) circle (2pt) node[above left,font=\scriptsize\bfseries] {$w_S$};
+    \fill[rust] (axis cs:28.0,250) circle (2.2pt) node[above,font=\scriptsize\bfseries] {$w_0$};
+    \fill[navy] (axis cs:42.5,250) circle (2pt) node[above right,font=\scriptsize\bfseries] {$w_L$};
+    % Phase field labels
+    \node[font=\scriptsize\bfseries,navy] at (axis cs:55,285) {Liquid ($L$) [$F_P = 2$]};
+    \node[font=\scriptsize\bfseries,teal] at (axis cs:6,195) {$\alpha$};
+    \node[font=\scriptsize\bfseries,teal] at (axis cs:24,215) {$\alpha + L$ [$F_P = 1$]};
+    \node[font=\scriptsize\bfseries,teal] at (axis cs:84,197) {$\beta + L$};
+    \node[font=\scriptsize\bfseries,rust] at (axis cs:55,140) {Two-Solid Field: $\alpha + \beta$ [$F_P = 1$]};
+  \end{axis}
+\end{tikzpicture}
+\captionof{figure}{Binary eutectic phase diagram modeled on the classic $\mathrm{Pb}$--$\mathrm{Sn}$ system ($T_{m,\mathrm{Pb}} = \SI{327.5}{\celsius}$, $T_{m,\mathrm{Sn}} = \SI{231.9}{\celsius}$, eutectic point $E$ at $w_E = 61.9\,\mathrm{wt\%\ Sn}, T_E = \SI{183.0}{\celsius}$ with terminal solid solubility limits $w_{\alpha E} = 18.3\%$ and $w_{\beta E} = 97.8\%$), illustrating an isothermal tie-line $(w_S, w_0, w_L)$ inside the $\alpha + L$ field \src{S05,S31}.}\label{fig:05:binary-eutectic}
+\idxfig{binary eutectic phase diagram and tie-line lever rule}
+\end{center}
+
+\begin{itemize}
+  \item \textbf{Four Key Binary Eutectic Exam Rules (\texttt{2027 Cornell E1} Checklist):}
+  \begin{enumerate}
+    \item \textbf{Liquidus vs.\ Solidus:} Above the \textbf{liquidus} curve, the alloy is $100\%$ homogeneous liquid $L$. Below the \textbf{solidus} line (and eutectic horizontal $T_E$), the alloy is $100\%$ solid ($\alpha$, $\beta$, or $\alpha + \beta$). Between the liquidus and solidus lies a \textbf{two-phase mushy zone} ($\alpha + L$ or $\beta + L$) where melting/freezing occurs over a temperature range rather than at a single temperature.
+    \item \textbf{Invariant Eutectic Point $(w_E, T_E)$:} At constant atmospheric pressure ($F_P = C - P + 1$), the three-phase eutectic reaction $L(w_E) \rightleftharpoons \alpha(w_{\alpha E}) + \beta(w_{\beta E})$ has $C = 2, P = 3 \implies \mathbf{F_P = 0}$ (invariant isothermal arrest at $T_E$). An alloy of exact eutectic composition $w_0 = w_E$ melts and freezes \textbf{isothermally at $T_E$ like a pure element}, at a temperature lower than either pure component ($T_E < \min(T_{m,A}, T_{m,B})$).
+    \item \textbf{Hypoeutectic ($w_{\alpha E} < w_0 < w_E$) vs.\ Hypereutectic ($w_E < w_0 < w_{\beta E}$) Cooling:} As a hypoeutectic liquid ($w_0 < w_E$) cools across the liquidus, \textbf{primary (proeutectic) $\alpha$ crystals} precipitate first while the remaining liquid enriches in $B$ along the liquidus curve until reaching $(w_E, T_E)$ at $T = T_E^+$, where the remaining liquid fraction $f_{\mathrm{eutectic}} = f_L(T_E^+) = \dfrac{w_0 - w_{\alpha E}}{w_E - w_{\alpha E}}$ freezes into fine alternating \textbf{eutectic $(\alpha + \beta)$ lamellae}.
+    \item \textbf{Total Phase Fractions vs.\ Microconstituent Fractions Just Below $T_E$ ($T = T_E^-$):}
+    \begin{equation}\label{eq:05:microconstituent}
+      f_{\alpha,\mathrm{total}}(T_E^-) = \frac{w_{\beta E} - w_0}{w_{\beta E} - w_{\alpha E}}, \qquad
+      f_{\text{primary }\alpha}(T_E^+) = \frac{w_E - w_0}{w_E - w_{\alpha E}}, \qquad
+      f_{\text{eutectic microconstituent}}(T_E^+) = \frac{w_0 - w_{\alpha E}}{w_E - w_{\alpha E}}.
+    \end{equation}
+  \end{enumerate}
+\end{itemize}
+
+\section{Vapor Pressure, Psychrometrics, Colligative Shifts \& Clausius--Clapeyron}
+\label{sec:05.5}
+\idxtopic{vapor pressure!boiling vs.\ evaporation and NIST Antoine equation}
+\idxtopic{psychrometrics!relative humidity, humidity ratio, dew point, wet-bulb temperature}
+\idxtopic{colligative properties!Raoult's law, boiling point elevation, freezing point depression}
+\idxtopic{Clausius-Clapeyron equation!algebraic two-point form (supplementary)}
+
+\begin{enumerate}
+  \item \textbf{Evaporation vs.\ Boiling \& NIST Antoine Equation:}
+  \textbf{Evaporation} is a surface phenomenon occurring at \emph{any} temperature whenever the ambient partial pressure of water vapor $P_v$ is less than the equilibrium saturation vapor pressure $P_{\mathrm{sat}}(T)$ ($P_v < P_{\mathrm{sat}}(T)$); high-energy molecules in the Maxwell--Boltzmann tail escape the surface, cooling the remaining liquid. \textbf{Boiling} is a bulk phenomenon occurring when $P_{\mathrm{sat}}(T)$ equals or exceeds the external ambient pressure ($P_{\mathrm{sat}}(T_b) = P_{\mathrm{ext}}$), allowing vapor bubbles to nucleate and grow throughout the liquid volume (at high altitude where $P_{\mathrm{ext}} < \SI{101.325}{\kilo\pascal}$, $T_b < \SI{100}{\celsius}$; inside a pressure cooker where $P_{\mathrm{ext}} \approx \SI{2}{\text{atm}}$, $T_b \approx \SI{120}{\celsius}$). NIST Chemistry WebBook parameterizes $P_{\mathrm{sat}}(T)$ ($\si{\text{bar}}$, $T$ in $\si{\kelvin}$) via the \textbf{Antoine equation} \src{S16}:
+  \begin{equation}\label{eq:05:antoine}
+    \log_{10}\!\left(\frac{P_{\mathrm{sat}}}{\si{\text{bar}}}\right) = A - \frac{B}{T + C}
+    \quad\text{where } (A,B,C) = \begin{cases}
+      (5.40221,\; 1838.675,\; -31.737) & \SI{273}{\kelvin} \le T \le \SI{303}{\kelvin}, \\
+      (5.20389,\; 1733.926,\; -39.485) & \SI{304}{\kelvin} \le T \le \SI{333}{\kelvin}, \\
+      (5.07680,\; 1659.793,\; -45.854) & \SI{334}{\kelvin} \le T \le \SI{363}{\kelvin}, \\
+      (5.08354,\; 1663.125,\; -45.622) & \SI{344}{\kelvin} \le T \le \SI{373}{\kelvin}.
+    \end{cases}
+  \end{equation}
+  \item \textbf{Psychrometrics --- Relative Humidity ($\mathrm{RH}$), Humidity Ratio ($\omega$), Dew Point ($T_{\mathrm{dp}}$) \& Wet-Bulb ($T_{\mathrm{wb}}$):}
+  Moist air at total barometric pressure $P$ is a Dalton ideal-gas mixture of dry air ($M_a = \SI{28.965}{\gram\per\mole}$, partial pressure $P_a = P - P_v$) and water vapor ($M_v = \SI{18.015}{\gram\per\mole}$, partial pressure $P_v$):
+  \begin{equation}\label{eq:05:psychro}
+    \mathrm{RH} = \frac{P_v}{P_{\mathrm{sat}}(T)} \times 100\%, \qquad
+    \omega = \frac{m_v}{m_a} = \frac{M_v}{M_a}\frac{P_v}{P - P_v} = \mathbf{0.62198\,\frac{P_v}{P - P_v}} \;\;\left[\si{\kilogram\per\kilogram}\;(\mathrm{kg\,H_2O/kg\,dry\,air})\right].
+  \end{equation}
+  \begin{itemize}
+    \item \textbf{Dew Point ($T_{\mathrm{dp}}$):} The temperature to which moist air must be cooled at constant pressure $P$ (and constant $P_v$) for condensation to begin: $P_{\mathrm{sat}}(T_{\mathrm{dp}}) = P_v$.
+    \item \textbf{Wet-Bulb Temperature ($T_{\mathrm{wb}}$):} The steady dynamic equilibrium temperature reached by a water-wetted thermometer bulb cooled by evaporation into moving air. Always satisfies $\mathbf{T_{\mathrm{dp}} \leq T_{\mathrm{wb}} \leq T_{\mathrm{dry\text{-}bulb}}}$, with equality $T_{\mathrm{dp}} = T_{\mathrm{wb}} = T_{\mathrm{db}}$ \textbf{if and only if} $\mathrm{RH} = 100\%$.
+  \end{itemize}
+  \item \textbf{Colligative Phase Shifts (Raoult's Law, $\Delta T_b$, $\Delta T_f$):}
+  Adding a non-volatile solute of molality $m$ ($\si{\mole\text{ solute}\per\kilogram\text{ solvent}}$) and van~'t~Hoff dissociation factor $i$ (e.g., $i=1$ for sucrose/urea/glycol, $i=2$ for $\mathrm{NaCl}$, $i=3$ for $\mathrm{CaCl_2}$) lowers solvent vapor pressure by Raoult's law ($P_{\mathrm{soln}} = x_{\mathrm{solv}}P_{\mathrm{solv}}^\circ$), which elevates the boiling point and depresses the freezing point \src{S05,S19}:
+  \begin{equation}\label{eq:05:colligative}
+    \Delta T_b = T_{b,\mathrm{soln}} - T_b^\circ = +i K_b m, \qquad
+    \Delta T_f = T_{f,\mathrm{soln}} - T_f^\circ = -i K_f m,
+  \end{equation}
+  where for water $K_b = \dfrac{R M_{\mathrm{H_2O}}(T_b^\circ)^2}{\Delta_{\mathrm{vap}}H_m^\circ} = \mathbf{\SI{0.512}{\kelvin\cdot\kilogram\per\mole}}$ and $K_f = \dfrac{R M_{\mathrm{H_2O}}(T_f^\circ)^2}{\Delta_{\mathrm{fus}}H_m^\circ} = \mathbf{\SI{1.853}{\kelvin\cdot\kilogram\per\mole}}$ (often rounded to $\SI{1.86}{\kelvin\cdot\kilogram\per\mole}$).
+\end{enumerate}
+
+\begin{suppbox}[Exact Clapeyron \& Algebraic Two-Point Clausius--Clapeyron Equations \src{S05,S19}]
+\textbf{\texttt{[SUPPLEMENTARY --- ALGEBRAIC FORM, ZERO CALCULUS REQUIRED TO APPLY]}}\\
+Equating the molar Gibbs free energies $G_{m,1}(T,P) = G_{m,2}(T,P)$ along any two-phase coexistence boundary yields the \textbf{exact Clapeyron equation} (valid for solid--liquid, liquid--vapor, and solid--vapor boundaries):
+\begin{equation}\label{eq:05:clapeyron}
+  \frac{\Delta P}{\Delta T} = \frac{\Delta_{\mathrm{trs}}S_m}{\Delta_{\mathrm{trs}}V_m} = \frac{\Delta_{\mathrm{trs}}H_m}{T\,\Delta_{\mathrm{trs}}V_m} = \frac{L}{T(v_2 - v_1)}.
+\end{equation}
+For vaporization or sublimation far below the critical point, $v_g \gg v_{\mathrm{cond}}$ so $\Delta_{\mathrm{vap}}V_m \approx V_{m,g} = RT/P$, which yields the \textbf{algebraic two-point Clausius--Clapeyron equation} (assuming constant $\Delta_{\mathrm{vap}}H_m$ over $[T_1, T_2]$):
+\begin{equation}\label{eq:05:cc}
+  \ln\!\left(\frac{P_2}{P_1}\right) = -\frac{\Delta_{\mathrm{vap}}H_m}{R}\left(\frac{1}{T_2} - \frac{1}{T_1}\right) = \frac{\Delta_{\mathrm{vap}}H_m}{R}\left(\frac{T_2 - T_1}{T_1 T_2}\right).
+\end{equation}
+\textbf{Unit Warning:} In (\ref{eq:05:cc}), $T_1, T_2$ \textbf{must be in kelvin ($\si{\kelvin}$)}, and $\Delta_{\mathrm{vap}}H_m$ ($\si{\joule\per\mole}$) must match $R = \SI{8.31446}{\joule\per\mole\per\kelvin}$ (convert $\si{\kilo\joule\per\mole}$ to $\si{\joule\per\mole}$ by multiplying by $1000$!).
+\end{suppbox}
+
+\section{Layered Worked Examples \& Diagnostics}
+\label{sec:05.6}
+
+\begin{workedexample}[Pressure Melting (Regelation) of Ice Under High Compression]{Competition $\cdot$ Rule 5.c.ii}{ex:05.1}
+At $T_0 = \SI{273.15}{\kelvin}$ ($\SI{0.00}{\celsius}$) and $\SI{1.00}{\text{atm}}$, ice has specific volume $v_{\mathrm{ice}} = \SI{1.0908e-3}{\cubic\meter\per\kilogram}$, liquid water has $v_w = \SI{1.00016e-3}{\cubic\meter\per\kilogram}$, and $L_f = \SI{333.55}{\kilo\joule\per\kilogram}$. Using the exact Clapeyron equation (\ref{eq:05:clapeyron}), compute (a) the slope $\Delta P/\Delta T$ of water's fusion line in $\si{\mega\pascal\per\kelvin}$ and $\si{\text{atm}\per\kelvin}$, and (b) the melting point of ice under an overburden pressure of $P = \SI{150.0}{\text{atm}}$ ($\SI{15.20}{\mega\pascal}$).
+
+\textbf{Solution.}
+\textbf{(a)} The volume change upon melting is $\Delta v_{\mathrm{fus}} = v_w - v_{\mathrm{ice}} = (1.00016 - 1.0908)\times 10^{-3} = \mathbf{-\SI{9.064e-5}{\cubic\meter\per\kilogram}} < 0$. By (\ref{eq:05:clapeyron}):
+\[
+  \frac{\Delta P}{\Delta T} = \frac{L_f}{T_0(v_w - v_{\mathrm{ice}})} = \frac{\SI{333550}{\joule\per\kilogram}}{(\SI{273.15}{\kelvin})(-\SI{9.064e-5}{\cubic\meter\per\kilogram})} = \mathbf{-\SI{13.47}{\mega\pascal\per\kelvin} = -\SI{133.0}{\text{atm}\per\kelvin}}.
+\]
+\textbf{(b)} Inverting the slope gives $\Delta T_m / \Delta P = -\SI{0.007521}{\kelvin\per\text{atm}}$. For $\Delta P = 150.0 - 1.0 = \SI{149.0}{\text{atm}}$:
+\[
+  \Delta T_m = (\SI{149.0}{\text{atm}})(-\SI{0.007521}{\kelvin\per\text{atm}}) = -\SI{1.121}{\kelvin} \implies T_m = \mathbf{-\SI{1.12}{\celsius}\;(\SI{272.03}{\kelvin})}.
+\]
+\verifiedby{Exact Clapeyron evaluation matches NIST IAPWS Ice~Ih melting curve to $<0.3\%$ (\texttt{check\_sec02\_05.py}).}
+\end{workedexample}
+
+\begin{workedexample}[Two-Phase Saturation Dome Quality $x$, Enthalpy \& Volume]{Competition $\cdot$ Rules 5.c.ii, 5.c.vi}{ex:05.2}
+A rigid $\SI{0.500}{\cubic\meter}$ pressure vessel contains $m_{\mathrm{tot}} = \SI{2.000}{\kilogram}$ of a two-phase liquid--vapor water mixture in equilibrium at $T = \SI{120.0}{\celsius}$ (\tref{tab:05:steamtables}: $P_{\mathrm{sat}} = \SI{198.67}{\kilo\pascal}$, $v_f = \SI{0.0010603}{\cubic\meter\per\kilogram}$, $v_g = \SI{0.8913}{\cubic\meter\per\kilogram}$, $h_f = \SI{503.81}{\kilo\joule\per\kilogram}$, $h_{fg} = \SI{2202.1}{\kilo\joule\per\kilogram}$). Calculate (a) the mixture specific volume $v$ and vapor quality $x$, (b) the masses of saturated vapor $m_g$ and saturated liquid $m_f$, and (c) the total enthalpy $H$ of the vessel contents.
+
+\textbf{Solution.}
+\textbf{(a)} Specific volume of the mixture is $v = V/m_{\mathrm{tot}} = \SI{0.500}{\cubic\meter}/\SI{2.000}{\kilogram} = \SI{0.2500}{\cubic\meter\per\kilogram}$. Since $v_f < v < v_g$, applying (\ref{eq:05:purelever}):
+\[
+  x = \frac{v - v_f}{v_g - v_f} = \frac{0.2500 - 0.0010603}{0.8913 - 0.0010603} = \frac{0.24894}{0.89024} = \mathbf{0.27963\;(27.96\%\text{ vapor by mass})}.
+\]
+\textbf{(b)} Vapor mass $m_g = x\,m_{\mathrm{tot}} = (0.27963)(\SI{2.000}{\kilogram}) = \mathbf{\SI{0.5593}{\kilogram}}$ and liquid mass $m_f = 2.000 - 0.5593 = \mathbf{\SI{1.4407}{\kilogram}}$. (Notice that although liquid is $72.04\%$ of the mass, it occupies only $m_f v_f = \SI{0.00153}{\cubic\meter} = 0.31\%$ of the volume!)
+\textbf{(c)} Specific enthalpy $h = h_f + x\,h_{fg} = 503.81 + (0.27963)(2202.1) = \SI{1119.59}{\kilo\joule\per\kilogram}$, so total enthalpy is $H = m_{\mathrm{tot}}h = \mathbf{\SI{2239.2}{\kilo\joule}}$.
+\verifiedby{$m_f v_f + m_g v_g = (1.44073)(0.0010603) + (0.55927)(0.8913) = \SI{0.50000}{\cubic\meter}$ (\texttt{check\_sec02\_05.py}).}
+\end{workedexample}
+
+\begin{workedexample}[Binary Eutectic Alloy Lever Rule \& Microconstituents (\texttt{2027 Cornell E1})]{National $\cdot$ Rule 5.c.ii}{ex:05.3}
+A $m_{\mathrm{tot}} = \SI{500.0}{\gram}$ lead--tin ($\mathrm{Pb\text{--}Sn}$) solder alloy of overall composition $w_0 = 35.0\,\mathrm{wt\%\ Sn}$ ($65.0\,\mathrm{wt\%\ Pb}$) is cooled slowly from the melt (\fref{fig:05:binary-eutectic}: eutectic point $w_E = 61.9\,\mathrm{wt\%\ Sn}$ at $T_E = \SI{183.0}{\celsius}$; maximum solid solubility limits at $\SI{183.0}{\celsius}$ are $w_{\alpha E} = 18.3\,\mathrm{wt\%\ Sn}$ in the $\alpha$-phase and $w_{\beta E} = 97.8\,\mathrm{wt\%\ Sn}$ in the $\beta$-phase).
+(a) At $T = \SI{220.0}{\celsius}$ inside the $(\alpha + L)$ field, the solidus and liquidus compositions are $w_S = 14.0\,\mathrm{wt\%\ Sn}$ and $w_L = 50.0\,\mathrm{wt\%\ Sn}$; calculate the mass of solid $\alpha$ and liquid $L$ present.
+(b) At $T = \SI{182.9}{\celsius}$ (just below the eutectic isotherm $T_E$), calculate the total mass fraction of $\alpha$-phase and $\beta$-phase, and distinguish the \textbf{primary (proeutectic) $\alpha$} mass fraction from the \textbf{eutectic microconstituent} mass fraction.
+
+\textbf{Solution.}
+\textbf{(a)} At $T = \SI{220.0}{\celsius}$ ($w_S = 14.0\%, w_0 = 35.0\%, w_L = 50.0\%$), the tie-line lever rule (\ref{eq:05:eutecticlever}) gives:
+\[
+  f_L = \frac{w_0 - w_S}{w_L - w_S} = \frac{35.0 - 14.0}{50.0 - 14.0} = \frac{21.0}{36.0} = \mathbf{0.5833\;(58.33\%)}, \qquad
+  f_S = \frac{w_L - w_0}{w_L - w_S} = \frac{50.0 - 35.0}{36.0} = \frac{15.0}{36.0} = \mathbf{0.4167\;(41.67\%)},
+\]
+so $m_L = (0.58333)(\SI{500.0}{\gram}) = \mathbf{\SI{291.7}{\gram}}$ of liquid (at $50.0\%\,\mathrm{Sn}$) and $m_\alpha = \mathbf{\SI{208.3}{\gram}}$ of solid $\alpha$ (at $14.0\%\,\mathrm{Sn}$).
+\textbf{(b)} At $T = \SI{182.9}{\celsius}$ ($T_E^-$), the tie-line spans the full two-solid $(\alpha + \beta)$ field from $w_{\alpha E} = 18.3\%$ to $w_{\beta E} = 97.8\%$:
+\[
+  f_{\alpha,\mathrm{tot}} = \frac{w_{\beta E} - w_0}{w_{\beta E} - w_{\alpha E}} = \frac{97.8 - 35.0}{97.8 - 18.3} = \frac{62.8}{79.5} = \mathbf{0.7899\;(78.99\%)}, \qquad
+  f_{\beta,\mathrm{tot}} = \frac{w_0 - w_{\alpha E}}{w_{\beta E} - w_{\alpha E}} = \frac{16.7}{79.5} = \mathbf{0.2101\;(21.01\%)}.
+\]
+Just above $T_E$ ($T = \SI{183.1}{\celsius}, T_E^+$), the tie-line spans $w_{\alpha E} = 18.3\%$ to $w_E = 61.9\%$, so by (\ref{eq:05:microconstituent}) the \textbf{primary proeutectic $\alpha$} fraction formed before reaching $T_E$ and the \textbf{eutectic lamellar microconstituent} fraction formed at $T_E$ are:
+\[
+  f_{\text{primary }\alpha} = \frac{w_E - w_0}{w_E - w_{\alpha E}} = \frac{61.9 - 35.0}{61.9 - 18.3} = \frac{26.9}{43.6} = \mathbf{0.6170\;(61.70\%)}, \qquad
+  f_{\text{eutectic}} = \frac{w_0 - w_{\alpha E}}{w_E - w_{\alpha E}} = \frac{16.7}{43.6} = \mathbf{0.3830\;(38.30\%)}.
+\]
+\verifiedby{$\mathrm{Sn}$ mass check at $\SI{220}{\celsius}$: $0.58333(50.0) + 0.41667(14.0) = 29.167 + 5.833 = 35.00\% = w_0$ (\texttt{check\_sec02\_05.py}).}
+\end{workedexample}
+
+\begin{workedexample}[High-Altitude Boiling Point via Algebraic Clausius--Clapeyron]{Competition $\cdot$ Rules 5.c.ii, 5.d.iv}{ex:05.4}
+At sea level ($P_1 = \SI{101.325}{\kilo\pascal}$), water boils at $T_1 = \SI{100.00}{\celsius} = \SI{373.15}{\kelvin}$ with $\Delta_{\mathrm{vap}}H_m = \SI{40.65}{\kilo\joule\per\mole}$. Using the algebraic two-point Clausius--Clapeyron equation (\ref{eq:05:cc}), compute the boiling point of water $T_2$ on the summit of Pike's Peak where barometric pressure is $P_2 = \SI{58.60}{\kilo\pascal}$.
+
+\textbf{Solution.}
+Directly substituting $P_2/P_1 = 58.60 / 101.325 = 0.57834$ and $\Delta_{\mathrm{vap}}H_m = \SI{40650}{\joule\per\mole}$ into (\ref{eq:05:cc}):
+\begin{align*}
+  \frac{1}{T_2} &= \frac{1}{T_1} - \frac{R}{\Delta_{\mathrm{vap}}H_m}\ln\!\left(\frac{P_2}{P_1}\right) = \frac{1}{\SI{373.15}{\kelvin}} - \frac{\SI{8.31446}{\joule\per\mole\per\kelvin}}{\SI{40650}{\joule\per\mole}}\ln(0.57834) = \SI{2.79189e-3}{\per\kelvin}, \\
+  T_2 &= \frac{1}{\SI{2.79189e-3}{\per\kelvin}} = \mathbf{\SI{358.18}{\kelvin} = \SI{85.03}{\celsius}} \quad (\text{NIST steam-table interpolation gives } \SI{85.32}{\celsius}).
+\end{align*}
+\verifiedby{Re-substituting $T_2 = \SI{358.180}{\kelvin}$ into (\ref{eq:05:cc}) reproduces $P_2 = \SI{58.600}{\kilo\pascal}$ (\texttt{check\_sec02\_05.py}).}
+\end{workedexample}
+
+\begin{workedexample}[Psychrometrics: Relative Humidity, Humidity Ratio $\omega$, Dew Point \& Condensation]{Competition $\cdot$ Rule 5.c.ii}{ex:05.5}
+Air inside a testing gymnasium of volume $V = \SI{1000}{\cubic\meter}$ is at $T_1 = \SI{30.0}{\celsius}$ ($\SI{303.15}{\kelvin}$), total pressure $P = \SI{101.325}{\kilo\pascal}$, and relative humidity $\mathrm{RH}_1 = 60.0\%$. Using \tref{tab:05:steamtables} ($P_{\mathrm{sat}}(\SI{30}{\celsius}) = \SI{4.2470}{\kilo\pascal}$, $P_{\mathrm{sat}}(\SI{20}{\celsius}) = \SI{2.3393}{\kilo\pascal}$, $P_{\mathrm{sat}}(\SI{15}{\celsius}) = \SI{1.7057}{\kilo\pascal}$), find (a) the water vapor partial pressure $P_{v,1}$ and humidity ratio $\omega_1$, (b) the approximate dew point $T_{\mathrm{dp}}$, and (c) the mass of liquid water that condenses out if the room air is cooled isobarically to $T_2 = \SI{15.0}{\celsius}$.
+
+\textbf{Solution.}
+\textbf{(a)} From (\ref{eq:05:psychro}), $P_{v,1} = \mathrm{RH}_1\,P_{\mathrm{sat}}(\SI{30}{\celsius}) = (0.600)(\SI{4.2470}{\kilo\pascal}) = \mathbf{\SI{2.5482}{\kilo\pascal}}$ and dry-air partial pressure is $P_{a,1} = 101.325 - 2.5482 = \SI{98.7768}{\kilo\pascal}$, giving humidity ratio:
+\[
+  \omega_1 = 0.62198\,\frac{P_{v,1}}{P - P_{v,1}} = 0.62198\,\frac{2.5482}{98.7768} = \mathbf{\SI{0.016045}{\kilogram\per\kilogram}\;(\SI{16.05}{\gram\per\kilogram}\text{ dry air})}.
+\]
+\textbf{(b)} At the dew point, $P_{\mathrm{sat}}(T_{\mathrm{dp}}) = P_{v,1} = \SI{2.5482}{\kilo\pascal}$, which lies between $\SI{20}{\celsius}$ ($\SI{2.3393}{\kilo\pascal}$) and $\SI{25}{\celsius}$ ($\SI{3.1699}{\kilo\pascal}$). Linear interpolation gives $T_{\mathrm{dp}} \approx 20.0 + 5.0\frac{2.5482 - 2.3393}{3.1699 - 2.3393} = \mathbf{\SI{21.26}{\celsius}}$ (exact Antoine solution: $\SI{21.39}{\celsius}$).
+\textbf{(c)} Mass of dry air in the $\SI{1000}{\cubic\meter}$ room is $m_a = \dfrac{P_{a,1}V M_a}{RT_1} = \dfrac{(\SI{98776.8}{\pascal})(\SI{1000}{\cubic\meter})(\SI{0.028965}{\kilogram\per\mole})}{(\SI{8.31446}{\joule\per\mole\per\kelvin})(\SI{303.15}{\kelvin})} = \SI{1134.9}{\kilogram}$. Because $T_2 = \SI{15.0}{\celsius} < T_{\mathrm{dp}}$, the air becomes saturated at $\SI{15.0}{\celsius}$ ($P_{v,2} = P_{\mathrm{sat}}(\SI{15}{\celsius}) = \SI{1.7057}{\kilo\pascal}$):
+\[
+  \omega_2 = 0.62198\,\frac{1.7057}{101.325 - 1.7057} = \SI{0.010649}{\kilogram\per\kilogram} \implies
+  m_{\mathrm{cond}} = m_a(\omega_1 - \omega_2) = (\SI{1134.9}{\kilogram})(0.016045 - 0.010649) = \mathbf{\SI{6.124}{\kilogram}}.
+\]
+\verifiedby{Ideal-gas vapor check: $\Delta m_v = m_a(\omega_1 - \omega_2) = \SI{6.124}{\kilogram}$ (\texttt{check\_sec02\_05.py}).}
+\end{workedexample}
+
+\begin{workedexample}[Adiabatic Crystallization of Supercooled Water \& Colligative Antifreeze Check]{Competition $\cdot$ Rule 5.c.ii}{ex:05.6}
+(a) A $\SI{200.0}{\gram}$ sample of ultra-pure liquid water is supercooled at $\SI{1}{\text{atm}}$ to $T_{\mathrm{sc}} = -\SI{12.0}{\celsius}$ ($c_w = \SI{4.184}{\joule\per\gram\per\kelvin}, L_f = \SI{333.55}{\joule\per\gram}$) in an adiabatic container and then nucleated by a microscopic dust speck. What final temperature $T_f$ does the sample jump to, and how many grams of ice form?
+(b) How many grams of calcium chloride ($\mathrm{CaCl_2}$, $M = \SI{110.98}{\gram\per\mole}$, ideal van~'t~Hoff factor $i = 3$, $K_f = \SI{1.853}{\kelvin\cdot\kilogram\per\mole}$) must be dissolved in $\SI{200.0}{\gram}$ of water to depress its equilibrium freezing point to $-\SI{12.0}{\celsius}$ so it never supercools?
+
+\textbf{Solution.}
+\textbf{(a)} Nucleation triggers rapid crystallization that releases $L_f$ until the remaining liquid + ice mixture reaches the equilibrium melting plateau $\mathbf{T_f = \SI{0.00}{\celsius}}$. By (\ref{eq:05:supercool}):
+\[
+  f_{\mathrm{frozen}} = \frac{c_w(0 - T_{\mathrm{sc}})}{L_f} = \frac{(4.184)(12.0)}{333.55} = \mathbf{0.15053\;(15.05\%)} \implies
+  m_{\mathrm{ice}} = (0.15053)(\SI{200.0}{\gram}) = \mathbf{\SI{30.11}{\gram}}.
+\]
+\textbf{(b)} From (\ref{eq:05:colligative}), $\Delta T_f = -i K_f m = -\SI{12.0}{\kelvin} \implies \text{molality } m = \dfrac{12.0}{(3)(1.853)} = \SI{2.1587}{\mole\per\kilogram}$ of $\mathrm{H_2O}$. For $\SI{0.2000}{\kilogram}$ of water:
+\[
+  m_{\mathrm{CaCl_2}} = (\SI{0.2000}{\kilogram})(\SI{2.1587}{\mole\per\kilogram})(\SI{110.98}{\gram\per\mole}) = \mathbf{\SI{47.91}{\gram}}.
+\]
+\verifiedby{Energy released by freezing $\SI{30.106}{\gram}$ ice ($\SI{10041.6}{\joule}$) equals sensible warming of $\SI{200.0}{\gram}$ water by $\SI{12.0}{\kelvin}$ (\texttt{check\_sec02\_05.py}).}
+\end{workedexample}
+
+\begin{workedexample}[Dry Ice ($\mathrm{CO_2(s)}$) Sublimation Bath \& Sealed-Vessel Triple-Point Liquefaction]{National $\cdot$ Rules 5.c.ii, 5.c.vi}{ex:05.7}
+(a) In an open insulated Dewar at $\SI{1.00}{\text{atm}}$, a chemist drops $m_{\mathrm{CO_2}} = \SI{150.0}{\gram}$ of solid dry ice at its normal sublimation temperature $T_{\mathrm{sub}} = -\SI{78.46}{\celsius}$ ($L_{\mathrm{sub}} = \SI{571.3}{\kilo\joule\per\kilogram}$, Table~\ref{tab:05:sixtransitions}) into $m_{\mathrm{eth}} = \SI{500.0}{\gram}$ of liquid ethanol initially at $T_i = \SI{22.00}{\celsius}$ ($c_{\mathrm{eth}} = \SI{2.440}{\joule\per\gram\per\kelvin}$, freezing point $T_{m,\mathrm{eth}} = -\SI{114.1}{\celsius}$). Assuming the evolved $\mathrm{CO_2(g)}$ escapes immediately at $-\SI{78.46}{\celsius}$, does all the dry ice sublime, and what final temperature $T_f$ does the ethanol bath reach?
+(b) If instead $m = \SI{150.0}{\gram}$ of dry ice ($M = \SI{44.010}{\gram\per\mole}$) is sealed inside an evacuated rigid steel cylinder of internal volume $V = \SI{1.200}{\liter}$ and warmed slowly toward room temperature, at what temperature $T$ does \textbf{liquid $\mathrm{CO_2}$} first appear, and what is the ideal-gas pressure estimate inside the cylinder at that moment?
+
+\textbf{Solution.}
+\textbf{(a)} Maximum heat that the $\SI{500.0}{\gram}$ ethanol can release in cooling from $+\SI{22.00}{\celsius}$ down to $-\SI{78.46}{\celsius}$ ($\Delta T = \SI{100.46}{\kelvin}$) is:
+\[
+  Q_{\mathrm{eth,\max}} = m_{\mathrm{eth}} c_{\mathrm{eth}}(22.00 - (-78.46)) = (\SI{500.0}{\gram})(\SI{2.440}{\joule\per\gram\per\kelvin})(\SI{100.46}{\kelvin}) = \SI{122561}{\joule} = \SI{122.56}{\kilo\joule}.
+\]
+Complete sublimation of $\SI{150.0}{\gram}$ dry ice requires $Q_{\mathrm{sub,all}} = m_{\mathrm{CO_2}} L_{\mathrm{sub}} = (\SI{0.1500}{\kilogram})(\SI{571.3}{\kilo\joule\per\kilogram}) = \mathbf{\SI{85.695}{\kilo\joule}} < Q_{\mathrm{eth,\max}}$. Thus \textbf{100\% of the dry ice sublimes}, and the ethanol cools to:
+\[
+  T_f = T_i - \frac{Q_{\mathrm{sub,all}}}{m_{\mathrm{eth}} c_{\mathrm{eth}}} = 22.00 - \frac{\SI{85695}{\joule}}{\SI{1220.0}{\joule\per\kelvin}} = 22.00 - 70.24 = \mathbf{-\SI{48.24}{\celsius}} \quad (\text{still liquid, since } T_f > -\SI{114.1}{\celsius}).
+\]
+\textbf{(b)} By \tref{tab:05:h2oco2}, liquid $\mathrm{CO_2}$ cannot form below the triple point $(T_{\mathrm{tp}} = \mathbf{\SI{216.59}{\kelvin} = -\SI{56.56}{\celsius}}, P_{\mathrm{tp}} = \mathbf{\SI{517.96}{\kilo\pascal} = \SI{5.112}{\text{atm}}})$. Since $n = 150.0/44.010 = \SI{3.4083}{\mole}$ in $V = \SI{1.200e-3}{\cubic\meter}$ would generate an ideal-gas pressure $P_{\mathrm{id}}(T_{\mathrm{tp}}) = nRT_{\mathrm{tp}}/V = \SI{5.115}{\mega\pascal} \gg P_{\mathrm{tp}}$, the vapor follows the solid--vapor sublimation curve up to $\mathbf{T_{\mathrm{tp}} = -\SI{56.56}{\celsius}}$, where liquid $\mathrm{CO_2}$ first melts at $\mathbf{P_{\mathrm{tp}} = \SI{518.0}{\kilo\pascal}}$!
+\verifiedby{To hold an ethanol bath at the $-\SI{78.46}{\celsius}$ dry-ice plateau requires at least $m_{\mathrm{CO_2}} \ge 122.56/571.3 = \SI{214.5}{\gram}$ of dry ice (\texttt{check\_sec02\_05.py}).}
+\end{workedexample}
+
+\begin{workedexample}[Isochoric Heating Across the Saturation Dome \& Steam-Table Interpolation]{National $\cdot$ Rules 5.c.ii, 5.c.vi}{ex:05.8}
+Using \tref{tab:05:steamtables}: (a) Estimate the saturation pressure $P_{\mathrm{sat}}$, latent heat $h_{fg}$, and saturated vapor specific volume $v_g$ of water at $T = \SI{70.0}{\celsius}$ by linear interpolation between $\SI{60.0}{\celsius}$ and $\SI{80.0}{\celsius}$.
+(b) A sealed rigid quartz ampoule of volume $V = \SI{31.06}{\centi\meter\cubed}$ contains $m = \SI{10.00}{\gram}$ of $\mathrm{H_2O}$ initially at $T_1 = \SI{25.0}{\celsius}$. Determine its specific volume $v$, show that heating the sealed ampoule at constant volume causes it to pass directly through the \textbf{critical point} $(T_c = \SI{373.95}{\celsius}, P_c = \SI{22.064}{\mega\pascal})$ without completely drying out or filling with liquid, and compute its initial vapor quality $x_1$ at $\SI{25.0}{\celsius}$.
+
+\textbf{Solution.}
+\textbf{(a)} Midpoint linear interpolation at $T = \SI{70.0}{\celsius}$ ($\text{fraction } f = (70-60)/(80-60) = 0.500$) between $\SI{60.0}{\celsius}$ and $\SI{80.0}{\celsius}$ in \tref{tab:05:steamtables} gives:
+\[
+  P_{\mathrm{sat}}(\SI{70}{\celsius}) \approx \frac{19.946 + 47.414}{2} = \mathbf{\SI{33.68}{\kilo\pascal}}\;\text{(NIST exact: }\SI{31.20}{\kilo\pascal}\text{)}, \qquad
+  h_{fg}(\SI{70}{\celsius}) \approx \frac{2357.7 + 2308.0}{2} = \mathbf{\SI{2332.85}{\kilo\joule\per\kilogram}},
+\]
+\[
+  v_g(\SI{70}{\celsius}) \approx \frac{7.667 + 3.405}{2} = \mathbf{\SI{5.536}{\cubic\meter\per\kilogram}}.
+\]
+\textbf{(b)} The constant specific volume of the sealed ampoule is:
+\[
+  v = \frac{V}{m} = \frac{\SI{31.06e-6}{\cubic\meter}}{\SI{0.01000}{\kilogram}} = \mathbf{\SI{0.003106}{\cubic\meter\per\kilogram}} = v_c \quad \left(\rho = \frac{1}{v} = \SI{322.0}{\kilogram\per\cubic\meter} = \rho_c\right).
+\]
+Because $v = v_c$ identically (\tref{tab:05:steamtables}, bottom row), the vertical isochoric path on the $P$--$v$ dome (\fref{fig:05:pv-dome}) intersects the exact apex of the saturation dome at $(T_c = \SI{373.95}{\celsius}, P_c = \SI{22.064}{\mega\pascal})$, where the meniscus fades out in mid-vessel! At $T_1 = \SI{25.0}{\celsius}$ ($v_f = \SI{0.0010030}{\cubic\meter\per\kilogram}, v_g = \SI{43.34}{\cubic\meter\per\kilogram}$), the initial vapor quality is:
+\[
+  x_1 = \frac{v - v_f}{v_g - v_f} = \frac{0.003106 - 0.0010030}{43.34 - 0.0010030} = \mathbf{\num{4.852e-5}\;(0.00485\%\text{ vapor by mass})}.
+\]
+\verifiedby{If $v < v_c$, isochoric heating fills the tube with liquid below $T_c$; if $v > v_c$, all liquid evaporates below $T_c$; only $v = v_c = \SI{0.003106}{\cubic\meter\per\kilogram}$ hits the critical point (\texttt{check\_sec02\_05.py}).}
+\end{workedexample}
+
+\begin{trapbox}[§5 Top 5 Phase Transitions, Phase Diagrams \& Psychrometrics Traps]
+\begin{errtab}
+Using the adjacent tie-line segment instead of the \textbf{opposite} tie-line segment in the binary eutectic lever rule & Swaps liquid fraction $f_L$ and solid fraction $f_S$ ($1 - f$ error on \texttt{Cornell E1} problems) & Fulcrum check: as $w_0 \to w_L$, $f_L$ must approach $1$, so the numerator of $f_L$ is $(w_0 - w_S)$ (opposite arm!). \\
+Claiming liquid $\mathrm{CO_2}$ exists at $\SI{1}{\text{atm}}$ or that water's fusion slope $dP/dT$ is positive & Violates $P_{\mathrm{tp}}(\mathrm{CO_2}) = \SI{5.11}{\text{atm}} > \SI{1}{\text{atm}}$ and $\rho_{\mathrm{ice}} < \rho_{\mathrm{water}}$ & Check \tref{tab:05:h2oco2}: $\mathrm{H_2O}$ has $dP/dT = -\SI{133.2}{\text{atm}\per\kelvin} < 0$; $\mathrm{CO_2}$ sublimes at $\SI{1}{\text{atm}}, -\SI{78.5}{\celsius}$. \\
+Plugging Celsius temperatures $T_C$ or $\Delta_{\mathrm{vap}}H_m$ in $\si{\kilo\joule\per\mole}$ directly into Clausius--Clapeyron with $R = \SI{8.314}{\joule\per\mole\per\kelvin}$ & Off by orders of magnitude in $P_2/P_1$ or $T_2$ & Always convert $T$ to $\si{\kelvin}$ and $\Delta_{\mathrm{vap}}H_m$ to $\si{\joule\per\mole}$ ($\times 1000$) before dividing by $R = \SI{8.31446}{\joule\per\mole\per\kelvin}$. \\
+Confusing relative humidity $\mathrm{RH} = P_v/P_{\mathrm{sat}}(T)$ with humidity ratio $\omega = m_v/m_a = 0.622\,P_v/(P-P_v)$ & Warming air at constant moisture lowers $\mathrm{RH}$ even though $\omega$ and $P_v$ stay constant! & $\omega$ and dew point $T_{\mathrm{dp}}$ depend only on $P_v$; $\mathrm{RH}$ drops on warming because $P_{\mathrm{sat}}(T)$ grows exponentially. \\
+Applying the ideal-vapor Clausius--Clapeyron equation (\ref{eq:05:cc}) to a solid--liquid melting curve & Ideal-gas substitution $\Delta V_m \approx RT/P$ is completely invalid for solid--liquid melting! & Always use the exact Clapeyron slope $\Delta P/\Delta T = L_f/[T(v_\ell - v_s)]$ (\ref{eq:05:clapeyron}) for melting curves. \\
+\end{errtab}
+\end{trapbox}
+
+\begin{devicebox}[Evaporative Latent-Heat Penalty \& Removable BoPET Glazing Cap in the 2027 Collector]
+\idxdev{evaporative cooling penalty and BoPET glazing cap!Clarification 5}
+Because water's latent heat of vaporization at $\SIrange{30}{45}{\celsius}$ is huge ($L_v \approx \SI{2420}{\kilo\joule\per\kilogram} = \SI{2420}{\joule\per\gram}$), the evaporation of just $\mathbf{\SI{1.00}{\gram}}$ of water from an open 9~oz cup strips away $\SI{2420}{\joule}$ of thermal energy---enough to cool $m_w = \SI{50.0}{\gram}$ of water by $\Delta T_{\mathrm{loss}} = \SI{2420}{\joule}/[(\SI{50.0}{\gram})(\SI{4.184}{\joule\per\gram\per\kelvin})] = \mathbf{\SI{11.57}{\celsius}}$! Under \texttt{2027 Official Clarification \#5}, the $\SI{3.8}{\centi\meter}$ ($\SI{1.5}{in}$) top access hole (\texttt{Rule 4.f}) only needs to be open when inserting/removing the cup or inserting the ES thermometer at the end of the run: placing a removable optical-grade clear \textbf{BoPET (Mylar) or low-iron glass glazing window} over the aperture during the heating run traps the saturated headspace ($P_v \to P_{\mathrm{sat}}$), eliminating evaporative latent-heat loss while transmitting $\sim 90\%$ of the lamp's visible/near-IR beam (\sref{sec:14}) \src{S01,S02}.
+\end{devicebox}
+
+\alsosee{\spref{sec:01.4} (\texttt{QS-04} Phase Diagrams), \spref{sec:01.5} (\texttt{QS-05} Lever Rule), \spref{sec:04.3} (5-Zone Calorimetry), \spref{sec:08.4} (Gibbs Free Energy $\Delta G$), and \spref{sec:14} (Evaporative Suppression in the 2027 Collector).}

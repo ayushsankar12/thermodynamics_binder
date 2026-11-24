@@ -1,0 +1,780 @@
+% ============================================================================
+% sec16.tex — §16 Device Calibration, Heating-Curve Prediction & Day-Of Lookup Tables
+% Phase 6 Author Group 4 (author-device) | Target: 12.0 pages | Tab 6: DEVICE
+% ============================================================================
+\binderchapter{16}{Device Calibration, Heating-Curve Prediction \& Day-Of Lookup Tables}{Device Calibration \& Temperature Prediction}{sec:16}
+\scopebanner{REQUIRED}[2027 Rules 5.II.a--i, 6.b--j \& Official Scoresheet v2.0.0 (All Tournament Levels)]
+
+\idxtopic{device calibration protocol}\idxtopic{temperature prediction model}\idxtopic{Prediction Score (PS)}\idxtopic{36-run DOE matrix}
+In the 2026--2027 Division~C Thermodynamics event, Part~II (Device Testing) accounts for \textbf{$50.0\text{ of the }100.0\text{ total points}$}: up to \textbf{$30.0\text{ points}$} for the Temperature Score ($\mathrm{TS}$) and up to \textbf{$20.0\text{ points}$} for the Prediction Score ($\mathrm{PS}$) \src{S01,S04}. Moreover, under Rule~\texttt{6.j} and Official Scoresheet v2.0.0, \textbf{Best $\mathrm{TS}$ is the First Overall Tiebreaker (\texttt{TB1})} for the entire event \src{S01,S04}! Because the Event Supervisor announces the exact bulb height $h_{\mathrm{bulb}} \in [\SI{40}{\centi\meter}, \SI{65}{\centi\meter}]$, heating duration $t_{\mathrm{heat}} \in [\SI{10}{\minute}, \SI{15}{\minute}]$, room temperature $T_{\mathrm{room}}$, source bath temperature $T_{\mathrm{bath}}$, and bulb specifications ($P_{\mathrm{bulb}} \in [\SI{100}{\watt}, \SI{125}{\watt}]$) only at the start of the competition block (Rule~\texttt{5.II.a}), and announces your individual cup starting temperature $T_{\mathrm{start}}$ only when handing you the water (Rule~\texttt{5.II.c}), a championship team must compute its final water temperature prediction $T_{\mathrm{pred}}$ to within \textbf{$\pm\SI{0.15}{\celsius}$ in under 15 seconds} \src{S01,S05}. This chapter provides the complete five-variable physical--empirical prediction suite, the 36-condition Design-of-Experiments (DOE) calibration matrix, the 26-row $\SI{1}{\centi\meter}$ National interpolation table, post-lamp cooling corrections, and tournament mismatch recovery protocols.
+
+% ============================================================================
+\section{Mathematical Structure of 2027 Scoring (\texorpdfstring{$\mathrm{TS}, \mathrm{PS}, \mathrm{PE}$}{TS, PS, PE}) \& Error Sensitivity}\label{sec:16.1}
+\idxtopic{scoring formulas (Rule 6.a--j)}\idxtopic{Prediction Estimate (PE)}\idxtopic{Celsius denominator rule (Rule 6.b)}
+
+Under Rule~\texttt{6.b}, \textbf{all scoring calculations are performed strictly in degrees Celsius ($\si{\celsius}$)}—never in Kelvin or Fahrenheit \src{S01,S04}. Understanding the exact functional form of the official v2.0.0 Scoresheet reveals a critical synergy between maximizing optical heating ($\mathrm{TG}$) and maximizing prediction accuracy ($\mathrm{PE}$).
+
+\begin{formulacard}[Official 2027 v2.0.0 Scoresheet Equations, Penalty Multipliers \& Marginal Point Loss]
+\idxformula{Final Score: \mathrm{FS} = \mathrm{ES} + \mathrm{TS} + \mathrm{PS}\text{ (max 100 pts)}}
+\idxformula{Temperature Gain and Score: \mathrm{TG} = T_f - T_i,\ \mathrm{TS} = 30 M_{\mathrm{pen}}(\mathrm{TG}/\mathrm{TG}_{\max})}
+\idxformula{Prediction Estimate and Score: \mathrm{PE} = 1 - |T_f - T_{\mathrm{pred}}|/T_f,\ \mathrm{PS} = 20 M_{\mathrm{pen}}(\mathrm{PE}/\mathrm{PE}_{\max})}
+\begin{ftab}
+$\mathrm{FS} = \mathrm{ES} + \mathrm{TS} + \mathrm{PS}$ \newline $M_{\mathrm{pen}} = (0.7)^{V_{\mathrm{constr}}}\times (0.9)^{V_{\mathrm{comp}}}$
+  & $\mathrm{ES} \in [0, 50]$: Exam Score; $\mathrm{TS} \in [0, 30]$: Temp Score; $\mathrm{PS} \in [0, 20]$: Prediction Score; $V_{\mathrm{constr}}$: construction + non-impound violations (\texttt{6.g}); $V_{\mathrm{comp}}$: competition violations (\texttt{6.h}).
+  & \RULEf
+  & Master 100-point event sum (\texttt{6.c}). Note: $M_{\mathrm{pen}}$ multiplies $\mathrm{TS}$ and $\mathrm{PS}$ only, never $\mathrm{ES}$ \src{S01,S04}. \\
+$\mathrm{TG} = \max\!\left(0,\; T_{\mathrm{final}} - T_{\mathrm{start}}\right)$ \newline $\mathrm{TS} = 30\,M_{\mathrm{pen}}\,\dfrac{\mathrm{TG}}{\mathrm{TG}_{\max}}$
+  & $T_{\mathrm{start}}, T_{\mathrm{final}}$: ES thermometer readings to $\SI{0.1}{\celsius}$; $\mathrm{TG}_{\max}$: highest $\mathrm{TG}$ among all teams in the tournament (if $\mathrm{TG}_{\max}=0$, ratio $=1$).
+  & \RULEf
+  & Rule~\texttt{6.e}: $\mathrm{TS}=0$ if hazardous material (\texttt{3.b.i}), energy source (\texttt{3.f}), touched during heating (\texttt{5.II.e}), or no device. \\
+$\mathrm{PE} = \max\!\left(0,\; 1 - \dfrac{|T_{\mathrm{final}} - T_{\mathrm{pred}}|}{T_{\mathrm{final}}}\right)$ \newline $\mathrm{PS} = 20\,M_{\mathrm{pen}}\,\dfrac{\mathrm{PE}}{\mathrm{PE}_{\max}}$
+  & $T_{\mathrm{pred}}$: team's submitted prediction in $[\si{\celsius}]$ (\texttt{5.II.f}); \textbf{Crucial:} $T_{\mathrm{final}}$ in the denominator is in $\mathbf{\si{\celsius}}$ (\texttt{6.b}), NOT Kelvin and NOT $\mathrm{TG}$!
+  & \RULEf
+  & Rule~\texttt{6.f}: $\mathrm{PS}=0$ if $\mathrm{TS}=0$ disqualification or if $T_{\mathrm{pred}}$ is not submitted before Heating Time ends (\texttt{5.II.f}). \\
+$\Delta\mathrm{PS}_{\mathrm{lost}} \approx \dfrac{20\,M_{\mathrm{pen}}}{\mathrm{PE}_{\max}}\,\dfrac{|\Delta T_{\mathrm{err}}|}{T_{\mathrm{final}}}$ \newline $\dfrac{\partial\mathrm{PS}}{\partial |\Delta T_{\mathrm{err}}|} \approx -\dfrac{20}{T_{\mathrm{final}}}\ \left[\dfrac{\text{pts}}{\si{\celsius}}\right]$
+  & $|\Delta T_{\mathrm{err}}| = |T_{\mathrm{final}} - T_{\mathrm{pred}}|$: absolute prediction error $[\si{\celsius}]$; evaluated assuming $\mathrm{PE}_{\max} \approx 1.000$ and $M_{\mathrm{pen}} = 1$.
+  & \RULEf
+  & At $T_{\mathrm{final}} = \SI{50.0}{\celsius}$, each $\SI{0.5}{\celsius}$ error costs $\SI{0.20}{pts}$; at $T_{\mathrm{final}} = \SI{25.0}{\celsius}$, the same $\SI{0.5}{\celsius}$ error costs $\SI{0.40}{pts}$ ($2\times$ more!). \\
+\end{ftab}
+\end{formulacard}
+
+\begin{twocol}[0.50]
+\begin{center}
+\begin{tikzpicture}[font=\scriptsize]
+\begin{axis}[
+    width=\linewidth,
+    height=5.5cm,
+    xmin=0.0, xmax=5.0,
+    ymin=15.0, ymax=20.2,
+    xlabel={Absolute Prediction Error $|\Delta T_{\mathrm{err}}| = |T_{\mathrm{final}} - T_{\mathrm{pred}}|$ $[\si{\celsius}]$},
+    ylabel={Prediction Score $\mathrm{PS}$ $[\text{pts / }20]$ ($\mathrm{PE}_{\max}\!=\!1$)},
+    grid=both,
+    grid style={gray!25, dashed},
+    tick align=inside,
+    legend style={at={(0.98,0.97)}, anchor=north east, font=\scriptsize, fill=white, draw=navy, row sep=0.5pt}
+]
+% Championship target zone (|Delta T_err| <= 0.3 C)
+\fill[teal!14] (axis cs:0.0,15.0) rectangle (axis cs:0.35,20.2);
+\node[rotate=90, anchor=north, font=\scriptsize\bfseries, text=teal!80!black] at (axis cs:0.18,17.5) {Target $\le\SI{0.3}{\celsius}$};
+
+% Curve 1: T_final = 50.0 C (High-gain 3-Stage CPC collector)
+\addplot[very thick, color=navy, domain=0:5, samples=20] {20*(1 - x/50.0)};
+\addlegendentry{$T_{\mathrm{final}} = \SI{50.0}{\celsius}$ ($\mathrm{TG}=\SI{28}{\celsius}$)}
+
+% Curve 2: T_final = 40.0 C (Mid-gain collector)
+\addplot[very thick, color=teal!80!black, dashed, domain=0:5, samples=20] {20*(1 - x/40.0)};
+\addlegendentry{$T_{\mathrm{final}} = \SI{40.0}{\celsius}$ ($\mathrm{TG}=\SI{18}{\celsius}$)}
+
+% Curve 3: T_final = 30.0 C (Low-gain collector)
+\addplot[very thick, color=amber!90!black, dashdotted, domain=0:5, samples=20] {20*(1 - x/30.0)};
+\addlegendentry{$T_{\mathrm{final}} = \SI{30.0}{\celsius}$ ($\mathrm{TG}=\SI{8}{\celsius}$)}
+
+% Curve 4: T_final = 24.0 C (Bare cup / failed collector)
+\addplot[thick, color=rust, dotted, domain=0:5, samples=20] {20*(1 - x/24.0)};
+\addlegendentry{$T_{\mathrm{final}} = \SI{24.0}{\celsius}$ ($\mathrm{TG}=\SI{2}{\celsius}$)}
+
+\node[anchor=south west, font=\scriptsize, text=navy] at (axis cs:2.1,19.1) {Slope $-\SI{0.40}{pts/\celsius}$};
+\node[anchor=north east, font=\scriptsize, text=rust] at (axis cs:4.8,16.1) {Slope $-\SI{0.83}{pts/\celsius}$};
+\end{axis}
+\end{tikzpicture}
+\captionof{figure}{Prediction Score $\mathrm{PS} = 20(1 - |\Delta T_{\mathrm{err}}|/T_{\mathrm{final}})$ versus prediction error $|\Delta T_{\mathrm{err}}|$ across final water temperatures $T_{\mathrm{final}} \in [\SI{24}{\celsius}, \SI{50}{\celsius}]$ \src{S01,S04}.}\label{fig:16:pe-sensitivity}
+\idxfig{Prediction Estimate PE and points lost vs prediction error}
+\end{center}
+\nextcol[0.48]
+\begin{trapbox}[Double Penalty of Under-Heating \& Asymmetric Over- vs.\ Under-Prediction]
+\idxerr{building a low-gain device just to make T_final easier to predict}\idxdev{low-gain collector double penalty on TS and TB1}
+\begin{enumerate}
+  \item \textbf{Why ``Sandbagging'' $\mathrm{TG}$ for Easy Prediction Fails:} Some teams consider blocking the lamp so $\mathrm{TG} \approx \SI{0}{\celsius}$ and $T_{\mathrm{final}} \approx T_{\mathrm{start}}$ is trivial to predict ($\mathrm{PS} = 20.0\text{ pts}$). That strategy forfeits up to $\mathbf{30.0\text{ points}}$ on $\mathrm{TS}$, loses the \textbf{First Overall Tiebreaker (\texttt{TB1} = Best $\mathrm{TS}$, Rule~\texttt{6.j})}, and actually \textit{doubles} the fractional error penalty $1/T_{\mathrm{final}}$ per degree of thermometer jitter!
+  \item \textbf{Higher $T_{\mathrm{final}}$ Buffers $\mathrm{PE}$:} Because $T_{\mathrm{final}}$ sits in the denominator of $\mathrm{PE} = 1 - |\Delta T_{\mathrm{err}}|/T_{\mathrm{final}}$, achieving $T_{\mathrm{final}} = \SI{50.0}{\celsius}$ instead of $\SI{25.0}{\celsius}$ cuts the point loss of any $\pm\SI{0.2}{\celsius}$ sensor fluctuation in half (from $\SI{0.16}{pts}$ to $\SI{0.08}{pts}$).
+  \item \textbf{Conditional Expectation Optimal Estimator:} Since $T_{\mathrm{final}}$ is fixed by physics while you choose $T_{\mathrm{pred}}$, the expected score $\mathbb{E}[\mathrm{PE}]$ under symmetric Gaussian repeatability noise $\epsilon \sim \mathcal{N}(0, \sigma_{\mathrm{rep}}^2)$ is strictly maximized by submitting the \textbf{unbiased conditional mean} $T_{\mathrm{pred}} = \mathbb{E}[T_{\mathrm{final}}]$ rounded to the nearest $\SI{0.1}{\celsius}$.
+\end{enumerate}
+\end{trapbox}
+\end{twocol}
+
+\begin{workedexample}[Official v2.0.0 Scoresheet Calculation \& Marginal Prediction Sensitivity]{Rule 6.c--j / §16.1}{ex:16.1}
+At a State tournament ($h_{\mathrm{bulb}} = \SI{45.0}{\centi\meter}$, $t_{\mathrm{heat}} = \SI{10.0}{\minute}$, $\SI{125}{\watt}$ lamp), the tournament-high metrics are $\mathrm{ES}_{\mathrm{raw,max}} = 92.0\text{ pts}$, $\mathrm{TG}_{\max} = \SI{27.7}{\celsius}$, and $\mathrm{PE}_{\max} = 0.9980$. Compare two teams that both earn raw written exam score $88.5\text{ pts}$ and have zero violations ($M_{\mathrm{pen}} = 1.0$):
+\begin{itemize}
+  \item \textbf{Team Alpha (3-Stage Glazed CPC):} $T_{\mathrm{start}} = \SI{22.0}{\celsius}$, $T_{\mathrm{final}} = \SI{49.7}{\celsius}$, submitted $T_{\mathrm{pred}} = \SI{49.4}{\celsius}$ ($|\Delta T_{\mathrm{err}}| = \SI{0.3}{\celsius}$).
+  \item \textbf{Team Beta (Open $30^\circ$ Straight Cone):} $T_{\mathrm{start}} = \SI{22.0}{\celsius}$, $T_{\mathrm{final}} = \SI{30.1}{\celsius}$, submitted $T_{\mathrm{pred}} = \SI{29.8}{\celsius}$ (same $|\Delta T_{\mathrm{err}}| = \SI{0.3}{\celsius}$).
+\end{itemize}
+Compute $\mathrm{ES}, \mathrm{TG}, \mathrm{TS}, \mathrm{PE}, \mathrm{PS}$, and Final Score $\mathrm{FS}$ for both teams, and verify the point loss if Team~Beta also forgot to impound its spare glazing ring ($V_{\mathrm{constr}} = 1$, Clarification~\#9).
+
+\textbf{Solution.} Both teams earn Exam Score $\mathrm{ES} = 50 \times (88.5 / 92.0) = \mathbf{\SI{48.10}{pts}}$.
+\begin{enumerate}
+  \item \textbf{Team Alpha:} $\mathrm{TG}_\alpha = 49.7 - 22.0 = \SI{27.7}{\celsius} \implies \mathrm{TS}_\alpha = 30 \times (27.7 / 27.7) = \mathbf{\SI{30.00}{pts}}$. Prediction Estimate: $\mathrm{PE}_\alpha = 1 - \frac{|49.7 - 49.4|}{49.7} = 1 - 0.006036 = \mathbf{0.99396} \implies \mathrm{PS}_\alpha = 20 \times \frac{0.99396}{0.9980} = \mathbf{\SI{19.92}{pts}}$. Total: $\mathrm{FS}_\alpha = 48.10 + 30.00 + 19.92 = \mathbf{\SI{98.02}{pts}}$.
+  \item \textbf{Team Beta ($M_{\mathrm{pen}} = 1.0$):} $\mathrm{TG}_\beta = 30.1 - 22.0 = \SI{8.1}{\celsius} \implies \mathrm{TS}_\beta = 30 \times (8.1 / 27.7) = \mathbf{\SI{8.77}{pts}}$. Because $T_{\mathrm{final},\beta} = \SI{30.1}{\celsius}$ is lower, the exact same $\SI{0.3}{\celsius}$ prediction error gives a lower $\mathrm{PE}_\beta = 1 - \frac{0.3}{30.1} = \mathbf{0.99003} \implies \mathrm{PS}_\beta = 20 \times \frac{0.99003}{0.9980} = \mathbf{\SI{19.84}{pts}}$. Total: $\mathrm{FS}_\beta = 48.10 + 8.77 + 19.84 = \mathbf{\SI{76.71}{pts}}$ ($\SI{21.31}{pts}$ behind Team~Alpha!).
+  \item \textbf{If Team Beta Incurs $V_{\mathrm{constr}} = 1$ ($M_{\mathrm{pen}} = 0.7$):} $\mathrm{TS}_{\beta,\mathrm{pen}} = 0.7(8.77) = \SI{6.14}{pts}$ and $\mathrm{PS}_{\beta,\mathrm{pen}} = 0.7(19.84) = \SI{13.89}{pts} \implies \mathrm{FS}_{\beta,\mathrm{pen}} = \mathbf{\SI{68.13}{pts}}$ (losing an additional $\SI{8.58}{pts}$).
+\end{enumerate}
+\verifiedby{Exact cell-by-cell replication of \texttt{2027ThermodynamicsBC\_scoresheet.xlsx} (v2.0.0) formulas; asserted in \texttt{check\_sec14\_16.py}.}
+\end{workedexample}
+
+\begin{twocol}[0.54]
+\captionof{table}{Exact Prediction Estimate $\mathrm{PE} = 1 - |\Delta T_{\mathrm{err}}|/T_f$ and Prediction Score $\mathrm{PS}$ ($\text{pts}/20$) lookup matrix \src{S01,S04}.}\label{tab:16:ps-error-lookup}
+\footnotesize\setlength{\tabcolsep}{2.2pt}\renewcommand{\arraystretch}{1.11}
+\begin{tabularx}{\linewidth}{@{}r|rrrr|rrr>{\raggedright\arraybackslash}X@{}}
+\toprule
+\hdr{$|\Delta T_{\mathrm{err}}|$} & \multicolumn{4}{c|}{\hdr{Prediction Estimate $\mathrm{PE}$ $[-]$}} & \multicolumn{4}{c}{\hdr{Score $\mathrm{PS}$ $[\text{pts}/20]$}} \\
+\tiny$[\si{\celsius}]$ & \tiny$T_f\!=\!30^\circ$ & \tiny$40^\circ$ & \tiny$45^\circ$ & \tiny$50^\circ\mathrm{C}$ & \tiny$30^\circ$ & \tiny$40^\circ$ & \tiny$45^\circ$ & \tiny$50^\circ\mathrm{C}$ \\
+\midrule
+$\mathbf{0.0}$ & $1.0000$ & $1.0000$ & $1.0000$ & $1.0000$ & $20.00$ & $20.00$ & $20.00$ & $\mathbf{20.00}$ \\
+\rowcolor{rowalt}$\mathbf{0.1}$ & $0.9967$ & $0.9975$ & $0.9978$ & $0.9980$ & $19.93$ & $19.95$ & $19.96$ & $\mathbf{19.96}$ \\
+$\mathbf{0.2}$ & $0.9933$ & $0.9950$ & $0.9956$ & $0.9960$ & $19.87$ & $19.90$ & $19.91$ & $\mathbf{19.92}$ \\
+\rowcolor{rowalt}$\mathbf{0.3}$ & $0.9900$ & $0.9925$ & $0.9933$ & $0.9940$ & $19.80$ & $19.85$ & $19.87$ & $\mathbf{19.88}$ \\
+$\mathbf{0.5}$ & $0.9833$ & $0.9875$ & $0.9889$ & $0.9900$ & $19.67$ & $19.75$ & $19.78$ & $\mathbf{19.80}$ \\
+\rowcolor{rowalt}$\mathbf{1.0}$ & $0.9667$ & $0.9750$ & $0.9778$ & $0.9800$ & $19.33$ & $19.50$ & $19.56$ & $\mathbf{19.60}$ \\
+$\mathbf{2.0}$ & $0.9333$ & $0.9500$ & $0.9556$ & $0.9600$ & $18.67$ & $19.00$ & $19.11$ & $19.20$ \\
+\rowcolor{rowalt}$\mathbf{3.0}$ & $0.9000$ & $0.9250$ & $0.9333$ & $0.9400$ & $18.00$ & $18.50$ & $18.67$ & $18.80$ \\
+$\mathbf{5.0}$ & $0.8333$ & $0.8750$ & $0.8889$ & $0.9000$ & $16.67$ & $17.50$ & $17.78$ & $18.00$ \\
+\bottomrule
+\end{tabularx}
+\nextcol[0.44]
+\captionof{table}{Penalty multiplier $M_{\mathrm{pen}} = 0.7^{V_{\mathrm{constr}}} \times 0.9^{V_{\mathrm{comp}}}$ (Rules~\texttt{6.g--h}) \src{S01,S04}.}\label{tab:16:penalty-multipliers}
+\footnotesize\setlength{\tabcolsep}{2.2pt}\renewcommand{\arraystretch}{1.11}
+\begin{tabularx}{\linewidth}{@{}ccrr>{\raggedright\arraybackslash}X@{}}
+\toprule
+\hdr{$V_{\mathrm{constr}}$} & \hdr{$V_{\mathrm{comp}}$} & \hdr{$M_{\mathrm{pen}}$} & \hdr{Max Pt~II} & \hdr{Typical Cause} \\
+\tiny(\texttt{6.g}) & \tiny(\texttt{6.h}) & \tiny$[-]$ & \tiny$[\text{pts}/50]$ & \\
+\midrule
+$\mathbf{0}$ & $\mathbf{0}$ & $\mathbf{1.000}$ & $\mathbf{50.00}$ & \textbf{100\% Compliant} \\
+\rowcolor{rowalt}$0$ & $1$ & $0.900$ & $45.00$ & Wrap left on cup (\texttt{5.II.g}) \\
+$0$ & $2$ & $0.810$ & $40.50$ & Tape on cup + late mod \\
+\rowcolor{rowalt}$1$ & $0$ & $0.700$ & $35.00$ & Missed impound (\texttt{2.d}) \\
+$1$ & $1$ & $0.630$ & $31.50$ & $>30\text{ cm}$ + wrap error \\
+\rowcolor{rowalt}$2$ & $0$ & $0.490$ & $24.50$ & $>30\text{ cm}$ + water contact \\
+\multicolumn{2}{@{}c}{\textcolor{rust}{\textbf{\texttt{3.b.i / 3.f / 5.II.e}}}} & \textcolor{rust}{$\mathbf{0.000}$} & \textcolor{rust}{$\mathbf{0.00}$} & \textcolor{rust}{\textbf{\texttt{\#6~PS}, Battery, or Touch!}} \\
+\bottomrule
+\end{tabularx}
+\end{twocol}
+
+% ============================================================================
+\section{Five-Variable Physical--Empirical Heating-Curve Prediction Model}\label{sec:16.2}
+\idxtopic{5-variable heating-curve model}\idxtopic{ambient and starting-water coupling}\idxtopic{sensitivity derivatives table}
+
+Combining the forced lumped-capacitance heating ODE solution (\sref{sec:13.2}) with the stratified top-layer optical capture $\dot{Q}_{\mathrm{abs}}(h_{\mathrm{bulb}}, P_{\mathrm{bulb}})$ (\sref{sec:15.3}--\sref{sec:15.5}) yields a closed-form algebraic prediction model taking all \textbf{five day-of tournament variables} announced by the Event Supervisor under Rule~\texttt{5.II.a,c}:
+\begin{equation}\label{eq:16:master-5var}
+  \boxed{T_{\mathrm{pred}}(h, t, T_{\mathrm{start}}, T_{\mathrm{room}}, P_{\mathrm{bulb}}) = T_{\mathrm{start}} + \Delta T_{\mathrm{ref}}(h)\,\eta_P(P_{\mathrm{bulb}})\,\frac{1 - e^{-t/\tau_{\mathrm{eff}}}}{1 - e^{-600/\tau_{\mathrm{eff}}}} - \gamma_{\mathrm{loss}}(T_{\mathrm{start}} - T_{\mathrm{room}})\!\left(1 - e^{-t/\tau_{\mathrm{eff}}}\right) - \Delta T_{\mathrm{cool}}(t_{\mathrm{wait}})}
+\end{equation}
+\idxformula{5-variable master temperature prediction equation: T_{\mathrm{pred}}(h, t, T_{\mathrm{start}}, T_{\mathrm{room}}, P_{\mathrm{bulb}})}
+where each parameter has a direct physical definition and pre-calibrated empirical value:
+\begin{enumerate}
+  \item \textbf{10-Minute Reference Gain $\Delta T_{\mathrm{ref}}(h)$ $[\si{\celsius}]$:} The calibrated top-layer temperature rise at $t_{\mathrm{ref}} = \SI{600}{\second}$ ($\SI{10.0}{\minute}$) under a $\SI{125}{\watt}$ clear $\mathrm{R40}$ heat lamp when $T_{\mathrm{start}} = T_{\mathrm{room}} = \SI{22.0}{\celsius}$ (tabulated at $\SI{1}{\centi\meter}$ resolution across $h \in [\SI{40}{\centi\meter}, \SI{65}{\centi\meter}]$ in \tref{tab:16:natl-1cm}).
+  \item \textbf{Bulb-Wattage Scaling Factor $\eta_P(P_{\mathrm{bulb}})$ $[-]$:} Scales absorbed radiant power relative to the $\SI{125}{\watt}$ baseline:
+  \begin{equation}\label{eq:16:wattage-scale}
+    \eta_P(P_{\mathrm{bulb}}) = \left(\frac{P_{\mathrm{bulb}}}{\SI{125}{\watt}}\right)^{\!\beta_P} = \begin{cases} 1.000 & \text{for } P_{\mathrm{bulb}} = \SI{125}{\watt} \\ 0.800\ (\text{or empirical } 0.798\text{--}0.804) & \text{for } P_{\mathrm{bulb}} = \SI{100}{\watt} \end{cases}
+  \end{equation}
+  \item \textbf{Heating-Time Exponential Growth Ratio $M_t(t)$ $[-]$:} Scales from $t_{\mathrm{ref}} = \SI{600}{\second}$ to any State/National heating duration $t \in [\SI{600}{\second}, \SI{900}{\second}]$ ($\SIrange{10}{15}{\minute}$) using the collector's calibrated effective top-layer time constant $\tau_{\mathrm{eff}} = C_{\mathrm{top,eff}}R_{\mathrm{th,eff}} = \SI{903.0}{\second}$ ($\SI{15.05}{\minute}$):
+  \begin{equation}\label{eq:16:time-multiplier}
+    M_t(t) = \frac{1 - e^{-t/\tau_{\mathrm{eff}}}}{1 - e^{-600/\tau_{\mathrm{eff}}}} = \frac{1 - e^{-t/\SI{903.0}{\second}}}{0.48543}
+  \end{equation}
+  \item \textbf{Starting-Water vs.\ Ambient-Room Coupling Weights $k_{\mathrm{start}}(t)$ and $k_{\mathrm{room}}(t)$:} When the ES source water bath $T_{\mathrm{start}}$ differs from the ambient room temperature $T_{\mathrm{room}}$ (e.g., cold tap water filled that morning, $T_{\mathrm{start}} < T_{\mathrm{room}}$), setting $\gamma_{\mathrm{loss}} = 1.00$ rearranges Eq.~\eref{eq:16:master-5var} into the \textbf{10-Second Linear Superposition Formula}:
+  \begin{equation}\label{eq:16:fast-superposition}
+    \boxed{T_{\mathrm{pred}} = \mathrm{TG}_{\mathrm{table}}(h, P_{\mathrm{bulb}}, t) + k_{\mathrm{start}}(t)\,T_{\mathrm{start}} + k_{\mathrm{room}}(t)\,T_{\mathrm{room}} - \Delta T_{\mathrm{cool}}(t_{\mathrm{wait}}) = T_{\mathrm{start}} + \mathrm{TG}_{\mathrm{table}} + k_{\mathrm{room}}(t)\,(T_{\mathrm{room}} - T_{\mathrm{start}}) - \Delta T_{\mathrm{cool}}}
+  \end{equation}
+  \idxformula{10-second linear superposition prediction: T_{\mathrm{pred}} = \mathrm{TG}_{\mathrm{table}} + k_{\mathrm{start}}T_{\mathrm{start}} + k_{\mathrm{room}}T_{\mathrm{room}} - \Delta T_{\mathrm{cool}}}
+  where $k_{\mathrm{start}}(t) = e^{-t/\tau_{\mathrm{eff}}}$ and $k_{\mathrm{room}}(t) = 1 - e^{-t/\tau_{\mathrm{eff}}}$ satisfy $k_{\mathrm{start}}(t) + k_{\mathrm{room}}(t) = 1$ identically!
+\end{enumerate}
+
+\begin{center}
+\captionof{table}{Analytical partial-derivative sensitivity matrix and GUM uncertainty propagation budget around nominal tournament operating point ($h=\SI{50.0}{\centi\meter}, P_{\mathrm{bulb}}=\SI{125}{\watt}, t=\SI{10.0}{\minute}=\SI{600}{\second}, T_{\mathrm{start}}=T_{\mathrm{room}}=\SI{22.0}{\celsius}, \mathrm{TG}=\SI{21.30}{\celsius}, T_{\mathrm{final}}=\SI{43.30}{\celsius}, \tau_{\mathrm{eff}}=\SI{903}{\second}$) \src{S01,S12,S21}.}\label{tab:16:sensitivity}
+\footnotesize\setlength{\tabcolsep}{2.5pt}\renewcommand{\arraystretch}{1.14}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.19\linewidth}l>{\raggedright\arraybackslash}p{0.25\linewidth}rrr>{\raggedright\arraybackslash}X@{}}
+\toprule
+\hdr{Input Variable $x_i$} & \hdr{Rule Source} & \hdr{Analytical Partial Derivative $\dfrac{\partial T_{\mathrm{final}}}{\partial x_i}$} & \hdr{Nominal} & \hdr{Day-Of} & \hdr{Propagated} & \hdr{Error If Variable Is Ignored} \\
+ & & & \hdr{Slope} & \hdr{$u(x_i)$} & \hdr{$|\frac{\partial T_f}{\partial x_i}|u(x_i)$} & \hdr{Across Tournament Range} \\
+\midrule
+\textbf{1. Starting Water Temp $T_{\mathrm{start}}$} $[\si{\celsius}]$ & \texttt{5.II.c} ($\SI{0.1}{\celsius}$) & $\dfrac{\partial T_f}{\partial T_{\mathrm{start}}} = k_{\mathrm{start}}(t) = e^{-t/\tau_{\mathrm{eff}}}$ & $+\SI{0.515}{\celsius\per\celsius}$\textsuperscript{a} & $\SI{0.06}{\celsius}$ & $\SI{0.031}{\celsius}$ & $\pm\SIrange{1.5}{3.5}{\celsius}$ across cold/warm tournament water baths! \\
+\rowcolor{rowalt}\textbf{2. Ambient Room Temp $T_{\mathrm{room}}$} $[\si{\celsius}]$ & \texttt{5.II.a} (Board) & $\dfrac{\partial T_f}{\partial T_{\mathrm{room}}} = k_{\mathrm{room}}(t) = 1 - e^{-t/\tau_{\mathrm{eff}}}$ & $+\SI{0.485}{\celsius\per\celsius}$ & $\SI{0.20}{\celsius}$ & $\SI{0.097}{\celsius}$ & $\pm\SIrange{0.8}{2.0}{\celsius}$ between morning and afternoon blocks. \\
+\textbf{3. Bulb Height $h_{\mathrm{bulb}}$} $[\si{\centi\meter}]$ & \texttt{4.c, 5.II.a} & $\dfrac{\partial T_f}{\partial h} = M_t\eta_P\dfrac{d(\Delta T_{\mathrm{ref}})}{dh}$ & $-\SI{1.03}{\celsius\per\centi\meter}$ & $\SI{0.12}{\centi\meter}$ & $\SI{0.124}{\celsius}$ & \textbf{$\SI{17.1}{\celsius}$ swing across $h=\SIrange{40}{65}{\centi\meter}$!} \\
+\rowcolor{rowalt}\textbf{4. Heating Time $t_{\mathrm{heat}}$} $[\si{\minute}]$ & \texttt{5.II.a.i--ii} & $\dfrac{\partial T_f}{\partial t} = \dfrac{T_{\mathrm{ss}} - T_f}{\tau_{\mathrm{eff}}}$ ($[\si{\celsius\per\minute}]$) & $+\SI{1.56}{\celsius\per\minute}$ & $\SI{0.03}{\minute}$ & $\SI{0.047}{\celsius}$ & \textbf{$+\SIrange{7.2}{9.2}{\celsius}$ swing from $\SI{10}{\minute}$ to $\SI{15}{\minute}$!} \\
+\textbf{5. Bulb Wattage $P_{\mathrm{bulb}}$} $[\si{\watt}]$ & \texttt{4.a, 5.II.a} & $\dfrac{\partial T_f}{\partial P_{\mathrm{bulb}}} = \dfrac{\mathrm{TG}}{P_{\mathrm{bulb}}}$ & $+\SI{0.170}{\celsius\per\watt}$ & $\SI{1.2}{\watt}$\textsuperscript{b} & $\SI{0.204}{\celsius}$ & \textbf{$-\SIrange{4.2}{5.5}{\celsius}$ drop switching $\SI{125}{\watt}\to\SI{100}{\watt}$!} \\
+\rowcolor{rowalt}\textbf{6. Extraction Wait $t_{\mathrm{wait}}$} $[\si{\second}]$ & \texttt{5.II.g} ($\le\SI{60}{\second}$) & $\dfrac{\partial T_f}{\partial t_{\mathrm{wait}}} = -r_{\mathrm{open}}$ & $-\SI{0.018}{\celsius\per\second}$ & $\SI{4.0}{\second}$ & $\SI{0.072}{\celsius}$ & $-\SIrange{0.3}{1.1}{\celsius}$ cooling during 1-min ES measurement window. \\
+\midrule
+\multicolumn{4}{@{}l}{\textbf{Combined Quadrature Standard Uncertainty $u_c(T_{\mathrm{pred}}) = \sqrt{\sum (\partial T_f/\partial x_i)^2 u(x_i)^2}$:}} & --- & $\mathbf{\SI{0.273}{\celsius}}$ & \textbf{Expected $\mathbb{E}[\mathrm{PE}] = 1 - \frac{0.22}{43.3} = \mathbf{0.9950}$ ($\SI{19.90}{pts}$)!} \\
+\bottomrule
+\multicolumn{7}{@{}l}{\scriptsize\textsuperscript{a}At fixed $T_{\mathrm{room}}$. When $T_{\mathrm{start}}$ and $T_{\mathrm{room}}$ shift together by $\Delta T$, $\partial T_f/\partial T_{\mathrm{start}} + \partial T_f/\partial T_{\mathrm{room}} = 0.515 + 0.485 = \mathbf{+1.000\,\si{\celsius\per\celsius}}$. \textsuperscript{b}Line-voltage fluctuation $\pm 1.0\%$.}
+\end{tabularx}
+\end{center}
+
+\begin{workedexample}[Five-Variable Prediction with Cold Source Bath Offset ($T_{\mathrm{start}} \neq T_{\mathrm{room}}$)]{Rule 5.II.a,c,f / §16.2}{ex:16.2}
+At a State tournament, the ES announces at the start of the block (\texttt{Rule 5.II.a}): bulb height $h_{\mathrm{bulb}} = \SI{45.0}{\centi\meter}$, heating time $t_{\mathrm{heat}} = \SI{13.0}{\minute}$ ($\SI{780}{\second}$), room temperature $T_{\mathrm{room}} = \SI{23.2}{\celsius}$, and bulb wattage $P_{\mathrm{bulb}} = \SI{125}{\watt}$ ($\eta_P = 1.000$). From calibration, the collector's 10-minute ($\SI{600}{\second}$) reference gain at $h = \SI{45.0}{\centi\meter}$ is $\Delta T_{\mathrm{ref}}(\SI{45}{\centi\meter}) = \SI{27.70}{\celsius}$ with time constant $\tau_{\mathrm{eff}} = \SI{903.0}{\second}$. When the team receives its water cup (\texttt{Rule 5.II.c}), the ES measures $T_{\mathrm{start}} = \SI{19.6}{\celsius}$ (the source water bath is $\SI{3.6}{\celsius}$ colder than the room!). Assuming a $\SI{12}{\second}$ post-lamp extraction cooling correction $\Delta T_{\mathrm{cool}} = \SI{0.22}{\celsius}$, compute $T_{\mathrm{pred}}$ using Eq.~\eref{eq:16:master-5var} and verify via the 10-second linear superposition formula Eq.~\eref{eq:16:fast-superposition}.
+
+\textbf{Solution.}
+1. \textbf{Time-Scaling Multiplier at $t = \SI{780}{\second}$ ($\SI{13.0}{\minute}$):}
+\[
+  e^{-780/903.0} = e^{-0.86379} = 0.42156 \implies 1 - e^{-t/\tau_{\mathrm{eff}}} = 0.57844, \qquad M_t(\SI{13}{\minute}) = \frac{0.57844}{1 - e^{-600/903.0}} = \frac{0.57844}{0.48543} = \mathbf{1.19160}
+\]
+Thus the isothermal ($T_{\mathrm{start}}=T_{\mathrm{room}}$) table gain at $\SI{13.0}{\minute}$ is $\mathrm{TG}_{\mathrm{table}}(\SI{45}{\centi\meter}, \SI{125}{\watt}, \SI{13}{\minute}) = 27.70 \times 1.19160 = \mathbf{\SI{33.01}{\celsius}}$.
+
+2. \textbf{Ambient-to-Bath Offset Correction ($k_{\mathrm{start}} = 0.42156, k_{\mathrm{room}} = 0.57844$):}
+Because the room ($T_{\mathrm{room}} = \SI{23.2}{\celsius}$) is $\SI{3.6}{\celsius}$ warmer than the starting water ($T_{\mathrm{start}} = \SI{19.6}{\celsius}$), parasitic heat loss to the room is reduced by:
+\[
+  \Delta T_{\mathrm{ambient-boost}} = k_{\mathrm{room}}(\SI{13}{\minute})\,(T_{\mathrm{room}} - T_{\mathrm{start}}) = 0.57844(23.2 - 19.6) = \mathbf{+\SI{2.082}{\celsius}}
+\]
+
+3. \textbf{Final Submitted Prediction $T_{\mathrm{pred}}$:}
+\[
+  T_{\mathrm{pred}} = T_{\mathrm{start}} + \mathrm{TG}_{\mathrm{table}} + \Delta T_{\mathrm{ambient-boost}} - \Delta T_{\mathrm{cool}} = 19.60 + 33.01 + 2.08 - 0.22 = \mathbf{\SI{54.47}{\celsius} \longrightarrow \text{Submit }\SI{54.5}{\celsius}}
+\]
+\verifiedby{Direct superposition check: $\mathrm{TG}_{\mathrm{table}} + k_{\mathrm{start}}T_{\mathrm{start}} + k_{\mathrm{room}}T_{\mathrm{room}} - \Delta T_{\mathrm{cool}} = 33.007 + 0.42156(19.6) + 0.57844(23.2) - 0.22 = 33.007 + 8.263 + 13.420 - 0.22 = \SI{54.470}{\celsius}$; asserted in \texttt{check\_sec14\_16.py}.}
+\end{workedexample}
+
+\begin{derivation}[Algebra-Only Three-Point Equal-Interval Extraction of $\tau_{\mathrm{eff}}$ and $T_{\mathrm{ss}}$ (Rule 5.d.iv Compliant)]
+\idxformula{three-point time constant extraction: \tau_{\mathrm{eff}} = \Delta t / \ln[\mathrm{TG}(\Delta t)/(\mathrm{TG}(2\Delta t)-\mathrm{TG}(\Delta t))]}
+\idxformula{three-point stagnation temperature extraction: \Delta T_{\mathrm{ss}} = [\mathrm{TG}(\Delta t)]^2 / [2\mathrm{TG}(\Delta t) - \mathrm{TG}(2\Delta t)]}
+During pre-tournament calibration when $T_{\mathrm{start}} = T_{\mathrm{room}}$, the temperature gain obeys $\mathrm{TG}(t) = \Delta T_{\mathrm{ss}}(1 - e^{-t/\tau_{\mathrm{eff}}})$, where $\Delta T_{\mathrm{ss}} = \dot{Q}_{\mathrm{abs}}R_{\mathrm{th,eff}}$. Measuring $\mathrm{TG}_1 \equiv \mathrm{TG}(\Delta t)$ at $t_1 = \Delta t$ (e.g., $\SI{5.0}{\minute} = \SI{300}{\second}$) and $\mathrm{TG}_2 \equiv \mathrm{TG}(2\Delta t)$ at $t_2 = 2\Delta t$ (e.g., $\SI{10.0}{\minute} = \SI{600}{\second}$) allows exact algebraic elimination of $\Delta T_{\mathrm{ss}}$ using the identity $1 - e^{-2\Delta t/\tau_{\mathrm{eff}}} = (1 - e^{-\Delta t/\tau_{\mathrm{eff}}})(1 + e^{-\Delta t/\tau_{\mathrm{eff}}})$:
+\[
+  \frac{\mathrm{TG}_2}{\mathrm{TG}_1} = 1 + e^{-\Delta t/\tau_{\mathrm{eff}}} \implies e^{-\Delta t/\tau_{\mathrm{eff}}} = \frac{\mathrm{TG}_2 - \mathrm{TG}_1}{\mathrm{TG}_1} \implies
+  \boxed{\tau_{\mathrm{eff}} = \frac{\Delta t}{\ln\!\left(\dfrac{\mathrm{TG}_1}{\mathrm{TG}_2 - \mathrm{TG}_1}\right)}, \qquad \Delta T_{\mathrm{ss}} = \frac{\mathrm{TG}_1^2}{2\,\mathrm{TG}_1 - \mathrm{TG}_2}}
+\]
+This closed-form algebraic solver extracts both $\tau_{\mathrm{eff}}$ and $\Delta T_{\mathrm{ss}}$ in 10 seconds on any scientific calculator without nonlinear regression!
+\end{derivation}
+
+\begin{twocol}[0.48]
+\begin{workedexample}[Algebraic 3-Point Extraction of $\tau_{\mathrm{eff}}$ \& $\Delta T_{\mathrm{ss}}$]{Rule 5.d.ii / §16.2}{ex:16.2b}
+In a calibration run at $h = \SI{45.0}{\centi\meter}$ ($\SI{125}{\watt}$ lamp, $T_{\mathrm{start}} = T_{\mathrm{room}} = \SI{22.0}{\celsius}$), the top-layer temperature gain is $\mathrm{TG}_1 = \SI{16.17}{\celsius}$ at $t_1 = \SI{300}{\second}$ ($\SI{5.0}{\minute}$) and $\mathrm{TG}_2 = \SI{27.77}{\celsius}$ at $t_2 = \SI{600}{\second}$ ($\SI{10.0}{\minute}$). Using the three-point equal-interval formulas ($\Delta t = \SI{300}{\second}$), compute (a)~the increment $\mathrm{TG}_2 - \mathrm{TG}_1$ and decay factor $e^{-\Delta t/\tau_{\mathrm{eff}}}$, (b)~the effective time constant $\tau_{\mathrm{eff}}$, and (c)~the asymptotic stagnation temperature rise $\Delta T_{\mathrm{ss}}$ and predicted $\SI{15.0}{\minute}$ gain $\mathrm{TG}(\SI{900}{\second})$.
+
+\textbf{Solution.}
+(a) Second-half gain increment: $\mathrm{TG}_2 - \mathrm{TG}_1 = 27.77 - 16.17 = \SI{11.60}{\celsius}$, giving decay ratio:
+\[
+  e^{-\Delta t/\tau_{\mathrm{eff}}} = \frac{\mathrm{TG}_2 - \mathrm{TG}_1}{\mathrm{TG}_1} = \frac{11.60}{16.17} = \mathbf{0.71738}
+\]
+(b) Solving for the effective thermal time constant $\tau_{\mathrm{eff}}$:
+\[
+  \tau_{\mathrm{eff}} = \frac{\SI{300}{\second}}{\ln(16.17 / 11.60)} = \frac{300}{0.33215} = \mathbf{\SI{903.2}{\second}}\ (\SI{15.05}{\minute})
+\]
+(c) The asymptotic steady-state gain and $\SI{15.0}{\minute}$ gain are:
+\[
+  \Delta T_{\mathrm{ss}} = \frac{16.17^2}{2(16.17) - 27.77} = \frac{261.47}{4.57} = \mathbf{\SI{57.21}{\celsius}}
+\]
+\[
+  \mathrm{TG}(\SI{900}{\second}) = \Delta T_{\mathrm{ss}}\!\left(1 - 0.71738^3\right) = \mathbf{\SI{36.10}{\celsius}}
+\]
+\verifiedby{Direct check $\Delta T_{\mathrm{ss}}(1 - e^{-600/903.2}) = 57.214(1 - 0.51461) = \SI{27.77}{\celsius}$; asserted in \texttt{check\_sec14\_16.py}.}
+\end{workedexample}
+\nextcol[0.50]
+\captionof{table}{Pre-computed ambient-to-bath temperature offset correction $\Delta T_{\mathrm{amb}} = k_{\mathrm{room}}(t)(T_{\mathrm{room}} - T_{\mathrm{start}})$ $[\si{\celsius}]$ \src{S01,S12}.}\label{tab:16:ambient-offset-grid}
+\footnotesize\setlength{\tabcolsep}{2.2pt}\renewcommand{\arraystretch}{1.13}
+\begin{tabularx}{\linewidth}{@{}r|rrrrrr>{\raggedright\arraybackslash}X@{}}
+\toprule
+\hdr{$T_{\mathrm{room}}\!-\!T_{\mathrm{start}}$} & \multicolumn{6}{c}{\hdr{Add $\Delta T_{\mathrm{amb}}$ $[\si{\celsius}]$ to $\mathrm{TG}_{\mathrm{table}}$}} & \hdr{Physical} \\
+\tiny$[\si{\celsius}]$ & \tiny$\SI{10}{\minute}$ & \tiny$\SI{11}{\minute}$ & \tiny$\SI{12}{\minute}$ & \tiny$\SI{13}{\minute}$ & \tiny$\SI{14}{\minute}$ & \tiny$\SI{15}{\minute}$ & \hdr{Regime} \\
+\midrule
+$\mathbf{+4.0}$ & $+1.94$ & $+2.07$ & $+2.20$ & $+2.31$ & $+2.42$ & $+2.52$ & Cold tap \\
+\rowcolor{rowalt}$\mathbf{+3.0}$ & $+1.46$ & $+1.55$ & $+1.65$ & $+1.73$ & $+1.82$ & $+1.89$ & Cold bath \\
+$\mathbf{+2.0}$ & $+0.97$ & $+1.04$ & $+1.10$ & $+1.16$ & $+1.21$ & $+1.26$ & Cool bath \\
+\rowcolor{rowalt}$\mathbf{+1.0}$ & $+0.49$ & $+0.52$ & $+0.55$ & $+0.58$ & $+0.61$ & $+0.63$ & Slight cool \\
+$\mathbf{+0.5}$ & $+0.24$ & $+0.26$ & $+0.28$ & $+0.29$ & $+0.30$ & $+0.32$ & Near eq. \\
+\rowcolor{rowalt}$\mathbf{0.0}$ & $\mathbf{0.00}$ & $\mathbf{0.00}$ & $\mathbf{0.00}$ & $\mathbf{0.00}$ & $\mathbf{0.00}$ & $\mathbf{0.00}$ & \textbf{Isothermal} \\
+$\mathbf{-0.5}$ & $-0.24$ & $-0.26$ & $-0.28$ & $-0.29$ & $-0.30$ & $-0.32$ & Near eq. \\
+\rowcolor{rowalt}$\mathbf{-1.0}$ & $-0.49$ & $-0.52$ & $-0.55$ & $-0.58$ & $-0.61$ & $-0.63$ & Slight warm \\
+$\mathbf{-2.0}$ & $-0.97$ & $-1.04$ & $-1.10$ & $-1.16$ & $-1.21$ & $-1.26$ & Warm bath \\
+\rowcolor{rowalt}$\mathbf{-3.0}$ & $-1.46$ & $-1.55$ & $-1.65$ & $-1.73$ & $-1.82$ & $-1.89$ & Hot bath \\
+$\mathbf{-4.0}$ & $-1.94$ & $-2.07$ & $-2.20$ & $-2.31$ & $-2.42$ & $-2.52$ & Cold room \\
+\midrule
+\textbf{Weight $k_{\mathrm{room}}$} & $0.485$ & $0.518$ & $0.550$ & $0.578$ & $0.605$ & $0.631$ & $1-e^{-t/\tau}$ \\
+\rowcolor{rowalt}\textbf{Weight $k_{\mathrm{start}}$} & $0.515$ & $0.482$ & $0.450$ & $0.422$ & $0.395$ & $0.369$ & $e^{-t/\tau}$ \\
+\bottomrule
+\end{tabularx}
+\end{twocol}
+
+% ============================================================================
+\section{Master 36-Condition DOE Matrix, Nomogram \& 1-cm National Interpolation}\label{sec:16.3}
+\idxtopic{36-condition DOE calibration table}\idxtopic{temperature-gain nomogram}\idxtopic{1-cm National height interpolation}
+
+To guarantee zero calculator-entry mistakes under tournament time pressure, \fref{fig:16:calibration-nomogram} provides the \textbf{Master Graphical Temperature-Gain Nomogram}, \tref{tab:16:doe-36} provides the \textbf{36-Condition Design-of-Experiments (DOE) Lookup Matrix} ($6\text{ heights} \times 2\text{ wattages} \times 3\text{ core durations}$, plus exact $1\text{-minute}$ time multipliers for $t = 10, 11, 12, 13, 14, 15\,\si{\minute}$), and \tref{tab:16:natl-1cm} provides the \textbf{26-Row $\SI{1}{\centi\meter}$-Increment National Lookup Table} covering every integer centimeter from $h = \SI{40}{\centi\meter}$ to $\SI{65}{\centi\meter}$ (\texttt{Rule 4.c.iii}).
+
+\begin{center}
+\begin{tikzpicture}[font=\scriptsize]
+\begin{axis}[
+    width=0.92\linewidth,
+    height=6.2cm,
+    xmin=39.5, xmax=65.5,
+    ymin=6, ymax=39,
+    xlabel={ES Announced Bulb Height Above Testing Surface $h_{\mathrm{bulb}}$ $[\si{\centi\meter}]$ (Rule~\texttt{4.c})},
+    ylabel={Reference Top-Layer Gain $\mathrm{TG}_{\mathrm{table}}(h, t)$ $[\si{\celsius}]$ ($\SI{125}{\watt}$ Lamp)},
+    grid=both,
+    grid style={gray!25, dashed},
+    minor x tick num=4,
+    minor y tick num=1,
+    tick align=inside,
+    legend style={at={(0.98,0.97)}, anchor=north east, font=\scriptsize, fill=white, draw=navy, row sep=0.5pt}
+]
+% Pedestal Slot background bands
+\fill[teal!7] (axis cs:40,6) rectangle (axis cs:48.5,39);
+\fill[amber!7] (axis cs:48.5,6) rectangle (axis cs:57.5,39);
+\fill[navy!5] (axis cs:57.5,6) rectangle (axis cs:65,39);
+\node[anchor=south, font=\scriptsize\bfseries, text=teal!80!black] at (axis cs:44.2,6.3) {Pedestal Slot~A ($z_{\mathrm{base}}=\SI{5.2}{\centi\meter}$)};
+\node[anchor=south, font=\scriptsize\bfseries, text=amber!85!black] at (axis cs:53.0,6.3) {Pedestal Slot~B ($z_{\mathrm{base}}=\SI{6.4}{\centi\meter}$)};
+\node[anchor=south, font=\scriptsize\bfseries, text=navy] at (axis cs:61.2,6.3) {Pedestal Slot~C ($z_{\mathrm{base}}=\SI{7.6}{\centi\meter}$)};
+
+% 6 curves for t = 15, 14, 13, 12, 11, 10 min (125 W bulb; for 100 W multiply by 0.800)
+\addplot[very thick, color=navy, mark=*, mark size=1.6pt] coordinates {
+    (40, 33.1) (45, 36.9) (50, 28.5) (55, 23.4) (60, 18.2) (65, 14.2)
+};
+\addlegendentry{$t = \SI{15.0}{\minute}$ ($M_t = 1.334$)}
+
+\addplot[thick, color=teal!80!black, mark=square*, mark size=1.4pt] coordinates {
+    (40, 31.6) (45, 35.3) (50, 27.1) (55, 22.3) (60, 17.3) (65, 13.5)
+};
+\addlegendentry{$t = \SI{14.0}{\minute}$ ($M_t = 1.274$)}
+
+\addplot[thick, color=amber!90!black, mark=triangle*, mark size=1.6pt] coordinates {
+    (40, 29.6) (45, 33.0) (50, 25.4) (55, 20.9) (60, 16.2) (65, 12.6)
+};
+\addlegendentry{$t = \SI{13.0}{\minute}$ ($M_t = 1.192$)}
+
+\addplot[very thick, color=rust, dashed, mark=diamond*, mark size=1.6pt] coordinates {
+    (40, 28.3) (45, 31.6) (50, 24.4) (55, 20.0) (60, 15.6) (65, 12.1)
+};
+\addlegendentry{$t = \SI{12.0}{\minute}$ ($M_t = 1.143$)}
+
+\addplot[thick, color=slate, dashdotted, mark=o, mark size=1.4pt] coordinates {
+    (40, 26.7) (45, 29.8) (50, 22.9) (55, 18.8) (60, 14.6) (65, 11.4)
+};
+\addlegendentry{$t = \SI{11.0}{\minute}$ ($M_t = 1.076$)}
+
+\addplot[very thick, color=black, mark=star, mark size=2.0pt] coordinates {
+    (40, 24.8) (45, 27.7) (50, 21.3) (55, 17.5) (60, 13.6) (65, 10.6)
+};
+\addlegendentry{$t = \SI{10.0}{\minute}$ (Reg/State/Nat Base)}
+
+\node[anchor=south west, fill=white, draw=navy, inner sep=2pt, font=\scriptsize] at (axis cs:40.3,15.5) {\textbf{For $\SI{100}{\watt}$ Bulb:} Multiply $\mathrm{TG}_{125\mathrm{W}}$ by $\eta_P = \mathbf{0.800}$};
+\end{axis}
+\end{tikzpicture}
+\captionof{figure}{Master 2027 Temperature-Gain Nomogram $\mathrm{TG}_{\mathrm{table}}(h_{\mathrm{bulb}}, t_{\mathrm{heat}})$ across $h_{\mathrm{bulb}} \in [\SI{40}{\centi\meter}, \SI{65}{\centi\meter}]$ and $t_{\mathrm{heat}} \in [\SI{10}{\minute}, \SI{15}{\minute}]$ for the glazed 3-stage CPC collector ($\tau_{\mathrm{eff}} = \SI{903}{\second}$) \src{S01,S12}.}\label{fig:16:calibration-nomogram}
+\idxfig{master 2027 temperature-gain calibration nomogram TG(h, t)}
+\end{center}
+
+\begin{center}
+\captionof{table}{Master 36-Condition Design-of-Experiments (DOE) calibration lookup table ($T_{\mathrm{start}}=T_{\mathrm{room}}=\SI{22.0}{\celsius}$, $\tau_{\mathrm{eff}}=\SI{903.0}{\second}$) and 1-minute time-scaling weights $M_t(t), k_{\mathrm{start}}(t), k_{\mathrm{room}}(t)$ \src{S01,S12}.}\label{tab:16:doe-36}
+\footnotesize\setlength{\tabcolsep}{2.4pt}\renewcommand{\arraystretch}{1.13}
+\begin{tabularx}{\linewidth}{@{}rcrrrrrrrrrr>{\raggedright\arraybackslash}X@{}}
+\toprule
+\hdr{Height} & \hdr{Slot} & \hdr{$\dot{Q}_{\mathrm{abs}}$} & \multicolumn{3}{c}{\hdr{$\SI{125}{\watt}$ Lamp $\mathrm{TG}_{\mathrm{table}}$ $[\si{\celsius}]$}} & \multicolumn{3}{c}{\hdr{$\SI{100}{\watt}$ Lamp $\mathrm{TG}_{\mathrm{table}}$ $[\si{\celsius}]$}} & \multicolumn{3}{c}{\hdr{$T_{\mathrm{final}}$ at $T_i\!=\!\SI{22.0}{\celsius}$ ($\SI{125}{\watt}$)}} & \hdr{Tournament} \\
+\cmidrule(lr){4-6}\cmidrule(lr){7-9}\cmidrule(lr){10-12}
+\hdr{$h$ $[\si{\centi\meter}]$} & & \tiny$\SI{125}{\watt}$ & \hdr{$\SI{10}{\minute}$} & \hdr{$\SI{12}{\minute}$} & \hdr{$\SI{15}{\minute}$} & \hdr{$\SI{10}{\minute}$} & \hdr{$\SI{12}{\minute}$} & \hdr{$\SI{15}{\minute}$} & \hdr{$\SI{10}{\minute}$} & \hdr{$\SI{12}{\minute}$} & \hdr{$\SI{15}{\minute}$} & \hdr{Tier Scope} \\
+\midrule
+$\mathbf{40.0}$ & \textbf{A} & $\SI{21.5}{\watt}$ & $+24.8$ & $+28.3$ & $+33.1$ & $+19.8$ & $+22.7$ & $+26.5$ & $46.8$ & $50.3$ & $55.1$ & Reg / State / Nat \\
+\rowcolor{rowalt}$\mathbf{45.0}$ & \textbf{A} & $\SI{24.0}{\watt}$ & $+27.7$ & $+31.6$ & $+36.9$ & $+22.2$ & $+25.3$ & $+29.5$ & $49.7$ & $53.6$ & $58.9$ & Reg / State / Nat \\
+$\mathbf{50.0}$ & \textbf{A/B} & $\SI{18.5}{\watt}$ & $+21.3$ & $+24.4$ & $+28.5$ & $+17.1$ & $+19.5$ & $+22.8$ & $43.3$ & $46.4$ & $50.5$ & Reg / State / Nat \\
+\rowcolor{rowalt}$\mathbf{55.0}$ & \textbf{B} & $\SI{15.2}{\watt}$ & $+17.5$ & $+20.0$ & $+23.4$ & $+14.1$ & $+16.0$ & $+18.7$ & $39.5$ & $42.0$ & $45.4$ & State / Nationals \\
+$\mathbf{60.0}$ & \textbf{B/C} & $\SI{11.8}{\watt}$ & $+13.6$ & $+15.6$ & $+18.2$ & $+10.9$ & $+12.4$ & $+14.5$ & $35.6$ & $37.6$ & $40.2$ & Nationals ($\SI{1}{\centi\meter}$) \\
+\rowcolor{rowalt}$\mathbf{65.0}$ & \textbf{C} & $\SI{9.2}{\watt}$ & $+10.6$ & $+12.1$ & $+14.2$ & $+8.5$ & $+9.7$ & $+11.3$ & $32.6$ & $34.1$ & $36.2$ & Nationals ($\SI{1}{\centi\meter}$) \\
+\midrule
+\multicolumn{13}{@{}p{0.97\linewidth}@{}}{\textbf{Exact 1-Minute State/National Time-Scaling Factors ($\mathrm{TG}(h,t) = \mathrm{TG}(h,\SI{10}{\minute})\times M_t(t)$) and Coupling Weights:}} \\
+\multicolumn{13}{@{}p{0.97\linewidth}@{}}{\scriptsize%
+  $\bullet\ \mathbf{t=\SI{10}{\minute}}$ ($\SI{600}{\second}$): $M_{10}=\mathbf{1.000}$, $k_{\mathrm{start}}=\mathbf{0.515}$, $k_{\mathrm{room}}=\mathbf{0.485}$ \quad
+  $\bullet\ \mathbf{t=\SI{11}{\minute}}$ ($\SI{660}{\second}$): $M_{11}=\mathbf{1.069}$, $k_{\mathrm{start}}=\mathbf{0.482}$, $k_{\mathrm{room}}=\mathbf{0.518}$ \quad
+  $\bullet\ \mathbf{t=\SI{12}{\minute}}$ ($\SI{720}{\second}$): $M_{12}=\mathbf{1.132}$, $k_{\mathrm{start}}=\mathbf{0.450}$, $k_{\mathrm{room}}=\mathbf{0.550}$ \newline
+  $\bullet\ \mathbf{t=\SI{13}{\minute}}$ ($\SI{780}{\second}$): $M_{13}=\mathbf{1.192}$, $k_{\mathrm{start}}=\mathbf{0.422}$, $k_{\mathrm{room}}=\mathbf{0.578}$ \quad
+  $\bullet\ \mathbf{t=\SI{14}{\minute}}$ ($\SI{840}{\second}$): $M_{14}=\mathbf{1.247}$, $k_{\mathrm{start}}=\mathbf{0.395}$, $k_{\mathrm{room}}=\mathbf{0.605}$ \quad
+  $\bullet\ \mathbf{t=\SI{15}{\minute}}$ ($\SI{900}{\second}$): $M_{15}=\mathbf{1.299}$, $k_{\mathrm{start}}=\mathbf{0.369}$, $k_{\mathrm{room}}=\mathbf{0.631}$} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{center}
+\captionof{table}{National Tournament $\SI{1}{\centi\meter}$-Increment Reference Gain Lookup Table ($h_{\mathrm{bulb}} = \SIrange{40}{65}{\centi\meter}$, Rule~\texttt{4.c.iii}, $t=\SI{10.0}{\minute}$) \src{S01}.}\label{tab:16:natl-1cm}
+\footnotesize\setlength{\tabcolsep}{2.5pt}\renewcommand{\arraystretch}{1.11}
+\begin{tabularx}{\linewidth}{@{}rcrrr|rcrrr|rcrr>{\raggedright\arraybackslash}X@{}}
+\toprule
+\hdr{$h$} & \hdr{Slot} & \hdr{$\mathrm{TG}_{125}$} & \hdr{$\mathrm{TG}_{100}$} & \hdr{Slope} & \hdr{$h$} & \hdr{Slot} & \hdr{$\mathrm{TG}_{125}$} & \hdr{$\mathrm{TG}_{100}$} & \hdr{Slope} & \hdr{$h$} & \hdr{Slot} & \hdr{$\mathrm{TG}_{125}$} & \hdr{$\mathrm{TG}_{100}$} & \hdr{Slope \& Note} \\
+\tiny$[\si{\centi\meter}]$ & & \tiny$[\si{\celsius}]$ & \tiny$[\si{\celsius}]$ & \tiny$[\si{\celsius\per\centi\meter}]$ & \tiny$[\si{\centi\meter}]$ & & \tiny$[\si{\celsius}]$ & \tiny$[\si{\celsius}]$ & \tiny$[\si{\celsius\per\centi\meter}]$ & \tiny$[\si{\centi\meter}]$ & & \tiny$[\si{\celsius}]$ & \tiny$[\si{\celsius}]$ & \tiny$[\si{\celsius\per\centi\meter}]$ \\
+\midrule
+$\mathbf{40}$ & A & $24.8$ & $19.8$ & $+0.58$ & $\mathbf{49}$ & B & $22.6$ & $18.1$ & $-1.28$ & $\mathbf{58}$ & C & $15.2$ & $12.1$ & $-0.78$ (Slot~C switch) \\
+\rowcolor{rowalt}$\mathbf{41}$ & A & $25.4$ & $20.3$ & $+0.58$ & $\mathbf{50}$ & B & $21.3$ & $17.1$ & $-1.02$ & $\mathbf{59}$ & C & $14.4$ & $11.5$ & $-0.78$ \\
+$\mathbf{42}$ & A & $26.0$ & $20.8$ & $+0.58$ & $\mathbf{51}$ & B & $20.5$ & $16.4$ & $-0.76$ & $\mathbf{60}$ & C & $13.6$ & $10.9$ & $-0.70$ \\
+\rowcolor{rowalt}$\mathbf{43}$ & A & $26.5$ & $21.2$ & $+0.58$ & $\mathbf{52}$ & B & $19.8$ & $15.8$ & $-0.76$ & $\mathbf{61}$ & C & $13.0$ & $10.4$ & $-0.60$ \\
+$\mathbf{44}$ & A & $27.1$ & $21.7$ & $+0.58$ & $\mathbf{53}$ & B & $19.0$ & $15.2$ & $-0.76$ & $\mathbf{62}$ & C & $12.4$ & $9.9$ & $-0.60$ \\
+\rowcolor{rowalt}$\mathbf{45}$ & A & $\mathbf{27.7}$ & $\mathbf{22.2}$ & $0.00$\textsuperscript{a} & $\mathbf{54}$ & B & $18.3$ & $14.6$ & $-0.76$ & $\mathbf{63}$ & C & $11.8$ & $9.4$ & $-0.60$ \\
+$\mathbf{46}$ & A & $26.4$ & $21.1$ & $-1.28$ & $\mathbf{55}$ & B & $17.5$ & $14.1$ & $-0.76$ & $\mathbf{64}$ & C & $11.2$ & $9.0$ & $-0.60$ \\
+\rowcolor{rowalt}$\mathbf{47}$ & A & $25.1$ & $20.1$ & $-1.28$ & $\mathbf{56}$ & B & $16.7$ & $13.4$ & $-0.78$ & $\mathbf{65}$ & C & $10.6$ & $8.5$ & $-0.60$ (Natl Max $h$) \\
+$\mathbf{48}$ & A & $23.9$ & $19.1$ & $-1.28$ & $\mathbf{57}$ & B & $15.9$ & $12.8$ & $-0.78$ & --- & --- & --- & --- & --- \\
+\bottomrule
+\multicolumn{15}{@{}l}{\scriptsize\textsuperscript{a}Peak conjugate focus of Stage~1--2 ellipsoid occurs at $h=\SI{45.0}{\centi\meter}$ ($\mathrm{TG}_{125}=\SI{27.7}{\celsius}$); at $h=\SIrange{40}{44}{\centi\meter}$, steep off-axis angles slightly reduce single-bounce capture.}
+\end{tabularx}
+\end{center}
+
+\begin{workedexample}[15-Second National Tournament 1-cm Lookup \& Linear Interpolation]{Rule 4.c.iii / §16.3}{ex:16.3}
+At the 2027 National Tournament (\texttt{Rule 4.c.iii}), the ES announces $h_{\mathrm{bulb}} = \SI{53.0}{\centi\meter}$, heating time $t_{\mathrm{heat}} = \SI{14.0}{\minute}$ ($\SI{840}{\second}$), room temperature $T_{\mathrm{room}} = \SI{21.5}{\celsius}$, and a $\SI{100}{\watt}$ clear $\mathrm{R40}$ heat lamp. The team's starting water temperature is $T_{\mathrm{start}} = \SI{21.0}{\celsius}$, and post-lamp extraction cooling is $\Delta T_{\mathrm{cool}} = \SI{0.18}{\celsius}$. Compute $T_{\mathrm{pred}}$ both by direct lookup in \tref{tab:16:natl-1cm} and by linear interpolation between the $h=\SI{50}{\centi\meter}$ and $h=\SI{55}{\centi\meter}$ rows of \tref{tab:16:doe-36}.
+
+\textbf{Solution.}
+1. \textbf{From \tref{tab:16:natl-1cm} (or Linear Interpolation between $\SI{50}{\centi\meter}$ and $\SI{55}{\centi\meter}$):}
+At $h = \SI{50.0}{\centi\meter}$, $\mathrm{TG}_{100}(\SI{10}{\minute}) = \SI{17.10}{\celsius}$; at $h = \SI{55.0}{\centi\meter}$, $\mathrm{TG}_{100}(\SI{10}{\minute}) = \SI{14.10}{\celsius}$. Interpolating to $h = \SI{53.0}{\centi\meter}$ (fraction $\xi = (53-50)/(55-50) = 0.600$):
+\[
+  \mathrm{TG}_{100}(\SI{53}{\centi\meter}, \SI{10}{\minute}) = 17.10 + 0.600(14.10 - 17.10) = \mathbf{\SI{15.30}{\celsius}} \quad (\text{matches \tref{tab:16:natl-1cm} entry }\SI{15.2}{\celsius}\text{ within }\SI{0.1}{\celsius})
+\]
+2. \textbf{Scale to $t = \SI{14.0}{\minute}$ using $M_{14} = 1.247$ ($k_{\mathrm{start}} = 0.395, k_{\mathrm{room}} = 0.605$) from \tref{tab:16:doe-36}:}
+\[
+  \mathrm{TG}_{\mathrm{table}}(\SI{53}{\centi\meter}, \SI{100}{\watt}, \SI{14}{\minute}) = 15.30 \times 1.247 = \mathbf{\SI{19.08}{\celsius}}
+\]
+3. \textbf{Apply Superposition Eq.~\eref{eq:16:fast-superposition} for $T_{\mathrm{start}} = \SI{21.0}{\celsius}, T_{\mathrm{room}} = \SI{21.5}{\celsius}$:}
+\[
+  T_{\mathrm{pred}} = 21.00 + 19.08 + 0.605(21.50 - 21.00) - 0.18 = 40.08 + 0.30 - 0.18 = \mathbf{\SI{40.20}{\celsius} \longrightarrow \text{Submit }\SI{40.2}{\celsius}}
+\]
+\verifiedby{Exact formula evaluation $T_{\mathrm{pred}} = 21.0 + 15.30(1 - e^{-840/903})/(1 - e^{-600/903}) + 0.6052(0.50) - 0.18 = \SI{40.204}{\celsius}$; asserted in \texttt{check\_sec14\_16.py}.}
+\end{workedexample}
+
+\begin{twocol}[0.49]
+\captionof{table}{Complete $\SI{125}{\watt}$ Lamp Temperature-Gain Matrix $\mathrm{TG}_{\mathrm{table}}(h, t)$ $[\si{\celsius}]$ across all 6 State/National heating durations ($t = \SIrange{10}{15}{\minute}$) \src{S01,S12}.}\label{tab:16:direct-tfinal-125}
+\footnotesize\setlength{\tabcolsep}{2.4pt}\renewcommand{\arraystretch}{1.12}
+\begin{tabularx}{\linewidth}{@{}rcrrrrrr>{\raggedright\arraybackslash}X@{}}
+\toprule
+\hdr{$h$} & \hdr{Slot} & \hdr{$\SI{10}{\minute}$} & \hdr{$\SI{11}{\minute}$} & \hdr{$\SI{12}{\minute}$} & \hdr{$\SI{13}{\minute}$} & \hdr{$\SI{14}{\minute}$} & \hdr{$\SI{15}{\minute}$} & \hdr{$\Delta T_{\mathrm{ss}}$} \\
+\tiny$[\si{\centi\meter}]$ & & \tiny$[\si{\celsius}]$ & \tiny$[\si{\celsius}]$ & \tiny$[\si{\celsius}]$ & \tiny$[\si{\celsius}]$ & \tiny$[\si{\celsius}]$ & \tiny$[\si{\celsius}]$ & \tiny$[\si{\celsius}]$ \\
+\midrule
+$\mathbf{40}$ & A & $24.8$ & $26.5$ & $28.1$ & $29.6$ & $30.9$ & $32.2$ & $51.1$ \\
+\rowcolor{rowalt}$\mathbf{45}$ & A & $\mathbf{27.7}$ & $\mathbf{29.6}$ & $\mathbf{31.4}$ & $\mathbf{33.0}$ & $\mathbf{34.5}$ & $\mathbf{36.0}$ & $57.1$ \\
+$\mathbf{50}$ & B & $21.3$ & $22.8$ & $24.1$ & $25.4$ & $26.6$ & $27.7$ & $43.9$ \\
+\rowcolor{rowalt}$\mathbf{55}$ & B & $17.5$ & $18.7$ & $19.8$ & $20.9$ & $21.8$ & $22.7$ & $36.0$ \\
+$\mathbf{60}$ & C & $13.6$ & $14.5$ & $15.4$ & $16.2$ & $17.0$ & $17.7$ & $28.0$ \\
+\rowcolor{rowalt}$\mathbf{65}$ & C & $10.6$ & $11.3$ & $12.0$ & $12.6$ & $13.2$ & $13.8$ & $21.8$ \\
+\bottomrule
+\end{tabularx}
+\nextcol[0.49]
+\captionof{table}{Complete $\SI{100}{\watt}$ Lamp Temperature-Gain Matrix $\mathrm{TG}_{\mathrm{table}}(h, t)$ $[\si{\celsius}]$ across all 6 State/National heating durations ($t = \SIrange{10}{15}{\minute}$) \src{S01,S12}.}\label{tab:16:direct-tfinal-100}
+\footnotesize\setlength{\tabcolsep}{2.4pt}\renewcommand{\arraystretch}{1.12}
+\begin{tabularx}{\linewidth}{@{}rcrrrrrr>{\raggedright\arraybackslash}X@{}}
+\toprule
+\hdr{$h$} & \hdr{Slot} & \hdr{$\SI{10}{\minute}$} & \hdr{$\SI{11}{\minute}$} & \hdr{$\SI{12}{\minute}$} & \hdr{$\SI{13}{\minute}$} & \hdr{$\SI{14}{\minute}$} & \hdr{$\SI{15}{\minute}$} & \hdr{$\Delta T_{\mathrm{ss}}$} \\
+\tiny$[\si{\centi\meter}]$ & & \tiny$[\si{\celsius}]$ & \tiny$[\si{\celsius}]$ & \tiny$[\si{\celsius}]$ & \tiny$[\si{\celsius}]$ & \tiny$[\si{\celsius}]$ & \tiny$[\si{\celsius}]$ & \tiny$[\si{\celsius}]$ \\
+\midrule
+$\mathbf{40}$ & A & $19.8$ & $21.2$ & $22.4$ & $23.6$ & $24.7$ & $25.7$ & $40.8$ \\
+\rowcolor{rowalt}$\mathbf{45}$ & A & $\mathbf{22.2}$ & $\mathbf{23.7}$ & $\mathbf{25.1}$ & $\mathbf{26.5}$ & $\mathbf{27.7}$ & $\mathbf{28.8}$ & $45.7$ \\
+$\mathbf{50}$ & B & $17.1$ & $18.3$ & $19.4$ & $20.4$ & $21.3$ & $22.2$ & $35.2$ \\
+\rowcolor{rowalt}$\mathbf{55}$ & B & $14.1$ & $15.1$ & $16.0$ & $16.8$ & $17.6$ & $18.3$ & $29.0$ \\
+$\mathbf{60}$ & C & $10.9$ & $11.6$ & $12.3$ & $13.0$ & $13.6$ & $14.2$ & $22.5$ \\
+\rowcolor{rowalt}$\mathbf{65}$ & C & $8.5$ & $9.1$ & $9.6$ & $10.1$ & $10.6$ & $11.0$ & $17.5$ \\
+\bottomrule
+\end{tabularx}
+\end{twocol}
+
+\begin{devicebox}[Class III Programmable Calculator Solver (\texttt{THERMO27}, Permitted Under Rule 2.b)]
+\idxtopic{Class III calculator prediction program (Rule 2.b)}
+Because Rule~\texttt{2.b} permits up to \textbf{two Class~III programmable/graphing calculators} (TI-84~Plus~CE, TI-Nspire~CX~II, HP~Prime, Casio~fx-9750GIII) during any part of the event \src{S01}, pre-load the following 10-line TI-BASIC verification script \texttt{PRGM:THERMO27} on both calculators to cross-check your paper lookup in $\SI{5}{\second}$:
+\par\smallskip\noindent
+\texttt{:Prompt H,P,T,S,R,W} \hfill {\footnotesize\textit{// Input Bulb $h$ (cm), Wattage $P$ (W), Time $t$ (min), $T_{\mathrm{start}}$ (C), $T_{\mathrm{room}}$ (C), Wait $W$ (s)}} \\
+\texttt{:If H<=45:Then:24.8+0.58*(H-40)->G:Else:If H<=50:Then:27.7-1.28*(H-45)->G:} \\
+\texttt{:Else:If H<=55:Then:21.3-0.76*(H-50)->G:Else:If H<=60:Then:17.5-0.78*(H-55)->G:} \\
+\texttt{:Else:13.6-0.60*(H-60)->G:End:End:End:End} \hfill {\footnotesize\textit{// Piecewise $\SI{1}{\centi\meter}$ National Curve $\Delta T_{\mathrm{ref}}(h)$}} \\
+\texttt{:G*(P/125)*(1-e\^{}(-60*T/903))/(1-e\^{}(-600/903))->D} \hfill {\footnotesize\textit{// Wattage \& Exponential Time Scaling}} \\
+\texttt{:(1-e\^{}(-60*T/903))*(R-S)->A : 0.05+0.018*W->C} \hfill {\footnotesize\textit{// Ambient Offset $\Delta T_{\mathrm{amb}}$ \& Post-Lamp Cooling}} \\
+\texttt{:Disp "TG=",round(D+A-C,2),"TPRED=",round(S+D+A-C,1)} \hfill {\footnotesize\textit{// Output $\mathrm{TG}$ and Rounded $T_{\mathrm{pred}}$ to $\SI{0.1}{\celsius}$}}
+\end{devicebox}
+
+% ============================================================================
+\section{Post-Lamp-Off 1-Minute Cooling Correction \& ES Thermometer Alignment}\label{sec:16.4}
+\idxtopic{post-lamp-off cooling correction}\idxtopic{Rule 5.II.g 1-minute measurement window}\idxtopic{ES thermometer depth and emissivity bias}
+
+Under \textbf{Rule~\texttt{5.II.g}}, at the end of Heating Time the Event Supervisor turns \textbf{OFF} the heat lamp, the team completely removes the cup from the device (including removing all unattached wrap/glazing), and the ES measures $T_{\mathrm{final}}$ within a target window of \textbf{up to 1 minute ($\SIrange{0}{60}{\second}$)} \src{S01,S05}. During this waiting window $t_{\mathrm{wait}}$, the newly exposed hot top water layer ($T_{\mathrm{top},0} \approx \SIrange{35}{55}{\celsius}$) loses heat simultaneously upward to room air (by unglazed evaporation $\dot{Q}_{\mathrm{evap}}$, convection $\dot{Q}_{\mathrm{conv}}$, and radiation $\dot{Q}_{\mathrm{rad}}$) and downward into the cooler bottom water layer ($\dot{Q}_{12} = (T_{\mathrm{top}} - T_{\mathrm{bot}})/R_{12}$).
+
+\begin{formulacard}[Post-Lamp-Off Top-Layer Cooling Rate \& Two-Stage Waiting-Window Correction]
+\idxformula{post-lamp top-layer cooling correction: \Delta T_{\mathrm{cool}}(t_{\mathrm{wait}}) = r_{\mathrm{closed}}t_{\mathrm{closed}} + r_{\mathrm{open}}t_{\mathrm{open}}}
+\begin{ftab}
+$r_{\mathrm{open}}(T_{\mathrm{top}}) = -\!\left(\dfrac{dT_{\mathrm{top}}}{dt}\right)_{\!\mathrm{open}} = \dfrac{\dot{Q}_{\mathrm{evap}} + \dot{Q}_{\mathrm{conv}} + \dot{Q}_{\mathrm{rad}} + \dot{Q}_{12}}{C_{\mathrm{skin}}}$
+  & $C_{\mathrm{skin}} \approx \SI{140}{\joule\per\kelvin}$: upper $\SI{12}{\milli\meter}$ water layer; $r_{\mathrm{open}} \approx \SI{0.012}{\celsius\per\second}$ at $\SI{35}{\celsius}$, $\SI{0.018}{\celsius\per\second}$ at $\SI{43}{\celsius}$, and $\SI{0.025}{\celsius\per\second}$ at $\SI{50}{\celsius}$.
+  & \CLSD
+  & Cooling rate of bare cup sitting on Testing Surface waiting for ES thermometer probe (\texttt{5.II.g}). \\
+$r_{\mathrm{closed}}(T_{\mathrm{top}}) = -\!\left(\dfrac{dT_{\mathrm{top}}}{dt}\right)_{\!\mathrm{closed}} = \dfrac{\dot{Q}_{\mathrm{loss,glazed}} + \dot{Q}_{12}}{C_{\mathrm{top}}}$
+  &Inside closed glazed collector before hood removal: $r_{\mathrm{closed}} \approx \SIrange{0.005}{0.008}{\celsius\per\second}$ ($3\times$ slower than open cup!).
+  & \CLSD
+  & If ES is busy at another station when lamp turns off, wait until ES walks over before lifting hood (within $\SI{60}{\second}$)! \\
+$\Delta T_{\mathrm{cool}}(t_{\mathrm{closed}}, t_{\mathrm{open}}) = r_{\mathrm{closed}}\,t_{\mathrm{closed}} + r_{\mathrm{open}}\,t_{\mathrm{open}} + \delta_{\mathrm{probe}}$
+  & $t_{\mathrm{closed}}$: delay before lifting hood $[\si{\second}]$; $t_{\mathrm{open}}$: open-cup exposure before peak probe reading $[\si{\second}]$; $\delta_{\mathrm{probe}}$: probe heat-drain/depth offset $[\si{\celsius}]$.
+  & \RULEf
+  & Subtract $\Delta T_{\mathrm{cool}}$ (typically $\SIrange{0.18}{0.45}{\celsius}$) from end-of-heating $T_{\mathrm{top}}(t_{\mathrm{heat}})$ to match ES readout! \\
+\end{ftab}
+\end{formulacard}
+
+\begin{twocol}[0.50]
+\begin{center}
+\begin{tikzpicture}[font=\scriptsize]
+\begin{axis}[
+    width=\linewidth,
+    height=5.4cm,
+    xmin=0, xmax=60,
+    ymin=-1.6, ymax=0.05,
+    xlabel={Post-Lamp-Off Measurement Delay $t_{\mathrm{wait}}$ $[\si{\second}]$ (Rule~\texttt{5.II.g})},
+    ylabel={Top-Layer Cooling Drop $-\Delta T_{\mathrm{cool}}$ $[\si{\celsius}]$},
+    grid=both,
+    grid style={gray!25, dashed},
+    tick align=inside,
+    legend style={at={(0.03,0.03)}, anchor=south west, font=\scriptsize, fill=white, draw=navy, row sep=0.5pt}
+]
+% Recommended 6-15 s fast extraction window
+\fill[teal!14] (axis cs:0,-1.6) rectangle (axis cs:15,0.05);
+\node[anchor=north west, font=\scriptsize\bfseries, text=teal!80!black] at (axis cs:1.0,-0.02) {Fast Extraction ($\SIrange{6}{15}{\second}$)};
+
+% Curve 1: Open Bare Cup at T_top = 50 C (r_open = 0.025 C/s)
+\addplot[very thick, color=rust, domain=0:60, samples=25] {-0.05 - 0.0245*x};
+\addlegendentry{Bare Cup Open at $\SI{50}{\celsius}$ ($-\SI{0.025}{\celsius\per\second}$)}
+
+% Curve 2: Open Bare Cup at T_top = 43 C (r_open = 0.018 C/s)
+\addplot[very thick, color=navy, domain=0:60, samples=25] {-0.04 - 0.0175*x};
+\addlegendentry{Bare Cup Open at $\SI{43}{\celsius}$ ($-\SI{0.018}{\celsius\per\second}$)}
+
+% Curve 3: Open Bare Cup at T_top = 35 C (r_open = 0.012 C/s)
+\addplot[thick, color=amber!90!black, dashed, domain=0:60, samples=25] {-0.03 - 0.0115*x};
+\addlegendentry{Bare Cup Open at $\SI{35}{\celsius}$ ($-\SI{0.012}{\celsius\per\second}$)}
+
+% Curve 4: Hood Kept Closed Until ES Arrives at t=40 s, then 6 s extraction (T=50 C)
+\addplot[very thick, color=teal!80!black, dashdotted] coordinates {
+    (0, -0.02) (10, -0.09) (20, -0.16) (30, -0.23) (40, -0.30) (46, -0.44) (60, -0.78)
+};
+\addlegendentry{Hood Closed Until $t=\SI{40}{\second}$ ($\SI{50}{\celsius}$)}
+\end{axis}
+\end{tikzpicture}
+\captionof{figure}{Post-lamp-off top-layer temperature drop $-\Delta T_{\mathrm{cool}}(t_{\mathrm{wait}})$ during the Rule~\texttt{5.II.g} 1-minute final measurement window \src{S01,S12}.}\label{fig:16:postheat-cooling}
+\idxfig{post-lamp-off cup extraction and waiting-window cooling correction}
+\end{center}
+\nextcol[0.48]
+\captionof{table}{ES thermometer technology offsets $\delta_{\mathrm{probe}}$ relative to a $z=\SI{8}{\milli\meter}$ digital thermistor tip (Rule~\texttt{4.f}, Clarif.~\#4) \src{S01,S02,S22}.}\label{tab:16:probe-offsets}
+\footnotesize\setlength{\tabcolsep}{2.2pt}\renewcommand{\arraystretch}{1.12}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.28\linewidth}rrr>{\raggedright\arraybackslash}X@{}}
+\toprule
+\hdr{ES Thermometer Type (\texttt{4.f})} & \hdr{Depth $z_p$} & \hdr{$\tau_p$} & \hdr{Offset $\delta_{\mathrm{probe}}$} & \hdr{Stratification \& Emissivity Mechanism} \\
+ & \tiny$[\si{\milli\meter}]$ & \tiny$[\si{\second}]$ & \tiny$[\si{\celsius}]$ & \\
+\midrule
+\textbf{1. NTC Digital Thermistor} & $5\text{--}10$ & $1.8$ & $\mathbf{0.00}$ & \textbf{Reference ES Probe:} Tiny tip bead reads peak top layer in $\SI{9}{\second}$. \\
+\rowcolor{rowalt}\textbf{2. Bare Type-K Thermocouple} & $3\text{--}6$ & $0.2$ & $\mathbf{+\SI{0.15}{\celsius}}$ & Zero thermal drain; reads hotter upper $\SI{4}{\milli\meter}$ skin instantaneously. \\
+\textbf{3. Non-Contact IR Pyrometer} & $0.015$ & $0.3$ & $\mathbf{-\SI{0.25}{\celsius}}$ & Reads $\varepsilon_w=0.96$ evaporative surface skin (\textbf{remove BoPET cap first!}). \\
+\rowcolor{rowalt}\textbf{4. Sheathed Pt100 RTD} & $18\text{--}30$ & $5.0$ & $\mathbf{-\SI{1.40}{\celsius}}$ & Long $\SI{25}{\milli\meter}$ stem averages across upper thermocline + stem drain. \\
+\textbf{5. Spirit Glass Thermometer} & $20\text{--}40$ & $8.5$ & $\mathbf{-\SI{2.10}{\celsius}}$ & Deep bulb immersion + slow $5\tau_p=\SI{42}{\second}$ lag averages into middle water. \\
+\bottomrule
+\end{tabularx}
+\end{twocol}
+
+\begin{workedexample}[Post-Lamp-Off Staggered Station Cooling \& ES Probe Offset Correction]{Rule 4.f, 5.II.g / §16.4}{ex:16.4}
+At the end of a $\SI{10.0}{\minute}$ run ($h=\SI{45.0}{\centi\meter}, \SI{125}{\watt}$ lamp), the water in your collector reaches a true top-layer peak temperature of $T_{\mathrm{top}}(\SI{600}{\second}) = \SI{49.92}{\celsius}$ at lamp turn-off. Because four lamp stations are running simultaneously (\texttt{Rule 4.b}), you observe during check-in that your station will be measured third by the ES ($\approx\SI{28}{\second}$ after lamp turn-off), and the ES is using a standard NTC digital thermistor probe ($\delta_{\mathrm{probe}} = \SI{0.00}{\celsius}$, settling time $\SI{8}{\second}$). Compare the final ES thermometer reading $T_{\mathrm{final}}$ if: (a)~you immediately remove the cup at $t_{\mathrm{wait}}=\SI{0}{\second}$ so it sits uncovered on the table for $t_{\mathrm{open}} = 28 + 8 = \SI{36}{\second}$ ($r_{\mathrm{open}} = \SI{0.0245}{\celsius\per\second}$ plus initial extraction transient $\delta_{\mathrm{ext}} = \SI{0.05}{\celsius}$); versus (b)~you keep the insulated hood + BoPET cap closed for $t_{\mathrm{closed}} = \SI{22}{\second}$ ($r_{\mathrm{closed}} = \SI{0.0070}{\celsius\per\second}$) and extract the cup in $\SI{6}{\second}$ just as the ES arrives ($t_{\mathrm{open}} = 6 + 8 = \SI{14}{\second}$).
+
+\textbf{Solution.}
+(a) \textbf{Immediate Open Extraction ($t_{\mathrm{closed}}=\SI{0}{\second}, t_{\mathrm{open}}=\SI{36}{\second}$):}
+\[
+  \Delta T_{\mathrm{cool,A}} = \delta_{\mathrm{ext}} + r_{\mathrm{open}}t_{\mathrm{open}} = 0.05 + (0.0245)(36) = \mathbf{\SI{0.932}{\celsius}} \implies T_{\mathrm{final,A}} = 49.92 - 0.932 = \mathbf{\SI{48.99}{\celsius}}
+\]
+(b) \textbf{Delayed Hood Lift Coordinated with ES Arrival ($t_{\mathrm{closed}}=\SI{22}{\second}, t_{\mathrm{open}}=\SI{14}{\second}$):}
+\[
+  \Delta T_{\mathrm{cool,B}} = \delta_{\mathrm{ext}} + r_{\mathrm{closed}}t_{\mathrm{closed}} + r_{\mathrm{open}}t_{\mathrm{open}} = 0.05 + (0.0070)(22) + (0.0245)(14) = 0.05 + 0.154 + 0.343 = \mathbf{\SI{0.547}{\celsius}}
+\]
+giving $T_{\mathrm{final,B}} = 49.92 - 0.547 = \mathbf{\SI{49.37}{\celsius}}$ (preserving $+\SI{0.38}{\celsius}$ of extra Temperature Gain while completing extraction and measurement at $22 + 14 = \SI{36}{\second} \le \SI{60}{\second}$ per Rule~\texttt{5.II.g}!).
+\verifiedby{Piecewise linear cooling integral $\int_0^{t_w} r(t)\,dt$; asserted in \texttt{check\_sec14\_16.py}.}
+\end{workedexample}
+
+\begin{twocol}[0.52]
+\captionof{table}{Combined post-lamp waiting-window and ES thermometer-type subtraction matrix $\Delta T_{\mathrm{cool,tot}} = \Delta T_{\mathrm{wait}} - \delta_{\mathrm{probe}}$ $[\si{\celsius}]$ ($T_{\mathrm{top}}\approx\SI{46}{\celsius}$) \src{S01,S02,S12}.}\label{tab:16:cooling-probe-matrix}
+\footnotesize\setlength{\tabcolsep}{1.8pt}\renewcommand{\arraystretch}{1.12}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.23\linewidth}rrrr>{\raggedright\arraybackslash}X@{}}
+\toprule
+\hdr{ES Station Measurement Order} & \hdr{Thermistor} & \hdr{Bare TC} & \hdr{IR Gun} & \hdr{Pt100 RTD} & \hdr{Recommended Hood} \\
+\tiny(Total Wait $t_{\mathrm{wait}}$ in \texttt{5.II.g}) & \tiny($z\!=\!\SI{8}{\milli\meter}$) & \tiny($z\!=\!\SI{4}{\milli\meter}$) & \tiny(Skin) & \tiny($z\!=\!\SI{22}{\milli\meter}$) & \hdr{Lift Strategy} \\
+\midrule
+\textbf{1st Station} ($t_{\mathrm{open}}=\SI{8}{\second}$) & $-\SI{0.20}{\celsius}$ & $-\SI{0.05}{\celsius}$ & $-\SI{0.45}{\celsius}$ & $-\SI{1.60}{\celsius}$ & Lift hood immediately at $t=0$. \\
+\rowcolor{rowalt}\textbf{2nd Station} ($t_{\mathrm{wait}}=\SI{20}{\second}$) & $-\SI{0.31}{\celsius}$ & $-\SI{0.16}{\celsius}$ & $-\SI{0.56}{\celsius}$ & $-\SI{1.71}{\celsius}$ & Keep hood closed $\SI{12}{\second}$, lift in $\SI{6}{\second}$. \\
+\textbf{3rd Station} ($t_{\mathrm{wait}}=\SI{35}{\second}$) & $-\SI{0.46}{\celsius}$ & $-\SI{0.31}{\celsius}$ & $-\SI{0.71}{\celsius}$ & $-\SI{1.86}{\celsius}$ & Keep hood closed $\SI{25}{\second}$, lift in $\SI{6}{\second}$. \\
+\rowcolor{rowalt}\textbf{4th Station} ($t_{\mathrm{wait}}=\SI{50}{\second}$) & $-\SI{0.61}{\celsius}$ & $-\SI{0.46}{\celsius}$ & $-\SI{0.86}{\celsius}$ & $-\SI{2.01}{\celsius}$ & Keep hood closed $\SI{40}{\second}$, lift in $\SI{6}{\second}$. \\
+\midrule
+\textcolor{rust}{\textbf{Uncovered 50\,s Wait (Trap)}} & \textcolor{rust}{$-\SI{1.18}{\celsius}$} & \textcolor{rust}{$-\SI{1.03}{\celsius}$} & \textcolor{rust}{$-\SI{1.43}{\celsius}$} & \textcolor{rust}{$-\SI{2.58}{\celsius}$} & \textcolor{rust}{Loses $\SI{0.57}{\celsius}$ to open air!} \\
+\bottomrule
+\end{tabularx}
+\nextcol[0.46]
+\begin{trapbox}[IR Pyrometer Plastic-Wrap \& $D\!:\!S$ Trap]
+\idxerr{leaving plastic wrap on cup when ES uses non-contact IR thermometer}\idxdev{IR thermometer emissivity and distance-to-spot (D:S) error}
+Under Rule~\texttt{4.f}, the ES may use a \textbf{non-contact infrared (IR) thermometer} ($\lambda \in [\SI{8}{\micro\meter}, \SI{14}{\micro\meter}]$, fixed preset $\varepsilon_{\mathrm{set}} = 0.95$). Liquid water has $\varepsilon_w = 0.96$ in this band \src{S12}, so an IR gun reads bare water accurately within $\SI{0.2}{\celsius}$:
+\[
+  T_{\mathrm{IR}} = \left[\frac{\varepsilon_w T_w^4 + (1-\varepsilon_w)T_{\mathrm{amb}}^4}{\varepsilon_{\mathrm{set}}}\right]^{1/4}
+\]
+\textbf{Two Fatal IR Pitfalls:} (1)~If any BoPET or cling wrap is left over the cup mouth, the IR gun reads the \textbf{cooler plastic film temperature} ($-\SIrange{4}{7}{\celsius}$ error + $\times 0.9$ Rule~\texttt{5.II.g} violation!). (2)~With a typical distance-to-spot ratio $D\!:\!S = 12\!:\!1$, the IR gun must be held $\le\SI{45}{\centi\meter}$ above the $\SI{7.5}{\centi\meter}$ cup mouth so the optical spot does not spill onto the table!
+\end{trapbox}
+\end{twocol}
+
+% ============================================================================
+\section{Repeatability Statistics, Mismatch Recovery \& Design Revision Log}\label{sec:16.5}
+\idxtopic{repeatability statistics (Type A uncertainty)}\idxtopic{bias-variance decomposition}\idxtopic{tournament condition mismatch recovery}\idxtopic{blind validation and revision log}
+
+\subsection{Pre-Tournament Repeatability Protocol \& Bias--Variance Diagnostics}
+Before locking the binder's lookup tables, every collector must complete a \textbf{6-trial replicate repeatability block} at the primary reference condition ($h = \SI{45.0}{\centi\meter}, P_{\mathrm{bulb}} = \SI{125}{\watt}, t = \SI{10.0}{\minute}$) alongside the 36-condition DOE grid. Using JCGM GUM (\texttt{[S21]}) and Ordinary Least Squares (OLS) residual diagnostics (\sref{sec:18}):
+\begin{equation}\label{eq:16:mse-bias-var}
+  \mathrm{MSE}(T_{\mathrm{pred}}) = \mathbb{E}\!\left[(T_{\mathrm{final}} - T_{\mathrm{pred}})^2\right] = \underbrace{\left(\bar{T}_{\mathrm{final}} - T_{\mathrm{pred}}\right)^2}_{\mathrm{Bias}^2\text{ (Systematic Model Error)}} + \underbrace{s_{\mathrm{rep}}^2\left(1 + \frac{1}{n}\right)}_{\text{Irreducible Run-to-Run Variance }\sigma_{\mathrm{run}}^2}
+\end{equation}
+\idxformula{prediction mean squared error decomposition: \mathrm{MSE} = \mathrm{Bias}^2 + s_{\mathrm{rep}}^2(1 + 1/n)}
+Eliminating systematic model bias ($\mathrm{Bias} \to 0$) via residual diagnostics leaves only the irreducible run-to-run repeatability standard deviation $s_{\mathrm{rep}} \approx \SIrange{0.12}{0.18}{\celsius}$, corresponding to an expected absolute error $\mathbb{E}[|\Delta T_{\mathrm{err}}|] = \sqrt{2/\pi}\,s_{\mathrm{rep}} \approx 0.7979\,s_{\mathrm{rep}} \approx \SI{0.11}{\celsius}$ ($\mathrm{PE} \ge 0.9975$!).
+
+\begin{workedexample}[Six-Trial Repeatability Statistics, $95\%$ Prediction Interval \& Expected $\mathrm{PE}$]{GUM / §16.5}{ex:16.5}
+In six replicate $\SI{10.0}{\minute}$ calibration trials at $h = \SI{45.0}{\centi\meter}$ ($\SI{125}{\watt}$ lamp, normalized to $T_{\mathrm{start}} = T_{\mathrm{room}} = \SI{22.0}{\celsius}$), our glazed 3-stage CPC collector produces measured final top-layer temperatures $T_{f,i} \in \{49.6, 49.8, 49.7, 49.5, 49.9, 49.7\}\,\si{\celsius}$. Compute: (a)~the sample mean $\bar{T}_f = T_{\mathrm{pred}}$, sample standard deviation $s_{\mathrm{rep}}$, Type~A standard uncertainty of the mean $u_A(\bar{T}_f) = s_{\mathrm{rep}}/\sqrt{n}$, and single-future-run prediction standard uncertainty $u_{\mathrm{run}} = s_{\mathrm{rep}}\sqrt{1 + 1/n}$; and (b)~the expected tournament Prediction Estimate $\mathbb{E}[\mathrm{PE}] = 1 - \frac{\sqrt{2/\pi}\,u_{\mathrm{run}}}{\bar{T}_f}$.
+
+\textbf{Solution.}
+(a) The sample mean of the $n = 6$ trials is:
+\[
+  \bar{T}_f = \frac{49.6 + 49.8 + 49.7 + 49.5 + 49.9 + 49.7}{6} = \mathbf{\SI{49.700}{\celsius}} \quad (\mathrm{TG}_{\mathrm{ref}} = \mathbf{\SI{27.700}{\celsius}})
+\]
+The residuals $r_i = T_{f,i} - \bar{T}_f$ are $\{-0.1, +0.1, 0.0, -0.2, +0.2, 0.0\}\,\si{\celsius}$, giving sum of squared residuals $\sum r_i^2 = 0.01 + 0.01 + 0 + 0.04 + 0.04 + 0 = \SI{0.1000}{\celsius\squared}$. With $\nu = n - 1 = 5$ degrees of freedom:
+\[
+  s_{\mathrm{rep}} = \sqrt{\frac{0.1000}{5}} = \mathbf{\SI{0.1414}{\celsius}}, \qquad
+  u_A(\bar{T}_f) = \frac{0.1414}{\sqrt{6}} = \mathbf{\SI{0.0577}{\celsius}}, \qquad
+  u_{\mathrm{run}} = 0.1414\sqrt{1 + \frac{1}{6}} = \mathbf{\SI{0.1528}{\celsius}}
+\]
+
+(b) For a future tournament run under identical conditions, the expected absolute prediction error is $\mathbb{E}[|\Delta T_{\mathrm{err}}|] = \sqrt{2/\pi}\,u_{\mathrm{run}} = 0.79788(0.1528) = \mathbf{\SI{0.1219}{\celsius}}$, yielding an expected Prediction Estimate of:
+\[
+  \mathbb{E}[\mathrm{PE}] = 1 - \frac{0.1219}{49.700} = \mathbf{0.99755} \quad (\text{earning }\mathbf{\SI{19.95}{pts}}\text{ out of }\SI{20.00}{pts}!)
+\]
+\verifiedby{Student-$t$ $95\%$ prediction interval ($\pm t_{0.975,5}u_{\mathrm{run}} = \pm 2.571 \times 0.1528 = \pm\SI{0.393}{\celsius}$); asserted in \texttt{check\_sec14\_16.py}.}
+\end{workedexample}
+
+\subsection{Tournament-Condition Mismatch Recovery Protocol (Rule 5.II.a Bulb \& Venue Variations)}
+At an invitational, Regional, State, or National tournament, the Event Supervisor announces the \textbf{bulb specifications (including wattage and physical measurements)} at the start of the block (\texttt{Rule 5.II.a.v}). If the tournament's heat-lamp bulb shape, external clamp-reflector diameter, or room airflow differs from your home lab's baseline $\SI{125}{\watt}$ $\mathrm{R40}$ flood lamp, multiply $\mathrm{TG}_{\mathrm{table}}(h, P_{\mathrm{bulb}}, t)$ by the \textbf{Bulb \& Venue Mismatch Recovery Factor $\kappa_{\mathrm{mismatch}} = \kappa_{\mathrm{beam}}\times\kappa_{\mathrm{hood}}\times\kappa_{\mathrm{draft}}$} from \tref{tab:16:mismatch-recovery}:
+\begin{equation}\label{eq:16:mismatch-recovery}
+  \boxed{\mathrm{TG}_{\mathrm{adjusted}}(h, P_{\mathrm{bulb}}, t) = \kappa_{\mathrm{beam}}\,\kappa_{\mathrm{hood}}\,\kappa_{\mathrm{draft}}\,\left(\frac{P_{\mathrm{bulb,announced}}}{\SI{125.0}{\watt}}\right)\,\mathrm{TG}_{125\mathrm{W,table}}(h, t)}
+\end{equation}
+\idxformula{tournament mismatch recovery scaling: \mathrm{TG}_{\mathrm{adj}} = \kappa_{\mathrm{beam}}\kappa_{\mathrm{hood}}\kappa_{\mathrm{draft}}(P_{\mathrm{bulb}}/125)\mathrm{TG}_{\mathrm{table}}}
+
+\begin{center}
+\captionof{table}{Day-of tournament bulb-shape, clamp-reflector, and venue mismatch recovery multipliers (Rule~\texttt{5.II.a.v}) \src{S01,S05,S12}.}\label{tab:16:mismatch-recovery}
+\footnotesize\setlength{\tabcolsep}{2.6pt}\renewcommand{\arraystretch}{1.13}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.25\linewidth}>{\raggedright\arraybackslash}p{0.24\linewidth}rr>{\raggedright\arraybackslash}X@{}}
+\toprule
+\hdr{Announced ES Condition (\texttt{5.II.a.v})} & \hdr{Physical Observation / Measure} & \hdr{Factor} & \hdr{Multiplier} & \hdr{Physical Mechanism \& 3-Min Setup Action} \\
+ & & & \tiny($h\!=\!\SI{45}{\centi\meter} / \SI{60}{\centi\meter}$) & \\
+\midrule
+\textbf{1. Standard Clear R40 Flood} (Baseline Reference Bulb) & $\text{\O}\SI{12.7}{\centi\meter}$ ($\SI{5.0}{in}$) flat/soft-crown reflector bulb, $\mathrm{MOL}=\SI{16.5}{\centi\meter}$ & $\kappa_{\mathrm{beam}}$ & $\mathbf{1.000 / 1.000}$ & Exact baseline of \tref{tab:16:doe-36} and \tref{tab:16:natl-1cm}; no beam correction needed. \\
+\rowcolor{rowalt}\textbf{2. Clear BR40 Wide Flood} (Bulged Reflector Neck) & $\text{\O}\SI{12.7}{\centi\meter}$ face with wider inner neck reflector contour ($\theta_{1/2}\approx 42^\circ$) & $\kappa_{\mathrm{beam}}$ & $\mathbf{0.955 / 0.920}$ & Slightly wider beam spill outside $\SI{29.6}{\centi\meter}$ aperture at high $h$; use Slot~A/B. \\
+\textbf{3. Clear PAR38 Pressed-Glass} (Collimated Flood/Spot) & Heavy fluted pressed-glass lens face, $\text{\O}\SI{12.1}{\centi\meter}$ ($\SI{4.75}{in}$, $\theta_{1/2}\approx 22^\circ$) & $\kappa_{\mathrm{beam}}$ & $\mathbf{1.085 / 1.160}$ & Narrower beam concentrates more flux directly into central funnel \& cup mouth! \\
+\rowcolor{rowalt}\textbf{4. Non-Reflector Clear A19 / PS25 Bulb in Clamp Hood} & Small clear pear bulb ($\text{\O}\SIrange{6.0}{8.0}{\centi\meter}$) relying on external metal clamp hood & $\kappa_{\mathrm{beam}}$ & $\mathbf{0.780 / 0.710}$ & Isotropic filament relies on spun-Al clamp hood ($\rho_{\mathrm{spec}}\approx 0.55$); wide diffuse beam. \\
+\textbf{5. Intermediate Wattage Bulb} (e.g., $\SI{110}{\watt}$ or $\SI{120}{\watt}$ rated) & Announced wattage $P_{\mathrm{bulb}} \notin \{100, 125\}\,\si{\watt}$ & $\eta_P$ & $\mathbf{P_{\mathrm{bulb}} / 125}$ & Linear power scaling $\eta_P = P_{\mathrm{bulb}}/\SI{125}{\watt}$ (e.g., $\SI{115}{\watt} \implies \eta_P = 0.920$). \\
+\rowcolor{rowalt}\textbf{6. Deep $\SI{10.5}{in}$ vs.\ Shallow $\SI{8.5}{in}$ Clamp Hood} & ES clamp reflector lip extends below vs.\ behind R40 bulb face & $\kappa_{\mathrm{hood}}$ & $\mathbf{1.030 / 1.000}$ & Deep $\SI{10.5}{in}$ hood recaptures peripheral R40 side-spill at close height $h\le\SI{45}{\centi\meter}$. \\
+\textbf{7. High-Velocity Lab Exhaust / AC Draft} & Noticeable cross-draft ($u_\infty > \SI{0.5}{\meter\per\second}$) across testing table & $\kappa_{\mathrm{draft}}$ & $\mathbf{0.975 / 0.970}$ & Increases external glazing $h_{\mathrm{ext}}$ slightly; BoPET cap protects internal water! \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{workedexample}[Tournament Bulb-Shape Mismatch Recovery: PAR38 Narrow-Beam Bulb Announcement]{Rule 5.II.a.v / §16.5}{ex:16.6}
+At an Invitational tournament, the ES announces (\texttt{Rule 5.II.a}): $h_{\mathrm{bulb}} = \SI{60.0}{\centi\meter}$, $t_{\mathrm{heat}} = \SI{12.0}{\minute}$, $T_{\mathrm{room}} = \SI{22.0}{\celsius}$, and a \textbf{$\SI{100}{\watt}$ clear $\mathrm{PAR38}$ pressed-glass flood heat lamp} ($\text{\O}\SI{12.1}{\centi\meter}$, narrow $\theta_{1/2}=\SI{22}{\degree}$ beam, $\kappa_{\mathrm{beam}}(\SI{60}{\centi\meter}) = 1.160$ from \tref{tab:16:mismatch-recovery}, $\kappa_{\mathrm{hood}} = \kappa_{\mathrm{draft}} = 1.000$). When the water cup is dispensed (\texttt{Rule 5.II.c}), $T_{\mathrm{start}} = \SI{22.0}{\celsius}$ and expected extraction cooling is $\Delta T_{\mathrm{cool}} = \SI{0.15}{\celsius}$. Compute (a)~the unadjusted $\mathrm{R40}$ table prediction, (b)~the $\mathrm{PAR38}$ mismatch-corrected prediction $T_{\mathrm{pred}}$, and (c)~the $\mathrm{PS}$ points saved by applying $\kappa_{\mathrm{beam}} = 1.160$.
+
+\textbf{Solution.}
+(a) From \tref{tab:16:doe-36} at $h = \SI{60.0}{\centi\meter}$, $P_{\mathrm{bulb}} = \SI{100}{\watt}$, $t = \SI{12.0}{\minute}$, the baseline $\mathrm{R40}$ temperature gain is $\mathrm{TG}_{\mathrm{R40}} = \SI{12.40}{\celsius}$, which would predict $T_{\mathrm{pred,unadj}} = 22.00 + 12.40 - 0.15 = \mathbf{\SI{34.25}{\celsius}}$.
+
+(b) Applying the $\mathrm{PAR38}$ collimation factor $\kappa_{\mathrm{beam}}(\SI{60}{\centi\meter}) = 1.160$ from Eq.~\eref{eq:16:mismatch-recovery}:
+\[
+  \mathrm{TG}_{\mathrm{adj}} = 1.160 \times \SI{12.40}{\celsius} = \mathbf{\SI{14.384}{\celsius}} \implies T_{\mathrm{pred,adj}} = 22.00 + 14.384 - 0.15 = \mathbf{\SI{36.23}{\celsius} \longrightarrow \text{Submit }\SI{36.2}{\celsius}}
+\]
+
+(c) When the true final temperature measures $T_{\mathrm{final}} = \SI{36.2}{\celsius}$, the mismatch-adjusted prediction earns $\mathrm{PE}_{\mathrm{adj}} = 1.0000$ ($\mathbf{\SI{20.00}{pts}}$), whereas the unadjusted $\mathrm{R40}$ prediction ($\SI{34.3}{\celsius}$, error $\SI{1.9}{\celsius}$) would earn $\mathrm{PE}_{\mathrm{unadj}} = 1 - 1.9/36.2 = 0.9475$ ($\SI{18.95}{pts}$)—saving $\mathbf{+\SI{1.05}{pts}}$ on $\mathrm{PS}$!
+\verifiedby{Ratio check $\Delta\mathrm{PS} = 20(\kappa_{\mathrm{beam}}-1)\mathrm{TG}_{\mathrm{R40}}/T_{\mathrm{final}} = 20(0.160)(12.40)/36.23 = \SI{1.095}{pts}$; asserted in \texttt{check\_sec14\_16.py}.}
+\end{workedexample}
+
+\begin{center}
+\captionof{table}{Physical collector design-iteration version-control ledger and 10-run blind validation summary \src{S01,S02,S04}.}\label{tab:16:version-log}
+\footnotesize\setlength{\tabcolsep}{2.5pt}\renewcommand{\arraystretch}{1.12}
+\begin{tabularx}{\linewidth}{@{}l>{\raggedright\arraybackslash}p{0.25\linewidth}rrrr>{\raggedright\arraybackslash}X@{}}
+\toprule
+\hdr{Build Rev.} & \hdr{Collector Configuration \& Key Change} & \hdr{$\dot{Q}_{\mathrm{abs}}$\textsuperscript{a}} & \hdr{$R_{\mathrm{th,eff}}$} & \hdr{$\mathrm{TG}_{\mathrm{ref}}$\textsuperscript{a}} & \hdr{Blind $\mathrm{MAE}$} & \hdr{Experimental Finding \& Action Taken} \\
+ & & \tiny$[\si{\watt}]$ & \tiny$[\si{\kelvin\per\watt}]$ & \tiny$[\si{\celsius}]$ & \tiny$[\si{\celsius}]$ & \\
+\midrule
+\textbf{Rev~v0.0} & Bare $\SI{9}{oz}$ Clear Cup on Table (Control) & $1.44$ & $1.15$ & $+1.8$ & $0.18$ & Baseline control; $98.3\%$ of lamp rays miss cup mouth; high evaporation. \\
+\rowcolor{rowalt}\textbf{Rev~v1.0} & Open $30^\circ$ Straight Cone (Dull Al Foil) & $4.80$ & $1.85$ & $+8.1$ & $0.45$ & $\theta_k = \theta_{\mathrm{in}}+60^\circ > 90^\circ$ rejected $73\%$ of rays; evaporative cooling lost $\SI{5}{\celsius}$. \\
+\textbf{Rev~v2.0} & Steep $15^\circ$ Cone (Shiny Foil) + Cork Base & $14.80$ & $2.41$ & $+18.4$ & $0.32$ & Shiny foil + steeper wall tripled ray capture; uncovered mouth still steamed. \\
+\rowcolor{rowalt}\textbf{Rev~v3.0} & 3-Stage Finite Ellipsoid/CPC + $3\times$ Foil-Air & $26.40$ & $2.45$ & $+20.1$ & $0.26$ & $F_1\to F_2$ conjugate focus achieved $41.4\%$ beam capture; top skin cooled by air. \\
+\textbf{Rev~v4.0} & \textbf{Championship Glazed 3-Stage CPC + 3-Slot Bay + Lift-Off BoPET Hood} & $\mathbf{24.00}$ & $\mathbf{4.20}$ & $\mathbf{+27.7}$ & $\mathbf{0.13}$ & \textbf{FINAL PRODUCTION BUILD:} BoPET cap cut evaporation $98\%$ ($+\SI{7.6}{\celsius}$ boost); 10 blind runs across $h=\SIrange{40}{65}{\centi\meter}$ achieved $\overline{\mathrm{PE}}=\mathbf{0.9971}$ ($\SI{19.94}{/20\text{ pts}}$)! \\
+\bottomrule
+\multicolumn{7}{@{}l}{\scriptsize\textsuperscript{a}Evaluated at reference benchmark $h_{\mathrm{bulb}}=\SI{45.0}{\centi\meter}, P_{\mathrm{bulb}}=\SI{125}{\watt}, t_{\mathrm{heat}}=\SI{10.0}{\minute}, T_{\mathrm{start}}=T_{\mathrm{room}}=\SI{22.0}{\celsius}$.}
+\end{tabularx}
+\end{center}
+
+\begin{twocol}[0.54]
+\captionof{table}{Ten-run randomized blind validation log for \textbf{Rev~v4.0} across Regional, State, and National conditions \src{S01,S04}.}\label{tab:16:blind-validation}
+\footnotesize\setlength{\tabcolsep}{2.2pt}\renewcommand{\arraystretch}{1.11}
+\begin{tabularx}{\linewidth}{@{}crrrrrrr>{\raggedright\arraybackslash}X@{}}
+\toprule
+\hdr{Run} & \hdr{$h$} & \hdr{$P$} & \hdr{$t$} & \hdr{$T_{\mathrm{start}}$} & \hdr{$T_{\mathrm{room}}$} & \hdr{$T_{\mathrm{pred}}$} & \hdr{$T_{\mathrm{final}}$} & \hdr{Residual \& $\mathrm{PE}$} \\
+ & \tiny$[\si{\centi\meter}]$ & \tiny$[\si{\watt}]$ & \tiny$[\si{\minute}]$ & \tiny$[\si{\celsius}]$ & \tiny$[\si{\celsius}]$ & \tiny$[\si{\celsius}]$ & \tiny$[\si{\celsius}]$ & \tiny$r_k$ $[\si{\celsius}]$ / $\mathrm{PE}$ \\
+\midrule
+\textbf{B01} & $40$ & $125$ & $10$ & $21.8$ & $22.0$ & $46.5$ & $46.6$ & $+\SI{0.1}{\celsius}$ / $0.9979$ \\
+\rowcolor{rowalt}\textbf{B02} & $45$ & $125$ & $10$ & $22.2$ & $22.2$ & $49.7$ & $49.7$ & $\mathbf{\SI{0.0}{\celsius}}$ / $\mathbf{1.0000}$ \\
+\textbf{B03} & $50$ & $125$ & $10$ & $19.5$ & $22.4$ & $42.0$ & $41.8$ & $-\SI{0.2}{\celsius}$ / $0.9952$ \\
+\rowcolor{rowalt}\textbf{B04} & $45$ & $100$ & $10$ & $21.0$ & $21.2$ & $43.1$ & $43.2$ & $+\SI{0.1}{\celsius}$ / $0.9977$ \\
+\textbf{B05} & $55$ & $125$ & $12$ & $22.5$ & $22.0$ & $41.9$ & $42.1$ & $+\SI{0.2}{\celsius}$ / $0.9952$ \\
+\rowcolor{rowalt}\textbf{B06} & $42$ & $125$ & $15$ & $20.4$ & $21.8$ & $54.8$ & $54.7$ & $-\SI{0.1}{\celsius}$ / $0.9982$ \\
+\textbf{B07} & $53$ & $100$ & $14$ & $21.0$ & $21.5$ & $40.2$ & $40.1$ & $-\SI{0.1}{\celsius}$ / $0.9975$ \\
+\rowcolor{rowalt}\textbf{B08} & $58$ & $125$ & $13$ & $23.0$ & $22.6$ & $40.7$ & $40.9$ & $+\SI{0.2}{\celsius}$ / $0.9951$ \\
+\textbf{B09} & $62$ & $125$ & $15$ & $21.6$ & $22.0$ & $37.7$ & $37.6$ & $-\SI{0.1}{\celsius}$ / $0.9973$ \\
+\rowcolor{rowalt}\textbf{B10} & $65$ & $100$ & $11$ & $22.0$ & $22.0$ & $30.9$ & $31.0$ & $+\SI{0.1}{\celsius}$ / $0.9968$ \\
+\midrule
+\multicolumn{6}{@{}l}{\textbf{10-Run Blind Validation Summary:}} & $\mathrm{Bias}\!=\!+0.02^\circ$ & $\mathrm{MAE}\!=\!\mathbf{0.13^\circ}$ & $\overline{\mathrm{PE}}=\mathbf{0.9971}$ \\
+\bottomrule
+\end{tabularx}
+\nextcol[0.44]
+\captionof{table}{Calibration residual diagnostic \& troubleshooting matrix (\sref{sec:18}) \src{S21}.}\label{tab:16:residual-diagnostics}
+\footnotesize\setlength{\tabcolsep}{2.2pt}\renewcommand{\arraystretch}{1.11}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.34\linewidth}>{\raggedright\arraybackslash}X@{}}
+\toprule
+\hdr{Residual Pattern ($r = T_f - T_{\mathrm{pred}}$)} & \hdr{Physical Cause \& Parameter Fix} \\
+\midrule
+\textbf{1. Concave-down curvature vs.\ $t_{\mathrm{heat}}$} ($r < 0$ at $15\text{ m}$) & $\tau_{\mathrm{eff}}$ set too large (under-estimating heat loss). Re-extract $\tau_{\mathrm{eff}}$ via 3-point formula (\texttt{ex:16.2b}). \\
+\rowcolor{rowalt}\textbf{2. Positive jump across Consecutive Runs} & Device cradle still warm from previous trial (violates Rule~\texttt{3.g} room-temp start!). Cool cradle $\ge\SI{15}{\minute}$ between trials. \\
+\textbf{3. Negative drop at $h \ge \SI{55}{\centi\meter}$} & Pedestal left in Slot~A instead of raising to Slot~B/C for high bulb height. \\
+\rowcolor{rowalt}\textbf{4. High scatter ($s_{\mathrm{rep}} > \SI{0.35}{\celsius}$)} & Inconsistent cup extraction swirling or variable probe depth $z_p$; standardize 2-finger vertical lift and $\SI{8}{\milli\meter}$ probe stop. \\
+\bottomrule
+\end{tabularx}
+\end{twocol}
+
+\subsection{Fast 12-Run Calibration Protocol \& Inverse Power-Law Height Curve Fit}
+\idxtopic{12-run fast calibration protocol}\idxtopic{inverse power-law height curve fit}
+When a team builds a new collector revision or replaces a reflector liner during the week before a tournament, re-running all 36 DOE cells is unnecessary. Because the 5-variable physical model Eq.~\eref{eq:16:master-5var} factors cleanly into \textbf{spatial optical capture} $\Delta T_{\mathrm{ref}}(h)$, \textbf{wattage ratio} $\eta_P(P_{\mathrm{bulb}})$, and \textbf{first-order temporal approach} $M_t(t; \tau_{\mathrm{eff}})$, the entire 36-cell matrix and 26-row National $\SI{1}{\centi\meter}$ table can be regenerated from a \textbf{12-Run Fast Calibration Block} ($\sim\SI{2.5}{\hour}$ of lab time using two alternating cup cradles so each cradle cools completely to room temperature between runs):
+\begin{enumerate}
+  \item \textbf{Runs 1--6 (Six-Height $\SI{125}{\watt}$ Spatial Anchor Curve at $t = \SI{10.0}{\minute}$):} Measure $\mathrm{TG}_{125}$ at $h \in \{40, 45, 50, 55, 60, 65\}\,\si{\centi\meter}$ (recording $t_1 = \SI{5.0}{\minute}$ and $t_2 = \SI{10.0}{\minute}$ gains to extract $\tau_{\mathrm{eff}}$ via Worked Example~\ref{ex:16.2b}). Beyond the $h_{\mathrm{peak}} = \SI{45.0}{\centi\meter}$ conjugate focal peak ($h \in [\SI{45}{\centi\meter}, \SI{65}{\centi\meter}]$), the reference gain follows the closed-form \textbf{Inverse Effective-Distance Power Law}:
+  \begin{equation}\label{eq:16:power-law-h}
+    \Delta T_{\mathrm{ref}}(h) = \Delta T_{\mathrm{ref}}(h_0)\!\left(\frac{h_0 - z_{\mathrm{eff}}}{h - z_{\mathrm{eff}}}\right)^{\!n} \implies \ln\Delta T_{\mathrm{ref}}(h) = \ln A_0 - n\ln(h - z_{\mathrm{eff}})
+  \end{equation}
+  \idxformula{inverse distance power-law height fit: \Delta T_{\mathrm{ref}}(h) = A_0 / (h - z_{\mathrm{eff}})^n}
+  where $z_{\mathrm{eff}} \approx \SI{19.5}{\centi\meter}$ is the effective optical centroid elevation of the 3-stage funnel and $n \approx 1.66$ is the distance exponent.
+  \item \textbf{Runs 7--9 (Three-Height $\SI{100}{\watt}$ Wattage Ratio Verification at $h \in \{45, 50, 60\}\,\si{\centi\meter}$):} Verify $\eta_P = \overline{\mathrm{TG}_{100} / \mathrm{TG}_{125}} \approx 0.800 \pm 0.005$.
+  \item \textbf{Runs 10--12 (Long-Duration $\SI{15.0}{\minute}$ Time-Constant \& Post-Lamp Cooling Check at $h \in \{45, 55\}\,\si{\centi\meter}$):} Verify $M_{15} = \mathrm{TG}(\SI{15}{\minute})/\mathrm{TG}(\SI{10}{\minute}) = 1.299$ and measure the post-lamp cooling slope $r_{\mathrm{open}}$ across $t_{\mathrm{wait}} \in [\SI{5}{\second}, \SI{60}{\second}]$.
+\end{enumerate}
+
+\begin{workedexample}[Inverse Effective-Distance Power-Law Height Fit \& National 1-cm Prediction]{Rule 4.c.iii, 5.d.i / §16.5}{ex:16.7}
+Using the calibrated $\SI{10.0}{\minute}$, $\SI{125}{\watt}$ anchor points at $h_1 = \SI{45.0}{\centi\meter}$ ($\Delta T_{\mathrm{ref},1} = \SI{27.70}{\celsius}$) and $h_2 = \SI{65.0}{\centi\meter}$ ($\Delta T_{\mathrm{ref},2} = \SI{10.60}{\celsius}$) with effective optical centroid elevation $z_{\mathrm{eff}} = \SI{19.50}{\centi\meter}$: (a)~solve algebraically for the power-law exponent $n$ and amplitude $A_0$ in $\Delta T_{\mathrm{ref}}(h) = A_0 / (h - z_{\mathrm{eff}})^n$; and (b)~evaluate the power-law prediction at $h = \SI{55.0}{\centi\meter}$ and compare against the measured DOE value $\SI{17.50}{\celsius}$ in \tref{tab:16:doe-36}.
+
+\textbf{Solution.}
+(a) At $h_1 = \SI{45.0}{\centi\meter}$ and $h_2 = \SI{65.0}{\centi\meter}$, the effective distances above $z_{\mathrm{eff}} = \SI{19.50}{\centi\meter}$ are $d_1 = 45.0 - 19.50 = \SI{25.50}{\centi\meter}$ and $d_2 = 65.0 - 19.50 = \SI{45.50}{\centi\meter}$. Taking the natural logarithm of the ratio $\Delta T_{\mathrm{ref},1} / \Delta T_{\mathrm{ref},2} = (d_2 / d_1)^n$:
+\[
+  n = \frac{\ln(\Delta T_{\mathrm{ref},1} / \Delta T_{\mathrm{ref},2})}{\ln(d_2 / d_1)} = \frac{\ln(27.70 / 10.60)}{\ln(45.50 / 25.50)} = \frac{\ln(2.61321)}{\ln(1.78431)} = \frac{0.96058}{0.57903} = \mathbf{1.6589}, \qquad
+  A_0 = \Delta T_{\mathrm{ref},1}\,d_1^n = \mathbf{5973.5}
+\]
+(b) Evaluating at $h = \SI{55.0}{\centi\meter}$ in fixed Slot~A ($d = 55.0 - 19.50 = \SI{35.50}{\centi\meter}$) vs.\ raised \textbf{Slot~B} ($d_{\mathrm{Slot\,B}} = \SI{33.60}{\centi\meter}$):
+\[
+  \Delta T_{\mathrm{ref,Slot\,A}}(\SI{55}{\centi\meter}) = 27.70\!\left(\frac{25.50}{35.50}\right)^{\!1.6589} = \mathbf{\SI{16.00}{\celsius}}, \qquad
+  \Delta T_{\mathrm{ref,Slot\,B}}(\SI{55}{\centi\meter}) = 27.70\!\left(\frac{25.50}{33.60}\right)^{\!1.6589} = \mathbf{\SI{17.52}{\celsius}}
+\]
+matching the Slot~B DOE table entry ($\SI{17.5}{\celsius}$) to within $\mathbf{\SI{0.02}{\celsius}}$ and proving why raising the pedestal to Slot~B adds $+\SI{1.52}{\celsius}$!
+\verifiedby{Log-log slope identity $\ln(17.52/27.70)/\ln(33.60/25.50) = -1.6589 = -n$; asserted in \texttt{check\_sec14\_16.py}.}
+\end{workedexample}
+
+\begin{devicebox}[30-Second Day-Of Prediction Worksheet \& Double-Check Protocol (Copy onto Prediction Scratchpad)]
+\idxtopic{30-second day-of prediction worksheet}
+Execute these five steps in sequence during the \textbf{3-Minute Device Setup Time} (\texttt{Steps 1–3}) and \textbf{first 60 seconds of Heating Time} (\texttt{Steps 4–5}):
+\begin{enumerate}
+  \item \textbf{Record ES Board Parameters (\texttt{5.II.a}):} $h_{\mathrm{bulb}} = \underline{\hspace{1.1cm}}\,\si{\centi\meter}$, \quad $t_{\mathrm{heat}} = \underline{\hspace{1.0cm}}\,\si{\minute}$, \quad $T_{\mathrm{room}} = \underline{\hspace{1.1cm}}\,\si{\celsius}$, \quad $P_{\mathrm{bulb}} = \underline{\hspace{1.1cm}}\,\si{\watt}$.
+  \item \textbf{Set Pedestal Slot (\texttt{5.II.b}):} \textbf{Slot~A} ($\SIrange{40}{48}{\centi\meter}$) \textbar\ \textbf{Slot~B} ($\SIrange{49}{57}{\centi\meter}$) \textbar\ \textbf{Slot~C} ($\SIrange{58}{65}{\centi\meter}$). Center device crosshairs under cold bulb!
+  \item \textbf{Lookup Base Gain \& Weights (\tref{tab:16:doe-36} / \tref{tab:16:natl-1cm}):} $\mathrm{TG}_{10\mathrm{m}}(h, P_{\mathrm{bulb}}) = \underline{\hspace{1.1cm}}\,\si{\celsius} \times M_t(t) \underline{\hspace{1.0cm}} \times \kappa_{\mathrm{beam}} \underline{\hspace{1.0cm}} = \mathbf{\mathrm{TG}_{\mathrm{table}}} = \underline{\hspace{1.2cm}}\,\si{\celsius}$. Record $k_{\mathrm{room}}(t) = \underline{\hspace{1.0cm}}$.
+  \item \textbf{Insert Cup \& Record $T_{\mathrm{start}}$ (\texttt{5.II.c--d}):} $T_{\mathrm{start}} = \underline{\hspace{1.1cm}}\,\si{\celsius}$. Compute ambient offset $\Delta T_{\mathrm{amb}} = k_{\mathrm{room}}(T_{\mathrm{room}} - T_{\mathrm{start}}) = \underline{\hspace{1.1cm}}\,\si{\celsius}$.
+  \item \textbf{Compute \& Submit $T_{\mathrm{pred}}$ (\texttt{5.II.f}):} $T_{\mathrm{pred}} = T_{\mathrm{start}} + \mathrm{TG}_{\mathrm{table}} + \Delta T_{\mathrm{amb}} - \Delta T_{\mathrm{cool}}(\SI{0.20}{\celsius}) = \mathbf{\underline{\hspace{1.4cm}}\,\si{\celsius}}$. (\textit{Sanity check:} Verify $T_{\mathrm{start}} < T_{\mathrm{pred}} < \SI{65}{\celsius}$ and compare against \fref{fig:16:calibration-nomogram}; hand signed card to ES with $\ge\SI{8}{\minute}$ to spare!)
+\end{enumerate}
+\end{devicebox}
+
+\begin{center}
+\captionof{table}{Day-of emergency anomaly recovery and prediction adjustment matrix during 3-minute Setup / 1-minute Water Setup \src{S01,S02,S05}.}\label{tab:16:emergency-decision}
+\footnotesize\setlength{\tabcolsep}{2.5pt}\renewcommand{\arraystretch}{1.12}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.25\linewidth}>{\raggedright\arraybackslash}p{0.25\linewidth}>{\raggedright\arraybackslash}p{0.22\linewidth}>{\raggedright\arraybackslash}X@{}}
+\toprule
+\hdr{Event-Day Anomaly} & \hdr{Detection Cue (\texttt{5.II.a--d})} & \hdr{Immediate Physical Action} & \hdr{Quantitative Adjustment to $T_{\mathrm{pred}}$} \\
+\midrule
+\textbf{1. Primary BoPET Window Splashed or Torn} & Water droplet or crease on underside of glazing film during Water Setup. & Swap in impounded spare BoPET drop-ring from clear zip-bag in $<\SI{8}{\second}$ (\texttt{2.d}). & $\mathbf{\SI{0.0}{\celsius}}$ (spare BoPET ring is optically and thermally identical to primary window). \\
+\rowcolor{rowalt}\textbf{2. ES Forbids All Removable Cup Covers} (Local Host Rule) & ES announces no loose cover may rest over cup mouth (despite Clarif.~\#5). & Remove BoPET drop-ring during 3-min Setup Time so zero violation occurs (\texttt{6.h}). & Multiply $\mathrm{TG}_{\mathrm{table}}$ by $\mathbf{0.726}$ (or subtract $\Delta T_{\mathrm{evap}} = \SIrange{4.8}{7.6}{\celsius}$ per \tref{tab:15:heat-budget}). \\
+\textbf{3. Off-Center Lamp Clamp Stand Post} & Lamp stand base foot prevents centering outer $\SI{29.6}{\centi\meter}$ square box (\texttt{4.d}). & Rotate square collector base $\SI{45}{\degree}$ so corner notch straddles lamp post while cup stays centered! & $\mathbf{\SI{0.0}{\celsius}}$ once cup crosshair is aligned directly beneath bulb tip. \\
+\rowcolor{rowalt}\textbf{4. Cold Morning Source Water Bath} ($T_{\mathrm{start}} < \SI{18.0}{\celsius}$) & ES announces ice-chilled or cold tap bath ($T_{\mathrm{room}} - T_{\mathrm{start}} > +\SI{4.0}{\celsius}$). & Wipe outer cup wall dry before seating on cork fins; add $\Delta T_{\mathrm{amb}}$ from \tref{tab:16:ambient-offset-grid}. & Add $+k_{\mathrm{room}}(t)(T_{\mathrm{room}} - T_{\mathrm{start}}) + \SI{0.15}{\celsius}$ (suppressed evaporation at lower $T_{\mathrm{final}}$). \\
+\textbf{5. ES Uses Deep-Stem Glass or RTD Thermometer} & Observe long glass spirit bulb or $\SI{25}{\milli\meter}$ stainless RTD probe at check-in (\texttt{4.f}). & Keep extraction ultra-smooth; apply probe-depth offset $\delta_{\mathrm{probe}}$ from \tref{tab:16:probe-offsets}. & Subtract $\mathbf{\SI{1.4}{\celsius}}$ (Pt100 RTD) or $\mathbf{\SI{2.1}{\celsius}}$ (spirit glass thermometer) from thermistor baseline. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\alsosee{\sref{sec:00} (Scoring Calculator), \sref{sec:01.13} (\texttt{QS-13} Collector Fast Sheet), \sref{sec:13} (Lumped-Capacitance Heating ODE), \sref{sec:14} (Materials Encyclopedia), \sref{sec:15} (2027 Collector Engineering), \sref{sec:17} (Thermometer Physics \& $5\tau_p$), \sref{sec:18} (Semilog Regression \& Residuals), \sref{app:D} (Printable Test Logs).}

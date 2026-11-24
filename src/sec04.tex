@@ -1,0 +1,652 @@
+\binderchapter{4}{Heat Capacity, Specific/Molar Heat, Dulong--Petit \& Multi-Body Calorimetry}{§4 Heat Capacity \& Calorimetry}{sec:04}
+\scopebanner{REQUIRED}[Rule 5.c.i--ii (Specific Heat, Heat Capacity \& Calorimetry), 5.c.vi (Enthalpy \& Phase Energy), 5.d.iv (Algebra/Geometry Only)]
+
+\begin{formulacard}[§4 Core Formula Card --- Heat Capacity, Dulong--Petit \& Multi-Body Calorimetry]
+\begin{ftab}
+Sensible Heat \& Heat Capacity & $\displaystyle Q = m c \Delta T = n C_m \Delta T = C \Delta T, \qquad C = mc = nC_m, \qquad C_m = M c$ & $\si{\joule}$ (\ref{eq:04:sensible}) \\
+Water Equivalent of Calorimeter & $\displaystyle m_{\mathrm{eq}} = \frac{C_{\mathrm{cal}}}{c_w}, \qquad Q_{\mathrm{cal}} = C_{\mathrm{cal}}\Delta T = m_{\mathrm{eq}} c_w \Delta T$ & $\si{\kilogram}$ (\ref{eq:04:watereq}) \\
+Dulong--Petit Classical Solid Limit & $\displaystyle C_{V,m} \approx 3R = \SI{24.943}{\joule\per\mole\per\kelvin}, \qquad c \approx \frac{3R}{M}$ & $T \gtrsim \Theta_D$ (\ref{eq:04:dulongpetit}) \\
+Debye Low-$T$ Phonon $T^3$ Law & $\displaystyle C_{V,m}(T) = \frac{12\pi^4}{5} R \left(\frac{T}{\Theta_D}\right)^3 \approx 233.78\,R\left(\frac{T}{\Theta_D}\right)^3$ & $T \ll \Theta_D$ (\ref{eq:04:debye}) \\
+$N$-Body Sensible Equilibrium $T_f$ & $\displaystyle \sum_{i=1}^N Q_i = 0 \implies T_f = \frac{\sum_{i=1}^N m_i c_i T_i + C_{\mathrm{cal}} T_{\mathrm{cal}}}{\sum_{i=1}^N m_i c_i + C_{\mathrm{cal}}}$ & No phase change (\ref{eq:04:nbody}) \\
+Calorimeter Calibration ($C_{\mathrm{cal}}$) & $\displaystyle C_{\mathrm{cal}} = m_h c_w \frac{T_h - T_f}{T_f - T_c} - m_c c_w$ & Warm + cold water (\ref{eq:04:ccal}) \\
+Latent Heat of Fusion / Vaporization & $\displaystyle Q_{\mathrm{fus}} = \pm m L_f, \qquad Q_{\mathrm{vap}} = \pm m L_v, \qquad Q_{\mathrm{sub}} = \pm m L_{\mathrm{sub}}$ & Isothermal plateau (\sref{sec:04.3}) \\
+Electrical Immersion Calorimetry & $\displaystyle E_{\mathrm{elec}} = V I t = I^2 R t = \frac{V^2}{R}t = (m c + C_{\mathrm{cal}})\Delta T + Q_{\mathrm{leak}}$ & $\si{\joule}$ (\ref{eq:04:elec}) \\
+Callendar--Barnes Continuous Flow & $\displaystyle V I = \dot{m} c_p (T_{\mathrm{out}} - T_{\mathrm{in}}) + \dot{Q}_{\mathrm{loss}}$ & Steady flow (\ref{eq:04:flow}) \\
+Regnault--Pfaundler Drift Correction & $\displaystyle \Delta T_{\mathrm{corr}} = (T_{\max} - T_0) - \frac{r_{\mathrm{pre}} + r_{\mathrm{post}}}{2}\,(t_{\max} - t_0)$ & Cooling correction (\ref{eq:04:drift}) \\
+Isobaric vs.\ Isochoric Calorimetry & $\displaystyle q_P = \Delta H, \qquad q_V = \Delta U = -C_{\mathrm{bomb}}\Delta T, \qquad \Delta H_{\mathrm{rxn}} = \Delta U_{\mathrm{rxn}} + \Delta n_{\mathrm{gas}} R T$ & $\si{\joule\per\mole}$ (\ref{eq:04:bomb}) \\
+\end{ftab}
+\end{formulacard}
+
+\section{Heat Capacity, Specific Heat, Molar Heat \& Sourced Property Tables}
+\label{sec:04.1}
+\idxtopic{heat capacity!total, specific, molar, and volumetric}
+\idxtopic{specific heat!unit conversions and sourced property tables}
+\idxtopic{water equivalent of a calorimeter}
+
+When heat $Q$ enters or leaves a single-phase substance of mass $m$ and molar amount $n = m/M$ without triggering a phase transition or chemical reaction, its temperature changes by $\Delta T = T_f - T_i$. The proportionality defines three related capacity quantities \src{S04,S05}:
+\begin{equation}\label{eq:04:sensible}
+  Q = C\,\Delta T = m c\,\Delta T = n C_m\,\Delta T, \qquad
+  c = \frac{C}{m} = \frac{Q}{m\Delta T} \;\left[\si{\joule\per\kilogram\per\kelvin}\right], \qquad
+  C_m = M c = \frac{Q}{n\Delta T} \;\left[\si{\joule\per\mole\per\kelvin}\right],
+\end{equation}
+where $C$ ($\si{\joule\per\kelvin}$) is the \textbf{total (extensive) heat capacity} of the object, $c$ ($\si{\joule\per\kilogram\per\kelvin}$ or $\si{\joule\per\gram\per\kelvin}$) is the \textbf{specific (mass-basis) heat capacity}, $C_m$ ($\si{\joule\per\mole\per\kelvin}$) is the \textbf{molar heat capacity}, and $M$ ($\si{\kilogram\per\mole}$) is the molar mass. In transient conduction and thermal-mass design (\sref{sec:13}), the \textbf{volumetric heat capacity} $\rho c_p$ ($\si{\joule\per\cubic\meter\per\kelvin}$) measures energy stored per unit volume.
+
+\begin{itemize}
+  \item \textbf{Constant-Pressure ($c_p$) vs.\ Constant-Volume ($c_v$) Specific Heat:} By the First Law (\sref{sec:07.1}), heating at constant volume ($\Delta V = 0 \implies W_{\mathrm{by}} = 0$) gives $Q_V = \Delta U = m c_v \Delta T$, whereas heating at constant pressure gives $Q_P = \Delta U + P\Delta V = \Delta H = m c_p \Delta T$. Exact thermodynamics relates their molar difference to the volumetric expansion coefficient $\beta_V$ and isothermal compressibility $\kappa_T$:
+  \begin{equation}\label{eq:04:cpcvsolid}
+    C_{P,m} - C_{V,m} = \frac{T V_m \beta_V^2}{\kappa_T}.
+  \end{equation}
+  For dense solids and liquids near $\SI{298}{\kelvin}$, $\beta_V$ is small ($\sim 10^{-5}\text{--}10^{-4}\,\si{\per\kelvin}$), so $C_{P,m} - C_{V,m}$ is only $1\%\text{--}5\%$ of $C_{P,m}$ (e.g., for copper at $\SI{298}{\kelvin}$, $C_{P,m} = \SI{24.44}{\joule\per\mole\per\kelvin}$ vs.\ $C_{V,m} = \SI{23.7}{\joule\per\mole\per\kelvin}$) and standard tables report $c \approx c_p$. For an ideal gas ($\beta_V = 1/T$, $\kappa_T = 1/P$), (\ref{eq:04:cpcvsolid}) yields Mayer's exact relation $C_{P,m} - C_{V,m} = R$ (\sref{sec:06}).
+  \item \textbf{Water Equivalent ($m_{\mathrm{eq}}$) \& Fast Unit Conversions:} Older calorimetry problems express a vessel's heat capacity $C_{\mathrm{cal}}$ ($\si{\joule\per\kelvin}$) as its \textbf{water equivalent}---the mass of liquid water having the same heat capacity:
+  \begin{equation}\label{eq:04:watereq}
+    m_{\mathrm{eq}} = \frac{C_{\mathrm{cal}}}{c_w} \implies C_{\mathrm{cal}} = m_{\mathrm{eq}} c_w.
+  \end{equation}
+  Because both the calorie and the BTU were historically defined using liquid water, specific heat has a \textbf{1-to-1 numerical identity} between CGS calories and Imperial units:
+  \begin{equation}\label{eq:04:unitidentity}
+    1\,\mathrm{cal/(g\cdot\si{\celsius})} = 1\,\mathrm{kcal/(kg\cdot\si{\kelvin})} = 1\,\mathrm{BTU/(lb_m\cdot{}^\circ\mathrm{F})} = \SI{4.184}{\joule\per\gram\per\kelvin} = \SI{4184}{\joule\per\kilogram\per\kelvin}.
+  \end{equation}
+\end{itemize}
+
+\begin{rulebox}[Steam Specific Heat Reconciliation Across NIST, OpenStax \& Ideal-Gas Limit \src{S04,S14,S16}]
+\idxtopic{steam specific heat reconciliation!2080 vs.\ 2020 vs.\ 1864 J/(kg K)}
+Water vapor specific heat $c_{p,\mathrm{steam}}$ appears with \textbf{three different values} across standard references depending on temperature and pressure:
+\begin{enumerate}
+  \item \textbf{NIST Real Saturated Steam at $\SI{100.0}{\celsius}, \SI{101.325}{\kilo\pascal}$ \src{S16}:} $c_p = \mathbf{\SI{2080.0}{\joule\per\kilogram\per\kelvin}}$ ($C_{p,m} = \SI{37.47}{\joule\per\mole\per\kelvin}$), $c_v = \SI{1555.6}{\joule\per\kilogram\per\kelvin}$, $\gamma = 1.337$. Hydrogen-bond clustering near saturation elevates $c_p$ by $\sim 11\%$ above the ideal-gas value.
+  \item \textbf{OpenStax \emph{University Physics Vol.~2} Table~1.3 \src{S04}:} $c_p = \mathbf{\SI{2020}{\joule\per\kilogram\per\kelvin}}$ ($0.482\,\mathrm{kcal/(kg\cdot\si{\celsius})}$) and $c_v = \SI{1520}{\joule\per\kilogram\per\kelvin}$, representing slightly superheated steam at $\SI{1}{\text{atm}}$ averaged over $\SIrange{100}{150}{\celsius}$ (Lienhard 6e gives $\SI{2034}{\joule\per\kilogram\per\kelvin}$ at $\SI{110}{\celsius}$ \src{S14}).
+  \item \textbf{Dilute Ideal-Gas Limit at $\SI{298.15}{\kelvin}$ ($f = 3\text{ trans} + 3\text{ rot} = 6$) \src{S16}:} $C_{p,m}^\circ = \SI{33.58}{\joule\per\mole\per\kelvin} \implies c_p = \mathbf{\SI{1864}{\joule\per\kilogram\per\kelvin}}$ (exact $4R/M = \SI{1846}{\joule\per\kilogram\per\kelvin}$), $c_v = \SI{1403}{\joule\per\kilogram\per\kelvin}$, $\gamma = 1.329$.
+\end{enumerate}
+\textbf{Competition Rule:} If a problem does not give $c_{\mathrm{steam}}$, write down both the textbook value $\SI{2020}{\joule\per\kilogram\per\kelvin}$ (or $\SI{2010}{\joule\per\kilogram\per\kelvin}$) and the NIST saturation value $\SI{2080}{\joule\per\kilogram\per\kelvin}$; they differ by only $3\%$ on the sensible superheat step and negligible amounts compared to $L_v = \SI{2256.4}{\kilo\joule\per\kilogram}$.
+\end{rulebox}
+
+\begin{center}
+\captionof{table}{Sourced thermophysical and calorimetry properties of 28 common solids and liquids at $\SI{20}{\celsius}$--$\SI{25}{\celsius}$, $\SI{1}{\text{atm}}$, cross-reconciling Lienhard 6e \src{S14}, NIST WebBook \src{S16,S17}, and OpenStax UP2 \src{S04}.}\label{tab:04:calorimetry}
+\scriptsize\setlength{\tabcolsep}{2.8pt}\renewcommand{\arraystretch}{1.09}
+\begin{tabularx}{\linewidth}{@{}l r r r r r r r X@{}}\toprule
+\textbf{Substance} & \textbf{$\rho$ ($\si{\kilogram\per\cubic\meter}$)} & \textbf{$c_p$ [NIST/L6e]} & \textbf{$c_p$ [OS UP2]} & \textbf{$C_m$ ($\si{\joule\per\mole\per\kelvin}$)} & \textbf{$T_m$ ($\si{\celsius}$)} & \textbf{$L_f$ ($\si{\kilo\joule\per\kilogram}$)} & \textbf{$T_b$ ($\si{\celsius}$)} & \textbf{$L_v$ ($\si{\kilo\joule\per\kilogram}$) / Notes} \\\midrule
+\multicolumn{9}{@{}l}{\textbf{Metals \& Alloys} ($c_p$ in $\si{\joule\per\kilogram\per\kelvin}$; Dulong--Petit benchmark $3R = \SI{24.94}{\joule\per\mole\per\kelvin}$)} \\
+Aluminum ($\mathrm{Al}$, $M=26.98$) & 2700 & \textbf{897} & 900 & $24.20\;(2.91R)$ & 660.3 & 397 & 2519 & $L_v = 10500$; $\Theta_D = \SI{428}{\kelvin}$ \\
+Beryllium ($\mathrm{Be}$, $M=9.012$) & 1850 & \textbf{1825} & 1825 & $16.44\;(1.98R)$ & 1287 & 876 & 2469 & Quantum freeze-out ($\Theta_D = \SI{1440}{\kelvin}$) \\
+Brass ($70\mathrm{Cu}$--$30\mathrm{Zn}$) & 8530 & \textbf{380} & 380 & $\approx 24.4$ & 930 & 168 & --- & Standard calorimeter weight alloy \\
+Copper ($\mathrm{Cu}$, $M=63.55$) & 8960 & \textbf{385} & 390 & $24.44\;(2.94R)$ & 1084.6 & 207 & 2562 & $L_v = 4730$; $\Theta_D = \SI{343}{\kelvin}$ \\
+Gold ($\mathrm{Au}$, $M=196.97$) & 19300 & \textbf{129} & 129 & $25.42\;(3.06R)$ & 1064.2 & 63.7 & 2856 & $L_v = 1645$; $\Theta_D = \SI{165}{\kelvin}$ \\
+Iron ($\mathrm{Fe}$, $M=55.845$) & 7874 & \textbf{449} & 450 & $25.10\;(3.02R)$ & 1538 & 247 & 2861 & $L_v = 6090$; $\Theta_D = \SI{470}{\kelvin}$ \\
+Steel (Carbon, $1\%\,\mathrm{C}$) & 7850 & \textbf{470} & 452 & $\approx 26.2$ & 1450 & 250 & --- & Stainless 304: $c_p = \SI{500}{\joule\per\kilogram\per\kelvin}$ \\
+Lead ($\mathrm{Pb}$, $M=207.2$) & 11340 & \textbf{129} & 128 & $26.65\;(3.21R)$ & 327.5 & 23.0 & 1749 & $L_v = 859$; $\Theta_D = \SI{105}{\kelvin}$ \\
+Nickel ($\mathrm{Ni}$, $M=58.69$) & 8908 & \textbf{444} & 444 & $26.07\;(3.13R)$ & 1455 & 298 & 2913 & Ferromagnetic contribution near $T_C$ \\
+Platinum ($\mathrm{Pt}$, $M=195.08$) & 21450 & \textbf{133} & 133 & $25.86\;(3.11R)$ & 1768.3 & 113.6 & 3825 & RTD sensor standard (\sref{sec:03.2}) \\
+Silver ($\mathrm{Ag}$, $M=107.87$) & 10490 & \textbf{235} & 235 & $25.35\;(3.05R)$ & 961.8 & 104.8 & 2162 & $L_v = 2360$; $\Theta_D = \SI{225}{\kelvin}$ \\
+Tin ($\mathrm{Sn}$, $M=118.71$) & 7310 & \textbf{228} & 227 & $27.11\;(3.26R)$ & 231.9 & 59.2 & 2602 & White $\beta$-$\mathrm{Sn}$; eutectic solder component \\
+Titanium ($\mathrm{Ti}$, $M=47.87$) & 4506 & \textbf{523} & 522 & $25.06\;(3.01R)$ & 1668 & 295 & 3287 & Low-$k$ structural metal ($k = \SI{21.9}{\watt\per\meter\per\kelvin}$) \\
+Tungsten ($\mathrm{W}$, $M=183.84$) & 19250 & \textbf{132} & 134 & $24.27\;(2.92R)$ & 3422 & 192 & 5555 & Highest $T_m$ of any pure metal \\
+Zinc ($\mathrm{Zn}$, $M=65.38$) & 7140 & \textbf{388} & 390 & $25.39\;(3.05R)$ & 419.5 & 112 & 907 & $L_v = 1760$; $\Theta_D = \SI{327}{\kelvin}$ \\\midrule
+\multicolumn{9}{@{}l}{\textbf{Nonmetallic Solids, Minerals, Ice \& Polymers} ($c_p$ in $\si{\joule\per\kilogram\per\kelvin}$)} \\
+Diamond ($\mathrm{C}$, $M=12.011$) & 3515 & \textbf{509} & 509 & $6.12\;(0.74R)$ & 3550 & --- & --- & Strongest quantum freeze-out ($\Theta_D = \SI{2230}{\kelvin}$) \\
+Silicon ($\mathrm{Si}$, $M=28.085$) & 2329 & \textbf{705} & 705 & $19.79\;(2.38R)$ & 1414 & 1787 & 3265 & $\Theta_D = \SI{645}{\kelvin}$; high latent fusion heat \\
+Glass (Crown / Soda-Lime) & 2500 & \textbf{840} & 840 & --- & $\sim 1400$ & --- & --- & Pyrex borosilicate: $c_p = \SI{753}{\joule\per\kilogram\per\kelvin}$ \\
+Quartz Sand / Granite ($\mathrm{SiO_2}$) & 2650 & \textbf{790} & 840 & $44.4\;\text{(3-atom)}$ & 1670 & 142 & 2230 & Dry sand bulk $\rho \approx \SI{1600}{\kilogram\per\cubic\meter}$, $c_p \approx \SI{800}{\joule\per\kilogram\per\kelvin}$ \\
+Concrete / Brick (Dry) & 2300 & \textbf{880} & 840 & --- & --- & --- & --- & Gypsum drywall: $c_p = \SI{1090}{\joule\per\kilogram\per\kelvin}$ \\
+Ice Ih ($\mathrm{H_2O(s)}$ at $\SI{0}{\celsius}$) & 916.7 & \textbf{2093} & 2090 & $37.7\;\text{(at }\SI{0}{\celsius}\text{)}$ & 0.00 & \textbf{333.55} & --- & At $\SI{-20}{\celsius}$: $c_p = \SI{1960}{\joule\per\kilogram\per\kelvin}$; OS $L_f = \SI{334}{\kilo\joule\per\kilogram}$ \\
+Polymers (\texttt{\#1 PET / \#5 PP}) & 1380/905 & \textbf{1200/1920} & --- & --- & 255/165 & --- & --- & Wood (oak/pine): $c_p \approx \SI{1700}{\joule\per\kilogram\per\kelvin}$ \\\midrule
+\multicolumn{9}{@{}l}{\textbf{Calorimetry Liquids at $\SI{20}{\celsius}$--$\SI{25}{\celsius}$, $\SI{1}{\text{atm}}$} ($c_p$ in $\si{\joule\per\kilogram\per\kelvin}$)} \\
+Water ($\mathrm{H_2O(\ell)}$, $M=18.015$) & 998.2 & \textbf{4184} & 4186 & $75.33\;(9.06R)$ & 0.00 & \textbf{333.55} & 100.0 & $L_v(\SI{100}{\celsius}) = \mathbf{2256.4}$ (OS: $2256$); $L_v(\SI{25}{\celsius}) = 2441.7$ \\
+Seawater ($3.5\%$ salinity) & 1025 & \textbf{3993} & 3990 & --- & $-1.91$ & 315 & 100.6 & Colligative depression $\Delta T_f = -\SI{1.91}{\celsius}$ \\
+Ethanol ($\mathrm{C_2H_5OH}$, $M=46.07$) & 789 & \textbf{2440} & 2430 & $112.4$ & $-114.1$ & 108 & 78.24 & $L_v = \SI{846}{\kilo\joule\per\kilogram}$ (OS: $854$) \\
+Methanol ($\mathrm{CH_3OH}$, $M=32.04$) & 792 & \textbf{2530} & 2549 & $81.1$ & $-97.6$ & 99.2 & 64.7 & $L_v = \SI{1100}{\kilo\joule\per\kilogram}$ \\
+Glycerol ($\mathrm{C_3H_8O_3}$, $M=92.09$) & 1261 & \textbf{2427} & 2410 & $223.5$ & 17.8 & 200.6 & 290 & High viscosity ($\mu = \SI{1.41}{\pascal\second}$ at $\SI{20}{\celsius}$) \\
+Ethylene Glycol ($\mathrm{C_2H_6O_2}$) & 1113 & \textbf{2415} & 2386 & $149.9$ & $-12.9$ & 181 & 197.3 & $50/50$ water antifreeze: $c_p \approx \SI{3350}{\joule\per\kilogram\per\kelvin}$, $T_f \approx -\SI{37}{\celsius}$ \\
+Mercury ($\mathrm{Hg(\ell)}$, $M=200.59$) & 13546 & \textbf{139.5} & 139 & $27.98\;(3.37R)$ & $-38.83$ & 11.4 & 356.7 & $L_v = \SI{295}{\kilo\joule\per\kilogram}$; liquid metal at $\SI{298}{\kelvin}$ \\
+Vegetable / Olive Oil & 918 & \textbf{1970} & 1970 & --- & $\sim -6$ & --- & $\sim 300$ & Kerosene / Mineral oil: $c_p \approx \SI{2010}{\joule\per\kilogram\per\kelvin}$ \\\bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{center}
+\captionof{table}{Temperature-dependent thermophysical properties of Ice~Ih ($\SI{-50}{\celsius}$ to $\SI{0}{\celsius}$), Liquid Water ($\SI{0}{\celsius}$ to $\SI{100}{\celsius}$), and Superheated Steam ($\SI{100}{\celsius}$ to $\SI{200}{\celsius}$) at $P = \SI{1}{\text{atm}}$ ($\SI{101.325}{\kilo\pascal}$) from NIST IAPWS-95 \src{S16} and Lienhard 6e \src{S14}.}\label{tab:04:waterice1atm}
+\scriptsize\setlength{\tabcolsep}{3.2pt}\renewcommand{\arraystretch}{1.08}
+\begin{tabularx}{\linewidth}{@{}r l r r r r r r r X@{}}\toprule
+\textbf{$T$ ($\si{\celsius}$)} & \textbf{Phase} & \textbf{$\rho$ ($\si{\kilogram\per\cubic\meter}$)} & \textbf{$c_p$ ($\si{\joule\per\kilogram\per\kelvin}$)} & \textbf{$k$ ($\si{\watt\per\meter\per\kelvin}$)} & \textbf{$\mu$ ($\si{\milli\pascal\second}$)} & \textbf{$\nu$ ($\SI{e-6}{\square\meter\per\second}$)} & \textbf{$\alpha$ ($\SI{e-7}{\square\meter\per\second}$)} & \textbf{$\mathrm{Pr} = \nu/\alpha$} & \textbf{$\beta_V$ ($\SI{e-4}{\per\kelvin}$) / Key Benchmark} \\\midrule
+$-50.0$ & Ice Ih & $921.6$ & $1741$ & $2.76$ & --- & --- & $17.20$ & --- & $\alpha_L = \SI{45e-6}{\per\kelvin}$ ($\beta_V = \SI{1.35e-4}{\per\kelvin}$) \\
+$-30.0$ & Ice Ih & $919.6$ & $1882$ & $2.50$ & --- & --- & $14.45$ & --- & $c_p$ rises linearly with $T$ in ice \\
+$-20.0$ & Ice Ih & $918.7$ & $1960$ & $2.39$ & --- & --- & $13.27$ & --- & Standard freezer ice benchmark \\
+$-10.0$ & Ice Ih & $917.8$ & $2027$ & $2.30$ & --- & --- & $12.36$ & --- & $\alpha_{\mathrm{ice}} \approx 9\times \alpha_{\mathrm{water}}$! \\
+$0.0$ & Ice Ih & $916.7$ & $\mathbf{2093}$ & $2.22$ & --- & --- & $11.57$ & --- & $L_f = \SI{333.55}{\kilo\joule\per\kilogram}$ at $\SI{0.00}{\celsius}$ \\\midrule
+$0.0$ & Liquid & $999.84$ & $4217.6$ & $0.5610$ & $1.792$ & $1.792$ & $1.330$ & $13.48$ & $\beta_V = \mathbf{-0.68}$ (contracts on warming!) \\
+$3.984$ & Liquid & $\mathbf{999.97}$ & $4204.5$ & $0.5687$ & $1.568$ & $1.568$ & $1.353$ & $11.59$ & \textbf{Density maximum} ($\beta_V = 0.00$) \\
+$10.0$ & Liquid & $999.70$ & $4192.1$ & $0.5800$ & $1.306$ & $1.306$ & $1.384$ & $9.44$ & $\beta_V = +0.88$ \\
+$20.0$ & Liquid & $998.21$ & $\mathbf{4181.8}$ & $0.5984$ & $1.002$ & $1.004$ & $1.434$ & $7.00$ & $\beta_V = +2.07$ ($1\,\mathrm{cal}_{\mathrm{th}} = \SI{4.184}{\joule}$) \\
+$25.0$ & Liquid & $997.05$ & $4179.6$ & $0.6072$ & $0.890$ & $0.893$ & $1.458$ & $6.13$ & $\beta_V = +2.57$ (Standard $\SI{298.15}{\kelvin}$) \\
+$35.0$ & Liquid & $994.03$ & $\mathbf{4178.0}$ & $0.6233$ & $0.719$ & $0.724$ & $1.501$ & $4.82$ & \textbf{Minimum $c_p$} of liquid water at $\SI{35}{\celsius}$ \\
+$40.0$ & Liquid & $992.22$ & $4178.6$ & $0.6306$ & $0.653$ & $0.658$ & $1.521$ & $4.33$ & $\beta_V = +3.85$ (2027 cup mean $T$) \\
+$50.0$ & Liquid & $988.03$ & $4180.6$ & $0.6435$ & $0.547$ & $0.554$ & $1.558$ & $3.55$ & $\beta_V = +4.58$ \\
+$60.0$ & Liquid & $983.20$ & $4184.3$ & $0.6543$ & $0.466$ & $0.474$ & $1.591$ & $2.98$ & $\beta_V = +5.23$ \\
+$80.0$ & Liquid & $971.79$ & $4196.3$ & $0.6700$ & $0.354$ & $0.365$ & $1.643$ & $2.22$ & $\beta_V = +6.41$ \\
+$100.0$ & Sat.\ Liq & $958.35$ & $4215.7$ & $0.6791$ & $0.282$ & $0.294$ & $1.680$ & $1.75$ & $\beta_V = +7.50$; $L_v = \SI{2256.4}{\kilo\joule\per\kilogram}$ \\\midrule
+$100.0$ & Sat.\ Vap & $0.5977$ & $\mathbf{2080.0}$ & $0.0251$ & $0.0123$ & $20.53$ & $201.9$ & $1.017$ & NIST real sat.\ steam ($c_v = \SI{1555.6}{\joule\per\kilogram\per\kelvin}$) \\
+$120.0$ & Steam & $0.5608$ & $2036.0$ & $0.0268$ & $0.0131$ & $23.32$ & $234.7$ & $0.994$ & OpenStax average $c_p = \SI{2020}{\joule\per\kilogram\per\kelvin}$ \\
+$150.0$ & Steam & $0.5164$ & $2003.9$ & $0.0295$ & $0.0143$ & $27.67$ & $285.1$ & $0.971$ & Approaches ideal-gas behavior \\
+$200.0$ & Steam & $0.4564$ & $1988.2$ & $0.0342$ & $0.0163$ & $35.67$ & $376.9$ & $0.946$ & $\SI{1}{\text{atm}}$ superheated steam \\\bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{center}
+\captionof{table}{Temperature-dependent ideal-gas molar heat capacity $C_{p,m}^\circ(T) = A + Bt + Ct^2 + Dt^3 + E/t^2$ ($t = T/\SI{1000}{\kelvin}$) from NIST Chemistry WebBook \src{S16}, with pre-evaluated values ($\si{\joule\per\mole\per\kelvin}$) for algebraic midpoint calorimetry $\Delta H = n\,C_{p,m}(\bar{T})\,\Delta T$.}\label{tab:04:shomate}
+\scriptsize\setlength{\tabcolsep}{3.5pt}\renewcommand{\arraystretch}{1.08}
+\begin{tabularx}{\linewidth}{@{}l r r r r r r r r r X@{}}\toprule
+\textbf{Gas ($M$, $\si{\gram\per\mole}$)} & \textbf{$A$} & \textbf{$B$} & \textbf{$C$} & \textbf{$D$} & \textbf{$E$} & \textbf{$C_{p,m}(\SI{298}{\kelvin})$} & \textbf{$C_{p,m}(\SI{400}{\kelvin})$} & \textbf{$C_{p,m}(\SI{600}{\kelvin})$} & \textbf{$C_{p,m}(\SI{800}{\kelvin})$} & \textbf{$C_{p,m}(\SI{1000}{\kelvin})$} \\\midrule
+$\mathrm{N_2}$ ($28.013$) & $28.986$ & $1.854$ & $-9.647$ & $16.635$ & $0.0001$ & $29.12\;(3.50R)$ & $29.25$ & $30.11$ & $31.43$ & $32.70\;(3.93R)$ \\
+$\mathrm{O_2}$ ($31.999$) & $31.322$ & $-20.235$ & $57.866$ & $-36.506$ & $-0.0074$ & $29.38\;(3.53R)$ & $30.11$ & $32.09$ & $33.73$ & $34.87\;(4.19R)$ \\
+$\mathrm{H_2}$ ($2.016$) & $33.066$ & $-11.363$ & $11.433$ & $-2.773$ & $-0.1586$ & $28.84\;(3.47R)$ & $29.18$ & $29.33$ & $29.62$ & $30.20\;(3.63R)$ \\
+$\mathrm{CO}$ ($28.010$) & $25.568$ & $6.096$ & $4.055$ & $-2.671$ & $0.1310$ & $29.14\;(3.51R)$ & $29.34$ & $30.44$ & $31.90$ & $33.18\;(3.99R)$ \\
+$\mathrm{H_2O(g)}$ ($18.015$) & $30.092$ & $6.833$ & $6.793$ & $-2.534$ & $0.0821$ & $33.58\;(4.04R)$ & $34.26$ & $36.33$ & $38.72$ & $41.27\;(4.96R)$ \\
+$\mathrm{CO_2}$ ($44.010$) & $24.997$ & $55.187$ & $-33.691$ & $7.948$ & $-0.1366$ & $37.13\;(4.47R)$ & $41.33$ & $47.32$ & $51.43$ & $54.31\;(6.53R)$ \\
+$\mathrm{CH_4}$ ($16.043$) & $-0.703$ & $108.477$ & $-42.522$ & $5.863$ & $0.6786$ & $35.69\;(4.29R)$ & $40.63$ & $52.23$ & $62.93$ & $71.80\;(8.64R)$ \\
+$\mathrm{NH_3}$ ($17.031$) & $19.996$ & $49.771$ & $-15.376$ & $1.921$ & $0.1892$ & $35.65\;(4.29R)$ & $38.72$ & $45.29$ & $51.24$ & $56.49\;(6.79R)$ \\\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{The Law of Dulong \& Petit (1819) and Quantum Lattice Freeze-Out}
+\label{sec:04.2}
+\idxtopic{Dulong-Petit law!classical 3R limit and unknown metal identification}
+\idxtopic{Debye temperature and quantum phonon freeze-out}
+
+In 1819, French physicists Pierre Louis Dulong and Alexis Th\'er\`ese Petit discovered empirically that the product of specific heat $c$ and atomic molar mass $M$ is nearly identical for most solid elements near room temperature \src{S04,S07}:
+\begin{equation}\label{eq:04:dulongpetit}
+  C_m = M c \approx 3R = 3(\SI{8.31446}{\joule\per\mole\per\kelvin}) = \mathbf{\SI{24.94}{\joule\per\mole\per\kelvin}} \approx 6.0\,\mathrm{cal/(mol\cdot\si{\kelvin})} \implies c \approx \frac{3R}{M}.
+\end{equation}
+
+\begin{derivation}[Algebraic Equipartition Proof of the Dulong--Petit Law \src{S04,S07}]
+In a crystalline solid of $N$ atoms, each atom vibrates harmonically in $3$ orthogonal directions ($x,y,z$) about its lattice site. Each 1D harmonic oscillator possesses $2$ quadratic energy terms ($E_{1\mathrm{D}} = \frac{1}{2}mv_x^2 + \frac{1}{2}\kappa_s x^2$), so a 3D lattice atom has $f = 3\text{ (kinetic)} + 3\text{ (potential)} = 6$ quadratic degrees of freedom. By the classical equipartition theorem (\sref{sec:06.2}), each quadratic mode stores an average thermal energy of $\frac{1}{2}k_B T$:
+\[
+  U = N \left(6 \times \frac{1}{2}k_B T\right) = 3 N k_B T = 3 n R T \implies C_{V,m} = \frac{\Delta U}{n\Delta T} = \mathbf{3R = \SI{24.943}{\joule\per\mole\per\kelvin}}.
+\]
+For a multi-atom ionic or covalent crystal whose formula unit contains $\nu_{\mathrm{atoms}}$ atoms (such as $\mathrm{NaCl}$ with $\nu_{\mathrm{atoms}} = 2$, or $\mathrm{SiO_2}$ with $\nu_{\mathrm{atoms}} = 3$), the classical Kopp--Neumann extension gives $C_{V,m} \approx 3\,\nu_{\mathrm{atoms}}\,R$ ($\approx \SI{49.9}{\joule\per\mole\per\kelvin}$ for $\mathrm{NaCl}$, actual $\SI{50.5}{\joule\per\mole\per\kelvin}$ at $\SI{298}{\kelvin}$).
+\end{derivation}
+
+\begin{itemize}
+  \item \textbf{Competition Shortcut --- Identifying an Unknown Metal from Calorimetry Data:} Because $M \approx \dfrac{\SI{24.94}{\joule\per\mole\per\kelvin}}{c}$, specific heat $c$ ($\si{\joule\per\kilogram\per\kelvin}$) scales \textbf{inversely} with atomic mass $M$: light metals have large specific heat ($\mathrm{Al}$: $M = \SI{27.0}{\gram\per\mole} \implies c = \SI{897}{\joule\per\kilogram\per\kelvin}$), medium transition metals cluster near $\SIrange{385}{450}{\joule\per\kilogram\per\kelvin}$ ($\mathrm{Fe}, \mathrm{Ni}, \mathrm{Cu}, \mathrm{Zn}$), and heavy metals have tiny specific heat ($\mathrm{Ag}$: $\SI{235}{\joule\per\kilogram\per\kelvin}$; $\mathrm{Au}, \mathrm{Pb}, \mathrm{Pt}, \mathrm{W}$: $\SIrange{128}{133}{\joule\per\kilogram\per\kelvin}$).
+  \item \textbf{Why Light, Stiff Solids Fall Below $3R$ at Room Temperature (Einstein 1907 \& Debye 1912):} Classical equipartition assumes $k_B T \gg \hbar\omega_{\max}$, where $\omega_{\max}$ is the maximum lattice vibration (phonon) frequency $\omega_{\max} \sim \sqrt{\kappa_s/m_{\mathrm{atom}}}$. Defining the \textbf{Debye temperature} $\Theta_D = \hbar\omega_{\max}/k_B \propto \sqrt{\kappa_s/M}$:
+  \begin{enumerate}
+    \item \textbf{High-$T$ Classical Regime ($T \gtrsim \Theta_D$):} All phonon modes are thermally active and $C_{V,m} \to 3R$. Heavy, soft metals have low $\Theta_D$ ($\mathrm{Pb}$: $\Theta_D = \SI{105}{\kelvin}$; $\mathrm{Au}$: $\SI{165}{\kelvin}$; $\mathrm{Ag}$: $\SI{225}{\kelvin}$; $\mathrm{Cu}$: $\SI{343}{\kelvin}$) and reach $3R$ at or below $\SI{298}{\kelvin}$.
+    \item \textbf{Quantum Freeze-Out at Room Temperature ($T < \Theta_D$):} Light atoms bound by ultra-stiff covalent bonds have high $\Theta_D$, so high-frequency modes are ``frozen out'' at $\SI{298}{\kelvin}$: \textbf{diamond} ($\Theta_D = \SI{2230}{\kelvin} \implies C_m(\SI{298}{\kelvin}) = \SI{6.12}{\joule\per\mole\per\kelvin} = 0.74R$), \textbf{beryllium} ($\Theta_D = \SI{1440}{\kelvin} \implies \SI{16.44}{\joule\per\mole\per\kelvin} = 1.98R$), \textbf{silicon} ($\Theta_D = \SI{645}{\kelvin} \implies \SI{19.79}{\joule\per\mole\per\kelvin} = 2.38R$).
+    \item \textbf{Cryogenic Debye $T^3$ Limit ($T \ll \Theta_D$):} As $T \to \SI{0}{\kelvin}$, the phonon heat capacity vanishes as $T^3$, satisfying the Third Law (\sref{sec:08.5}):
+    \begin{equation}\label{eq:04:debye}
+      C_{V,m}(T) = \frac{12\pi^4}{5}R\left(\frac{T}{\Theta_D}\right)^3 \approx 233.78\,R\left(\frac{T}{\Theta_D}\right)^3 \qquad (\text{plus electronic } C_{\mathrm{el}} = \gamma_{\mathrm{el}}T \text{ in metals}).
+    \end{equation}
+  \end{enumerate}
+\end{itemize}
+
+\section{Method of Mixtures, Calorimeter Constant $C_{\mathrm{cal}}$ \& Multi-Phase Ledger}
+\label{sec:04.3}
+\idxtopic{calorimetry!method of mixtures and calorimeter constant}
+\idxtopic{calorimetry!5-zone ice-water-steam phase-change algorithm}
+\idxtopic{heating curve of water!5-stage quantitative energy ledger}
+
+In an adiabatically insulated calorimeter ($Q_{\mathrm{ext}} = 0$) at constant pressure, conservation of energy requires that the algebraic sum of all signed heat transfers into every sub-body $i$ (including the calorimeter cup/stirrer/thermometer assembly $C_{\mathrm{cal}}$) equals zero \src{S04,S05}:
+\begin{equation}\label{eq:04:nbody}
+  \sum_{i} Q_i = 0 \quad\Longleftrightarrow\quad \sum_{\text{cold}} |Q_{\mathrm{gained}}| = \sum_{\text{hot}} |Q_{\mathrm{lost}}|.
+\end{equation}
+When no phase change occurs, every term is sensible ($Q_i = m_i c_i (T_f - T_i)$) and (\ref{eq:04:nbody}) yields the linear weighted average:
+\begin{equation}\label{eq:04:nbodytf}
+  \sum_{i=1}^N m_i c_i (T_f - T_i) + C_{\mathrm{cal}}(T_f - T_{\mathrm{cal}}) = 0 \implies
+  T_f = \frac{\sum_{i=1}^N m_i c_i T_i + C_{\mathrm{cal}} T_{\mathrm{cal}}}{\sum_{i=1}^N m_i c_i + C_{\mathrm{cal}}}.
+\end{equation}
+To measure $C_{\mathrm{cal}}$ experimentally before an unknown-sample run, pour a known mass $m_h$ of warm water at $T_h$ into a known mass $m_c$ of cold water equilibrated with the calorimeter at $T_c$, record the equilibrium temperature $T_f$, and solve (\ref{eq:04:nbodytf}):
+\begin{equation}\label{eq:04:ccal}
+  m_h c_w (T_f - T_h) + (m_c c_w + C_{\mathrm{cal}})(T_f - T_c) = 0 \implies
+  C_{\mathrm{cal}} = m_h c_w \frac{T_h - T_f}{T_f - T_c} - m_c c_w.
+\end{equation}
+
+\begin{center}
+\begin{tikzpicture}[font=\scriptsize]
+\begin{axis}[
+  width=0.92\linewidth,
+  height=5.6cm,
+  xlabel={Cumulative Heat Added per Kilogram of $\mathrm{H_2O}$, $q = Q/m$ ($\si{\kilo\joule\per\kilogram}$)},
+  ylabel={Temperature $T$ ($\si{\celsius}$)},
+  xmin=0, xmax=3350,
+  ymin=-50, ymax=175,
+  xtick={0,83.7,417.3,835.7,3092.1,3216.9},
+  xticklabels={$0$, $83.7$, $417.3$, $835.7$, $3092.1$, $3217$},
+  ytick={-40,0,50,100,160},
+  grid=both,
+  grid style={draw=gray!25},
+  axis line style={thick,navy},
+  tick label style={font=\scriptsize},
+  label style={font=\scriptsize\bfseries}
+]
+  % 5-stage water heating curve from -40 C to +160 C at 1 atm
+  \addplot[ultra thick,rust,mark=*,mark size=1.8pt] coordinates {
+    (0,-40)
+    (83.72,0)
+    (417.27,0)
+    (835.67,100)
+    (3092.07,100)
+    (3216.87,160)
+  };
+  % Stage labels
+  \node[above right,font=\scriptsize\bfseries,navy] at (axis cs:5,-36) {1. Ice: $c_{\mathrm{ice}}\Delta T$};
+  \node[above,font=\scriptsize\bfseries,rust] at (axis cs:250,3) {2. Melt ($0\,^\circ\mathrm{C}$): $L_f = \SI{333.55}{\kilo\joule\per\kilogram}$};
+  \node[above left,font=\scriptsize\bfseries,teal] at (axis cs:665,48) {3. Liquid Water: $c_w\Delta T$};
+  \node[above,font=\scriptsize\bfseries,rust] at (axis cs:1960,103) {4. Boil ($100\,^\circ\mathrm{C}$): $L_v = \SI{2256.4}{\kilo\joule\per\kilogram}$};
+  \node[left,font=\scriptsize\bfseries,navy] at (axis cs:3140,145) {5. Steam: $c_{\mathrm{st}}\Delta T$};
+  % Horizontal dashed guides at 0 C and 100 C
+  \draw[dashed,navy!60] (axis cs:0,0) -- (axis cs:3350,0);
+  \draw[dashed,navy!60] (axis cs:0,100) -- (axis cs:3350,100);
+\end{axis}
+\end{tikzpicture}
+\captionof{figure}{Five-stage quantitative heating curve for $\SI{1.000}{\kilogram}$ of $\mathrm{H_2O}$ at $\SI{1}{\text{atm}}$ from $\SI{-40}{\celsius}$ ice to $\SI{160}{\celsius}$ steam ($c_{\mathrm{ice}} = \SI{2.093}{\kilo\joule\per\kilogram\per\kelvin}$, $L_f = \SI{333.55}{\kilo\joule\per\kilogram}$, $c_w = \SI{4.184}{\kilo\joule\per\kilogram\per\kelvin}$, $L_v = \SI{2256.4}{\kilo\joule\per\kilogram}$, $c_{p,\mathrm{steam}} = \SI{2.080}{\kilo\joule\per\kilogram\per\kelvin}$) \src{S04,S16}. Note that boiling ($L_v$) absorbs $5.4\times$ more energy than heating liquid water from $\SI{0}{\celsius}$ to $\SI{100}{\celsius}$ ($\SI{418.4}{\kilo\joule\per\kilogram}$) and $6.76\times$ more than melting ice ($L_f$).}\label{fig:04:heating-curve}
+\idxfig{water 5-stage heating curve from -40 C ice to 160 C steam}
+\end{center}
+
+\subsection{Deterministic 5-Zone Algebraic Algorithm for Ice--Water--Steam Mixtures}
+\label{sec:04.3.1}
+When subcooled ice ($m_{\mathrm{ice}}$ at $T_{\mathrm{ice},i} \leq \SI{0}{\celsius}$), liquid water ($m_w$ at $\SI{0}{\celsius} \leq T_{w,i} \leq \SI{100}{\celsius}$), superheated or saturated steam ($m_{\mathrm{st}}$ at $T_{\mathrm{st},i} \geq \SI{100}{\celsius}$), and non-phase-changing solids/calorimeter ($m_{\mathrm{sol}}, c_{\mathrm{sol}}, T_{\mathrm{sol},i}$; $C_{\mathrm{cal}}, T_{\mathrm{cal},i}$) are mixed at $\SI{1}{\text{atm}}$, \textbf{never guess} $T_f$ blindly! guessing the wrong phase region produces nonsensical results such as $T_f < \SI{0}{\celsius}$ after assuming all ice melted. Instead, use the \textbf{$\SI{0}{\celsius}$ Liquid-Water Reference State Method} (\fref{fig:04:ice-water-tree}):
+
+\begin{enumerate}
+  \item \textbf{Step 1 --- Compute Net Thermal Energy $E_{\mathrm{net},0}$ Relative to All-Liquid Water at $T_{\mathrm{ref}} = \SI{0}{\celsius}$:}
+  Bring every component algebraically to liquid water (or solid metal/calorimeter) at $\SI{0}{\celsius}$. Heat released by hot bodies cooling/condensing to $\SI{0}{\celsius}$ liquid water is positive; heat required to warm and melt cold ice to $\SI{0}{\celsius}$ liquid water is negative:
+  \begin{align}\label{eq:04:enet0}
+    E_{\mathrm{avail},0} &= m_w c_w (T_{w,i} - 0) + m_{\mathrm{st}}\!\left[c_{\mathrm{st}}(T_{\mathrm{st},i} - 100) + L_v + 100\,c_w\right] + \sum_k C_{\mathrm{solid},k}(T_{\mathrm{solid},k,i} - 0), \\
+    E_{\mathrm{need,ice}\to 0\,\ell} &= m_{\mathrm{ice}} c_{\mathrm{ice}}(0 - T_{\mathrm{ice},i}) + m_{\mathrm{ice}} L_f = E_{\mathrm{warm,ice}} + E_{\mathrm{melt,ice}}, \\
+    E_{\mathrm{net},0} &= E_{\mathrm{avail},0} - E_{\mathrm{need,ice}\to 0\,\ell}.
+  \end{align}
+  \item \textbf{Step 2 --- Define Total Water Mass $M_{\mathrm{H_2O}}$ and Checkpoint Capacities:}
+  Let $M_{\mathrm{H_2O}} = m_{\mathrm{ice}} + m_w + m_{\mathrm{st}}$ be the total $\mathrm{H_2O}$ mass and $C_{\mathrm{solids}} = \sum_k m_{\mathrm{sol},k} c_{\mathrm{sol},k} + C_{\mathrm{cal}}$ be the total heat capacity of all non-$\mathrm{H_2O}$ solids/vessels. Relative to the all-liquid $\SI{0}{\celsius}$ reference state ($E = 0$), the five phase zones are separated by exact energy checkpoints:
+  \begin{equation}\label{eq:04:checkpoints}
+    E_{\mathrm{100,\ell}} = (M_{\mathrm{H_2O}} c_w + C_{\mathrm{solids}})(\SI{100}{\celsius}), \qquad
+    E_{\mathrm{100,g}} = E_{\mathrm{100,\ell}} + M_{\mathrm{H_2O}} L_v.
+  \end{equation}
+  \item \textbf{Step 3 --- Locate $E_{\mathrm{net},0}$ in the 5-Zone Table (\tref{tab:04:fivezones}) to Read Off the Exact Final State:}
+\end{enumerate}
+
+\begin{center}
+\captionof{table}{Deterministic 5-Zone Phase-Equilibrium Table for $\mathrm{H_2O}$ + Solids Calorimetry at $\SI{1}{\text{atm}}$ (using $E_{\mathrm{net},0}$ from Eq.~\ref{eq:04:enet0}).}\label{tab:04:fivezones}
+\footnotesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.22}
+\begin{tabularx}{\linewidth}{@{}l l l X@{}}\toprule
+\textbf{Zone} & \textbf{Energy Condition on $E_{\mathrm{net},0}$} & \textbf{Final Phase State} & \textbf{Exact Algebraic Solution for $T_f$ or Mass Fractions} \\\midrule
+\textbf{Zone I} & $E_{\mathrm{net},0} < -M_{\mathrm{H_2O}} L_f$ & All Subcooled Ice ($T_f < \SI{0}{\celsius}$) & $\displaystyle T_f = \frac{E_{\mathrm{net},0} + M_{\mathrm{H_2O}} L_f}{M_{\mathrm{H_2O}} c_{\mathrm{ice}} + C_{\mathrm{solids}}} < \SI{0}{\celsius}$ \\
+\textbf{Zone II} & $-M_{\mathrm{H_2O}} L_f \leq E_{\mathrm{net},0} \leq 0$ & \textbf{Ice + Water at $T_f = \SI{0.00}{\celsius}$} & $\displaystyle m_{\mathrm{ice,final}} = \frac{-E_{\mathrm{net},0}}{L_f}, \quad m_{\mathrm{liq,final}} = M_{\mathrm{H_2O}} - m_{\mathrm{ice,final}}$ \\
+\textbf{Zone III} & $0 < E_{\mathrm{net},0} < E_{\mathrm{100,\ell}}$ & All Liquid Water ($\SI{0}{\celsius} < T_f < \SI{100}{\celsius}$) & $\displaystyle T_f = \frac{E_{\mathrm{net},0}}{M_{\mathrm{H_2O}} c_w + C_{\mathrm{solids}}}$ \\
+\textbf{Zone IV} & $E_{\mathrm{100,\ell}} \leq E_{\mathrm{net},0} \leq E_{\mathrm{100,g}}$ & \textbf{Water + Steam at $T_f = \SI{100.0}{\celsius}$} & $\displaystyle m_{\mathrm{steam,final}} = \frac{E_{\mathrm{net},0} - E_{\mathrm{100,\ell}}}{L_v}, \quad m_{\mathrm{liq,final}} = M_{\mathrm{H_2O}} - m_{\mathrm{steam,final}}$ \\
+\textbf{Zone V} & $E_{\mathrm{net},0} > E_{\mathrm{100,g}}$ & Superheated Steam ($T_f > \SI{100}{\celsius}$) & $\displaystyle T_f = \SI{100}{\celsius} + \frac{E_{\mathrm{net},0} - E_{\mathrm{100,g}}}{M_{\mathrm{H_2O}} c_{\mathrm{st}} + C_{\mathrm{solids}}}$ \\\bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{center}
+\begin{tikzpicture}[>=Stealth,font=\scriptsize,node distance=0.45cm]
+  \node[draw=navy,very thick,fill=boxbg,rounded corners=3pt,text width=14.6cm,align=center,inner sep=4pt] (start)
+    {\textbf{START:} Compute $E_{\mathrm{net},0} = E_{\mathrm{avail},0} - (E_{\mathrm{warm,ice}} + E_{\mathrm{melt,ice}})$ relative to all-liquid $\mathrm{H_2O}$ at $\SI{0}{\celsius}$ (Eq.~\ref{eq:04:enet0}), total $\mathrm{H_2O}$ mass $M_{\mathrm{H_2O}} = m_{\mathrm{ice}}+m_w+m_{\mathrm{st}}$, and $E_{\mathrm{100,\ell}} = 100(M_{\mathrm{H_2O}}c_w + C_{\mathrm{solids}})$, $E_{\mathrm{100,g}} = E_{\mathrm{100,\ell}} + M_{\mathrm{H_2O}}L_v$.};
+
+  \node[draw=rust,thick,fill=amber!14,rounded corners=2pt,text width=2.75cm,align=center,inner sep=3.5pt] (z1) at (-6.0,-1.75)
+    {\textbf{Zone I}\\$E_{\mathrm{net},0} < -M_{\mathrm{H_2O}}L_f$\\\textbf{All Ice ($T_f < \SI{0}{\celsius}$)}};
+  \node[draw=teal,very thick,fill=boxbg,rounded corners=2pt,text width=2.85cm,align=center,inner sep=3.5pt] (z2) at (-3.0,-1.75)
+    {\textbf{Zone II}\\$-M_{\mathrm{H_2O}}L_f \le E_{\mathrm{net},0} \le 0$\\\textbf{Ice+Water ($\SI{0}{\celsius}$)}};
+  \node[draw=navy,very thick,fill=boxbg,rounded corners=2pt,text width=2.85cm,align=center,inner sep=3.5pt] (z3) at (0.0,-1.75)
+    {\textbf{Zone III}\\$0 < E_{\mathrm{net},0} < E_{\mathrm{100,\ell}}$\\\textbf{All Liquid ($\SIrange{0}{100}{\celsius}$)}};
+  \node[draw=teal,very thick,fill=boxbg,rounded corners=2pt,text width=2.85cm,align=center,inner sep=3.5pt] (z4) at (3.0,-1.75)
+    {\textbf{Zone IV}\\$E_{\mathrm{100,\ell}} \le E_{\mathrm{net},0} \le E_{\mathrm{100,g}}$\\\textbf{Water+Steam ($\SI{100}{\celsius}$)}};
+  \node[draw=rust,thick,fill=amber!14,rounded corners=2pt,text width=2.75cm,align=center,inner sep=3.5pt] (z5) at (6.0,-1.75)
+    {\textbf{Zone V}\\$E_{\mathrm{net},0} > E_{\mathrm{100,g}}$\\\textbf{All Steam ($T_f > \SI{100}{\celsius}$)}};
+
+  \draw[->,thick,navy] (start.south) -- (z1.north);
+  \draw[->,thick,navy] (start.south) -- (z2.north);
+  \draw[->,thick,navy] (start.south) -- (z3.north);
+  \draw[->,thick,navy] (start.south) -- (z4.north);
+  \draw[->,thick,navy] (start.south) -- (z5.north);
+\end{tikzpicture}
+\captionof{figure}{Deterministic 5-Zone decision tree for multi-phase $\mathrm{H_2O}$ calorimetry at $\SI{1}{\text{atm}}$, eliminating trial-and-error phase guessing.}\label{fig:04:ice-water-tree}
+\idxfig{multi-phase calorimetry 5-zone decision tree}
+\end{center}
+
+\section{Electrical, Continuous-Flow \& Heat-Loss Corrected Calorimetry}
+\label{sec:04.4}
+\idxtopic{calorimetry!electrical heater and two-power-level heat-leak cancellation}
+\idxtopic{calorimetry!Callendar-Barnes continuous-flow calorimeter}
+\idxtopic{calorimetry!Regnault-Pfaundler drift-rate cooling correction}
+
+High-precision specific-heat measurements replace hot-block dropping with controlled electrical Joule heating ($P_{\mathrm{elec}} = VI = I^2R = V^2/R$) and account for ambient heat exchange $Q_{\mathrm{leak}}$ \src{S05,S14}:
+
+\begin{enumerate}
+  \item \textbf{Batch Electrical Immersion Calorimetry \& Two-Power Heat-Leak Elimination:}
+  When an electric heater operates at voltage $V$ and current $I$ for duration $t$ inside a liquid of mass $m$ and calorimeter $C_{\mathrm{cal}}$:
+  \begin{equation}\label{eq:04:elec}
+    V I t = (m c + C_{\mathrm{cal}})\Delta T + Q_{\mathrm{leak}}.
+  \end{equation}
+  If two runs of equal duration $t$ are performed across the \emph{same} mean temperature window (so $Q_{\mathrm{leak},1} = Q_{\mathrm{leak},2} = \dot{Q}_{\mathrm{loss}}t$) at electrical powers $P_1 = V_1 I_1$ and $P_2 = V_2 I_2$, subtracting Run~1 from Run~2 cancels $Q_{\mathrm{leak}}$ identically:
+  \begin{equation}\label{eq:04:tworun}
+    (P_2 - P_1)t = (m c + C_{\mathrm{cal}})(\Delta T_2 - \Delta T_1) \implies
+    c = \frac{(P_2 - P_1)t - C_{\mathrm{cal}}(\Delta T_2 - \Delta T_1)}{m(\Delta T_2 - \Delta T_1)}.
+  \end{equation}
+  \item \textbf{Callendar--Barnes Steady Continuous-Flow Calorimeter (1899):}
+  Fluid flows steadily at mass flow rate $\dot{m} = \Delta m/\Delta t$ ($\si{\kilogram\per\second}$) through a tube heated electrically at power $P = VI$, entering at $T_{\mathrm{in}}$ and exiting at steady $T_{\mathrm{out}}$:
+  \begin{equation}\label{eq:04:flow}
+    V I = \dot{m} c_p (T_{\mathrm{out}} - T_{\mathrm{in}}) + \dot{Q}_{\mathrm{loss}}.
+  \end{equation}
+  Because the tube wall temperature profile is stationary in time, the heat capacity of the calorimeter apparatus $C_{\mathrm{cal}}$ drops out completely! Changing flow rate and power from $(\dot{m}_1, V_1 I_1)$ to $(\dot{m}_2, V_2 I_2)$ while maintaining the \emph{exact same} $T_{\mathrm{in}}$ and $T_{\mathrm{out}}$ keeps $\dot{Q}_{\mathrm{loss}}$ identical, giving:
+  \begin{equation}\label{eq:04:flowcancel}
+    c_p = \frac{V_2 I_2 - V_1 I_1}{(\dot{m}_2 - \dot{m}_1)(T_{\mathrm{out}} - T_{\mathrm{in}})}.
+  \end{equation}
+  \item \textbf{Regnault--Pfaundler Linear Drift / Newton Cooling Correction:}
+  In a batch calorimetry run where temperature is logged during a pre-period ($t < t_0$, slope $r_{\mathrm{pre}} = (dT/dt)_{\mathrm{pre}}$), a main reaction/heating period ($t_0 \leq t \leq t_{\max}$), and a post-period ($t > t_{\max}$, cooling slope $r_{\mathrm{post}} = (dT/dt)_{\mathrm{post}} < 0$), Newton's law of cooling $\dot{T}_{\mathrm{leak}} = -k_c(T - T_\infty)$ yields the midpoint-corrected adiabatic temperature rise:
+  \begin{equation}\label{eq:04:drift}
+    \Delta T_{\mathrm{corr}} = (T_{\max} - T_0) - \left(\frac{r_{\mathrm{pre}} + r_{\mathrm{post}}}{2}\right)(t_{\max} - t_0).
+  \end{equation}
+  Since $r_{\mathrm{post}} < 0$ when $T_{\max} > T_\infty$, subtracting a negative drift rate \textbf{adds back} the temperature lost to the room during the mixing interval $(t_{\max} - t_0)$.
+\end{enumerate}
+
+\section{Isobaric Coffee-Cup ($q_P = \Delta H$) vs.\ Isochoric Bomb Calorimetry ($q_V = \Delta U$)}
+\label{sec:04.5}
+\idxtopic{calorimetry!coffee-cup isobaric vs.\ bomb isochoric}
+\idxtopic{bomb calorimetry!benzoic acid calibration and Delta H = Delta U + Delta n R T}
+
+Chemical and phase-change calorimetry (\texttt{Rule 5.c.ii, 5.c.vi}) employs two distinct vessels (\fref{fig:04:calorimeters}) corresponding to the two thermodynamic state functions $H = U + PV$ and $U$ \src{S05,S19}:
+
+\begin{center}
+\begin{tikzpicture}[>=Stealth,font=\scriptsize]
+  % Left: Isobaric Coffee-Cup Calorimeter
+  \begin{scope}[xshift=0cm]
+    \node[font=\scriptsize\bfseries,navy] at (2.8,3.65) {(a) Isobaric Coffee-Cup Calorimeter ($P = \text{const} \implies q_P = \Delta H$)};
+    % Nested cups
+    \draw[very thick,navy,fill=boxbg] (1.3,2.8) -- (1.6,0.3) -- (4.0,0.3) -- (4.3,2.8);
+    \draw[thick,navy] (1.15,2.8) -- (1.48,0.15) -- (4.12,0.15) -- (4.45,2.8);
+    % Solution fill
+    \fill[teal!18] (1.48,1.9) -- (1.62,0.33) -- (3.98,0.33) -- (4.12,1.9) -- cycle;
+    \draw[thick,teal] (1.48,1.9) -- (4.12,1.9);
+    % Lid
+    \draw[very thick,amber,fill=amber!14] (1.0,2.8) rectangle (4.6,3.0);
+    % Thermometer & Stirrer
+    \draw[very thick,rust] (2.4,0.6) -- (2.4,3.45);
+    \fill[rust] (2.4,0.6) circle (2.2pt);
+    \draw[thick,navy] (3.2,0.7) -- (3.2,3.4) (3.0,0.7) -- (3.4,0.7);
+    \node[right,font=\scriptsize] at (4.5,2.4) {Loose lid ($P = P_{\mathrm{atm}}$)};
+    \node[right,font=\scriptsize] at (4.5,1.8) {Nested cups};
+    \node[right,font=\scriptsize,teal] at (4.5,1.2) {Aqueous solution $m_{\mathrm{soln}}$};
+    \node[right,font=\scriptsize,rust] at (4.5,0.6) {$q_{\mathrm{rxn}} = -(m_{\mathrm{soln}}c_{\mathrm{soln}}+C_{\mathrm{cal}})\Delta T$};
+  \end{scope}
+
+  % Right: Isochoric Bomb Calorimeter
+  \begin{scope}[xshift=8.2cm]
+    \node[font=\scriptsize\bfseries,rust] at (3.0,3.65) {(b) Isochoric Oxygen Bomb Calorimeter ($V = \text{const} \implies q_V = \Delta U$)};
+    % Outer insulated jacket
+    \draw[very thick,navy,fill=boxbg] (0.5,0.15) rectangle (5.5,3.0);
+    % Water bath
+    \fill[teal!15] (0.7,0.3) rectangle (5.3,2.75);
+    % Rigid steel bomb
+    \draw[ultra thick,rust,fill=amber!14] (1.9,0.65) rectangle (4.1,2.35);
+    \node[font=\scriptsize\bfseries,rust] at (3.0,2.05) {Steel Bomb ($V=\text{const}$)};
+    \node[font=\scriptsize] at (3.0,1.65) {$\mathrm{O_2}$ at $\SI{30}{\text{atm}}$};
+    % Sample crucible & ignition leads
+    \draw[thick,navy] (2.65,0.9) -- (2.75,0.75) -- (3.25,0.75) -- (3.35,0.9);
+    \fill[rust] (3.0,0.85) circle (2pt);
+    \draw[thick,amber] (2.75,3.3) -- (2.75,0.95) -- (3.25,0.95) -- (3.25,3.3);
+    % Thermometer & stirrer in water bath
+    \draw[very thick,rust] (1.2,0.55) -- (1.2,3.4);
+    \fill[rust] (1.2,0.55) circle (2pt);
+    \draw[thick,navy] (4.8,0.55) -- (4.8,3.35) (4.65,0.55) -- (4.95,0.55);
+    \node[font=\scriptsize,navy] at (3.0,0.45) {Water bath ($m_w$) + Bomb ($C_{\mathrm{bomb}}$)};
+  \end{scope}
+\end{tikzpicture}
+\captionof{figure}{Side-by-side comparison of (a) an open-to-atmosphere isobaric solution calorimeter measuring enthalpy change $q_P = \Delta H$ and (b) a rigid steel isochoric oxygen bomb calorimeter measuring internal energy change $q_V = \Delta U$ \src{S05,S19}.}\label{fig:04:calorimeters}
+\idxfig{coffee-cup isobaric vs.\ bomb isochoric calorimeters}
+\end{center}
+
+\begin{enumerate}
+  \item \textbf{Isobaric Solution (Coffee-Cup) Calorimetry ($P = P_{\mathrm{atm}} = \text{const} \implies q_P = \Delta H$):}
+  When $n_{\mathrm{lim}}$ moles of limiting reactant undergo an aqueous neutralization, dissolution, or displacement reaction inside an open-pressure cup containing total solution mass $m_{\mathrm{soln}} = m_1 + m_2$:
+  \begin{equation}\label{eq:04:coffeecup}
+    q_{\mathrm{soln}} = (m_{\mathrm{soln}} c_{\mathrm{soln}} + C_{\mathrm{cal}})(T_f - T_i), \qquad
+    q_{\mathrm{rxn}} = -q_{\mathrm{soln}}, \qquad
+    \Delta H_{\mathrm{rxn}} = \frac{q_{\mathrm{rxn}}}{n_{\mathrm{lim}}} = -\frac{(m_{\mathrm{soln}} c_{\mathrm{soln}} + C_{\mathrm{cal}})\Delta T}{n_{\mathrm{lim}}}.
+  \end{equation}
+  \textbf{Sign Rule:} If temperature rises ($\Delta T > 0$), the solution gained heat ($q_{\mathrm{soln}} > 0$), so the reaction released heat (\textbf{exothermic}, $\Delta H_{\mathrm{rxn}} < 0$). If temperature drops ($\Delta T < 0$, e.g., dissolving $\mathrm{NH_4NO_3(s)}$ in water), the reaction absorbed heat (\textbf{endothermic}, $\Delta H_{\mathrm{rxn}} > 0$).
+  \item \textbf{Isochoric Oxygen Bomb Calorimetry ($V = \text{const} \implies W_{\mathrm{by}} = 0 \implies q_V = \Delta U$):}
+  A combustible sample of mass $m_s$ ($n_s = m_s/M_s$ moles) is burned inside a thick-walled steel bomb pressurized to $\sim\SI{30}{\text{atm}}$ pure $\mathrm{O_2}$ and submerged in a water bath. Because the rigid steel bomb enforces $\Delta V = 0$, zero $P\text{--}V$ work is done and the total heat released measures $\Delta U$:
+  \begin{equation}\label{eq:04:bomb}
+    q_{\mathrm{cal}} = C_{\mathrm{tot}}\Delta T = (m_w c_w + C_{\mathrm{hardware}})\Delta T, \qquad
+    \Delta U_{\mathrm{rxn}} = \frac{-q_{\mathrm{cal}} + q_{\mathrm{fuse}} + q_{\mathrm{acid}}}{n_s},
+  \end{equation}
+  where $q_{\mathrm{fuse}} = m_{\mathrm{wire}}|\Delta_c u_{\mathrm{wire}}|$ (for iron fuse wire, $|\Delta_c u_{\mathrm{Fe}}| = \SI{5.86}{\kilo\joule\per\gram}$ or $\SI{9.6}{\joule\per\centi\meter}$) and $q_{\mathrm{acid}}$ corrects for trace $\mathrm{HNO_3}$ formation. Standard calibration uses \textbf{NIST SRM 39j Benzoic Acid} ($\mathrm{C_6H_5COOH(s)}$, $M = \SI{122.12}{\gram\per\mole}$), which has certified constant-volume specific energy of combustion $|\Delta_c u^\circ| = \mathbf{\SI{26.434}{\kilo\joule\per\gram}}$ ($\Delta_c U_m^\circ = \mathbf{-\SI{3228.1}{\kilo\joule\per\mole}}$) at $\SI{298.15}{\kelvin}$ \src{S16,S19}.
+  \item \textbf{Converting Bomb $\Delta U_{\mathrm{rxn}}$ to Standard Enthalpy $\Delta H_{\mathrm{rxn}}$:}
+  Since $H = U + PV$, for any reaction at temperature $T$ where ideal gases appear or disappear while condensed-phase volume changes $\Delta V_{\mathrm{solid/liq}}$ are negligible:
+  \begin{equation}\label{eq:04:du2dh}
+    \Delta H_{\mathrm{rxn}} = \Delta U_{\mathrm{rxn}} + \Delta(PV) \approx \Delta U_{\mathrm{rxn}} + \Delta n_{\mathrm{gas}} R T, \qquad
+    \Delta n_{\mathrm{gas}} = \sum_{\text{gas prod}} \nu_p - \sum_{\text{gas react}} \nu_r.
+  \end{equation}
+  Always check physical states at $\SI{298.15}{\kelvin}$: product water in bomb calorimetry condenses to \textbf{liquid} $\mathrm{H_2O(\ell)}$, so $\mathrm{H_2O(\ell)}$ is \textbf{not} counted in $\Delta n_{\mathrm{gas}}$!
+\end{enumerate}
+
+\begin{center}
+\captionof{table}{Sourced bomb ($\Delta_c U_m^\circ$) vs.\ isobaric ($\Delta_c H_m^\circ$) heats of combustion, gas-mole shifts $\Delta n_{\mathrm{gas}}$, and specific combustion energies $|\Delta_c u^\circ|$ ($\si{\kilo\joule\per\gram}$, forming $\mathrm{CO_2(g)}$ and $\mathrm{H_2O(\ell)}$ at $\SI{298.15}{\kelvin}, \SI{1}{\text{bar}}$) from NIST Chemistry WebBook \src{S16,S19}.}\label{tab:04:combustions}
+\scriptsize\setlength{\tabcolsep}{3.2pt}\renewcommand{\arraystretch}{1.09}
+\begin{tabularx}{\linewidth}{@{}l l r r r r r X@{}}\toprule
+\textbf{Fuel / Standard} & \textbf{Formula (State)} & \textbf{$M$ ($\si{\gram\per\mole}$)} & \textbf{$\Delta_f H_m^\circ$ ($\si{\kilo\joule\per\mole}$)} & \textbf{$\Delta n_{\mathrm{gas}}$} & \textbf{$\Delta_c U_m^\circ$ ($\si{\kilo\joule\per\mole}$)} & \textbf{$\Delta_c H_m^\circ$ ($\si{\kilo\joule\per\mole}$)} & \textbf{$|\Delta_c u^\circ|$ ($\si{\kilo\joule\per\gram}$) / Notes} \\\midrule
+Benzoic Acid (SRM 39j) & $\mathrm{C_6H_5COOH(s)}$ & $122.12$ & $-385.2$ & $-0.5$ & $\mathbf{-3225.7}$ & $-3226.9$ & $\mathbf{26.434}$ (NIST bomb standard) \\
+Sucrose & $\mathrm{C_{12}H_{22}O_{11}(s)}$ & $342.30$ & $-2226.1$ & $0.0$ & $-5643.4$ & $-5643.4$ & $16.487$ ($\Delta H_c = \Delta U_c$ exactly!) \\
+D-Glucose & $\mathrm{C_6H_{12}O_6(s)}$ & $180.16$ & $-1273.3$ & $0.0$ & $-2805.0$ & $-2805.0$ & $15.570$ ($\Delta n_{\mathrm{gas}} = 6 - 6 = 0$) \\
+Graphite (Carbon) & $\mathrm{C(s,graphite)}$ & $12.011$ & $0.0$ & $0.0$ & $-393.51$ & $-393.51$ & $32.763$ ($\mathrm{C(s)+O_2(g)\to CO_2(g)}$) \\
+Hydrogen & $\mathrm{H_2(g)}$ & $2.016$ & $0.0$ & $-1.5$ & $-282.12$ & $-285.83$ & $139.94$ (HHV; LHV $= \SI{119.96}{\kilo\joule\per\gram}$) \\
+Carbon Monoxide & $\mathrm{CO(g)}$ & $28.010$ & $-110.53$ & $-0.5$ & $-281.74$ & $-282.98$ & $10.059$ \\
+Methane & $\mathrm{CH_4(g)}$ & $16.043$ & $-74.87$ & $-2.0$ & $-885.4$ & $-890.36$ & $55.19$ (Natural gas main component) \\
+Acetylene & $\mathrm{C_2H_2(g)}$ & $26.038$ & $+227.4$ & $-1.5$ & $-1296.0$ & $-1299.7$ & $49.77$ (Oxy-acetylene torch fuel) \\
+Ethane & $\mathrm{C_2H_6(g)}$ & $30.070$ & $-84.0$ & $-2.5$ & $-1553.6$ & $-1559.8$ & $51.67$ \\
+Propane & $\mathrm{C_3H_8(g)}$ & $44.097$ & $-103.85$ & $-3.0$ & $-2212.5$ & $-2219.9$ & $50.17$ (LPG cylinder fuel) \\
+$n$-Butane & $\mathrm{C_4H_{10}(g)}$ & $58.123$ & $-125.6$ & $-3.5$ & $-2868.8$ & $-2877.5$ & $49.36$ \\
+$n$-Octane & $\mathrm{C_8H_{18}(\ell)}$ & $114.23$ & $-250.1$ & $-4.5$ & $-5459.3$ & $-5470.5$ & $47.79$ (Gasoline primary benchmark) \\
+Benzene & $\mathrm{C_6H_6(\ell)}$ & $78.114$ & $+49.0$ & $-1.5$ & $-3263.9$ & $-3267.6$ & $41.78$ \\
+Methanol & $\mathrm{CH_3OH(\ell)}$ & $32.042$ & $-239.2$ & $-0.5$ & $-724.9$ & $-726.1$ & $22.62$ \\
+Ethanol & $\mathrm{C_2H_5OH(\ell)}$ & $46.068$ & $-277.6$ & $-1.0$ & $-1364.3$ & $-1366.8$ & $29.62$ (Spirit burner fuel) \\
+Naphthalene & $\mathrm{C_{10}H_8(s)}$ & $128.17$ & $+77.9$ & $-2.0$ & $-5151.4$ & $-5156.3$ & $40.19$ (Secondary bomb calibrant) \\\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Layered Worked Examples \& Diagnostics}
+\label{sec:04.6}
+
+\begin{workedexample}[Calorimeter Calibration ($C_{\mathrm{cal}}$) \& Unknown Metal Identification via Dulong--Petit]{Basic $\cdot$ Rule 5.c.i--ii}{ex:04.1}
+A team first calibrates an insulated aluminum calorimeter originally containing $m_c = \SI{150.0}{\gram}$ of water at $T_c = \SI{20.00}{\celsius}$ by pouring in $m_h = \SI{100.0}{\gram}$ of hot water at $T_h = \SI{60.00}{\celsius}$ ($c_w = \SI{4.184}{\joule\per\gram\per\kelvin}$); the mixture equilibrates at $T_{f,1} = \SI{35.38}{\celsius}$. Next, they empty and refill the calorimeter with $m_w = \SI{200.0}{\gram}$ of water at $T_1 = \SI{20.00}{\celsius}$, drop in a $m_m = \SI{250.0}{\gram}$ pure metal cylinder heated in a boiling-water bath to $T_m = \SI{100.00}{\celsius}$, and measure a final temperature $T_{f,2} = \SI{27.86}{\celsius}$. Find (a) the calorimeter constant $C_{\mathrm{cal}}$ and water equivalent $m_{\mathrm{eq}}$, (b) the metal's specific heat $c_m$, and (c) the metal's approximate atomic mass $M$ via Dulong--Petit and its identity from \tref{tab:04:calorimetry}.
+
+\textbf{Solution.}
+\textbf{(a)} From (\ref{eq:04:ccal}), the heat lost by the $\SI{100.0}{\gram}$ hot water equals the heat gained by the $\SI{150.0}{\gram}$ cold water plus calorimeter:
+\[
+  C_{\mathrm{cal}} = m_h c_w \frac{T_h - T_{f,1}}{T_{f,1} - T_c} - m_c c_w = (100.0)(4.184)\frac{60.00 - 35.38}{35.38 - 20.00} - (150.0)(4.184) = 669.77 - 627.60 = \mathbf{\SI{42.17}{\joule\per\kelvin}},
+\]
+giving a water equivalent $m_{\mathrm{eq}} = C_{\mathrm{cal}}/c_w = 42.17/4.184 = \mathbf{\SI{10.08}{\gram}}$ of water.
+\textbf{(b)} In the metal run, $(m_w c_w + C_{\mathrm{cal}}) = (200.0)(4.184) + 42.17 = \SI{878.97}{\joule\per\kelvin}$. Energy balance $\sum Q_i = 0$ gives:
+\[
+  c_m = \frac{(m_w c_w + C_{\mathrm{cal}})(T_{f,2} - T_1)}{m_m(T_m - T_{f,2})} = \frac{(\SI{878.97}{\joule\per\kelvin})(27.86 - 20.00)}{(\SI{0.2500}{\kilogram})(100.00 - 27.86)} = \frac{\SI{6908.7}{\joule}}{\SI{18.035}{\kilogram\cdot\kelvin}} = \mathbf{\SI{383.1}{\joule\per\kilogram\per\kelvin}}.
+\]
+\textbf{(c)} Applying Dulong--Petit (\ref{eq:04:dulongpetit}):
+\[
+  M \approx \frac{3R}{c_m} = \frac{\SI{24.943}{\joule\per\mole\per\kelvin}}{\SI{0.3831}{\joule\per\gram\per\kelvin}} = \mathbf{\SI{65.1}{\gram\per\mole}},
+\]
+which matches \textbf{Copper} ($M = \SI{63.55}{\gram\per\mole}, c_p = \SI{385}{\joule\per\kilogram\per\kelvin}$) or \textbf{Zinc} ($M = \SI{65.38}{\gram\per\mole}, c_p = \SI{388}{\joule\per\kilogram\per\kelvin}$)!
+\verifiedby{Re-substituting $C_{\mathrm{cal}} = \SI{42.17}{\joule\per\kelvin}$ and $c_m = \SI{383.07}{\joule\per\kilogram\per\kelvin}$ yields $T_{f,1} = \SI{35.380}{\celsius}$ and $T_{f,2} = \SI{27.860}{\celsius}$ (\texttt{check\_sec02\_05.py}).}
+\end{workedexample}
+
+\begin{workedexample}[Partial-Melting Ice--Water Equilibrium (Zone II Plateau at $0\,^\circ\mathrm{C}$)]{Competition $\cdot$ Rule 5.c.i--ii}{ex:04.2}
+An insulated copper calorimeter of mass $m_{\mathrm{Cu}} = \SI{120.0}{\gram}$ ($c_{\mathrm{Cu}} = \SI{385}{\joule\per\kilogram\per\kelvin}$) contains $m_w = \SI{250.0}{\gram}$ of liquid water at $T_{w,i} = \SI{22.0}{\celsius}$ ($c_w = \SI{4184}{\joule\per\kilogram\per\kelvin}$). A block of subcooled ice of mass $m_{\mathrm{ice}} = \SI{110.0}{\gram}$ at $T_{\mathrm{ice},i} = \SI{-15.0}{\celsius}$ ($c_{\mathrm{ice}} = \SI{2093}{\joule\per\kilogram\per\kelvin}$, $L_f = \SI{333.55}{\kilo\joule\per\kilogram}$) is added. Determine the final equilibrium temperature $T_f$ and the exact final masses of liquid water and solid ice.
+
+\textbf{Solution.}
+Using the deterministic 5-Zone Algorithm (\sref{sec:04.3.1}) relative to $\SI{0}{\celsius}$ liquid water:
+\begin{align*}
+  E_{\mathrm{avail},0} &= (m_w c_w + m_{\mathrm{Cu}} c_{\mathrm{Cu}})(22.0 - 0) = \left[(0.2500)(4184) + (0.1200)(385)\right](22.0) = (\SI{1092.2}{\joule\per\kelvin})(22.0) = \SI{24028.4}{\joule}, \\
+  E_{\mathrm{warm,ice}} &= m_{\mathrm{ice}} c_{\mathrm{ice}}(0 - (-15.0)) = (0.1100)(2093)(15.0) = \SI{3453.45}{\joule}, \\
+  E_{\mathrm{melt,ice}} &= m_{\mathrm{ice}} L_f = (0.1100)(\SI{333550}{\joule\per\kilogram}) = \SI{36690.50}{\joule}, \\
+  E_{\mathrm{net},0} &= E_{\mathrm{avail},0} - (E_{\mathrm{warm,ice}} + E_{\mathrm{melt,ice}}) = 24028.40 - (3453.45 + 36690.50) = \mathbf{-\SI{16115.55}{\joule}}.
+\end{align*}
+Since $-M_{\mathrm{H_2O}} L_f = -\SI{120078}{\joule} \leq E_{\mathrm{net},0} \leq 0$, the system lies squarely in \textbf{Zone II} (\tref{tab:04:fivezones}): the final temperature is locked at the phase plateau $\mathbf{T_f = \SI{0.00}{\celsius}}$! The mass of ice remaining unmelted and the mass melted are:
+\[
+  m_{\mathrm{ice,final}} = \frac{-E_{\mathrm{net},0}}{L_f} = \frac{\SI{16115.55}{\joule}}{\SI{333.55}{\joule\per\gram}} = \mathbf{\SI{48.32}{\gram}}, \qquad
+  m_{\mathrm{melted}} = 110.0 - 48.32 = \SI{61.68}{\gram}, \qquad
+  m_{\mathrm{liq,final}} = 250.0 + 61.68 = \mathbf{\SI{311.68}{\gram}}.
+\]
+\verifiedby{Heat balance at $\SI{0}{\celsius}$: $Q_{\mathrm{warm,ice}} (\SI{3453.45}{\joule}) + m_{\mathrm{melted}} L_f (\SI{20574.95}{\joule}) = \SI{24028.40}{\joule} = E_{\mathrm{avail},0}$ (\texttt{check\_sec02\_05.py}).}
+\end{workedexample}
+
+\begin{workedexample}[Three-Phase Ice + Water + Steam Mixture in a Copper Calorimeter]{National $\cdot$ Rule 5.c.i--ii}{ex:04.3}
+Inside an insulated copper calorimeter ($m_{\mathrm{Cu}} = \SI{100.0}{\gram}, c_{\mathrm{Cu}} = \SI{385}{\joule\per\kilogram\per\kelvin}$) initially equilibrated with $m_{\mathrm{ice}} = \SI{80.0}{\gram}$ of ice at $T_{\mathrm{ice},i} = \SI{-10.0}{\celsius}$ ($c_{\mathrm{ice}} = \SI{2093}{\joule\per\kilogram\per\kelvin}, L_f = \SI{333.55}{\kilo\joule\per\kilogram}$), an experimenter simultaneously introduces $m_w = \SI{200.0}{\gram}$ of warm liquid water at $T_{w,i} = \SI{50.0}{\celsius}$ ($c_w = \SI{4184}{\joule\per\kilogram\per\kelvin}$) and bubbles in $m_{\mathrm{st}} = \SI{25.0}{\gram}$ of superheated steam at $T_{\mathrm{st},i} = \SI{130.0}{\celsius}$ ($c_{\mathrm{st}} = \SI{2080}{\joule\per\kilogram\per\kelvin}, L_v = \SI{2256.4}{\kilo\joule\per\kilogram}$) at $\SI{1}{\text{atm}}$. Determine the final temperature $T_f$ and phase composition.
+
+\textbf{Solution.}
+Apply the 5-Zone Algorithm (\sref{sec:04.3.1}) relative to $T_{\mathrm{ref}} = \SI{0}{\celsius}$ liquid water, with $M_{\mathrm{H_2O}} = 80.0 + 200.0 + 25.0 = \SI{305.0}{\gram} = \SI{0.3050}{\kilogram}$ and $C_{\mathrm{solids}} = m_{\mathrm{Cu}}c_{\mathrm{Cu}} = (0.1000)(385) = \SI{38.50}{\joule\per\kelvin}$:
+\begin{align*}
+  E_{\mathrm{avail},0} &= m_w c_w(50.0) + m_{\mathrm{st}}\!\left[c_{\mathrm{st}}(130.0 - 100.0) + L_v + 100.0\,c_w\right] + C_{\mathrm{solids}}(-10.0 - 0) \\
+  &= (0.200)(4184)(50.0) + (0.025)\!\left[(2080)(30.0) + 2256400 + 418400\right] - (38.50)(10.0) \\
+  &= 41840.0 + 68430.0 - 385.0 = \SI{109885.0}{\joule}, \\
+  E_{\mathrm{need,ice}\to 0\,\ell} &= m_{\mathrm{ice}}\!\left[c_{\mathrm{ice}}(10.0) + L_f\right] = (0.0800)\!\left[20930 + 333550\right] = \SI{28358.4}{\joule}, \\
+  E_{\mathrm{net},0} &= 109885.0 - 28358.4 = \mathbf{+\SI{81526.6}{\joule}}.
+\end{align*}
+Compare $E_{\mathrm{net},0}$ against the liquid-boiling checkpoint $E_{\mathrm{100,\ell}} = (M_{\mathrm{H_2O}}c_w + C_{\mathrm{solids}})(100.0) = \left[(0.3050)(4184) + 38.50\right](100.0) = (\SI{1314.62}{\joule\per\kelvin})(100.0) = \SI{131462.0}{\joule}$. Since $0 < E_{\mathrm{net},0} < E_{\mathrm{100,\ell}}$, the mixture lands in \textbf{Zone III} (100\% liquid water, $\SI{305.0}{\gram}$) at:
+\[
+  T_f = \frac{E_{\mathrm{net},0}}{M_{\mathrm{H_2O}} c_w + C_{\mathrm{solids}}} = \frac{\SI{81526.6}{\joule}}{\SI{1314.62}{\joule\per\kelvin}} = \mathbf{\SI{62.02}{\celsius}}.
+\]
+\verifiedby{$\sum Q_i$ at $T_f = \SI{62.0153}{\celsius}$ equals $\SI{0.00}{\joule}$ to machine precision (\texttt{check\_sec02\_05.py}).}
+\end{workedexample}
+
+\begin{workedexample}[Partial Steam Condensation (Zone IV Plateau at $100\,^\circ\mathrm{C}$)]{National $\cdot$ Rule 5.c.i--ii}{ex:04.4}
+Suppose in Example~\ref{ex:04.3} the mass of $\SI{130.0}{\celsius}$ superheated steam injected into the same vessel ($m_{\mathrm{Cu}} = \SI{100.0}{\gram}$, $m_{\mathrm{ice}} = \SI{80.0}{\gram}$ at $\SI{-10.0}{\celsius}$, $m_w = \SI{200.0}{\gram}$ at $\SI{50.0}{\celsius}$) is increased from $\SI{25.0}{\gram}$ to $m_{\mathrm{st}} = \SI{60.0}{\gram}$. Find the new final temperature $T_f$ and the final masses of liquid water and uncondensed steam.
+
+\textbf{Solution.}
+Here $M_{\mathrm{H_2O}} = 80.0 + 200.0 + 60.0 = \SI{340.0}{\gram} = \SI{0.3400}{\kilogram}$ and $C_{\mathrm{solids}} = \SI{38.50}{\joule\per\kelvin}$:
+\begin{align*}
+  E_{\mathrm{avail},0} &= 41840.0 + (0.0600)(2737200) - 385.0 = 41840.0 + 164232.0 - 385.0 = \SI{205687.0}{\joule}, \\
+  E_{\mathrm{net},0} &= 205687.0 - 28358.4 = \mathbf{\SI{177328.6}{\joule}}.
+\end{align*}
+The checkpoint for all-liquid water at $\SI{100.0}{\celsius}$ is $E_{\mathrm{100,\ell}} = \left[(0.3400)(4184) + 38.50\right](100.0) = \SI{146106.0}{\joule}$, while complete vaporization requires $E_{\mathrm{100,g}} = 146106.0 + (0.3400)(2256400) = \SI{913282.0}{\joule}$. Because $E_{\mathrm{100,\ell}} \leq E_{\mathrm{net},0} \leq E_{\mathrm{100,g}}$, the system lands in \textbf{Zone IV} (\tref{tab:04:fivezones}) at $\mathbf{T_f = \SI{100.0}{\celsius}}$! The mass of steam remaining uncondensed in equilibrium with liquid water is:
+\[
+  m_{\mathrm{steam,final}} = \frac{E_{\mathrm{net},0} - E_{\mathrm{100,\ell}}}{L_v} = \frac{177328.6 - 146106.0}{\SI{2256.4}{\joule\per\gram}} = \frac{\SI{31222.6}{\joule}}{\SI{2256.4}{\joule\per\gram}} = \mathbf{\SI{13.84}{\gram}},
+\]
+and the final liquid water mass is $m_{\mathrm{liq,final}} = 340.0 - 13.84 = \mathbf{\SI{326.16}{\gram}}$ (so $60.0 - 13.84 = \SI{46.16}{\gram}$ of steam condensed).
+\verifiedby{Heat released by $\SI{60.0}{\gram}$ steam cooling to $\SI{100}{\celsius}$ ($\SI{3744.0}{\joule}$) + $\SI{46.1623}{\gram}$ condensing ($\SI{104160.6}{\joule}$) = $\SI{107904.6}{\joule}$ = heat needed to bring ice, water \& Cu to $\SI{100}{\celsius}$ (\texttt{check\_sec02\_05.py}).}
+\end{workedexample}
+
+\begin{workedexample}[Electrical Calorimetry with Drift-Rate Cooling Correction]{National $\cdot$ Rule 5.c.i--ii}{ex:04.5}
+An electrical immersion calorimeter ($C_{\mathrm{cal}} = \SI{55.0}{\joule\per\kelvin}$) holds $m = \SI{400.0}{\gram}$ of an unknown organic liquid. Before heating ($t < 0$), the temperature drifts upward at $r_{\mathrm{pre}} = +\SI{0.010}{\celsius\per\minute}$. At $t_0 = \SI{0.0}{\minute}$ ($T_0 = \SI{21.200}{\celsius}$), a $\SI{12.00}{\volt}$, $\SI{2.500}{\ampere}$ DC heater is switched on for $\Delta t = \SI{4.000}{\minute}$ ($\SI{240.0}{\second}$), reaching a peak $T_{\max} = \SI{28.340}{\celsius}$ at $t_{\max} = \SI{4.000}{\minute}$. After the heater is turned off ($t > \SI{4.0}{\minute}$), the vessel cools at $r_{\mathrm{post}} = -\SI{0.050}{\celsius\per\minute}$. Compute (a) the Regnault--Pfaundler drift-corrected temperature rise $\Delta T_{\mathrm{corr}}$, and (b) the liquid's specific heat $c$ and identity from \tref{tab:04:calorimetry}.
+
+\textbf{Solution.}
+\textbf{(a)} The observed temperature rise is $\Delta T_{\mathrm{obs}} = 28.340 - 21.200 = \SI{7.140}{\celsius}$. Using (\ref{eq:04:drift}), the mean drift rate during the $\SI{4.000}{\minute}$ heating window is $\bar{r} = \frac{1}{2}(+0.010 - 0.050) = -\SI{0.020}{\celsius\per\minute}$, so the adiabatic corrected rise is:
+\[
+  \Delta T_{\mathrm{corr}} = \Delta T_{\mathrm{obs}} - \bar{r}(t_{\max} - t_0) = \SI{7.140}{\celsius} - (-\SI{0.020}{\celsius\per\minute})(\SI{4.000}{\minute}) = 7.140 + 0.080 = \mathbf{\SI{7.220}{\celsius} = \SI{7.220}{\kelvin}}.
+\]
+\textbf{(b)} Electrical energy supplied is $E_{\mathrm{elec}} = V I t = (\SI{12.00}{\volt})(\SI{2.500}{\ampere})(\SI{240.0}{\second}) = \SI{7200.0}{\joule}$. From $E_{\mathrm{elec}} = (m c + C_{\mathrm{cal}})\Delta T_{\mathrm{corr}}$:
+\[
+  c = \frac{E_{\mathrm{elec}}/\Delta T_{\mathrm{corr}} - C_{\mathrm{cal}}}{m} = \frac{7200.0/7.220 - 55.0}{\SI{0.4000}{\kilogram}} = \frac{997.23 - 55.0}{0.4000} = \mathbf{\SI{2355.6}{\joule\per\kilogram\per\kelvin} \approx \SI{2.36}{\kilo\joule\per\kilogram\per\kelvin}},
+\]
+identifying the liquid as \textbf{Ethylene Glycol} (or \textbf{Ethanol/Glycerol} family) in \tref{tab:04:calorimetry}.
+\verifiedby{Neglecting the $\SI{0.080}{\kelvin}$ cooling correction overestimates $c$ by $\SI{27.4}{\joule\per\kilogram\per\kelvin}$ ($1.16\%$) (\texttt{check\_sec02\_05.py}).}
+\end{workedexample}
+
+\begin{workedexample}[Isobaric Coffee-Cup Neutralization Enthalpy ($\mathrm{HCl + NaOH}$, $q_P = \Delta H$)]{Competition $\cdot$ Rules 5.c.ii, 5.c.vi}{ex:04.6}
+In a nested coffee-cup calorimeter ($C_{\mathrm{cal}} = \SI{18.0}{\joule\per\kelvin}$), $\SI{100.0}{\milli\liter}$ of $\SI{1.000}{\mole\per\liter}$ aqueous $\mathrm{HCl}$ at $\SI{21.50}{\celsius}$ is mixed with $\SI{100.0}{\milli\liter}$ of $\SI{1.000}{\mole\per\liter}$ aqueous $\mathrm{NaOH}$ at $\SI{21.50}{\celsius}$. The combined solution has density $\rho_{\mathrm{soln}} = \SI{1.020}{\gram\per\milli\liter}$ and specific heat $c_{\mathrm{soln}} = \SI{4.050}{\joule\per\gram\per\kelvin}$, and reaches a peak temperature $T_f = \SI{28.12}{\celsius}$. Compute the molar enthalpy of neutralization $\Delta H_{\mathrm{neut}}$.
+
+\textbf{Solution.}
+Total solution volume is $V_{\mathrm{soln}} = \SI{200.0}{\milli\liter}$, so $m_{\mathrm{soln}} = (200.0)(1.020) = \SI{204.0}{\gram}$, and $\Delta T = 28.12 - 21.50 = +\SI{6.62}{\kelvin}$. Moles reacted: $n_{\mathrm{lim}} = (\SI{0.1000}{\liter})(\SI{1.000}{\mole\per\liter}) = \SI{0.1000}{\mole}$. From (\ref{eq:04:coffeecup}):
+\[
+  q_{\mathrm{soln}} = (m_{\mathrm{soln}} c_{\mathrm{soln}} + C_{\mathrm{cal}})\Delta T = \left[(204.0)(4.050) + 18.0\right](6.62) = (\SI{844.20}{\joule\per\kelvin})(6.62) = \SI{5588.6}{\joule},
+\]
+\[
+  \Delta H_{\mathrm{neut}} = -\frac{q_{\mathrm{soln}}}{n_{\mathrm{lim}}} = -\frac{\SI{5.5886}{\kilo\joule}}{\SI{0.1000}{\mole}} = \mathbf{-\SI{55.89}{\kilo\joule\per\mole}} \quad (\text{standard infinite-dilution value: } -\SI{55.84}{\kilo\joule\per\mole}).
+\]
+\verifiedby{Including $C_{\mathrm{cal}} = \SI{18.0}{\joule\per\kelvin}$ accounts for $\SI{1.19}{\kilo\joule\per\mole}$ ($2.1\%$) of $\Delta H_{\mathrm{neut}}$ (\texttt{check\_sec02\_05.py}).}
+\end{workedexample}
+
+\begin{workedexample}[Isochoric Bomb Calorimetry: Benzoic Acid Calibration \& Octane $\Delta U_c \to \Delta H_c$]{National $\cdot$ Rules 5.c.ii, 5.c.vi}{ex:04.7}
+A constant-volume oxygen bomb calorimeter is calibrated by burning $m_{\mathrm{BA}} = \SI{1.2500}{\gram}$ of NIST benzoic acid ($|\Delta_c u^\circ| = \SI{26.434}{\kilo\joule\per\gram}$) with $\SI{5.0}{\centi\meter}$ of iron fuse wire ($q_{\mathrm{fuse}} = \SI{48.0}{\joule}$), producing a temperature rise $\Delta T_1 = \SI{3.1850}{\kelvin}$. Next, $m_{\mathrm{oct}} = \SI{0.8565}{\gram}$ of liquid $n$-octane ($\mathrm{C_8H_{18}(\ell)}$, $M = \SI{114.23}{\gram\per\mole}$) is burned at $T = \SI{298.15}{\kelvin}$ with the same fuse wire ($q_{\mathrm{fuse}} = \SI{48.0}{\joule}$), yielding $\Delta T_2 = \SI{3.9410}{\kelvin}$. Find (a) the total bomb heat capacity $C_{\mathrm{tot}}$, (b) the molar internal energy of combustion $\Delta_c U_m^\circ$ of $n$-octane, and (c) the molar enthalpy of combustion $\Delta_c H_m^\circ$ at $\SI{298.15}{\kelvin}$.
+
+\textbf{Solution.}
+\textbf{(a)} Calibration energy released inside the bomb is $q_{\mathrm{cal},1} = m_{\mathrm{BA}}|\Delta_c u^\circ| + q_{\mathrm{fuse}} = (1.2500)(26434.0) + 48.0 = 33042.5 + 48.0 = \SI{33090.5}{\joule}$, so:
+\[
+  C_{\mathrm{tot}} = \frac{q_{\mathrm{cal},1}}{\Delta T_1} = \frac{\SI{33090.5}{\joule}}{\SI{3.1850}{\kelvin}} = \mathbf{\SI{10389.5}{\joule\per\kelvin} = \SI{10.390}{\kilo\joule\per\kelvin}}.
+\]
+\textbf{(b)} In the octane run ($n_{\mathrm{oct}} = 0.8565 / 114.23 = \SI{7.4980e-3}{\mole}$), $q_{\mathrm{cal},2} = C_{\mathrm{tot}}\Delta T_2 = (10389.48)(3.9410) = \SI{40945.0}{\joule}$. Subtracting the fuse wire gives the net octane combustion heat $q_{V,\mathrm{oct}} = 40945.0 - 48.0 = \SI{40897.0}{\joule}$:
+\[
+  \Delta_c U_m^\circ = -\frac{q_{V,\mathrm{oct}}}{n_{\mathrm{oct}}} = -\frac{\SI{40.8970}{\kilo\joule}}{\SI{7.4980e-3}{\mole}} = \mathbf{-\SI{5454.4}{\kilo\joule\per\mole}}.
+\]
+\textbf{(c)} For $\mathrm{C_8H_{18}(\ell)} + \frac{25}{2}\,\mathrm{O_2(g)} \longrightarrow 8\,\mathrm{CO_2(g)} + 9\,\mathrm{H_2O(\ell)}$, the gas-mole change per mole of octane is $\Delta n_{\mathrm{gas}} = 8 - 12.5 = \mathbf{-4.5}$. By (\ref{eq:04:du2dh}):
+\[
+  \Delta_c H_m^\circ = \Delta_c U_m^\circ + \Delta n_{\mathrm{gas}} R T = -\SI{5454.4}{\kilo\joule\per\mole} + (-4.5)(\SI{8.31446e-3}{\kilo\joule\per\mole\per\kelvin})(\SI{298.15}{\kelvin}) = -5454.4 - 11.15 = \mathbf{-\SI{5465.5}{\kilo\joule\per\mole}}.
+\]
+\verifiedby{NIST WebBook certified $\Delta_c H_m^\circ(\mathrm{C_8H_{18},\ell}) = -\SI{5470.5}{\kilo\joule\per\mole}$ ($0.09\%$ agreement; \texttt{check\_sec02\_05.py}).}
+\end{workedexample}
+
+\begin{workedexample}[Callendar--Barnes Continuous-Flow Calorimeter with Heat-Leak Cancellation]{National $\cdot$ Rule 5.c.i--ii}{ex:04.8}
+In a Callendar--Barnes steady continuous-flow calorimeter (\ref{eq:04:flow}), an unknown oil enters at $T_{\mathrm{in}} = \SI{20.00}{\celsius}$ and exits at $T_{\mathrm{out}} = \SI{28.00}{\celsius}$ ($\Delta T = \SI{8.00}{\kelvin}$). In Run~1, at mass flow rate $\dot{m}_1 = \SI{1.800}{\gram\per\second}$, an electrical heater input of $V_1 = \SI{15.00}{\volt}$ and $I_1 = \SI{2.200}{\ampere}$ is required to hold $T_{\mathrm{out}} = \SI{28.00}{\celsius}$. In Run~2, the flow rate is increased to $\dot{m}_2 = \SI{3.300}{\gram\per\second}$ and the heater is adjusted to $V_2 = \SI{20.00}{\volt}$ and $I_2 = \SI{2.850}{\ampere}$ so that the exact same $T_{\mathrm{in}} = \SI{20.00}{\celsius}$ and $T_{\mathrm{out}} = \SI{28.00}{\celsius}$ are maintained. Find (a) the oil's specific heat $c_p$ and (b) the steady ambient heat loss rate $\dot{Q}_{\mathrm{loss}}$.
+
+\textbf{Solution.}
+\textbf{(a)} Electrical powers are $P_1 = V_1 I_1 = (15.00)(2.200) = \SI{33.00}{\watt}$ and $P_2 = V_2 I_2 = (20.00)(2.850) = \SI{57.00}{\watt}$. Because $T_{\mathrm{in}}$ and $T_{\mathrm{out}}$ are unchanged, $\dot{Q}_{\mathrm{loss}}$ is identical in both runs. By (\ref{eq:04:flowcancel}):
+\[
+  c_p = \frac{P_2 - P_1}{(\dot{m}_2 - \dot{m}_1)(T_{\mathrm{out}} - T_{\mathrm{in}})} = \frac{57.00 - 33.00}{(3.300 - 1.800)\times 10^{-3}\,\si{\kilogram\per\second} \times \SI{8.00}{\kelvin}} = \frac{\SI{24.00}{\watt}}{\SI{0.01200}{\kilogram\cdot\kelvin\per\second}} = \mathbf{\SI{2000}{\joule\per\kilogram\per\kelvin}}.
+\]
+\textbf{(b)} Substituting $c_p = \SI{2000}{\joule\per\kilogram\per\kelvin}$ back into Run~1 (\ref{eq:04:flow}):
+\[
+  \dot{Q}_{\mathrm{loss}} = P_1 - \dot{m}_1 c_p \Delta T = \SI{33.00}{\watt} - (\SI{1.800e-3}{\kilogram\per\second})(\SI{2000}{\joule\per\kilogram\per\kelvin})(\SI{8.00}{\kelvin}) = 33.00 - 28.80 = \mathbf{\SI{4.20}{\watt}}.
+\]
+\verifiedby{Run~2 check: $\dot{m}_2 c_p \Delta T + \dot{Q}_{\mathrm{loss}} = (0.00330)(2000)(8.00) + 4.20 = 52.80 + 4.20 = \SI{57.00}{\watt} = P_2$ (\texttt{check\_sec02\_05.py}).}
+\end{workedexample}
+
+\begin{workedexample}[Zone I Sub-Zero Equilibrium: Cryogenic Ice Freezing All Liquid Water]{National $\cdot$ Rule 5.c.i--ii}{ex:04.9}
+A large block of deeply subcooled ice of mass $m_{\mathrm{ice}} = \SI{600.0}{\gram}$ at $T_{\mathrm{ice},i} = \SI{-40.0}{\celsius}$ ($c_{\mathrm{ice}} = \SI{2093}{\joule\per\kilogram\per\kelvin}, L_f = \SI{333.55}{\kilo\joule\per\kilogram}$) is placed inside a negligible-mass insulated pouch, and $m_w = \SI{50.0}{\gram}$ of liquid water at $T_{w,i} = \SI{20.0}{\celsius}$ ($c_w = \SI{4184}{\joule\per\kilogram\per\kelvin}$) is poured over it. Use the 5-Zone Algorithm (\tref{tab:04:fivezones}) to determine the final equilibrium state and final temperature $T_f$.
+
+\textbf{Solution.}
+Here $M_{\mathrm{H_2O}} = 600.0 + 50.0 = \SI{650.0}{\gram} = \SI{0.6500}{\kilogram}$ and $C_{\mathrm{solids}} = 0$. Relative to all-liquid water at $T_{\mathrm{ref}} = \SI{0}{\celsius}$ (\ref{eq:04:enet0}):
+\begin{align*}
+  E_{\mathrm{avail},0} &= m_w c_w(20.0 - 0) = (0.0500)(4184)(20.0) = \SI{4184.0}{\joule}, \\
+  E_{\mathrm{need,ice}\to 0\,\ell} &= m_{\mathrm{ice}} c_{\mathrm{ice}}(40.0) + m_{\mathrm{ice}} L_f = (0.6000)(2093)(40.0) + (0.6000)(333550) = 50232.0 + 200130.0 = \SI{250362.0}{\joule}, \\
+  E_{\mathrm{net},0} &= 4184.0 - 250362.0 = \mathbf{-\SI{246178.0}{\joule}}.
+\end{align*}
+Compare $E_{\mathrm{net},0}$ against the Zone~I boundary $-M_{\mathrm{H_2O}}L_f = -(0.6500)(333550) = -\SI{216807.5}{\joule}$. Since $E_{\mathrm{net},0} < -M_{\mathrm{H_2O}}L_f$, the mixture lies in \textbf{Zone I} (\tref{tab:04:fivezones}): all $\SI{50.0}{\gram}$ of liquid water cools to $\SI{0}{\celsius}$, freezes solid into ice, and the entire $\SI{650.0}{\gram}$ ice block equilibrates below $\SI{0}{\celsius}$ at:
+\[
+  T_f = \frac{E_{\mathrm{net},0} + M_{\mathrm{H_2O}}L_f}{M_{\mathrm{H_2O}}c_{\mathrm{ice}}} = \frac{-246178.0 + 216807.5}{(0.6500)(2093)} = \frac{-\SI{29370.5}{\joule}}{\SI{1360.45}{\joule\per\kelvin}} = \mathbf{-\SI{21.59}{\celsius}}.
+\]
+\verifiedby{Direct check from $\SI{0}{\celsius}$ ice: warming $\SI{600}{\gram}$ ice from $-\SI{40}{\celsius}$ to $\SI{0}{\celsius}$ absorbs $\SI{50232}{\joule}$, while cooling \& freezing $\SI{50}{\gram}$ water releases $4184 + 16677.5 = \SI{20861.5}{\joule}$ (deficit $-\SI{29370.5}{\joule}$) (\texttt{check\_sec02\_05.py}).}
+\end{workedexample}
+
+\begin{workedexample}[Four-Body Multi-Metal \& Glycerol Mixture with Water Equivalent $m_{\mathrm{eq}}$]{Competition $\cdot$ Rule 5.c.i--ii}{ex:04.10}
+A brass calorimeter with water equivalent $m_{\mathrm{eq}} = \SI{15.0}{\gram}$ ($c_w = \SI{4.184}{\joule\per\gram\per\kelvin}$) contains $m_{\mathrm{gly}} = \SI{350.0}{\gram}$ of liquid glycerol ($c_{\mathrm{gly}} = \SI{2.427}{\joule\per\gram\per\kelvin}$, \tref{tab:04:calorimetry}) at $T_0 = \SI{18.00}{\celsius}$. Two hot metal blocks---an aluminum block of mass $m_{\mathrm{Al}} = \SI{120.0}{\gram}$ at $T_{\mathrm{Al},i} = \SI{140.0}{\celsius}$ ($c_{\mathrm{Al}} = \SI{0.897}{\joule\per\gram\per\kelvin}$) and a silver block of mass $m_{\mathrm{Ag}} = \SI{200.0}{\gram}$ at $T_{\mathrm{Ag},i} = \SI{180.0}{\celsius}$ ($c_{\mathrm{Ag}} = \SI{0.235}{\joule\per\gram\per\kelvin}$)---are dropped simultaneously into the glycerol. Compute (a) the final equilibrium temperature $T_f$, and (b) the net heat transferred into or out of each of the four sub-systems.
+
+\textbf{Solution.}
+\textbf{(a)} The individual heat capacities $C_i = m_i c_i$ are $C_{\mathrm{cal}} = m_{\mathrm{eq}} c_w = (15.0)(4.184) = \SI{62.76}{\joule\per\kelvin}$, $C_{\mathrm{gly}} = (350.0)(2.427) = \SI{849.45}{\joule\per\kelvin}$, $C_{\mathrm{Al}} = (120.0)(0.897) = \SI{107.64}{\joule\per\kelvin}$, and $C_{\mathrm{Ag}} = (200.0)(0.235) = \SI{47.00}{\joule\per\kelvin}$.
+Total heat capacity is $\sum C_i = 62.76 + 849.45 + 107.64 + 47.00 = \SI{1066.85}{\joule\per\kelvin}$. From (\ref{eq:04:nbodytf}):
+\[
+  T_f = \frac{(912.21)(18.00) + (107.64)(140.0) + (47.00)(180.0)}{1066.85} = \frac{\SI{39949.38}{\joule}}{\SI{1066.85}{\joule\per\kelvin}} = \mathbf{\SI{37.45}{\celsius}}.
+\]
+\textbf{(b)} Individual signed heat transfers $Q_i = C_i(T_f - T_i)$:
+\[
+  Q_{\mathrm{gly}} = +\SI{16518.4}{\joule}, \quad
+  Q_{\mathrm{cal}} = +\SI{1220.4}{\joule}, \quad
+  Q_{\mathrm{Al}} = -\SI{11038.9}{\joule}, \quad
+  Q_{\mathrm{Ag}} = -\SI{6699.9}{\joule} \implies \sum Q_i = \mathbf{\SI{0.0}{\joule}}.
+\]
+\verifiedby{$(16518.4 + 1220.4) - (11038.9 + 6699.9) = \SI{0.0}{\joule}$ (\texttt{check\_sec02\_05.py}).}
+\end{workedexample}
+
+\begin{workedexample}[Temperature-Dependent Gas Heating via NIST Shomate Midpoint $\bar{C}_{p,m}$]{National $\cdot$ Rules 5.c.i, 5.c.vi, 5.d.iv}{ex:04.11}
+A steady industrial heat exchanger heats $n = \SI{5.000}{\mole}$ of carbon dioxide gas ($\mathrm{CO_2(g)}$) at constant pressure $P = \SI{1.00}{\text{bar}}$ from $T_1 = \SI{298.15}{\kelvin}$ to $T_2 = \SI{1000.0}{\kelvin}$ ($\Delta T = \SI{701.85}{\kelvin}$). Using \tref{tab:04:shomate}, compute (a) the heat required $Q_{\mathrm{const}}$ if room-temperature $C_{p,m}(\SI{298}{\kelvin}) = \SI{37.13}{\joule\per\mole\per\kelvin}$ were naively assumed constant, and (b) the heat required $Q_{\mathrm{mid}}$ using the 3-point Simpson/midpoint average across $\SI{298}{\kelvin}$, $\SI{600}{\kelvin}$, and $\SI{1000}{\kelvin}$ (where vibrational modes of $\mathrm{CO_2}$ become thermally active), and find the percentage error of the constant-$C_p$ assumption.
+
+\textbf{Solution.}
+\textbf{(a)} Assuming constant room-temperature heat capacity:
+\[
+  Q_{\mathrm{const}} = n\,C_{p,m}(\SI{298}{\kelvin})\,\Delta T = (\SI{5.000}{\mole})(\SI{37.13}{\joule\per\mole\per\kelvin})(\SI{701.85}{\kelvin}) = \mathbf{\SI{130.30}{\kilo\joule}}.
+\]
+\textbf{(b)} From \tref{tab:04:shomate}, $\mathrm{CO_2}$ vibrational bending and stretching modes elevate $C_{p,m}$ from $\SI{37.13}{\joule\per\mole\per\kelvin}$ at $\SI{298}{\kelvin}$ to $\SI{47.32}{\joule\per\mole\per\kelvin}$ at $\SI{600}{\kelvin}$ and $\SI{54.31}{\joule\per\mole\per\kelvin}$ at $\SI{1000}{\kelvin}$. Splitting into two algebraic intervals $[\SI{298.15}{\kelvin}, \SI{600}{\kelvin}]$ ($\bar{C}_{p,1} = \frac{1}{2}(37.13+47.32) = \SI{42.225}{\joule\per\mole\per\kelvin}$) and $[\SI{600}{\kelvin}, \SI{1000}{\kelvin}]$ ($\bar{C}_{p,2} = \frac{1}{2}(47.32+54.31) = \SI{50.815}{\joule\per\mole\per\kelvin}$):
+\[
+  Q_{\mathrm{mid}} = n\!\left[\bar{C}_{p,1}(600.0 - 298.15) + \bar{C}_{p,2}(1000.0 - 600.0)\right] = 5.000\!\left[(42.225)(301.85) + (50.815)(400.0)\right] = \mathbf{\SI{165.36}{\kilo\joule}}.
+\]
+Neglecting vibrational activation underestimates the heat requirement by $(165.36 - 130.30)/165.36 = \mathbf{21.2\%}$!
+\verifiedby{Exact NIST WebBook enthalpy difference $5[H^\circ(\SI{1000}{\kelvin}) - H^\circ(\SI{298.15}{\kelvin})] = 5(\SI{33.405}{\kilo\joule\per\mole}) = \SI{167.0}{\kilo\joule}$ ($0.98\%$ agreement without calculus; \texttt{check\_sec02\_05.py}).}
+\end{workedexample}
+
+\begin{trapbox}[§4 Top 5 Heat Capacity \& Calorimetry Traps]
+\begin{errtab}
+Writing $\sum m_i c_i (T_f - T_i) = 0$ across a phase boundary without checking if all ice melts or steam condenses & Predicts non-physical temperatures (e.g., $T_f = -\SI{18}{\celsius}$ after assuming all ice melted to liquid!) & Always compute $E_{\mathrm{net},0}$ (\ref{eq:04:enet0}) and check the 5-Zone inequalities (\tref{tab:04:fivezones}) before solving for $T_f$. \\
+Mixing $\si{\joule\per\gram\per\kelvin}$ ($c_w = 4.184$) with latent heat in $\si{\kilo\joule\per\kilogram}$ ($L_f = 333.55$) in the same equation & Factor-of-$1000$ error between sensible and latent terms & Use either $(\si{\gram}, \si{\joule\per\gram\per\kelvin}, \si{\joule\per\gram})$ with $L_f = \SI{333.55}{\joule\per\gram}$ or $(\si{\kilogram}, \si{\joule\per\kilogram\per\kelvin}, \si{\joule\per\kilogram})$ with $L_f = \SI{333550}{\joule\per\kilogram}$. \\
+Applying Dulong--Petit ($C_m \approx 3R$) blindly to diamond, beryllium, or multi-atom compounds like $\mathrm{NaCl}$ & Overestimates diamond's $c_p$ by $4\times$ and underestimates $\mathrm{NaCl}$ by $2\times$ & Light stiff solids ($\Theta_D > \SI{300}{\kelvin}$) have quantum freeze-out; multi-atom ionic solids have $C_m \approx 3\,\nu_{\mathrm{atoms}} R$. \\
+Forgetting to add the calorimeter's heat capacity $C_{\mathrm{cal}} = m_{\mathrm{eq}} c_w$ (or the metal cup mass $m_{\mathrm{cup}} c_{\mathrm{cup}}$) & Systematic $3\%\text{--}10\%$ error in $T_f$ or measured specific heat & Always include $C_{\mathrm{cal}}(T_f - T_{\mathrm{cal},i})$ at the same initial temperature as the fluid initially inside the vessel. \\
+Counting liquid product water $\mathrm{H_2O(\ell)}$ in $\Delta n_{\mathrm{gas}}$ when converting bomb $\Delta U_c$ to $\Delta H_c$ at $\SI{298}{\kelvin}$ & Wrong sign/magnitude on $\Delta n_{\mathrm{gas}}RT$ (e.g., $+4.5$ instead of $-4.5$ for octane) & At $\SI{298.15}{\kelvin}$, combustion water condenses to $\mathrm{H_2O(\ell)}$ ($\nu_{\mathrm{gas}} = 0$); only count gaseous species ($\mathrm{O_2, CO_2, N_2}$). \\
+\end{errtab}
+\end{trapbox}
+
+\begin{devicebox}[2027 Heat-Lamp Collector Calorimetry: Cup Thermal Mass, Stratification \& Stirring]
+\idxdev{calorimetry of the 2027 9 oz cup!thermal mass and top-layer stratification}
+In the 2027 heat-lamp collector event (\texttt{Rule 4.g, 5.II}), the Event Supervisor dispenses $m_w = \SIrange{50}{150}{\gram}$ ($\SIrange{50}{150}{\milli\liter}$) of room-temperature water ($C_w = m_w c_w = \SIrange{209.2}{627.6}{\joule\per\kelvin}$) into a 9~oz clear plastic party cup ($m_{\mathrm{cup}} \approx \SIrange{5}{10}{\gram}$, $c_{\mathrm{cup}} \approx \SIrange{1200}{1920}{\joule\per\kilogram\per\kelvin} \implies C_{\mathrm{cup}} \approx \SIrange{8}{15}{\joule\per\kelvin}$, only $1.5\%\text{--}6\%$ of $C_w$). Because infrared lamp radiation is absorbed within the \textbf{top $\SIrange{1}{3}{\milli\meter}$ skin layer} of water and warm water is less dense than cool water ($\beta_V > 0$ for $T > \SI{4}{\celsius}$), buoyancy \textbf{suppresses natural convection}, creating a stable thermal stratification where the top $\SI{1.3}{\centi\meter}$ ($\SI{0.5}{in}$) thermometer measurement zone (\texttt{Rule 5.II.g}) can sit $\SIrange{3}{8}{\celsius}$ warmer than the cup bottom! See \sref{sec:14} for how to preserve this top-layer stratification during the 1-minute cup extraction window \src{S01,S02}.
+\end{devicebox}
+
+\alsosee{\spref{sec:01.3} (\texttt{QS-03} Calorimetry), \spref{sec:01.4} (\texttt{QS-04} Ice/Steam Checkpoints), \spref{sec:05} (Phase Transitions \& Latent Heat), \spref{sec:06.2} (Equipartition), \spref{sec:08.3} (Enthalpy \& Hess's Law), and \spref{sec:14} (2027 Collector Thermal Budget).}

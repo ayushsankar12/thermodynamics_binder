@@ -1,0 +1,657 @@
+% ============================================================================
+% sec17.tex — §17 Laboratory & Measurement Handbook
+% Target: 12 pages | Figures: fig:17:thermometer-response, fig:17:probe-depth-bias
+% ============================================================================
+\binderchapter{17}{Laboratory \& Measurement Handbook (Thermometer Physics, Probe Time Constant $5\tau$, Immersion Bias, Calibration \& GUM Uncertainty Propagation)}{Laboratory \& Measurement Handbook}{sec:17}
+\scopebanner{REQUIRED}[2027 Rules 4.f, 5.I.b, 5.II.c,g \& Clarifications \#1--\#4 (All Tournament Levels)]
+
+\idxtopic{thermometry!overview}\idxtopic{laboratory measurement handbook}\idxdev{thermometer protocol (Rule 4.f)}
+Accurate thermal metrology links Part~I written laboratory analysis (\sref{sec:18}) to Part~II 2027 Heat-Lamp Collector temperature prediction (\sref{sec:15}--\sref{sec:16}) \src{S01,S05}. Under 2027 Rule~\texttt{4.f}, the Event Supervisor (ES) provides a non-mercury thermometer reading to $\SI{0.1}{\celsius}$ (\emph{liquid-in-glass spirit, electronic digital probe, or non-contact infrared}) and uses the \textbf{same thermometer} for a team's starting ($T_{\mathrm{start}}$) and final ($T_f$) water readings \src{S01,S02}. This chapter covers the sensor physics of all five thermometer families, dynamic thermal lag ($\tau_p$ and the $5\tau_p$ settling rule), top-layer immersion and radial stratification bias under Official Clarifications~\texttt{\#1--\texttt{\#4}}, fixed-point ice/steam calibration, JCGM GUM / NIST TN~1297 uncertainty propagation \src{S21}, and step-by-step classroom-safe calorimetry and heat-lamp collector validation protocols.
+
+% ============================================================================
+\section{Physics \& Specifications of the Five Thermometer Technologies (\texttt{Rule 4.f})}\label{sec:17.1}
+\idxtopic{thermometer technologies}\idxtopic{Rule 4.f!thermometer types}
+
+Every thermometer transduces temperature $T$ into a measurable thermometric property $X(T)$ (liquid column length $L$, electrical resistance $R$, thermoelectric voltage $\Delta V$, or mid-infrared radiant exitance $M_{\lambda}$) \src{S13,S22,S33}. Table~\ref{tab:17:sensors} summarizes the physical laws, operating windows, dynamic time constants $\tau_p$, active sensing zones, and 2027 competition diagnostics across all five sensor technologies permitted under Rule~\texttt{4.f} \src{S01,S05,S22}.
+
+\begin{table}[h!]
+\centering
+\captionof{table}{Comparison of the Five Thermometer Technologies Used in Science Olympiad Thermodynamics (\texttt{Rule 4.f}) \src{S01,S05,S12,S22}.}\label{tab:17:sensors}
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.17\linewidth} >{\raggedright\arraybackslash}p{0.27\linewidth} C{0.10\linewidth} C{0.10\linewidth} C{0.09\linewidth} C{0.10\linewidth} >{\raggedright\arraybackslash}X@{}}
+\toprule
+\hdr{Sensor Family} & \hdr{Governing Thermometric Equation} & \hdr{Range $[\si{\celsius}]$} & \hdr{Typical Accuracy} & \hdr{$\tau_p$ in Water ($5\tau_p$)} & \hdr{Sensing Zone $[\si{\milli\meter}]$} & \hdr{2027 Top-Layer Stratification \& Exam Role} \\
+\midrule
+\textbf{1.~Liquid-in-Glass (Spirit / Galinstan)} \idxtopic{liquid-in-glass thermometer}\idxtopic{spirit thermometer} &
+$L(T) = L_0 + \dfrac{V_0}{A_c}(\beta_{\mathrm{liq}} - 3\alpha_g)(T - T_0)$ &
+$-20$ to $+110$ (spirit) &
+$\pm\SIrange{0.5}{1.0}{\celsius}$ &
+$\SIrange{6}{12}{\second}$ ($\SIrange{30}{60}{\second}$) &
+$15$--$25$ bulb ($50$--$76$ imm.) &
+Long bulb averages across top \& middle layers; stem-emergence \& meniscus parallax bias. Mercury banned (\texttt{Rule 4.f}). \\
+\rowcolor{rowalt}
+\textbf{2.~NTC Thermistor Digital Probe} \idxtopic{thermistor (NTC)}\idxformula{Steinhart-Hart equation} &
+$\dfrac{1}{T} = A + B\ln R + C(\ln R)^3$; \newline $R(T) = R_0 e^{\beta(1/T - 1/T_0)}$ &
+$-50$ to $+150$ &
+$\pm\SIrange{0.1}{0.2}{\celsius}$ &
+$\SIrange{0.8}{3.5}{\second}$ ($\SIrange{4}{18}{\second}$) &
+$4$--$10$ (bead at tip) &
+\textbf{Most common ES probe.} High sensitivity ($\alpha_R \approx \SI{-4}{\percent\per\kelvin}$) \& small tip sample top $\SIrange{5}{12}{\milli\meter}$ layer (\texttt{Clarif.~\#4}). \\
+\textbf{3.~Platinum RTD (\texttt{Pt100} / \texttt{Pt1000})} \idxtopic{RTD (Pt100/Pt1000)}\idxformula{Callendar-Van Dusen equation} &
+$R(t) = R_0(1 + A t + B t^2)$ ($t \ge \SI{0}{\celsius}$, $R_0 = \SI{100.00}{\ohm}$) &
+$-200$ to $+600$ &
+Class A: $\pm(0.15 + 0.002|t|)$ &
+$\SIrange{3.0}{8.0}{\second}$ ($\SIrange{15}{40}{\second}$) &
+$15$--$30$ (wire/film element) &
+Reference metrology standard (IEC~60751). Longer sheath requires $\ge\SI{25}{\milli\meter}$ depth; use 3/4-wire bridge for lead resistance. \\
+\rowcolor{rowalt}
+\textbf{4.~Thermocouple (\texttt{Type K} / \texttt{Type T})} \idxtopic{thermocouple (Type K, T)}\idxtopic{Seebeck effect} &
+$\Delta V = \int_{T_{\mathrm{ref}}}^{T} S_{AB}(T')\,dT' \approx S_{AB}(T - T_{\mathrm{ref}})$ \src{S22} &
+$-200$ to $+1260$ (K); $+350$ (T) &
+$\pm\SI{1.1}{\celsius}$ (K); $\pm\SI{0.5}{\celsius}$ (T) &
+$\SIrange{0.05}{0.3}{\second}$ bare ($\SIrange{1.5}{3}{\second}$ sheath) &
+$1$--$5$ (point weld) &
+Fastest point sensor ($5\tau_p < \SI{1.5}{\second}$ bare bead) with negligible heat-capacity drain; requires cold-junction compensation (CJC). \\
+\textbf{5.~Non-Contact Infrared (IR) Gun} \idxtopic{infrared (IR) thermometer}\idxdev{IR thermometer emissivity trap} &
+$T_{\mathrm{read}} = \left[T_{\mathrm{amb}}^4 + \dfrac{\varepsilon_{\mathrm{true}}}{\varepsilon_{\mathrm{set}}}(T_{\mathrm{obj}}^4 - T_{\mathrm{amb}}^4)\right]^{1/4}$ &
+$-30$ to $+500$ &
+$\pm\SIrange{1.5}{2.0}{\celsius}$ &
+$\SIrange{0.15}{0.5}{\second}$ ($\SIrange{1.0}{2.5}{\second}$) &
+$0.015$ (top $\SI{15}{\micro\meter}$ skin) &
+Water $\varepsilon_w = 0.96$ matches $\varepsilon_{\mathrm{set}} = 0.95$. \textbf{Never shoot through plastic wrap/cup wall or at shiny Al foil ($\varepsilon=0.04$)!} \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{1. Non-Mercury Liquid-in-Glass Thermometers (Spirit \& Galinstan)}
+\idxtopic{liquid-in-glass thermometer!apparent expansion}\idxformula{apparent volumetric expansion beta_app = beta_liq - 3*alpha_glass}
+Because mercury ($\mathrm{Hg}$) is prohibited for safety under Rule~\texttt{4.f} \src{S01}, competition liquid-in-glass thermometers use dyed organic spirits (ethanol, $\beta_{\mathrm{liq}} = \SI{1.12e-3}{\per\kelvin}$; toluene, $\beta_{\mathrm{liq}} = \SI{1.08e-3}{\per\kelvin}$; or kerosene, $\beta_{\mathrm{liq}} = \SI{0.99e-3}{\per\kelvin}$) or non-toxic liquid metal alloy Galinstan ($\mathrm{Ga\text{--}In\text{--}Sn}$, $\beta_{\mathrm{liq}} \approx \SI{1.83e-4}{\per\kelvin}$) enclosed in a thin borosilicate glass bulb ($\alpha_g = \SI{3.3e-6}{\per\kelvin}$, volumetric $\beta_g = 3\alpha_g = \SI{9.9e-6}{\per\kelvin}$) connected to a uniform capillary bore of diameter $d_c$ and cross-sectional area $A_c = \pi d_c^2/4$ \src{S13}.
+\begin{itemize}
+  \item \textbf{Differential Volumetric Expansion Law:} When the bulb of initial internal volume $V_0$ warms by $\Delta T = T - T_0$, the liquid volume expands by $\Delta V_{\mathrm{liq}} = V_0 \beta_{\mathrm{liq}}\Delta T$ while the glass bulb cavity expands by $\Delta V_{\mathrm{glass}} = V_0 (3\alpha_g)\Delta T$. Only the \emph{apparent} differential volume $\Delta V_{\mathrm{app}} = V_0(\beta_{\mathrm{liq}} - 3\alpha_g)\Delta T = V_0\beta_{\mathrm{app}}\Delta T$ is forced up the capillary stem of area $A_c$:
+  \begin{equation}\label{eq:17:lig}
+    \Delta L = L(T) - L_0 = \frac{V_0}{A_c}(\beta_{\mathrm{liq}} - 3\alpha_g)(T - T_0) = \frac{4 V_0 \beta_{\mathrm{app}}}{\pi d_c^2}(T - T_0) \implies S_L = \frac{\Delta L}{\Delta T} = \frac{4 V_0(\beta_{\mathrm{liq}} - 3\alpha_g)}{\pi d_c^2}
+  \end{equation}
+  Maximizing linear sensitivity $S_L$ $[\si{\milli\meter\per\kelvin}]$ requires a large bulb volume $V_0$, a high-expansion working fluid $\beta_{\mathrm{liq}}$, a low-expansion borosilicate glass $\alpha_g$, and a narrow capillary bore $d_c$ (though large $V_0$ increases thermal time constant $\tau_p$).
+  \item \textbf{Total vs.\ Partial Immersion \& Stem-Emergence Correction:} \idxtopic{stem-emergence correction}\idxformula{stem-emergence correction Delta_T_stem = k_g*N*(T_read - T_stem)} A \emph{partial-immersion} thermometer is calibrated with the bulb and lower stem immersed to an etched immersion ring (typically $\SI{50}{\milli\meter}$ or $\SI{76}{\milli\meter}$) while the upper stem sits in ambient air. A \emph{total-immersion} thermometer is calibrated with the entire liquid column submerged to the top of the meniscus. If a total-immersion thermometer (or a partial-immersion thermometer immersed shallower than its line, as in a $\SI{38}{\milli\meter}$-deep $\SI{100}{\milli\liter}$ cup!) has $N$ degrees (in $\si{\celsius}$ scale length) of liquid column emerging into cooler ambient stem air at $T_{\mathrm{stem}}$ while the bulb is at $T_{\mathrm{read}}$, the emergent liquid column contracts and under-reads the true bath temperature $T_{\mathrm{true}}$ by:
+  \begin{equation}\label{eq:17:stem}
+    \Delta T_{\mathrm{stem}} = k_g\,N\,(T_{\mathrm{read}} - T_{\mathrm{stem}}), \qquad T_{\mathrm{true}} = T_{\mathrm{read}} + k_g\,N\,(T_{\mathrm{read}} - T_{\mathrm{stem}})
+  \end{equation}
+  where $k_g = \beta_{\mathrm{app}} \approx \SI{0.00104}{\per\celsius}$ for organic spirit-in-glass thermometers and $k_g \approx \SI{0.00016}{\per\celsius}$ for mercury/Galinstan-in-borosilicate-glass thermometers \src{S21,S33}.
+  \item \textbf{Separated Spirit Column Diagnostic \& Fix:} \idxerr{separated spirit column in thermometer} Organic spirit columns easily separate during shipping, leaving a gas bubble in the bore or a droplet clinging to the top expansion chamber (causing the thermometer to read $\SIrange{1}{5}{\celsius}$ too low!). Always inspect the entire bore before use; rejoin a separated column by cooling the bulb in an ice-salt bath so all liquid retreats into the bulb, or by gentle centrifugal swinging (never heat the bulb over an open flame, which shatters the glass expansion bulb).
+\end{itemize}
+
+\subsection{2. Negative Temperature Coefficient (NTC) Thermistors}
+\idxtopic{thermistor (NTC)!Steinhart-Hart and beta model}\idxtopic{self-heating error!thermistor}
+NTC thermistors are sintered metal-oxide semiconductor beads ($\mathrm{Mn_3O_4}$, $\mathrm{NiO}$, $\mathrm{Co_3O_4}$) whose charge-carrier density grows exponentially with thermal excitation across a semiconductor energy gap, causing resistance $R(T)$ to drop steeply as absolute temperature $T$ $[\si{\kelvin}]$ rises \src{S21,S33}:
+\begin{equation}\label{eq:17:steinhart}
+  \text{\textbf{Steinhart--Hart (3-Parameter Exact):}}\quad \frac{1}{T} = A + B\ln R + C(\ln R)^3 \quad (T\text{ in }\si{\kelvin},\ R\text{ in }\si{\ohm})
+\end{equation}
+*(Note: The quadratic $(\ln R)^2$ term vanishes in the standard Steinhart--Hart representation, achieving $\pm\SI{0.005}{\celsius}$ fidelity across $\SIrange{0}{100}{\celsius}$).* Over a narrower $\SI{50}{\kelvin}$ window around reference state $(T_0, R_0)$ (typically $R_0 = \SI{10.00}{\kilo\ohm}$ at $T_0 = \SI{298.15}{\kelvin} = \SI{25.00}{\celsius}$), setting $C=0$ yields the **2-parameter $\beta$-equation**:
+\begin{equation}\label{eq:17:beta}
+  R(T) = R_0\exp\!\left[\beta\!\left(\frac{1}{T} - \frac{1}{T_0}\right)\right] \Longleftrightarrow T = \left[\frac{1}{T_0} + \frac{1}{\beta}\ln\!\left(\frac{R}{R_0}\right)\right]^{-1}, \qquad \alpha_R = \frac{1}{R}\frac{dR}{dT} = -\frac{\beta}{T^2}
+\end{equation}
+With material constant $\beta \in \SIrange{3400}{4100}{\kelvin}$, the fractional temperature coefficient at $T = \SI{300}{\kelvin}$ is $\alpha_R \approx -3892/300^2 = \SI{-0.0432}{\per\kelvin} = \SI{-4.32}{\percent\per\kelvin}$ --- roughly \textbf{11 times more sensitive} than a platinum RTD ($\alpha_{\mathrm{Pt}} = \SI{+0.385}{\percent\per\kelvin}$)!
+\begin{itemize}
+  \item \textbf{Voltage-Divider Readout \& Self-Heating Dissipation Error ($\Delta T_{\mathrm{SH}}$):} \idxformula{thermistor self-heating Delta_T_SH = I^2*R/delta_diss} In a microcontroller or digital probe readout, the thermistor $R(T)$ is placed in series with a fixed precision resistor $R_s$ across excitation voltage $V_{\mathrm{ref}}$, producing output voltage $V_{\mathrm{out}} = V_{\mathrm{ref}}\frac{R(T)}{R_s + R(T)}$ (which has maximum linearity $\frac{d^2 V_{\mathrm{out}}}{dT^2} = 0$ when $R_s = R(T_{\mathrm{mid}})\frac{\beta - 2T_{\mathrm{mid}}}{\beta + 2T_{\mathrm{mid}}} \approx 0.77\,R(T_{\mathrm{mid}})$). Because current $I = \frac{V_{\mathrm{ref}}}{R_s + R(T)}$ dissipates Joule power $P_{\mathrm{elec}} = I^2 R(T)$ inside the tiny bead, the bead warms above the surrounding fluid by:
+  \begin{equation}\label{eq:17:selfheat}
+    \Delta T_{\mathrm{SH}} = \frac{P_{\mathrm{elec}}}{\delta_{\mathrm{diss}}} = \frac{I^2 R(T)}{\delta_{\mathrm{diss}}} = \frac{V_{\mathrm{ref}}^2 R(T)}{\delta_{\mathrm{diss}}\left[R_s + R(T)\right]^2}
+  \end{equation}
+  where $\delta_{\mathrm{diss}} = h_p A_p$ $[\si{\milli\watt\per\kelvin}]$ is the probe's \textbf{dissipation constant}. Because convective transfer $h_p$ is $5\text{--}10\times$ smaller in still air than in water, $\delta_{\mathrm{diss}} \approx \SIrange{0.8}{1.5}{\milli\watt\per\kelvin}$ in still air versus $\SIrange{5.0}{10.0}{\milli\watt\per\kelvin}$ in liquid water! An improperly designed thermistor circuit carrying $I = \SI{1.0}{\milli\ampere}$ at $R = \SI{10}{\kilo\ohm}$ ($P_{\mathrm{elec}} = \SI{10}{\milli\watt}$) self-heats by $+\SI{10}{\celsius}$ in air and $+\SI{1.5}{\celsius}$ in water. Always limit thermistor excitation current to $I \le \SI{100}{\micro\ampere}$ ($P_{\mathrm{elec}} \le \SI{0.1}{\milli\watt} \implies \Delta T_{\mathrm{SH}} < \SI{0.02}{\celsius}$).
+\end{itemize}
+
+\subsection{3. Platinum Resistance Temperature Detectors (\texttt{Pt100} \& \texttt{Pt1000} RTDs)}
+\idxtopic{RTD (Pt100/Pt1000)!Callendar-Van Dusen equation}\idxtopic{lead-wire resistance!3-wire and 4-wire RTD}
+Pure platinum exhibits a repeatable, nearly linear positive resistance-temperature relation standardized by IEC~60751 (`Pt100`: $R_0 = \SI{100.00}{\ohm}$ at $t = \SI{0.00}{\celsius}$; `Pt1000`: $R_0 = \SI{1000.0}{\ohm}$ at $\SI{0.00}{\celsius}$) via the \textbf{Callendar--Van Dusen Equation}:
+\begin{equation}\label{eq:17:cvd}
+  R(t) = \begin{cases}
+    R_0\left(1 + A t + B t^2\right) & \text{for }\SI{0}{\celsius} \le t \le \SI{661}{\celsius} \\[2pt]
+    R_0\left[1 + A t + B t^2 + C(t - \SI{100}{\celsius})t^3\right] & \text{for }\SI{-200}{\celsius} \le t < \SI{0}{\celsius}
+  \end{cases}
+\end{equation}
+where $t$ is temperature in $\si{\celsius}$, $A = \SI{3.9083e-3}{\per\celsius}$, $B = \SI{-5.775e-7}{\per\square\celsius}$, and $C = \SI{-4.183e-12}{\per\celsius\tothe{4}}$. Over $\SIrange{0}{100}{\celsius}$, the mean linear temperature coefficient is $\alpha_{0\text{--}100} = \frac{R(100) - R(0)}{100\,R_0} = A + 100B = \SI{0.00385055}{\per\celsius}$ ($\SI{+0.385055}{\ohm\per\celsius}$ for \texttt{Pt100}).
+\begin{itemize}
+  \item \textbf{IEC~60751 Accuracy Classes:} Class~AA: $\Delta t_{\mathrm{tol}} = \pm(0.10 + 0.0017|t|)\,\si{\celsius}$; Class~A: $\pm(0.15 + 0.002|t|)\,\si{\celsius}$; Class~B: $\pm(0.30 + 0.005|t|)\,\si{\celsius}$.
+  \item \textbf{2-Wire Lead-Resistance Trap vs.\ 3-Wire \& 4-Wire Bridges:} \idxerr{2-wire RTD lead resistance error} Because a \texttt{Pt100} changes by only $\SI{0.385}{\ohm\per\celsius}$, two copper extension leads each of resistance $R_{\mathrm{lead}}$ in a simple 2-wire ohmmeter circuit add $2R_{\mathrm{lead}}$ to $R(t)$, creating a large positive temperature bias:
+  \begin{equation}\label{eq:17:rtdlead}
+    \Delta t_{\mathrm{lead,2-wire}} \approx \frac{2 R_{\mathrm{lead}}}{R_0 \alpha_{0\text{--}100}} = \frac{2 R_{\mathrm{lead}}}{\SI{0.385055}{\ohm\per\celsius}} \approx \left(\SI{5.194}{\celsius\per\ohm}\right) R_{\mathrm{lead}}
+  \end{equation}
+  Just $\SI{0.35}{\ohm}$ per wire produces a $+\SI{1.82}{\celsius}$ reading error! A \textbf{3-wire Wheatstone bridge} places one current-carrying lead in each adjacent bridge leg so matched lead resistances cancel to first order, while a \textbf{4-wire Kelvin measurement} uses two outer leads to supply excitation current $I$ and two separate high-impedance inner sense leads ($I_{\mathrm{sense}} \approx 0$) to measure voltage drop directly across the platinum element, eliminating lead-resistance error completely.
+\end{itemize}
+
+\subsection{4. Thermocouples (\texttt{Type K}, \texttt{T}, \texttt{J}, \texttt{E} --- NIST ITS-90 SRD~60 \src{S22})}
+\idxtopic{thermocouple (Type K, T)!laws and CJC}\idxformula{Seebeck voltage Delta_V = S_AB*(T_sense - T_ref)}
+When two dissimilar conductors $A$ and $B$ are joined at a sensing junction at $T_{\mathrm{sense}}$ and their open ends are held at a reference junction temperature $T_{\mathrm{ref}}$, carrier diffusion along the thermal gradient generates an open-circuit \textbf{Seebeck thermoelectric EMF} $\Delta V_{AB}$ \src{S22}:
+\begin{equation}\label{eq:17:seebeck}
+  \Delta V_{AB} = \int_{T_{\mathrm{ref}}}^{T_{\mathrm{sense}}} \left[S_A(T) - S_B(T)\right]dT = \int_{T_{\mathrm{ref}}}^{T_{\mathrm{sense}}} S_{AB}(T)\,dT \approx S_{AB}(\bar{T})\,(T_{\mathrm{sense}} - T_{\mathrm{ref}})
+\end{equation}
+\begin{itemize}
+  \item \textbf{Three Fundamental Thermoelectric Laws:}
+    (1)~\emph{Law of Homogeneous Circuits:} Heating a single homogeneous wire cannot produce a net thermoelectric current; voltage depends only on junction temperatures $T_{\mathrm{sense}}$ and $T_{\mathrm{ref}}$, not the temperature profile along homogeneous leads.
+    (2)~\emph{Law of Intermediate Metals:} Inserting a third metal $C$ (e.g., copper voltmeter terminals or solder) into the circuit adds zero net EMF if both junctions with metal $C$ are at the same temperature.
+    (3)~\emph{Law of Intermediate Temperatures (Cold-Junction Compensation, CJC):} $\Delta V(T_1, T_3) = \Delta V(T_1, T_2) + \Delta V(T_2, T_3)$. Because a digital thermocouple meter's input jack sits at ambient room temperature $T_{\mathrm{ref}} \approx \SI{22}{\celsius}$ rather than an ice bath at $\SI{0}{\celsius}$, an onboard thermistor/IC measures $T_{\mathrm{ref}}$ at the terminal block and adds the NIST ITS-90 table voltage $\Delta V(\SI{0}{\celsius}, T_{\mathrm{ref}})$ electronically \src{S22}.
+  \item \textbf{Standard NIST ITS-90 Thermocouple Types at $\SI{25}{\celsius}$ \src{S22}:}
+    \texttt{Type K} ($\text{Chromel}^+$ [$\mathrm{Ni\text{--}Cr}$] / $\text{Alumel}^-$ [$\mathrm{Ni\text{--}Al}$]): $S_K = \SI{40.6}{\micro\volt\per\kelvin}$ ($\SI{39.5}{\micro\volt\per\kelvin}$ at $\SI{0}{\celsius}$, $\SI{41.3}{\micro\volt\per\kelvin}$ at $\SI{50}{\celsius}$); general-purpose probe.
+    \texttt{Type T} ($\text{Copper}^+$ / $\text{Constantan}^-$ [$\mathrm{Cu\text{--}Ni}$]): $S_T = \SI{40.9}{\micro\volt\per\kelvin}$; highest stability and tightest special tolerance ($\pm\SI{0.5}{\celsius}$) in wet $\SIrange{0}{100}{\celsius}$ calorimetry.
+    \texttt{Type J} ($\text{Iron}^+$ / $\text{Constantan}^-$): $S_J = \SI{51.7}{\micro\volt\per\kelvin}$ (iron rusts in water; avoid in wet labs).
+    \texttt{Type E} ($\text{Chromel}^+$ / $\text{Constantan}^-$): $S_E = \SI{60.9}{\micro\volt\per\kelvin}$ (highest Seebeck output and lowest thermal conductivity stem loss).
+\end{itemize}
+
+\begin{table}[h!]
+\centering
+\captionof{table}{Master Sensor Transduction Reference Table ($\SI{-20}{\celsius}$ to $\SI{120}{\celsius}$): \texttt{Pt100} RTD Resistance (IEC~60751), $\SI{10}{\kilo\ohm}$ NTC Thermistor ($\beta=\SI{3892}{\kelvin}$), and NIST ITS-90 Thermocouple EMF ($T_{\mathrm{ref}}=\SI{0.00}{\celsius}$) \src{S21,S22}.}\label{tab:17:sensortable}
+\footnotesize
+\setlength{\tabcolsep}{4.5pt}
+\renewcommand{\arraystretch}{1.12}
+\begin{tabularx}{\linewidth}{@{}R{0.09\linewidth} R{0.10\linewidth} R{0.14\linewidth} R{0.16\linewidth} R{0.15\linewidth} R{0.15\linewidth} >{\raggedright\arraybackslash}X@{}}
+\toprule
+\hdr{$t$ $[\si{\celsius}]$} & \hdr{$T$ $[\si{\kelvin}]$} & \hdr{\texttt{Pt100} $R(t)$ $[\si{\ohm}]$} & \hdr{NTC $\SI{10}{\kilo\ohm}$ $R(T)$ $[\si{\ohm}]$} & \hdr{\texttt{Type K} $E(\SI{0}{\celsius},t)$ $[\si{\milli\volt}]$} & \hdr{\texttt{Type T} $E(\SI{0}{\celsius},t)$ $[\si{\milli\volt}]$} & \hdr{Benchmark State / Calibration Note} \\
+\midrule
+$-20.0$ & $253.15$ & $92.16$ & $101{,}916$ & $-0.778$ & $-0.757$ & Freezer / ice-salt bath \\
+\rowcolor{rowalt}
+$0.0$ & $273.15$ & $100.00$ & $33{,}024$ & $0.000$ & $0.000$ & \textbf{Ice-point reference ($\delta_0$ check)} \\
+$10.0$ & $283.15$ & $103.90$ & $19{,}969$ & $+0.397$ & $+0.391$ & Chilled water supply \\
+\rowcolor{rowalt}
+$20.0$ & $293.15$ & $107.79$ & $12{,}488$ & $+0.798$ & $+0.790$ & Standard room baseline \\
+$25.0$ & $298.15$ & $109.73$ & $10{,}000$ & $+1.000$ & $+0.992$ & \textbf{NTC reference ($R_0 = \SI{10.00}{\kilo\ohm}$)} \\
+\rowcolor{rowalt}
+$30.0$ & $303.15$ & $111.67$ & $8{,}064$ & $+1.203$ & $+1.196$ & Mild collector warming \\
+$40.0$ & $313.15$ & $115.54$ & $5{,}337$ & $+1.612$ & $+1.612$ & Typical 2027 collector $T_f$ ($h=\SI{50}{\centi\meter}$) \\
+\rowcolor{rowalt}
+$50.0$ & $323.15$ & $119.40$ & $3{,}613$ & $+2.023$ & $+2.036$ & High-gain collector $T_f$ ($h=\SI{40}{\centi\meter}$) \\
+$60.0$ & $333.15$ & $123.24$ & $2{,}496$ & $+2.436$ & $+2.468$ & Hot water calorimetry bath \\
+\rowcolor{rowalt}
+$80.0$ & $353.15$ & $130.90$ & $1{,}264$ & $+3.267$ & $+3.358$ & \texttt{\#1 PET} cup $T_g$ warning zone! \\
+$100.0$ & $373.15$ & $138.51$ & $682.3$ & $+4.096$ & $+4.279$ & \textbf{Normal steam point ($\SI{101.325}{\kilo\pascal}$)} \\
+\rowcolor{rowalt}
+$120.0$ & $393.15$ & $146.07$ & $390.0$ & $+4.920$ & $+5.228$ & Autoclave / pressurized steam \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{5. Non-Contact Infrared (IR) Thermometers \& the Clear-Cup / Foil Emissivity Traps}
+\idxtopic{infrared (IR) thermometer!radiometric equation}\idxerr{IR thermometer pointed through plastic cup or cling wrap}\idxerr{IR thermometer pointed at shiny aluminum foil}
+A handheld IR thermometer uses a germanium or Fresnel silicon lens to focus mid-infrared thermal radiation in the atmospheric window $\lambda \in \SIrange{8}{14}{\micro\meter}$ onto a thermopile detector at ambient housing temperature $T_{\mathrm{amb}}$ \src{S12}. For an opaque gray target of true mid-IR emissivity $\varepsilon_{\mathrm{true}}$ and reflectance $\rho_{\mathrm{true}} = 1 - \varepsilon_{\mathrm{true}}$ at temperature $T_{\mathrm{obj}}$ surrounded by background walls at $T_{\mathrm{amb}}$, the total radiosity leaving the target is $J = \varepsilon_{\mathrm{true}}\sigma T_{\mathrm{obj}}^4 + (1 - \varepsilon_{\mathrm{true}})\sigma T_{\mathrm{amb}}^4$. A background-compensated IR thermometer configured with user emissivity setting $\varepsilon_{\mathrm{set}}$ (typically fixed at $\varepsilon_{\mathrm{set}} = 0.95$) solves $\varepsilon_{\mathrm{set}}\sigma T_{\mathrm{read}}^4 + (1 - \varepsilon_{\mathrm{set}})\sigma T_{\mathrm{amb}}^4 = J$, yielding the exact apparent temperature read by the IR gun:
+\begin{equation}\label{eq:17:ir}
+  \boxed{T_{\mathrm{read}} = \left[T_{\mathrm{amb}}^4 + \frac{\varepsilon_{\mathrm{true}}}{\varepsilon_{\mathrm{set}}}\left(T_{\mathrm{obj}}^4 - T_{\mathrm{amb}}^4\right)\right]^{1/4} \quad (\text{all }T\text{ in }\si{\kelvin})}
+\end{equation}
+
+\begin{trapbox}[Four Critical Infrared Thermometer Traps in 2027 Thermodynamics Testing]
+\begin{enumerate}
+  \item \textbf{Trap 1 --- Shooting Through the Clear \texttt{\#1 PET} / \texttt{\#5 PP} Plastic Cup Sidewall or Cling-Wrap Glazing:} \idxerr{shooting IR gun through plastic wrap or cup wall}
+  Because water and plastics are visually transparent at $\lambda = \SIrange{0.4}{0.7}{\micro\meter}$, students falsely assume an IR thermometer can ``see through'' a clear $\SI{9}{oz}$ plastic cup wall or a plastic cling-wrap cover to read the water inside. In the $\SIrange{8}{14}{\micro\meter}$ thermal-IR band, glass and clear plastics ($\ge\SI{0.3}{\milli\meter}$ PET/PP) are \textbf{virtually opaque} ($\tau_{\mathrm{MIR}} < 0.05\text{--}0.25$, $\varepsilon_{\mathrm{MIR}} \approx 0.90\text{--}0.94$) \src{S12}! Shooting an IR gun at the cup sidewall or through an unremoved top plastic film measures the \textbf{cooler exterior plastic temperature}, not the water! Under Official Clarification~\texttt{\#5} and the ES Guide \src{S02,S05}, any team-placed film or lid \textbf{must be completely removed from the cup} during the 1-minute Final Measurement window so the ES thermometer views or contacts the bare top water surface directly.
+  \item \textbf{Trap 2 --- Shooting at Bare Liquid Water Surface (Why Top-Down IR Works Well on Open Water):}
+  In the $\SIrange{8}{14}{\micro\meter}$ band, liquid water has an absorption coefficient $\mu_a > \SI{600}{\per\centi\meter}$ (penetration depth $\delta_p < \SI{17}{\micro\meter}$) and a hemispherical emissivity of $\varepsilon_w = \mathbf{0.96}$ at $\SI{40}{\celsius}$ (normal-incidence $\varepsilon_{w,n} = 0.985$, Lienhard Table~10.1 p.~546 \src{S12}). Thus, an IR gun preset to $\varepsilon_{\mathrm{set}} = 0.95$ aimed vertically downward at bare water reads within $+\SI{0.2}{\celsius}$ of the true surface skin temperature (which is slightly cooled by evaporation once uncovered).
+  \item \textbf{Trap 3 --- Shooting at Polished Metals or Aluminum Foil ($\varepsilon_{\mathrm{true}} = 0.04$):}
+  On shiny aluminum foil ($\varepsilon_{\mathrm{true}} = 0.04$, $\rho_{\mathrm{true}} = 0.96$), $96\%$ of the IR radiation entering the gun is reflected room background! By \eref{eq:17:ir}, a $\SI{44.0}{\celsius}$ aluminum cone liner in a $\SI{22.0}{\celsius}$ room reads only $\SI{23.0}{\celsius}$ on an IR gun with $\varepsilon_{\mathrm{set}} = 0.95$ --- a $-\SI{21.0}{\celsius}$ error! To measure a shiny metal surface with an IR gun, apply a patch of matte black electrical tape or flat black paint ($\varepsilon = 0.95$) and target the patch.
+  \item \textbf{Trap 4 --- Distance-to-Spot Ratio ($D:S$) Field-of-View Spillover:} \idxtopic{distance-to-spot ratio (D:S)}
+  An IR gun with optical ratio $D:S = 12:1$ held at distance $d$ views a circular spot of diameter $D_{\mathrm{spot}} = d / 12$. Because the $\SI{9}{oz}$ cup water surface has diameter $D_{\mathrm{water}} \approx \SI{6.8}{\centi\meter}$, holding a $12:1$ IR gun farther than $d_{\max} = 12 \times (\SI{4.5}{\centi\meter}\text{ safe central zone}) = \SI{54}{\centi\meter}$ causes the sensor spot to spill over onto the cooler cup rim and table, averaging down $T_f$! Always hold the IR gun at $d = \SIrange{15}{30}{\centi\meter}$ ($D_{\mathrm{spot}} = \SIrange{1.3}{2.5}{\centi\meter}$) centered directly over the cup.
+\end{enumerate}
+\end{trapbox}
+
+\begin{workedexample}[Liquid-in-Glass Capillary Design \& Partial-Immersion Stem Correction]{Rule 4.f \& 5.c.i}{ex:17.1}
+A spirit-in-glass laboratory thermometer uses ethanol ($\beta_{\mathrm{liq}} = \SI{1.120e-3}{\per\kelvin}$) in a borosilicate glass bulb ($\alpha_g = \SI{3.30e-6}{\per\kelvin}$) of internal volume $V_0 = \SI{250.0}{\cubic\milli\meter}$ connected to a capillary bore of diameter $d_c = \SI{0.400}{\milli\meter}$. (a)~Calculate the linear scale sensitivity $S_L = \Delta L/\Delta T$ in $\si{\milli\meter\per\kelvin}$. (b)~During a hot-water bath check, the thermometer reads $T_{\mathrm{read}} = \SI{65.00}{\celsius}$, but an emergent column of length equivalent to $N = \SI{45.0}{\celsius}$ protrudes above the immersion line into ambient air at $T_{\mathrm{stem}} = \SI{23.0}{\celsius}$ ($k_g = \SI{0.00104}{\per\celsius}$). Find the true bath temperature $T_{\mathrm{true}}$.
+\par\smallskip\noindent
+\textbf{Solution.}
+(a)~Apparent expansion coefficient: $\beta_{\mathrm{app}} = \beta_{\mathrm{liq}} - 3\alpha_g = \num{1.120e-3} - 3(\num{3.30e-6}) = \SI{1.1101e-3}{\per\kelvin}$. Capillary cross-sectional area: $A_c = \frac{\pi}{4}(\SI{0.400}{\milli\meter})^2 = \SI{0.125664}{\square\milli\meter}$. By \eref{eq:17:lig}:
+$$S_L = \frac{\Delta L}{\Delta T} = \frac{V_0 \beta_{\mathrm{app}}}{A_c} = \frac{(\SI{250.0}{\cubic\milli\meter})(\SI{1.1101e-3}{\per\kelvin})}{\SI{0.125664}{\square\milli\meter}} = \mathbf{\SI{2.2085}{\milli\meter\per\kelvin}}$$
+(b)~By \eref{eq:17:stem}, the emergent column correction is $\Delta T_{\mathrm{stem}} = k_g N (T_{\mathrm{read}} - T_{\mathrm{stem}}) = (\num{0.00104})(45.0)(65.00 - 23.0) = +\SI{1.9656}{\celsius}$, so:
+$$T_{\mathrm{true}} = 65.00 + 1.9656 = \mathbf{\SI{66.97}{\celsius}}$$
+\verifiedby{Independent volumetric balance $\Delta V_{\mathrm{app}}(\SI{1}{\kelvin}) = \SI{0.277525}{\cubic\milli\meter} = A_c(\SI{2.20847}{\milli\meter})$ and Python check \texttt{sec17:ex17.1} ($\Delta T_{\mathrm{stem}} = +\SI{1.9656}{\celsius}$).}
+\end{workedexample}
+
+\begin{workedexample}[NTC Thermistor $\beta$-Model Inversion, Sensitivity \& Self-Heating Audit]{Rule 4.f}{ex:17.2}
+An Event Supervisor's digital probe uses a $\SI{10.00}{\kilo\ohm}$ NTC thermistor ($R_0 = \SI{10000}{\ohm}$ at $T_0 = \SI{25.00}{\celsius} = \SI{298.15}{\kelvin}$, $\beta = \SI{3892}{\kelvin}$, dissipation constant in water $\delta_{\mathrm{diss}} = \SI{6.50}{\milli\watt\per\kelvin}$) connected in a voltage divider with $R_s = \SI{10.00}{\kilo\ohm}$ and $V_{\mathrm{ref}} = \SI{3.30}{\volt}$. When immersed in the heated cup, the thermistor resistance is $R = \SI{4912.0}{\ohm}$. Find: (a)~the water temperature in $\si{\celsius}$, (b)~the fractional sensitivity $\alpha_R$ and $\frac{dR}{dT}$ at that temperature, and (c)~the Joule self-heating bias $\Delta T_{\mathrm{SH}}$.
+\par\smallskip\noindent
+\textbf{Solution.}
+(a)~From \eref{eq:17:beta}:
+$$\frac{1}{T} = \frac{1}{\SI{298.15}{\kelvin}} + \frac{1}{\SI{3892}{\kelvin}}\ln\!\left(\frac{4912.0}{10000.0}\right) = \num{3.3540164e-3} - \num{1.826699e-4} = \SI{3.1713465e-3}{\per\kelvin} \implies T = \SI{315.3235}{\kelvin} = \mathbf{\SI{42.17}{\celsius}}$$
+(b)~Fractional sensitivity: $\alpha_R = -\frac{\beta}{T^2} = -\frac{3892}{(315.3235)^2} = \mathbf{\SI{-0.03914}{\per\kelvin}} = \mathbf{\SI{-3.914}{\percent\per\kelvin}}$, so $\frac{dR}{dT} = \alpha_R R = (\num{-0.039144})(4912.0) = \mathbf{\SI{-192.3}{\ohm\per\kelvin}}$.
+(c)~Divider current: $I = \frac{3.30}{10000 + 4912.0} = \SI{0.22130}{\milli\ampere}$. Electrical dissipation: $P_{\mathrm{elec}} = I^2 R = (\num{2.2130e-4})^2(4912.0) = \SI{0.24056}{\milli\watt}$. By \eref{eq:17:selfheat}, $\Delta T_{\mathrm{SH}} = \frac{\SI{0.24056}{\milli\watt}}{\SI{6.50}{\milli\watt\per\kelvin}} = \mathbf{+\SI{0.0370}{\celsius}}$ (well below the $\SI{0.1}{\celsius}$ display resolution; however, in still air where $\delta_{\mathrm{diss}} \approx \SI{1.0}{\milli\watt\per\kelvin}$, $\Delta T_{\mathrm{SH}}$ rises to $+\SI{0.24}{\celsius}$!).
+\verifiedby{Forward substitution $R(\SI{315.3235}{\kelvin}) = 10000\exp[3892(1/315.3235 - 1/298.15)] = \SI{4912.00}{\ohm}$ and Python check \texttt{sec17:ex17.2}.}
+\end{workedexample}
+
+\begin{workedexample}[\texttt{Pt100} RTD Lead-Resistance Bias \& IR Pyrometer Emissivity Audit]{Rule 4.f}{ex:17.3}
+(a)~A 2-wire \texttt{Pt100} RTD ($R_0 = \SI{100.00}{\ohm}$, $A = \SI{3.9083e-3}{\per\celsius}$, $B = \SI{-5.775e-7}{\per\square\celsius}$) has two extension leads of resistance $R_{\mathrm{lead}} = \SI{0.350}{\ohm}$ each. If the meter reads total loop resistance $R_{\mathrm{meas}} = \SI{117.47}{\ohm}$, find the true water temperature $t_{\mathrm{true}}$ vs.\ the uncorrected 2-wire reading $t_{\mathrm{app}}$.
+(b)~An IR thermometer ($\varepsilon_{\mathrm{set}} = 0.95$, ambient room $T_{\mathrm{amb}} = \SI{22.00}{\celsius} = \SI{295.15}{\kelvin}$) is aimed at bare water ($\varepsilon_w = 0.96$) at $T_{\mathrm{obj}} = \SI{44.00}{\celsius} = \SI{317.15}{\kelvin}$, and then at the collector's shiny aluminum-foil cone ($\varepsilon_{\mathrm{Al}} = 0.04$) also at $\SI{44.00}{\celsius}$. Compute both IR readings.
+\par\smallskip\noindent
+\textbf{Solution.}
+(a)~Subtracting the two-lead loop resistance $2R_{\mathrm{lead}} = \SI{0.700}{\ohm}$ gives true RTD resistance $R_{\mathrm{true}} = 117.47 - 0.700 = \SI{116.77}{\ohm}$. Solving the Callendar--Van Dusen quadratic \eref{eq:17:cvd}, $100.00(1 + \num{3.9083e-3}t - \num{5.775e-7}t^2) = R$:
+$$t = \frac{-A + \sqrt{A^2 - 4B(1 - R/R_0)}}{2B} \implies t_{\mathrm{true}}(\SI{116.77}{\ohm}) = \mathbf{\SI{43.18}{\celsius}}, \qquad t_{\mathrm{app}}(\SI{117.47}{\ohm}) = \mathbf{\SI{45.00}{\celsius}}$$
+The 2-wire lead bias is $t_{\mathrm{app}} - t_{\mathrm{true}} = \mathbf{+\SI{1.815}{\celsius}}$ (eliminated by a 3-wire or 4-wire Kelvin probe).
+\par\noindent
+(b)~Using the background-compensated IR radiometer equation \eref{eq:17:ir} with $T_{\mathrm{amb}} = \SI{295.15}{\kelvin}$ and $T_{\mathrm{obj}} = \SI{317.15}{\kelvin}$:
+$$T_{\mathrm{read,water}} = \left[295.15^4 + \frac{0.96}{0.95}\left(317.15^4 - 295.15^4\right)\right]^{1/4} - 273.15 = 317.358 - 273.15 = \mathbf{\SI{44.21}{\celsius}} \quad (+\SI{0.21}{\celsius}\text{ offset})$$
+$$T_{\mathrm{read,foil}} = \left[295.15^4 + \frac{0.04}{0.95}\left(317.15^4 - 295.15^4\right)\right]^{1/4} - 273.15 = 296.180 - 273.15 = \mathbf{\SI{23.03}{\celsius}} \quad (-\SI{20.97}{\celsius}\text{ error!})$$
+\verifiedby{Quadratic verification $100(1 + \num{3.9083e-3}(43.1842) - \num{5.775e-7}(43.1842)^2) = \SI{116.770}{\ohm}$ and Python check \texttt{sec17:ex17.3}.}
+\end{workedexample}
+
+% ============================================================================
+\section{Metrology Fundamentals, Parallax, Balances, Timers \& Volumetric Repeatability}\label{sec:17.2}
+\idxtopic{accuracy vs precision vs resolution}\idxtopic{parallax error}\idxtopic{volumetric dispensing (100 mL)}
+
+\subsection{1. Resolution vs.\ Precision vs.\ Accuracy vs.\ Sensitivity}
+\begin{itemize}
+  \item \textbf{Resolution ($\Delta_{\mathrm{res}}$):} The smallest increment distinguishable on a display or scale (e.g., $\Delta_{\mathrm{res}} = \SI{0.1}{\celsius}$ required by Rule~\texttt{4.f}). On an analog scale with graduation spacing $\Delta_{\mathrm{grad}}$, human interpolation resolves $\Delta_{\mathrm{res}} \approx \Delta_{\mathrm{grad}}/5$ to $\Delta_{\mathrm{grad}}/2$, whereas a digital display has hard quantization $\Delta_{\mathrm{res}} = 1\text{ LSD}$ (least significant digit), creating a rectangular Type~B rounding uncertainty $u_{B,\mathrm{res}} = \frac{\Delta_{\mathrm{res}}}{2\sqrt{3}} \approx 0.2887\,\Delta_{\mathrm{res}}$ (\sref{sec:17.6}) \src{S21}.
+  \item \textbf{Precision (Repeatability / Random Scatter):} Closeness of agreement among independent repeated measurements under identical conditions, quantified by sample standard deviation $s$ and Type~A standard uncertainty of the mean $u_A = s/\sqrt{n}$. High precision means small random noise, even if all readings share a constant offset.
+  \item \textbf{Accuracy (Trueness / Low Systematic Bias):} Closeness of agreement between the mean measured value and the true NIST/SI reference value. Systematic bias $\delta_{\mathrm{sys}} = \bar{T}_{\mathrm{meas}} - T_{\mathrm{true}}$ is reduced only by physical calibration (\sref{sec:17.5}) or differential cancellation.
+  \item \textbf{Why Rule~\texttt{4.f} (``Same Thermometer for Start \& Final Reading'') Cancels Zero-Offset Bias in $\mathrm{TG}$:} \idxtopic{Rule 4.f!systematic bias cancellation}
+  Suppose the ES thermometer has a constant additive zero-offset bias $\delta_{\mathrm{sys}}$ (e.g., reads $+\SI{0.6}{\celsius}$ high across $\SIrange{20}{50}{\celsius}$): $T_{\mathrm{start,read}} = T_{\mathrm{start,true}} + \delta_{\mathrm{sys}}$ and $T_{f,\mathrm{read}} = T_{f,\mathrm{true}} + \delta_{\mathrm{sys}}$.
+  \begin{enumerate}
+    \item In the \textbf{Temperature Score ($\mathrm{TS}$, 30 pts, Rule~\texttt{6.e})}, which depends on Temperature Gain $\mathrm{TG} = T_{f,\mathrm{read}} - T_{\mathrm{start,read}} = (T_{f,\mathrm{true}} + \delta_{\mathrm{sys}}) - (T_{\mathrm{start,true}} + \delta_{\mathrm{sys}}) = \mathrm{TG}_{\mathrm{true}}$, the additive zero offset $\delta_{\mathrm{sys}}$ \textbf{cancels identically}!
+    \item In the \textbf{Prediction Score ($\mathrm{PS}$, 20 pts, Rule~\texttt{6.f})}, $\mathrm{PE} = 1 - \frac{|T_{f,\mathrm{read}} - T_{\mathrm{pred}}|}{T_{f,\mathrm{read}}}$. Because the ES announces $T_{\mathrm{start,read}}$ measured with that \textbf{same} offset thermometer (\texttt{Rule 5.II.c}) and your team computes $T_{\mathrm{pred}} = T_{\mathrm{start,read}} + \widehat{\mathrm{TG}}$, the numerator $|T_{f,\mathrm{read}} - T_{\mathrm{pred}}| = |(T_{f,\mathrm{true}} + \delta_{\mathrm{sys}}) - (T_{\mathrm{start,true}} + \delta_{\mathrm{sys}} + \widehat{\mathrm{TG}})| = |\mathrm{TG}_{\mathrm{true}} - \widehat{\mathrm{TG}}|$ \textbf{also cancels $\delta_{\mathrm{sys}}$ identically}! Always anchor your prediction equation directly to the ES-announced $T_{\mathrm{start}}$ (\sref{sec:16}).
+  \end{enumerate}
+\end{itemize}
+
+\subsection{2. Meniscus Parallax, Digital Balances, Timers \& $\SI{100}{\milli\liter}$ Water Dispensing Repeatability}
+\idxtopic{meniscus reading!concave vs convex}\idxtopic{buoyancy correction!gravimetric weighing}
+\begin{table}[h!]
+\centering
+\captionof{table}{Laboratory Metrology Standards for Volume, Mass, Time, and Meniscus Reading in Calibration Labs \src{S05,S09,S21}.}\label{tab:17:labgear}
+\footnotesize
+\setlength{\tabcolsep}{3.5pt}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.21\linewidth} >{\raggedright\arraybackslash}p{0.34\linewidth} C{0.14\linewidth} >{\raggedright\arraybackslash}X@{}}
+\toprule
+\hdr{Measurement / Instrument} & \hdr{Governing Physics \& Systematic Bias Formula} & \hdr{Typical Uncertainty} & \hdr{Best-Practice Protocol for 2027 Device Calibration} \\
+\midrule
+\textbf{Meniscus \& Parallax} \newline (Graduated cylinder \& spirit thermometer) &
+Line-of-sight angle $\theta$ off horizontal across bore-to-scale gap $d_g$ shifts reading by $\Delta y_{\mathrm{par}} = d_g \tan\theta \approx d_g(\Delta z_{\mathrm{eye}} / L_{\mathrm{eye}})$. &
+$\pm\SIrange{0.2}{0.5}{\milli\liter}$ or $\pm\SI{0.3}{\celsius}$ if viewed at angle &
+Water \& ethanol wet glass (adhesion $>$ cohesion $\implies$ \textbf{concave meniscus}: read \textbf{bottom} of trough at eye level). Mercury does not wet glass (\textbf{convex}: read top of dome). \\
+\rowcolor{rowalt}
+\textbf{Volumetric $\SI{100}{\milli\liter}$ Dispensing} (\texttt{Rule 3.a, 5.II.c}) &
+Thermal capacity of water $C_w = \rho_w(T)\,V_w\,c_{p,w}$ scales linearly with volume: $\dfrac{\delta(\mathrm{TG})}{\mathrm{TG}} \approx -\dfrac{C_w}{C_{\mathrm{eff}}}\dfrac{\delta V_w}{V_w}$ ($\approx -\SI{0.20}{\celsius}$ per $+\SI{1.0}{\milli\liter}$ error at $\mathrm{TG}=\SI{20}{\celsius}$!). &
+Beaker: $\pm\SI{5}{\milli\liter}$ \newline Class B cyl: $\pm\SI{1.0}{\milli\liter}$ \newline Class A cyl: $\pm\SI{0.5}{\milli\liter}$ \newline Gravimetric: $\pm\SI{0.05}{\milli\liter}$ &
+During pre-tournament DOE calibration (\sref{sec:16}), always dispense the $\SI{100.0}{\milli\liter}$ water sample \textbf{gravimetrically on a $\SI{0.01}{\gram}$ digital balance} so volume scatter never corrupts your calibration curve! \\
+\textbf{Gravimetric Mass-to-Volume \& Air Buoyancy} \src{S09,S21} &
+True mass $m_{\mathrm{true}} = m_{\mathrm{bal}}\dfrac{1 - \rho_{\mathrm{air}}/\rho_{\mathrm{cal}}}{1 - \rho_{\mathrm{air}}/\rho_w} \approx m_{\mathrm{bal}}\left[1 + \rho_{\mathrm{air}}\!\left(\dfrac{1}{\rho_w} - \dfrac{1}{\rho_{\mathrm{cal}}}\right)\right] = 1.00106\,m_{\mathrm{bal}}$ ($\rho_{\mathrm{air}} = \SI{1.20}{\kilogram\per\cubic\meter}$, steel calibration weight $\rho_{\mathrm{cal}} = \SI{8000}{\kilogram\per\cubic\meter}$). &
+Balance: $\pm\SI{0.01}{\gram}$ \newline Buoyancy + $\rho_w(T)$ shift: $\SI{0.33}{\gram}$ at $\SI{22}{\celsius}$ &
+At $T = \SI{22.0}{\celsius}$, $\rho_w = \SI{0.99777}{\gram\per\milli\liter}$ \src{S09}; accounting for air buoyancy ($1.00106$), $\SI{100.00}{\milli\liter}$ of water weighs exactly $m_{\mathrm{bal}} = \dfrac{\SI{99.777}{\gram}}{1.00106} = \mathbf{\SI{99.67}{\gram}}$ on a tared digital scale (at $\SI{20.0}{\celsius}$, $\SI{99.72}{\gram}$; at $\SI{25.0}{\celsius}$, $\SI{99.60}{\gram}$). \\
+\rowcolor{rowalt}
+\textbf{Digital Stopwatch \& AC Line Voltage} &
+Heating gain scales as $\dfrac{\partial T_f}{\partial t} \approx \SI{1.5}{\celsius\per\minute} = \SI{0.025}{\celsius\per\second}$; incandescent lamp power scales with AC mains voltage as $P_{\mathrm{bulb}} \propto (V_{\mathrm{AC}}/V_0)^{1.54}$. &
+Human reaction: $\pm\SI{0.2}{\second}$ ($\pm\SI{0.005}{\celsius}$) \newline Mains voltage: $\pm\SI{3}{\percent}$ &
+Stopwatch reaction error is negligible, but a $\SI{3}{\percent}$ building AC line voltage sag ($\SI{120}{\volt} \to \SI{116.4}{\volt}$) reduces heat-lamp output by $1.54 \times \SI{3}{\percent} = \SI{4.6}{\percent}$. Log Kill-A-Watt power meter readings during calibration runs. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+% ============================================================================
+\section{Dynamic Probe Response Time ($\tau_p$), First-Order Thermal Lag \& the $5\tau_p$ Settling Rule}\label{sec:17.3}
+\idxtopic{probe response time (tau_p)}\idxtopic{5-tau settling rule}\idxformula{thermometer step response T_p(t) = T_w - (T_w - T_p0)*exp(-t/tau_p)}
+
+When a thermometer probe of sensing-tip mass $m_p$, specific heat $c_p$, wetted surface area $A_p$, and internal thermal conductivity $k_p$ (with probe Biot number $\mathrm{Bi}_p = \frac{h_p r_p}{2 k_p} < 0.1$) is transferred at $t = 0$ from ambient room air at $T_{p,0}$ into liquid water at temperature $T_w$, convective heat transfer across the probe boundary layer ($h_p$) governs the probe reading $T_p(t)$ via a first-order linear energy balance \src{S12}:
+\begin{equation}\label{eq:17:probeode}
+  m_p c_p \frac{dT_p}{dt} = h_p A_p \left[T_w - T_p(t)\right] \implies \tau_p \frac{dT_p}{dt} + T_p(t) = T_w, \qquad \tau_p = \frac{m_p c_p}{h_p A_p} = R_{\mathrm{th},p}\,C_p
+\end{equation}
+
+\begin{formulacard}[First-Order Probe Step Response, $5\tau_p$ Settling Rule, Ramp Lag \& Probe Thermal Drain]
+\begin{enumerate}
+  \item \textbf{Step-Immersion Response \& Dynamic Fractional Lag Error:}
+  \begin{equation}\label{eq:17:probestep}
+    T_p(t) = T_w - \left(T_w - T_{p,0}\right)e^{-t/\tau_p}, \qquad E_{\mathrm{frac}}(t) = \frac{T_w - T_p(t)}{T_w - T_{p,0}} = e^{-t/\tau_p}, \qquad f_{\mathrm{settled}}(t) = 1 - e^{-t/\tau_p}
+  \end{equation}
+  \begin{center}
+  \footnotesize
+  \setlength{\tabcolsep}{5pt}
+  \begin{tabular}{@{}lcccccc@{}}
+  \toprule
+  \textbf{Elapsed Time $t/\tau_p$} & $1\tau_p$ & $2\tau_p$ & $3\tau_p$ & $4\tau_p$ & $\mathbf{5\tau_p}$ \textbf{(Rule)} & $6\tau_p$ \\
+  \midrule
+  \textbf{Fraction Settled $1 - e^{-t/\tau_p}$} & $\SI{63.21}{\percent}$ & $\SI{86.47}{\percent}$ & $\SI{95.02}{\percent}$ & $\SI{98.17}{\percent}$ & $\mathbf{\SI{99.326}{\percent}}$ & $\SI{99.752}{\percent}$ \\
+  \textbf{Remaining Error $e^{-t/\tau_p}$} & $\SI{36.79}{\percent}$ & $\SI{13.53}{\percent}$ & $\SI{4.98}{\percent}$ & $\SI{1.83}{\percent}$ & $\mathbf{\SI{0.674}{\percent}}$ & $\SI{0.248}{\percent}$ \\
+  \textbf{Lag Error for $\Delta T = \SI{25.0}{\celsius}$ Step} & $-\SI{9.20}{\celsius}$ & $-\SI{3.38}{\celsius}$ & $-\SI{1.24}{\celsius}$ & $-\SI{0.46}{\celsius}$ & $\mathbf{-\SI{0.17}{\celsius}}$ & $-\SI{0.06}{\celsius}$ \\
+  \bottomrule
+  \end{tabular}
+  \end{center}
+  \item \textbf{Two-Point Algebraic Extraction of Probe Time Constant $\tau_p$ (Zero Calculus Required):} \idxformula{probe time constant from two readings tau_p = (t2 - t1)/ln((T_w - T_p1)/(T_w - T_p2))}
+  From any two probe readings $T_p(t_1)$ and $T_p(t_2)$ during step immersion into a constant-temperature bath $T_w$:
+  \begin{equation}\label{eq:17:taup2pt}
+    \tau_p = \frac{t_2 - t_1}{\ln\!\left(\dfrac{T_w - T_p(t_1)}{T_w - T_p(t_2)}\right)}
+  \end{equation}
+  \item \textbf{Dynamic Ramp Lag During Continuous Heating ($T_w(t) = T_{w,0} + r\,t$):} \idxtopic{dynamic ramp lag of thermometer}\idxformula{ramp lag Delta_T_lag = -r*tau_p}
+  If a thermometer probe remains immersed while water warms at rate $r = \frac{dT_w}{dt}$ $[\si{\celsius\per\second}]$, the exact steady-ramp solution to $\tau_p \frac{dT_p}{dt} + T_p = T_{w,0} + rt$ is:
+  \begin{equation}\label{eq:17:ramplag}
+    T_p(t) = T_w(t) - r\tau_p\left(1 - e^{-t/\tau_p}\right) \xrightarrow{t \ge 5\tau_p} T_p(t) - T_w(t) = -r\,\tau_p
+  \end{equation}
+  *(During continuous heating at $r = \SI{2.4}{\celsius\per\minute} = \SI{0.040}{\celsius\per\second}$, a slow spirit thermometer with $\tau_p = \SI{10}{\second}$ constantly trails the true water temperature by $-r\tau_p = -\SI{0.40}{\celsius}$!)*
+  \item \textbf{Calorimetric Probe Heat-Capacity Perturbation ($\Delta T_{\mathrm{drain}}$):} \idxtopic{probe heat-capacity drain}\idxformula{probe thermal drain Delta_T_drain = -C_p*(T_w0 - T_p0)/(C_w + C_p)}
+  When a cold probe of effective submerged heat capacity $C_p = m_p c_p$ initially at room temperature $T_{p,0}$ is dipped into an unstirred top water layer of effective heat capacity $C_{\mathrm{top}}$ initially at $T_{w,0}$, thermal equilibration cools the local water layer to:
+  \begin{equation}\label{eq:17:probedrain}
+    T_{\mathrm{eq}} = \frac{C_{\mathrm{top}} T_{w,0} + C_p T_{p,0}}{C_{\mathrm{top}} + C_p} \implies \Delta T_{\mathrm{drain}} = T_{\mathrm{eq}} - T_{w,0} = -\frac{C_p}{C_{\mathrm{top}} + C_p}\left(T_{w,0} - T_{p,0}\right)
+  \end{equation}
+\end{enumerate}
+\end{formulacard}
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=0.92\linewidth,
+    height=5.2cm,
+    font=\scriptsize,
+    xlabel={Dimensionless Immersion Time $t / \tau_p$ (for $\tau_p = \SI{4.0}{\second}$, $1\tau_p = \SI{4}{\second}$ and $5\tau_p = \SI{20}{\second}$)},
+    ylabel={Normalized Response / Fractional Error},
+    xmin=0, xmax=6.0,
+    ymin=0, ymax=1.08,
+    xtick={0,1,2,3,4,5,6},
+    xticklabels={$0$, $1\tau_p\ (\SI{4}{\second})$, $2\tau_p\ (\SI{8}{\second})$, $3\tau_p\ (\SI{12}{\second})$, $4\tau_p\ (\SI{16}{\second})$, $\mathbf{5\tau_p\ (\SI{20}{\second})}$, $6\tau_p\ (\SI{24}{\second})$},
+    ytick={0,0.2,0.4,0.632,0.8,0.95,1.0},
+    yticklabels={$0\%$, $20\%$, $40\%$, $63.2\%$, $80\%$, $95.0\%$, $100\%$},
+    grid=both,
+    grid style={gray!25, dashed},
+    legend style={at={(0.52,0.52)}, anchor=west, font=\scriptsize, fill=white, draw=navy},
+     samples=36,
+    domain=0:6
+]
+  % Settling curve 1 - exp(-x)
+  \addplot[navy, very thick] {1 - exp(-x)};
+  \addlegendentry{Probe Step Response $\dfrac{T_p(t) - T_{p,0}}{T_{\mathrm{true}} - T_{p,0}} = 1 - e^{-t/\tau_p}$}
+  % Error curve exp(-x)
+  \addplot[rust, very thick, dashed] {exp(-x)};
+  \addlegendentry{Fractional Lag Error $E_{\mathrm{frac}}(t) = \dfrac{T_{\mathrm{true}} - T_p(t)}{\Delta T} = e^{-t/\tau_p}$}
+  % Initial tangent line y = x
+  \addplot[teal, semithick, dotted, domain=0:1.05] {x};
+  \addlegendentry{Initial Slope Tangent at $t=0$: $(d\theta/dt)_0 = 1/\tau_p$}
+
+  % Key markers at 1 tau, 3 tau, 5 tau
+  \addplot[only marks, mark=*, mark size=2pt, navy] coordinates {(1, 0.6321) (2, 0.8647) (3, 0.9502) (5, 0.9933)};
+  \addplot[only marks, mark=square*, mark size=1.8pt, rust] coordinates {(1, 0.3679) (2, 0.1353) (3, 0.0498) (5, 0.0067)};
+
+  \draw[navy, densely dashed] (axis cs:1,0) -- (axis cs:1,0.6321);
+  \draw[navy, densely dashed] (axis cs:3,0) -- (axis cs:3,0.9502);
+  \draw[rust, thick] (axis cs:5,0) -- (axis cs:5,1.02);
+
+  \node[anchor=south west, font=\scriptsize, fill=white, inner sep=1pt] at (axis cs:1.05,0.60) {$1\tau_p$: $63.2\%$ ($36.8\%$ err)};
+  \node[anchor=south east, font=\scriptsize, fill=white, inner sep=1pt] at (axis cs:3.0,0.96) {$3\tau_p$: $95.0\%$ ($5.0\%$ err)};
+  \node[anchor=north east, font=\scriptsize\bfseries, text=rust, fill=boxbg, draw=rust, inner sep=2pt] at (axis cs:4.92,0.91) {$5\tau_p$ Settling Threshold: $99.33\%$ settled ($0.67\%$ err $< \SI{0.17}{\celsius}$)};
+\end{axis}
+\end{tikzpicture}
+\captionof{figure}{First-order thermometer probe step response $1 - e^{-t/\tau_p}$ and fractional dynamic lag error $e^{-t/\tau_p}$ versus dimensionless immersion time $t/\tau_p$. A probe with $\tau_p = \SI{4.0}{\second}$ must remain immersed for $\ge 5\tau_p = \SI{20.0}{\second}$ to reduce dynamic lag below $0.67\%$ of $\Delta T$ \src{S12,S21}.}\label{fig:17:thermometer-response}
+\idxfig{First-Order Thermometer Probe Step Response and 5-tau Settling Rule}
+\end{center}
+
+% ============================================================================
+\section{Immersion Depth, Stem Conduction \& Radial Stratification Bias (\texttt{Clarifications \#1--\#4})}\label{sec:17.4}
+\idxtopic{stratification bias!probe depth and radial placement}\idxdev{Clarification #4 top-layer probe placement}\idxtopic{Clarifications #1-#4!probe placement}
+
+\begin{rulebox}[2027 Official National Clarifications \texttt{\#1--\#4}: Unstirred Stratified Cup \& Top-Layer Measurement \src{S02,S05}]
+\begin{itemize}
+  \item \textbf{Clarifications \texttt{\#1, \#2, \#3} (\texttt{09/30/2026--10/06/2026}):} \emph{``No, the water must not be swirled, shaken or stirred before taking the temperature.''}
+  \item \textbf{Clarification \texttt{\#4} (\texttt{10/06/2026}, Sec.~5 / Par.~II.g):} \emph{``It is recommended that the ES should measure the temperature of the top layer of water near the center of the cup. If the thermometer has a probe, the ES should insert it far enough into the water to take an accurate measurement, but no farther.''}
+\end{itemize}
+\end{rulebox}
+
+Why does probe placement inside the $\SI{100}{\milli\liter}$ water column ($\SI{38}{\milli\meter}$ total fill depth in a standard $\SI{9}{oz}$ clear cup) shift the measured temperature $T_f$ by up to $\SIrange{4.0}{8.5}{\celsius}$?
+\begin{enumerate}
+  \item \textbf{Vertical Optical Deposition \& Hydrostatic Stability ($z$-Axis Bias):}
+  As established by the Hale \& Querry (1973) and Kou et al.\ (1993) liquid-water near-IR absorption spectra (\sref{sec:14}, \sref{sec:15.3}) \src{S19,S20}, $>66\%$ of the $\SI{2400}{\kelvin}$ tungsten heat lamp's transmitted radiant energy is absorbed directly inside the \textbf{top $z = \SI{5}{\milli\meter}$} of water ($>72\%$ in the top $\SI{10}{\milli\meter}$). Because liquid water above $\SI{4}{\celsius}$ expands when heated ($\partial\rho/\partial T < 0$), the hot top water layer is less dense than the cooler water beneath it ($\partial\rho/\partial z > 0$ downward). This gravitationally stable density profile completely suppresses vertical natural-convection overturning ($\mathrm{Ra} < 0$), trapping heat in the upper $\SIrange{5}{15}{\milli\meter}$ stratum while heat trickles downward only via slow molecular conduction ($\alpha_w = \SI{1.45e-7}{\square\meter\per\second}$, diffusion depth $\delta_{\mathrm{th}} = \sqrt{4\alpha_w t} \approx \SI{18.7}{\milli\meter}$ after $\SI{10}{\minute}$) \src{S12}.
+  \item \textbf{Uncovered Surface Evaporative Skin Cooling ($z = \SIrange{0}{1.5}{\milli\meter}$):}
+  The instant the cup is uncovered at the end of Heating Time (\texttt{Rule 5.II.g}), evaporative latent heat loss ($\dot{Q}_{\mathrm{evap}} \approx \SIrange{2.2}{4.4}{\watt}$, \sref{sec:15.4}) cools the uppermost $\SI{1}{\milli\meter}$ free-surface skin by $\SIrange{0.4}{0.9}{\celsius}$ within $\SIrange{15}{30}{\second}$. Consequently, the \textbf{peak water temperature} sits just below the evaporative surface boundary layer at depth $\mathbf{z_{\mathrm{opt}} = \SIrange{5}{12}{\milli\meter}}$ --- the exact zone targeted by an electronic probe tip under Clarification~\texttt{\#4}!
+  \item \textbf{Radial Sidewall Cooling Boundary Layer ($r$-Axis Bias):}
+  Along the vertical plastic cup wall ($r = R_{\mathrm{water}} \approx \SI{33.8}{\milli\meter}$), radial heat loss to the ambient room cools a $\delta_T \approx \SIrange{3}{5}{\milli\meter}$ natural-convection boundary layer, creating a downward-sinking wall plume that feeds cool water to the cup bottom while leaving the central core ($r < \SI{12}{\milli\meter}$) $\SIrange{0.6}{1.8}{\celsius}$ warmer than the perimeter wall (\fref{fig:17:probe-depth-bias}).
+  \item \textbf{Probe Stem Conduction Error at Ultra-Shallow Immersion ($z < \SI{4}{\milli\meter}$):} \idxtopic{stem conduction error in probe}
+  A stainless-steel probe sheath ($k_{\mathrm{ss}} \approx \SI{15}{\watt\per\meter\per\kelvin}$, diameter $d_p = \SI{3.2}{\milli\meter}$) acts as a conductive fin protruding into $\SI{22}{\celsius}$ room air. If immersed only $\SI{2}{\milli\meter}$ deep so part of the internal thermistor/RTD element sits above the waterline, axial stem conduction pulls the sensor reading down by $\SIrange{0.8}{2.5}{\celsius}$. Immersing the tip to $z = \SIrange{8}{12}{\milli\meter}$ ($2.5\text{--}4$ sheath diameters) submerges the entire active thermistor/thermocouple bead inside the peak isothermal stratum while minimizing stem-fin cooling.
+\end{enumerate}
+
+\begin{center}
+\resizebox{0.99\linewidth}{!}{%
+\begin{tikzpicture}[font=\scriptsize, >=Latex]
+  % Left panel: Cross section of 9 oz cup with stratified zones & probe placements
+  \begin{scope}[shift={(0,0)}]
+    % Stratified water layers (y from 0 to 3.2 cm representing 0 to 38 mm depth)
+    \fill[navy!12] (-2.60,0) -- (2.60,0) -- (2.95,1.4) -- (-2.95,1.4) -- cycle;
+    \fill[teal!18] (-2.95,1.4) -- (2.95,1.4) -- (3.22,2.45) -- (-3.22,2.45) -- cycle;
+    \fill[amber!25] (-3.22,2.45) -- (3.22,2.45) -- (3.35,3.02) -- (-3.35,3.02) -- cycle;
+    \fill[rust!22] (-3.35,3.02) -- (3.35,3.02) -- (3.38,3.20) -- (-3.38,3.20) -- cycle;
+
+    % Optimal ES target box (z = 5-12 mm, r < 10 mm)
+    \draw[rust, very thick, fill=amber!40] (-1.1,2.20) rectangle (1.1,2.85);
+    \node[font=\scriptsize\bfseries, text=rust, align=center] at (0,2.52) {CLARIF.\ \#4 TARGET ZONE\\[-1pt]$z=\SIrange{5}{12}{\milli\meter},\ r<\SI{10}{\milli\meter}$\\[-1pt]$\mathbf{T_{\mathrm{top}} = \SI{45.2}{\celsius}}$};
+
+    % Cup walls
+    \draw[navy, ultra thick] (-3.75,4.8) -- (-2.60,0) -- (2.60,0) -- (3.75,4.8);
+    \draw[navy, thick] (-3.85,4.8) -- (-3.65,4.8) (3.65,4.8) -- (3.85,4.8);
+    \draw[teal, very thick] (-3.38,3.20) -- (3.38,3.20);
+
+    % Layer labels
+    \node[font=\scriptsize, text=navy, align=center] at (0,0.65) {Bottom Cold Layer ($z=\SIrange{24}{38}{\milli\meter}$): $T_{\mathrm{bot}} = \SIrange{37.8}{39.2}{\celsius}$\\[-1pt](Bias if pushed to bottom: $\mathbf{-\SIrange{6.0}{7.4}{\celsius}}$!)};
+    \node[font=\scriptsize, text=navy] at (0,1.82) {Thermocline Transition ($z=\SIrange{12}{24}{\milli\meter}$): $T = \SIrange{40.5}{43.8}{\celsius}$};
+
+    % Radial wall cooling arrows
+    \draw[->, navy, thick, dashed] (-3.05,2.7) -- (-2.70,1.2);
+    \draw[->, navy, thick, dashed] (3.05,2.7) -- (2.70,1.2);
+    \node[font=\scriptsize, text=navy, rotate=78] at (-3.30,1.9) {Wall Plume $-\SI{1.4}{\celsius}$};
+
+    % Probe A: Correct ES Center Top-Layer Probe
+    \draw[fill=slate!70, draw=black, thick] (-0.12,2.50) rectangle (0.12,5.35);
+    \fill[rust] (0,2.50) circle (2.2pt);
+    \node[anchor=south, font=\scriptsize\bfseries, fill=boxbg, draw=navy, inner sep=1.5pt] at (0,5.38) {Probe A (Correct Clarif.\ \#4 Center Tip)};
+
+    % Probe B: Deep/Wall Misplaced Probe
+    \draw[fill=midgray!60, draw=black, densely dashed] (2.05,0.25) rectangle (2.25,5.0);
+    \fill[navy] (2.15,0.25) circle (2.0pt);
+    \node[anchor=west, font=\scriptsize, text=rust, align=left] at (2.35,4.45) {Probe B (Bottom/Wall Error)\\[-1pt]Reads $\SI{38.4}{\celsius}$ ($-\SI{6.8}{\celsius}$ bias)};
+
+    % IR Cone at Top Surface
+    \draw[rust, dotted, thick] (-0.75,5.1) -- (-0.45,3.20) (0.75,5.1) -- (0.45,3.20);
+    \node[anchor=east, font=\scriptsize, text=rust, align=right] at (-0.8,4.35) {IR Gun Spot ($z=\SI{15}{\micro\meter}$ skin)\\[-1pt]$\varepsilon_w=0.96,\ T_{\mathrm{skin}}\approx\SI{44.6}{\celsius}$};
+
+    % Depth scale on left
+    \draw[<->, black, semithick] (-4.1,3.20) -- (-4.1,0) node[midway, fill=white, inner sep=1pt, rotate=90] {Water Depth $\SI{38}{\milli\meter}$ ($\SI{100}{\milli\liter}$)};
+    \draw[black] (-4.25,3.20) -- (-3.95,3.20) node[left=2pt] {$z=\SI{0}{\milli\meter}$};
+    \draw[black] (-4.25,2.52) -- (-3.95,2.52) node[left=2pt] {$z=\SI{8}{\milli\meter}$};
+    \draw[black] (-4.25,0) -- (-3.95,0) node[left=2pt] {$z=\SI{38}{\milli\meter}$};
+  \end{scope}
+
+  % Right panel: Vertical & Radial Temperature Profile Table / Mini-Plot
+  \begin{scope}[shift={(5.5,0.2)}]
+    \draw[navy, thick, fill=boxbglight] (0,0) rectangle (6.5,5.0);
+    \node[anchor=north, font=\scriptsize\bfseries, fill=navy, text=white, minimum width=6.25cm, inner sep=2.5pt] at (3.25,5.0) {Measured Stratification Map $T(z,r)$ ($t=\SI{10}{\minute}$, $h=\SI{45}{\centi\meter}$)};
+    \node[anchor=north west, font=\scriptsize] at (0.12,4.42) {%
+      \setlength{\tabcolsep}{2.8pt}
+      \renewcommand{\arraystretch}{1.12}
+      \begin{tabular}{@{}lcccc@{}}
+      \toprule
+      \textbf{Depth $z$} & \textbf{Center} & \textbf{Mid-Rad} & \textbf{Cup Wall} & \textbf{Bias vs.\ Target} \\
+      $(\text{below }z=0)$ & $(r=\SI{0}{\milli\meter})$ & $(r=\SI{18}{\milli\meter})$ & $(r=\SI{32}{\milli\meter})$ & $(z=\SI{8}{\milli\meter},r=0)$ \\
+      \midrule
+      $\SI{0.02}{\milli\meter}$ (IR skin) & $\SI{44.6}{\celsius}$ & $\SI{44.3}{\celsius}$ & $\SI{43.1}{\celsius}$ & $-\SI{0.6}{\celsius}$ (evap) \\
+      $\mathbf{\SI{5}{\milli\meter}}$ \textbf{(Top)} & $\mathbf{\SI{45.1}{\celsius}}$ & $\SI{44.8}{\celsius}$ & $\SI{43.5}{\celsius}$ & $-\SI{0.1}{\celsius}$ \\
+      $\mathbf{\SI{8}{\milli\meter}}$ \textbf{(Peak)} & $\mathbf{\SI{45.2}{\celsius}}$ & $\SI{44.9}{\celsius}$ & $\SI{43.6}{\celsius}$ & $\mathbf{\SI{0.0}{\celsius}}$ \textbf{(Ref)} \\
+      $\mathbf{\SI{12}{\milli\meter}}$ \textbf{(Top)} & $\mathbf{\SI{44.8}{\celsius}}$ & $\SI{44.4}{\celsius}$ & $\SI{43.1}{\celsius}$ & $-\SI{0.4}{\celsius}$ \\
+      $\SI{20}{\milli\meter}$ (Mid) & $\SI{42.1}{\celsius}$ & $\SI{41.7}{\celsius}$ & $\SI{40.6}{\celsius}$ & $-\SI{3.1}{\celsius}$ \\
+      $\SI{30}{\milli\meter}$ (Low) & $\SI{39.4}{\celsius}$ & $\SI{39.1}{\celsius}$ & $\SI{38.3}{\celsius}$ & $-\SI{5.8}{\celsius}$ \\
+      $\SI{37}{\milli\meter}$ (Base) & $\SI{38.1}{\celsius}$ & $\SI{37.9}{\celsius}$ & $\SI{37.4}{\celsius}$ & $\mathbf{-\SI{7.1}{\celsius}}$ \\
+      \midrule
+      \textbf{Swirled Bulk} & $\SI{41.6}{\celsius}$ & $\SI{41.6}{\celsius}$ & $\SI{41.5}{\celsius}$ & $\mathbf{-\SI{3.6}{\celsius}}$ \textbf{Lost!} \\
+      \bottomrule
+      \end{tabular}%
+    };
+    \node[anchor=south, font=\scriptsize, text=rust, align=center] at (3.25,0.08) {\textbf{Calibration Rule:} Clamp practice probe at $z=\SI{8\pm 2}{\milli\meter},\ r=\SI{0}{\milli\meter}$!};
+  \end{scope}
+\end{tikzpicture}%
+}
+\captionof{figure}{Thermometer immersion depth ($z$) and radial placement ($r$) bias inside an unstirred, top-heated $\SI{9}{oz}$ cup containing $\SI{100}{\milli\liter}$ of water (\texttt{Official Clarifications \#1--\#4}). Top-down near-IR absorption creates a buoyantly stable hot upper stratum ($z = \SIrange{5}{12}{\milli\meter}$) that exceeds the swirled bulk average by $+\SI{3.6}{\celsius}$ and the bottom boundary by $+\SI{7.1}{\celsius}$ \src{S02,S05,S19}.}\label{fig:17:probe-depth-bias}
+\idxfig{ES Thermometer Immersion Depth and Radial Placement Bias in Stratified Cup}
+\end{center}
+
+% ============================================================================
+\section{Fixed-Point Thermometer Calibration: Ice Bath ($\SI{0.00}{\celsius}$) \& Barometric Steam Point}\label{sec:17.5}
+\idxtopic{thermometer calibration!ice point and boiling point}\idxformula{barometric boiling point T_boil = 100.00 + 0.03686*(P_mmHg - 760) - 0.000020*(P_mmHg - 760)^2}
+
+To verify or calibrate team thermometers before building the 36-run DOE calibration table (\sref{sec:16.2}), perform a two-point fixed-temperature calibration against the \textbf{ice point ($\SI{0.00}{\celsius} = \SI{273.15}{\kelvin}$)} and the \textbf{barometric-corrected steam boiling point ($T_{\mathrm{boil}}(P_{\mathrm{atm}})$)} \src{S09,S21,S22}:
+\begin{enumerate}
+  \item \textbf{Ice-Point Reference Bath ($T_{\mathrm{ice}} = \SI{0.00}{\celsius}$ at $\SI{1}{\text{atm}}$):} \idxerr{ice floating on 4 C warm bottom water in calibration bath}
+  Pack a clean Dewar or insulated foam cup \textbf{all the way to the bottom} with finely shaved or crushed ice made from distilled water, then add just enough chilled distilled water to fill the pore spaces between ice crystals ($\SIrange{75}{80}{\percent}$ solid ice, $\SIrange{20}{25}{\percent}$ liquid water; slush looks wet and translucent, with \textbf{zero free-floating ice gap at the bottom}).
+  \emph{Why bottom-packed ice is critical:} Because liquid water reaches maximum density $\rho_{\max} = \SI{999.97}{\kilogram\per\cubic\meter}$ at $+\SI{3.984}{\celsius}$ (\sref{sec:03}) \src{S09}, if ice cubes merely float at the top of a cup of water, dense $+\SI{4}{\celsius}$ water sinks to the bottom, causing a deep probe to read $+\SIrange{1.5}{4.0}{\celsius}$ instead of $\SI{0.00}{\celsius}$! Wait $\SI{3}{\minute}$, insert the probe into the central slush zone without touching the container walls, wait $\ge 5\tau_p$, and record $T_{\mathrm{read,ice}}$. The zero-offset error is $\delta_0 = T_{\mathrm{read,ice}} - \SI{0.00}{\celsius}$. *(Note: Dissolved air depresses the freezing point of air-saturated water by only $\SI{-0.0024}{\celsius}$ relative to the $\SI{0.0100}{\celsius}$ triple point, and barometric pressure shifts the ice point by $\frac{dT_m}{dP} = \SI{-0.00743}{\celsius\per\text{atm}}$, which is negligible on a $\SI{0.1}{\celsius}$ probe \src{S11}).*
+  \item \textbf{Altitude / Barometric-Pressure Corrected Steam Boiling Point ($T_{\mathrm{boil}}(P_{\mathrm{atm}})$):}
+  Water boils at exactly $\SI{100.00}{\celsius}$ ($T_{90} = \SI{99.974}{\celsius}$ on ITS-90 \src{S09}) \textbf{only} at standard sea-level pressure $P_0 = \SI{101.325}{\kilo\pascal} = \SI{760.00}{\milli\meter Hg}$. Because $P_{\mathrm{atm}}$ drops with elevation $z_{\mathrm{alt}}$ $[\si{\meter}]$ as $P_{\mathrm{atm}}(z_{\mathrm{alt}}) \approx \SI{101.325}{\kilo\pascal}\left(1 - \num{2.2558e-5}\,z_{\mathrm{alt}}\right)^{5.2559}$ ($\approx -\SI{1.2}{\kilo\pascal}$ or $-\SI{9.0}{\milli\meter Hg}$ per $+\SI{100}{\meter}$ elevation) and fluctuates by $\pm\SI{2.5}{\kilo\pascal}$ with weather fronts, calibrating a thermometer in boiling water without correcting for local barometric pressure introduces a $\SIrange{0.5}{3.0}{\celsius}$ systematic error! From the NIST IAPWS-95 saturation curve around $\SI{100}{\celsius}$ ($\frac{dT_{\mathrm{sat}}}{dP} = \frac{T v_{fg}}{h_{fg}} = \SI{0.2765}{\kelvin\per\kilo\pascal} = \SI{0.03686}{\kelvin\per\milli\meter Hg}$) \src{S09}:
+  \begin{align}\label{eq:17:tboil}
+    T_{\mathrm{boil}}(P_{\mathrm{mmHg}}) &= \SI{100.00}{\celsius} + \num{0.03686}\left(P_{\mathrm{mmHg}} - 760.0\right) - \num{0.000020}\left(P_{\mathrm{mmHg}} - 760.0\right)^2 \\[2pt]
+    T_{\mathrm{boil}}(P_{\mathrm{kPa}})  &= \SI{100.00}{\celsius} + \num{0.2765}\left(P_{\mathrm{kPa}} - 101.325\right) - \num{0.00112}\left(P_{\mathrm{kPa}} - 101.325\right)^2
+  \end{align}
+  *(Suspend the probe in the condensing saturated steam just above the boiling distilled water surface or in a vigorously rolling bath with boiling chips to avoid $+\SIrange{0.2}{0.6}{\celsius}$ liquid superheating at the heated vessel bottom).*
+  \item \textbf{Two-Point Linear Calibration Correction Equation:} \idxformula{two-point thermometer calibration T_true = T_boil*(T_raw - T_read,ice)/(T_read,boil - T_read,ice)}
+  Given raw thermometer reading $T_{\mathrm{raw}}$, ice-bath reading $T_{\mathrm{read,ice}}$ (at true $\SI{0.00}{\celsius}$), and steam-point reading $T_{\mathrm{read,boil}}$ (at true $T_{\mathrm{boil}}(P_{\mathrm{atm}})$):
+  \begin{equation}\label{eq:17:2ptcal}
+    \boxed{T_{\mathrm{true}} = T_{\mathrm{boil}}(P_{\mathrm{atm}}) \times \frac{T_{\mathrm{raw}} - T_{\mathrm{read,ice}}}{T_{\mathrm{read,boil}} - T_{\mathrm{read,ice}}}}
+  \end{equation}
+\end{enumerate}
+
+\begin{workedexample}[5$\tau_p$ Premature-Reading Audit, Probe Heat Drain \& Two-Point Barometric Calibration]{Rule 4.f \& 5.II.g}{ex:17.4}
+(a)~A stainless-sheathed digital probe ($\tau_p = \SI{3.20}{\second}$, effective tip heat capacity $C_p = \SI{0.450}{\joule\per\kelvin}$, initial room temperature $T_{p,0} = \SI{21.50}{\celsius}$) is inserted into the top stratified water layer ($C_{\mathrm{top}} = \SI{185.0}{\joule\per\kelvin}$, initial temperature $T_{w,0} = \SI{46.50}{\celsius}$). Compute the true equilibrium temperature $T_{\mathrm{eq}}$ after probe thermal drain, the premature reading if recorded at $t = \SI{6.40}{\second}$ ($2\tau_p$), and the settled reading at $t = 5\tau_p = \SI{16.0}{\second}$.
+(b)~During pre-tournament calibration on a day when local barometric pressure is $P_{\mathrm{atm}} = \SI{742.0}{\milli\meter Hg}$, the probe reads $T_{\mathrm{read,ice}} = -\SI{0.30}{\celsius}$ in an ice bath and $T_{\mathrm{read,boil}} = \SI{98.90}{\celsius}$ in saturated steam. If the probe reads $T_{\mathrm{raw}} = \SI{44.20}{\celsius}$ in a trial cup, what is the true calibrated water temperature $T_{\mathrm{true}}$?
+\par\smallskip\noindent
+\textbf{Solution.}
+(a)~By \eref{eq:17:probedrain}, calorimetric equilibration between the $\SI{21.50}{\celsius}$ probe tip and the $\SI{46.50}{\celsius}$ top layer yields:
+$$T_{\mathrm{eq}} = \frac{185.0(46.50) + 0.450(21.50)}{185.0 + 0.450} = \frac{8612.175}{185.450} = \mathbf{\SI{46.439}{\celsius}} \quad (\Delta T_{\mathrm{drain}} = -\SI{0.061}{\celsius})$$
+Using \eref{eq:17:probestep} with $\Delta T_{\mathrm{step}} = 46.4393 - 21.50 = \SI{24.9393}{\celsius}$:
+$$T_p(2\tau_p = \SI{6.40}{\second}) = 46.4393 - 24.9393\,e^{-2} = \mathbf{\SI{43.06}{\celsius}} \quad (\text{premature reading loses }\mathbf{\SI{3.38}{\celsius}}\text{!})$$
+$$T_p(5\tau_p = \SI{16.0}{\second}) = 46.4393 - 24.9393\,e^{-5} = \mathbf{\SI{46.27}{\celsius}} \quad (\text{within }\SI{0.17}{\celsius}\text{ of }T_{\mathrm{eq}})$$
+(b)~At $P_{\mathrm{atm}} = \SI{742.0}{\milli\meter Hg}$ ($\Delta P = -\SI{18.0}{\milli\meter Hg}$), \eref{eq:17:tboil} gives true steam temperature:
+$$T_{\mathrm{boil}}(\SI{742.0}{\milli\meter Hg}) = 100.00 + \num{0.03686}(-18.0) - \num{0.000020}(-18.0)^2 = 100.00 - 0.66348 - 0.00648 = \mathbf{\SI{99.330}{\celsius}}$$
+Applying the two-point linear calibration formula \eref{eq:17:2ptcal}:
+$$T_{\mathrm{true}} = \SI{99.330}{\celsius} \times \frac{44.20 - (-0.30)}{98.90 - (-0.30)} = 99.330 \times \frac{44.50}{99.20} = \mathbf{\SI{44.56}{\celsius}}$$
+\verifiedby{Direct linear slope/offset verification $T_{\mathrm{true}} = 1.00131(44.20 + 0.30) = \SI{44.5583}{\celsius}$ and Python check \texttt{sec17:ex17.4}.}
+\end{workedexample}
+
+% ============================================================================
+\section{JCGM GUM / NIST TN~1297 Uncertainty Propagation Framework \src{S21}}\label{sec:17.6}
+\idxtopic{uncertainty propagation (JCGM GUM / NIST TN 1297)}\idxtopic{Type A vs Type B standard uncertainty}\idxformula{GUM propagation law u_c^2(y) = sum (df/dx_i)^2 * u^2(x_i)}
+
+Under the international BIPM/JCGM \emph{Guide to the Expression of Uncertainty in Measurement} (GUM, JCGM~100:2008) and NIST Technical Note~1297 \src{S21}, every measurement uncertainty is expressed as a \textbf{standard uncertainty} $u(x_i)$ (equivalent to one standard deviation, $1\sigma$) classified by evaluation method:
+\begin{enumerate}
+  \item \textbf{Type~A Standard Uncertainty ($u_A$ --- Statistical Evaluation of Repeated Trials):}
+  From $n$ independent repeated measurements $x_1, x_2, \dots, x_n$ with sample mean $\bar{x} = \frac{1}{n}\sum_{k=1}^n x_k$ and sample standard deviation $s = \sqrt{\frac{1}{n-1}\sum_{k=1}^n (x_k - \bar{x})^2}$ (with $\nu = n - 1$ degrees of freedom):
+  \begin{equation}\label{eq:17:typeA}
+    u_A(\bar{x}) = \frac{s}{\sqrt{n}} = \sqrt{\frac{\sum_{k=1}^n (x_k - \bar{x})^2}{n(n - 1)}}
+  \end{equation}
+  \item \textbf{Type~B Standard Uncertainty ($u_B$ --- Non-Statistical Prior / Specification Bounds):}
+  \begin{itemize}
+    \item \emph{Manufacturer Tolerance $\pm a$ (Rectangular / Uniform Distribution on $[\bar{x}-a, \bar{x}+a]$):}
+    \begin{equation}\label{eq:17:typeBtol}
+      u_{B,\mathrm{tol}} = \frac{a}{\sqrt{3}} \approx 0.57735\,a
+    \end{equation}
+    \item \emph{Digital Display Resolution $\Delta_{\mathrm{res}}$ (Uniform Rounding Within $\pm a = \pm\Delta_{\mathrm{res}}/2$):}
+    \begin{equation}\label{eq:17:typeBres}
+      u_{B,\mathrm{res}} = \frac{\Delta_{\mathrm{res}} / 2}{\sqrt{3}} = \frac{\Delta_{\mathrm{res}}}{2\sqrt{3}} \approx 0.28868\,\Delta_{\mathrm{res}} \quad (\text{for }\Delta_{\mathrm{res}} = \SI{0.1}{\celsius},\ u_{B,\mathrm{res}} = \SI{0.0289}{\celsius})
+    \end{equation}
+    \item \emph{Analog Meniscus / Scale Reading Bound $\pm a$ (Triangular Distribution Peaked at Center):} $u_{B,\mathrm{tri}} = \frac{a}{\sqrt{6}} \approx 0.40825\,a$.
+  \end{itemize}
+  \item \textbf{Combined Standard Uncertainty $u_c(y)$ \& Expanded Uncertainty $U = k\,u_c(y)$:}
+  For a single measurand $x$ with independent Type~A and Type~B components, $u(x) = \sqrt{u_A^2 + u_{B,\mathrm{tol}}^2 + u_{B,\mathrm{res}}^2}$. For a derived quantity $y = f(x_1, x_2, \dots, x_N)$, the first-order Taylor expansion (Law of Propagation of Uncertainty) with sensitivity coefficients $c_i = \frac{\partial f}{\partial x_i}$ and covariance $u(x_i, x_j) = r_{ij}u(x_i)u(x_j)$ gives \src{S21}:
+  \begin{equation}\label{eq:17:gum}
+    u_c^2(y) = \sum_{i=1}^N \left(\frac{\partial f}{\partial x_i}\right)^2 u^2(x_i) + 2\sum_{i=1}^{N-1}\sum_{j=i+1}^N \frac{\partial f}{\partial x_i}\frac{\partial f}{\partial x_j}\,r_{ij}u(x_i)u(x_j), \qquad U = k\,u_c(y)
+  \end{equation}
+  where coverage factor $k = 2$ defines an approximately $\SI{95}{\percent}$ confidence interval $y \pm U$ (or $k = t_{0.95,\nu_{\mathrm{eff}}}$ from the Student-$t$ distribution when effective degrees of freedom $\nu_{\mathrm{eff}}$ from the Welch--Satterthwaite formula $\nu_{\mathrm{eff}} = u_c^4(y)/\sum \frac{[c_i u(x_i)]^4}{\nu_i}$ are small, e.g., $\nu < 10$).
+\end{enumerate}
+
+\begin{table}[h!]
+\centering
+\captionof{table}{Algebra-Only JCGM GUM Uncertainty Propagation Rules for Science Olympiad Thermodynamics (`Rule 5.d.iv` Compliant) \src{S06,S21}.}\label{tab:17:gumrules}
+\footnotesize
+\setlength{\tabcolsep}{3.5pt}
+\renewcommand{\arraystretch}{1.22}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.21\linewidth} >{\raggedright\arraybackslash}p{0.24\linewidth} >{\raggedright\arraybackslash}p{0.31\linewidth} >{\raggedright\arraybackslash}X@{}}
+\toprule
+\hdr{Functional Relationship} & \hdr{Equation $y = f(x_1, x_2, \dots)$} & \hdr{Ready-to-Use Algebraic Uncertainty Rule} & \hdr{Thermodynamics Competition Application} \\
+\midrule
+\textbf{1.~Linear Sum / Difference} (Uncorrelated, $r_{ij}=0$) &
+$y = a x_1 + b x_2 - c x_3$ &
+$u_c(y) = \sqrt{a^2 u^2(x_1) + b^2 u^2(x_2) + c^2 u^2(x_3)}$ \newline \emph{(Absolute uncertainties add in quadrature)} &
+$\Delta T = T_2 - T_1$ with two \emph{different} sensors: $u(\Delta T) = \sqrt{u^2(T_2) + u^2(T_1)}$. \\
+\rowcolor{rowalt}
+\textbf{2.~Correlated Difference} (\textbf{Rule \texttt{4.f} Same Thermometer!}) \idxtopic{Rule 4.f!GUM correlated uncertainty} &
+$\mathrm{TG} = T_f - T_s$ \newline ($r_{\mathrm{sys}} = +1$ for shared bias $u_{B,\mathrm{sys}}$) &
+$u_c(\mathrm{TG}) = \sqrt{u_{\mathrm{rand}}^2(T_f) + u_{\mathrm{rand}}^2(T_s)}$ \newline where $u_{\mathrm{rand}}^2 = u_A^2 + u_{B,\mathrm{res}}^2$ \newline \emph{(Shared systematic tolerance $u_{B,\mathrm{sys}}$ cancels!)} &
+Under Rule~\texttt{4.f}, the same thermometer measures $T_s$ and $T_f$: $u_{B,\mathrm{sys}}^2 + u_{B,\mathrm{sys}}^2 - 2(+1)u_{B,\mathrm{sys}}^2 = 0$! \\
+\textbf{3.~Product \& Quotient} &
+$y = \dfrac{k\,x_1\,x_2}{x_3}$ &
+$\dfrac{u_c(y)}{|y|} = \sqrt{\left(\dfrac{u(x_1)}{x_1}\right)^2 + \left(\dfrac{u(x_2)}{x_2}\right)^2 + \left(\dfrac{u(x_3)}{x_3}\right)^2}$ \newline \emph{(Fractional uncertainties add in quadrature)} &
+Calorimetry $Q = m c_p \Delta T$, ideal gas $P = nRT/V$, or thermal conductivity $k = \dfrac{\dot{Q} L}{A \Delta T}$. \\
+\rowcolor{rowalt}
+\textbf{4.~Power / Monomial Law} &
+$y = k\,x_1^a\,x_2^b\,x_3^{-c}$ &
+$\dfrac{u_c(y)}{|y|} = \sqrt{\left(a\dfrac{u(x_1)}{x_1}\right)^2 + \left(b\dfrac{u(x_2)}{x_2}\right)^2 + \left(c\dfrac{u(x_3)}{x_3}\right)^2}$ &
+Stefan--Boltzmann $\dot{Q} = \varepsilon\sigma A T^4 \implies \dfrac{u(\dot{Q})}{\dot{Q}} = \sqrt{\dots + \left(\mathbf{4}\dfrac{u(T)}{T}\right)^2}$; pipe area $A = \frac{\pi}{4}D^2 \implies 2\frac{u(D)}{D}$. \\
+\textbf{5.~Natural Logarithm \& Exponential} &
+$y = a\ln(x)$ \newline or $z = a e^{b x}$ &
+$u_c(y) = |a|\dfrac{u(x)}{|x|}$ \newline $\dfrac{u_c(z)}{|z|} = |b|\,u(x)$ &
+Semi-log cooling plot $y = \ln(T - T_{\mathrm{ss}})$, entropy $\Delta S = mc\ln(T_2/T_1)$, or Boltzmann factor $e^{-E/(k_B T)}$. \\
+\rowcolor{rowalt}
+\textbf{6.~OLS Linear Regression Slope $m$ \& Intercept $b$} &
+$y = m x + b$ across $N$ points $(x_i, y_i)$ &
+$s_{y|x} = \sqrt{\dfrac{S_{yy} - m S_{xy}}{N - 2}}$,\quad $u(m) = \dfrac{s_{y|x}}{\sqrt{S_{xx}}}$, \newline $u(b) = s_{y|x}\sqrt{\dfrac{1}{N} + \dfrac{\bar{x}^2}{S_{xx}}}$ &
+Time constant $\tau = -1/m \implies u(\tau) = \dfrac{u(m)}{m^2} = \tau^2 u(m)$; Clausius--Clapeyron $\Delta H_{\mathrm{vap}} = -R m \implies u(\Delta H) = R\,u(m)$. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{workedexample}[Complete JCGM GUM Uncertainty Budget for \texttt{Rule 4.f} $\mathrm{TG}$ \& Specific-Heat Calorimetry]{Rules 4.f \& 5.I.b}{ex:17.5}
+(a)~An ES digital probe has manufacturer tolerance $\pm a_{\mathrm{sys}} = \pm\SI{0.40}{\celsius}$, display resolution $\Delta_{\mathrm{res}} = \SI{0.10}{\celsius}$, and Type~A random repeatability $u_A = \SI{0.050}{\celsius}$. Calculate the combined standard uncertainty $u(T)$ of a single temperature reading, and compare $u_c(\mathrm{TG})$ for $\mathrm{TG} = T_f - T_{\mathrm{start}}$ when measured with two \emph{different} probes ($r=0$) versus the \emph{same} probe under Rule~\texttt{4.f} ($r_{\mathrm{sys}} = +1$).
+(b)~In a calorimetry lab using that same thermometer, a metal sample of mass $m_x = \SI{85.00 \pm 0.05}{\gram}$ cooled by $\Delta T_x = \SI{52.60}{\celsius}$ warms $m_w = \SI{100.00 \pm 0.15}{\gram}$ of water ($c_w = \SI{4.184}{\joule\per\gram\per\kelvin}$, exact) by $\Delta T_w = \SI{5.40}{\celsius}$ (where $u(\Delta T_w) = u(\Delta T_x) = u_{\mathrm{corr}}(\mathrm{TG}) = \SI{0.08165}{\celsius}$). Compute $c_x$, its combined standard uncertainty $u_c(c_x)$, and the expanded uncertainty $U(c_x)$ ($k=2$).
+\par\smallskip\noindent
+\textbf{Solution.}
+(a)~From \eref{eq:17:typeBtol}--\eref{eq:17:typeBres}: $u_{B,\mathrm{sys}} = \frac{0.40}{\sqrt{3}} = \SI{0.23094}{\celsius}$ and $u_{B,\mathrm{res}} = \frac{0.10}{2\sqrt{3}} = \SI{0.02887}{\celsius}$. For a single reading:
+$$u(T) = \sqrt{u_{B,\mathrm{sys}}^2 + u_{B,\mathrm{res}}^2 + u_A^2} = \sqrt{0.23094^2 + 0.02887^2 + 0.050^2} = \mathbf{\SI{0.2380}{\celsius}}$$
+If two independent thermometers were used ($r = 0$), $u_{\mathrm{uncorr}}(\mathrm{TG}) = \sqrt{2}\,u(T) = \mathbf{\SI{0.3366}{\celsius}}$. Under Rule~\texttt{4.f} (same thermometer, $r_{\mathrm{sys}} = +1$), the correlated systematic variance cancels ($u_{B,\mathrm{sys}}^2 + u_{B,\mathrm{sys}}^2 - 2u_{B,\mathrm{sys}}^2 = 0$), leaving only random and resolution terms:
+$$u_{\mathrm{corr}}(\mathrm{TG}) = \sqrt{2\left(u_{B,\mathrm{res}}^2 + u_A^2\right)} = \sqrt{2\left(0.02887^2 + 0.050^2\right)} = \mathbf{\SI{0.08165}{\celsius}} \quad (\mathbf{4.12\times\text{\textbf{ lower uncertainty!}}})$$
+(b)~Specific heat of the metal: $c_x = \frac{m_w c_w \Delta T_w}{m_x \Delta T_x} = \frac{(100.00)(4.184)(5.40)}{(85.00)(52.60)} = \mathbf{\SI{0.50533}{\joule\per\gram\per\kelvin}}$. By Rule~3 in Table~\ref{tab:17:gumrules}:
+$$\frac{u_c(c_x)}{c_x} = \sqrt{\left(\frac{0.15}{100.00}\right)^2 + \left(\frac{0.05}{85.00}\right)^2 + \left(\frac{0.08165}{5.40}\right)^2 + \left(\frac{0.08165}{52.60}\right)^2} = \mathbf{0.01528}\ (\SI{1.53}{\percent})$$
+*(Notice that $\frac{u(\Delta T_w)}{\Delta T_w} = \SI{1.51}{\percent}$ contributes $>97\%$ of the total variance!)* Thus $u_c(c_x) = (0.50533)(0.01528) = \mathbf{\SI{0.00772}{\joule\per\gram\per\kelvin}}$ and expanded uncertainty ($k=2$) is $U = 2 u_c(c_x) = \mathbf{\SI{0.0154}{\joule\per\gram\per\kelvin}}$, reported as $c_x = \mathbf{\SI{0.505 \pm 0.015}{\joule\per\gram\per\kelvin}}$.
+\verifiedby{Monte Carlo / finite-difference perturbation of $c_x(m_w, m_x, \Delta T_w, \Delta T_x)$ and Python check \texttt{sec17:ex17.5}.}
+\end{workedexample}
+
+\begin{workedexample}[Thermocouple Cold-Junction Compensation (CJC) \& Stefan--Boltzmann $T^4$ Power-Law Uncertainty]{Rules 4.f, 5.c.vi}{ex:17.6}
+(a)~A \texttt{Type T} thermocouple has its sensing junction in warm water at $T_{\mathrm{sense}}$ and its voltmeter terminal block (reference junction) at ambient room temperature $T_{\mathrm{ref}} = \SI{20.00}{\celsius}$. The uncompensated millivoltmeter reads $\Delta V(T_{\mathrm{ref}}, T_{\mathrm{sense}}) = \SI{+0.934}{\milli\volt}$. Using Table~\ref{tab:17:sensortable}, find the total ice-point referenced EMF $E(\SI{0}{\celsius}, T_{\mathrm{sense}})$ and determine $T_{\mathrm{sense}}$ by linear interpolation between $\SI{40.0}{\celsius}$ and $\SI{50.0}{\celsius}$.
+(b)~A blackbody cavity ($\varepsilon = 1.000$ exact) of aperture area $A = \SI{50.00 \pm 0.25}{\square\centi\meter}$ operates at $T = \SI{500.0 \pm 2.5}{\kelvin}$. Calculate the emitted radiant power $\dot{Q} = \sigma A T^4$ and its combined standard uncertainty $u_c(\dot{Q})$.
+\par\smallskip\noindent
+\textbf{Solution.}
+(a)~From Table~\ref{tab:17:sensortable}, a \texttt{Type T} junction at $T_{\mathrm{ref}} = \SI{20.00}{\celsius}$ has $E(\SI{0}{\celsius}, \SI{20.00}{\celsius}) = \SI{+0.790}{\milli\volt}$. By the Law of Intermediate Temperatures:
+$$E(\SI{0}{\celsius}, T_{\mathrm{sense}}) = E(\SI{0}{\celsius}, \SI{20.00}{\celsius}) + \Delta V(\SI{20.00}{\celsius}, T_{\mathrm{sense}}) = 0.790 + 0.934 = \mathbf{\SI{+1.724}{\milli\volt}}$$
+Interpolating in Table~\ref{tab:17:sensortable} between $\SI{40.0}{\celsius}$ ($\SI{1.612}{\milli\volt}$) and $\SI{50.0}{\celsius}$ ($\SI{2.036}{\milli\volt}$):
+$$T_{\mathrm{sense}} = 40.0 + (50.0 - 40.0)\frac{1.724 - 1.612}{2.036 - 1.612} = 40.0 + 10.0\left(\frac{0.112}{0.424}\right) = \mathbf{\SI{42.64}{\celsius}}$$
+(b)~Emitted radiant power ($\sigma = \SI{5.670374e-8}{\watt\per\square\meter\per\kelvin\tothe{4}}$, $A = \SI{5.000e-3}{\square\meter}$):
+$$\dot{Q} = \sigma A T^4 = (\num{5.670374e-8})(\num{5.000e-3})(500.0)^4 = \mathbf{\SI{17.720}{\watt}}$$
+By the power-law GUM formula (Rule~4 in Table~\ref{tab:17:gumrules}), the exponent $4$ on $T$ multiplies its relative uncertainty by $4$:
+$$\frac{u_c(\dot{Q})}{\dot{Q}} = \sqrt{\left(\frac{u(A)}{A}\right)^2 + \left(4\,\frac{u(T)}{T}\right)^2} = \sqrt{\left(\frac{0.25}{50.00}\right)^2 + \left(4\times\frac{2.5}{500.0}\right)^2} = \sqrt{0.0050^2 + 0.0200^2} = \mathbf{0.02062}\ (\SI{2.06}{\percent})$$
+Thus $u_c(\dot{Q}) = (\SI{17.720}{\watt})(0.020616) = \mathbf{\SI{0.365}{\watt}}$, so $\dot{Q} = \mathbf{\SI{17.72 \pm 0.37}{\watt}}$ ($1\sigma$).
+\verifiedby{Exact differential $\delta\dot{Q} = \sqrt{(\sigma T^4 u_A)^2 + (4\sigma A T^3 u_T)^2} = \sqrt{0.0886^2 + 0.3544^2} = \SI{0.3653}{\watt}$ and Python check \texttt{sec17:ex17.6}.}
+\end{workedexample}
+
+% ============================================================================
+\section{Step-by-Step Classroom-Safe Calorimetry \& 2027 Collector Validation Protocols}\label{sec:17.7}
+\idxtopic{laboratory protocols!calorimetry and collector validation}\idxtopic{safety checklist!burn, electrical, spill, glass}
+
+\begin{devicebox}[Protocol A (Calorimeter Heat Capacity $C_{\mathrm{cal}}$) \& Protocol B (2027 Heat-Lamp Collector DOE Validation)]
+\begin{twocol}[0.485]
+\textbf{Protocol A: Classroom Calorimeter Calibration \& Specific Heat Determination (\texttt{Rule 5.c.iii})}
+\begin{enumerate}
+  \item \textbf{Dry Tare \& Cold Baseline:} Weigh dry inner calorimeter cup ($m_{\mathrm{cup}}$) on $\SI{0.01}{\gram}$ balance. Add $\SI{100.0}{\milli\liter}$ room-temperature water, re-weigh ($m_c = m_{\mathrm{total}} - m_{\mathrm{cup}}$), insert calibrated probe, stir gently, wait $\ge 5\tau_p$, and log $T_c$ every $\SI{15}{\second}$ for $\SI{2}{\minute}$ to confirm zero drift.
+  \item \textbf{Determine Calorimeter Constant $C_{\mathrm{cal}}$ $[\si{\joule\per\kelvin}]$:} Heat a separate $\SI{100.0}{\milli\liter}$ water sample to $T_h \approx \SI{55}{\celsius}$ (safe below scalding threshold). Record $T_h$ ($\ge 5\tau_p$) and exact mass $m_h$, pour rapidly into cold calorimeter, cover lid, and log $T(t)$ every $\SI{5}{\second}$ through peak $T_{\mathrm{eq}}$ and for $\SI{3}{\minute}$ of post-peak cooling. Extrapolate the post-peak linear cooling line back to mixing time $t_{\mathrm{mix}}$ (Regnault--Pfaundler cooling correction, \sref{sec:04}) to get true $T_{\mathrm{eq}}$, then compute:
+  $$C_{\mathrm{cal}} = \frac{m_h c_w (T_h - T_{\mathrm{eq}}) - m_c c_w (T_{\mathrm{eq}} - T_c)}{T_{\mathrm{eq}} - T_c}$$
+  \item \textbf{Unknown Solid Specific Heat $c_x$:} Equilibrate dry metal cylinder ($m_x \approx \SI{80}{\gram}$) in a boiling steam jacket ($T_{x,i} = T_{\mathrm{boil}}(P_{\mathrm{atm}})$ for $\ge\SI{10}{\minute}$), transfer rapidly ($<\SI{2}{\second}$ in air) into fresh calorimeter water ($m_w, T_{w,i}$) without splashing, record $T_{\mathrm{eq}}$, and solve:
+  $$c_x = \frac{\left(m_w c_w + C_{\mathrm{cal}}\right)(T_{\mathrm{eq}} - T_{w,i})}{m_x\left(T_{x,i} - T_{\mathrm{eq}}\right)}$$
+\end{enumerate}
+\nextcol[0.485]
+\textbf{Protocol B: 2027 Heat-Lamp Collector Calibration \& Stratification Validation (\texttt{Rule 5.II})}
+\begin{enumerate}
+  \item \textbf{Station Geometry \& Lamp Pre-Warm:} Mount clamp lamp with $\SI{125}{\watt}$ (or $\SI{100}{\watt}$) clear untinted incandescent heat-lamp bulb facing straight down (\texttt{Rule 4.a--d}). Set vertical height $h \in \SIrange{40.0}{65.0}{\centi\meter}$ from table surface to bottommost tip of bulb (\texttt{Rule 4.c}) using a rigid meterstick and plumb line. Turn lamp ON for $\ge\SI{3}{\minute}$ off to the side so filament and glass envelope reach thermal steady state.
+  \item \textbf{3-Min Device Setup \& 1-Min Water Setup Simulation:} Start master timer. Configure collector pedestal slot for height $h$ (\texttt{Rule 5.II.b}). Dispense $\SI{99.67 \pm 0.05}{\gram}$ ($\SI{100.00}{\milli\liter}$ at $\SI{22}{\celsius}$) water from source bath into a fresh $\SI{9}{oz}$ clear cup, measure $T_{\mathrm{start}}$ at $z = \SI{8}{\milli\meter}$ after $5\tau_p$, place non-attached clear BoPET film cap on cup rim (\texttt{Clarif.~\#5}), seat cup into collector cradle, and center under lamp at $t = 0$.
+  \item \textbf{Heating Window \& Unswirled Top-Layer Extraction:} Heat for exact target duration $t \in \{10, 12, 15\}\,\si{\minute}$. At lamp turn-off, lift upper reflector hood straight up (removing the clear film cap cleanly) and lift the $\SI{9}{oz}$ cup vertically onto the Testing Surface in $<\SI{8}{\second}$ \textbf{with zero tilting, swirling, or vibration} (\texttt{Clarif.~\#1--\#3}).
+  \item \textbf{Clarification~\texttt{\#4} Probe Reading \& Cool-Down Return:} Lower probe clamp into top water layer ($z = \SI{8 \pm 2}{\milli\meter}$, $r = \SI{0}{\milli\meter}$), wait $5\tau_p$ ($\SI{10}{\second}$), and log $T_f$ in Appendix~D test log. Cool collector back to $T_{\mathrm{room}}$ with a fan before the next trial!
+\end{enumerate}
+\end{twocol}
+\end{devicebox}
+
+\begin{rulebox}[Mandatory Laboratory Safety \& Impound Compliance Checklist (Thermal, Electrical, Glass \& Chemical)]
+\begin{itemize}
+  \item \textbf{Thermal Burn \& Fire Prevention:} A $\SI{125}{\watt}$ heat lamp glass face reaches $\SIrange{180}{230}{\celsius}$; never touch the bulb or metal clamp shroud until cooled for $\ge\SI{15}{\minute}$. Keep all paper/cardboard/balsa collector surfaces $\ge\SI{10}{\centi\meter}$ below the bulb and faced with reflective aluminum foil ($\rho_{\mathrm{NIR}} = 0.96$) so structural temperatures stay $<\SI{45}{\celsius}$ (well below the $\SI{218}{\celsius}$ paper ignition point and $\SI{74}{\celsius}$ \texttt{\#1 PET} cup softening point).
+  \item \textbf{Zero-Tolerance Prohibited Materials Audit (\texttt{Rule 3.b.i} \& \texttt{Clarification \#6}):} Verify that \textbf{zero Polystyrene / Styrofoam / \texttt{\#6 PS} plastic}, fiberglass, mineral wool, asbestos, or mercury thermometers are present anywhere in the device or lab kit (\texttt{Rule 3.b.iii} bars any device containing prohibited hazardous materials from testing: $\mathrm{TS}=0, \mathrm{PS}=0$!).
+  \item \textbf{Electrical \& Water-Spill Separation:} Plug the clamp lamp into a GFCI-protected $\SI{120}{\volt}$ outlet with a drip loop so water spills on the Testing Surface can never reach electrical cords. Never place or remove the water cup while looking directly into the incandescent filament.
+\end{itemize}
+\end{rulebox}
+
+\alsosee{\sref{sec:00} (Command Center \& Rules), \sref{sec:02} (Sig Figs \& Units), \sref{sec:14} (Material Optical/Thermal Properties), \sref{sec:15}--\sref{sec:16} (2027 Collector Design \& Calibration DOE), \sref{sec:18} (Graphs, Semi-Log OLS \& Residuals), and \sref{app:D} (Printable Calibration Logs).}

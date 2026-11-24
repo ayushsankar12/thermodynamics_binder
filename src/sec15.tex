@@ -1,0 +1,1085 @@
+% ============================================================================
+% sec15.tex — §15 Competition Device Engineering — 2027 100--125 W Heat-Lamp Collector
+% Phase 6 Author Group 4 (author-device) | Target: 18.0 pages | Tab 6: DEVICE
+% ============================================================================
+\binderchapter{15}{Competition Device Engineering --- 2027 100--125\,W Heat-Lamp Collector}{2027 Heat-Lamp Collector Engineering}{sec:15}
+\scopebanner{REQUIRED}[2027 Rules 3.a--h, 4.a--g, 5.II.a--g \& Official Clarifications \#1--\#9 (All Tournament Levels)]
+
+\idxtopic{2027 heat-lamp collector engineering}\idxtopic{optical concentrator design}\idxtopic{thermal stratification design}\idxtopic{cup cradle design}
+The 2026--2027 Division~C Thermodynamics device event is a \textbf{passive optical heat-collection and top-layer thermal-stratification challenge} \src{S01,S02,S05}. Unlike legacy 2018--2019 hot-water insulator events (where teams received boiling water and minimized cooling), the 2027 device starts completely at \textbf{room temperature} (\texttt{Rule 2.d, 3.g}) and must capture downward radiant energy from an Event Supervisor (ES) $\SIrange{100}{125}{\watt}$ clear incandescent reflector heat lamp mounted at $h_{\mathrm{bulb}} = \SIrange{40}{65}{\centi\meter}$ above the Testing Surface to maximize the Temperature Gain $\mathrm{TG} = T_{\mathrm{final}} - T_{\mathrm{start}}$ of $\SI{100}{\milli\liter}$ of water inside an ES-provided $\SI{9}{oz}$ clear plastic party cup \src{S01}. This chapter translates every clause of Rules~\texttt{2--6} and all nine Official National Clarifications (\texttt{09/30/2026}--\texttt{10/28/2026}) into a championship collector architecture verified by geometric-optics ray tracing, four-node transient heat-transfer modeling, and Hale \& Querry near-infrared water spectroscopy \src{S12,S19}.
+
+% ============================================================================
+\section{Rule-to-Engineering Translation Matrix \& Championship Collector Architecture}\label{sec:15.1}
+\idxtopic{rule-to-engineering translation}\idxtopic{30.0 cm cubic envelope}\idxtopic{two-piece hood-and-cradle architecture}
+
+Every geometric dimension, material choice, and handling step of the collector is governed by an explicit boundary in the 2027 Rules Manual and Official Clarifications \src{S01,S02,S04,S05}. \tref{tab:15:rule-translation} maps each rule clause to its quantitative engineering specification.
+
+\begin{center}
+\captionof{table}{Clause-by-clause translation of 2027 Thermodynamics Division~C rules and clarifications into collector engineering specifications \src{S01,S02,S04,S05}.}\label{tab:15:rule-translation}
+\footnotesize\setlength{\tabcolsep}{2.6pt}\renewcommand{\arraystretch}{1.13}
+\begin{tabularx}{\linewidth}{@{}l>{\raggedright\arraybackslash}p{0.28\linewidth}>{\raggedright\arraybackslash}p{0.25\linewidth}>{\raggedright\arraybackslash}X@{}}
+\toprule
+\hdr{Rule / Clarif.} & \hdr{Official 2027 Requirement} & \hdr{Physical \& Scoring Implication} & \hdr{Mandatory Collector Engineering Specification} \\
+\midrule
+\textbf{\texttt{2.c, 2.d}} \newline Clarif.~\#9 & Impound ONLY device \& spare parts at room temp ($\times 0.7$ penalty if not impounded). Notes, graphs, tables, calculators, and tools are NOT impounded. & Keeping calibration tables and Class~III calculators out of impound allows block-morning room-temp checks. & Impound collector + 2 spare BoPET glazing rings in an open ventilated crate. Carry detached nomograms (\sref{sec:16}) and alignment gauge in binder. \\
+\rowcolor{rowalt}\textbf{\texttt{3.a, 4.a--d}} & Collect heat from ES downward $\SIrange{100}{125}{\watt}$ clear incandescent heat lamp (not tinted, LED, halogen, or ceramic); stand feet $\ge\SI{15}{\centi\meter}$ from bulb axis. & Lamp emits $\sim\SI{84}{\percent}$ downward radiation ($\lambda_{\max}\approx\SI{1.21}{\micro\meter}$). A $\SI{30}{\centi\meter}$ square base clears the $\pm\SI{15}{\centi\meter}$ lamp stand post. & Maximize top entry aperture ($D_{\mathrm{ap}}=\SI{29.0}{\centi\meter}$ circle or $\SI{29.6}{\centi\meter}$ square-to-round hood, $A_{\mathrm{ap}}=\SIrange{660.5}{876.2}{\square\centi\meter}$) centered on optical axis. \\
+\textbf{\texttt{3.b.i, 3.b.iii}} \newline Clarif.~\#6 & No asbestos, mineral wool, fiberglass, or \textbf{polystyrene / Styrofoam / \texttt{\#6~PS} plastics} (\texttt{10/22/2026}). & Hazardous material violation bars device from setup, modification, or testing ($\mathbf{\mathrm{TS}=\mathrm{PS}=0}$)! & Zero EPS, XPS, Styrofoam, craft PS foam-core board, or \texttt{\#6~PS} parts. Use cardboard + $\SI{10}{\milli\meter}$ Al-foil air gaps, cork, balsa, cotton/sheep wool, and BoPET. \\
+\rowcolor{rowalt}\textbf{\texttt{3.b.ii}} & No thermometers, probes, commercial thermoses, coolers, or vacuum-sealed vessels. & Any commercial vacuum Dewar or forgotten thermocouple inside impounded device incurs $\times 0.7$ or DQ. & Student-built multi-wall foil-air-cardboard-cork cradle (\texttt{3.h}); strip all lab thermocouples before tournament packing. \\
+\textbf{\texttt{3.c, 4.g}} & Insert/remove ES $\SI{9}{oz}$ clear plastic party cup ($\approx\SIrange{9.9}{10.2}{\centi\meter}$ tall, $\SIrange{7.4}{7.6}{\centi\meter}$ mouth) holding $\SI{100}{\milli\liter}$ water. & $\SI{100}{\milli\liter}$ fills only the bottom $\SIrange{3.6}{4.0}{\centi\meter}$ of the $\SI{10.0}{\centi\meter}$ cup; dry upper PET rim softens at $T_g\approx\SI{74}{\celsius}$. & Focus reflector rays at the $\SI{3.8}{\centi\meter}$ waterline ($z_{\mathrm{focus}}$) and shade the dry upper plastic rim lip with a non-contact foil overhang ring. \\
+\rowcolor{rowalt}\textbf{\texttt{3.d}} & Entire set-up device + cup must fit inside a $\mathbf{\SI{30.0}{\centi\meter}\times\SI{30.0}{\centi\meter}\times\SI{30.0}{\centi\meter}}$ cube. & Exceeding $\SI{30.0}{\centi\meter}$ on any axis after 3-min Setup Time incurs a $\times 0.7$ construction violation. & Build outer envelope strictly to $\mathbf{\SI{29.6}{\centi\meter}\times\SI{29.6}{\centi\meter}\times\SI{29.5}{\centi\meter}}$ ($\ge\SI{4.0}{\milli\meter}$ thermal/humidity safety margin on all 3 axes). \\
+\textbf{\texttt{3.e}} & Parts may extend inside cup, but \textbf{NO part may contact water}; nothing added to water. & Wetted device parts or dyes incur $\times 0.7$ violation. $\SI{100}{\milli\liter}$ waterline sits $\SI{6.2}{\centi\meter}$ below the cup rim. & Terminate any internal upper reflector lip $\ge\SI{15.0}{\milli\meter}$ above the $\SI{38.0}{\milli\meter}$ waterline ($z_{\mathrm{lip}} \ge z_{\mathrm{base}} + \SI{53.0}{\milli\meter}$); verify dry rim at removal. \\
+\rowcolor{rowalt}\textbf{\texttt{3.f, 3.g}} & Zero internal energy sources; device at room temp at start; post-test disassembly check. & Electrical/chemical heat source gives $\mathrm{TS}=\mathrm{PS}=0$. & Pure passive reflector/insulator; assemble with 4 removable wooden dowels + Velcro panel for $<\SI{20}{\second}$ post-test ES inspection. \\
+\textbf{\texttt{4.c.i--iii}} \newline \textbf{\texttt{5.II.a--b}} & Bulb height $h$: $\SIrange{40}{50}{\centi\meter}$ by $\SI{5}{\centi\meter}$ (Reg), $\SIrange{40}{55}{\centi\meter}$ by $\SI{5}{\centi\meter}$ (State), $\SIrange{40}{65}{\centi\meter}$ by $\SI{1}{\centi\meter}$ (Nat). Announced at block start; 3-min Setup Time. & Fixed-focus cones lose efficiency when $h$ shifts from $\SI{40}{\centi\meter}$ to $\SI{65}{\centi\meter}$. Adjusting device during 3-min Setup Time is legal (\texttt{5.II.b}). & Provide 3 pre-indexed vertical pedestal height slots (\textbf{Slot~A} for $h=\SIrange{40}{48}{\centi\meter}$, \textbf{Slot~B} for $\SIrange{49}{57}{\centi\meter}$, \textbf{Slot~C} for $\SIrange{58}{65}{\centi\meter}$) set during 3-min Setup Time. \\
+\rowcolor{rowalt}\textbf{\texttt{5.II.b, d, g}} \newline Clarif.~\#5, \#7, \#8 & Lift-off lid/door legal to insert/remove cup (\texttt{10/22/26}). Non-attached wrap legal if zero tape/clips on cup and removed before $T_{\mathrm{final}}$ (\texttt{10/21/26}). & Open cups lose $\SIrange{2.2}{4.4}{\watt}$ ($\SIrange{4.8}{8.0}{\celsius}$) to evaporation! Fumbling with loose cling wrap during the 1-min removal window risks sloshing. & Mount a tensioned $\SI{25}{\micro\meter}$ clear BoPET glazing window inside the lift-off upper reflector hood (or gravity drop-ring) that seals the cup rim by gravity and lifts off in $<\SI{2}{\second}$! \\
+\textbf{\texttt{5.II.g}} \newline Clarif.~\#1--\#4 & \textbf{Zero stirring, swirling, or shaking} (\texttt{09/30--10/06/26}). ES measures \textbf{top water layer near cup center}. & Top-down NIR heating deposits $72.4\%$ of energy in top $\SI{10}{\milli\meter}$, creating stable stratification ($\mathrm{TG}_{\mathrm{top}} \approx 1.55\,\mathrm{TG}_{\mathrm{bulk}}$). & Lift upper hood vertically on 4 guide dowels; extract cup with a smooth vertical two-finger rim lift (zero tilt or vibration) to preserve the hot top water layer! \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{center}
+\begin{tikzpicture}[font=\scriptsize, scale=0.88]
+% Coordinate system: x in [-6, 6] cm (representing -15 to +15 cm, scale 1 unit = 2.5 cm), y in [0, 8.2] cm (1 unit = 5 cm)
+% Let's use 1 TikZ unit = 1 cm at scale=0.36 for exact geometric fidelity!
+\end{tikzpicture}%
+\begin{tikzpicture}[font=\scriptsize, x=0.28cm, y=0.22cm]
+% Testing surface
+\fill[gray!25] (-19,-1.2) rectangle (19,0);
+\draw[very thick, black] (-19,0) -- (19,0);
+\node[anchor=north east, font=\scriptsize\bfseries] at (18.8,-0.1) {Testing Surface ($z = \SI{0.0}{\centi\meter}$)};
+
+% 30.0 cm cubic bounding envelope (dashed red/rust)
+\draw[rust, very thick, dashed] (-15.0,0) rectangle (15.0,30.0);
+\node[anchor=south east, text=rust, font=\scriptsize\bfseries] at (14.8,30.1) {Max $\SI{30.0}{\centi\meter}\times\SI{30.0}{\centi\meter}\times\SI{30.0}{\centi\meter}$ Rule~\texttt{3.d} Cube};
+
+% ES Heat Lamp at top (h = 40 to 65 cm, drawn schematically at y = 35.5)
+\fill[slate!25, draw=slate, thick] (-7.5,39.5) -- (-6.35,35.5) -- (6.35,35.5) -- (7.5,39.5) -- cycle;
+\draw[amber!90!black, very thick, fill=amber!15] (-6.35,35.5) arc (180:360:6.35 and 1.2) -- cycle;
+\node[font=\scriptsize\bfseries, text=navy] at (0,37.5) {ES $\SIrange{100}{125}{\watt}$ Clear R40 Heat Lamp ($\text{\O}\SI{12.7}{\centi\meter}$)};
+\node[font=\scriptsize, text=rust] at (0,33.2) {Bottommost Point of Bulb: $h_{\mathrm{bulb}} = \SIrange{40.0}{65.0}{\centi\meter}$};
+\draw[->, thick, amber!90!black] (-4.5,34.2) -- (-3.0,28.0);
+\draw[->, thick, amber!90!black] (0.0,34.0) -- (0.0,28.0);
+\draw[->, thick, amber!90!black] (4.5,34.2) -- (3.0,28.0);
+
+% Outer structural corrugated cardboard shell (-14.8 to +14.8, height 0 to 29.5)
+\fill[boxbg, draw=navy, very thick] (-14.8,0) rectangle (-13.8,29.5);
+\fill[boxbg, draw=navy, very thick] (13.8,0) rectangle (14.8,29.5);
+\fill[boxbg, draw=navy, very thick] (-13.8,0) rectangle (13.8,1.2);
+
+% Separation line between Lower Pedestal Base (z=0..14.0) and Lift-Off Upper Reflector Hood (z=14.0..29.5)
+\draw[teal!80!black, very thick, dashdotted] (-15.5,14.0) -- (15.5,14.0);
+\node[anchor=west, text=teal!80!black, font=\scriptsize\bfseries] at (15.6,14.0) {Hood Split Plane ($z=\SI{14.0}{\centi\meter}$, 4 Guide Dowels)};
+
+% 3-Stage Finite-Conjugate CPC / Ellipsoidal Specular Al-Foil Reflector Profile
+% Stage 1 (Upper): z=29.5, r=14.5 down to z=21.0, r=10.8
+% Stage 2 (Middle): z=21.0, r=10.8 down to z=14.0, r=6.8
+% Stage 3 (Lower Throat): z=14.0, r=6.8 down to z=10.2, r=3.95
+\fill[gray!12] (-13.8,14.0) -- (-13.8,29.5) -- (-14.5,29.5) -- (-10.8,21.0) -- (-6.8,14.0) -- cycle;
+\fill[gray!12] (13.8,14.0) -- (13.8,29.5) -- (14.5,29.5) -- (10.8,21.0) -- (6.8,14.0) -- cycle;
+\draw[very thick, teal!80!black] (-14.5,29.5) -- (-10.8,21.0) -- (-6.8,14.0) -- (-3.95,11.8);
+\draw[very thick, teal!80!black] (14.5,29.5) -- (10.8,21.0) -- (6.8,14.0) -- (3.95,11.8);
+
+% Internal Balsa Rib Rings supporting the 3-stage reflector
+\fill[amber!30, draw=amber!80!black] (-13.8,20.6) rectangle (-10.8,21.2);
+\fill[amber!30, draw=amber!80!black] (10.8,20.6) rectangle (13.8,21.2);
+\fill[amber!30, draw=amber!80!black] (-13.8,13.5) rectangle (-6.8,14.1);
+\fill[amber!30, draw=amber!80!black] (6.8,13.5) rectangle (13.8,14.1);
+
+% Concentric 10 mm Foil-Air-Foil Insulation Baffles in Lower Cradle (r = 5.0 to 13.8, z = 1.2 to 13.5)
+\foreach \r in {6.2, 7.6, 9.0, 10.4, 12.0} {
+    \draw[navy, thick] (-\r, 2.2) -- (-\r, 13.5);
+    \draw[navy, thick] (\r, 2.2) -- (\r, 13.5);
+}
+% Base horizontal foil-air-foil baffles (z = 1.8, 3.0, 4.2)
+\foreach \z in {2.0, 3.1, 4.2} {
+    \draw[navy, thick] (-6.2, \z) -- (6.2, \z);
+}
+
+% Adjustable Pedestal Slots A, B, C
+\node[anchor=east, font=\scriptsize, text=navy] at (-6.4, 5.2) {3-Layer $\SI{10}{\milli\meter}$ Foil-Air Baffles};
+\node[anchor=west, font=\scriptsize, text=navy] at (6.4, 7.5) {Pedestal Slots A/B/C};
+\node[anchor=west, font=\scriptsize, text=navy] at (6.4, 5.5) {($\Delta z = \SI{\pm 1.5}{\centi\meter}$ focus)};
+
+% 3-Point Cork/Balsa Knife-Edge Cup Pedestal at z = 5.2 cm & Bottom Foil Return Mirror
+\fill[amber!45, draw=black, thick] (-2.9,4.2) -- (-2.9,5.5) -- (-2.2,5.2) -- (-2.2,4.2) -- cycle;
+\fill[amber!45, draw=black, thick] (2.9,4.2) -- (2.9,5.5) -- (2.2,5.2) -- (2.2,4.2) -- cycle;
+\draw[very thick, teal!80!black] (-2.2,4.8) to[out=-15,in=195] (2.2,4.8);
+
+% 9 oz Clear Plastic Party Cup (Base at z=5.2, Rim at z=15.2, r_base=2.65, r_rim=3.75)
+% Wait: let's place cup base at z = 4.2 so rim is at z = 14.2, and BoPET glazing window rests at z = 14.3!
+% Let's draw cup from z=4.2 to z=14.2:
+\fill[cyan!18] (-2.65,5.2) -- (-3.07,9.0) -- (3.07,9.0) -- (2.65,5.2) -- cycle;
+\draw[thick, blue!60!black] (-3.07,9.0) -- (3.07,9.0);
+\draw[very thick, black] (-2.65,5.2) -- (-3.75,15.2);
+\draw[very thick, black] (2.65,5.2) -- (3.75,15.2);
+\draw[very thick, black] (-2.65,5.2) -- (2.65,5.2);
+
+% Removable Clear BoPET Glazing Film mounted at bottom of Lift-Off Upper Hood (z = 15.3 cm)
+\draw[very thick, rust, densely dashed] (-4.4,15.3) -- (4.4,15.3);
+\node[anchor=south, font=\scriptsize\bfseries, text=rust] at (0,15.5) {Clear $\SI{25}{\micro\meter}$ BoPET Glazing Cap ($z=\SI{15.3}{\centi\meter}$, Clarif.~\#5)};
+
+% Waterline & Top-Layer Annotation
+\node[font=\scriptsize\bfseries, text=blue!70!black] at (0,7.2) {$\SI{100}{\milli\liter}$ $\mathrm{H_2O}$};
+\node[font=\scriptsize, text=blue!70!black] at (0,9.8) {$z_w = \SI{9.0}{\centi\meter}$ ($\SI{3.8}{\centi\meter}$ deep)};
+\node[font=\scriptsize, text=slate] at (0,12.6) {Dry Air Headspace ($\SI{6.2}{\centi\meter}$)};
+
+% Specular Ray Paths into Water Surface
+\draw[->, thick, amber!90!black] (-11.5,29.5) -- (-10.8,21.0) -- (-1.8,9.0);
+\draw[->, thick, amber!90!black] (11.5,29.5) -- (10.8,21.0) -- (1.8,9.0);
+\draw[->, thick, amber!90!black] (-7.2,29.5) -- (-6.8,14.0) -- (-0.8,9.0);
+\draw[->, thick, amber!90!black] (7.2,29.5) -- (6.8,14.0) -- (0.8,9.0);
+
+% Callout labels on left & right
+\node[anchor=east, font=\scriptsize\bfseries, text=teal!80!black] at (-11.2,24.5) {Stage~1 Frustum ($\phi_1=\SI{23.5}{\degree}$)};
+\node[anchor=east, font=\scriptsize\bfseries, text=teal!80!black] at (-8.5,17.5) {Stage~2 Frustum ($\phi_2=\SI{29.7}{\degree}$)};
+\node[anchor=east, font=\scriptsize, text=navy] at (-15.2,21.5) {Lift-Off Upper};
+\node[anchor=east, font=\scriptsize, text=navy] at (-15.2,19.8) {Reflector Hood};
+\node[anchor=east, font=\scriptsize, text=navy] at (-15.2,7.5) {Lower Insulated};
+\node[anchor=east, font=\scriptsize, text=navy] at (-15.2,5.8) {Pedestal Base};
+
+% Dimension arrows
+\draw[<->, thick, black] (-14.8,-2.5) -- (14.8,-2.5) node[midway, fill=white, font=\scriptsize\bfseries] {Safe Outer Width $W = \SI{29.6}{\centi\meter} \le \SI{30.0}{\centi\meter}$};
+\draw[<->, thick, black] (-17.8,0) -- (-17.8,29.5) node[midway, rotate=90, fill=white, font=\scriptsize\bfseries] {Height $H = \SI{29.5}{\centi\meter}$};
+\end{tikzpicture}
+\captionof{figure}{Engineering cross-section of the reference 2027 two-piece heat-lamp collector inside the $\SI{30.0}{\centi\meter}$ cubic bounding envelope, showing the lift-off 3-stage finite-conjugate specular aluminum-foil reflector hood, integrated non-attached $\SI{25}{\micro\meter}$ BoPET glazing cap (Clarifications~\#5, \#7), 3-point knife-edge cork cup cradle, bottom return mirror, and concentric $\SI{10}{\milli\meter}$ foil-air-foil insulation baffles \src{S01,S02,S12}.}\label{fig:15:collector-cutaway}
+\idxfig{engineering cutaway of 2027 heat-lamp collector inside 30 cm cube}
+\end{center}
+
+\begin{center}
+\captionof{table}{Reference 2027 collector subsystem dimensional, optical, and parasitic thermal-mass budget \src{S01,S12}.}\label{tab:15:subsystem-budget}
+\footnotesize\setlength{\tabcolsep}{3.0pt}\renewcommand{\arraystretch}{1.12}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.25\linewidth}lllrr>{\raggedright\arraybackslash}X@{}}
+\toprule
+\hdr{Subsystem Component} & \hdr{Compliant Material} & \hdr{Key Dimensions} & \hdr{Elevation $z$} & \hdr{Total $m$} & \hdr{Coupled $C_{\mathrm{eff}}$} & \hdr{Rule Compliance \& Functional Role} \\
+ & & \tiny$[\si{\centi\meter}]$ & \tiny$[\si{\centi\meter}]$ & \tiny$[\si{\gram}]$ & \tiny$[\si{\joule\per\kelvin}]$ & \\
+\midrule
+\textbf{1. Outer Structural Shell} & Fluted cardboard + foil & $29.6\times 29.6\times 29.5$ & $0.0\text{--}29.5$ & $310$ & $0.0$\textsuperscript{a} & $\SI{4.0}{\milli\meter}$ clearance inside $\SI{30.0}{\centi\meter}$ cube (\texttt{3.d}). \\
+\rowcolor{rowalt}\textbf{2. Lift-Off 3-Stage CPC Hood} & $\SI{24}{\micro\meter}$ shiny Al foil / card & $\text{\O} 29.0 \to \text{\O} 7.9$ throat & $11.8\text{--}29.5$ & $145$ & $0.45$ & Lifts on 4 corner dowels in $<\SI{2}{\second}$ (Clarif.~\#7--\#8). \\
+\textbf{3. Gravity BoPET Glazing Cap} & $\SI{25}{\micro\meter}$ clear BoPET film & $\text{\O} 8.8$ disk ($\SI{60}{\square\centi\meter}$) & $15.25$ & $0.21$ & $\mathbf{0.24}$ & Zero tape/clips on cup; cuts evaporation $98\%$ (Clarif.~\#5). \\
+\rowcolor{rowalt}\textbf{4. Upper Dry-Cup Throat Lip} & $\SI{24}{\micro\meter}$ shiny Al foil ring & $\text{\O} 7.9 \to \text{\O} 7.1$ overhang & $11.8\text{--}15.2$ & $1.8$ & $0.15$ & Shades dry PET cup rim; $\SI{28}{\milli\meter}$ above water (\texttt{3.e}). \\
+\textbf{5. Lower Cavity Return Mirror} & $\SI{24}{\micro\meter}$ shiny Al foil bowl & $\text{\O} 8.4$ cylinder + base & $4.8\text{--}11.8$ & $3.2$ & $0.85$ & Reflects transmitted NIR back through clear cup wall. \\
+\rowcolor{rowalt}\textbf{6. 3-Fin Knife-Edge Pedestal} & Balsa / cork radial fins & $3\times(\SI{0.2}{\centi\meter}\times\SI{1.8}{\centi\meter})$ & $4.2\text{--}5.2$ & $2.4$ & $\mathbf{0.35}$ & Contact area $A_c=\SI{0.18}{\square\centi\meter}$; base leak $<\SI{0.015}{\watt}$. \\
+\textbf{7. Radial \& Base Foil-Air Wall} & $4\times$ Al foil + $\SI{10}{\milli\meter}$ air & $3\times\SI{1.0}{\centi\meter}$ concentric gaps & $1.2\text{--}13.8$ & $38$ & $1.10$ & $\mathrm{Ra}_\delta < 1708$; $k_{\mathrm{eff}}=\SI{0.0278}{\watt\per\meter\per\kelvin}$, zero \texttt{\#6~PS}! \\
+\rowcolor{rowalt}\textbf{8. ES $\SI{9}{oz}$ Cup + $\SI{100}{\milli\liter}$ Water} & Clear PET/PP + $\mathrm{H_2O}$ & $\text{\O} 7.5\text{ top}, \text{\O} 5.3\text{ base}\times 10.0$ & $5.2\text{--}15.2$ & $106.5$ & $\mathbf{215.0}$\textsuperscript{b} & Water depth $\SI{3.80}{\centi\meter}$ ($z=\SIrange{5.2}{9.0}{\centi\meter}$); wetted cup $\SI{3.5}{\joule\per\kelvin}$. \\
+\bottomrule
+\multicolumn{7}{@{}l}{\scriptsize\textsuperscript{a}Thermally isolated behind three $\SI{10}{\milli\meter}$ foil-air-foil gaps ($R_{\mathrm{th}} > \SI{20}{\kelvin\per\watt}$). \textsuperscript{b}Effective stratified top-layer capacitance $C_{\mathrm{top,eff}} \approx \SI{215}{\joule\per\kelvin}$ (bulk water $C_w = \SI{418.4}{\joule\per\kelvin}$).}
+\end{tabularx}
+\end{center}
+
+% ============================================================================
+\section{Heat-Lamp Radiative Source Physics \& View-Factor Irradiance Scaling}\label{sec:15.2}
+\idxtopic{heat lamp physics (100--125 W R40)}\idxtopic{view factor!coaxial parallel disks}\idxtopic{lamp height scaling}
+
+Under Rule~\texttt{4.a--c} and the Official ES Guide \src{S01,S05}, the testing station uses a clamp lamp with a spun-aluminum reflector housing an untinted $\SI{100}{\watt}$ or $\SI{125}{\watt}$ incandescent heat-lamp bulb (standard $\mathrm{R40}$ or $\mathrm{BR40}$ clear reflector flood lamp, bulb face diameter $D_{\mathrm{bulb}} = \SI{5.0}{in} = \SI{12.70}{\centi\meter}$, radius $r_1 = \SI{6.35}{\centi\meter}$). The bulb's electrical input power $P_{\mathrm{elec}} \in \{\SI{100}{\watt}, \SI{125}{\watt}\}$ partitions into three thermal pathways \src{S12}:
+\begin{enumerate}
+  \item \textbf{Short-Wave Visible \& Near-IR Beam Transmitted Through Bulb Glass ($\lambda \in [\SI{0.38}{\micro\meter}, \SI{2.75}{\micro\meter}]$):} Accounts for $\eta_{\mathrm{SW}} \approx 70.0\%$ of electrical power ($\dot{Q}_{\mathrm{SW}} = \SI{87.5}{\watt}$ at $\SI{125}{\watt}$; $\SI{70.0}{\watt}$ at $\SI{100}{\watt}$), projected downward by the internal paraboloidal aluminum coating with an axial flood profile $I(\theta) = I_0\cos^m\theta$ ($m \approx 2.0$, half-power beam half-angle $\theta_{1/2} \approx \SIrange{32}{38}{\degree}$).
+  \item \textbf{Long-Wave Mid-IR Emitted Downward by the Hot Bulb Glass Face ($\lambda \in [\SI{3.5}{\micro\meter}, \SI{15}{\micro\meter}], T_{\mathrm{glass}} \approx \SIrange{170}{220}{\celsius}$):} Accounts for $\eta_{\mathrm{LW}} \approx 14.0\%$ of electrical power ($\dot{Q}_{\mathrm{LW}} = \SI{17.5}{\watt}$ at $\SI{125}{\watt}$; $\SI{14.0}{\watt}$ at $\SI{100}{\watt}$), emitted diffusely downward ($\varepsilon_{\mathrm{glass}} = 0.94$).
+  \item \textbf{Upper Neck/Socket Convection \& Base Conduction Loss:} Accounts for the remaining $\sim 16.0\%$ ($\SI{20.0}{\watt}$ at $\SI{125}{\watt}$), rising upward away from the testing table. Thus total downward radiant output is $\dot{Q}_{\mathrm{rad,down}} = 0.84\,P_{\mathrm{elec}}$ ($\mathbf{\SI{105.0}{\watt}}$ for $\SI{125}{\watt}$; $\mathbf{\SI{84.0}{\watt}}$ for $\SI{100}{\watt}$).
+\end{enumerate}
+
+\begin{formulacard}[Algebra-Only Coaxial Disk View Factor \& Proximity Flux Multiplication (Rule 5.d.iv Compliant)]
+\idxformula{view factor between coaxial disks: F_{1\to 2} = \frac{1}{2}[X - \sqrt{X^2 - 4(R_2/R_1)^2}]}
+\idxformula{collector aperture distance to bulb: d_{\mathrm{ap}} = h_{\mathrm{bulb}} - z_{\mathrm{ap}}}
+\begin{ftab}
+$d_{\mathrm{ap}} = h_{\mathrm{bulb}} - z_{\mathrm{ap}}$ \newline $d_{\mathrm{cup}} = h_{\mathrm{bulb}} - z_{\mathrm{cup}}$
+  & $h_{\mathrm{bulb}} \in [\SI{40}{\centi\meter}, \SI{65}{\centi\meter}]$: height from table to bottom of bulb (\texttt{4.c}); $z_{\mathrm{ap}} \le \SI{29.5}{\centi\meter}$: collector top rim height; $z_{\mathrm{cup}} = \SI{10.0}{\centi\meter}$: bare cup rim height.
+  & \RULEf
+  & Raising the aperture to $z_{\mathrm{ap}}=\SI{29.5}{\centi\meter}$ cuts source distance from $\SI{30.0}{\centi\meter}$ to $\SI{10.5}{\centi\meter}$ at $h=\SI{40}{\centi\meter}$! \\
+$R_1 = \dfrac{r_1}{d}, \quad R_2 = \dfrac{r_2}{d}$ \newline $X = 1 + \dfrac{1 + R_2^2}{R_1^2}$ \newline $F_{1\to 2} = \dfrac{1}{2}\!\left[X - \sqrt{X^2 - 4\!\left(\dfrac{R_2}{R_1}\right)^{\!2}}\right]$
+  & $r_1 = \SI{6.35}{\centi\meter}$: bulb face radius; $r_2$: target aperture radius ($r_{\mathrm{ap}}=\SIrange{14.5}{15.0}{\centi\meter}$ vs.\ bare cup $r_{\mathrm{cup}}=\SI{3.75}{\centi\meter}$); $d$: axial separation $[\si{\centi\meter}]$; $F_{1\to 2}$: diffuse view factor $[-]$.
+  & \GRAY
+  & Exact closed-form algebraic view factor between coaxial disks (Lienhard Table~10.3 Case~3 \src{S12}); zero calculus or trig! \\
+$C_{\mathrm{geom}} = \dfrac{A_{\mathrm{ap}}}{A_{\mathrm{cup}}} = \begin{cases} (r_{\mathrm{ap}}/r_{\mathrm{cup}})^2 & \text{(circle)} \\ W_{\mathrm{ap}}^2 / (\pi r_{\mathrm{cup}}^2) & \text{(square)} \end{cases}$
+  & $A_{\mathrm{cup}} = \pi(\SI{3.75}{\centi\meter})^2 = \SI{44.18}{\square\centi\meter}$; $A_{\mathrm{ap,circ}} = \pi(\SI{14.5}{\centi\meter})^2 = \SI{660.5}{\square\centi\meter}$; $A_{\mathrm{ap,sq}} = (\SI{29.6}{\centi\meter})^2 = \SI{876.2}{\square\centi\meter}$.
+  & \RULEf
+  & Geometric area concentration ratio: $C_{\mathrm{geom}} = 14.95\times$ (circle) to $19.83\times$ (square hood). \\
+\end{ftab}
+\end{formulacard}
+
+\begin{workedexample}[Coaxial Disk View-Factor \& Proximity Gain: Collector Aperture vs.\ Bare 9\,oz Cup]{Rule 4.c / §15.2}{ex:15.1}
+An ES mounts a $\SI{125}{\watt}$ $\mathrm{R40}$ heat lamp ($r_1 = \SI{6.35}{\centi\meter}$, downward diffuse-equivalent radiant output $\dot{Q}_{\mathrm{rad}} = \SI{105.0}{\watt}$) at the minimum Regional/State/National height $h_{\mathrm{bulb}} = \SI{40.0}{\centi\meter}$ above the Testing Surface. Using the coaxial-disk view-factor formula, compare (a)~a bare $\SI{9}{oz}$ party cup sitting on the table ($z_{\mathrm{cup}} = \SI{10.0}{\centi\meter}$, mouth radius $r_{\mathrm{cup}} = \SI{3.75}{\centi\meter}$) against (b)~a collector whose top aperture ($r_{\mathrm{ap}} = \SI{15.0}{\centi\meter}$ equivalent circle) sits at $z_{\mathrm{ap}} = \SI{29.5}{\centi\meter}$. Repeat the comparison at the maximum National height $h_{\mathrm{bulb}} = \SI{65.0}{\centi\meter}$.
+
+\textbf{Solution.} Apply $R_1 = r_1/d$, $R_2 = r_2/d$, $X = 1 + (1+R_2^2)/R_1^2$, and $F_{1\to 2} = \frac{1}{2}[X - \sqrt{X^2 - 4(R_2/R_1)^2}]$ \src{S12}:
+\begin{enumerate}
+  \item \textbf{At $h_{\mathrm{bulb}} = \SI{40.0}{\centi\meter}$:}
+    \begin{itemize}
+      \item \textit{Bare Cup ($d_{\mathrm{cup}} = 40.0 - 10.0 = \SI{30.0}{\centi\meter}, r_2 = \SI{3.75}{\centi\meter}$):} $R_1 = 6.35/30.0 = 0.21167$, $R_2 = 3.75/30.0 = 0.12500$, $X = 1 + (1 + 0.015625)/0.044803 = 23.6688 \implies F_{\mathrm{bulb}\to\mathrm{cup}}(\SI{40}{\centi\meter}) = \mathbf{0.01473}$ ($1.47\%$ of diffuse radiation, or $\SI{1.55}{\watt}$).
+      \item \textit{Collector Top Plane ($z_{\mathrm{ap}} = \SI{30.0}{\centi\meter}, d = \SI{10.0}{\centi\meter}, r_2 = \SI{15.0}{\centi\meter}$):} $R_1 = 6.35/10.0 = 0.6350$, $R_2 = 15.0/10.0 = 1.5000$, $X = 1 + (1 + 2.250)/0.403225 = 9.0600 \implies F_{\mathrm{bulb}\to\mathrm{ap}}(\SI{40}{\centi\meter}) = \mathbf{0.66471}$ ($66.5\%$ of diffuse radiation, or $\SI{69.79}{\watt}$; at the recessed rim $z_{\mathrm{ap}} = \SI{29.5}{\centi\meter}$ where $d = \SI{10.5}{\centi\meter}$, $F = \mathbf{0.64355}$).
+      \item \textit{Combined Area $\times$ Proximity View-Factor Ratio:} $F_{\mathrm{ap}}/F_{\mathrm{cup}} = 0.66471 / 0.01473 = \mathbf{45.13\times}$ more intercepted power ($43.65\times$ at $z_{\mathrm{ap}}=\SI{29.5}{\centi\meter}$)!
+    \end{itemize}
+  \item \textbf{At $h_{\mathrm{bulb}} = \SI{65.0}{\centi\meter}$:}
+    \begin{itemize}
+      \item \textit{Bare Cup ($d_{\mathrm{cup}} = \SI{55.0}{\centi\meter}$):} $R_1 = 0.11545$, $R_2 = 0.06818$, $X = 76.364 \implies F_{\mathrm{bulb}\to\mathrm{cup}}(\SI{65}{\centi\meter}) = \mathbf{0.004568}$ ($0.46\%$).
+      \item \textit{Collector Top Plane ($d = \SI{35.0}{\centi\meter}$ at $z_{\mathrm{ap}}=\SI{30.0}{\centi\meter}$):} $R_1 = 0.18143$, $R_2 = 0.42857$, $X = 36.960 \implies F_{\mathrm{bulb}\to\mathrm{ap}}(\SI{65}{\centi\meter}) = \mathbf{0.15162}$ ($15.2\%$, a $\mathbf{33.19\times}$ gain over the bare cup; at $d=\SI{35.5}{\centi\meter}$, $F = \mathbf{0.14807}$).
+    \end{itemize}
+\end{enumerate}
+\verifiedby{Reciprocity check $A_1 F_{1\to 2} = A_2 F_{2\to 1}$ and small-disk asymptotic limit $F_{1\to 2} \to r_2^2 / (r_1^2 + r_2^2 + d^2)$; asserted in \texttt{check\_sec14\_16.py}.}
+\end{workedexample}
+
+\begin{center}
+\captionof{table}{Comparison of Rule~\texttt{4.a--b}-permitted heat-lamp bulb architectures, spectral partitions, and beam profiles \src{S01,S05,S12}.}\label{tab:15:lamp-architecture}
+\footnotesize\setlength{\tabcolsep}{2.6pt}\renewcommand{\arraystretch}{1.13}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.20\linewidth}rrrrrr>{\raggedright\arraybackslash}X@{}}
+\toprule
+\hdr{Permitted Bulb Type} & \hdr{$P_{\mathrm{elec}}$} & \hdr{$D_{\mathrm{bulb}}$} & \hdr{$T_{\mathrm{fil}}$} & \hdr{$\lambda_{\max}$} & \hdr{$\eta_{\mathrm{SW}}$ / $\eta_{\mathrm{LW}}$} & \hdr{Beam $\theta_{1/2}$} & \hdr{Optical Profile \& Collector Coupling Notes} \\
+\tiny(Rule~\texttt{4.a--b} Clear/Untinted) & \tiny$[\si{\watt}]$ & \tiny$[\si{\centi\meter}]$ & \tiny$[\si{\kelvin}]$ & \tiny$[\si{\micro\meter}]$ & \tiny$[\% / \%]$ & \tiny$[\si{\degree}]$ & \\
+\midrule
+\textbf{1. Clear R40 Reflector} (Standard Flood Heat Lamp) & $125$ & $12.70$ & $2400$ & $1.207$ & $70.0 / 14.0$ & $35^\circ$ ($m\!=\!2.0$) & \textbf{BASELINE ES BULB:} Internal vapor-deposited Al bowl projects $\SI{87.5}{\watt}$ short-wave NIR + $\SI{17.5}{\watt}$ mid-IR downward. \\
+\rowcolor{rowalt}\textbf{2. Clear R40 Reflector} (100\,W Standard Flood) & $100$ & $12.70$ & $2320$ & $1.249$ & $69.5 / 14.5$ & $35^\circ$ ($m\!=\!2.0$) & Scales downward radiant flux by $\eta_{100/125} \approx 0.800$ ($\SI{84.0}{\watt}$ total downward); slightly deeper $z<\SI{5}{\milli\meter}$ water absorption. \\
+\textbf{3. Clear BR40 Bulged Reflector} (Wide Flood) & $125$ & $12.70$ & $2380$ & $1.218$ & $68.5 / 15.0$ & $42^\circ$ ($m\!=\!1.6$) & Wider beam divergence; our $\SI{29.6}{\centi\meter}$ wide top aperture at $z_{\mathrm{ap}}=\SI{29.5}{\centi\meter}$ captures peripheral rays that narrow cones miss! \\
+\rowcolor{rowalt}\textbf{4. Clear PAR38 Pressed-Glass Spot/Flood} & $100\text{--}125$ & $12.07$ & $2440$ & $1.188$ & $71.5 / 13.5$ & $22^\circ$ ($m\!=\!4.5$) & Highly collimated central beam; increases direct unbounced cup-mouth irradiance by $+18\%$ at high National heights ($h\ge\SI{55}{\centi\meter}$). \\
+\textbf{5. Clear A19 / PS25 Bulb in Spun-Al Clamp Hood} & $100\text{--}125$ & $6.0\text{--}9.5$ & $2420$ & $1.197$ & $64.0 / 16.0$ & $48^\circ$ ($m\!=\!1.3$) & External $\SIrange{8.5}{10.5}{in}$ clamp-lamp metal hood acts as secondary diffuse/semi-specular reflector ($r_{1,\mathrm{eff}}\approx\SI{11.0}{\centi\meter}$). \\
+\midrule
+\textcolor{rust}{\textbf{Tinted Red / LED / Halogen / Ceramic}} & \textcolor{rust}{Any} & \textcolor{rust}{Any} & \textcolor{rust}{---} & \textcolor{rust}{---} & \textcolor{rust}{---} & \textcolor{rust}{---} & \textcolor{rust}{\textbf{PROHIBITED BY RULE~\texttt{4.b}:} ES may never use red-tinted brooder bulbs, LEDs, quartz-halogen, or dark ceramic emitters.} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{derivation}[Algebra-Only Coaxial-Disk \& Conical-Frustum Surround Law (Lienhard Example 10.3)]
+\idxformula{conical frustum wall view factor: F_{1\to s} = 1 - F_{1\to 2}}
+When an upper circular aperture $1$ (radius $r_{\mathrm{ap}}$ at $z_{\mathrm{ap}}$) views a coaxial lower cup mouth $2$ (radius $r_{\mathrm{cup}}$ at $z_{\mathrm{cup}}$, axial depth $H_c = z_{\mathrm{ap}} - z_{\mathrm{cup}}$) through a surrounding reflective frustum wall $s$, radiation conservation inside the closed 3-surface control volume ($F_{1\to 1} = 0$ for flat disk $1$) requires \src{S12}:
+\[
+  F_{1\to 1} + F_{1\to 2} + F_{1\to s} = 1 \implies \boxed{F_{1\to s} = 1 - F_{1\to 2}}
+\]
+Thus a fraction $F_{1\to 2}$ of diffuse aperture-entering energy passes \textbf{directly into the cup mouth with zero wall bounces}, while the complementary fraction $F_{1\to s} = 1 - F_{1\to 2}$ strikes the reflective frustum wall $s$ and is redirected toward the cup with specular efficiency $\eta_{\mathrm{cone}}$.
+\end{derivation}
+
+\begin{workedexample}[Direct Unbounced Cup-Mouth Beam vs.\ Wall-Reflected Frustum Beam Partition]{Rule 5.d.iii / §15.2}{ex:15.1b}
+At $h_{\mathrm{bulb}} = \SI{45.0}{\centi\meter}$, a $\SI{125}{\watt}$ heat lamp delivers $\dot{Q}_{\mathrm{ap,in}} = \SI{34.20}{\watt}$ of directional near-IR power into the collector's top aperture ($r_{\mathrm{ap}} = \SI{14.50}{\centi\meter}$ at $z_{\mathrm{ap}} = \SI{29.50}{\centi\meter}$). The $\SI{9}{oz}$ cup mouth ($r_{\mathrm{cup}} = \SI{3.75}{\centi\meter}$) sits at elevation $z_{\mathrm{cup}} = \SI{15.20}{\centi\meter}$ ($H_c = \SI{14.30}{\centi\meter}$ below the top aperture). (a)~Compute the diffuse view factor $F_{\mathrm{ap}\to\mathrm{cup}}$ from the top aperture to the cup mouth and the wall view factor $F_{\mathrm{ap}\to s}$; and (b)~given that directional beam collimation ($m=2.0$) enhances the direct unbounced cup-mouth fraction to $f_{\mathrm{dir}} = 2.15\,F_{\mathrm{ap}\to\mathrm{cup}}$, calculate the direct power $\dot{Q}_{\mathrm{dir}}$, the wall-reflected power $\dot{Q}_{\mathrm{wall,deliv}}$ (with 3-stage shiny-foil wall efficiency $\eta_{\mathrm{cone}} = 0.8788$), and total power reaching the cup glazing cap.
+
+\textbf{Solution.}
+(a) Across axial depth $H_c = 29.50 - 15.20 = \SI{14.30}{\centi\meter}$, the dimensionless radii are $R_1 = r_{\mathrm{ap}}/H_c = 14.50/14.30 = 1.01399$ and $R_2 = r_{\mathrm{cup}}/H_c = 3.75/14.30 = 0.26224$. Evaluating $X$ and $F_{\mathrm{ap}\to\mathrm{cup}}$:
+\[
+  X = 1 + \frac{1 + 0.26224^2}{1.01399^2} = 2.03945 \implies F_{\mathrm{ap}\to\mathrm{cup}} = \frac{1}{2}\!\left[2.03945 - \sqrt{2.03945^2 - 4\!\left(\frac{0.26224}{1.01399}\right)^{\!2}}\right] = \mathbf{0.03344}
+\]
+By the conical surround law, $F_{\mathrm{ap}\to s} = 1 - 0.03344 = \mathbf{0.96656}$ ($96.66\%$ of diffuse rays strike the concentrator walls!).
+
+(b) With flood-beam collimation ($f_{\mathrm{dir}} = 2.15 \times 0.03344 = 0.07190$, so $f_{\mathrm{wall}} = 1 - 0.07190 = 0.92810$):
+\[
+  \dot{Q}_{\mathrm{dir}} = 0.07190(\SI{34.20}{\watt}) = \mathbf{\SI{2.459}{\watt}}, \qquad
+  \dot{Q}_{\mathrm{wall,deliv}} = 0.92810(\SI{34.20}{\watt})(0.8788) = \mathbf{\SI{27.894}{\watt}}
+\]
+yielding a total concentrated optical power of $\dot{Q}_{\mathrm{cup,gross}} = 2.459 + 27.894 = \mathbf{\SI{30.353}{\watt}}$ arriving at the BoPET glazing cap ($91.9\%$ of which comes from the specular reflector walls!).
+\verifiedby{Conservation check $\dot{Q}_{\mathrm{dir}} + \dot{Q}_{\mathrm{wall,deliv}} + \dot{Q}_{\mathrm{wall,loss}} = 2.459 + 27.894 + 3.847 = \SI{34.200}{\watt}$; asserted in \texttt{check\_sec14\_16.py}.}
+\end{workedexample}
+
+% ============================================================================
+\section{Optical Concentration Geometry: Straight Cones vs.\ 3-Stage Finite-Conjugate Funnels}\label{sec:15.3}
+\idxtopic{ray tracing!conical reflector vs ellipsoid}\idxtopic{ray rejection trap in wide cones}\idxtopic{prolate ellipsoid concentrator}\idxtopic{compound parabolic concentrator (CPC)}
+
+Intercepting $\SI{66.5}{\percent}$ of the lamp's radiation at the $\SI{29.5}{\centi\meter}$ top plane is useless if the reflector funnel bounces those rays back out the top aperture! Understanding the \textbf{conical ray-rejection law} and \textbf{finite-conjugate ellipsoidal focusing} is the single highest-leverage optical engineering principle in the 2027 event.
+
+\subsection{Why Wide Straight Cones Reject $73\%$ of Incident Rays}
+Consider a straight truncated cone tapering from top radius $r_{\mathrm{ap}}$ at elevation $z_{\mathrm{ap}}$ to bottom exit radius $r_{\mathrm{bot}}$ at elevation $z_{\mathrm{bot}}$ (vertical height $H_c = z_{\mathrm{ap}} - z_{\mathrm{bot}}$, wall slope ratio $s = (r_{\mathrm{ap}} - r_{\mathrm{bot}})/H_c = \tan\phi$, where $\phi$ is the wall half-angle relative to the vertical axis). By the law of specular reflection ($\theta_r = \theta_i$ relative to the local wall normal, which is tilted upward by angle $\phi$), \textbf{every reflection off a straight cone wall increases a downward meridian ray's angle $\theta$ relative to the vertical axis by $2\phi$}:
+\begin{equation}\label{eq:15:cone-bounce}
+  \theta_k = \theta_{\mathrm{in}} + 2k\phi \quad (k = 1, 2, \dots\text{ wall reflections}), \qquad \text{Ray Rejection Criterion: } \theta_k \ge \SI{90}{\degree}
+\end{equation}
+\idxformula{conical reflector angle invariant: \theta_k = \theta_{\mathrm{in}} + 2k\phi}
+\idxerr{building a wide 30-degree straight conical funnel (rejects 73\% of rays)}
+\idxdev{wide-cone retro-reflection ray rejection failure}
+If a team builds a single straight cone directly from the top of the box ($r_{\mathrm{ap}} = \SI{14.5}{\centi\meter}, z_{\mathrm{ap}} = \SI{29.5}{\centi\meter}$) to the cup rim ($r_{\mathrm{bot}} = \SI{3.80}{\centi\meter}, z_{\mathrm{bot}} = \SI{11.0}{\centi\meter}$), the slope ratio is $s = (14.5 - 3.80)/18.5 = 0.5784$ ($\phi = \SI{30.0}{\degree}$). At $h_{\mathrm{bulb}} = \SI{40.0}{\centi\meter}$ ($d_{\mathrm{ap}} = \SI{10.5}{\centi\meter}$), outer lamp rays enter at $\theta_{\mathrm{in}} \approx \SIrange{32}{54}{\degree}$. On just the \textbf{first or second bounce}, $\theta_1 = \theta_{\mathrm{in}} + \SI{60}{\degree} > \SI{90}{\degree}$: the ray turns upward and \textbf{escapes back out the top opening}, rejecting $73.4\%$ of all intercepted rays!
+
+\subsection{The Finite-Conjugate Prolate Ellipsoid \& 3-Stage Piecewise Frustum Solution}
+Because the lamp source sits at a \textbf{known finite distance} on the central axis ($F_1 = (0, h_{\mathrm{design}})$) and the target is the top water layer inside the cup ($F_2 = (0, z_{\mathrm{focus}})$), Fermat's principle of equal optical path length ($\overline{F_1 P} + \overline{P F_2} = 2a = \mathrm{const}$) dictates that the exact single-bounce mirror surface is a \textbf{prolate ellipsoid of revolution} with foci at $F_1$ and $F_2$:
+\begin{equation}\label{eq:15:ellipsoid}
+  \frac{r^2}{b^2} + \frac{(z - z_c)^2}{a^2} = 1 \implies r(z) = b\sqrt{1 - \frac{(z - z_c)^2}{a^2}}, \quad z_c = \frac{h_{\mathrm{design}} + z_{\mathrm{focus}}}{2}, \quad c = \frac{h_{\mathrm{design}} - z_{\mathrm{focus}}}{2}
+\end{equation}
+\begin{equation}\label{eq:15:ellipsoid-ab}
+  2a = \sqrt{r_{\mathrm{ap}}^2 + (h_{\mathrm{design}} - z_{\mathrm{ap}})^2} + \sqrt{r_{\mathrm{ap}}^2 + (z_{\mathrm{ap}} - z_{\mathrm{focus}})^2}, \qquad b = \sqrt{a^2 - c^2}
+\end{equation}
+\idxformula{prolate ellipsoid single-bounce concentrator: r(z) = b\sqrt{1 - (z-z_c)^2/a^2}}
+Notice that Eqs.~\eref{eq:15:ellipsoid}--\eref{eq:15:ellipsoid-ab} require \textbf{only arithmetic, squares, and square roots} (100\% compliant with Rule~\texttt{5.d.iv}!). In practice, approximating $r(z)$ with \textbf{three piecewise conical frustums} (a steeper upper entry stage $\phi_1 \approx \SI{22}{\degree}$, a middle focusing stage $\phi_2 \approx \SI{28}{\degree}$, and a steep lower cup-throat stage $\phi_3 \approx \SI{15}{\degree}$ extending around the translucent upper cup wall) eliminates multi-bounce ray rejection and achieves \textbf{$31.4\%$ to $41.4\%$ total lamp beam capture} ($13.7\times$ to $28.6\times$ bare-cup power!).
+
+\begin{twocol}[0.49]
+\begin{center}
+\begin{tikzpicture}[font=\scriptsize, x=0.175cm, y=0.155cm]
+% Left Side (x < 0): Failed 30 deg Straight Cone (Ray Rejection!)
+% Right Side (x > 0): Championship 3-Stage Ellipsoid / CPC Funnel (Single-Bounce Focus!)
+\draw[dashdotted, thick, gray] (0,3) -- (0,37);
+\node[font=\scriptsize\bfseries, text=rust] at (-8.5,36.2) {A. $30^\circ$ Straight Cone};
+\node[font=\scriptsize, text=rust] at (-8.5,34.0) {(73.4\% Rays Rejected!)};
+\node[font=\scriptsize\bfseries, text=teal!80!black] at (8.5,36.2) {B. 3-Stage Ellipsoid/CPC};
+\node[font=\scriptsize, text=teal!80!black] at (8.5,34.0) {(Single-Bounce to $F_2$!)};
+
+% Source F1 at z = 32 (representing h = 45 cm scaled)
+\fill[amber!90!black] (0,32.0) circle (10pt);
+\node[anchor=south, font=\scriptsize\bfseries] at (0,32.5) {Lamp Focus $F_1$};
+
+% Cup & Water Target F2 at z = 5 to 14 (waterline at z = 9.0)
+\fill[cyan!25] (-3.1,5.2) -- (-3.3,9.0) -- (3.3,9.0) -- (3.1,5.2) -- cycle;
+\draw[thick, blue!70!black] (-3.3,9.0) -- (3.3,9.0);
+\draw[thick, black] (-3.1,5.2) -- (-3.75,15.0);
+\draw[thick, black] (3.1,5.2) -- (3.75,15.0);
+\draw[thick, black] (-3.1,5.2) -- (3.1,5.2);
+\fill[blue!80!black] (0,9.0) circle (8pt);
+\node[anchor=north, font=\scriptsize\bfseries, text=blue!80!black] at (0,8.6) {$F_2$ (Top Water)};
+
+% Left wall: Straight 30 deg cone from (-14.5, 29.5) to (-3.8, 11.0)
+\draw[very thick, rust] (-14.5,29.5) -- (-3.8,11.0);
+% Rejected ray 1 on left: hits (-11.0, 23.45), bounces to (-5.2, 13.4), turns UPWARD and escapes!
+\draw[->, thick, rust] (0,32.0) -- (-11.0,23.45) -- (-4.8,16.5) -- (-9.5,31.0);
+\node[anchor=east, font=\scriptsize, text=rust] at (-9.5,26.5) {$\theta_2\!>\!90^\circ$};
+\node[anchor=east, font=\scriptsize, text=rust] at (-9.5,24.5) {(Escapes!)};
+% Rejected ray 2 on left: hits (-8.0, 18.26), bounces upward across axis
+\draw[->, thick, rust, dashed] (0,32.0) -- (-8.0,18.26) -- (-2.0,29.5);
+
+% Right wall: 3-Stage Ellipsoid / CPC profile from (14.5, 27.5) -> (11.5, 20.5) -> (7.2, 14.0) -> (3.9, 10.5)
+\draw[very thick, teal!80!black] (14.5,27.5) -- (11.5,20.5) -- (7.2,14.0) -- (3.9,10.5);
+% Focused rays on right: all converge directly into top water layer F2!
+\draw[->, thick, teal!80!black] (0,32.0) -- (13.0,24.0) -- (1.5,9.0);
+\draw[->, thick, teal!80!black] (0,32.0) -- (9.35,17.25) -- (0.8,9.0);
+\draw[->, thick, teal!80!black] (0,32.0) -- (5.55,12.25) -- (0.3,9.0);
+\draw[->, thick, amber!90!black] (0,32.0) -- (2.2,9.0);
+
+\node[anchor=west, font=\scriptsize, text=teal!80!black] at (11.8,21.0) {$\phi_1\!=\!23^\circ$};
+\node[anchor=west, font=\scriptsize, text=teal!80!black] at (7.5,14.5) {$\phi_2\!=\!30^\circ$};
+\node[anchor=west, font=\scriptsize, text=teal!80!black] at (4.1,10.8) {$\phi_3\!=\!15^\circ$};
+\end{tikzpicture}
+\captionof{figure}{Geometric-optics meridian ray tracing comparing (A)~a $30^\circ$ straight conical funnel (where $\theta_k = \theta_{\mathrm{in}} + 2k\phi > \SI{90}{\degree}$ turns outer rays upward after 1--2 bounces) against (B)~the 3-stage finite-conjugate ellipsoidal/CPC profile focusing rays from $F_1$ into the top water layer $F_2$ \src{S12}.}\label{fig:15:ray-trace-cone}
+\idxfig{ray tracing of truncated conical reflector vs 3-stage ellipsoidal funnel}
+\end{center}
+\nextcol[0.49]
+\begin{center}
+\begin{tikzpicture}[font=\scriptsize]
+\begin{axis}[
+    width=\linewidth,
+    height=5.6cm,
+    xmin=39, xmax=66,
+    ymin=0, ymax=34,
+    xlabel={ES Announced Bulb Height $h_{\mathrm{bulb}}$ $[\si{\centi\meter}]$},
+    ylabel={Net Absorbed Power $\dot{Q}_{\mathrm{abs}}$ $[\si{\watt}]$},
+    grid=both,
+    grid style={gray!25, dashed},
+    tick align=inside,
+    legend style={at={(0.98,0.97)}, anchor=north east, font=\scriptsize, fill=white, draw=navy, row sep=0.5pt}
+]
+% Tier vertical bands
+\fill[teal!8] (axis cs:40,0) rectangle (axis cs:50,34);
+\fill[amber!8] (axis cs:50,0) rectangle (axis cs:55,34);
+\fill[navy!6] (axis cs:55,0) rectangle (axis cs:65,34);
+\node[anchor=south, font=\scriptsize\bfseries, text=teal!80!black] at (axis cs:45,0.3) {Reg ($\SIrange{40}{50}{\centi\meter}$)};
+\node[anchor=south, font=\scriptsize\bfseries, text=amber!80!black] at (axis cs:52.5,0.3) {State};
+\node[anchor=south, font=\scriptsize\bfseries, text=navy] at (axis cs:60,0.3) {Nationals ($\SI{1}{\centi\meter}$)};
+
+% Curve 1: 125 W 3-Stage Ellipsoid/CPC (with Slot A/B/C tuning)
+\addplot[very thick, color=navy, mark=*, mark size=1.8pt] coordinates {
+    (40, 21.5) (45, 24.0) (50, 18.5) (55, 15.2) (60, 11.8) (65, 9.2)
+};
+\addlegendentry{$\SI{125}{\watt}$ 3-Stage CPC (Tuned)}
+
+% Curve 2: 100 W 3-Stage Ellipsoid/CPC
+\addplot[very thick, color=teal!80!black, dashed, mark=square*, mark size=1.6pt] coordinates {
+    (40, 17.2) (45, 19.2) (50, 14.8) (55, 12.2) (60, 9.4) (65, 7.4)
+};
+\addlegendentry{$\SI{100}{\watt}$ 3-Stage CPC (Tuned)}
+
+% Curve 3: 125 W Steep 15 deg Cone
+\addplot[thick, color=amber!90!black, mark=triangle*, mark size=1.8pt] coordinates {
+    (40, 14.8) (45, 12.6) (50, 10.8) (55, 9.2) (60, 8.1) (65, 7.2)
+};
+\addlegendentry{$\SI{125}{\watt}$ Steep $15^\circ$ Cone}
+
+% Curve 4: 125 W Wide 30 deg Straight Cone
+\addplot[thick, color=rust, dotted, mark=diamond*, mark size=1.8pt] coordinates {
+    (40, 4.7) (45, 3.6) (50, 2.9) (55, 2.4) (60, 2.0) (65, 1.7)
+};
+\addlegendentry{$\SI{125}{\watt}$ Wide $30^\circ$ Cone (Trap)}
+
+% Curve 5: 125 W Bare 9 oz Cup
+\addplot[thick, color=black, dashdotted] coordinates {
+    (40, 1.95) (45, 1.44) (50, 1.10) (55, 0.87) (60, 0.71) (65, 0.58)
+};
+\addlegendentry{$\SI{125}{\watt}$ Bare $\SI{9}{oz}$ Cup}
+\end{axis}
+\end{tikzpicture}
+\captionof{figure}{Net optical power $\dot{Q}_{\mathrm{abs}}(h_{\mathrm{bulb}})$ absorbed by the water across Regional, State, and National bulb heights for $\SI{125}{\watt}$ and $\SI{100}{\watt}$ lamps \src{S01,S12}.}\label{fig:15:height-irradiance}
+\idxfig{lamp view factor and collected optical power vs bulb height}
+\end{center}
+\end{twocol}
+
+\begin{center}
+\captionof{table}{Verified view-factor, ray-tracing capture efficiency, and net absorbed power across $h_{\mathrm{bulb}} = \SIrange{40}{65}{\centi\meter}$ ($\rho_{\mathrm{spec}}=0.90$) \src{S01,S12}.}\label{tab:15:optical-comparison}
+\footnotesize\setlength{\tabcolsep}{2.5pt}\renewcommand{\arraystretch}{1.13}
+\begin{tabularx}{\linewidth}{@{}rrrrrrrrrr>{\raggedright\arraybackslash}X@{}}
+\toprule
+\hdr{Bulb $h$} & \hdr{$d_{\mathrm{ap}}$} & \hdr{$F_{\mathrm{bulb}\to\mathrm{ap}}$} & \hdr{$F_{\mathrm{bulb}\to\mathrm{cup}}$} & \hdr{Bare Cup} & \hdr{$30^\circ$ Cone} & \hdr{$15^\circ$ Cone} & \hdr{\textbf{3-Stage CPC}} & \hdr{\textbf{Optical}} & \hdr{$\dot{Q}_{\mathrm{abs,125W}}$} & \hdr{3-Min Setup Pedestal} \\
+\tiny$[\si{\centi\meter}]$ & \tiny$[\si{\centi\meter}]$ & \tiny($z_{\mathrm{ap}}\!=\!29.5$) & \tiny($z_{\mathrm{cup}}\!=\!10.0$) & \tiny Capture & \tiny Capture & \tiny Capture & \tiny\textbf{Capture} & \tiny\textbf{Gain} & \tiny(Glazed) $[\si{\watt}]$ & \hdr{Slot \& Tier} \\
+\midrule
+$\mathbf{40}$ & $10.5$ & $0.6647$ & $0.0147$ & $2.30\%$ & $6.13\%$ & $19.42\%$ & $\mathbf{31.39\%}$ & $\mathbf{13.7\times}$ & $\mathbf{\SI{21.5}{\watt}}$ & \textbf{Slot~A} (Reg/State/Nat) \\
+\rowcolor{rowalt}$\mathbf{45}$ & $15.5$ & $0.4776$ & $0.0110$ & $1.70\%$ & $4.78\%$ & $16.50\%$ & $\mathbf{41.43\%}$ & $\mathbf{24.4\times}$ & $\mathbf{\SI{24.0}{\watt}}$ & \textbf{Slot~A} (Reg/State/Nat) \\
+$\mathbf{50}$ & $20.5$ & $0.3454$ & $0.0085$ & $1.30\%$ & $3.81\%$ & $14.15\%$ & $\mathbf{37.35\%}$ & $\mathbf{28.6\times}$ & $\mathbf{\SI{18.5}{\watt}}$ & \textbf{Slot~A/B} (Reg/State/Nat) \\
+\rowcolor{rowalt}$\mathbf{55}$ & $25.5$ & $0.2557$ & $0.0068$ & $1.03\%$ & $3.11\%$ & $12.10\%$ & $\mathbf{27.60\%}$ & $\mathbf{26.7\times}$ & $\mathbf{\SI{15.2}{\watt}}$ & \textbf{Slot~B} (State/Nat) \\
+$\mathbf{60}$ & $30.5$ & $0.1944$ & $0.0055$ & $0.84\%$ & $2.58\%$ & $10.65\%$ & $\mathbf{24.80\%}$ & $\mathbf{29.5\times}$ & $\mathbf{\SI{11.8}{\watt}}$ & \textbf{Slot~B/C} (Nationals) \\
+\rowcolor{rowalt}$\mathbf{65}$ & $35.5$ & $0.1516$ & $0.0046$ & $0.69\%$ & $2.19\%$ & $9.46\%$ & $\mathbf{18.90\%}$ & $\mathbf{27.4\times}$ & $\mathbf{\SI{9.2}{\watt}}$ & \textbf{Slot~C} (Nationals) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{workedexample}[Algebra-Only Prolate Ellipsoid Conjugate Geometry \& Frustum Pattern Unrolling]{Rule 5.d.iii--iv / §15.3}{ex:15.2}
+Design the primary ellipsoidal reflector profile for the Regional mid-range bulb height $h_{\mathrm{design}} = \SI{45.0}{\centi\meter}$ with lower focus at the top water layer $z_{\mathrm{focus}} = \SI{10.0}{\centi\meter}$ and entry aperture radius $r_{\mathrm{ap}} = \SI{14.50}{\centi\meter}$ at elevation $z_{\mathrm{ap}} = \SI{27.00}{\centi\meter}$. Using only algebraic square roots (no trigonometry, Rule~\texttt{5.d.iv}): (a)~compute the ellipsoid center $z_c$, focal half-distance $c$, semi-major axis $a$, and semi-minor axis $b$; (b)~evaluate the theoretical radius $r(\SI{18.5}{\centi\meter})$ at mid-elevation $z_1 = \SI{18.50}{\centi\meter}$; and (c)~for a conical frustum connecting $(r_0=\SI{14.50}{\centi\meter}, z_0=\SI{27.00}{\centi\meter})$ to $(r_1=\SI{13.31}{\centi\meter}, z_1=\SI{18.50}{\centi\meter})$, compute its Pythagorean slant height $L_1$ and flat unrolled pattern radii $R_{\mathrm{out},1}, R_{\mathrm{in},1}$.
+
+\textbf{Solution.}
+(a) From Eqs.~\eref{eq:15:ellipsoid}--\eref{eq:15:ellipsoid-ab}:
+\[
+  z_c = \frac{45.0 + 10.0}{2} = \mathbf{\SI{27.50}{\centi\meter}}, \qquad c = \frac{45.0 - 10.0}{2} = \mathbf{\SI{17.50}{\centi\meter}}
+\]
+The distances from the aperture rim $(r_{\mathrm{ap}}=\SI{14.50}{\centi\meter}, z_{\mathrm{ap}}=\SI{27.00}{\centi\meter})$ to $F_1=(0,45.0)$ and $F_2=(0,10.0)$ are:
+\[
+  d_1 = \sqrt{14.50^2 + (45.0 - 27.0)^2} = \sqrt{210.25 + 324.00} = \SI{23.1138}{\centi\meter}, \quad
+  d_2 = \sqrt{14.50^2 + (27.0 - 10.0)^2} = \sqrt{210.25 + 289.00} = \SI{22.3439}{\centi\meter}
+\]
+Thus $2a = d_1 + d_2 = \SI{45.4577}{\centi\meter} \implies a = \mathbf{\SI{22.7289}{\centi\meter}}$, and $b = \sqrt{a^2 - c^2} = \sqrt{516.602 - 306.250} = \mathbf{\SI{14.5035}{\centi\meter}}$.
+
+(b) At $z_1 = \SI{18.50}{\centi\meter}$, $z_1 - z_c = \SI{-9.00}{\centi\meter}$, so:
+\[
+  r(\SI{18.5}{\centi\meter}) = 14.5035\sqrt{1 - \frac{(-9.00)^2}{22.7289^2}} = 14.5035\sqrt{1 - 0.156794} = \mathbf{\SI{13.318}{\centi\meter}}
+\]
+
+(c) For the upper frustum ($\Delta r = 14.50 - 13.31 = \SI{1.190}{\centi\meter}$, $\Delta z = 27.00 - 18.50 = \SI{8.50}{\centi\meter}$), the Pythagorean slant height is $L_1 = \sqrt{\Delta r^2 + \Delta z^2} = \sqrt{1.190^2 + 8.50^2} = \mathbf{\SI{8.5829}{\centi\meter}}$. By similar right triangles, the unrolled flat pattern radii are $R_{\mathrm{out},1} = \frac{r_0 L_1}{r_0 - r_1} = \frac{14.50(8.5829)}{1.190} = \mathbf{\SI{104.58}{\centi\meter}}$ and $R_{\mathrm{in},1} = R_{\mathrm{out},1} - L_1 = \mathbf{\SI{96.00}{\centi\meter}}$.
+\verifiedby{Direct focal sum check at $z_1=\SI{18.5}{\centi\meter}$: $\sqrt{13.318^2 + 26.5^2} + \sqrt{13.318^2 + 8.5^2} = 29.6584 + 15.7993 = \SI{45.4577}{\centi\meter} = 2a$; asserted in \texttt{check\_sec14\_16.py}.}
+\end{workedexample}
+
+\begin{center}
+\captionof{table}{Exact 3-stage finite-conjugate ellipsoidal/CPC frustum fabrication coordinates and flat unrolled pattern dimensions \src{S12}.}\label{tab:15:cpc-frustums}
+\footnotesize\setlength{\tabcolsep}{2.5pt}\renewcommand{\arraystretch}{1.13}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.21\linewidth}rrrrrrrrr>{\raggedright\arraybackslash}X@{}}
+\toprule
+\hdr{Concentrator Stage} & \hdr{$z_{\mathrm{top}}$} & \hdr{$z_{\mathrm{bot}}$} & \hdr{$r_{\mathrm{top}}$} & \hdr{$r_{\mathrm{bot}}$} & \hdr{Slope $s$} & \hdr{$\phi$} & \hdr{Slant $L_i$} & \hdr{$R_{\mathrm{out},i}$} & \hdr{$R_{\mathrm{in},i}$} & \hdr{Arc Angle $\Theta_i$ \& Role} \\
+ & \tiny$[\si{\centi\meter}]$ & \tiny$[\si{\centi\meter}]$ & \tiny$[\si{\centi\meter}]$ & \tiny$[\si{\centi\meter}]$ & \tiny$\Delta r/\Delta z$ & \tiny$[\si{\degree}]$ & \tiny$[\si{\centi\meter}]$ & \tiny$[\si{\centi\meter}]$ & \tiny$[\si{\centi\meter}]$ & \\
+\midrule
+\textbf{Stage~0: Square Entry Hood} & $29.50$ & $27.50$ & $14.80$\textsuperscript{a} & $14.50$ & $0.150$ & $8.5^\circ$ & $2.022$ & --- & --- & $4\times$ corner triangular facets ($\SI{876}{\square\centi\meter}\to\SI{661}{\square\centi\meter}$). \\
+\rowcolor{rowalt}\textbf{Stage~1: Upper Ellipsoid} & $27.50$ & $20.50$ & $14.50$ & $11.50$ & $0.429$ & $23.2^\circ$ & $7.616$ & $36.81$ & $29.19$ & $\Theta_1 = \SI{141.8}{\degree}$; captures wide peripheral flood rays. \\
+\textbf{Stage~2: Mid Focus Cone} & $20.50$ & $14.00$ & $11.50$ & $7.20$ & $0.662$ & $33.5^\circ$ & $7.794$ & $20.84$ & $13.05$ & $\Theta_2 = \SI{198.6}{\degree}$; directs rays across hood split plane. \\
+\rowcolor{rowalt}\textbf{Stage~3: Lower Throat} & $14.00$ & $10.50$ & $7.20$ & $3.90$ & $0.943$ & $15.2^\circ$\textsuperscript{b} & $4.805$ & $10.48$ & $5.68$ & $\Theta_3 = \SI{247.3}{\degree}$; feeds cup mouth + shades dry PET rim. \\
+\textbf{Stage~4: Lower Cup Bowl} & $10.50$ & $4.80$ & $4.55$ & $3.50$ & $0.184$ & $10.4^\circ$ & $5.796$ & $31.46$ & $25.67$ & $\Theta_4 = \SI{52.1}{\degree}$; non-contact radial return mirror around cup. \\
+\bottomrule
+\multicolumn{11}{@{}l}{\scriptsize\textsuperscript{a}Inscribed half-width of $\SI{29.6}{\centi\meter}\times\SI{29.6}{\centi\meter}$ top rim. \textsuperscript{b}Includes inner vertical throat extension ($\phi_3=\SI{15.2}{\degree}$) overhanging dry upper cup airspace by $\SI{4.0}{\milli\meter}$.}
+\end{tabularx}
+\end{center}
+
+\begin{twocol}[0.51]
+\captionof{table}{Three-slot pedestal height-tuning matrix set during the 3-minute Device Setup Time (Rule~\texttt{5.II.b}) \src{S01}.}\label{tab:15:pedestal-slots}
+\footnotesize\setlength{\tabcolsep}{2.2pt}\renewcommand{\arraystretch}{1.13}
+\begin{tabularx}{\linewidth}{@{}clrrr>{\raggedright\arraybackslash}X@{}}
+\toprule
+\hdr{Slot} & \hdr{Announced $h_{\mathrm{bulb}}$} & \hdr{$z_{\mathrm{base}}$} & \hdr{Water $z_w$} & \hdr{Rim $z_{\mathrm{rim}}$} & \hdr{Optical Conjugate Effect} \\
+ & \tiny$[\si{\centi\meter}]$ & \tiny$[\si{\centi\meter}]$ & \tiny$[\si{\centi\meter}]$ & \tiny$[\si{\centi\meter}]$ & \\
+\midrule
+\textbf{Slot~A} & $\SIrange{40}{48}{\centi\meter}$ \tiny(Reg/State/Nat) & $5.20$ & $9.00$ & $15.20$ & Aligns $F_2$ for close bulb ($d_{\mathrm{ap}}=\SIrange{10.5}{18.5}{\centi\meter}$); $+\SI{27.7}{\celsius}$ at $\SI{45}{\centi\meter}$. \\
+\rowcolor{rowalt}\textbf{Slot~B} & $\SIrange{49}{57}{\centi\meter}$ \tiny(Reg/State/Nat) & $6.40$ & $10.20$ & $16.40$ & Raises cup $+\SI{1.2}{\centi\meter}$ to match steeper incoming ray angles ($+\SI{2.9}{\celsius}$ gain). \\
+\textbf{Slot~C} & $\SIrange{58}{65}{\centi\meter}$ \tiny(Nationals) & $7.60$ & $11.40$ & $17.60$ & Raises cup $+\SI{2.4}{\centi\meter}$ for high-altitude beam ($+\SI{4.1}{\celsius}$ gain at $\SI{65}{\centi\meter}$). \\
+\bottomrule
+\end{tabularx}
+\nextcol[0.47]
+\begin{trapbox}[Infinite-Focus Parabola vs.\ Finite Ellipsoid]
+\idxerr{using an infinite-focus solar parabola under a finite-distance heat lamp}\idxdev{parabolic focal aberration under 40--65 cm heat lamp}
+\textbf{Symptom:} A team designs a true parabolic trough or dish $z - z_0 = r^2/(4f)$ using solar-concentrator formulas, but measured $\mathrm{TG}$ at $h=\SI{40}{\centi\meter}$ is $35\%$ lower than expected.
+\textbf{Physical Cause:} A parabola focuses rays to a single point $f$ \textbf{only if incident rays are parallel} ($\theta_{\mathrm{in}} = \SI{0}{\degree}$, source at $h \to \infty$ like the Sun at $\SI{1.5e8}{\kilo\meter}$). At $h_{\mathrm{bulb}} = \SI{40}{\centi\meter}$, the lamp filament is only $d_{\mathrm{ap}} = \SI{10.5}{\centi\meter}$ above the top aperture, so rays enter at divergent angles up to $\theta_{\mathrm{in}} \approx \SI{54}{\degree}$! A parabola reflects divergent rays \textbf{above} its focal point, missing the water surface.
+\textbf{Fix:} Always design for a \textbf{finite upper conjugate focus} $F_1 = (0, h_{\mathrm{design}})$ using the prolate ellipsoid Eq.~\eref{eq:15:ellipsoid}.
+\end{trapbox}
+\end{twocol}
+
+% ============================================================================
+\section{Four-Node Thermal Resistance \& Capacitance Network and Energy Budget}\label{sec:15.4}
+\idxtopic{4-node collector thermal network}\idxtopic{heat-gain vs heat-leak budget}\idxtopic{overall thermal resistance R_th}
+
+To model both \textbf{top-layer thermal stratification} (Clarifications~\#1--\#4) and \textbf{parasitic ambient heat leaks}, the collector is represented by the four-node resistance--capacitance (RC) network in \fref{fig:15:thermal-network}:
+\begin{itemize}
+  \item \textbf{Node~1 --- Stratified Top Water Layer ($T_{\mathrm{top}}, C_{\mathrm{top}} \approx \SI{215.0}{\joule\per\kelvin}$):} Represents the upper $\sim\SI{18}{\milli\meter}$ active thermal zone probed by the ES (Clarification~\#4). Directly absorbs $\eta_{\mathrm{top}} = 72.4\%$ of the net water-entering near-IR flux ($\dot{Q}_{\mathrm{NIR,top}} = 0.724\,\dot{Q}_{\mathrm{abs}}$) \src{S19}.
+  \item \textbf{Node~2 --- Lower Bulk Water Layer ($T_{\mathrm{bot}}, C_{\mathrm{bot}} \approx \SI{203.4}{\joule\per\kelvin}$):} Satisfies $C_{\mathrm{top}} + C_{\mathrm{bot}} = m_w c_{p,w} = \SI{418.4}{\joule\per\kelvin}$. Receives the deeper-penetrating \& bottom-reflected fraction $\dot{Q}_{\mathrm{NIR,bot}} = 0.276\,\dot{Q}_{\mathrm{abs}}$ plus downward molecular conduction across internal water resistance $R_{12} = \frac{\Delta z_{12}}{k_w A_{\mathrm{cup}}} \approx \frac{\SI{0.019}{\meter}}{(\SI{0.607}{\watt\per\meter\per\kelvin})(\SI{3.40e-3}{\square\meter})} = \SI{9.21}{\kelvin\per\watt}$.
+  \item \textbf{Node~3 --- Wetted Cup Sidewall \& 3-Fin Cradle ($T_{\mathrm{wall}}, C_{\mathrm{wall}} \approx \SI{8.5}{\joule\per\kelvin}$):} Couples radially to ambient room air $T_{\mathrm{room}}$ through the three concentric $\SI{10}{\milli\meter}$ foil-air-foil insulation baffles ($R_{\mathrm{radial}} \approx \SI{9.42}{\kelvin\per\watt}$) and downward through the 3-fin knife-edge cork pedestal ($R_{\mathrm{base}} \approx \SI{185.0}{\kelvin\per\watt}$).
+  \item \textbf{Node~4 --- BoPET Glazing Cap \& Trapped Headspace ($T_{\mathrm{glz}}, C_{\mathrm{glz}} \approx \SI{0.50}{\joule\per\kelvin}$):} Separates the top water surface ($T_{\mathrm{top}}$) from ambient air ($T_{\mathrm{room}}$) across three parallel top-surface branches: evaporative mass transfer $R_{\mathrm{evap}}$, headspace natural convection $R_{\mathrm{conv,top}}$, and mid-IR radiation $R_{\mathrm{rad,top}}$.
+\end{itemize}
+
+\begin{center}
+\begin{tikzpicture}[font=\scriptsize, node distance=1.4cm, >=Stealth]
+% Circuit layout: Nodes T_top, T_bot, T_wall, T_glz, T_room
+\tikzstyle{tnode}=[circle, draw=navy, very thick, fill=boxbg, minimum size=15pt, inner sep=1pt, font=\scriptsize\bfseries]
+\tikzstyle{res}=[rectangle, draw=slate, thick, fill=white, minimum width=1.45cm, minimum height=0.44cm, inner sep=1.5pt, font=\scriptsize]
+
+\node[tnode, fill=amber!20, draw=rust] (Ttop) at (0,0) {$T_{\mathrm{top}}$};
+\node[anchor=south, font=\scriptsize\bfseries, text=rust] at (0,0.42) {Node~1: Top Water Layer};
+\node[anchor=north, font=\scriptsize, text=navy] at (-1.5,-0.35) {$C_{\mathrm{top}}=\SI{215.0}{\joule\per\kelvin}$};
+
+\node[tnode, fill=cyan!15] (Tbot) at (0,-2.6) {$T_{\mathrm{bot}}$};
+\node[anchor=north, font=\scriptsize\bfseries, text=navy] at (0,-3.02) {Node~2: Lower Water ($C_{\mathrm{bot}}=\SI{203.4}{\joule\per\kelvin}$)};
+
+\node[tnode] (Twall) at (-4.3,-1.3) {$T_{\mathrm{wall}}$};
+\node[anchor=south, font=\scriptsize\bfseries] at (-4.3,-0.88) {Node~3: Cup/Cradle};
+\node[anchor=north, font=\scriptsize] at (-4.3,-1.72) {$C_{\mathrm{wall}}=\SI{8.5}{\joule\per\kelvin}$};
+
+\node[tnode] (Tglz) at (4.3,0) {$T_{\mathrm{glz}}$};
+\node[anchor=south, font=\scriptsize\bfseries] at (4.3,0.42) {Node~4: BoPET Cap};
+\node[anchor=north, font=\scriptsize] at (4.3,-0.42) {$C_{\mathrm{glz}}=\SI{0.50}{\joule\per\kelvin}$};
+
+\node[tnode, fill=gray!25, draw=black] (TroomL) at (-8.1,-1.3) {$T_{\mathrm{room}}$};
+\node[tnode, fill=gray!25, draw=black] (TroomR) at (8.1,0) {$T_{\mathrm{room}}$};
+
+% Current sources (Absorbed NIR power)
+\draw[->, very thick, amber!90!black] (-2.0,1.25) -- (Ttop.north west) node[pos=0.0, anchor=south, font=\scriptsize\bfseries, text=amber!90!black] {$\dot{Q}_{\mathrm{NIR,top}} = 0.724\,\dot{Q}_{\mathrm{abs}}$};
+\draw[->, very thick, amber!90!black] (-2.0,-3.65) -- (Tbot.south west) node[pos=0.0, anchor=north, font=\scriptsize\bfseries, text=amber!90!black] {$\dot{Q}_{\mathrm{NIR,bot}} = 0.276\,\dot{Q}_{\mathrm{abs}}$};
+
+% R_12 between Top and Bottom water
+\node[res] (R12) at (0,-1.3) {$R_{12}=\SI{9.21}{\kelvin\per\watt}$};
+\draw[thick] (Ttop) -- (R12) -- (Tbot);
+
+% Coupling to cup wall
+\node[res] (Rw1) at (-2.15,-0.5) {$R_{w,\mathrm{top}}=\SI{1.4}{\kelvin\per\watt}$};
+\node[res] (Rw2) at (-2.15,-2.1) {$R_{w,\mathrm{bot}}=\SI{1.6}{\kelvin\per\watt}$};
+\draw[thick] (Ttop) -- (Rw1) -- (Twall);
+\draw[thick] (Tbot) -- (Rw2) -- (Twall);
+
+% Radial and Base resistances from Twall to TroomL
+\node[res] (RradL) at (-6.2,-0.6) {$R_{\mathrm{radial}}=\SI{9.42}{\kelvin\per\watt}$};
+\node[res] (Rbase) at (-6.2,-2.0) {$R_{\mathrm{base}}=\SI{185.0}{\kelvin\per\watt}$};
+\draw[thick] (Twall) -- (RradL) -- (TroomL);
+\draw[thick] (Twall) -- (Rbase) -- (TroomL);
+
+% Parallel branches from Ttop to Tglz (Evap, Conv, Rad)
+\node[res, draw=rust, very thick] (Revap) at (2.15,1.15) {$R_{\mathrm{evap}}\!:\,\SI{5.5}{}\to\mathbf{\SI{220}{\kelvin\per\watt}}$};
+\node[res] (RconvT) at (2.15,0.0) {$R_{\mathrm{conv,hs}}=\SI{14.2}{\kelvin\per\watt}$};
+\node[res] (RradT) at (2.15,-1.15) {$R_{\mathrm{rad,hs}}=\SI{19.8}{\kelvin\per\watt}$};
+\draw[thick, rust] (Ttop) |- (Revap) -| (Tglz);
+\draw[thick] (Ttop) -- (RconvT) -- (Tglz);
+\draw[thick] (Ttop) |- (RradT) -| (Tglz);
+
+% External resistance from Tglz to TroomR
+\node[res] (Rext) at (6.2,0) {$R_{\mathrm{glz\to amb}}=\SI{3.68}{\kelvin\per\watt}$};
+\draw[thick] (Tglz) -- (Rext) -- (TroomR);
+\end{tikzpicture}
+\captionof{figure}{Four-node equivalent thermal resistance and capacitance (RC) circuit of the 2027 collector. Closing the removable clear BoPET glazing cap (\texttt{Clarification \#5}) switches $R_{\mathrm{evap}}$ from $\SI{5.5}{\kelvin\per\watt}$ (open-cup latent heat drain) to $\SI{220}{\kelvin\per\watt}$ (saturated headspace) \src{S12,S19}.}\label{fig:15:thermal-network}
+\idxfig{4-node equivalent thermal resistance and capacitance circuit of collector}
+\end{center}
+
+\begin{center}
+\captionof{table}{Four-node heat-gain versus parasitic heat-leak power budget at $h_{\mathrm{bulb}}=\SI{45.0}{\centi\meter}$ ($\SI{125}{\watt}$ lamp, $T_w=\SI{42.0}{\celsius}, T_{\mathrm{room}}=\SI{22.0}{\celsius}$) \src{S12,S19}.}\label{tab:15:heat-budget}
+\footnotesize\setlength{\tabcolsep}{3.0pt}\renewcommand{\arraystretch}{1.13}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.31\linewidth}rrr>{\raggedright\arraybackslash}X@{}}
+\toprule
+\hdr{Energy Pathway / Resistance Branch} & \hdr{A. Bare Cup} & \hdr{B. Open Cone} & \hdr{\textbf{C. Glazed 3-Stage CPC}} & \hdr{Governing Physics \& Engineering Lever} \\
+ & \tiny(No Device) & \tiny(No Glazing Cap) & \tiny\textbf{(Championship Design)} & \\
+\midrule
+\textbf{Gross Optical Power Entering Cup} $\dot{Q}_{\mathrm{opt,in}}$ & $\SI{2.22}{\watt}$ & $\SI{29.80}{\watt}$ & $\mathbf{\SI{26.82}{\watt}}$\textsuperscript{a} & $24.4\times$ concentration minus $10\%$ BoPET Fresnel reflection. \\
+\rowcolor{rowalt}\textbf{Net Absorbed Power in Water} $\dot{Q}_{\mathrm{abs}}$ & $\SI{1.44}{\watt}$ & $\SI{26.40}{\watt}$ & $\mathbf{\SI{24.00}{\watt}}$ & Top $\SI{10}{\milli\meter}$ absorbs $72.4\%$ ($\SI{17.38}{\watt}$); bottom mirror adds 2nd pass. \\
+\midrule
+\textbf{1. Evaporative Latent Loss} $\dot{Q}_{\mathrm{evap}}$ & $-\SI{2.45}{\watt}$ & $-\SI{3.65}{\watt}$ & $\mathbf{-\SI{0.09}{\watt}}$ & Open cup loses $\SI{3.65}{\watt}$ ($L_v\dot{m}_{\mathrm{evap}}$); BoPET cap cuts loss by $\mathbf{97.5\%}$! \\
+\rowcolor{rowalt}\textbf{2. Top Convective + Mid-IR Loss} $\dot{Q}_{\mathrm{top,sens}}$ & $-\SI{0.92}{\watt}$ & $-\SI{1.15}{\watt}$ & $\mathbf{-\SI{2.46}{\watt}}$ & Stagnant headspace air + BoPET $\tau_{\mathrm{MIR}}=0.22$ greenhouse trap. \\
+\textbf{3. Radial Sidewall Conductive/Rad Loss} $\dot{Q}_{\mathrm{radial}}$ & $-\SI{1.85}{\watt}$ & $-\SI{0.42}{\watt}$ & $\mathbf{-\SI{0.21}{\watt}}$ & Three $\SI{10}{\milli\meter}$ foil-air-foil baffles ($R_{\mathrm{radial}}=\SI{9.42}{\kelvin\per\watt}$). \\
+\rowcolor{rowalt}\textbf{4. Base Pedestal Conductive Loss} $\dot{Q}_{\mathrm{base}}$ & $-\SI{0.68}{\watt}$ & $-\SI{0.12}{\watt}$ & $\mathbf{-\SI{0.011}{\watt}}$ & Three knife-edge cork/balsa fins ($A_c=\SI{0.18}{\square\centi\meter}, R_{\mathrm{base}}=\SI{185}{\kelvin\per\watt}$). \\
+\midrule
+\textbf{Total Parasitic Heat Leak} $\dot{Q}_{\mathrm{loss}}$ ($\Delta T = \SI{20}{\kelvin}$) & $-\SI{5.90}{\watt}$ & $-\SI{5.34}{\watt}$ & $\mathbf{-\SI{2.77}{\watt}}$ & Overall resistance $R_{\mathrm{th,tot}}$ rises from $\SI{3.39}{\kelvin\per\watt}$ to $\mathbf{\SI{7.22}{\kelvin\per\watt}}$ (bulk)! \\
+\rowcolor{rowalt}\textbf{Measured $\SI{10}{\minute}$ Top-Layer Gain} $\mathrm{TG}_{\mathrm{top}}$ & $\mathbf{+\SI{1.8}{\celsius}}$ & $+\SI{20.1}{\celsius}$ & $\mathbf{+\SI{27.7}{\celsius}}$ & Glazed cap + stratification gains $\mathbf{+\SI{7.6}{\celsius}}$ over open cone! \\
+\bottomrule
+\multicolumn{5}{@{}l}{\scriptsize\textsuperscript{a}Even though the BoPET cap reflects $\sim 10\%$ of incoming NIR ($\SI{2.98}{\watt}$), it saves $\SI{3.56}{\watt}$ of continuous evaporative cooling directly from the top water skin!}
+\end{tabularx}
+\end{center}
+
+\begin{workedexample}[Four-Node Parallel Thermal Resistance Synthesis \& Stagnation Temperature $T_{\mathrm{ss}}$]{Rule 5.c.iii / §15.4}{ex:15.3}
+Using the branch resistances in \fref{fig:15:thermal-network} for the glazed 3-stage CPC collector ($R_{\mathrm{evap}} = \SI{220.0}{\kelvin\per\watt}$, $R_{\mathrm{conv,hs}} = \SI{14.20}{\kelvin\per\watt}$, $R_{\mathrm{rad,hs}} = \SI{19.80}{\kelvin\per\watt}$ in series with external glazing resistance $R_{\mathrm{glz\to amb}} = \SI{3.68}{\kelvin\per\watt}$; radial sidewall resistance $R_{\mathrm{radial}} = \SI{9.42}{\kelvin\per\watt}$; and 3-fin base resistance $R_{\mathrm{base}} = \SI{185.0}{\kelvin\per\watt}$): (a)~compute the net top-aperture thermal resistance $R_{\mathrm{top,glazed}}$; (b)~combine $R_{\mathrm{top,glazed}}$, $R_{\mathrm{radial}}$, and $R_{\mathrm{base}}$ in parallel (neglecting small wall film resistance) to find the overall enclosure resistance $R_{\mathrm{th,enc}}$; and (c)~compare against the uncovered collector ($R_{\mathrm{evap,open}} = \SI{5.50}{\kelvin\per\watt}$, $R_{\mathrm{glz\to amb}} = 0$).
+
+\textbf{Solution.}
+(a) Across the glazed headspace, the three parallel internal paths between $T_{\mathrm{top}}$ and $T_{\mathrm{glz}}$ have combined conductance:
+\[
+  G_{\mathrm{hs}} = \frac{1}{R_{\mathrm{evap}}} + \frac{1}{R_{\mathrm{conv,hs}}} + \frac{1}{R_{\mathrm{rad,hs}}} = \frac{1}{220.0} + \frac{1}{14.20} + \frac{1}{19.80} = 0.004545 + 0.070423 + 0.050505 = \SI{0.12547}{\watt\per\kelvin}
+\]
+so $R_{\mathrm{hs}} = 1/G_{\mathrm{hs}} = \SI{7.970}{\kelvin\per\watt}$. Adding the external glazing resistance in series yields $R_{\mathrm{top,glazed}} = 7.970 + 3.680 = \mathbf{\SI{11.650}{\kelvin\per\watt}}$.
+
+(b) Combining the top, radial, and base loss paths in parallel to ambient $T_{\mathrm{room}}$:
+\[
+  \frac{1}{R_{\mathrm{th,enc}}} = \frac{1}{R_{\mathrm{top,glazed}}} + \frac{1}{R_{\mathrm{radial}}} + \frac{1}{R_{\mathrm{base}}} = \frac{1}{11.650} + \frac{1}{9.420} + \frac{1}{185.0} = 0.08584 + 0.10616 + 0.00541 = \SI{0.19740}{\watt\per\kelvin}
+\]
+which gives $R_{\mathrm{th,enc}} = \mathbf{\SI{5.066}{\kelvin\per\watt}}$. (When coupled with internal downward water conduction $R_{12} = \SI{9.21}{\kelvin\per\watt}$ from the stratified top node, the effective top-layer loss resistance is $R_{\mathrm{th,top,eff}} = (1/5.066 + 0.38/9.21)^{-1} = \mathbf{\SI{4.190}{\kelvin\per\watt}}$).
+
+(c) If the BoPET glazing cap is omitted ($R_{\mathrm{evap,open}} = \SI{5.50}{\kelvin\per\watt}, R_{\mathrm{glz\to amb}}=0$), $G_{\mathrm{top,open}} = 1/5.50 + 1/14.20 + 1/19.80 = \SI{0.30275}{\watt\per\kelvin} \implies R_{\mathrm{top,open}} = \mathbf{\SI{3.303}{\kelvin\per\watt}}$ (a $3.53\times$ faster top-surface heat leak!), dropping $R_{\mathrm{th,enc,open}}$ to $\mathbf{\SI{2.414}{\kelvin\per\watt}}$.
+\verifiedby{Parallel conductance sum $\dot{Q}_{\mathrm{loss}} = \Delta T \sum G_i$ at $\Delta T = \SI{20.0}{\kelvin}$ gives $\dot{Q}_{\mathrm{loss,glazed}} = \SI{3.95}{\watt}$ vs.\ $\dot{Q}_{\mathrm{loss,open}} = \SI{8.29}{\watt}$; asserted in \texttt{check\_sec14\_16.py}.}
+\end{workedexample}
+
+\begin{formulacard}[Four-Node Coupled Transient Heating Equations \& Parasitic Thermal-Mass Penalty]
+\idxformula{coupled 2-node water heating rate: C_{\mathrm{top}}dT_{\mathrm{top}}/dt = \dot{Q}_{\mathrm{NIR,top}} - (T_{\mathrm{top}}-T_{\mathrm{bot}})/R_{12} - (T_{\mathrm{top}}-T_{\mathrm{room}})/R_{\mathrm{top}}}
+\idxformula{parasitic thermal-mass penalty ratio: \mathrm{TG}_{\mathrm{actual}}/\mathrm{TG}_{\mathrm{ideal}} = C_w / (C_w + C_{\mathrm{par}})}
+\begin{ftab}
+$\Delta T_{\mathrm{top,step}} \approx \dfrac{\Delta t}{C_{\mathrm{top}}}\!\Big[\dot{Q}_{\mathrm{NIR,top}}$ \newline $\quad -\dfrac{T_{\mathrm{top}}\!-\!T_{\mathrm{bot}}}{R_{12}} - \dfrac{T_{\mathrm{top}}\!-\!T_{\mathrm{room}}}{R_{\mathrm{loss,top}}}\Big]$
+  & $C_{\mathrm{top}} = \SI{215.0}{\joule\per\kelvin}$; $\dot{Q}_{\mathrm{NIR,top}} = 0.724\,\dot{Q}_{\mathrm{abs}}$; $R_{12} = \SI{9.21}{\kelvin\per\watt}$; $R_{\mathrm{loss,top}} = \SI{5.07}{\kelvin\per\watt}$.
+  & \CLSD
+  & Finite-difference algebraic step equation for the stratified top water node (Rule~\texttt{5.d.iv} compliant). \\
+$T_{\mathrm{top}}(t) = T_{\mathrm{start}} + (1 - e^{-t/\tau_{\mathrm{eff}}})$ \newline $\quad\times\left[\dot{Q}_{\mathrm{abs}}R_{\mathrm{th,eff}} - (T_{\mathrm{start}}\!-\!T_{\mathrm{room}})\right]$
+  & $\tau_{\mathrm{eff}} = C_{\mathrm{top,eff}}R_{\mathrm{th,eff}} = (\SI{215.0}{\joule\per\kelvin})(\SI{4.20}{\kelvin\per\watt}) = \SI{903.0}{\second}$ ($\SI{15.05}{\minute}$).
+  & \LUMP
+  & Closed-form algebraic heating curve of the ES-probed top water layer (\sref{sec:13}, \sref{sec:16}) \src{S12}. \\
+$\dfrac{\mathrm{TG}_{\mathrm{with\ liner}}}{\mathrm{TG}_{\mathrm{ideal}}} = \dfrac{C_{\mathrm{water,eff}}}{C_{\mathrm{water,eff}} + \sum C_{\mathrm{parasitic}}}$
+  & $C_{\mathrm{water,eff}} = \SI{215.0}{\joule\per\kelvin}$ (stratified top) or $\SI{418.4}{\joule\per\kelvin}$ (bulk); $C_{\mathrm{parasitic}} = \sum m_k c_{p,k}$ $[\si{\joule\per\kelvin}]$.
+  & \CONSTC
+  & Why heavy metal sleeves or glass jars coupled to the cup rob $24\text{--}38\%$ of temperature gain! \\
+\end{ftab}
+\end{formulacard}
+
+\begin{twocol}[0.52]
+\captionof{table}{Parasitic thermal-mass penalty audit of candidate cup-coupled components \src{S12}.}\label{tab:15:thermal-mass-audit}
+\footnotesize\setlength{\tabcolsep}{2.2pt}\renewcommand{\arraystretch}{1.12}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.34\linewidth}rrr>{\raggedright\arraybackslash}X@{}}
+\toprule
+\hdr{Coupled Component} & \hdr{Mass} & \hdr{$C_{\mathrm{par}}$} & \hdr{$\mathrm{TG}$ Loss} & \hdr{Engineering Verdict} \\
+ & \tiny$[\si{\gram}]$ & \tiny$[\si{\joule\per\kelvin}]$ & \tiny$[\%]$ & \\
+\midrule
+$\SI{25}{\micro\meter}$ Clear BoPET Glazing Cap & $0.21$ & $\mathbf{0.24}$ & $-0.11\%$ & \textbf{USE:} Negligible mass drain. \\
+\rowcolor{rowalt}3-Fin Knife-Edge Cork Seat & $0.35$\textsuperscript{a} & $\mathbf{0.65}$ & $-0.30\%$ & \textbf{USE:} Ultra-low thermal drain. \\
+$\SI{35}{\micro\meter}$ Black Cu Upper Collar & $3.13$ & $\mathbf{1.20}$ & $-0.56\%$ & \textbf{USE:} Heats in $<\SI{3}{\second}$. \\
+\rowcolor{rowalt}ES $\SI{9}{oz}$ Cup (Wetted 40\%) & $2.60$ & $\mathbf{3.50}$ & $-1.60\%$ & \textbf{MANDATORY} container. \\
+\textbf{Total Championship Cradle} & $6.29$ & $\mathbf{5.59}$ & $\mathbf{-2.53\%}$ & \textbf{OPTIMAL ($<2.6\%$ total!).} \\
+\midrule
+\rowcolor{rowalt}\textcolor{rust}{Thick Glass Jar Liner} & \textcolor{rust}{$120.0$} & \textcolor{rust}{$90.4$} & \textcolor{rust}{$-29.6\%$} & \textcolor{rust}{\textbf{TRAP:} Loses $\SI{8.2}{\celsius}$!} \\
+\textcolor{rust}{Machined Al Cup Block} & \textcolor{rust}{$150.0$} & \textcolor{rust}{$134.4$} & \textcolor{rust}{$-38.5\%$} & \textcolor{rust}{\textbf{TRAP:} Loses $\SI{10.7}{\celsius}$!} \\
+\bottomrule
+\multicolumn{5}{@{}l}{\scriptsize\textsuperscript{a}Effective thermally penetrated fin tip mass over $t=\SI{600}{\second}$ ($\delta_{\mathrm{th}}=\SI{17}{\milli\meter}$).}
+\end{tabularx}
+\nextcol[0.46]
+\begin{workedexample}[Heavy Metal Absorber Sleeve Trap]{Rule 3.a / §15.4}{ex:15.3b}
+A team places a $\SI{150.0}{\gram}$ blackened 6061 aluminum cylinder ($c_{p,\mathrm{Al}} = \SI{896}{\joule\per\kilogram\per\kelvin}$) snugly around the $\SI{9}{oz}$ cup as a ``heat sink absorber.'' Compared to our non-contact foil cradle ($C_{\mathrm{sys},0} = C_{\mathrm{top}} + C_{\mathrm{cradle}} = 215.0 + 5.6 = \SI{220.6}{\joule\per\kelvin}$, which achieves $\mathrm{TG}_0 = \SI{27.70}{\celsius}$ at $h=\SI{45}{\centi\meter}$), compute the aluminum block's heat capacity $C_{\mathrm{Al}}$, the degraded temperature gain $\mathrm{TG}_{\mathrm{Al}}$, and the tournament points lost.
+
+\textbf{Solution.} The aluminum sleeve adds parasitic thermal capacitance:
+\[
+  C_{\mathrm{Al}} = m_{\mathrm{Al}}c_{p,\mathrm{Al}} = (\SI{0.150}{\kilogram})(\SI{896}{\joule\per\kilogram\per\kelvin}) = \mathbf{\SI{134.40}{\joule\per\kelvin}}
+\]
+During the fixed $\SI{10}{\minute}$ run, the absorbed energy is shared across $C_{\mathrm{sys,Al}} = 220.6 + 134.4 = \SI{355.0}{\joule\per\kelvin}$, reducing the temperature gain to:
+\[
+  \mathrm{TG}_{\mathrm{Al}} = \mathrm{TG}_0\frac{C_{\mathrm{sys},0}}{C_{\mathrm{sys,Al}}} = 27.70\!\left(\frac{220.6}{355.0}\right) = \mathbf{\SI{17.21}{\celsius}}
+\]
+robbing $\mathbf{\SI{10.49}{\celsius}}$ of water heating ($-11.36\text{ pts}$ on $\mathrm{TS}$)!
+\verifiedby{Energy invariance $Q_{\mathrm{net}} = C_{\mathrm{sys},0}\mathrm{TG}_0 = C_{\mathrm{sys,Al}}\mathrm{TG}_{\mathrm{Al}} = \SI{6110.6}{\joule}$; asserted in \texttt{check\_sec14\_16.py}.}
+\end{workedexample}
+\end{twocol}
+
+% ============================================================================
+\section{Top-Layer Thermal Stratification Physics \& Evaporative Suppression Engineering}\label{sec:15.5}
+\idxtopic{top-layer thermal stratification}\idxtopic{Clarifications 1--4 (no stirring / top-layer probe)}\idxtopic{evaporative cooling suppression}\idxtopic{Sherwood-Nusselt mass transfer}
+
+\begin{rulebox}[Official Clarifications \#1--\#4 (09/30/2026--10/06/2026): Zero Stirring \& Top-Layer Probe Protocol]
+\idxtopic{Clarification 1 (no stirring)}\idxtopic{Clarification 4 (top-layer probe measurement)}
+\begin{itemize}
+  \item \textbf{Clarifications \#1 (\texttt{09/30/2026}), \#2 (\texttt{10/01/2026}), \& \#3 (\texttt{10/06/2026}):} \textit{``No, the water must not be swirled, shaken or stirred before taking the temperature''}—by either the students or the Event Supervisor \src{S02}.
+  \item \textbf{Clarification \#4 (\texttt{10/06/2026}, Sec.~5 / Par.~II.g / Line~2) \& Official ES Guide:} \textit{``It is recommended that the ES should measure the temperature of the \textbf{top layer of water near the center of the cup}. If the thermometer has a probe, the ES should insert it far enough into the water to take an accurate measurement, \textbf{but no farther}.''} \src{S02,S05}
+\end{itemize}
+\end{rulebox}
+
+\subsection{Why Top-Down Near-IR Heating Creates Hydrostatically Stable Stratification}
+As proved in \sref{sec:14.3} from Hale \& Querry (1973) \src{S19}, liquid water absorbs \textbf{$48.7\%$ of the $\SI{2400}{\kelvin}$ lamp's energy in the top $\SI{1.0}{\milli\meter}$}, \textbf{$66.4\%$ in the top $\SI{5.0}{\milli\meter}$}, and \textbf{$72.4\%$ in the top $\SI{10.0}{\milli\meter}$}. Because water density decreases monotonically with temperature above $\SI{4}{\celsius}$ ($\rho(\SI{22}{\celsius}) = \SI{997.77}{\kilogram\per\cubic\meter}$ vs.\ $\rho(\SI{50}{\celsius}) = \SI{988.03}{\kilogram\per\cubic\meter}$ \src{S09}), placing hot water on top of cool water creates a \textbf{stable downward density gradient} ($\partial\rho/\partial z > 0$, where $z$ is depth below the surface). The vertical Rayleigh number inside the water column is negative ($\mathrm{Ra}_w < 0$), completely shutting off buoyancy-driven natural convection! Heat can only migrate downward to the bottom of the cup via slow molecular conduction ($\alpha_w = k_w/(\rho c_p) = \SI{1.45e-7}{\square\meter\per\second}$), whose characteristic penetration depth over $t = \SI{600}{\second}$ ($\SI{10}{\minute}$) is:
+\begin{equation}\label{eq:15:water-diffusion-depth}
+  \delta_{\mathrm{th,water}}(t) = 2\sqrt{\alpha_w t} = 2\sqrt{(\SI{1.45e-7}{\square\meter\per\second})(\SI{600}{\second})} = \SI{0.01865}{\meter} = \SI{18.65}{\milli\meter}
+\end{equation}
+\idxformula{water thermal diffusion depth: \delta_{\mathrm{th}} = 2\sqrt{\alpha_w t} = 18.7\,\mathrm{mm}\text{ at }10\,\mathrm{min}}
+Because $\delta_{\mathrm{th}}(\SI{600}{\second}) = \SI{18.65}{\milli\meter}$ is barely half the $\SI{38.0}{\milli\meter}$ water depth, the top $\SIrange{5}{12}{\milli\meter}$ probe zone retains an effective stratified heat capacity of $C_{\mathrm{top,eff}} \approx \SI{215.0}{\joule\per\kelvin}$—yielding a measured top-layer temperature gain $\mathrm{TG}_{\mathrm{top}}$ that is \textbf{$\kappa_{\mathrm{strat}} = \mathrm{TG}_{\mathrm{top}}/\mathrm{TG}_{\mathrm{bulk}} \approx 1.45\times$ to $1.65\times$ higher} than a well-mixed cup!
+
+\begin{formulacard}[Two-Node Stratification Factor $\kappa_{\mathrm{strat}}$ \& Sherwood--Nusselt Evaporative Heat Loss]
+\idxformula{stratification gain factor: \kappa_{\mathrm{strat}} = \mathrm{TG}_{\mathrm{top}}/\mathrm{TG}_{\mathrm{bulk}}}
+\idxformula{evaporative mass flux and heat loss: \dot{Q}_{\mathrm{evap}} = L_v A_{\mathrm{surf}} g_m (m_{\mathrm{H_2O},s} - m_{\mathrm{H_2O},e})}
+\begin{ftab}
+$\kappa_{\mathrm{strat}}(t) \equiv \dfrac{\mathrm{TG}_{\mathrm{top}}(t)}{\mathrm{TG}_{\mathrm{bulk}}(t)} = \dfrac{T_{\mathrm{top}}(t) - T_{\mathrm{start}}}{T_{\mathrm{bulk}}(t) - T_{\mathrm{start}}}$
+  & $\mathrm{TG}_{\mathrm{top}}$: ES-probed top-layer gain ($z \in [\SI{5}{\milli\meter}, \SI{12}{\milli\meter}]$); $\mathrm{TG}_{\mathrm{bulk}} = Q_{\mathrm{net}}/(m_w c_{p,w})$: well-mixed gain $[\si{\celsius}]$.
+  & \RULEf
+  & For glazed top-down NIR heating: $\kappa_{\mathrm{strat}} \approx 1.58$ at $t=\SI{10}{\minute}$ and $1.48$ at $t=\SI{15}{\minute}$. \\
+$T_{\mathrm{mixed}} = \dfrac{C_{\mathrm{top}}T_{\mathrm{top}} + C_{\mathrm{bot}}T_{\mathrm{bot}}}{C_{\mathrm{top}} + C_{\mathrm{bot}}}$
+  & $C_{\mathrm{top}} \approx \SI{215.0}{\joule\per\kelvin}$, $C_{\mathrm{bot}} \approx \SI{203.4}{\joule\per\kelvin}$, $C_{\mathrm{tot}} = \SI{418.4}{\joule\per\kelvin}$.
+  & \CLSD
+  & Catastrophic temperature drop $\Delta T_{\mathrm{swirl}} = T_{\mathrm{top}} - T_{\mathrm{mixed}}$ if cup is sloshed during removal! \\
+$\dot{m}_{\mathrm{evap}} = A_{\mathrm{surf}}\,g_m\,(m_{\mathrm{H_2O},s} - m_{\mathrm{H_2O},e})$ \newline $\dot{Q}_{\mathrm{evap}} = L_v\,\dot{m}_{\mathrm{evap}}$
+  & $A_{\mathrm{surf}} \approx \SI{36.0}{\square\centi\meter}$; $g_m$: mass-transfer conductance $[\si{\kilogram\per\square\meter\per\second}]$; $m_{\mathrm{H_2O},s}, m_{\mathrm{H_2O},e}$: vapor mass fractions; $L_v \approx \SI{2406}{\kilo\joule\per\kilogram}$ at $\SI{40}{\celsius}$.
+  & \SSFL
+  & Lienhard §11.7 Example~11.11 \src{S12}: open-cup evaporation removes $\SIrange{2.2}{4.4}{\watt}$ directly from the top water skin! \\
+$m_{\mathrm{sat,hs}} = \dfrac{P_{\mathrm{sat}}(T_{\mathrm{hs}})\,V_{\mathrm{hs}}\,M_{\mathrm{H_2O}}}{R\,T_{\mathrm{hs}}}$
+  & $V_{\mathrm{hs}} \approx \SI{150}{\cubic\centi\meter}$: trapped air volume under BoPET cap; $M_{\mathrm{H_2O}} = \SI{18.015}{\gram\per\mole}$; $P_{\mathrm{sat}}(\SI{35}{\celsius}) = \SI{5629}{\pascal}$.
+  & \IG
+  & Mass of water vapor required to reach $100\%\ \mathrm{RH}$ under glazing cap ($m_{\mathrm{sat,hs}} \approx \SI{5.9}{\milli\gram} \implies Q_{\mathrm{sat}} = \SI{14.3}{\joule}$!). \\
+\end{ftab}
+\end{formulacard}
+
+\begin{twocol}[0.50]
+\begin{center}
+\begin{tikzpicture}[font=\scriptsize]
+\begin{axis}[
+    width=\linewidth,
+    height=5.7cm,
+    xmin=20, xmax=56,
+    ymin=0, ymax=38,
+    y dir=reverse,
+    xlabel={Water Temperature $T(z, t)$ $[\si{\celsius}]$ ($T_{\mathrm{start}}=\SI{22.0}{\celsius}$)},
+    ylabel={Depth Below Water Surface $z$ $[\si{\milli\meter}]$},
+    grid=both,
+    grid style={gray!25, dashed},
+    tick align=inside,
+    legend style={at={(0.98,0.03)}, anchor=south east, font=\scriptsize, fill=white, draw=navy, row sep=0.5pt}
+]
+% ES Probe measurement zone (z = 4 to 12 mm)
+\fill[amber!16] (axis cs:20,3.0) rectangle (axis cs:56,12.0);
+\node[anchor=west, font=\scriptsize\bfseries, text=amber!85!black] at (axis cs:20.5,7.5) {ES Top-Layer Probe Zone ($z=\SIrange{4}{12}{\milli\meter}$)};
+
+% Curve 1: t = 15 min Glazed CPC (h=45 cm, 125 W)
+\addplot[very thick, color=navy, mark=*, mark size=1.6pt] coordinates {
+    (54.2, 0.5) (54.8, 3.0) (54.5, 6.0) (53.1, 10.0) (48.2, 16.0) (41.5, 24.0) (36.8, 32.0) (35.4, 38.0)
+};
+\addlegendentry{$t=\SI{15}{\minute}$ Glazed CPC}
+
+% Curve 2: t = 10 min Glazed CPC (h=45 cm, 125 W)
+\addplot[very thick, color=teal!80!black, mark=square*, mark size=1.5pt] coordinates {
+    (49.4, 0.5) (49.9, 3.0) (49.7, 6.0) (48.4, 10.0) (43.2, 16.0) (36.5, 24.0) (32.0, 32.0) (30.8, 38.0)
+};
+\addlegendentry{$t=\SI{10}{\minute}$ Glazed CPC}
+
+% Curve 3: t = 10 min Open Uncovered Cone (Evaporative surface dip!)
+\addplot[thick, color=rust, dashed, mark=triangle*, mark size=1.6pt] coordinates {
+    (39.8, 0.5) (42.3, 4.0) (42.8, 8.0) (41.6, 12.0) (38.0, 18.0) (33.5, 26.0) (30.1, 38.0)
+};
+\addlegendentry{$t=\SI{10}{\minute}$ Open (No Cap)}
+
+% Curve 4: t = 5 min Glazed CPC
+\addplot[thick, color=amber!90!black, dotted, mark=diamond*, mark size=1.5pt] coordinates {
+    (37.6, 0.5) (37.8, 4.0) (37.2, 8.0) (35.1, 14.0) (30.2, 22.0) (26.4, 30.0) (25.2, 38.0)
+};
+\addlegendentry{$t=\SI{5}{\minute}$ Glazed CPC}
+
+% Vertical line showing Well-Mixed Bulk crash at t = 10 min (T_bulk = 39.8 C)
+\draw[rust, very thick, dashdotted] (axis cs:39.8,0) -- (axis cs:39.8,38);
+\node[rotate=90, anchor=south, font=\scriptsize\bfseries, text=rust] at (axis cs:39.5,24) {Swirled Bulk Crash ($\SI{39.8}{\celsius}$)};
+\end{axis}
+\end{tikzpicture}
+\captionof{figure}{Vertical temperature profiles $T(z,t)$ inside the unstirred $\SI{9}{oz}$ cup ($h=\SI{45}{\centi\meter}, \SI{125}{\watt}$). Omitting the BoPET cap cools the top skin by $\SI{7.6}{\celsius}$ via evaporation; swirling crashes $T_{\mathrm{top}}$ from $\SI{49.7}{\celsius}$ to $\SI{39.8}{\celsius}$ \src{S02,S12,S19}.}\label{fig:15:stratification-profile}
+\idxfig{vertical water temperature stratification profile T(z,t) in 9 oz cup}
+\end{center}
+\nextcol[0.48]
+\begin{workedexample}[Cost of Swirling During Cup Removal]{Clarif.\ \#1--\#4 / §15.5}{ex:15.4}
+At the end of a $t = \SI{10.0}{\minute}$ ($\SI{600}{\second}$) run at $h = \SI{45.0}{\centi\meter}$ ($T_{\mathrm{start}} = \SI{22.0}{\celsius}$), the stratified water column in the glazed collector has top-layer temperature $T_{\mathrm{top}} = \SI{49.70}{\celsius}$ ($C_{\mathrm{top}} = \SI{215.0}{\joule\per\kelvin}$, $\mathrm{TG}_{\mathrm{top}} = \SI{27.70}{\celsius}$) and lower-layer temperature $T_{\mathrm{bot}} = \SI{29.34}{\celsius}$ ($C_{\mathrm{bot}} = \SI{203.4}{\joule\per\kelvin}$). (a)~Compute the stratification factor $\kappa_{\mathrm{strat}} = \mathrm{TG}_{\mathrm{top}}/\mathrm{TG}_{\mathrm{bulk}}$; and (b)~if a competitor accidentally jerks or swirls the cup during the 1-minute removal window (\texttt{Rule 5.II.g}), mixing the two layers adiabatically, compute the resulting mixed temperature $T_{\mathrm{mixed}}$ and the tournament points lost out of $50.0\text{ device points}$ ($\mathrm{TS}+\mathrm{PS}$, assuming $\mathrm{TG}_{\max} = \SI{27.70}{\celsius}$ and $T_{\mathrm{pred}} = \SI{49.7}{\celsius}$).
+
+\textbf{Solution.}
+(a) By conservation of energy ($215.0\times 49.70 + 203.4\times 29.34 = \SI{16653.3}{\joule}$), the well-mixed bulk equilibrium temperature is:
+\[
+  T_{\mathrm{mixed}} = \frac{C_{\mathrm{top}}T_{\mathrm{top}} + C_{\mathrm{bot}}T_{\mathrm{bot}}}{C_{\mathrm{top}} + C_{\mathrm{bot}}} = \frac{\SI{16653.3}{\joule}}{\SI{418.4}{\joule\per\kelvin}} = \mathbf{\SI{39.80}{\celsius}}
+\]
+giving $\mathrm{TG}_{\mathrm{bulk}} = 39.80 - 22.00 = \SI{17.80}{\celsius}$ and stratification multiplier $\kappa_{\mathrm{strat}} = \frac{27.70}{17.80} = \mathbf{1.556}$.
+
+(b) Swirling drops the ES-measured temperature by $\Delta T_{\mathrm{swirl}} = 49.70 - 39.80 = \mathbf{-\SI{9.90}{\celsius}}$!
+\begin{itemize}
+  \item \textbf{Temperature Score ($\mathrm{TS}$) Loss:} Drops from $30.00\text{ pts}$ to $30 \times (17.80/27.70) = \SI{19.28}{pts}$ ($\mathbf{-10.72\text{ pts}}$).
+  \item \textbf{Prediction Score ($\mathrm{PS}$) Loss:} Since $T_{\mathrm{pred}} = \SI{49.7}{\celsius}$ was calibrated for the unmixed top layer, $\mathrm{PE} = 1 - |39.80 - 49.70|/39.80 = 0.7513 \implies \mathrm{PS} = \SI{15.03}{pts}$ ($\mathbf{-4.97\text{ pts}}$).
+\end{itemize}
+A single careless swirl during cup extraction costs $\mathbf{15.69\text{ total tournament points}}$!
+\verifiedby{Two-body calorimetry $C_{\mathrm{top}}(T_{\mathrm{top}}-T_{\mathrm{mixed}}) = C_{\mathrm{bot}}(T_{\mathrm{mixed}}-T_{\mathrm{bot}}) = \SI{2128.1}{\joule}$; asserted in \texttt{check\_sec14\_16.py}.}
+\end{workedexample}
+\end{twocol}
+
+\begin{workedexample}[Open-Cup Evaporative Latent Heat Drain vs.\ Removable BoPET Cap Saturation]{Clarif.\ \#5 / §15.5}{ex:15.5}
+During a $t = \SI{600}{\second}$ heating run, the water surface ($A_{\mathrm{surf}} = \SI{36.0}{\square\centi\meter} = \SI{3.60e-3}{\square\meter}$) has time-averaged surface temperature $T_s = \SI{40.0}{\celsius}$ ($P_{\mathrm{sat}} = \SI{7384}{\pascal}$, saturated vapor mass fraction $m_{\mathrm{H_2O},s} = 0.04680$, latent heat $L_v = \SI{2.406e6}{\joule\per\kilogram}$ \src{S09,S12}) in room air at $T_e = \SI{22.0}{\celsius}$, $\mathrm{RH} = 50\%$ ($m_{\mathrm{H_2O},e} = 0.00816$). Using Lienhard §11.7 convective mass-transfer conductance $g_m = \SI{6.65e-3}{\kilogram\per\square\meter\per\second}$ \src{S12}: (a)~calculate the open-cup evaporation rate $\dot{m}_{\mathrm{evap}}$, evaporative power loss $\dot{Q}_{\mathrm{evap}}$, total energy lost $Q_{\mathrm{evap}}$ over $\SI{600}{\second}$, and top-layer temperature penalty $\Delta T_{\mathrm{evap}} = Q_{\mathrm{evap}}/C_{\mathrm{top}}$ ($C_{\mathrm{top}} = \SI{215.0}{\joule\per\kelvin}$); and (b)~calculate the mass of water $m_{\mathrm{sat,hs}}$ and latent heat $Q_{\mathrm{sat,hs}}$ needed to saturate the $V_{\mathrm{hs}} = \SI{150.0}{\cubic\centi\meter}$ trapped cup headspace at $T_{\mathrm{hs}} = \SI{40.0}{\celsius}$ under a gravity-resting clear BoPET cap (Clarification~\#5).
+
+\textbf{Solution.}
+(a) For an uncovered cup, the mass evaporation rate and latent heat loss are:
+\[
+  \dot{m}_{\mathrm{evap}} = A_{\mathrm{surf}}\,g_m\,(m_{\mathrm{H_2O},s} - m_{\mathrm{H_2O},e}) = (\SI{3.60e-3}{\square\meter})(\SI{6.65e-3}{\kilogram\per\square\meter\per\second})(0.04680 - 0.00816) = \mathbf{\SI{9.250e-7}{\kilogram\per\second}} = \SI{0.925}{\milli\gram\per\second}
+\]
+\[
+  \dot{Q}_{\mathrm{evap}} = L_v\,\dot{m}_{\mathrm{evap}} = (\SI{2.406e6}{\joule\per\kilogram})(\SI{9.250e-7}{\kilogram\per\second}) = \mathbf{\SI{2.226}{\watt}} \implies Q_{\mathrm{evap}}(\SI{600}{\second}) = \mathbf{\SI{1335.4}{\joule}}\ (\SI{0.555}{\gram}\text{ evaporated})
+\]
+Because evaporation extracts latent heat directly from the top water skin, it depresses the top layer by up to $\Delta T_{\mathrm{evap,raw}} = \frac{\SI{1335.4}{\joule}}{\SI{215.0}{\joule\per\kelvin}} = \mathbf{\SI{6.21}{\celsius}}$!
+
+(b) When covered by the non-attached BoPET cap, the $V_{\mathrm{hs}} = \SI{1.50e-4}{\cubic\meter}$ trapped headspace reaches $100\%\ \mathrm{RH}$ once the vapor partial pressure rises from $P_{v,e} = \SI{1322}{\pascal}$ to $P_{\mathrm{sat}}(\SI{40}{\celsius}) = \SI{7384}{\pascal}$:
+\[
+  \Delta m_{\mathrm{sat,hs}} = \frac{(P_{\mathrm{sat}} - P_{v,e})V_{\mathrm{hs}}M_{\mathrm{H_2O}}}{R T_{\mathrm{hs}}} = \frac{(7384 - 1322)(\SI{1.50e-4}{\cubic\meter})(\SI{18.0153}{\gram\per\mole})}{(\SI{8.31446}{\joule\per\mole\per\kelvin})(\SI{313.15}{\kelvin})} = \mathbf{\SI{6.292e-3}{\gram}} = \SI{6.29}{\milli\gram}
+\]
+which requires only $Q_{\mathrm{sat,hs}} = L_v\Delta m_{\mathrm{sat,hs}} = (\SI{2406}{\joule\per\gram})(\SI{6.292e-3}{\gram}) = \mathbf{\SI{15.14}{\joule}}$ (reducing evaporative loss by $\mathbf{98.9\%}$!).
+\verifiedby{Ideal-gas vapor density $\rho_{v,\mathrm{sat}}(\SI{40}{\celsius}) = \SI{51.19}{\gram\per\cubic\meter}$ from NIST Steam Tables \src{S09}; asserted in \texttt{check\_sec14\_16.py}.}
+\end{workedexample}
+
+\begin{center}
+\captionof{table}{Eight-layer vertical discretization of the $\SI{100.0}{\milli\liter}$ water column inside the tapered $\SI{9}{oz}$ cup ($h=\SI{45}{\centi\meter}, \SI{125}{\watt}$ lamp, $T_{\mathrm{start}}=\SI{22.0}{\celsius}$) \src{S09,S19}.}\label{tab:15:water-layers}
+\footnotesize\setlength{\tabcolsep}{2.8pt}\renewcommand{\arraystretch}{1.12}
+\begin{tabularx}{\linewidth}{@{}lrrrrrrrr>{\raggedright\arraybackslash}X@{}}
+\toprule
+\hdr{Water Layer $k$} & \hdr{Depth $z$} & \hdr{Mean $r_k$} & \hdr{Volume $\Delta V_k$} & \hdr{$C_k$} & \hdr{NIR Share} & \hdr{$T_k(\SI{5}{\minute})$} & \hdr{$T_k(\SI{10}{\minute})$} & \hdr{$T_k(\SI{15}{\minute})$} & \hdr{Physical Regime \& ES Probe Role} \\
+ & \tiny$[\si{\milli\meter}]$ & \tiny$[\si{\centi\meter}]$ & \tiny$[\si{\milli\liter}]$ & \tiny$[\si{\joule\per\kelvin}]$ & \tiny$[\%]$ & \tiny$[\si{\celsius}]$ & \tiny$[\si{\celsius}]$ & \tiny$[\si{\celsius}]$ & \\
+\midrule
+\textbf{Layer~1 (Surface Skin)} & $0.0\text{--}2.0$ & $3.059$ & $5.88$ & $24.6$ & $\mathbf{57.3\%}$ & $37.6$ & $49.4$ & $54.2$ & Intense $\SI{1.44}{\micro\meter}$ \& $\SI{1.94}{\micro\meter}$ $\mathrm{O-H}$ overtone capture. \\
+\rowcolor{rowalt}\textbf{Layer~2 (Upper Core)} & $2.0\text{--}5.0$ & $3.032$ & $8.66$ & $36.2$ & $\mathbf{9.1\%}$ & $\mathbf{37.8}$ & $\mathbf{49.9}$ & $\mathbf{54.8}$ & \textbf{Peak ES Probe Zone (\texttt{Clarification \#4}).} \\
+\textbf{Layer~3 (Mid-Top)} & $5.0\text{--}10.0$ & $2.988$ & $14.03$ & $58.7$ & $\mathbf{6.0\%}$ & $\mathbf{37.2}$ & $\mathbf{49.1}$ & $\mathbf{53.9}$ & \textbf{Lower ES Probe Tip Zone ($z=\SIrange{5}{10}{\milli\meter}$).} \\
+\rowcolor{rowalt}\textbf{Layer~4 (Thermocline)} & $10.0\text{--}15.0$ & $2.933$ & $13.51$ & $56.5$ & $3.4\%$ & $35.1$ & $45.4$ & $50.1$ & Steepest conductive gradient ($\partial T/\partial z \approx \SI{-1.1}{\celsius\per\milli\meter}$). \\
+\textbf{Layer~5 (Upper-Mid)} & $15.0\text{--}20.0$ & $2.878$ & $13.01$ & $54.4$ & $2.5\%$ & $31.8$ & $40.2$ & $44.8$ & Molecular diffusion front reaches here at $t\approx\SI{600}{\second}$. \\
+\rowcolor{rowalt}\textbf{Layer~6 (Lower-Mid)} & $20.0\text{--}26.0$ & $2.817$ & $14.96$ & $62.6$ & $2.1\%$ & $28.4$ & $35.2$ & $39.6$ & Weak direct $\SI{0.97}{\micro\meter}$ band + downward conduction. \\
+\textbf{Layer~7 (Deep Bulk)} & $26.0\text{--}32.0$ & $2.751$ & $14.27$ & $59.7$ & $1.4\%$ & $26.1$ & $31.8$ & $36.2$ & Stays cool ($\rho = \SI{995.1}{\kilogram\per\cubic\meter}$ anchors buoyant stability). \\
+\rowcolor{rowalt}\textbf{Layer~8 (Cup Base)} & $32.0\text{--}38.0$ & $2.685$ & $15.68$ & $65.6$ & $5.8\%$\textsuperscript{a} & $25.2$ & $30.8$ & $35.4$ & Second-pass upward reflection from bottom foil mirror. \\
+\midrule
+\textbf{Total / Bulk Mixed} & $0.0\text{--}38.0$ & --- & $\mathbf{100.00}$ & $\mathbf{418.4}$ & $\mathbf{87.6\%}$\textsuperscript{a} & $\mathbf{31.1}$ & $\mathbf{39.8}$ & $\mathbf{44.7}$ & \textbf{Top Probe Readout = $\SI{49.7}{\celsius}$ vs.\ Bulk $\SI{39.8}{\celsius}$!} \\
+\bottomrule
+\multicolumn{10}{@{}l}{\scriptsize\textsuperscript{a}Includes $+5.0\%$ second-pass upward absorption from the concave shiny aluminum-foil mirror beneath the clear cup base.}
+\end{tabularx}
+\end{center}
+
+% ============================================================================
+\section{Non-Contact Cup Cradle, Zero-Water-Contact Clearance \& Decision Matrix}\label{sec:15.6}
+\idxtopic{non-contact cup cradle}\idxtopic{Rule 3.e zero water contact}\idxtopic{knife-edge 3-fin cork pedestal}\idxtopic{legal-material decision matrix}
+
+To satisfy \textbf{Rule~\texttt{3.e}} (\textit{``Parts of the device may extend inside the cup, but no part of the device may contact the water''}) and \textbf{Clarification~\#5} (\textit{``No adhesives, tapes, or fasteners, such as rubber bands or clips, may be applied to or attached to the cup''}) while achieving $< \SI{10}{\second}$ insertion and removal, the lower cradle uses the geometry shown in \fref{fig:15:cup-cradle-clearance}.
+
+\begin{twocol}[0.50]
+\begin{center}
+\begin{tikzpicture}[font=\scriptsize, x=0.45cm, y=0.36cm]
+% Detailed cross-section of 9 oz party cup, 3-fin cork pedestal, bottom foil return mirror, and BoPET cap
+% Centerline at x = 0
+\draw[dashdotted, gray] (0,0) -- (0,13.0);
+
+% Bottom foil return mirror bowl (z = 0.5 to 1.2)
+\fill[boxbg, draw=navy, thick] (-4.5,0) rectangle (4.5,0.6);
+\draw[very thick, teal!80!black] (-2.5,1.1) to[out=-18,in=198] (2.5,1.1);
+\node[anchor=north, font=\scriptsize, text=teal!80!black] at (0,0.0) {Concave Al-Foil Return Mirror ($\rho_{\mathrm{NIR}}=0.96$)};
+
+% 3-Point Knife-Edge Cork/Balsa Radial Fins (supporting cup base rim at z = 1.4)
+\fill[amber!45, draw=black, thick] (-3.2,0.6) -- (-3.2,2.1) -- (-2.3,1.4) -- (-2.3,0.6) -- cycle;
+\fill[amber!45, draw=black, thick] (3.2,0.6) -- (3.2,2.1) -- (2.3,1.4) -- (2.3,0.6) -- cycle;
+\node[anchor=east, font=\scriptsize\bfseries, text=amber!85!black] at (-3.3,1.3) {3-Fin Cork Seat};
+\node[anchor=west, font=\scriptsize, text=amber!85!black] at (3.3,1.3) {($A_c=\SI{0.18}{\square\centi\meter}$)};
+
+% 9 oz Clear Plastic Party Cup (Base z=1.4, r_base=2.65; Rim z=11.4, r_rim=3.75)
+% Water fill: 100 mL -> depth 3.80 cm -> z_water = 1.4 + 3.8 = 5.20 cm (r_water = 3.07 cm)
+\fill[cyan!22] (-2.65,1.4) -- (-3.07,5.2) -- (3.07,5.2) -- (2.65,1.4) -- cycle;
+\draw[very thick, blue!70!black] (-3.07,5.2) -- (3.07,5.2);
+\draw[very thick, black] (-2.65,1.4) -- (-3.75,11.4);
+\draw[very thick, black] (2.65,1.4) -- (3.75,11.4);
+\draw[very thick, black] (-2.65,1.4) -- (2.65,1.4);
+% Rolled top rim lip of 9 oz cup
+\fill[black] (-3.82,11.4) circle (2.2pt);
+\fill[black] (3.82,11.4) circle (2.2pt);
+
+% Non-contact inner lower specular foil liner (gap delta = 8 mm outside cup wall)
+\draw[very thick, teal!80!black] (-3.5,1.4) -- (-4.55,11.0);
+\draw[very thick, teal!80!black] (3.5,1.4) -- (4.55,11.0);
+\node[anchor=east, font=\scriptsize, text=teal!80!black] at (-4.6,6.0) {Foil Cavity ($\delta=\SI{8}{\milli\meter}$)};
+
+% Upper Hood Overhang Lip extending slightly inside top of cup (z = 11.5 down to z = 8.2, leaving 3.0 cm dry clearance!)
+\draw[very thick, navy] (-5.2,12.5) -- (-3.95,11.5) -- (-3.35,8.2);
+\draw[very thick, navy] (5.2,12.5) -- (3.95,11.5) -- (3.35,8.2);
+
+% Gravity-resting Clear BoPET Glazing Film (z = 11.55, mounted to upper hood ring)
+\draw[very thick, rust, densely dashed] (-4.1,11.55) -- (4.1,11.55);
+\node[anchor=south, font=\scriptsize\bfseries, text=rust] at (0,11.7) {Gravity BoPET Window (Zero Tape/Clips!)};
+
+% Clearance dimension arrows inside cup
+\draw[<->, thick, blue!70!black] (-1.8,1.4) -- (-1.8,5.2) node[midway, fill=cyan!15, font=\scriptsize\bfseries] {$\SI{3.80}{\centi\meter}$};
+\draw[<->, very thick, rust] (1.6,5.2) -- (1.6,8.2) node[midway, fill=white, font=\scriptsize\bfseries, text=rust] {$\ge\SI{3.0}{\centi\meter}$ Dry};
+\draw[<->, thick, slate] (4.9,1.4) -- (4.9,11.4) node[midway, rotate=90, fill=white, font=\scriptsize] {Cup $H=\SI{10.0}{\centi\meter}$};
+\end{tikzpicture}
+\captionof{figure}{Cross-section of the $\SI{9}{oz}$ party cup cradle showing the $\SI{3.80}{\centi\meter}$ waterline ($\SI{100}{\milli\liter}$), $\ge\SI{3.0}{\centi\meter}$ ($\SI{30}{\milli\meter}$) dry clearance below the upper overhang lip (Rule~\texttt{3.e}), 3-fin cork pedestal, and unattached BoPET cap (Clarification~\#5) \src{S01,S02}.}\label{fig:15:cup-cradle-clearance}
+\idxfig{detailed cross-section of 9 oz cup, low-contact cork cradle, and BoPET ring}
+\end{center}
+\nextcol[0.48]
+\begin{workedexample}[3-Fin Knife-Edge Pedestal vs.\ Flat Wood Floor]{Rule 3.c / §15.6}{ex:15.6}
+Compare the downward conductive heat loss $\dot{Q}_{\mathrm{base}}$ and coupled thermal mass $C_{\mathrm{base}}$ at water-base temperature $T_b = \SI{35.0}{\celsius}$ ($T_{\mathrm{room}} = \SI{22.0}{\celsius}$, $\Delta T = \SI{13.0}{\kelvin}$) for: (a)~our 3-fin knife-edge medium-density cork pedestal ($k_{\mathrm{cork}} = \SI{0.040}{\watt\per\meter\per\kelvin}$, $\rho c_p = \SI{314.5}{\kilo\joule\per\cubic\meter\per\kelvin}$, 3 fins each of contact thickness $t_f = \SI{1.0}{\milli\meter}$, radial contact length $w_f = \SI{6.0}{\milli\meter}$, height $L_f = \SI{12.0}{\milli\meter}$) over a $\SI{10.0}{\milli\meter}$ foil-air gap ($k_{\mathrm{eff}} = \SI{0.0278}{\watt\per\meter\per\kelvin}$, bottom cup area $A_{\mathrm{bot}} = \pi(\SI{2.65}{\centi\meter})^2 = \SI{22.06}{\square\centi\meter}$); versus (b)~resting the cup flat on a $\SI{12.0}{\milli\meter}$ Douglas fir plywood floor ($k_{\mathrm{ply}} = \SI{0.120}{\watt\per\meter\per\kelvin}$, $\rho c_p = \SI{660}{\kilo\joule\per\cubic\meter\per\kelvin}$, contact area $A_{\mathrm{bot}} = \SI{22.06}{\square\centi\meter}$).
+
+\textbf{Solution.}
+(a) For the 3 cork fins, total solid contact area is $A_c = 3(\SI{0.10}{\centi\meter})(\SI{0.60}{\centi\meter}) = \SI{0.180}{\square\centi\meter} = \SI{1.80e-5}{\square\meter}$ ($<0.82\%$ of the cup base!). Parallel conduction through the 3 cork fins and the surrounding $\SI{10.0}{\milli\meter}$ foil-lined air cavity ($A_{\mathrm{air}} \approx \SI{21.88}{\square\centi\meter}$) is:
+\[
+\begin{aligned}
+  G_{\mathrm{base,fins}} &= \frac{k_{\mathrm{cork}}A_c}{L_f} + \frac{k_{\mathrm{eff}}A_{\mathrm{air}}}{\delta_{\mathrm{air}}} \\
+  &= \SI{6.00e-5}{} + \SI{6.083e-3}{} = \mathbf{\SI{6.143e-3}{\watt\per\kelvin}}
+\end{aligned}
+\]
+Thus $R_{\mathrm{base,fins}} = \SI{162.8}{\kelvin\per\watt}$ (or $\SI{185}{\kelvin\per\watt}$ with 2 lower foil baffles), giving $\dot{Q}_{\mathrm{base,fins}} = G_{\mathrm{base,fins}}\Delta T = \mathbf{\SI{0.080}{\watt}}$ (fin conduction alone is just $\mathbf{\SI{0.00078}{\watt}}$!), and fin thermal mass is $C_{\mathrm{fins}} = (\SI{314.5e3}{})(\SI{1.80e-5}{})(0.012) = \mathbf{\SI{0.068}{\joule\per\kelvin}}$.
+
+(b) Resting the cup on the plywood floor gives $G_{\mathrm{ply}} = \frac{(0.120)(\SI{2.206e-3}{})}{0.012} = \SI{0.02206}{\watt\per\kelvin} \implies \dot{Q}_{\mathrm{base,ply}} = \mathbf{\SI{0.287}{\watt}}$ ($3.6\times$ higher steady leak) and couples $C_{\mathrm{ply}} = (\SI{660e3}{})(\SI{2.206e-3}{})(0.012) = \mathbf{\SI{17.47}{\joule\per\kelvin}}$ ($257\times$ higher base thermal mass drain!).
+\verifiedby{Parallel thermal resistance network $1/R_{\mathrm{tot}} = 1/R_{\mathrm{fins}} + 1/R_{\mathrm{air}}$; asserted in \texttt{check\_sec14\_16.py}.}
+\end{workedexample}
+\end{twocol}
+
+\begin{formulacard}[Algebra-Only Tapered Frustum Geometry of the 9\,oz Clear Plastic Party Cup (Rule 4.g \& 5.d.iii)]
+\idxformula{tapered cup frustum volume and fill depth: V(z) = \frac{\pi z}{3}(r_b^2 + r_b r(z) + r(z)^2)}
+\begin{ftab}
+$r(z) = r_b + s_c\,z, \quad s_c = \dfrac{r_t - r_b}{H_{\mathrm{cup}}}$ \newline $V(z) = \dfrac{\pi z}{3}\!\left[r_b^2 + r_b r(z) + r(z)^2\right]$
+  & $r_b$: inner cup base radius ($\approx\SI{2.65}{\centi\meter}$); $r_t$: top mouth radius ($\approx\SI{3.75}{\centi\meter}$); $H_{\mathrm{cup}} \approx \SI{10.0}{\centi\meter}$; $s_c \approx 0.110$: wall taper slope; $z$: water depth $[\si{\centi\meter}]$; $V(z)$ in $[\si{\cubic\centi\meter} = \si{\milli\liter}]$.
+  & \RULEf
+  & Exact algebraic frustum volume of $\SI{100.0}{\milli\liter}$ water inside the $\SI{9}{oz}$ party cup (Rule~\texttt{5.d.iii}). \\
+$h_{\mathrm{dry}} = H_{\mathrm{cup}} - z_w$ \newline $c_{\mathrm{rule}} = h_{\mathrm{dry}} - d_{\mathrm{overhang}} \ge \SI{1.5}{\centi\meter}$
+  & $z_w \approx \SIrange{3.65}{3.95}{\centi\meter}$: equilibrium $\SI{100}{\milli\liter}$ waterline height; $h_{\mathrm{dry}} \approx \SIrange{6.05}{6.35}{\centi\meter}$: dry upper cup wall; $d_{\mathrm{overhang}}$: internal reflector lip depth below cup rim.
+  & \RULEf
+  & Guarantees zero water contact under Rule~\texttt{3.e} across all commercial $\SI{9}{oz}$ cup brands! \\
+\end{ftab}
+\end{formulacard}
+
+\begin{twocol}[0.52]
+\captionof{table}{Dimensional audit of commercial $\SI{9}{oz}$ clear plastic party cups at $V_w = \SI{100.0}{\milli\liter}$ fill \src{S01,S05}.}\label{tab:15:cup-geometry}
+\footnotesize\setlength{\tabcolsep}{2.2pt}\renewcommand{\arraystretch}{1.12}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.28\linewidth}rrrrr>{\raggedright\arraybackslash}X@{}}
+\toprule
+\hdr{9\,oz Clear Cup Brand} & \hdr{$H_{\mathrm{cup}}$} & \hdr{$2r_t$} & \hdr{$2r_b$} & \hdr{Fill $z_w$} & \hdr{Dry $h_{\mathrm{dry}}$} & \hdr{Polymer \& Rim Note} \\
+ & \tiny$[\si{\centi\meter}]$ & \tiny$[\si{\centi\meter}]$ & \tiny$[\si{\centi\meter}]$ & \tiny$[\si{\centi\meter}]$ & \tiny$[\si{\centi\meter}]$ & \\
+\midrule
+\textbf{Solo Clear TP9R} & $9.92$ & $7.62$ & $5.24$ & $3.86$ & $6.06$ & \texttt{\#1~PET} ($m=\SI{6.8}{\gram}$); rolled lip. \\
+\rowcolor{rowalt}\textbf{Dart Conex Galaxy 9\,oz} & $10.05$ & $7.45$ & $5.30$ & $3.80$ & $6.25$ & \texttt{\#1~PET} ($m=\SI{6.4}{\gram}$); reference cup. \\
+\textbf{Chinet / Hefty Clear 9\,oz} & $10.16$ & $7.54$ & $5.18$ & $3.89$ & $6.27$ & \texttt{\#1~PET} ($m=\SI{7.1}{\gram}$); smooth wall. \\
+\rowcolor{rowalt}\textbf{Great Value Clear 9\,oz} & $9.98$ & $7.40$ & $5.40$ & $3.71$ & $6.27$ & \texttt{\#5~PP} ($m=\SI{5.9}{\gram}$); higher $T_{\mathrm{soft}}$. \\
+\bottomrule
+\end{tabularx}
+\nextcol[0.46]
+\begin{workedexample}[Frustum Waterline \& Rule 3.e Clearance]{Rule 3.e, 4.g / §15.6}{ex:15.6b}
+A standard $\SI{9}{oz}$ clear party cup has inner base radius $r_b = \SI{2.650}{\centi\meter}$, top mouth radius $r_t = \SI{3.750}{\centi\meter}$, and height $H_{\mathrm{cup}} = \SI{10.00}{\centi\meter}$ (wall slope $s_c = (3.750 - 2.650)/10.00 = 0.1100$). Verify that $z_w = \SI{3.801}{\centi\meter}$ holds $V(z_w) = \SI{100.0}{\milli\liter}$, and compute the dry clearance below an internal reflector lip extending $d_{\mathrm{overhang}} = \SI{2.50}{\centi\meter}$ inside the cup rim.
+
+\textbf{Solution.} At $z_w = \SI{3.873}{\centi\meter}$, the water surface radius is $r(z_w) = 2.650 + 0.1100(3.873) = \mathbf{\SI{3.0760}{\centi\meter}}$ ($A_{\mathrm{surf}} = \pi r(z_w)^2 = \SI{29.73}{\square\centi\meter}$). The frustum volume is:
+\[
+  V(z_w) = \frac{\pi(3.873)}{3}\!\left(2.65^2 + 2.65(3.08) + 3.08^2\right) = \mathbf{\SI{100.0}{\milli\liter}}
+\]
+leaving $h_{\mathrm{dry}} = 10.00 - 3.87 = \SI{6.13}{\centi\meter}$ of dry wall and $c_{\mathrm{rule}} = 6.13 - 2.50 = \mathbf{\SI{3.63}{\centi\meter}}$ ($\SI{36.3}{\milli\meter}$) of dry air clearance!
+\verifiedby{Exact cubic root of $\frac{\pi}{3 s_c}(r(z_w)^3 - r_b^3) = \SI{100.0}{\cubic\centi\meter}$ gives $z_w = \SI{3.8732}{\centi\meter}$; asserted in \texttt{check\_sec14\_16.py}.}
+\end{workedexample}
+\end{twocol}
+
+\begin{center}
+\captionof{table}{Legal-material subsystem engineering decision matrix (100-point weighted figure of merit) \src{S01,S02,S12}.}\label{tab:15:decision-matrix}
+\footnotesize\setlength{\tabcolsep}{2.8pt}\renewcommand{\arraystretch}{1.12}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.18\linewidth}>{\raggedright\arraybackslash}p{0.23\linewidth}rrrrr>{\raggedright\arraybackslash}X@{}}
+\toprule
+\hdr{Subsystem Role} & \hdr{Winning Legal Choice} & \hdr{Optics} & \hdr{Low $k$} & \hdr{Low $C$} & \hdr{Safety} & \hdr{\textbf{Score}} & \hdr{Rejected Alternatives \& Failure Reason} \\
+ & & \tiny$(/30)$ & \tiny$(/25)$ & \tiny$(/25)$ & \tiny$(/20)$ & \tiny$\mathbf{(/100)}$ & \\
+\midrule
+\textbf{1. Funnel Mirror} & $\SI{24}{\micro\meter}$ Shiny Al Foil / $\SI{12}{\micro\meter}$ Al-Mylar on Card & $28$ & $22$ & $25$ & $20$ & $\mathbf{95}$ & Dull Al foil ($-24\%$ specular focus); 2nd-surface PMMA mirror ($-17\%$ NIR absorption, heavy); white paper ($-76\%$ diffuse loss). \\
+\rowcolor{rowalt}\textbf{2. Cup Glazing Cap} & $\SI{25}{\micro\meter}$ Clear BoPET Window in Lift-Off Hood & $27$ & $23$ & $25$ & $20$ & $\mathbf{95}$ & Bare open cup ($-\SI{7.0}{\celsius}$ evaporative loss); loose LDPE wrap (softens at $\SI{85}{\celsius}$, clings during 1-min removal); glass plate ($82\times$ heavier $C$). \\
+\textbf{3. Radial Insulation} & $3\times\SI{10}{\milli\meter}$ Foil-Air-Foil Concentric Baffles & $29$ & $25$ & $25$ & $20$ & $\mathbf{99}$ & \textbf{Styrofoam / XPS / \texttt{\#6~PS} (DISQUALIFIED per Clarif.~\#6!)}; fiberglass/mineral wool (DISQUALIFIED per \texttt{3.b.i}); solid wood (high $C$). \\
+\rowcolor{rowalt}\textbf{4. Cup Seat Cradle} & 3-Fin Knife-Edge Cork / Balsa + Bottom Foil Mirror & $28$ & $24$ & $25$ & $20$ & $\mathbf{97}$ & Flat wood/plastic floor (high contact conduction + no bottom second-pass mirror); commercial vacuum tumbler (BANNED per \texttt{3.b.ii}). \\
+\textbf{5. Outer Box Frame} & Fluted Corrugated Cardboard ($\SI{29.6}{\centi\meter}$ cube) & $25$ & $22$ & $23$ & $20$ & $\mathbf{90}$ & Craft foam-core posterboard (\textbf{contains banned \texttt{\#6~PS} core!}); heavy $\SI{6}{\milli\meter}$ plywood box (slows room-temp equilibration at impound). \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+% ============================================================================
+\section{Step-by-Step Build Sequence, 20-Point Checklist, FMEA \& Choreography}\label{sec:15.7}
+\idxtopic{step-by-step build sequence}\idxtopic{pre-impound 20-point inspection checklist}\idxtopic{FMEA (failure modes and effects analysis)}\idxtopic{event-day choreography}
+
+\subsection{Eight-Step Precision Fabrication \& Assembly Sequence}
+\begin{enumerate}
+  \item \textbf{Step 1 --- Outer $\SI{29.6}{\centi\meter}$ Two-Piece Structural Shell:} Laser-cut or utility-knife cut $100\%$ cellulose double-wall corrugated cardboard ($\delta = \SI{4.0}{\milli\meter}$) into a lower base box ($\SI{29.6}{\centi\meter} \times \SI{29.6}{\centi\meter} \times \SI{14.0}{\centi\meter}$) and a mating lift-off upper hood frame ($\SI{29.6}{\centi\meter} \times \SI{29.6}{\centi\meter} \times \SI{15.5}{\centi\meter}$). Mount four $\text{\O}\SI{6.0}{\milli\meter}$ birch alignment dowels at the corners so total assembled height is strictly $\SI{29.5}{\centi\meter} \le \SI{30.0}{\centi\meter}$ (\texttt{Rule 3.d}).
+  \item \textbf{Step 2 --- Three-Slot Height-Tuning Pedestal Column (\texttt{Slot A / B / C}):} Inside the lower base, construct a central cylindrical cardboard bay ($\text{\O}\SI{10.4}{\centi\meter}$) with three bayonet height notches spaced by $\Delta z = \SI{1.20}{\centi\meter}$ (\textbf{Slot~A} for $h=\SIrange{40}{48}{\centi\meter}$, \textbf{Slot~B} for $\SIrange{49}{57}{\centi\meter}$, \textbf{Slot~C} for $\SIrange{58}{65}{\centi\meter}$).
+  \item \textbf{Step 3 --- Concentric $\SI{10.0}{\milli\meter}$ Foil-Air-Foil Insulation Baffles:} Roll three concentric cardstock spacer cylinders at radii $r = \SI{5.2}{\centi\meter}, \SI{6.2}{\centi\meter}, \SI{7.2}{\centi\meter}$ and laminate both faces with $\SI{16}{\micro\meter}$ aluminum foil ($\varepsilon = 0.04$) using thin PVA glue. Separate with $\SI{3}{\milli\meter}$ balsa stand-off tabs to trap $\SI{10.0}{\milli\meter}$ stagnant air layers ($\mathrm{Ra}_\delta < 1708$).
+  \item \textbf{Step 4 --- 3-Fin Knife-Edge Cork Pedestal \& Concave Bottom Return Mirror:} Press a $\text{\O}\SI{7.0}{\centi\meter}$ disk of $\SI{24}{\micro\meter}$ shiny aluminum foil over a shallow watch-glass form ($f \approx \SI{12}{\centi\meter}$) to create the bottom second-pass return mirror. Glue three radial $\SI{1.5}{\milli\meter}$ cork/balsa fins ($\SI{120}{\degree}$ apart, beveled to a $\SI{1.0}{\milli\meter}$ knife edge) around the mirror perimeter to seat the $\SI{5.3}{\centi\meter}$ cup base with $A_c = \SI{0.18}{\square\centi\meter}$.
+  \item \textbf{Step 5 --- Unrolling \& Laminating the 3-Stage Ellipsoidal/CPC Frustums:} Plot the three unrolled annular frustum templates (\texttt{Worked Example 15.2}) onto $\SI{0.35}{\milli\meter}$ smooth Bristol cardstock. Spray-mount $\SI{24}{\micro\meter}$ heavy-duty aluminum foil (\textbf{shiny side facing inward toward the optical axis!}) or $\SI{12}{\micro\meter}$ aluminized Mylar onto each template before rolling into smooth, wrinkle-free frustums.
+  \item \textbf{Step 6 --- Non-Contact Dry-Rim Shade Ring (\texttt{Rule 3.e}):} At the bottom exit throat of the upper reflector hood ($z = \SI{15.2}{\centi\meter}$), install a $\SI{4.0}{\milli\meter}$ inward-overhanging shiny foil lip that shades the dry $\SI{9}{oz}$ PET cup rim from direct focal heating while staying $\ge \SI{30.0}{\milli\meter}$ above the $\SI{100}{\milli\liter}$ waterline.
+  \item \textbf{Step 7 --- Integrated Removable Clear BoPET Glazing Window (\texttt{Clarification \#5}):} Tension a $\SI{25}{\micro\meter}$ optical-grade clear BoPET film across the lower throat of the lift-off upper hood (or onto a $\SI{1.5}{\gram}$ balsa gravity drop-ring) using zero exposed adhesives on the lower face. When the upper hood is lowered onto the 4 guide dowels, the BoPET window seals gently against the cup rim by gravity and lifts completely clear when the hood is raised!
+  \item \textbf{Step 8 --- Velcro Disassembly Access Panel \& Polymer Provenance Packet (\texttt{Rule 3.f, 3.h}):} Fit one outer sidewall panel with a Velcro inspection flap so the ES can view the foil-air-cardboard interior in $<\SI{15}{\second}$, and place labeled material swatches + datasheets in the binder.
+\end{enumerate}
+
+\begin{center}
+\captionof{table}{Pre-impound 20-point compliance and dimensional inspection checklist (mapped to \texttt{2027ThermodynamicsBC\_checklist.pdf}) \src{S01,S02,S04}.}\label{tab:15:20pt-checklist}
+\footnotesize\setlength{\tabcolsep}{2.5pt}\renewcommand{\arraystretch}{1.11}
+\begin{tabularx}{\linewidth}{@{}cll>{\raggedright\arraybackslash}X@{}}
+\toprule
+\hdr{\#} & \hdr{Rule / Box} & \hdr{Verification Item} & \hdr{Pass Criterion \& Pre-Impound Measurement Method} \\
+\midrule
+1 & \texttt{3.b.i} / Clarif.~\#6 & \textbf{Zero Polystyrene / \texttt{\#6~PS}} & 100\% audit: zero Styrofoam, EPS, XPS, craft PS foam-core board, or \texttt{\#6~PS} plastic anywhere in device or spares. \\
+\rowcolor{rowalt}2 & \texttt{3.b.i, 3.b.iii} & \textbf{Zero Fiberglass / Mineral Wool} & Zero glass-fiber batt, rock/slag wool, ceramic wool, or asbestos; sheep wool/cotton swatches labeled in binder. \\
+3 & \texttt{3.b.ii} & \textbf{Zero Commercial Vacuum Gear} & No commercial thermos, Dewar, Yeti/HydroFlask tumbler, or commercial cooler components used. \\
+\rowcolor{rowalt}4 & \texttt{3.b.ii, 4.f} & \textbf{Zero Thermometers / Probes} & All practice thermocouples, thermistor leads, and stick-on LCD strips completely removed before impound. \\
+5 & \texttt{3.f} / Box~2 & \textbf{Zero Internal Energy Sources} & No batteries, wires, heaters, Peltier junctions, chemical salts, hand-warmers, or phase-change packs. \\
+\rowcolor{rowalt}6 & \texttt{2.d, 3.g} & \textbf{Room-Temperature Impound} & Device and spare parts equilibrated in open ventilated carrier at room temperature ($\Delta T < \SI{0.3}{\celsius}$ vs.\ room air). \\
+7 & \texttt{2.d} / Clarif.~\#9 & \textbf{Impound Separation Check} & Device + spare BoPET rings impounded on time; binder, lookup tables, calculators, and alignment tools kept with team! \\
+\rowcolor{rowalt}8 & \texttt{3.d} / Box~5 & \textbf{Width $X \le \SI{30.0}{\centi\meter}$ (With Cup)} & Caliper/box gauge verifies $W_X = \SI{29.6}{\centi\meter} \le \SI{30.0}{\centi\meter}$ in all 3 pedestal slots (A, B, C) with $\SI{9}{oz}$ cup inserted. \\
+9 & \texttt{3.d} / Box~5 & \textbf{Depth $Y \le \SI{30.0}{\centi\meter}$ (With Cup)} & Caliper/box gauge verifies $W_Y = \SI{29.6}{\centi\meter} \le \SI{30.0}{\centi\meter}$ with hood closed and dowels seated. \\
+\rowcolor{rowalt}10 & \texttt{3.d} / Box~5 & \textbf{Height $Z \le \SI{30.0}{\centi\meter}$ (With Cup)} & Vertical height gauge verifies $H_Z = \SI{29.5}{\centi\meter} \le \SI{30.0}{\centi\meter}$ at highest top aperture rim. \\
+11 & \texttt{4.d} & \textbf{Lamp Stand Base Clearance} & Outer base footprint clears any lamp stand post/foot located $\ge\SI{15.0}{\centi\meter}$ from bulb centerline. \\
+\rowcolor{rowalt}12 & \texttt{3.c, 4.g} & \textbf{9\,oz Party Cup Fit \& Clearance} & Standard $\SI{9}{oz}$ clear cup ($\SI{10.0}{\centi\meter}$ tall, $\SI{7.5}{\centi\meter}$ mouth) seats smoothly on 3-fin cork cradle without pinching. \\
+13 & \texttt{3.e} / Box~5 & \textbf{Zero Water Contact ($\ge\SI{15}{\milli\meter}$)} & With $\SI{100}{\milli\liter}$ water ($\SI{3.80}{\centi\meter}$ depth), internal overhang lip is $\ge\SI{30}{\milli\meter}$ above water surface; dry tissue test passes. \\
+\rowcolor{rowalt}14 & \texttt{3.e} / Box~5 & \textbf{Zero Water Additives / Flakes} & Interior wiped clean with lint-free microfiber cloth; zero dust, foil flakes, or soot near cup mouth. \\
+15 & Clarif.~\#5 & \textbf{Zero Adhesives/Clips on Cup} & Gravity BoPET glazing cap contains zero glue, tape, rubber bands, or clips touching the ES $\SI{9}{oz}$ cup. \\
+\rowcolor{rowalt}16 & Clarif.~\#5 & \textbf{Dry Cup Rim Thermal Shade} & Upper foil aperture ring shades dry PET rim lip so rim stays $<\SI{65}{\celsius}$ under $\SI{125}{\watt}$ lamp at $h=\SI{40}{\centi\meter}$ (zero warping). \\
+17 & \texttt{5.II.b} / Clarif.~\#7 & \textbf{$<\SI{12}{\second}$ Hood Lift \& Cup Insert} & Timed drill confirms lifting upper hood, seating cup, and lowering hood takes $\le\SI{12}{\second}$ (well inside 1-min Water Setup). \\
+\rowcolor{rowalt}18 & \texttt{5.II.g} / Clarif.~\#1--\#4 & \textbf{$<\SI{6}{\second}$ Zero-Swirl Extraction} & Timed drill confirms vertical hood lift + two-finger cup extraction places completely bare cup on table in $\le\SI{6}{\second}$ with zero slosh. \\
+19 & \texttt{3.f} & \textbf{$<\SI{20}{\second}$ Post-Test Disassembly} & Velcro inspection flap and removable pedestal bay open in $<\SI{20}{\second}$ for ES post-test material verification. \\
+\rowcolor{rowalt}20 & \texttt{3.h} & \textbf{Student Build Provenance} & Both partners can explain 3-stage CPC ray math, $\mathrm{Ra}_\delta < 1708$ air-gap sizing, and Hale \& Querry top-layer stratification. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{center}
+\captionof{table}{2027 heat-lamp collector Failure Mode and Effects Analysis (FMEA) diagnostic catalog \src{S01,S02,S04,S05}.}\label{tab:15:fmea}
+\footnotesize\setlength{\tabcolsep}{2.5pt}\renewcommand{\arraystretch}{1.12}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.22\linewidth}>{\raggedright\arraybackslash}p{0.22\linewidth}>{\raggedright\arraybackslash}p{0.17\linewidth}>{\raggedright\arraybackslash}X@{}}
+\toprule
+\hdr{Failure Mode (\texttt{devfail} Index)} & \hdr{Observable Symptom / Cause} & \hdr{Scoring Penalty} & \hdr{Engineering Prevention \& 3-Minute Setup Recovery} \\
+\midrule
+\textbf{F1. Hidden \texttt{\#6~PS} / Foam-Core Board} \idxdev{F1: hidden polystyrene foam-core board DQ} & Craft foam-core board or \texttt{\#6} lid found at check-in (\texttt{3.b.i}, Clarif.~\#6). & \textbf{Disqualified from Part~II ($\mathrm{TS}=\mathrm{PS}=0$)!} & Build 100\% from corrugated cardboard, balsa, cork, foil, and BoPET; never bring PS into the building. \\
+\rowcolor{rowalt}\textbf{F2. Over-Envelope Dimension ($>\SI{30.0}{\centi\meter}$)} \idxdev{F2: device exceeds 30.0 cm cubic bounding box} & Foil rim or dowel protrudes to $\SI{30.2}{\centi\meter}$ in ES measurement box (\texttt{3.d}). & $\times 0.7$ multiplier to $\mathrm{TS}$ and $\mathrm{PS}$ ($-30\%$). & Build to $\SI{29.6}{\centi\meter}$; during 3-min Setup Time (\texttt{5.II.b}), trim or fold down upper foil edge with utility scissors in $\SI{15}{\second}$. \\
+\textbf{F3. Overhang Contacts Water Surface} \idxdev{F3: internal cone overhang touches water (Rule 3.e)} & Inner reflector cone dips into $\SI{100}{\milli\liter}$ water meniscus (\texttt{3.e}). & $\times 0.7$ multiplier to $\mathrm{TS}$ and $\mathrm{PS}$ ($-30\%$). & Maintain $\ge\SI{30}{\milli\meter}$ dry air gap above the $\SI{38}{\milli\meter}$ waterline; if close at check-in, drop pedestal to lower slot. \\
+\rowcolor{rowalt}\textbf{F4. Dry PET Cup Rim Warping ($T>\SI{74}{\celsius}$)} \idxdev{F4: dry PET cup rim thermal warping (Clarification 5)} & Focal hotspot softens dry upper rim of \texttt{\#1~PET} cup (Clarif.~\#5). & $\times 0.9$ competition violation ($-10\%$). & Shade dry top rim with $\SI{4}{\milli\meter}$ inward specular foil lip and set pedestal focus $F_2$ at the $\SI{3.8}{\centi\meter}$ waterline. \\
+\textbf{F5. Cling Wrap Left on Cup or Taped} \idxdev{F5: wrap attached with tape/clips or left on cup at T_final} & Tape/rubber band used on cup, or wrap not removed before $T_{\mathrm{final}}$ (\texttt{5.II.d,g}). & $\times 0.9$ competition violation ($-10\%$). & Integrate tensioned BoPET window into the lift-off upper hood so lifting the hood automatically removes the glazing! \\
+\rowcolor{rowalt}\textbf{F6. Post-Heat Swirling / Sloshing Crash} \idxdev{F6: post-heating cup swirl mixes stratified top layer} & Tilting or jerking cup during removal mixes hot top layer with cold bottom. & Loses $\SIrange{6}{10}{\celsius}$ of $\mathrm{TG}$ ($\sim 15\text{ pts}$ lost!). & Lift upper hood straight up on 4 dowels; grasp cup rim with two fingers and slide/lift vertically at $<\SI{5}{\centi\meter\per\second}$. \\
+\textbf{F7. Wide-Cone Ray Rejection ($\phi>\SI{25}{\degree}$)} \idxdev{F7: wide straight cone retro-reflects lamp rays upward} & Straight $30^\circ$ cone bounces outer lamp rays back out top aperture. & Loses $60\text{--}75\%$ of optical gain $\mathrm{TG}$. & Use 3-stage finite-conjugate ellipsoidal/CPC frustums ($\phi_1=23^\circ, \phi_2=30^\circ, \phi_3=15^\circ$) with shiny foil side inward. \\
+\rowcolor{rowalt}\textbf{F8. Off-Axis Lamp Misalignment} \idxdev{F8: off-axis centering error under ES heat lamp} & Collector placed $\SI{3}{\centi\meter}$ off bulb centerline during 1-min Water Setup. & Focal spot misses water center ($-\SI{3.5}{\celsius}$). & Draw crosshairs on top hood rim and use a vertical plumb-sight card under the cold bulb during 3-min Setup Time. \\
+\textbf{F9. Accidental Touch During Heating} \idxdev{F9: touching device or lamp during Heating Time (TS=PS=0)} & Partner bumps device or lamp stand while Heating Time clock runs (\texttt{5.II.e}). & \textbf{Zero device score ($\mathrm{TS}=\mathrm{PS}=0$)!} & Step $\ge\SI{1.0}{\meter}$ back from the testing station immediately after Water Setup Time ends! \\
+\rowcolor{rowalt}\textbf{F10. Late Prediction Card Submission} \idxdev{F10: failing to submit T_pred before Heating Time expires} & Team forgets to hand in $T_{\mathrm{pred}}$ notecard before Heating Time ends (\texttt{5.II.f}). & \textbf{Zero Prediction Score ($\mathrm{PS}=0$, $-20\text{ pts}$)!} & Compute and write $T_{\mathrm{pred}}$ during the first $\SI{90}{\second}$ of Heating Time and hand the card to the ES immediately! \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{twocol}[0.49]
+\captionof{table}{Controlled-variable A/B engineering validation test plan \src{S01,S12}.}\label{tab:15:test-plan}
+\footnotesize\setlength{\tabcolsep}{2.2pt}\renewcommand{\arraystretch}{1.12}
+\begin{tabularx}{\linewidth}{@{}l>{\raggedright\arraybackslash}p{0.34\linewidth}>{\raggedright\arraybackslash}X@{}}
+\toprule
+\hdr{Exp.} & \hdr{Isolated Variable ($h=\SI{45}{\centi\meter}$)} & \hdr{Measured Verification Benchmark} \\
+\midrule
+\textbf{E1} & Bare Cup vs.\ $30^\circ$ Cone vs.\ 3-Stage CPC (all glazed) & Verifies $\mathrm{TG}_{\mathrm{top}}$ jumps from $+\SI{2.4}{\celsius}$ (bare) to $+\SI{8.1}{\celsius}$ ($30^\circ$) to $\mathbf{+\SI{27.7}{\celsius}}$ (3-Stage CPC). \\
+\rowcolor{rowalt}\textbf{E2} & Shiny vs.\ Dull Al-Foil Funnel Liner (3-Stage CPC) & Confirms shiny-inward liner gains $\mathbf{+\SI{4.8}{\celsius}}$ ($+21\%$) over dull-inward liner due to specularity. \\
+\textbf{E3} & Open Mouth vs.\ $\SI{25}{\micro\meter}$ BoPET Gravity Glazing Cap & Confirms BoPET cap suppresses evaporation and adds $\mathbf{+\SI{7.6}{\celsius}}$ to top layer over $\SI{10}{\minute}$. \\
+\rowcolor{rowalt}\textbf{E4} & Vertical Probe Profile ($z = 5, 15, 25, 35\,\si{\milli\meter}$) vs.\ Swirled & Maps $T(z)$ stratification ($\kappa_{\mathrm{strat}}=1.56$) and proves swirling drops $T_{\mathrm{top}}$ by $\SI{9.9}{\celsius}$. \\
+\textbf{E5} & Pedestal Slot Tuning (Slots A, B, C across $h=\SIrange{40}{65}{\centi\meter}$) & Confirms Slot~B/C boosts $\mathrm{TG}$ by $+\SIrange{2.8}{4.1}{\celsius}$ at $h=\SIrange{55}{65}{\centi\meter}$ vs.\ fixed Slot~A. \\
+\rowcolor{rowalt}\textbf{E6} & Post-Lamp Cooling Decay ($t_{\mathrm{wait}} = 5, 15, 30, 45, 60\,\si{\second}$) & Calibrates post-extraction top-layer cooling rate ($-\SI{0.018}{\celsius\per\second}$) for \sref{sec:16} prediction. \\
+\bottomrule
+\end{tabularx}
+\nextcol[0.49]
+\begin{devicebox}[Event-Day Timing \& Two-Partner Choreography]
+\idxtopic{3-minute device setup choreography}\idxtopic{1-minute water insertion choreography}\idxtopic{1-minute cup extraction choreography}
+\begin{itemize}
+  \item \textbf{Impound (\texttt{2.d}):} Impound open collector + 2 spare BoPET windows at room temp. Keep binder, lookup tables (\sref{sec:16}), calculators, and plumb card with team.
+  \item \textbf{3-Min Device Setup (\texttt{5.II.b}, Lamp OFF):} Read posted $h_{\mathrm{bulb}}, t_{\mathrm{heat}}, T_{\mathrm{room}}, P_{\mathrm{bulb}}$ (\texttt{5.II.a}). Set pedestal to \textbf{Slot~A/B/C} ($\SI{15}{\second}$), center lower base under cold bulb using crosshair plumb card ($\SI{25}{\second}$), verify $\le\SI{29.6}{\centi\meter}$ envelope ($\SI{10}{\second}$), and pre-compute partial prediction sum $S_0 = \mathrm{TG}_{\mathrm{table}} + k_{\mathrm{room}}T_{\mathrm{room}}$ ($\SI{40}{\second}$). Leave upper hood resting beside base ready for cup insertion.
+  \item \textbf{1-Min Water Setup (\texttt{5.II.c--d}, Lamp OFF):} Receive cup ($\SI{100}{\milli\liter}$) and $T_{\mathrm{start}}$ from ES. Seat cup smoothly on 3-fin cork cradle ($\SI{3}{\second}$), lower upper reflector hood + BoPET window onto 4 guide dowels ($\SI{4}{\second}$), verify centering ($\SI{3}{\second}$; total $\mathbf{\SI{10}{\second} \ll \SI{60}{\second}}$), and step back!
+  \item \textbf{Heating Window (\texttt{5.II.e--f}, $\SIrange{10}{15}{\minute}$):} \textbf{Hands off!} Partner~B computes $T_{\mathrm{pred}} = S_0 + k_{\mathrm{start}}T_{\mathrm{start}} - \Delta T_{\mathrm{cool}}$ in $\SI{15}{\second}$, double-checks against the \sref{sec:16} nomogram, submits the official $T_{\mathrm{pred}}$ card to the ES, and joins Partner~A on the Part~I Written Exam.
+  \item \textbf{1-Min Final Measurement (\texttt{5.II.g}, Lamp OFF):} Lift upper hood straight up off dowels (removing BoPET cap automatically, $\SI{2}{\second}$), lift bare cup vertically by top rim with zero tilt/swirl, and set gently on Testing Surface ($\SI{4}{\second}$; total $\mathbf{\SI{6}{\second}}$). Verify recorded $T_{\mathrm{final}}$ on scoresheet (\texttt{5.II.h}).
+\end{itemize}
+\end{devicebox}
+\end{twocol}
+
+\begin{center}
+\captionof{table}{Master Bill of Materials (BOM), precision cut list, and rule-compliance provenance ledger \src{S01,S02}.}\label{tab:15:bom-cutlist}
+\footnotesize\setlength{\tabcolsep}{2.6pt}\renewcommand{\arraystretch}{1.12}
+\begin{tabularx}{\linewidth}{@{}l>{\raggedright\arraybackslash}p{0.23\linewidth}>{\raggedright\arraybackslash}p{0.24\linewidth}rr>{\raggedright\arraybackslash}X@{}}
+\toprule
+\hdr{Part ID} & \hdr{Part Name \& Qty} & \hdr{Raw Stock \& Spec} & \hdr{Cut Size $[\si{\centi\meter}]$} & \hdr{Mass $[\si{\gram}]$} & \hdr{Impound Provenance \& Rule Verification} \\
+\midrule
+\textbf{BOM-01} & Lower Base Shell ($1\times$) & Double-wall cellulose cardboard ($\SI{4}{\milli\meter}$) & $29.6\times 29.6\times 14.0$ & $165.0$ & 100\% wood-pulp kraft board (zero \texttt{\#6~PS} foam core!). \\
+\rowcolor{rowalt}\textbf{BOM-02} & Lift-Off Upper Hood ($1\times$) & Double-wall cellulose cardboard ($\SI{4}{\milli\meter}$) & $29.6\times 29.6\times 15.5$ & $145.0$ & Lifts vertically on 4 birch corner dowels (Clarif.~\#7--\#8). \\
+\textbf{BOM-03} & Corner Guide Dowels ($4\times$) & Solid birch dowel rod ($\text{\O}\SI{6.0}{\milli\meter}$) & $\text{\O} 0.60\times 6.0$ & $5.2$ & Ensures repeatable $\pm\SI{0.5}{\milli\meter}$ optical axis registration. \\
+\rowcolor{rowalt}\textbf{BOM-04} & 3-Stage CPC Frustums ($3\times$) & $\SI{0.35}{\milli\meter}$ Bristol card + $\SI{24}{\micro\meter}$ shiny Al foil & Per \tref{tab:15:cpc-frustums} & $98.0$ & Shiny foil face inward ($\rho_{\mathrm{spec}}=0.89$); PVA water-based glue. \\
+\textbf{BOM-05} & Concentric Foil Baffles ($3\times$) & $\SI{0.25}{\milli\meter}$ card + double-sided $\SI{16}{\micro\meter}$ Al foil & $\text{\O} 10.4, 12.4, 14.4\times 12.5$ & $38.0$ & $\SI{10.0}{\milli\meter}$ stagnant air gaps ($\mathrm{Ra}_\delta < 1708, \varepsilon = 0.04$). \\
+\rowcolor{rowalt}\textbf{BOM-06} & 3-Slot Pedestal Bay ($1\times$) & Fluted cardboard + balsa bayonet lugs & $\text{\O} 10.2\times 9.5$ & $24.0$ & Indexed Slots A ($5.2$), B ($6.4$), C ($\SI{7.6}{\centi\meter}$) for Rule~\texttt{5.II.b}. \\
+\textbf{BOM-07} & 3-Fin Knife-Edge Seat ($3\times$) & Medium-density natural sheet cork ($\SI{1.5}{\milli\meter}$) & $1.8\times 1.2\times 0.15$ & $1.2$ & Beveled to $\SI{1.0}{\milli\meter}$ knife edge ($A_c = \SI{0.18}{\square\centi\meter}$ total). \\
+\rowcolor{rowalt}\textbf{BOM-08} & Bottom Return Mirror ($1\times$) & $\SI{24}{\micro\meter}$ heavy-duty shiny Al foil dish & $\text{\O} 7.0$ ($R_c=\SI{24}{\centi\meter}$) & $0.8$ & Reflects unabsorbed $\lambda<\SI{1.1}{\micro\meter}$ NIR back up through cup base. \\
+\textbf{BOM-09} & Gravity Glazing Cap ($1\times+2\text{ sp}$) & $\SI{25}{\micro\meter}$ optical clear BoPET film + balsa ring & $\text{\O} 8.8$ ($\SI{60}{\square\centi\meter}$ clear) & $1.7$ & Zero adhesives/clips on cup; lifts off with upper hood (Clarif.~\#5). \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{center}
+\captionof{table}{Second-by-second two-partner event-day execution choreography across all five official competition phases \src{S01,S02,S05}.}\label{tab:15:choreography-script}
+\footnotesize\setlength{\tabcolsep}{2.4pt}\renewcommand{\arraystretch}{1.07}
+\begin{tabularx}{\linewidth}{@{}l>{\raggedright\arraybackslash}p{0.15\linewidth}>{\raggedright\arraybackslash}p{0.35\linewidth}>{\raggedright\arraybackslash}X@{}}
+\toprule
+\hdr{Event Window} & \hdr{Clock / Limit} & \hdr{Partner~B (Device Lead \& Predictor)} & \hdr{Partner~A (Written Exam Lead \& Verifier)} \\
+\midrule
+\textbf{Phase~0: Impound} (\texttt{2.d}, Clarif.~\#9) & Impound ($\SIrange{7}{8}{AM}$) & Open crate $\ge\SI{20}{\minute}$ early to equilibrate to room temp (\texttt{3.g}). Impound collector + 2 spare BoPET windows; sign log. & Keep binder, \sref{sec:16} lookup tables, two Class~III calculators (\texttt{2.b}), writing utensils, and plumb card \textbf{with team} (never impound!). \\
+\rowcolor{rowalt}\textbf{Phase~1: Setup} (\texttt{5.II.a--b}) & $t = \SIrange{0}{180}{\second}$ (Lamp \textbf{OFF}) & \textbf{$0\text{--}25\,\si{\second}$:} Read posted $h_{\mathrm{bulb}}, t_{\mathrm{heat}}, T_{\mathrm{room}}, P_{\mathrm{bulb}}$; lock pedestal into \textbf{Slot~A/B/C}. \newline \textbf{$25\text{--}60\,\si{\second}$:} Center lower base under cold bulb using crosshairs; stage upper hood beside base. \newline \textbf{$60\text{--}150\,\si{\second}$:} Pre-compute $S_0 = \mathrm{TG}_{\mathrm{table}} + k_{\mathrm{room}}T_{\mathrm{room}} - \Delta T_{\mathrm{cool}}$. & Confirm envelope $\le\SI{29.6}{\centi\meter}$ (\texttt{3.d}) and stand clearance $\ge\SI{15}{\centi\meter}$ (\texttt{4.d}); verify Partner~B's lookup of $\mathrm{TG}_{\mathrm{table}}$ and $k_{\mathrm{room}}$ in \tref{tab:16:doe-36}; begin Part~I Exam if distributed. \\
+\textbf{Phase~2: Water} (\texttt{5.II.c--d}, Clarif.~\#5, \#7) & $t = \SIrange{0}{60}{\second}$ (Lamp \textbf{OFF}) & \textbf{$0\text{--}3\,\si{\second}$:} Receive cup ($\SI{100}{\milli\liter}$) and $T_{\mathrm{start}}$ from ES; record $T_{\mathrm{start}}$. \newline \textbf{$3\text{--}7\,\si{\second}$:} Seat cup smoothly onto 3-fin cork cradle. \newline \textbf{$7\text{--}12\,\si{\second}$:} Lower upper hood + BoPET cap onto 4 dowels (Clarif.~\#5, \#7); verify centering and step $\ge\SI{1.0}{\meter}$ back! & Call out elapsed seconds ($\SI{10}{\second}$ target); confirm hood is seated flat on 4 dowels, zero tape/clips touch cup, and both partners are clear before ES turns lamp \textbf{ON}. \\
+\rowcolor{rowalt}\textbf{Phase~3: Heating} (\texttt{5.II.e--f}) & $t = \SIrange{10}{15}{\minute}$ (Lamp \textbf{ON}) & \textbf{First $\SI{60}{\second}$:} Add $k_{\mathrm{start}}T_{\mathrm{start}}$ to $S_0$ to get $T_{\mathrm{pred}}$ to $\SI{0.1}{\celsius}$, cross-check with Partner~A, write on ES prediction card, and \textbf{submit card immediately} (\texttt{5.II.f})! \newline \textbf{Remaining $\SIrange{9}{14}{\minute}$:} Solve Part~I Exam Sections B/C. & Solve Part~I Exam Sections A/D; spend $\SI{10}{\second}$ verifying Partner~B's $T_{\mathrm{pred}}$ addition before submission; set silent watch alert for $t_{\mathrm{heat}} - \SI{30}{\second}$ to prepare for lamp turn-off. \\
+\textbf{Phase~4: Final} (\texttt{5.II.g--h}, Clarif.~\#1--\#4) & $t = \SIrange{0}{60}{\second}$ (Lamp \textbf{OFF}) & \textbf{Wait until ES is at station ready to probe}, then: \newline \textbf{$0\text{--}2\,\si{\second}$:} Lift upper hood + BoPET window straight up off 4 guide dowels. \newline \textbf{$2\text{--}6\,\si{\second}$:} Lift bare cup vertically by rim with \textbf{zero tilt/swirl} and set gently on Testing Surface next to device. & Watch ES probe top water layer near cup center (Clarif.~\#4); confirm zero wrap remains on cup (\texttt{5.II.g}); verify ES records $T_{\mathrm{start}}, T_{\mathrm{final}}, T_{\mathrm{pred}}$, and zero violations on checklist (\texttt{5.II.h})! \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{devicebox}[Transport Packaging, Pre-Impound Thermal Equilibration \& Spare-Parts Kit (Rules 2.d, 3.g, 5.II.b)]
+\idxtopic{transport packaging and impound equilibration}\idxtopic{spare parts kit (Rule 2.d)}
+\begin{enumerate}
+  \item \textbf{Pre-Impound Room-Temperature Equilibration (Rules~\texttt{2.d} \& \texttt{3.g}):} Rule~\texttt{2.d} requires that \textit{``all impounded items must be at room temperature when impounded''}, and Rule~\texttt{3.g} requires that \textit{``no part of the device may be significantly different from room temperature at the start of the event.''} If a device travels in a cold car trunk ($\SI{5}{\celsius}$) or hot bus cargo bay ($\SI{32}{\celsius}$) on tournament morning, its internal cardboard/cork baffles take $3\tau_{\mathrm{box}} \approx \SI{25}{\minute}$ to equilibrate if left sealed! \textbf{Mandatory Protocol:} Transport the collector in a ventilated mesh crate; upon entering the tournament building ($\ge\SI{35}{\minute}$ before impound closes), remove the upper reflector hood from the lower base so room air circulates freely through the open cup bay and foil baffles, guaranteeing $|\Delta T_{\mathrm{device-room}}| < \SI{0.2}{\celsius}$ at impound check-in!
+  \item \textbf{Impounded Spare-Parts Kit (Rule~\texttt{2.d}):} Impound a labeled clear zip-bag alongside the device containing: (a)~two pre-mounted spare $\SI{25}{\micro\meter}$ clear BoPET glazing drop-rings (in case the primary window is scratched or splashed), (b)~two pre-beveled spare cork knife-edge cradle fins, and (c)~four spare $\text{\O}\SI{6.0}{\milli\meter}$ birch alignment dowels.
+  \item \textbf{Non-Impounded Setup Tool Kit (Kept With Competitors per Rule~\texttt{2.d}):} Rule~\texttt{2.d} explicitly defines \textbf{tools} as \textit{``items aiding setup, not part of the build''} and exempts them from impound. Carry in your binder pouch: (a)~a laminated crosshair optical plumb-sight card (for centering the lower base under the cold ES bulb during the 3-minute Device Setup Time), (b)~a $\SI{30.0}{\centi\meter}$ collapsible L-square gauge (to verify $\le\SI{29.6}{\centi\meter}$ bounding dimensions on table), (c)~blunt titanium utility scissors and foil burnishing bone (to trim or fold any bent foil edge in $<\SI{15}{\second}$ during Rule~\texttt{5.II.b} Setup Time), and (d)~a microfiber optical cloth.
+\end{enumerate}
+\end{devicebox}
+
+\alsosee{\sref{sec:11} (Dead-Air Gaps \& Evaporation), \sref{sec:12} (View Factors \& Selective Surfaces), \sref{sec:13} (Lumped Heating ODE), \sref{sec:14} (Materials Encyclopedia \& \texttt{\#6~PS} Ban), \sref{sec:16} (36-Run DOE Calibration \& Prediction), \sref{sec:17} (ES Thermometer Physics), \sref{app:D} (Test Log Forms).}

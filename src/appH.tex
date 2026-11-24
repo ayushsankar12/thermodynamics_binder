@@ -1,0 +1,77 @@
+% ============================================================================
+% appH.tex — Appendix H: Open Questions Register, Defect/Revision Log &
+% Duplex Reprint Maintenance Guide (Target: 1 Page)
+% ============================================================================
+\setcounter{chapter}{7}
+\binderapp{H}{Open Questions, Revision Log \& Duplex Maintenance Guide}{App.\ H Open Questions \& Maintenance Guide}{app:H}
+\scopebanner{VERIFY AGAINST RULES}[Tournament-Specific Open Questions Register, QA Audit Summary \& Selective Duplex Leaf Reprinting Protocol]
+\idxtopic{binder maintenance and selective duplex reprinting}
+\idxtopic{open questions register}
+
+\section{Tournament-Specific Open Questions Register}\label{app:H.1}
+
+Because national rules allow local Event Supervisors and Tournament Directors to select specific operating points within the official ranges (\texttt{Rules 4.a, 4.c, 4.f, 5.II.a}) or announce site-dependent adjustments under General Rule 7 (\texttt{p.\ C1}), resolve these 5 items for each upcoming tournament:
+\par\smallskip\noindent
+{\scriptsize\setlength{\tabcolsep}{3pt}\renewcommand{\arraystretch}{1.12}
+\begin{tabularx}{\linewidth}{@{}c >{\raggedright\arraybackslash}p{0.25\linewidth} >{\raggedright\arraybackslash}p{0.34\linewidth} >{\raggedright\arraybackslash}X@{}}
+\toprule
+\textbf{\#} & \textbf{Open Tournament Variable} & \textbf{2027 National Default Baseline (\src{S01,S02,S05})} & \textbf{How the Binder \& Team Adapt Once Announced} \\
+\midrule
+\textbf{Q1} & \textbf{Target Tournament Tier \& Date} & National Schedule (\texttt{p.\ C78}): May 14--15, 2027 at Ohio State Univ.; Invitationals run Nov 2026--Feb 2027. & Enter date on \sref{app:F}; select Regional ($h=\SIrange{40}{50}{\centi\meter}$, $t=\SI{10}{\minute}$) vs. State/National ($h=\SIrange{40}{65}{\centi\meter}$, $t=\SIrange{10}{15}{\minute}$) lookup rows in \sref{sec:16} / \texttt{QS-13}. \\
+\rowcolor{rowalt}\textbf{Q2} & \textbf{Exact Bulb Wattage \& Reflector Shape (\texttt{4.a, 5.II.a})} & Untinted $100\text{--}\SI{125}{\watt}$ incandescent/IR heat lamp bulb (typically $100\text{ W}$ or $125\text{ W}$ clear R40/BR40). & At block start (\texttt{5.II.a}), read announced wattage $P_{\mathrm{bulb}}$ and select the $100\text{ W}$ or $125\text{ W}$ column (or linear interpolation $\mathrm{TG} \propto P_{\mathrm{bulb}}$) in \sref{sec:16}. \\
+\textbf{Q3} & \textbf{ES Thermometer Type \& Immersion Depth (\texttt{4.f, 5.II.g})} & Digital probe, non-mercury glass, or IR reading to $\SI{0.1}{\celsius}$; \texttt{Clarif.\ \#4} recommends \textbf{top water layer near cup center}. & If ES announces top-center probing (default), use $\kappa_{\mathrm{strat,top}}$ table in \sref{sec:16}; if ES announces mid-depth or IR surface reading, apply depth offset $\Delta T_{\mathrm{depth}}$. \\
+\rowcolor{rowalt}\textbf{Q4} & \textbf{Device Testing Schedule Format (\texttt{p.\ C2} \& ES Guide \src{S05})} & Device tested concurrently during the 50-min written test block (staggered across 2--3 lamp setups per ES). & If run concurrently, follow \fref{fig:00:timeline} choreography; if run in a separate self-scheduled device block, both partners spend all $\SI{50}{\minute}$ on Part I. \\
+\textbf{Q5} & \textbf{Post-\texttt{2026-11-22} National Clarifications or Corrections} & Verified \textbf{0 corrections} and \textbf{9 clarifications} as of \texttt{2026-11-22} (\src{S02,S03}). & Check \texttt{soinc.org/events/rules-corrections} and \texttt{soinc.org/division-c-events} 7 days and 24 hours before competition (\sref{app:F}). \\
+\bottomrule
+\end{tabularx}}
+
+\section{Build Pipeline, QA Sign-Off \& Selective Duplex Leaf Reprinting}\label{app:H.2}
+
+\begin{twocol}[0.49]
+\begin{formulacard}[Rebuilding \& Verifying All 4 Production PDFs]
+Run from \texttt{C:\textbackslash science olympiad\textbackslash Thermodynamics-Binder} using \textbf{Python 3.10.4} (\texttt{python}, which auto-prepends offline \textbf{MiKTeX 25.12} \texttt{pdflatex + makeindex}):
+\begin{itemize}
+  \item \textbf{Build All 4 Targets (\texttt{output/*.pdf}):}\newline
+    \texttt{python build/build.py --target all}\newline
+    (\emph{Or} \texttt{--target main|gray|quickref|device})
+  \item \textbf{Run Automated Mechanical \& Visual QA:}\newline
+    \texttt{python qa/pdfcheck.py}\newline
+    \texttt{python verify/verify\_all.py}
+  \item \textbf{Mandatory Release Gates (\texttt{build/pdfcheck-report.md}):}
+    \begin{itemize}
+      \item \textbf{P1:} Exact US Letter ($612.0 \times 792.0\text{ pt}$) on every page.
+      \item \textbf{P2:} Main/Gray $\le 280\text{ pp}$; QuickRef $== 12\text{ pp}$.
+      \item \textbf{P3:} Zero unresolved cross-reference markers or leaked raw LaTeX macros.
+      \item \textbf{P4:} Zero text spans in $0.72\text{ in}$ ($51.84\text{ pt}$) inner 3-hole punch margin.
+      \item \textbf{P5--P6:} Footer \texttt{Page N of M} + \texttt{2026-11-22}; min font $\ge 5.0\text{ pt}$; $100\%$ embedded Type 1 fonts.
+    \end{itemize}
+\end{itemize}
+\end{formulacard}
+\nextcol[0.49]
+\begin{formulacard}[Selective Duplex-Safe Page-Pair Replacement]
+Because the binder uses \texttt{twoside} duplex margins ($0.75\text{ in}$ inner 3-hole punch margin, $0.50\text{ in}$ outer thumb-tab margin), \textbf{every physical sheet in the binder is an odd--even duplex leaf pair $(2k-1,\; 2k)$}:
+\begin{enumerate}
+  \item \textbf{Page-Count-Neutral Edits:} Keep edits inside a chapter's final \texttt{\textbackslash clearpage} (or inside a 1-page \texttt{quicksheet}) so downstream page numbers do not shift.
+  \item \textbf{Identify Physical Leaf Pair $(2k-1,\; 2k)$:}
+    \begin{itemize}
+      \item Edited \textbf{odd page $p=2k-1$} (front/recto) $\Rightarrow$ reprint pages \textbf{$p$ to $p+1$}.
+      \item Edited \textbf{even page $p=2k$} (back/verso) $\Rightarrow$ reprint pages \textbf{$p-1$ to $p$}.
+    \end{itemize}
+  \item \textbf{Print Settings:} Select \textbf{Actual Size / 100\%} (never ``Fit to Printable Area''), \textbf{Two-Sided: Flip on Long Edge}, punch on the $0.75\text{ in}$ inner margin, and swap the single leaf into the 3-ring binder.
+\end{enumerate}
+\end{formulacard}
+\end{twocol}
+
+\par\noindent\textbf{Binder Revision \& Verification Sign-Off Ledger.}
+\par\smallskip\noindent
+{\scriptsize\setlength{\tabcolsep}{3pt}\renewcommand{\arraystretch}{1.12}
+\begin{tabularx}{\linewidth}{@{}l l l >{\raggedright\arraybackslash}X l@{}}
+\toprule
+\textbf{Rev} & \textbf{Date} & \textbf{Scope} & \textbf{Summary of Verified Updates \& QA Sign-Off} & \textbf{QA Status} \\
+\midrule
+\textbf{v1.0} & \texttt{2026-11-22} & Full Release & Initial 2026--2027 Division C Thermodynamics Binder (\S\S 0--23, App.\ A--H, 54 vector figures, 5 indices, 12-pp QuickRef, Device Handbook, Grayscale Proof). Verified against \texttt{official-2027-C.pdf} + 9 National Clarifications + 0 Corrections + \texttt{verify\_all.py} + \texttt{pdfcheck.py}. & \textbf{PASS (P1--P6 \& V1)} \\
+\rowcolor{rowalt}\textbf{v1.1} & \dotfill & \dotfill & \dotfill & \dotfill \\
+\textbf{v1.2} & \dotfill & \dotfill & \dotfill & \dotfill \\
+\rowcolor{rowalt}\textbf{v2.0} & \dotfill & \dotfill & \dotfill & \dotfill \\
+\bottomrule
+\end{tabularx}}

@@ -1,0 +1,583 @@
+% ============================================================================
+% thermobinder.sty — Production LaTeX Style for Science Olympiad 2026-2027
+% Division C Thermodynamics Competition Binder & Companion Handbooks
+%
+% Verified offline MiKTeX 25.12 package stack (zero network / zero Type 3 fonts).
+% Geometry: US Letter, twoside duplex, 0.75 in inner 3-hole punch margin,
+%           0.50 in outer thumb-tab margin, 0.62 in top, 0.58 in bottom.
+% Supports:
+%   - \ifdefined\grayproof  -> true grayscale proof mode
+%   - \ifdefined\companionmode -> standalone QuickRef (12 pp) / Device Handbook
+%   - 9 Outer-Edge Thumb Tabs (CMD/QUICK .. INDEX/APP)
+%   - \scopebanner{REQUIRED|TIER-DEPENDENT|SUPPLEMENTARY|VERIFY AGAINST RULES}[clause]
+%   - Pedagogical boxes: formulacard, workedexample (+ \verifiedby), trapbox,
+%     devicebox, rulebox, quicksheet, tierbox (+ aliases formula, quick, assume,
+%     trap, labbox, shortcut, derivation, suppbox, example)
+%   - 5 Named MakeIndex indices: topic, formula, figure, error, devfail
+%     (\idxtopic, \idxformula, \idxfig, \idxerr, \idxdev)
+% ============================================================================
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{thermobinder}[2026/11/22 v1.0 Science Olympiad 2027 Div C Thermodynamics Binder Style]
+
+\ifdefined\grayproof
+  \ifnum\grayproof>0
+    \PassOptionsToPackage{gray}{xcolor}
+  \fi
+\fi
+
+% ---------------- 1. Page Geometry (US Letter, 0.75 in inner punch margin) ------
+\RequirePackage[letterpaper,twoside,inner=0.75in,outer=0.50in,top=0.62in,bottom=0.58in,
+                includehead,includefoot,headheight=13pt,headsep=6pt,footskip=16pt]{geometry}
+
+% ---------------- 2. Fonts & Unicode Mapping (100% Type 1 .pfa) -----------------
+\RequirePackage[T1]{fontenc}
+\RequirePackage[utf8]{inputenc}
+\RequirePackage{amsmath}
+\RequirePackage{newtxtext,newtxmath}
+\RequirePackage[scaled=0.90]{helvet}
+\RequirePackage[scaled=0.88]{beramono}
+\RequirePackage{textcomp}
+\RequirePackage{pifont}
+\RequirePackage{newunicodechar}
+\newunicodechar{Δ}{\ensuremath{\Delta}}
+\newunicodechar{Ω}{\ensuremath{\Omega}}
+\newunicodechar{µ}{\ensuremath{\muup}}   % upright Type 1 micro from newtxmath
+\newunicodechar{μ}{\ensuremath{\mu}}
+\newunicodechar{ε}{\ensuremath{\varepsilon}}
+\newunicodechar{ρ}{\ensuremath{\rho}}
+\newunicodechar{τ}{\ensuremath{\tau}}
+\newunicodechar{β}{\ensuremath{\beta}}
+\newunicodechar{θ}{\ensuremath{\theta}}
+\newunicodechar{π}{\ensuremath{\pi}}
+\newunicodechar{σ}{\ensuremath{\sigma}}
+\newunicodechar{λ}{\ensuremath{\lambda}}
+\newunicodechar{η}{\ensuremath{\eta}}
+\newunicodechar{κ}{\ensuremath{\kappa}}
+\newunicodechar{α}{\ensuremath{\alpha}}
+\newunicodechar{γ}{\ensuremath{\gamma}}
+\newunicodechar{ω}{\ensuremath{\omega}}
+\newunicodechar{Φ}{\ensuremath{\Phi}}
+\newunicodechar{∞}{\ensuremath{\infty}}
+\newunicodechar{≈}{\ensuremath{\approx}}
+\newunicodechar{≥}{\ensuremath{\geq}}
+\newunicodechar{≤}{\ensuremath{\leq}}
+\newunicodechar{≠}{\ensuremath{\neq}}
+\newunicodechar{√}{\ensuremath{\surd}}
+\newunicodechar{∥}{\ensuremath{\parallel}}
+\newunicodechar{←}{\ensuremath{\leftarrow}}
+\newunicodechar{→}{\ensuremath{\rightarrow}}
+\newunicodechar{⇒}{\ensuremath{\Rightarrow}}
+\newunicodechar{✓}{\ding{51}}
+\newunicodechar{✗}{\ding{55}}
+\newunicodechar{−}{\ensuremath{-}}
+\newunicodechar{–}{--}
+\newunicodechar{—}{---}
+\newunicodechar{°}{\ensuremath{^\circ}}
+\newunicodechar{±}{\ensuremath{\pm}}
+\newunicodechar{×}{\ensuremath{\times}}
+
+\RequirePackage{microtype}
+\RequirePackage{setspace}\setstretch{1.05}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{2.2pt plus 0.8pt minus 0.4pt}
+\newcommand{\densefont}{\fontsize{9.5}{11.2}\selectfont}
+% Guard against sub-5pt text: map \tiny to \scriptsize and keep 7pt math subscripts >= 5.2 pt
+\renewcommand{\tiny}{\fontsize{7.0}{8.2}\selectfont}
+\DeclareMathSizes{7}{7}{5.5}{5.2}
+\DeclareMathSizes{7.0}{7.0}{5.5}{5.2}
+\DeclareMathSizes{7.2}{7.2}{5.5}{5.2}
+\DeclareMathSizes{7.3}{7.3}{5.5}{5.2}
+\DeclareMathSizes{8}{8}{6.0}{5.5}
+\DeclareMathSizes{9.5}{9.5}{7.0}{5.8}
+\DeclareMathSizes{10}{10}{7.4}{6.0}
+
+% ---------------- 3. Color Palette, Tables & Layout Packages --------------------
+\RequirePackage[dvipsnames,table]{xcolor}
+\ifdefined\grayproof
+  \ifnum\grayproof>0
+    \selectcolormodel{gray}
+  \fi
+\fi
+\RequirePackage{colortbl}
+\RequirePackage{graphicx}
+\RequirePackage{array,tabularx,booktabs,longtable,multirow,makecell}
+\RequirePackage{multicol}
+\RequirePackage{enumitem}
+\setlist{nosep,leftmargin=1.85em}
+\RequirePackage{needspace}
+\RequirePackage{xparse}
+
+% ---------------- 4. SI Units (siunitx v3, Type 1 upright \muup) ----------------
+\RequirePackage{siunitx}
+\sisetup{per-mode=symbol,group-minimum-digits=5,detect-all,
+         product-units=single,range-units=single,list-units=single,mode=math}
+\DeclareSIPrefix{\micro}{\muup}{-6}
+\DeclareSIUnit{\bar}{bar}
+\DeclareSIUnit{\atmosphere}{atm}
+\DeclareSIUnit{\torr}{Torr}
+\DeclareSIUnit{\mmHg}{mmHg}
+\DeclareSIUnit{\psi}{psi}
+\DeclareSIUnit{\calorie}{cal}
+\DeclareSIUnit{\degree}{^\circ}
+\DeclareSIUnit{\fahrenheit}{{^\circ}\mathrm{F}}
+\DeclareSIUnit{\rankine}{{^\circ}\mathrm{R}}
+\DeclareSIUnit{\kilojoule}{\kilo\joule}
+\DeclareSIUnit{\megajoule}{\mega\joule}
+\DeclareSIUnit{\kilowatt}{\kilo\watt}
+\DeclareSIUnit{\megapascal}{\mega\pascal}
+\DeclareSIUnit{\gigapascal}{\giga\pascal}
+\DeclareSIUnit{\micrometer}{\micro\meter}
+\DeclareSIUnit{\millimeter}{\milli\meter}
+\DeclareSIUnit{\centimeter}{\centi\meter}
+\DeclareSIUnit{\milliliter}{\milli\liter}
+\DeclareSIUnit{\electronvolt}{eV}
+
+% ---------------- 5. Vector Diagrams & Callout Boxes (TikZ, PGFPlots, tcolorbox)
+\RequirePackage{tikz}
+\RequirePackage{pgfplots}\pgfplotsset{compat=1.18}
+\usetikzlibrary{arrows.meta,positioning,calc,shapes.geometric,shapes.misc,
+                decorations.pathreplacing,decorations.pathmorphing,patterns,backgrounds,fit}
+\RequirePackage[most]{tcolorbox}
+\RequirePackage{caption}
+\captionsetup{font=footnotesize,labelfont={bf,sf},labelsep=period,skip=2pt}
+\captionsetup[figure]{name=Fig.}
+\captionsetup[table]{name=Table}
+\RequirePackage{titlesec}
+\RequirePackage{fancyhdr}
+\RequirePackage{lastpage}
+\RequirePackage{eso-pic}
+\RequirePackage{ifthen}
+\RequirePackage[nottoc]{tocbibind}
+\RequirePackage{tocloft}
+\RequirePackage[noautomatic]{imakeidx}
+
+% ---------------- 6. Companion Booklet & Cross-Reference Support ----------------
+\newif\ifcompanion \companionfalse
+\ifdefined\companionmode
+  \ifnum\companionmode>0
+    \companiontrue
+  \fi
+\fi
+\RequirePackage{xr-hyper}
+\ifcompanion
+  \IfFileExists{booklet-ext.aux}{\externaldocument{booklet-ext}}{}
+\fi
+
+% ---------------- 7. Grayscale-Surviving Palette (CIE Luminance Engineered) -----
+\definecolor{navy}{HTML}{142B44}       % Y ~ 0.16 (primary structural frame & header)
+\definecolor{teal}{HTML}{125E63}       % Y ~ 0.28 (formula / shortcut accent)
+\definecolor{rust}{HTML}{8C2D19}       % Y ~ 0.23 (trap / safety warning frame)
+\definecolor{amber}{HTML}{6E4B00}      % Y ~ 0.30 (tier / verify scope accent)
+\definecolor{slate}{HTML}{3B4652}      % Y ~ 0.27 (device / lab engineering accent)
+\definecolor{boxbg}{gray}{0.94}        % Y = 0.94 (shaded formula card fill)
+\definecolor{boxbglight}{gray}{0.97}   % Y = 0.97 (light derivation / shortcut fill)
+\definecolor{rule}{gray}{0.32}         % Y = 0.32 (standard divider rule)
+\definecolor{tabblack}{gray}{0.08}     % Y = 0.08 (outer thumb tab & required scope fill)
+\definecolor{midgray}{gray}{0.52}      % Y = 0.52 (supplementary / derivation bar)
+\definecolor{rowalt}{gray}{0.95}       % Y = 0.95 (alternating table row shading)
+
+% ---------------- 8. Chapter & Section Numbering / Headings ---------------------
+\renewcommand{\thechapter}{\arabic{chapter}}
+\renewcommand{\thesection}{\thechapter.\arabic{section}}
+\renewcommand{\thesubsection}{\thesection.\arabic{subsection}}
+\setcounter{secnumdepth}{2}
+\setcounter{tocdepth}{1}
+\numberwithin{equation}{chapter}
+\renewcommand{\theequation}{\thechapter.\arabic{equation}}
+\numberwithin{figure}{chapter}
+\renewcommand{\thefigure}{\thechapter.\arabic{figure}}
+\numberwithin{table}{chapter}
+\renewcommand{\thetable}{\thechapter.\arabic{table}}
+
+\titleformat{\chapter}[block]{\sffamily\bfseries\Large\color{navy}}
+  {\S\thechapter}{0.55em}{}[{\vspace{2pt}\titlerule[1.2pt]}]
+\titlespacing*{\chapter}{0pt}{-6pt}{5pt}
+\titleformat{\section}[block]{\sffamily\bfseries\large\color{navy}}{\S\thesection}{0.5em}{}
+\titlespacing*{\section}{0pt}{7pt plus 2pt minus 2pt}{2.5pt}
+\titleformat{\subsection}[runin]{\sffamily\bfseries\normalsize}{}{0pt}{}[.]
+\titlespacing*{\subsection}{0pt}{4pt plus 1pt}{0.5em}
+\titleformat{\subsubsection}[runin]{\sffamily\bfseries\small}{}{0pt}{}[.]
+\titlespacing*{\subsubsection}{0pt}{3pt}{0.4em}
+\newcommand{\sectionbreak}{\Needspace{8\baselineskip}}
+
+% \binderchapter{number}{title}{short running title}{label}
+\newcommand{\binderchapter}[4]{%
+  \setcounter{chapter}{\numexpr#1-1\relax}%
+  \chapter[#2]{#2}\chaptermark{#3}\label{#4}}
+
+% \binderapp{letter_or_num}{title}{short running title}{label}
+\newcommand{\binderapp}[4]{%
+  \chapter[#2]{#2}\chaptermark{#3}\label{#4}}
+
+\g@addto@macro\appendix{%
+  \renewcommand{\thechapter}{\Alph{chapter}}%
+  \renewcommand{\thesection}{\thechapter.\arabic{section}}%
+  \renewcommand{\theequation}{\thechapter.\arabic{equation}}%
+  \renewcommand{\thefigure}{\thechapter.\arabic{figure}}%
+  \renewcommand{\thetable}{\thechapter.\arabic{table}}%
+  \titleformat{\chapter}[block]{\sffamily\bfseries\Large\color{navy}}
+    {App.\ \thechapter}{0.55em}{}[{\vspace{2pt}\titlerule[1.2pt]}]%
+  \addtocontents{toc}{\protect\renewcommand{\protect\cftchappresnum}{App.\,}%
+                      \protect\setlength{\protect\cftchapnumwidth}{3.6em}}%
+  \fancyhead[LE,RO]{\sffamily\footnotesize\textbf{App.\ \thechapter}\ \textperiodcentered\ \leftmark}%
+}
+
+% ---------------- 9. Running Headers & Footers ----------------------------------
+\newcommand{\binderfooterlabel}{Thermodynamics Div C (2027 Rules) \textperiodcentered\ Rev.\ 2026-11-22}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+\renewcommand{\sectionmark}[1]{\markright{\S\thesection\ #1}}
+\fancyhead[LE,RO]{\sffamily\footnotesize\textbf{\S\thechapter}\ \textperiodcentered\ \leftmark}
+\fancyhead[RE,LO]{\sffamily\footnotesize\rightmark}
+\fancyfoot[LE,RO]{\sffamily\footnotesize Page \thepage\ of \pageref*{LastPage}}
+\fancyfoot[RE,LO]{\sffamily\footnotesize\binderfooterlabel}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.2pt}
+\fancypagestyle{plain}{\fancyhf{}%
+  \fancyfoot[LE,RO]{\sffamily\footnotesize Page \thepage\ of \pageref*{LastPage}}%
+  \fancyfoot[RE,LO]{\sffamily\footnotesize\binderfooterlabel}%
+  \renewcommand{\headrulewidth}{0pt}}
+
+% ---------------- 10. TOC Styling -----------------------------------------------
+\renewcommand{\cftchapfont}{\sffamily\bfseries}
+\renewcommand{\cftchappagefont}{\sffamily\bfseries}
+\renewcommand{\cftchappresnum}{\S}
+\setlength{\cftchapnumwidth}{2.4em}
+\setlength{\cftbeforechapskip}{2pt}
+\renewcommand{\cftsecfont}{\small}
+\renewcommand{\cftsecpagefont}{\small}
+\setlength{\cftsecindent}{2.4em}
+\setlength{\cftsecnumwidth}{2.8em}
+\renewcommand{\cftfigpresnum}{Fig.~}
+\setlength{\cftfignumwidth}{4.6em}
+
+% ---------------- 11. 9 Outer-Edge Thumb Tabs (Part G Exact 9-Tab System) -------
+% Tabs:
+%   1: CMD/QUICK   (§§0-1)
+%   2: FOUNDATIONS (§§2-3)
+%   3: CAL/PHASE   (§§4-5)
+%   4: GASES/LAWS  (§§6-9)
+%   5: TRANSFER    (§§10-13)
+%   6: DEVICE      (§§14-16)
+%   7: LAB/DATA    (§§17-18)
+%   8: PROBLEMS    (§§19-23)
+%   9: INDEX/APP   (App A-H & Indices)
+% Geometry: 9 slots x 1.02 in = 9.18 in vertical span (top offset 0.85 in).
+% Placed in the outer 0.34 in margin strip (x in [8.16in, 8.50in] on odd pages;
+% x in [0.00in, 0.34in] on even pages), leaving a 0.16 in white gutter outside the text body
+% and 100% opposite the 0.75 in inner 3-hole punch margin.
+\newif\ifshowtabs \showtabstrue
+\newcommand{\notabs}{\showtabsfalse}
+\newcounter{tabslot}
+\newcommand{\tablabel}{}
+\newcommand{\settab}[2]{\clearpage\setcounter{tabslot}{#1}\renewcommand{\tablabel}{#2}}
+\newcommand{\settabnoclear}[2]{\setcounter{tabslot}{#1}\renewcommand{\tablabel}{#2}}
+\newcommand{\thermotabname}[1]{%
+  \ifcase#1\or CMD/QUICK\or FOUNDATIONS\or CAL/PHASE\or GASES/LAWS\or TRANSFER\or DEVICE\or LAB/DATA\or PROBLEMS\or INDEX/APP\else TAB~#1\fi}
+\newcommand{\thermotab}[1]{\settab{#1}{\thermotabname{#1}}}
+\newcommand{\thermotabnoclear}[1]{\settabnoclear{#1}{\thermotabname{#1}}}
+
+\newlength{\tabslotheight}
+\setlength{\tabslotheight}{1.02in}
+\AddToShipoutPictureBG{%
+  \ifshowtabs
+  \ifnum\value{tabslot}>0
+  \AtPageUpperLeft{%
+    \ifodd\value{page}
+      \put(\LenToUnit{\paperwidth-0.34in},\LenToUnit{-0.85in-\value{tabslot}\tabslotheight+\tabslotheight}){%
+        \makebox(0,0)[tl]{\color{tabblack}\rule{0.34in}{\tabslotheight}}}%
+      \put(\LenToUnit{\paperwidth-0.17in},\LenToUnit{-0.85in-\value{tabslot}\tabslotheight+0.5\tabslotheight}){%
+        \makebox(0,0){\rotatebox{-90}{\color{white}\sffamily\bfseries\scriptsize\tablabel}}}%
+    \else
+      \put(\LenToUnit{0in},\LenToUnit{-0.85in-\value{tabslot}\tabslotheight+\tabslotheight}){%
+        \makebox(0,0)[tl]{\color{tabblack}\rule{0.34in}{\tabslotheight}}}%
+      \put(\LenToUnit{0.17in},\LenToUnit{-0.85in-\value{tabslot}\tabslotheight+0.5\tabslotheight}){%
+        \makebox(0,0){\rotatebox{90}{\color{white}\sffamily\bfseries\scriptsize\tablabel}}}%
+    \fi}%
+  \fi
+  \fi}
+
+% ---------------- 12. Scope Banners (Part D) ------------------------------------
+% Supports:
+%   \scopebanner{REQUIRED}
+%   \scopebanner{REQUIRED}[Rule 5.c.i--v (All Levels)]
+%   \scopebanner[Rule 5.c.vi--vii]{TIER-DEPENDENT}
+%   \scopebanner{SUPPLEMENTARY}{Enrichment beyond 2027 written syllabus}
+%   \scopebanner{VERIFY AGAINST RULES}[Host tournament parameters]
+% Plus grayscale-distinct border & badge patterns for each category.
+\NewDocumentCommand{\scopebanner}{ O{} m O{} g }{%
+  \begingroup
+  \def\sc@sub{#1}%
+  \ifx\sc@sub\@empty\def\sc@sub{#3}\fi
+  \IfValueT{#4}{\ifx\sc@sub\@empty\def\sc@sub{#4}\fi}%
+  \par\noindent
+  \tb@IfSubStr{#2}{TIER}{%
+    \begin{tcolorbox}[enhanced,boxrule=0.8pt,borderline={0.6pt}{1.5pt}{amber,dotted},
+      colback=boxbg,colframe=amber,arc=0.5pt,left=4pt,right=4pt,top=1.5pt,bottom=1.5pt,
+      before skip=2pt,after skip=3pt]
+      {\sffamily\footnotesize\bfseries\ding{73}\ SCOPE: #2}%
+      \ifx\sc@sub\@empty\else\ {\sffamily\footnotesize\textbar\ \sc@sub}\fi
+    \end{tcolorbox}%
+  }{%
+    \tb@IfSubStr{#2}{SUPP}{%
+      \begin{tcolorbox}[enhanced,boxrule=0.6pt,borderline={0.5pt}{1.5pt}{black,dashed},
+        colback=white,colframe=midgray,arc=0.5pt,left=4pt,right=4pt,top=1.5pt,bottom=1.5pt,
+        before skip=2pt,after skip=3pt]
+        {\sffamily\footnotesize\bfseries\ding{111}\ SCOPE: #2}%
+        \ifx\sc@sub\@empty\else\ {\sffamily\footnotesize\textbar\ \sc@sub}\fi
+      \end{tcolorbox}%
+    }{%
+      \tb@IfSubStr{#2}{VERIFY}{%
+        \begin{tcolorbox}[enhanced,boxrule=1.2pt,borderline={0.5pt}{1.8pt}{rust},
+          colback=white,colframe=rust,arc=0.5pt,left=4pt,right=4pt,top=1.5pt,bottom=1.5pt,
+          before skip=2pt,after skip=3pt]
+          {\sffamily\footnotesize\bfseries\ding{110}\ SCOPE: #2}%
+          \ifx\sc@sub\@empty\else\ {\sffamily\footnotesize\textbar\ \sc@sub}\fi
+        \end{tcolorbox}%
+      }{%
+        % Default / REQUIRED: high-contrast dark fill with white bold text
+        \colorbox{navy}{\parbox{\dimexpr\linewidth-2\fboxsep}{\raggedright\sffamily\footnotesize\color{white}%
+          \textbf{\ding{51}\ SCOPE: #2}\ifx\sc@sub\@empty\else\ \textbar\ \sc@sub\fi}}\par\vspace{3pt}%
+      }%
+    }%
+  }%
+  \endgroup
+}
+% Helper substring test using built-in LaTeX3 kernel \tl_if_in:nnTF
+\ExplSyntaxOn
+\cs_new_eq:NN \tb@IfSubStr \tl_if_in:nnTF
+\ExplSyntaxOff
+
+% Backwards-compatible alias \scope{category}{basis}
+\newcommand{\scope}[2]{\scopebanner{#1}[#2]}
+\newcommand{\alsosee}[1]{\par\vspace{3pt}\noindent\rule{\linewidth}{0.4pt}\par\noindent
+   {\sffamily\bfseries\small See also:}\ {\small #1}\par}
+
+% ---------------- 13. Pedagogical Callout Environments (Part D & E) -------------
+\tcbset{bindergeneral/.style={enhanced,breakable,left=4pt,right=4pt,top=2pt,bottom=2pt,
+        boxsep=1pt,arc=1pt,fonttitle=\sffamily\bfseries\small,coltitle=black,
+        before skip=3.5pt,after skip=3.5pt}}
+
+% 13.1 formulacard (L1 formula / decision card) + aliases formula, quick
+\newtcolorbox{formulacard}[1][]{bindergeneral,colback=boxbg,colframe=navy,boxrule=0.8pt,
+   title={\textsf{FORMULA \& DECISION CARD}\ifx&#1&\else\ \textperiodcentered\ #1\fi},
+   colbacktitle=navy,coltitle=white,fontupper=\small}
+
+\newtcolorbox{formula}[1][]{bindergeneral,colback=boxbg,colframe=navy,boxrule=0.7pt,
+   title={\textsf{FORMULA}\ifx&#1&\else\ \textperiodcentered\ #1\fi},colbacktitle=boxbg,
+   attach title to upper={\ \ },fontupper=\small}
+
+\newtcolorbox{quick}[1][]{bindergeneral,colback=boxbg,colframe=navy,boxrule=0.8pt,
+   title={QUICK REFERENCE\ifx&#1&\else\ \textperiodcentered\ #1\fi},colbacktitle=navy,coltitle=white,
+   fontupper=\small}
+
+% 13.2 workedexample (L4 worked example with mandatory \verifiedby{...}) + alias example
+\newcounter{example}[chapter]
+\renewcommand{\theexample}{\thechapter.\arabic{example}}
+
+\NewDocumentEnvironment{workedexample}{ O{} g g }{%
+  \refstepcounter{example}%
+  \def\ex@title{#1}%
+  \def\ex@meta{}%
+  \IfValueT{#2}{%
+    \ifx\ex@title\@empty
+      \def\ex@title{#2}%
+    \else
+      \def\ex@meta{#2}%
+    \fi}%
+  \IfValueT{#3}{%
+    \ifx\ex@meta\@empty
+      \def\ex@meta{#3}%
+    \else
+      \label{#3}%
+    \fi}%
+  \begin{tcolorbox}[bindergeneral,colback=white,colframe=black,boxrule=0.6pt,
+     title={Worked Example \theexample\ifx\ex@title\@empty\else\ --- \ex@title\fi
+            \ifx\ex@meta\@empty\else\hfill{\normalfont\footnotesize[\ex@meta]}\fi},
+     colbacktitle=boxbg,fontupper=\small]%
+}{\end{tcolorbox}}
+
+\newenvironment{example}[3]{\refstepcounter{example}\label{#3}%
+  \begin{tcolorbox}[bindergeneral,colback=white,colframe=black,boxrule=0.6pt,
+     title={Worked Example \theexample\ --- #1 \hfill{\normalfont\footnotesize[#2]}},
+     colbacktitle=boxbg,fontupper=\small]}
+  {\end{tcolorbox}}
+
+\newcommand{\cmark}{\ding{51}}
+\newcommand{\xmark}{\ding{55}}
+\newcommand{\verifiedby}[1]{\par\noindent{\sffamily\footnotesize\textbf{\cmark\ verified by:} #1}\par}
+\newcommand{\verified}[1]{\verifiedby{#1}}
+\newcommand{\ifgot}[2]{\par\noindent{\small\textbf{If you got #1,} #2}\par}
+
+% 13.3 trapbox (L5 common traps & wrong-answer diagnostics: symptom -> cause -> fix) + alias trap
+\newtcolorbox{trapbox}[1][]{bindergeneral,colback=white,colframe=rust,boxrule=1.8pt,
+   title={\ding{110}\ TRAP \& DIAGNOSTIC\ifx&#1&\else: #1\fi},
+   colbacktitle=boxbg,coltitle=black,fontupper=\small}
+
+\newtcolorbox{trap}[1][]{bindergeneral,colback=white,colframe=rust,boxrule=1.8pt,
+   title={\ding{110}\ TRAP\ifx&#1&\else: #1\fi},attach title to upper={\ \ },fontupper=\small}
+
+% 13.4 devicebox (L6 2027 heat-lamp collector / experimental application) + alias labbox
+\newtcolorbox{devicebox}[1][]{bindergeneral,colback=white,colframe=slate,boxrule=0.6pt,leftrule=4.0pt,
+   title={\ding{45}\ 2027 HEAT-COLLECTOR DEVICE \& LAB\ifx&#1&\else: #1\fi},
+   colbacktitle=boxbg,coltitle=black,fontupper=\small}
+
+\newtcolorbox{labbox}[1][]{bindergeneral,colback=white,colframe=slate,boxrule=0.6pt,leftrule=4.0pt,
+   title={\ding{45}\ DEVICE \& LAB\ifx&#1&\else: #1\fi},attach title to upper={\ \ },fontupper=\small}
+
+% 13.5 rulebox (2027 official rules / clarification / safety hazard warning callout)
+\newtcolorbox{rulebox}[1][]{bindergeneral,colback=white,colframe=navy,boxrule=0.8pt,
+   borderline={0.5pt}{1.5pt}{navy},colbacktitle=navy,coltitle=white,
+   title={\ding{72}\ 2027 OFFICIAL RULE / CLARIFICATION\ifx&#1&\else\ \textperiodcentered\ #1\fi},
+   fontupper=\small}
+
+% 13.6 tierbox (State/National-only 5.c.vi-vii content vs Regional core)
+\newtcolorbox{tierbox}[1][]{bindergeneral,colback=white,colframe=amber,boxrule=0.6pt,
+   borderline={0.6pt}{1.5pt}{amber,dotted},colbacktitle=boxbg,coltitle=black,
+   title={\ding{73}\ TIER: States/Nationals-only under 2027 rules (Rule 5.c.vi--vii)\ifx&#1&\else: #1\fi},
+   fontupper=\small}
+
+% 13.7 quicksheet (1-page standalone quick-reference sheet environment with page boundary control)
+% Use \begin{quicksheet*}[Title] on the first sheet after \binderchapter to suppress the leading \clearpage.
+\NewDocumentEnvironment{quicksheet}{ s O{} g }{%
+  \IfBooleanF{#1}{\clearpage}%
+  \def\qs@title{#2}%
+  \IfValueT{#3}{\ifx\qs@title\@empty\def\qs@title{#3}\fi}%
+  \noindent\colorbox{navy}{\parbox{\dimexpr\linewidth-2\fboxsep}{%
+    \sffamily\bfseries\normalsize\color{white}\strut ONE-PAGE QUICK SHEET\ifx\qs@title\@empty\else: \qs@title\fi
+    \hfill{\footnotesize 2027 Thermodynamics Div C}}}%
+  \par\vspace{3pt}%
+}{\clearpage}
+
+\NewDocumentEnvironment{quicksheet*}{ O{} g }{%
+  \def\qs@title{#1}%
+  \IfValueT{#2}{\ifx\qs@title\@empty\def\qs@title{#2}\fi}%
+  \noindent\colorbox{navy}{\parbox{\dimexpr\linewidth-2\fboxsep}{%
+    \sffamily\bfseries\normalsize\color{white}\strut ONE-PAGE QUICK SHEET\ifx\qs@title\@empty\else: \qs@title\fi
+    \hfill{\footnotesize 2027 Thermodynamics Div C}}}%
+  \par\vspace{3pt}%
+}{\clearpage}
+
+\newcommand{\sheet}[2]{\clearpage\section{#1}\label{#2}}
+
+% 13.8 Additional Supporting Boxes (assume, shortcut, derivation, suppbox)
+\newtcolorbox{assume}{bindergeneral,colback=white,colframe=black,boxrule=0.6pt,
+   borderline={0.6pt}{0pt}{black,dashed},frame hidden,
+   title={ASSUMPTIONS \& VALIDITY},attach title to upper={\ \ },fontupper=\small}
+
+\newtcolorbox{shortcut}[1][]{bindergeneral,colback=boxbglight,colframe=teal,boxrule=0.6pt,
+   title={\ding{228}\ SHORTCUT\ifx&#1&\else: #1\fi},colbacktitle=boxbg,coltitle=black,fontupper=\small}
+
+\newtcolorbox{derivation}[1][]{bindergeneral,colback=boxbglight,colframe=midgray,boxrule=0pt,leftrule=1.8pt,
+   title={DERIVATION\ifx&#1&\else\ \textperiodcentered\ #1\fi},attach title to upper={\ \ },fontupper=\small}
+
+\newtcolorbox{suppbox}[1][]{bindergeneral,colback=white,colframe=black,boxrule=0.5pt,
+   borderline={0.5pt}{1.5pt}{black,dashed},
+   title={SUPPLEMENTARY (enrichment outside 2027 core syllabus)\ifx&#1&\else: #1\fi},
+   attach title to upper={\ \ },fontupper=\small}
+
+% ---------------- 14. Assumption Flags & Table Environments ---------------------
+\newcommand{\flag}[1]{\textsf{\scriptsize\bfseries[#1]}}
+\newcommand{\IG}{\flag{IDEAL-GAS}}
+\newcommand{\CLSD}{\flag{CLOSED}}
+\newcommand{\SSFL}{\flag{STEADY-FLOW}}
+\newcommand{\REV}{\flag{REV}}
+\newcommand{\CONSTC}{\flag{CONST-$c$}}
+\newcommand{\LUMP}{\flag{Bi$<$0.1}}
+\newcommand{\GRAY}{\flag{GRAY-SURF}}
+\newcommand{\INCOMP}{\flag{INCOMP}}
+\newcommand{\TIERf}{\flag{STATE/NAT}}
+\newcommand{\RULEf}{\flag{2027-RULE}}
+\newcommand{\SUPPf}{\flag{SUPP}}
+\newcommand{\VERIF}[1]{\textsf{\scriptsize[VERIFIED: #1]}}
+\newcommand{\INFER}[1]{\textsf{\scriptsize[INFERRED: #1]}}
+\newcommand{\UNVER}{\textsf{\scriptsize[UNVERIFIED]}}
+\newcommand{\src}[1]{\textsf{\scriptsize\bfseries[#1]}}
+\newcommand{\Source}[1]{\src{#1}}
+\newcommand{\Sources}[1]{\src{#1}}
+\newcommand{\OBS}{\colorbox{black}{\textcolor{white}{\sffamily\bfseries\scriptsize\,OBSERVED\,}}}
+\newcommand{\REC}{\fbox{\sffamily\bfseries\scriptsize RECOMMENDED}}
+\newcommand{\SPEC}{\textsf{\bfseries\scriptsize\textit{[SPECULATIVE]}}}
+
+\newcommand{\hdr}[1]{\textbf{#1}}
+\newcommand{\tabfont}{\footnotesize}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\arraybackslash}p{#1}}
+
+\newenvironment{twocol}[1][0.485]{\par\smallskip\noindent\begin{minipage}[t]{#1\linewidth}\vspace{0pt}}%
+  {\end{minipage}\par\smallskip}
+\newcommand{\nextcol}[1][0.485]{\end{minipage}\hfill\begin{minipage}[t]{#1\linewidth}\vspace{0pt}}
+
+\newenvironment{ftab}{\par\noindent\footnotesize\setlength{\tabcolsep}{3pt}\renewcommand{\arraystretch}{1.15}%
+  \tabularx{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.28\linewidth}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}p{0.12\linewidth}>{\raggedright\arraybackslash}p{0.24\linewidth}@{}}\toprule
+  \hdr{Formula} & \hdr{Variables (SI units)} & \hdr{Flags} & \hdr{Use when}\\\midrule}
+  {\bottomrule\endtabularx\par\smallskip}
+
+\newenvironment{vartab}{\par\smallskip\noindent\footnotesize
+  \tabularx{\linewidth}{@{}l X l l@{}}\toprule
+  \textbf{Symbol} & \textbf{Meaning} & \textbf{SI unit} & \textbf{Typical range}\\\midrule}
+  {\bottomrule\endtabularx\par\smallskip}
+
+\newenvironment{errtab}{\par\smallskip\noindent\footnotesize
+  \tabularx{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.30\linewidth} >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}p{0.28\linewidth}@{}}\toprule
+  \textbf{Wrong move / Symptom} & \textbf{What it produces / Why it fails} & \textbf{5-second diagnostic \& fix}\\\midrule}
+  {\bottomrule\endtabularx\par\smallskip}
+
+\newcommand{\probmeta}[8]{{\sffamily\scriptsize[\textbf{#1} \textbar\ #2 \textbar\ \S#3 \textbar\ #4 \textbar\ #5 \textbar\ #6 \textbar\ #7 \textbar\ trap: #8]}}
+\newenvironment{problem}[8]{\par\needspace{4\baselineskip}\noindent\probmeta{#1}{#2}{#3}{#4}{#5}{#6}{#7}{#8}\label{prob:#1}\par\noindent\small}{\par\smallskip}
+\newenvironment{solution}[1]{\par\needspace{4\baselineskip}\noindent{\sffamily\bfseries\small Solution #1.}\ \small}{\par\smallskip}
+
+% ---------------- 15. Multi-Index System (5 Named MakeIndex Indices) ------------
+\indexsetup{level=\section*,toclevel=section,noclearpage,othercode=\footnotesize}
+\ifcompanion
+  \newcommand{\idxtopic}[1]{}
+  \newcommand{\idxformula}[1]{}
+  \newcommand{\idxfig}[1]{}
+  \newcommand{\idxerr}[1]{}
+  \newcommand{\idxdev}[1]{}
+\else
+  \makeindex[name=topic,  title={Alphabetical Topic, Law \& Concept Index},columns=3,intoc]
+  \makeindex[name=formula,title={Formula \& Equation Index (By Name \& Target Variable)},columns=2,intoc]
+  \makeindex[name=figure, title={Diagram, Cycle \& Phase-Graph Atlas Index},columns=2,intoc]
+  \makeindex[name=error,  title={Common-Mistake \& Wrong-Answer Diagnostic Index},columns=2,intoc]
+  \makeindex[name=devfail,title={2027 Collector Device Failure-Mode \& Calibration Index},columns=2,intoc]
+  \newcommand{\idxtopic}[1]{\index[topic]{\detokenize{#1}}}
+  \newcommand{\idxformula}[1]{\index[formula]{\detokenize{#1}}}
+  \newcommand{\idxfig}[1]{\index[figure]{\detokenize{#1}}}
+  \newcommand{\idxerr}[1]{\index[error]{\detokenize{#1}}}
+  \newcommand{\idxdev}[1]{\index[devfail]{\detokenize{#1}}}
+\fi
+% Backwards-compatible index aliases
+\newcommand{\ix}[1]{\idxtopic{#1}}
+\newcommand{\fx}[1]{\idxformula{#1}}
+\newcommand{\sx}[1]{\idxformula{#1}}
+\newcommand{\dx}[1]{\idxfig{#1}}
+\newcommand{\erx}[1]{\idxerr{#1}}
+\newcommand{\px}[1]{\idxdev{#1}}
+\newcommand{\cx}[1]{\idxdev{#1}}
+
+\newcommand{\printallthermoindices}{%
+  \printindex[topic]%
+  \printindex[formula]%
+  \printindex[figure]%
+  \printindex[error]%
+  \printindex[devfail]%
+}
+
+% ---------------- 16. Hyperref & Cross-Reference Helpers (Loaded Last) ----------
+\RequirePackage[hidelinks,bookmarksnumbered,bookmarksopen=false,pdfpagelabels]{hyperref}
+\hypersetup{pdftitle={Science Olympiad Division C Thermodynamics Competition Binder (2027 Rules)},
+            pdfauthor={Thermodynamics Division C Binder Swarm},
+            pdfsubject={Science Olympiad 2026-2027 Thermodynamics Division C}}
+
+\newcommand{\sref}[1]{\S\ref{#1}}
+\newcommand{\pref}[1]{\ifcompanion\else p.\,\pageref{#1}\fi}
+\newcommand{\spref}[1]{\S\ref{#1}\ifcompanion\else\ (p.\,\pageref{#1})\fi}
+\newcommand{\fref}[1]{Fig.~\ref{#1}}
+\newcommand{\tref}[1]{Table~\ref{#1}}
+\newcommand{\eref}[1]{(\ref{#1})}
+\newcommand{\seesec}[1]{$\rightarrow$\,\sref{#1}}
+
+\endinput

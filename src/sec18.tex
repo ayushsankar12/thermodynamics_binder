@@ -1,0 +1,499 @@
+% ============================================================================
+% sec18.tex — §18 Graphs, Data & Experimental Analysis
+% Target: 8 pages | Figures: fig:18:semilog-fit, fig:18:residuals
+% ============================================================================
+\binderchapter{18}{Graphs, Data \& Experimental Analysis (Semi-Log Linearization, Residual Diagnostics, Interpolation \& Numerical Table Extraction)}{Graphs, Data \& Experimental Analysis}{sec:18}
+\scopebanner{REQUIRED}[2027 Rules 5.I.b, 5.d.i--iv \& 5.II (All Tournament Levels)]
+
+\idxtopic{experimental data analysis}\idxtopic{graphical analysis!overview}
+Across the $N = 8$ Division~C tournament corpus (\sref{sec:22}), graph interpretation (\texttt{FMT-4}: $12.2\%$ of points) and experimental table/apparatus analysis (\texttt{FMT-5}: $20.2\%$ of the 2027 Cornell Invitational \texttt{E1}, including Tiebreaker~\texttt{\#1} worth $16.0\text{ pts}$!) carry decisive medal and tiebreaker weight \src{S25,S26,S28}. Moreover, 2027 Rule~\texttt{5.I.d.iv} strictly mandates that \emph{``No questions may require trigonometry or calculus''} \src{S01,S06}. This chapter equips competitors with zero-calculus algebraic tools to extract slopes, integrals, steam-table properties, linearized time constants ($\tau$), activation/vaporization enthalpies ($\Delta H_{\mathrm{vap}}$), ordinary least-squares (OLS) regression uncertainties, residual diagnostics, and Grubbs outlier tests in seconds.
+
+% ============================================================================
+\section{Systematic Reading of Thermodynamic Graphs \& Coordinate Transformations}\label{sec:18.1}
+\idxtopic{heating curves!slope and plateau reading}\idxtopic{phase diagrams!reading protocol}\idxtopic{P-V and T-S diagrams!area and slope}
+
+Whenever a graph appears on a written test, execute the \textbf{4-Step Axis Audit} before touching your calculator: (1)~read the exact axis variable and \textbf{SI prefix/unit} (e.g., $P$ in $\si{\kilo\pascal}$ vs.\ $\si{\mega\pascal}$ vs.\ $\si{\text{atm}}$; $V$ in $\si{\liter}$ vs.\ $\si{\cubic\centi\meter}$ vs.\ $\si{\cubic\meter}$; $1000/T$ in $\si{\per\kelvin}$ vs.\ $T$ in $\si{\celsius}$); (2)~check whether axes are \textbf{linear, semi-logarithmic ($\ln y$ or $\log_{10} y$), or log-log}; (3)~check whether the origin $(0,0)$ is shown or suppressed; and (4)~identify whether the physical quantity needed is a \textbf{point coordinate}, a \textbf{chord/tangent slope}, a \textbf{horizontal plateau width}, or a \textbf{signed enclosed area}.
+
+\begin{table}[h!]
+\centering
+\captionof{table}{Master Guide to Extracting Physical Quantities from the Six Canonical Thermodynamic Graphs \src{S12,S13,S25,S26}.}\label{tab:18:graphs}
+\footnotesize
+\setlength{\tabcolsep}{3.5pt}
+\renewcommand{\arraystretch}{1.16}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.19\linewidth} C{0.14\linewidth} >{\raggedright\arraybackslash}p{0.25\linewidth} >{\raggedright\arraybackslash}p{0.22\linewidth} >{\raggedright\arraybackslash}X@{}}
+\toprule
+\hdr{Graph Type} & \hdr{Axes $(x, y)$} & \hdr{What the Slope $\Delta y/\Delta x$ Means} & \hdr{What Plateau / Area Means} & \hdr{Classic Exam Trap \& Unit Rule} \\
+\midrule
+\textbf{1.~5-Stage Heating / Cooling Curve} (\sref{sec:04}) \idxtopic{heating curves!specific and latent heat extraction} &
+$x = Q$ $[\si{\joule}]$ or $t$ $[\si{\second}]$ \newline $y = T$ $[\si{\celsius}\text{ or }\si{\kelvin}]$ &
+$\text{Slope} = \dfrac{\Delta T}{\Delta Q} = \dfrac{1}{m c_p}$ \newline (or $\dfrac{\Delta T}{\Delta t} = \dfrac{\dot{Q}_{\mathrm{net}}}{m c_p}$) &
+\textbf{Horizontal Plateau} ($\Delta T = 0$): \newline $L = \dfrac{\Delta Q_{\mathrm{plateau}}}{m} = \dfrac{\dot{Q}\,\Delta t_{\mathrm{plat}}}{m}$ &
+\textbf{Steeper slope $=$ LOWER specific heat $c_p$!} Ice slope ($\SI{2.10}{\joule\per\gram\per\kelvin}$) is $2\times$ steeper than liquid water ($\SI{4.184}{\joule\per\gram\per\kelvin}$). \\
+\rowcolor{rowalt}
+\textbf{2.~Unary $P$--$T$ Phase Diagram} (\sref{sec:05}) \idxtopic{phase diagrams!Clapeyron slope} &
+$x = T$ $[\si{\kelvin}]$ \newline $y = P$ (or $\log_{10} P$) &
+Clapeyron co-existence slope: \newline $\dfrac{dP}{dT} = \dfrac{\Delta H_{\mathrm{trans}}}{T\,\Delta V_{\mathrm{trans}}}$ &
+Triple point $(T_{\mathrm{tp}}, P_{\mathrm{tp}})$: 3 phases coexist ($F=0$). Critical point $(T_c, P_c)$: L--V line ends. &
+$\mathrm{H_2O}$ solid--liquid line has \textbf{negative} slope ($v_{\mathrm{ice}} > v_{\mathrm{liq}}$); $\mathrm{CO_2}$ has positive S--L slope and $P_{\mathrm{tp}} = \SI{5.11}{\text{atm}} > \SI{1}{\text{atm}}$. \\
+\textbf{3.~Binary Alloy $T$--$w_B$ Phase Diagram} (\sref{sec:05}) \idxtopic{lever rule!binary phase diagram} &
+$x = w_B$ (wt\% or mol\%) \newline $y = T$ $[\si{\celsius}\text{ or }\si{\kelvin}]$ &
+Liquidus $T_L(w_B)$ (top boundary); Solidus $T_S(w_B)$ (bottom boundary). &
+\textbf{Horizontal Tie Line} in $L+\alpha$ zone: \newline $f_L = \dfrac{w_0 - w_\alpha}{w_L - w_\alpha},\ f_\alpha = \dfrac{w_L - w_0}{w_L - w_\alpha}$ &
+\textbf{Opposite-Arm Lever Rule:} Fraction of phase $L$ uses the segment length on the \emph{opposite} ($\alpha$) side of overall composition $w_0$ (\texttt{E1 Q10--14, Q30} \src{S25}). \\
+\rowcolor{rowalt}
+\textbf{4.~$P$--$V$ Work \& Cycle Diagram} (\sref{sec:07}, \sref{sec:09}) &
+$x = V$ $[\si{\cubic\meter}\text{ or }\si{\liter}]$ \newline $y = P$ $[\si{\pascal}\text{ or }\si{\kilo\pascal}]$ &
+Isotherm slope $= -\dfrac{P}{V}$; \newline Adiabat slope $= -\gamma\dfrac{P}{V}$ (steeper!). &
+\textbf{Area under path:} $W_{\mathrm{by}} = \int P\,dV$. \newline \textbf{Enclosed loop area:} $|W_{\mathrm{net}}|$. &
+$\si{\kilo\pascal}\times\si{\liter} = \mathbf{\SI{1}{\joule}}$! Clockwise loop: $W_{\mathrm{net,by}} > 0$ (engine); Counterclockwise: $W_{\mathrm{net,by}} < 0$ (refrigerator/pump). \\
+\textbf{5.~$T$--$S$ Entropy \& Cycle Diagram} (\sref{sec:08}, \sref{sec:09}) &
+$x = S$ $[\si{\joule\per\kelvin}]$ \newline $y = T$ $[\si{\kelvin}]$ &
+Isochoric slope $= \dfrac{T}{n C_{V,m}}$; \newline Isobaric slope $= \dfrac{T}{n C_{P,m}}$ (shallower!). &
+\textbf{Area under rev.\ path:} $Q_{\mathrm{rev}} = \int T\,dS$. \newline \textbf{Enclosed loop area:} $Q_{\mathrm{net}} = W_{\mathrm{net}}$. &
+$T$ \textbf{must be in Kelvin ($\si{\kelvin}$)} when computing area $\int T\,dS$! Carnot cycle is a rectangle: $W_{\mathrm{net}} = (T_H - T_C)\Delta S$. \\
+\rowcolor{rowalt}
+\textbf{6.~Transient Collector Curve $T(t)$} (\sref{sec:13}, \sref{sec:16}) &
+$x = t$ $[\si{\second}\text{ or }\si{\minute}]$ \newline $y = T(t)$ $[\si{\celsius}]$ &
+Initial tangent slope at $t=0$: \newline $\left(\dfrac{dT}{dt}\right)_0 = \dfrac{P_{\mathrm{abs}}}{C_{\mathrm{eff}}} = \dfrac{T_{\mathrm{ss}} - T_i}{\tau}$ &
+Asymptote $T_{\mathrm{ss}} = T_{\mathrm{room}} + P_{\mathrm{abs}}R_{\mathrm{th}}$. \newline At $t = \tau$: $T(\tau) - T_i = \SI{63.21}{\percent}(T_{\mathrm{ss}} - T_i)$. &
+Initial tangent intersects horizontal asymptote $y = T_{\mathrm{ss}}$ at exactly $t = \mathbf{1\tau}$ (\sref{sec:13}, \fref{fig:13:lumped-heating})! \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{shortcut}[Fast Cycle Coordinate Translator: $P$--$V \Longleftrightarrow T$--$S \Longleftrightarrow P$--$T \Longleftrightarrow V$--$T$ (\texttt{MIT E2 P2b, GGSO E4 Q12} \src{S26,S28})]
+\idxtopic{coordinate transformations of cycles (P-V, T-S, P-T, V-T)}
+To translate any 4-step ideal-gas cycle across unfamiliar coordinate planes in $<15\text{ s}$, map each leg by its invariant equation:
+\begin{itemize}
+  \item \textbf{Isochoric ($V = \text{const}$):} Vertical line on $P$--$V$; straight line through origin ($P = \frac{nR}{V}T$, slope $\propto 1/V$) on $P$--$T$; exponential curve $T = T_1 e^{(S-S_1)/(nC_{V,m})}$ (steeper than isobar by factor $\gamma = C_P/C_V$) on $T$--$S$.
+  \item \textbf{Isobaric ($P = \text{const}$):} Horizontal line on $P$--$V$ and $P$--$T$; straight line through origin ($V = \frac{nR}{P}T$, slope $\propto 1/P$) on $V$--$T$; exponential curve $T = T_1 e^{(S-S_1)/(nC_{P,m})}$ (shallower than isochor) on $T$--$S$.
+  \item \textbf{Isothermal ($T = \text{const}$):} Hyperbola $P = nRT/V$ on $P$--$V$; horizontal line on $T$--$S$; vertical line on $P$--$T$ and $V$--$T$.
+  \item \textbf{Reversible Adiabatic / Isentropic ($S = \text{const}$):} Steep curve $PV^\gamma = \text{const}$ on $P$--$V$; \textbf{vertical line} on $T$--$S$; power curve $P \propto T^{\gamma/(\gamma-1)}$ on $P$--$T$.
+\end{itemize}
+\end{shortcut}
+
+% ============================================================================
+\section{Steam Table \& Property Table Extraction: 1D Linear, 2D Bilinear \& Finite Differences}\label{sec:18.2}
+\idxtopic{steam tables!interpolation and state lookup}\idxtopic{interpolation!linear and bilinear}\idxformula{linear interpolation y(x) = y1 + ((x-x1)/(x2-x1))*(y2-y1)}
+
+\subsection{1. Pure-Substance State-Identification Protocol ($T, P, v, u, h, s, x$)}
+Given any two independent intensive properties of water/steam (Appendix~A Table~A.3 \src{S09}), compare against saturation values at the given $T$ or $P$:
+\begin{enumerate}
+  \item \textbf{Compressed (Subcooled) Liquid} ($T < T_{\mathrm{sat}}(P)$, or $P > P_{\mathrm{sat}}(T)$, or $y < y_f$ for $y \in \{v, u, h, s\}$): Approximate by saturated liquid at the \textbf{given temperature $T$}: $u(T,P) \approx u_f(T)$, $v(T,P) \approx v_f(T)$, $s(T,P) \approx s_f(T)$, and include the small pressure-work correction for enthalpy:
+  \begin{equation}\label{eq:18:subcooled}
+    h(T,P) \approx h_f(T) + v_f(T)\,\left[P - P_{\mathrm{sat}}(T)\right]
+  \end{equation}
+  \item \textbf{Saturated Two-Phase Liquid--Vapor Mixture} ($T = T_{\mathrm{sat}}(P)$ and $y_f \le y \le y_g$): Compute \textbf{vapor quality} $x = \frac{m_{\mathrm{vapor}}}{m_{\mathrm{total}}} \in [0, 1]$ from the known property $y \in \{v, u, h, s\}$, then evaluate all other properties via the linear lever rule ($y_{fg} \equiv y_g - y_f$):
+  \begin{equation}\label{eq:18:quality}
+    x = \frac{y - y_f}{y_g - y_f} = \frac{y - y_f}{y_{fg}} \quad\Longrightarrow\quad h = h_f + x\,h_{fg},\quad s = s_f + x\,s_{fg},\quad u = u_f + x\,u_{fg},\quad v = v_f + x\,v_{fg}
+  \end{equation}
+  \item \textbf{Superheated Vapor} ($T > T_{\mathrm{sat}}(P)$, or $P < P_{\mathrm{sat}}(T)$, or $y > y_g$): Use 1D linear or 2D bilinear interpolation in the Superheated Steam Table (or at low pressure $P \ll P_c$ where $Z \approx 1$, use ideal-gas relations $\Delta h \approx c_{p,\mathrm{steam}}\Delta T$ and $\Delta s \approx c_{p,\mathrm{steam}}\ln(T_2/T_1) - R_w\ln(P_2/P_1)$ with $R_w = R/M_{\mathrm{H_2O}} = \SI{0.46152}{\kilo\joule\per\kilogram\per\kelvin}$).
+\end{enumerate}
+
+\subsection{2. 1D Linear Interpolation, 2D Bilinear Interpolation \& Central Finite Differences}
+\idxformula{bilinear interpolation in 2D steam tables}\idxformula{central finite difference dy/dx = (y(x+h) - y(x-h))/(2h)}
+\begin{formulacard}[Algebra-Only Table Interpolation \& Finite-Difference Derivative Formulas (`Rule 5.d.iv`)]
+\begin{enumerate}
+  \item \textbf{1D Linear Interpolation \& Inverse Interpolation between $(x_1, y_1)$ and $(x_2, y_2)$:}
+  \begin{equation}\label{eq:18:lininterp}
+    y(x) = y_1 + \left(\frac{x - x_1}{x_2 - x_1}\right)(y_2 - y_1) = (1 - f)\,y_1 + f\,y_2 \quad\text{where } f = \frac{x - x_1}{x_2 - x_1} \in [0, 1]; \qquad x(y) = x_1 + \left(\frac{y - y_1}{y_2 - y_1}\right)(x_2 - x_1)
+  \end{equation}
+  \item \textbf{2D Bilinear Interpolation on a Rectangular $(T, P)$ Table Grid $[T_1, T_2] \times [P_1, P_2]$:}
+  Given four corner table entries $h_{11} = h(T_1,P_1)$, $h_{21} = h(T_2,P_1)$, $h_{12} = h(T_1,P_2)$, and $h_{22} = h(T_2,P_2)$, define fractional coordinates $f_T = \frac{T - T_1}{T_2 - T_1}$ and $f_P = \frac{P - P_1}{P_2 - P_1}$. First interpolate along $T$ at each pressure, then interpolate along $P$:
+  \begin{equation}\label{eq:18:bilinear}
+    \begin{aligned}
+      h(T, P_1) &= h_{11} + f_T(h_{21} - h_{11}), \qquad h(T, P_2) = h_{12} + f_T(h_{22} - h_{12}) \\
+      h(T, P) &= h(T, P_1) + f_P\left[h(T, P_2) - h(T, P_1)\right] = (1-f_T)(1-f_P)h_{11} + f_T(1-f_P)h_{21} + (1-f_T)f_P h_{12} + f_T f_P h_{22}
+    \end{aligned}
+  \end{equation}
+  \item \textbf{Central, Forward \& Backward Finite-Difference Derivatives from Discrete Table Rows (spacing $\Delta T$):}
+  When a competition problem asks for $\frac{dP_{\mathrm{sat}}}{dT}$ in the Clapeyron equation $\frac{dP_{\mathrm{sat}}}{dT} = \frac{h_{fg}}{T v_{fg}}$ (\texttt{2027 Cornell E1 Q27--28} \src{S25}) or heat capacity $C_P = \left(\frac{\partial H}{\partial T}\right)_P$ from a table of discrete temperatures $T - \Delta T, T, T + \Delta T$:
+  \begin{equation}\label{eq:18:finitediff}
+    \underbrace{\left(\frac{\Delta y}{\Delta T}\right)_{\mathrm{central}} = \frac{y(T + \Delta T) - y(T - \Delta T)}{2\,\Delta T}}_{\text{\textbf{Second-Order Accurate }} \mathcal{O}(\Delta T^2)\text{ --- \textbf{Always Prefer!}}}, \qquad
+    \left(\frac{\Delta y}{\Delta T}\right)_{\mathrm{fwd}} = \frac{y(T + \Delta T) - y(T)}{\Delta T}, \qquad
+    \left(\frac{\Delta y}{\Delta T}\right)_{\mathrm{bwd}} = \frac{y(T) - y(T - \Delta T)}{\Delta T}
+  \end{equation}
+  *(Why central difference wins: The quadratic Taylor curvature terms $+\frac{1}{2}y''(T)\Delta T^2$ and $-\frac{1}{2}y''(T)\Delta T^2$ cancel identically when subtracting $y(T+\Delta T) - y(T-\Delta T)$, reducing table derivative error by $10\times\text{--}30\times$ compared to one-sided differences!)*
+\end{enumerate}
+\end{formulacard}
+
+\begin{workedexample}[Steam-Table Quality, 2D Bilinear Interpolation \& Central-Difference Clapeyron Audit]{\texttt{2027 Cornell E1 Q27--29} \src{S09,S25}}{ex:18.1}
+(a)~From the NIST saturation table (\sref{app:A}), water at $T = \SI{85.0}{\celsius}$ has $P_{\mathrm{sat}} = \SI{57.868}{\kilo\pascal}$, $h_f = \SI{355.96}{\kilo\joule\per\kilogram}$, $h_g = \SI{2651.7}{\kilo\joule\per\kilogram}$, $s_f = \SI{1.1346}{\kilo\joule\per\kilogram\per\kelvin}$, and $s_g = \SI{7.5445}{\kilo\joule\per\kilogram\per\kelvin}$. Find the vapor quality $x$ and specific enthalpy $h$ of wet steam at $\SI{85.0}{\celsius}$ having $s = \SI{5.942025}{\kilo\joule\per\kilogram\per\kelvin}$.
+(b)~In a superheated steam table grid, $h(\SI{160}{\celsius}, \SI{0.30}{\mega\pascal}) = \SI{2782.3}{\kilo\joule\per\kilogram}$, $h(\SI{180}{\celsius}, \SI{0.30}{\mega\pascal}) = \SI{2824.4}{\kilo\joule\per\kilogram}$, $h(\SI{160}{\celsius}, \SI{0.40}{\mega\pascal}) = \SI{2776.1}{\kilo\joule\per\kilogram}$, and $h(\SI{180}{\celsius}, \SI{0.40}{\mega\pascal}) = \SI{2819.5}{\kilo\joule\per\kilogram}$. Compute $h(\SI{172.0}{\celsius}, \SI{0.350}{\mega\pascal})$ via 2D bilinear interpolation.
+(c)~Using $P_{\mathrm{sat}}(\SI{95.0}{\celsius}) = \SI{84.609}{\kilo\pascal}$, $P_{\mathrm{sat}}(\SI{105.0}{\celsius}) = \SI{120.90}{\kilo\pascal}$, and at $\SI{100.0}{\celsius}$ ($\SI{373.15}{\kelvin}$): $v_f = \SI{0.0010435}{\cubic\meter\per\kilogram}$, $v_g = \SI{1.6718}{\cubic\meter\per\kilogram}$, estimate the latent heat of vaporization $h_{fg}(\SI{100.0}{\celsius})$ via the central finite-difference Clapeyron equation and compare to the exact NIST value $\SI{2256.4}{\kilo\joule\per\kilogram}$.
+\par\smallskip\noindent
+\textbf{Solution.}
+(a)~Since $s_f < s < s_g$, the state is inside the two-phase dome. By \eref{eq:18:quality}:
+$$x = \frac{s - s_f}{s_g - s_f} = \frac{5.942025 - 1.1346}{7.5445 - 1.1346} = \frac{4.807425}{6.4099} = \mathbf{0.75000} \implies h = 355.96 + 0.75000(2651.7 - 355.96) = \mathbf{\SI{2077.77}{\kilo\joule\per\kilogram}}$$
+(b)~Fractional coordinates: $f_T = \frac{172.0 - 160.0}{180.0 - 160.0} = 0.600$ and $f_P = \frac{0.350 - 0.300}{0.400 - 0.300} = 0.500$. By \eref{eq:18:bilinear}:
+\begin{align*}
+  h(\SI{172}{\celsius}, \SI{0.30}{\mega\pascal}) &= 2782.3 + 0.600(2824.4 - 2782.3) = \SI{2807.56}{\kilo\joule\per\kilogram} \\
+  h(\SI{172}{\celsius}, \SI{0.40}{\mega\pascal}) &= 2776.1 + 0.600(2819.5 - 2776.1) = \SI{2802.14}{\kilo\joule\per\kilogram} \\
+  h(\SI{172.0}{\celsius}, \SI{0.350}{\mega\pascal}) &= 2807.56 + 0.500(2802.14 - 2807.56) = \mathbf{\SI{2804.85}{\kilo\joule\per\kilogram}}
+\end{align*}
+(c)~By \eref{eq:18:finitediff} with $\Delta T = \SI{5.0}{\kelvin}$, the central-difference saturation slope at $\SI{100.0}{\celsius}$ is $\left(\frac{\Delta P}{\Delta T}\right)_{\mathrm{central}} = \frac{120.90 - 84.609}{2(5.0)} = \SI{3.6291}{\kilo\pascal\per\kelvin}$. With $v_{fg} = v_g - v_f = 1.6718 - 0.0010435 = \SI{1.6707565}{\cubic\meter\per\kilogram}$, the Clapeyron equation yields:
+$$h_{fg} = T\,v_{fg}\left(\frac{\Delta P}{\Delta T}\right)_{\mathrm{central}} = (\SI{373.15}{\kelvin})(\SI{1.6707565}{\cubic\meter\per\kilogram})(\SI{3.6291}{\kilo\pascal\per\kelvin}) = \mathbf{\SI{2262.5}{\kilo\joule\per\kilogram}} \quad (\text{only } \mathbf{+0.27\%}\text{ from NIST }\SI{2256.4}{\kilo\joule\per\kilogram}\text{!})$$
+*(By contrast, a one-sided forward difference $\frac{120.90 - 101.42}{5.0} = \SI{3.896}{\kilo\pascal\per\kelvin}$ gives $\SI{2429}{\kilo\joule\per\kilogram}$, a $+7.6\%$ error!)*
+\verifiedby{Lagrange 4-corner expansion $0.2(2782.3)+0.3(2824.4)+0.2(2776.1)+0.3(2819.5)=\SI{2804.85}{\kilo\joule\per\kilogram}$ and Python check \texttt{sec18:ex18.1}.}
+\end{workedexample}
+
+% ============================================================================
+\section{Graphical Slope \& Zero-Calculus Geometric / Trapezoidal Area Integration (\texttt{Rule 5.d.iii--iv})}\label{sec:18.3}
+\idxtopic{numerical integration!trapezoidal rule and geometric areas}\idxformula{composite trapezoidal rule Area = sum 0.5*(y_{k-1} + y_k)*(x_k - x_{k-1})}
+
+Under Rule~\texttt{5.I.d.iii--iv}, every thermodynamic integral --- boundary work $W_{\mathrm{by}} = \int_{V_1}^{V_2} P\,dV$, reversible heat transfer $Q_{\mathrm{rev}} = \int_{S_1}^{S_2} T\,dS$, enthalpy change $\Delta H = \int_{T_1}^{T_2} C_P(T)\,dT$, or total band radiance $L_{\mathrm{band}} = \int_{\lambda_1}^{\lambda_2} L_\lambda(\lambda,T)\,d\lambda$ (\texttt{2027 Cornell E1 Q36d} \src{S25}) --- can be evaluated without calculus by \textbf{geometric decomposition} or the \textbf{composite trapezoidal rule}:
+\begin{enumerate}
+  \item \textbf{Geometric Shape Decomposition on $P$--$V$ and $T$--$S$ Diagrams (\texttt{GGSO E4 Q12--13, Cornell E6 Sec IV} \src{S28,S30}):}
+  \begin{itemize}
+    \item \emph{Straight-Line Chord from $(V_1, P_1)$ to $(V_2, P_2)$:} The region under a straight chord down to $P=0$ is a \textbf{trapezoid} of mean height $P_{\mathrm{avg}} = \frac{1}{2}(P_1 + P_2)$:
+    \begin{equation}\label{eq:18:chordwork}
+      W_{\mathrm{by,chord}} = \frac{P_1 + P_2}{2}\,(V_2 - V_1)
+    \end{equation}
+    \item \emph{Closed Polygonal Cycle (Triangle, Rectangle, Parallelogram, Trapezoid):}
+    $$\left|W_{\mathrm{net,triangle}}\right| = \frac{1}{2}\,\Delta V_{\mathrm{base}}\,\Delta P_{\mathrm{height}}, \qquad \left|W_{\mathrm{net,rect}}\right| = (V_{\max} - V_{\min})(P_{\max} - P_{\min})$$
+    \item \emph{Circular or Elliptical Cycle / Quarter-Circle Arc of Semi-Axes $a = \Delta V/2$ and $b = \Delta P/2$ (\texttt{GGSO E4 Q13a}):}
+    $$\left|W_{\mathrm{net,ellipse}}\right| = \pi\,a\,b = \frac{\pi}{4}(V_{\max} - V_{\min})(P_{\max} - P_{\min}), \qquad A_{\mathrm{quarter\text{-}ellipse}} = \frac{\pi}{4}\,R_V\,R_P$$
+  \end{itemize}
+  \item \textbf{Composite Trapezoidal Rule for Discrete Tabulated Data $(x_0, y_0), (x_1, y_1), \dots, (x_N, y_N)$:}
+  \begin{equation}\label{eq:18:trap}
+    \text{Area} \approx \sum_{k=1}^N \frac{y_{k-1} + y_k}{2}\,(x_k - x_{k-1}) \xrightarrow{\text{uniform spacing }\Delta x} \Delta x\left[\frac{1}{2}y_0 + y_1 + y_2 + \dots + y_{N-1} + \frac{1}{2}y_N\right]
+  \end{equation}
+  \item \textbf{Grid-Square Counting for Continuous Plotted Curves (\texttt{Cornell E1 Q36d} Planck Curve):}
+  Compute the physical energy/work value of \textbf{one grid box} $A_{\mathrm{box}} = (\Delta x_{\mathrm{box}})(\Delta y_{\mathrm{box}})$, count the number of full boxes $N_{\mathrm{full}}$ plus half the number of boundary-intersected boxes $\frac{1}{2}N_{\mathrm{partial}}$ under the curve, and multiply: $\text{Area} \approx (N_{\mathrm{full}} + 0.5\,N_{\mathrm{partial}})A_{\mathrm{box}}$.
+\end{enumerate}
+
+\begin{workedexample}[Composite Trapezoidal $P$--$V$ Work Integration from Discrete Pressure Sensor Logs]{Rule 5.d.iii--iv}{ex:18.2}
+During a non-standard gas expansion in an insulated cylinder, a data logger records pressure $P$ at five volume stations: $(V_0, P_0) = (\SI{2.00}{\liter}, \SI{420.0}{\kilo\pascal})$, $(V_1, P_1) = (\SI{3.00}{\liter}, \SI{310.0}{\kilo\pascal})$, $(V_2, P_2) = (\SI{4.00}{\liter}, \SI{240.0}{\kilo\pascal})$, $(V_3, P_3) = (\SI{5.00}{\liter}, \SI{195.0}{\kilo\pascal})$, and $(V_4, P_4) = (\SI{6.00}{\liter}, \SI{165.0}{\kilo\pascal})$. Calculate the boundary work $W_{\mathrm{by}}$ done by the gas using the composite trapezoidal rule.
+\par\smallskip\noindent
+\textbf{Solution.}
+Note that $\SI{1}{\kilo\pascal}\times\SI{1}{\liter} = (\SI{1000}{\pascal})(\SI{1e-3}{\cubic\meter}) = \SI{1.000}{\joule}$. Because the volume step is uniform at $\Delta V = \SI{1.00}{\liter}$, \eref{eq:18:trap} gives:
+$$W_{\mathrm{by}} = (\SI{1.00}{\liter})\left[\frac{420.0 + 310.0}{2} + \frac{310.0 + 240.0}{2} + \frac{240.0 + 195.0}{2} + \frac{195.0 + 165.0}{2}\right]\si{\kilo\pascal} = 365.0 + 275.0 + 217.5 + 180.0 = \mathbf{\SI{1037.5}{\joule}}$$
+\verifiedby{Uniform-step end-weighted sum $\Delta V[0.5(420.0) + 310.0 + 240.0 + 195.0 + 0.5(165.0)] = \SI{1037.5}{\joule}$ and Python check \texttt{sec18:ex18.2}.}
+\end{workedexample}
+
+% ============================================================================
+\section{Algebraic Linearization Catalog: Semi-Log Transients, Arrhenius/Clapeyron \& Power Laws}\label{sec:18.4}
+\idxtopic{linearization of nonlinear models}\idxtopic{semi-log plot!time constant extraction}\idxformula{semi-log linearization ln((T-T_ss)/(T_i-T_ss)) = -t/tau}
+
+Converting a curved exponential or power-law relationship into a straight line $Y = m X + b$ lets you extract physical parameters directly from the slope $m$ and intercept $b$ using a ruler or your Class~III calculator's linear regression mode (\sref{sec:19.4}):
+
+\begin{table}[h!]
+\centering
+\captionof{table}{Algebraic Linearization Transformations for Science Olympiad Thermodynamics (`Rule 5.d.i--iv` Compliant) \src{S12,S16,S21}.}\label{tab:18:linearize}
+\footnotesize
+\setlength{\tabcolsep}{3.5pt}
+\renewcommand{\arraystretch}{1.22}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.22\linewidth} >{\raggedright\arraybackslash}p{0.24\linewidth} C{0.18\linewidth} >{\raggedright\arraybackslash}p{0.17\linewidth} >{\raggedright\arraybackslash}X@{}}
+\toprule
+\hdr{Physical Model} & \hdr{Nonlinear Governing Equation} & \hdr{Linearized Axes $(X,\ Y)$} & \hdr{Slope $m$ \& Intercept $b$} & \hdr{Parameter Extraction Formulas} \\
+\midrule
+\textbf{1.~Lumped Heating / Cooling Transient} (\sref{sec:13.2}, \sref{sec:16}) &
+$T(t) = T_{\mathrm{ss}} - (T_{\mathrm{ss}} - T_i)e^{-t/\tau}$ \newline ($\theta(t) = \dfrac{T(t) - T_{\mathrm{ss}}}{T_i - T_{\mathrm{ss}}} = e^{-t/\tau}$) &
+$X = t$ $[\si{\second}\text{ or }\si{\minute}]$ \newline $Y = \ln\!\left(\dfrac{T(t) - T_{\mathrm{ss}}}{T_i - T_{\mathrm{ss}}}\right)$ &
+$m = -\dfrac{1}{\tau}$ \newline $b = 0$ &
+$\tau = -\dfrac{1}{m} = R_{\mathrm{th}} C_{\mathrm{eff}}$ \newline *(If $Y = \ln|T_{\mathrm{ss}} - T(t)|$, then $b = \ln|T_{\mathrm{ss}} - T_i|$)* \\
+\rowcolor{rowalt}
+\textbf{2.~Clausius--Clapeyron Vapor Pressure} (\sref{sec:05}) \idxformula{Clausius-Clapeyron linear plot ln P vs 1/T} &
+$P_{\mathrm{sat}}(T) = P_0 \exp\!\left[-\dfrac{\Delta H_{\mathrm{vap}}}{R}\!\left(\dfrac{1}{T} - \dfrac{1}{T_0}\right)\right]$ &
+$X = \dfrac{1}{T}$ $[\si{\per\kelvin}]$ \newline $Y = \ln P_{\mathrm{sat}}$ &
+$m = -\dfrac{\Delta H_{\mathrm{vap}}}{R}$ \newline $b = \ln P_0 + \dfrac{\Delta H_{\mathrm{vap}}}{R T_0}$ &
+$\Delta H_{\mathrm{vap}} = -R\,m$ \newline *(If $Y = \log_{10} P$, then $\Delta H_{\mathrm{vap}} = -2.302585\,R\,m$!)* \\
+\textbf{3.~Van't Hoff / Arrhenius Rate \& Equilibrium} (\sref{sec:08}) &
+$K_{\mathrm{eq}}(T) = \exp\!\left(-\dfrac{\Delta H^\circ}{R T} + \dfrac{\Delta S^\circ}{R}\right)$ \newline $k(T) = A e^{-E_a / (R T)}$ &
+$X = \dfrac{1}{T}$ $[\si{\per\kelvin}]$ \newline $Y = \ln K_{\mathrm{eq}}$ (or $\ln k$) &
+$m = -\dfrac{\Delta H^\circ}{R}$ \newline $b = +\dfrac{\Delta S^\circ}{R}$ &
+$\Delta H^\circ = -R\,m$ \newline $\Delta S^\circ = +R\,b$ \newline $E_a = -R\,m$ \\
+\rowcolor{rowalt}
+\textbf{4.~Polytropic Gas Process} (\sref{sec:07}) &
+$P V^n = C_{\mathrm{poly}}$ &
+$X = \ln V$ \newline $Y = \ln P$ &
+$m = -n$ \newline $b = \ln C_{\mathrm{poly}}$ &
+Polytropic index $n = -m$ \newline ($n=0$ isobar, $n=1$ isotherm, $n=\gamma$ adiabat) \\
+\textbf{5.~Convection / Lamp Scaling Power Law} (\sref{sec:11}, \sref{sec:15}) &
+$\mathrm{Nu} = C\,\mathrm{Ra}^n$ \newline or $\mathrm{TG}(h) = A_0 (h - z_{\mathrm{eff}})^{-n}$ &
+$X = \ln\mathrm{Ra}$ (or $\ln(h-z_{\mathrm{eff}})$) \newline $Y = \ln\mathrm{Nu}$ (or $\ln\mathrm{TG}$) &
+$m = n$ (or $-n$) \newline $b = \ln C$ &
+Scaling exponent $n = m$; \newline prefactor $C = e^b$ \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{shortcut}[Three-Point Equidistant Algebraic Formula for Unknown $T_{\mathrm{ss}}$ (Before Semi-Log Plotting!)]
+\idxformula{three-point equidistant asymptote T_ss = (T1*T3 - T2^2)/(T1 + T3 - 2*T2)}
+To plot $Y = \ln[(T(t) - T_{\mathrm{ss}})/(T_i - T_{\mathrm{ss}})]$ during a 10-minute heat-lamp run, you need the asymptotic stagnation temperature $T_{\mathrm{ss}}$, which has \emph{not yet been reached} at $t = \SI{10}{\minute}$! Pick any \textbf{three equally spaced time points} $t_1$, $t_2 = t_1 + \Delta t$, and $t_3 = t_1 + 2\Delta t$ (e.g., $t = 0, 5, \SI{10}{\minute}$ or $t = 0, 4, \SI{8}{\minute}$) with measured temperatures $T_1, T_2, T_3$. Because $T_{\mathrm{ss}} - T_2 = (T_{\mathrm{ss}} - T_1)e^{-\Delta t/\tau}$ and $T_{\mathrm{ss}} - T_3 = (T_{\mathrm{ss}} - T_1)e^{-2\Delta t/\tau}$, the ratio $\frac{T_{\mathrm{ss}} - T_2}{T_{\mathrm{ss}} - T_1} = \frac{T_{\mathrm{ss}} - T_3}{T_{\mathrm{ss}} - T_2} = e^{-\Delta t/\tau}$ is identical! Cross-multiplying $(T_{\mathrm{ss}} - T_2)^2 = (T_{\mathrm{ss}} - T_1)(T_{\mathrm{ss}} - T_3)$ cancels $T_{\mathrm{ss}}^2$ and gives the exact closed-form algebraic solution for $T_{\mathrm{ss}}$ and $\tau$:
+\begin{equation}\label{eq:18:3ptTss}
+  \boxed{T_{\mathrm{ss}} = \frac{T_1 T_3 - T_2^2}{T_1 + T_3 - 2\,T_2}, \qquad \tau = \frac{\Delta t}{\ln\!\left(\dfrac{T_2 - T_1}{T_3 - T_2}\right)}}
+\end{equation}
+\end{shortcut}
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=0.90\linewidth,
+    height=5.0cm,
+    font=\scriptsize,
+    xlabel={Heating Time $t$ $[\si{\minute}]$ ($\SI{0}{\second}$ to $\SI{600}{\second}$ during 2027 Collector Calibration Run)},
+    ylabel={Linearized Log Coordinate $Y = \ln\!\left(\dfrac{T_{\mathrm{ss}} - T(t)}{T_{\mathrm{ss}} - T_i}\right)$},
+    xmin=-0.3, xmax=10.5,
+    ymin=-0.75, ymax=0.06,
+    xtick={0,2,4,6,8,10},
+    ytick={0,-0.132,-0.265,-0.397,-0.530,-0.662},
+    yticklabels={$0.000$, $-0.132$, $-0.265$, $-0.397$, $-0.530$, $-0.662$},
+    grid=both,
+    grid style={gray!25, dashed},
+    legend style={at={(0.03,0.18)}, anchor=south west, font=\scriptsize, fill=white, draw=navy}
+]
+  % Confidence band around OLS line
+  \addplot[teal!20, fill=teal!15, draw=none, forget plot] coordinates {(0,0.015) (10,-0.647) (10,-0.677) (0,-0.015)} -- cycle;
+  \addplot[teal, semithick, dashed] coordinates {(0,0.015) (10,-0.647)};
+  \addplot[teal, semithick, dashed, forget plot] coordinates {(0,-0.015) (10,-0.677)};
+  \addlegendentry{$95\%$ OLS Regression Confidence Band ($\pm 2 s_{y|t}$)}
+
+  % Best-fit OLS straight line y = -0.066194 * t + 0.00005
+  \addplot[navy, very thick, domain=0:10.2] {-0.066194*x + 0.00005};
+  \addlegendentry{OLS Best-Fit Line: $Y = -\dfrac{1}{\tau}\,t = (\SI{-0.06619}{\per\minute})\,t$ ($R^2 = 0.999997$)}
+
+  % Experimental data points with error bars
+  \addplot[only marks, mark=*, mark size=2.2pt, rust,
+           error bars/.cd, y dir=both, y explicit]
+    coordinates {
+      (0,  0.00000) +- (0, 0.005)
+      (2, -0.13210) +- (0, 0.006)
+      (4, -0.26527) +- (0, 0.007)
+      (6, -0.39675) +- (0, 0.008)
+      (8, -0.52975) +- (0, 0.009)
+      (10,-0.66165) +- (0, 0.010)
+    };
+  \addlegendentry{Transformed Data $Y_k = \ln[(T_{\mathrm{ss}}-T_k)/(T_{\mathrm{ss}}-T_i)] \pm u(Y_k)$}
+
+  % Slope triangle annotation
+  \draw[rust, thick] (axis cs:4.0,-0.2647) -- (axis cs:8.0,-0.2647) node[midway, above, font=\scriptsize\bfseries] {$\Delta t = \SI{4.00}{\minute} = \SI{240}{\second}$};
+  \draw[rust, thick] (axis cs:8.0,-0.2647) -- (axis cs:8.0,-0.5295) node[midway, right, font=\scriptsize\bfseries] {$\Delta Y = -0.2648$};
+  \node[anchor=north east, font=\scriptsize\bfseries, fill=boxbg, draw=navy, inner sep=2pt] at (axis cs:10.1,-0.02)
+    {Slope $m = -\dfrac{1}{\tau} = \SI{-0.066194}{\per\minute} \implies \tau = \mathbf{\SI{15.110 \pm 0.010}{\minute}} = \mathbf{\SI{906.6 \pm 0.6}{\second}}$};
+\end{axis}
+\end{tikzpicture}
+\captionof{figure}{Linearized semi-log regression plot $Y = \ln[(T_{\mathrm{ss}} - T(t))/(T_{\mathrm{ss}} - T_i)] = -t/\tau$ for extracting the thermal time constant $\tau = R_{\mathrm{th}}C_{\mathrm{eff}}$ and verifying first-order lumped-capacitance behavior (\fref{fig:13:lumped-heating}, Worked Example~\ref{ex:18.3}). Notice that propagating a constant temperature uncertainty $u(T)$ through $Y = \ln(T_{\mathrm{ss}} - T)$ yields slightly growing semi-log error bars $u(Y_k) = u(T)/(T_{\mathrm{ss}} - T_k)$ as $T_k$ approaches $T_{\mathrm{ss}}$ \src{S12,S21}.}\label{fig:18:semilog-fit}
+\idxfig{Linearized Semi-Log Plot for Thermal Time Constant Parameter Extraction}
+\end{center}
+
+% ============================================================================
+\section{Ordinary Least Squares (OLS), Residual Diagnostics, Error Metrics \& Outlier Tests}\label{sec:18.5}
+\idxtopic{ordinary least squares (OLS) regression}\idxtopic{residual diagnostic plots}\idxtopic{Grubbs outlier test}
+
+\subsection{1. Ordinary Least Squares (OLS) Algebraic Formulas \& Residual Diagnostic Patterns}
+Given $N$ data pairs $(x_1, y_1), \dots, (x_N, y_N)$ ($N \ge 3$), compute sample means $\bar{x} = \frac{1}{N}\sum_{k=1}^N x_k$ and $\bar{y} = \frac{1}{N}\sum_{k=1}^N y_k$, and the three centered sums of squares $S_{xx}$, $S_{yy}$, and $S_{xy}$ \src{S21}:
+\begin{equation}\label{eq:18:ols}
+  \begin{aligned}
+    S_{xx} &= \sum_{k=1}^N (x_k - \bar{x})^2 = \sum x_k^2 - N\bar{x}^2, \qquad S_{yy} = \sum_{k=1}^N (y_k - \bar{y})^2 = \sum y_k^2 - N\bar{y}^2, \qquad S_{xy} = \sum_{k=1}^N (x_k - \bar{x})(y_k - \bar{y}) = \sum x_k y_k - N\bar{x}\bar{y} \\
+    m &= \frac{S_{xy}}{S_{xx}}, \qquad b = \bar{y} - m\,\bar{x}, \qquad R^2 = r^2 = \frac{S_{xy}^2}{S_{xx} S_{yy}} \in [0, 1], \qquad s_{y|x} = \sqrt{\frac{\sum r_k^2}{N - 2}} = \sqrt{\frac{S_{yy} - m S_{xy}}{N - 2}} \\
+    u(m) &= \frac{s_{y|x}}{\sqrt{S_{xx}}} = |m|\sqrt{\frac{1/R^2 - 1}{N - 2}}, \qquad u(b) = s_{y|x}\sqrt{\frac{1}{N} + \frac{\bar{x}^2}{S_{xx}}}, \qquad u\left(\hat{y}_{\mathrm{pred}}(x_0)\right) = s_{y|x}\sqrt{1 + \frac{1}{N} + \frac{(x_0 - \bar{x})^2}{S_{xx}}}
+  \end{aligned}
+\end{equation}
+
+Never rely on $R^2 > 0.99$ alone to validate a physical model! Always inspect the \textbf{residuals} $r_k = y_{\mathrm{meas},k} - \hat{y}_{\mathrm{fit}}(x_k) = y_k - (m x_k + b)$ (which satisfy $\sum_{k=1}^N r_k = 0$ and $\sum_{k=1}^N x_k r_k = 0$ identically) plotted against $x_k$ (\fref{fig:18:residuals}):
+\begin{itemize}
+  \item \textbf{Pattern A --- Random White-Noise Scatter Around $r_k = 0$:} Confirms that the functional model is physically well-specified and deviations are purely random measurement noise ($|r_k| \lesssim 2 s_{y|x}$, zero trend or curvature).
+  \item \textbf{Pattern B --- Systematic U-Shaped or Inverted-U Parabolic Curvature:} Proves an \textbf{unmodeled nonlinear physical mechanism}! For example, fitting a straight line $T(t) = T_i + m t$ to a collector heating curve without accounting for exponential parasitic heat loss $(T - T_{\mathrm{room}})/R_{\mathrm{th}}$ --- or choosing too high a $T_{\mathrm{ss}}$ in a semi-log plot --- produces a characteristic inverted-U or U-shaped residual curve.
+  \item \textbf{Pattern C --- Step Discontinuity / Regime Jump at $t = t^*$:} Exposes an abrupt experimental disturbance during the run: e.g., the clear plastic film cap slipped off at $t = \SI{6}{\minute}$ (triggering sudden evaporative cooling), the thermometer probe slipped deeper across the thermocline, or a phase boundary was crossed.
+\end{itemize}
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=0.92\linewidth,
+    height=4.8cm,
+    font=\scriptsize,
+    xlabel={Heating Time $t_k$ $[\si{\minute}]$ Across a 10-Minute Calibration Run},
+    ylabel={Residual $r_k = T_{\mathrm{meas},k} - T_{\mathrm{fit},k}$ $[\si{\celsius}]$},
+    xmin=-0.3, xmax=10.5,
+    ymin=-1.35, ymax=1.35,
+    xtick={0,1,2,3,4,5,6,7,8,9,10},
+    ytick={-1.2,-0.8,-0.4,0,0.4,0.8,1.2},
+    grid=both,
+    grid style={gray!25, dashed},
+    legend style={at={(0.02,0.97)}, anchor=north west, font=\scriptsize, fill=white, draw=navy}
+]
+  % Zero baseline and +-0.10 C noise band
+  \addplot[black, semithick] coordinates {(-0.3,0) (10.5,0)};
+  \addplot[gray, densely dotted, forget plot] coordinates {(-0.3,0.12) (10.5,0.12)};
+  \addplot[gray, densely dotted, forget plot] coordinates {(-0.3,-0.12) (10.5,-0.12)};
+
+  % Pattern A: Valid exponential model (random white noise within +-0.08 C)
+  \addplot[navy, thick, mark=*, mark size=1.8pt] coordinates {
+    (0,-0.01) (1,0.04) (2,-0.02) (3,0.05) (4,-0.04) (5,0.02) (6,0.03) (7,-0.05) (8,-0.01) (9,0.04) (10,-0.03)
+  };
+  \addlegendentry{Pattern A (Random White Noise $|r_k|\le\SI{0.05}{\celsius}$): Valid First-Order Model}
+
+  % Pattern B: Unmodeled heat loss curvature (fitting linear T = T_i + m*t to exponential curve)
+  \addplot[rust, very thick, dashed, mark=square*, mark size=1.8pt] coordinates {
+    (0,-0.82) (1,-0.18) (2,0.34) (3,0.72) (4,0.96) (5,1.06) (6,1.02) (7,0.84) (8,0.52) (9,0.06) (10,-0.54)
+  };
+  \addlegendentry{Pattern B (Inverted-U Curvature): Unmodeled Heat Loss / Wrong $T_{\mathrm{ss}}$}
+
+  % Pattern C: Stratification / lid-slip step jump at t = 6 min
+  \addplot[amber, very thick, dashdotted, mark=triangle*, mark size=2.2pt] coordinates {
+    (0,0.02) (1,0.05) (2,-0.01) (3,0.04) (4,0.01) (5,0.03) (6,-0.92) (7,-1.05) (8,-1.12) (9,-1.16) (10,-1.20)
+  };
+  \addlegendentry{Pattern C (Step Drop at $t=\SI{6}{\minute}$): Probe Slipped Deeper or Vapor Cap Dislodged}
+
+  \draw[->, amber, thick] (axis cs:5.6,-0.55) -- (axis cs:5.95,-0.88);
+  \node[anchor=east, font=\scriptsize\bfseries, text=amber, fill=white, inner sep=1pt] at (axis cs:5.55,-0.55) {Discontinuity at $t^*=\SI{6}{\minute}$};
+\end{axis}
+\end{tikzpicture}
+\captionof{figure}{Three diagnostic residual patterns $r_k = T_{\mathrm{meas},k} - T_{\mathrm{fit},k}$ versus time $t_k$. Pattern~A (random scatter inside $\pm 2u_{\mathrm{rand}}$) confirms a physically valid model; Pattern~B (arch curvature) reveals unmodeled heat loss or an erroneous asymptote $T_{\mathrm{ss}}$; Pattern~C (abrupt step shift) flags a mid-run probe depth shift or vapor-cover failure \src{S21}.}\label{fig:18:residuals}
+\idxfig{Regression Residual Diagnostic Patterns (Random Noise vs Curvature vs Jump)}
+\end{center}
+
+\subsection{2. Percent Error vs.\ Percent Difference vs.\ 2027 Prediction Estimate ($\mathrm{PE}$) \& Defensible Outlier Tests}
+\idxtopic{percent error vs percent difference}\idxformula{Grubbs test statistic G = max|x_i - x_bar|/s}
+\begin{itemize}
+  \item \textbf{Three Distinct Comparison Metrics (Never Confuse Their Denominators!):}
+  \begin{equation}\label{eq:18:metrics}
+    \text{\textbf{\% Error}} = \frac{|x_{\mathrm{exp}} - x_{\mathrm{true}}|}{|x_{\mathrm{true}}|}\times 100\%, \quad
+    \text{\textbf{\% Diff}} = \frac{|x_1 - x_2|}{\tfrac{1}{2}(x_1 + x_2)}\times 100\%, \quad
+    \text{\textbf{Rule 6.f }}\mathrm{PE} = 1 - \frac{|T_f - T_{\mathrm{pred}}|}{T_f}\ (^\circ\mathrm{C})
+  \end{equation}
+  *(Use \textbf{Percent Error} when comparing an experimental value $x_{\mathrm{exp}}$ against an authoritative NIST reference $x_{\mathrm{true}}$; use \textbf{Percent Difference} when comparing two experimental trials $x_1, x_2$ of equal standing where neither is ``true''; use \textbf{Rule~\texttt{6.f} $\mathrm{PE}$} with measured $T_f$ in $\si{\celsius}$ in the denominator for 2027 Part~II scoring \src{S01}).*
+  \item \textbf{Defensible Outlier Identification Without Cherry-Picking (Grubbs' Test \& Tukey IQR Fence) \src{S21}:}
+  Never delete a data point merely because it lowers $R^2$! An outlier $x_{\mathrm{suspect}}$ in $N$ replicate trials ($s = \sqrt{\frac{1}{N-1}\sum (x_i - \bar{x})^2}$) may be excluded \textbf{only} if (1)~a physical anomaly was logged during the run (e.g., power flicker, spilled water, dislodged lid) \textbf{OR} (2)~it exceeds the two-sided \textbf{Grubbs' Test critical value $G_{\mathrm{crit}}(\alpha=0.05, N)$} (or lies outside the non-parametric \textbf{Tukey Fence} $[Q_1 - 1.5\,\mathrm{IQR},\ Q_3 + 1.5\,\mathrm{IQR}]$ where $\mathrm{IQR} = Q_3 - Q_1$), and both the raw and filtered fits are reported:
+  \begin{equation}\label{eq:18:grubbs}
+    G = \frac{\max_{1\le i\le N}|x_i - \bar{x}|}{s} > G_{\mathrm{crit}}(\alpha=0.05, N) = \frac{N - 1}{\sqrt{N}}\sqrt{\frac{t_{\alpha/(2N),\,N-2}^2}{N - 2 + t_{\alpha/(2N),\,N-2}^2}}
+  \end{equation}
+  \begin{center}
+  \footnotesize
+  \setlength{\tabcolsep}{5.5pt}
+  \begin{tabular}{@{}lcccccccccc@{}}
+  \toprule
+  \textbf{Sample Size $N$} & $3$ & $4$ & $5$ & $\mathbf{6}$ & $7$ & $8$ & $9$ & $10$ & $12$ & $15$ \\
+  \midrule
+  \textbf{Grubbs $G_{\mathrm{crit}}$ ($\alpha=0.05$, $95\%$)} & $1.155$ & $1.481$ & $1.715$ & $\mathbf{1.887}$ & $2.020$ & $2.126$ & $2.215$ & $2.290$ & $2.412$ & $2.549$ \\
+  \textbf{Grubbs $G_{\mathrm{crit}}$ ($\alpha=0.01$, $99\%$)} & $1.155$ & $1.496$ & $1.764$ & $\mathbf{1.973}$ & $2.139$ & $2.274$ & $2.387$ & $2.482$ & $2.636$ & $2.806$ \\
+  \bottomrule
+  \end{tabular}
+  \end{center}
+\end{itemize}
+
+% ============================================================================
+\section{Complete End-to-End Worked Experimental Data-Analysis Set}\label{sec:18.6}
+
+\begin{workedexample}[End-to-End Collector Transient Dataset: 3-Point $T_{\mathrm{ss}}$, Semi-Log OLS $\tau$, Uncertainty \& Grubbs Test]{Rules 5.I.b, 5.d.i--iv, 5.II}{ex:18.3}
+A team logs water temperature $T(t)$ inside their 2027 collector ($h = \SI{50.0}{\centi\meter}$, $\SI{125}{\watt}$ lamp, $T_i = T_{\mathrm{room}} = \SI{22.00}{\celsius}$) every $\SI{2.00}{\minute}$ for $\SI{10.00}{\minute}$:
+\begin{center}
+\footnotesize
+\setlength{\tabcolsep}{6pt}
+\begin{tabular}{@{}lcccccc@{}}
+\toprule
+\textbf{Time $t_k$ $[\si{\minute}]$} & $0.00$ & $2.00$ & $4.00$ & $6.00$ & $8.00$ & $10.00$ \\
+\textbf{Measured $T_k$ $[\si{\celsius}]$} & $22.00$ & $26.95$ & $31.32$ & $35.10$ & $38.45$ & $41.36$ \\
+\textbf{Linearized $Y_k = \ln[(62.00 - T_k)/40.00]$} & $0.00000$ & $-0.13210$ & $-0.26527$ & $-0.39675$ & $-0.52975$ & $-0.66165$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+(a)~Without assuming $T_{\mathrm{ss}}$ is known, apply the 3-point equidistant formula \eref{eq:18:3ptTss} to the readings at $t_1 = \SI{0}{\minute}$, $t_2 = \SI{4}{\minute}$, and $t_3 = \SI{8}{\minute}$ to estimate $T_{\mathrm{ss}}$.
+(b)~Using the exact steady-state asymptote $T_{\mathrm{ss}} = \SI{62.00}{\celsius}$, perform an OLS linear regression \eref{eq:18:ols} of $Y_k = \ln[(T_{\mathrm{ss}} - T_k)/(T_{\mathrm{ss}} - T_i)]$ versus $t_k$ $[\si{\minute}]$ to determine the slope $m$, intercept $b$, $R^2$, time constant $\tau$, and standard uncertainty $u(\tau)$.
+(c)~Six replicate 10-minute runs at $h = \SI{50.0}{\centi\meter}$ yield temperature gains $\mathrm{TG} = \{21.30,\ 21.45,\ 21.20,\ 21.35,\ 21.40,\ 18.90\}\,\si{\celsius}$ (where the operator noted that the BoPET film cap slipped slightly on run~\#6). Apply Grubbs' test at $\alpha = 0.05$ to determine whether run~\#6 may be rejected, and compute the clean mean $\overline{\mathrm{TG}}$ and Type~A uncertainty $u_A$.
+\par\smallskip\noindent
+\textbf{Solution.}
+(a)~\textbf{Three-Point Equidistant $T_{\mathrm{ss}}$ Estimate ($t = 0, 4, \SI{8}{\minute} \implies T_1 = 22.00,\ T_2 = 31.32,\ T_3 = 38.45\,\si{\celsius}$):}
+By \eref{eq:18:3ptTss}:
+$$T_{\mathrm{ss,3pt}} = \frac{T_1 T_3 - T_2^2}{T_1 + T_3 - 2 T_2} = \frac{(22.00)(38.45) - (31.32)^2}{22.00 + 38.45 - 2(31.32)} = \frac{845.9000 - 980.9424}{-2.1900} = \frac{-135.0424}{-2.1900} = \mathbf{\SI{61.663}{\celsius}}$$
+*(Remarkably within $\SI{0.34}{\celsius}$ of the true $\SI{62.00}{\celsius}$ asymptote using only three points from the first 8 minutes!)*
+\par\smallskip\noindent
+(b)~\textbf{Semi-Log OLS Regression ($N = 6$ points):}
+From the table above, $\bar{t} = \SI{5.000}{\minute}$ and $\bar{Y} = \frac{-1.98552}{6} = -0.330920$. Evaluating the sums of squares \eref{eq:18:ols}:
+$$S_{tt} = (-5)^2 + (-3)^2 + (-1)^2 + 1^2 + 3^2 + 5^2 = \mathbf{70.000\,\si{\square\minute}}, \qquad S_{tY} = \sum_{k=1}^6 (t_k - \bar{t})(Y_k - \bar{Y}) = \mathbf{-4.63274\,\si{\minute}}, \qquad S_{YY} = \mathbf{0.3065976}$$
+$$m = \frac{S_{tY}}{S_{tt}} = \frac{-4.63274}{70.000} = \mathbf{\SI{-0.0661820}{\per\minute}}, \qquad b = \bar{Y} - m\bar{t} = -0.330920 - (-0.0661820)(5.000) = \mathbf{-0.000010} \approx 0$$
+$$R^2 = \frac{S_{tY}^2}{S_{tt} S_{YY}} = \frac{21.46228}{21.46183} = \mathbf{0.999998}, \qquad s_{Y|t} = \sqrt{\frac{S_{YY} - m S_{tY}}{N - 2}} = \sqrt{\frac{\num{4.89e-7}}{4}} = \mathbf{\num{3.50e-4}}$$
+$$u(m) = \frac{s_{Y|t}}{\sqrt{S_{tt}}} = \frac{\num{3.50e-4}}{\sqrt{70.0}} = \mathbf{\SI{4.18e-5}{\per\minute}} \quad\Longrightarrow\quad \tau = -\frac{1}{m} = \mathbf{\SI{15.110}{\minute}} = \mathbf{\SI{906.6}{\second}}, \qquad u(\tau) = \tau^2 u(m) = \mathbf{\SI{0.0105}{\minute}} = \mathbf{\SI{0.63}{\second}}$$
+\par\smallskip\noindent
+(c)~\textbf{Grubbs' Outlier Test on the $N = 6$ Replicate $\mathrm{TG}$ Trials:}
+Including all 6 trials: $\bar{x}_{\mathrm{all}} = \SI{20.9333}{\celsius}$ and sample standard deviation $s_{\mathrm{all}} = \SI{1.00003}{\celsius}$. Testing run~\#6 ($x_6 = \SI{18.90}{\celsius}$) via \eref{eq:18:grubbs}:
+$$G = \frac{|18.90 - 20.9333|}{1.00003} = \mathbf{2.0337} > G_{\mathrm{crit}}(\alpha=0.05, N=6) = \mathbf{1.887} \quad (\text{and } > G_{\mathrm{crit}}(\alpha=0.01, N=6) = 1.973!)$$
+Because $G > G_{\mathrm{crit}}$ \textbf{and} a physical cause (slipped BoPET vapor cap) was logged, run~\#6 is legitimately excluded. The remaining $n = 5$ valid runs yield $\overline{\mathrm{TG}}_{\mathrm{clean}} = \mathbf{\SI{21.340}{\celsius}}$, $s_{\mathrm{clean}} = \mathbf{\SI{0.0962}{\celsius}}$, and Type~A standard uncertainty $u_A = s_{\mathrm{clean}}/\sqrt{5} = \mathbf{\SI{0.0430}{\celsius}}$.
+\verifiedby{NumPy \texttt{polyfit} / \texttt{std(ddof=1)} exact match ($\tau = \SI{15.1101}{\minute}$, $G = 2.03367 > 1.887$) in Python check \texttt{sec18:ex18.3}.}
+\end{workedexample}
+
+\begin{workedexample}[Clausius--Clapeyron Vapor-Pressure Linear Regression \& Normal Boiling Point Extraction]{\texttt{Cornell E1 FRQ 2 \& GGSO E4 Q8} \src{S09,S25,S28}}{ex:18.4}
+In a Marcet high-pressure saturation boiler experiment (\texttt{2027 Cornell E1 FRQ 2}), a student measures the vapor pressure $P_{\mathrm{sat}}$ of a volatile liquid at four temperatures:
+\begin{center}
+\footnotesize
+\setlength{\tabcolsep}{6.5pt}
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+\textbf{Temperature $t_k$ $[\si{\celsius}]$ ($T_k$ $[\si{\kelvin}]$)} & $40.0\ (\SI{313.15}{\kelvin})$ & $60.0\ (\SI{333.15}{\kelvin})$ & $80.0\ (\SI{353.15}{\kelvin})$ & $100.0\ (\SI{373.15}{\kelvin})$ \\
+\textbf{Measured $P_{\mathrm{sat},k}$ $[\si{\kilo\pascal}]$} & $7.384$ & $19.946$ & $47.414$ & $101.42$ \\
+\textbf{Reciprocal $X_k = 1000/T_k$ $[\si{\per\kelvin}]$} & $3.19336$ & $3.00165$ & $2.83166$ & $2.67989$ \\
+\textbf{Log Pressure $Y_k = \ln(P_{\mathrm{sat},k}/\si{\kilo\pascal})$} & $2.00000$ & $2.99303$ & $3.85892$ & $4.61927$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+(a)~Perform an OLS linear regression of $Y = \ln(P_{\mathrm{sat}}/\si{\kilo\pascal})$ against $X = 1000/T$ $[\si{\per\kelvin}]$ to determine the slope $m$, intercept $b$, and coefficient of determination $R^2$.
+(b)~Extract the mean molar enthalpy of vaporization $\Delta H_{\mathrm{vap}}$ $[\si{\kilo\joule\per\mole}]$ across $\SIrange{40}{100}{\celsius}$ ($R = \SI{8.3144626}{\joule\per\mole\per\kelvin}$) and the predicted normal boiling point $T_b$ at $P_0 = \SI{101.325}{\kilo\pascal}$.
+\par\smallskip\noindent
+\textbf{Solution.}
+(a)~Means across $N = 4$ points: $\bar{X} = 2.926640\,\si{\per\kelvin}$ and $\bar{Y} = 3.367805$. Centered sums of squares \eref{eq:18:ols}:
+$$S_{XX} = \mathbf{0.141913}, \qquad S_{XY} = \mathbf{-0.724014}, \qquad S_{YY} = \mathbf{3.693954}$$
+$$m = \frac{S_{XY}}{S_{XX}} = \frac{-0.724014}{0.141913} = \mathbf{\SI{-5.10182}{\kelvin}}, \qquad b = \bar{Y} - m\bar{X} = 3.367805 - (-5.10182)(2.926640) = \mathbf{18.2990}$$
+$$R^2 = \frac{S_{XY}^2}{S_{XX} S_{YY}} = \frac{0.524196}{0.524220} = \mathbf{0.999954}$$
+(b)~Because the horizontal variable was scaled as $X = 1000/T$, the Clausius--Clapeyron relation $\ln P = -\frac{\Delta H_{\mathrm{vap}}}{1000\,R}\left(\frac{1000}{T}\right) + b$ gives slope $m = -\frac{\Delta H_{\mathrm{vap}}}{1000\,R}$, so:
+$$\Delta H_{\mathrm{vap}} = -1000\,R\,m = -(1000)(\SI{8.3144626}{\joule\per\mole\per\kelvin})(-5.10182) = \SI{42419}{\joule\per\mole} = \mathbf{\SI{42.42}{\kilo\joule\per\mole}}$$
+*(Matching the arithmetic mean of NIST water $\Delta H_{\mathrm{vap}}(\SI{40}{\celsius}) = \SI{43.35}{\kilo\joule\per\mole}$ and $\Delta H_{\mathrm{vap}}(\SI{100}{\celsius}) = \SI{40.65}{\kilo\joule\per\mole}$, which is $\SI{42.00}{\kilo\joule\per\mole}$, within $1.0\%$!).* Setting $P_{\mathrm{sat}} = \SI{101.325}{\kilo\pascal}$ ($Y_0 = \ln(101.325) = 4.61833$):
+$$X_b = \frac{1000}{T_b} = \frac{Y_0 - b}{m} = \frac{4.61833 - 18.2990}{-5.10182} = 2.68153\,\si{\per\kelvin} \implies T_b = \frac{1000}{2.68153} = \mathbf{\SI{372.92}{\kelvin}} = \mathbf{\SI{99.77}{\celsius}}$$
+\verifiedby{Two-point check $\Delta H_{\mathrm{vap}} = R\ln(101.42/7.384)/(1/313.15 - 1/373.15) = \SI{42.43}{\kilo\joule\per\mole}$ and Python check \texttt{sec18:ex18.4}.}
+\end{workedexample}
+
+\begin{workedexample}[5-Stage Heating-Curve Slope/Plateau Extraction \& Binary Eutectic Tie-Line Lever Rule]{\texttt{Cornell E1 Q10--14, Q30 \& GGSO E4 Q9} \src{S25,S28}}{ex:18.5}
+(a)~A constant-power electric heater ($\dot{Q}_{\mathrm{in}} = \SI{250.0}{\watt}$) warms an insulated sample of mass $m = \SI{0.400}{\kilogram}$ initially solid at $T_0 = \SI{-25.0}{\celsius}$. On the plotted temperature-versus-time curve $T(t)$, the solid warms linearly from $\SI{-25.0}{\celsius}$ to the melting plateau $T_m = \SI{15.0}{\celsius}$ over $\Delta t_{\mathrm{solid}} = \SI{112.0}{\second}$, remains flat at $T_m = \SI{15.0}{\celsius}$ for $\Delta t_{\mathrm{fus}} = \SI{288.0}{\second}$, and then the liquid warms linearly from $\SI{15.0}{\celsius}$ to $\SI{65.0}{\celsius}$ over $\Delta t_{\mathrm{liq}} = \SI{224.0}{\second}$. Extract the solid specific heat $c_{\mathrm{solid}}$, latent heat of fusion $L_f$, and liquid specific heat $c_{\mathrm{liq}}$.
+(b)~On a binary $\mathrm{Pb\text{--}Sn}$ eutectic phase diagram at $T = \SI{200.0}{\celsius}$ (above the $\SI{183.0}{\celsius}$ eutectic horizontal), an alloy of overall composition $w_0 = \SI{40.0}{wt\%\ Sn}$ lies inside the two-phase $(\alpha + L)$ region. The horizontal tie line at $\SI{200.0}{\celsius}$ intersects the $\alpha$-solidus boundary at $w_\alpha = \SI{18.0}{wt\%\ Sn}$ and the liquidus boundary at $w_L = \SI{55.5}{wt\%\ Sn}$. Calculate the mass fraction of liquid phase $f_L$, mass fraction of solid $\alpha$-phase $f_\alpha$, and the mass of tin ($\mathrm{Sn}$) dissolved inside the liquid phase for a $\SI{500.0}{\gram}$ total alloy charge.
+\par\smallskip\noindent
+\textbf{Solution.}
+(a)~From Row~1 of Table~\ref{tab:18:graphs}, the heating slope of each single-phase segment is $\frac{\Delta T}{\Delta t} = \frac{\dot{Q}_{\mathrm{in}}}{m c_p} \implies c_p = \frac{\dot{Q}_{\mathrm{in}}\,\Delta t}{m\,\Delta T}$:
+$$c_{\mathrm{solid}} = \frac{(\SI{250.0}{\watt})(\SI{112.0}{\second})}{(\SI{0.400}{\kilogram})(15.0 - (-25.0))\,\si{\kelvin}} = \frac{\SI{28000}{\joule}}{\SI{16.0}{\kilogram\cdot\kelvin}} = \mathbf{\SI{1750}{\joule\per\kilogram\per\kelvin}} = \mathbf{\SI{1.750}{\kilo\joule\per\kilogram\per\kelvin}}$$
+$$L_f = \frac{\dot{Q}_{\mathrm{in}}\,\Delta t_{\mathrm{fus}}}{m} = \frac{(\SI{250.0}{\watt})(\SI{288.0}{\second})}{\SI{0.400}{\kilogram}} = \frac{\SI{72000}{\joule}}{\SI{0.400}{\kilogram}} = \mathbf{\SI{180000}{\joule\per\kilogram}} = \mathbf{\SI{180.0}{\kilo\joule\per\kilogram}}$$
+$$c_{\mathrm{liq}} = \frac{(\SI{250.0}{\watt})(\SI{224.0}{\second})}{(\SI{0.400}{\kilogram})(65.0 - 15.0)\,\si{\kelvin}} = \frac{\SI{56000}{\joule}}{\SI{20.0}{\kilogram\cdot\kelvin}} = \mathbf{\SI{2800}{\joule\per\kilogram\per\kelvin}} = \mathbf{\SI{2.800}{\kilo\joule\per\kilogram\per\kelvin}}$$
+*(Sanity check: The liquid warming slope $\frac{50.0}{224.0} = \SI{0.2232}{\celsius\per\second}$ is shallower than the solid warming slope $\frac{40.0}{112.0} = \SI{0.3571}{\celsius\per\second}$ by the exact inverse ratio $\frac{c_{\mathrm{solid}}}{c_{\mathrm{liq}}} = \frac{1750}{2800} = 0.6250$!).*
+\par\smallskip\noindent
+(b)~Applying the opposite-arm tie-line lever rule (Row~3 of Table~\ref{tab:18:graphs}) across $[w_\alpha, w_L] = [18.0, 55.5]\,\text{wt\%}$ with $w_0 = 40.0\,\text{wt\%}$:
+$$f_L = \frac{w_0 - w_\alpha}{w_L - w_\alpha} = \frac{40.0 - 18.0}{55.5 - 18.0} = \frac{22.0}{37.5} = \mathbf{0.58667}\ (\SI{58.67}{\percent}), \qquad f_\alpha = \frac{w_L - w_0}{w_L - w_\alpha} = \frac{55.5 - 40.0}{37.5} = \frac{15.5}{37.5} = \mathbf{0.41333}\ (\SI{41.33}{\percent})$$
+For a $m_{\mathrm{tot}} = \SI{500.0}{\gram}$ alloy sample, the total liquid phase mass is $m_L = f_L m_{\mathrm{tot}} = 0.58667(\SI{500.0}{\gram}) = \SI{293.33}{\gram}$ (and $m_\alpha = \SI{206.67}{\gram}$). Because the liquid phase has composition $w_L = \SI{55.5}{wt\%\ Sn}$, the mass of $\mathrm{Sn}$ inside the liquid phase is:
+$$m_{\mathrm{Sn,in\text{ }L}} = w_L\,m_L = (0.555)(\SI{293.333}{\gram}) = \mathbf{\SI{162.80}{\gram}}$$
+*(Global Tin Conservation Audit: Tin in solid $\alpha$ is $m_{\mathrm{Sn,in\text{ }\alpha}} = w_\alpha m_\alpha = (0.180)(\SI{206.667}{\gram}) = \SI{37.20}{\gram}$; total tin is $162.80 + 37.20 = \SI{200.00}{\gram} = 0.400 \times \SI{500.0}{\gram}$. Exact match!)*
+\verifiedby{Global energy audit $Q_{\mathrm{tot}} = 28.0 + 72.0 + 56.0 = \SI{156.0}{\kilo\joule} = (\SI{250}{\watt})(\SI{624}{\second})$ and tin mass balance in Python check \texttt{sec18:ex18.5}.}
+\end{workedexample}
+
+\begin{trapbox}[Ten High-Frequency Graph-Reading \& Table-Extraction Traps on Division C Exams \src{S25,S26,S28}]
+\par\smallskip\noindent
+\footnotesize
+\setlength{\tabcolsep}{3.5pt}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.26\linewidth} >{\raggedright\arraybackslash}p{0.37\linewidth} >{\raggedright\arraybackslash}X@{}}
+\toprule
+\hdr{Graph / Table Trap} & \hdr{Why Students Lose Points} & \hdr{5-Second Diagnostic \& Fix} \\
+\midrule
+\textbf{1.~$\log_{10} y$ vs.\ $\ln y$ Semi-Log Slope} \idxerr{log10 vs ln slope factor 2.3026} &
+Reading slope $m_{10} = \Delta(\log_{10} P)/\Delta(1/T)$ and plugging directly into $\Delta H = -R m$ (off by $\ln 10 = 2.302585\times$!). &
+Since $\ln y = (\ln 10)\log_{10} y = 2.302585\log_{10} y$, always multiply a base-10 semi-log slope by $\mathbf{2.302585}$! \\
+\rowcolor{rowalt}
+\textbf{2.~Scaled Reciprocal Axis $1000/T$} \idxerr{1000/T Arrhenius axis scaling factor 1000} &
+Plot horizontal axis is labeled $10^3/T$ $[\si{\per\kelvin}]$; student forgets the $10^3$ factor and gets $\Delta H = \SI{42.4}{\joule\per\mole}$ instead of $\si{\kilo\joule\per\mole}$. &
+If $X = 1000/T$, $\frac{d(\ln P)}{d(1/T)} = 1000\frac{d(\ln P)}{dX}$, so slope $m_X$ gives $\Delta H_{\mathrm{vap}}$ directly in $\si{\kilo\joule\per\mole}$ when multiplied by $R = \num{8.3145}$! \\
+\textbf{3.~Suppressed Zero Origin $(V_0, P_0) \ne (0,0)$} \idxerr{suppressed zero origin on P-V work graph} &
+Computing area under a $P$--$V$ path down to the bottom border of the plot box when the bottom axis sits at $P_{\min} = \SI{100}{\kilo\pascal} > 0$! &
+Single-path work $W_{\mathrm{by}} = \int P\,dV$ \textbf{must integrate all the way down to absolute zero pressure $P = 0$} (add rectangle $P_{\min}\Delta V$!). \\
+\rowcolor{rowalt}
+\textbf{4.~Celsius on a $T$--$S$ Diagram} \idxerr{Celsius instead of Kelvin on T-S area} &
+Computing single-path reversible heat $Q_{\mathrm{rev}} = \int T\,dS$ using $T$ in $\si{\celsius}$ instead of $\si{\kelvin}$. &
+While enclosed loop area $\oint T_C\,dS = \oint T_K\,dS$ cancels the $+273.15$ offset, single-leg heat $Q_{12}$ \textbf{requires absolute Kelvin $T_K$}! \\
+\textbf{5.~$P$--$V$ Unit Prefix Product Trap} \idxerr{P-V unit prefix mismatch (MPa, cm3, bar, L)} &
+Multiplying $\si{\kilo\pascal}\times\si{\cubic\centi\meter}$ and writing $\si{\joule}$ (off by $10^3\times$). &
+Memorize: $\si{\pascal}\cdot\si{\cubic\meter} = \si{\joule}$;\quad $\si{\kilo\pascal}\cdot\si{\liter} = \si{\joule}$;\quad $\si{\mega\pascal}\cdot\si{\liter} = \si{\kilo\joule}$;\quad $\si{\kilo\pascal}\cdot\si{\cubic\centi\meter} = \SI{1e-3}{\joule}$;\quad $\si{\text{bar}}\cdot\si{\liter} = \SI{100}{\joule}$;\quad $\si{\text{atm}}\cdot\si{\liter} = \SI{101.325}{\joule}$. \\
+\rowcolor{rowalt}
+\textbf{6.~Blind Linear Extrapolation Outside Two-Phase Dome} \idxerr{steam quality x < 0 or x > 1} &
+Applying $x = (h - h_f)/h_{fg}$ when $h > h_g$ (getting $x = 1.18 > 1$) or $h < h_f$ (getting $x = -0.12 < 0$). &
+Quality $x$ is physically defined \textbf{only} for $0 \le x \le 1$! If $h > h_g$, switch to the Superheated Vapor Table; if $h < h_f$, use Subcooled Liquid \eref{eq:18:subcooled}. \\
+\bottomrule
+\end{tabularx}
+\end{trapbox}
+
+\alsosee{\sref{sec:04}--\sref{sec:05} (Heating Curves, Phase Diagrams \& Lever Rule), \sref{sec:07}--\sref{sec:09} ($P$--$V$ \& $T$--$S$ Cycles), \sref{sec:13} (Lumped Transients), \sref{sec:16} (DOE Prediction Matrix), \sref{sec:17} (GUM Uncertainty Propagation), \sref{sec:19} (Calculator Regression Playbook), and \sref{app:A} (NIST Steam Tables).}

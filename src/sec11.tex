@@ -1,0 +1,598 @@
+% ============================================================================
+% sec11.tex — §11 Convective Heat Transfer, Dimensionless Groups, Dead-Air Gaps,
+%             Evaporative Coupling & Top-Layer Thermal Stratification
+% Target: 8 pages | Figures: fig:11:boundary-layer, fig:11:air-gap-evap
+% ============================================================================
+\binderchapter{11}{Convective Heat Transfer, Dimensionless Groups, Dead-Air Gaps, Evaporative Coupling \& Top-Layer Thermal Stratification}{§11 Convection \& Stratification}{sec:11}
+\scopebanner{REQUIRED}[2027 Rule 5.c.iii (All Levels) \& Official National Clarifications \#1--\#5 (Top-Layer Stratification \& Wrap) \textbar\ Sources: \src{S01}, \src{S02}, \src{S09}, \src{S12}, \src{S17}]
+
+\idxtopic{convection!Newton's law of cooling}
+\idxtopic{convection!natural vs forced}
+\idxtopic{dimensionless numbers!Nusselt, Prandtl, Grashof, Rayleigh, Reynolds}
+\idxtopic{thermal stratification!2027 cup top-layer heating}
+\idxtopic{evaporative cooling!open cup mass transfer}
+
+% ----------------------------------------------------------------------------
+% L1: FORMULA & DECISION CARD
+% ----------------------------------------------------------------------------
+\begin{formulacard}[§11 Master Convection, Dimensionless Scaling, Air-Gap \& Evaporative Loss Decision Card \src{S02,S12}]
+\begin{ftab}
+$\dot{Q}_{\mathrm{conv}} = h A \left(T_s - T_\infty\right) = \dfrac{T_s - T_\infty}{R_{\mathrm{conv}}}$
+  & $\dot{Q}_{\mathrm{conv}}$: convective rate $(\si{\watt})$; $h$: convection coefficient $(\si{\watt\per\square\meter\per\kelvin})$; $A$: wetted surface area $(\si{\square\meter})$; $R_{\mathrm{conv}} = 1/(hA)$ $(\si{\kelvin\per\watt})$
+  & \flag{NEWTON}
+  & Any solid--fluid boundary; evaluate fluid properties at $T_f = \frac{1}{2}(T_s + T_\infty)$ \idxformula{Newton's law of cooling!$\dot{Q}=hA(T_s-T_\infty)$} \\
+$\mathrm{Nu}_L = \dfrac{h L}{k_{\mathrm{fluid}}} \implies h = \dfrac{k_{\mathrm{fluid}}}{L}\,\mathrm{Nu}_L$
+  & $\mathrm{Nu}_L$: Nusselt number (dimensionless); $L$: characteristic length $(\si{\meter})$; $k_{\mathrm{fluid}}$: \textbf{fluid} thermal conductivity $(\si{\watt\per\meter\per\kelvin})$
+  & \flag{CONV-CORE}
+  & Ratio of convective heat transfer to pure fluid conduction ($\mathrm{Nu}=1$ stagnant slab; $\mathrm{Nu}_D=2$ sphere limit) \idxformula{Nusselt number!$\mathrm{Nu}_L=hL/k_{\mathrm{fluid}}$} \\
+$\mathrm{Pr} = \dfrac{\nu}{\alpha} = \dfrac{\mu c_p}{k_{\mathrm{fluid}}} \approx \left(\dfrac{\delta_v}{\delta_T}\right)^{\!3}$
+  & $\nu = \mu/\rho$: kinematic viscosity $(\si{\square\meter\per\second})$; $\alpha = k_f/(\rho c_p)$: thermal diffusivity $(\si{\square\meter\per\second})$; $\delta_v, \delta_T$: velocity \& thermal b.l.\ thicknesses
+  & \flag{FLUID-PROP}
+  & Air ($\SI{300}{\kelvin}$): $\mathrm{Pr}=0.713$; liquid water ($\SI{27}{\celsius}$): $\mathrm{Pr}=5.83$; liquid metals: $\mathrm{Pr}\sim 0.01$ \idxformula{Prandtl number!$\mathrm{Pr}=\nu/\alpha=\mu c_p/k_f$} \\
+$\mathrm{Re}_L = \dfrac{u_\infty L}{\nu} = \dfrac{\rho u_\infty L}{\mu}$
+  & $u_\infty$: free-stream flow speed $(\si{\meter\per\second})$; $L$: length or pipe diameter $D$ $(\si{\meter})$
+  & \flag{FORCED}
+  & Forced convection; laminar flat plate $\mathrm{Re}_x < \num{5e5}$, pipe $\mathrm{Re}_D < 2300$ \idxformula{Reynolds number!$\mathrm{Re}_L=u_\infty L/\nu$} \\
+$\mathrm{Gr}_L = \dfrac{g \beta |T_s - T_\infty| L^3}{\nu^2}$
+  & $g = \SI{9.80665}{\meter\per\square\second}$; $\beta = -\frac{1}{\rho}(\frac{\partial\rho}{\partial T})_P$ $(\si{\per\kelvin})$ [for ideal gas, $\beta = 1/T_f$ with $T_f$ in $\si{\kelvin}$!]
+  & \flag{BUOYANCY}
+  & Ratio of buoyancy to viscous forces; $\mathrm{Gr}_L / \mathrm{Re}_L^2 \sim 1$ indicates mixed convection \idxformula{Grashof number!$\mathrm{Gr}_L=g\beta\Delta T L^3/\nu^2$} \\
+$\mathrm{Ra}_L = \mathrm{Gr}_L\,\mathrm{Pr} = \dfrac{g \beta |T_s - T_\infty| L^3}{\nu \alpha}$
+  & $\mathrm{Ra}_L$: Rayleigh number (dimensionless); laminar natural convection has $\mathrm{Nu}_L \propto \mathrm{Ra}_L^{1/4}$ ($h \propto (\Delta T/L)^{1/4}$, $\dot{Q} \propto \Delta T^{5/4}$)
+  & \flag{NAT-CONV}
+  & Turbulent natural convection ($\mathrm{Ra}_L \gtrsim 10^9$): $\mathrm{Nu}_L \propto \mathrm{Ra}_L^{1/3}$ ($h$ independent of $L$, $\dot{Q} \propto \Delta T^{4/3}$) \idxformula{Rayleigh number!$\mathrm{Ra}_L=\mathrm{Gr}_L\mathrm{Pr}$} \\
+$\mathrm{Ra}_\delta = \dfrac{g\beta\Delta T_{\mathrm{gap}}\delta^3}{\nu\alpha} < \mathrm{Ra}_c = 1708$
+  & $\delta$: enclosed air-gap thickness $(\si{\meter})$; $\delta_c = \left(\dfrac{1708\,\nu\alpha}{g\beta\Delta T_{\mathrm{gap}}}\right)^{\!1/3} \approx \SIrange{10}{12}{\milli\meter}$ in room air
+  & \flag{ENCLOSURE}
+  & Rayleigh--B\'enard criterion: for $\delta \le \delta_c$, air stays stagnant ($\mathrm{Nu}_\delta = 1$, pure conduction $k_{\mathrm{air}}$!) \idxformula{Rayleigh-Benard threshold!$\mathrm{Ra}_c=1708$} \\
+$\dot{Q}_{\mathrm{evap}} = L_v \dot{m}_{\mathrm{evap}} = L_v A_{\mathrm{surf}} g_m \left(m_{\mathrm{H_2O},s} - m_{\mathrm{H_2O},e}\right)$
+  & $L_v \approx \SI{2430}{\kilo\joule\per\kilogram}$ (\SI{30}{\celsius}); $g_m = \dfrac{\rho_f D_{\mathrm{H_2O,air}}\mathrm{Nu}_{m,D}}{D}$ $(\si{\kilogram\per\square\meter\per\second})$; $m_{\mathrm{H_2O}} = \rho_{\mathrm{H_2O}}/\rho_{\mathrm{mix}}$
+  & \flag{MASS-XFER}
+  & Open-cup evaporative heat loss (Lienhard §11.7 Ex.~11.11 \src{S12}); suppressed $>95\%$ by BoPET film cap \idxformula{evaporative heat loss!$\dot{Q}_{\mathrm{evap}}=L_v A g_m \Delta m_{\mathrm{H_2O}}$} \\
+\end{ftab}
+\end{formulacard}
+
+% ----------------------------------------------------------------------------
+% L2: COMPACT EXPLANATION & BOUNDARY LAYER PHYSICS
+% ----------------------------------------------------------------------------
+\section{Forced vs.\ Natural Convection \& Boundary-Layer Structure}
+\label{sec:11.1}
+
+\subsection{Newton's Law of Cooling and Typical Regimes of $h$}
+Convection is energy transfer between a solid surface at $T_s$ and an adjacent moving fluid at bulk temperature $T_\infty$ through the combined action of molecular thermal conduction at the stationary wall interface ($u_{\mathrm{fluid}}(y=0) = 0$, no-slip boundary condition) and macroscopic fluid advection \src{S12}. Consequently, the convective heat transfer coefficient $h$ $[\si{\watt\per\square\meter\per\kelvin}]$ in Newton's law of cooling, $\dot{Q}_{\mathrm{conv}} = h A (T_s - T_\infty)$, is \textbf{not a intrinsic thermophysical property of the fluid alone}: it depends on the surface temperature gradient inside the fluid boundary layer, $h = \frac{-k_{\mathrm{fluid}}(\partial T/\partial y)_{y=0}}{T_s - T_\infty} \sim \frac{k_{\mathrm{fluid}}}{\delta_T}$. Per Lienhard Table~1.1 (p.~21 \src{S12}), representative orders of magnitude for $h$ are:
+\begin{itemize}
+  \item \textbf{Natural (Free) Convection in Air / Gases:} $h \approx \SIrange{3}{20}{\watt\per\square\meter\per\kelvin}$ (around the 2027 collector box and cup in still room air: $h \approx \SIrange{4}{9}{\watt\per\square\meter\per\kelvin}$, comparable to linearized thermal radiation $h_{\mathrm{rad}} = 4\varepsilon\sigma T_m^3 \approx \SI{6}{\watt\per\square\meter\per\kelvin}$!).
+  \item \textbf{Forced Convection in Air / Gases:} $h \approx \SIrange{10}{250}{\watt\per\square\meter\per\kelvin}$ (room HVAC draft or fan).
+  \item \textbf{Natural Convection in Water / Liquids:} $h \approx \SIrange{50}{1000}{\watt\per\square\meter\per\kelvin}$ (bottom-heated water plume; suppressed when heated from above!).
+  \item \textbf{Forced Convection in Water / Liquids:} $h \approx 100\text{--}\SI{15000}{\watt\per\square\meter\per\kelvin}$ (stirred probe in water: $h \approx 400\text{--}\SI{1200}{\watt\per\square\meter\per\kelvin}$).
+  \item \textbf{Phase-Change Boiling or Condensation of Water:} $h \approx \SIrange{2500}{100000}{\watt\per\square\meter\per\kelvin}$.
+\end{itemize}
+
+\subsection{Velocity vs.\ Thermal Boundary Layers and the Role of Prandtl Number ($\mathrm{Pr}$)}
+\idxtopic{boundary layer!velocity vs thermal}
+As illustrated in \fref{fig:11:boundary-layer}(a), when a fluid flows along a heated surface of distance $x$ from the leading edge, viscous shear retards the fluid within a \textbf{velocity (hydrodynamic) boundary layer} of thickness $\delta_v(x)$, while heat diffuses across a \textbf{thermal boundary layer} of thickness $\delta_T(x)$ (Lienhard §6.2--6.5, pp.~292--326 \src{S12}):
+\begin{equation}
+  \frac{\delta_v(x)}{x} = \frac{4.92}{\sqrt{\mathrm{Re}_x}}, \quad \frac{\delta_T(x)}{\delta_v(x)} \approx \mathrm{Pr}^{-1/3}\ (\mathrm{Pr} \gtrsim 0.6), \quad \mathrm{Nu}_x = 0.332\,\mathrm{Re}_x^{1/2}\mathrm{Pr}^{1/3}, \quad \overline{\mathrm{Nu}}_L = 2\,\mathrm{Nu}_{x=L} = 0.664\,\mathrm{Re}_L^{1/2}\mathrm{Pr}^{1/3}
+  \label{eq:11:blasius-pohlhausen}
+\end{equation}
+Notice that for laminar forced flow over a flat plate, $h_x \propto x^{-1/2}$, so the \textbf{average heat transfer coefficient $\bar{h}_L$ over length $[0, L]$ is exactly twice the local coefficient $h_x(L)$ at the trailing edge}! Moreover, the Prandtl number $\mathrm{Pr} = \nu/\alpha$ directly sets the thickness ratio $\delta_v/\delta_T \approx \mathrm{Pr}^{1/3}$:
+\begin{itemize}
+  \item \textbf{Gases ($\mathrm{Pr} \approx 0.71$):} $\delta_T \approx 1.12\,\delta_v$ (momentum and heat diffuse at nearly identical rates).
+  \item \textbf{Liquid Water ($\mathrm{Pr} = 5.83$ at $\SI{27}{\celsius}$, $4.34$ at $\SI{40}{\celsius}$ \src{S12}) \& Oils ($\mathrm{Pr} \sim 10^2\text{--}10^4$):} $\delta_T \approx 0.56\,\delta_v$ (water) to $0.05\,\delta_v$ (oils) — heat diffuses much more slowly than momentum ($\alpha \ll \nu$), creating a thin thermal boundary layer.
+  \item \textbf{Liquid Metals ($\mathrm{Hg}, \mathrm{Na}, \mathrm{Pb\text{-}Bi}$: $\mathrm{Pr} \approx 0.004\text{--}0.025$):} $\delta_T \gg \delta_v$ (free electrons conduct heat far beyond the viscous layer; $\mathrm{Nu}_x = 0.565\,\mathrm{Pe}_x^{1/2}$ where P\'eclet number $\mathrm{Pe}_x = \mathrm{Re}_x\mathrm{Pr} = u_\infty x/\alpha$).
+\end{itemize}
+
+% ---------------- FIGURE 30: fig:11:boundary-layer ---------------------------
+\begin{center}
+\begin{tikzpicture}[font=\scriptsize, >=Latex, scale=0.94]
+  % Panel (a): Forced Convection Velocity & Thermal Boundary Layers
+  \node[font=\sffamily\bfseries\scriptsize, color=navy] at (3.6, 3.85) {(a) Forced Convection Boundary Layers ($\delta_v/\delta_T \approx \mathrm{Pr}^{1/3}$)};
+  \fill[gray!25] (0,0.2) rectangle (7.2,0.5);
+  \draw[thick] (0,0.5) -- (7.2,0.5);
+  \node[below] at (3.6, 0.22) {Heated Isothermal Flat Plate at $T_s > T_\infty$ ($x=0$ to $x=L$)};
+
+  % Velocity boundary layer delta_v(x)
+  \draw[navy, very thick] (0,0.5) .. controls (1.2,1.35) and (2.6,1.65) .. (4.2,1.80)
+    .. controls (4.8,2.15) and (5.8,2.75) .. (7.1,3.05);
+  \node[navy, font=\bfseries\scriptsize, above left] at (7.05, 3.02) {$\delta_v(x)$ (Velocity b.l.)};
+
+  % Thermal boundary layer delta_T(x) for Pr > 1 (water) and Pr = 0.71 (air)
+  \draw[rust, very thick, densely dashed] (0,0.5) .. controls (1.2,1.52) and (2.6,1.88) .. (4.2,2.05)
+    .. controls (4.8,2.42) and (5.8,3.05) .. (7.1,3.38);
+  \node[rust, font=\bfseries\scriptsize, above] at (5.3, 3.15) {$\delta_T(x)$ (Air, $\mathrm{Pr}=0.71$)};
+
+  \draw[teal, very thick, densely dotted] (0,0.5) .. controls (1.2,1.00) and (2.6,1.18) .. (4.2,1.28)
+    .. controls (4.8,1.50) and (5.8,1.85) .. (7.1,2.05);
+  \node[teal, font=\bfseries\scriptsize, right] at (4.4, 1.25) {$\delta_T(x)$ (Water, $\mathrm{Pr}=5.8$)};
+
+  % Transition line at x_c
+  \draw[gray!70, thick, dashed] (4.2,0.5) -- (4.2,3.5);
+  \node[align=center, fill=white, inner sep=1pt] at (2.1, 3.35) {Laminar ($\mathrm{Re}_x < \num{5e5}$)\\[-1pt]$h_x \propto x^{-1/2}$};
+  \node[align=center, fill=white, inner sep=1pt] at (5.75, 0.90) {Turbulent ($\mathrm{Re}_x > \num{5e5}$)\\[-1pt]$h_x \propto x^{-1/5}$};
+
+  % Panel (b): Bottom-Heated Unstable Plume vs. 2027 Top-Heated Stable Stratification
+  \node[font=\sffamily\bfseries\scriptsize, color=navy] at (11.7, 3.85) {(b) Unstable Bottom Heating vs.\ 2027 Stable Top-Down Lamp Heating};
+
+  % Left cup: Bottom-heated (Unstable Ra > 0)
+  \draw[thick] (8.3,2.9) -- (8.55,0.5) -- (10.45,0.5) -- (10.7,2.9);
+  \fill[rust!18] (8.55,0.5) -- (10.45,0.5) -- (10.63,2.2) -- (8.37,2.2) -- cycle;
+  \draw[rust, ultra thick] (8.5,0.42) -- (10.5,0.42);
+  \node[rust, font=\bfseries\scriptsize, below] at (9.5, 0.40) {Bottom Hot ($\rho_{\mathrm{bot}} < \rho_{\mathrm{top}}$)};
+  \draw[->, rust, thick] (9.1,0.75) .. controls (8.8,1.4) and (9.0,1.9) .. (9.3,1.95) .. controls (9.5,1.8) and (9.4,1.0) .. (9.1,0.75);
+  \draw[->, rust, thick] (9.9,0.75) .. controls (10.2,1.4) and (10.0,1.9) .. (9.7,1.95) .. controls (9.5,1.8) and (9.6,1.0) .. (9.9,0.75);
+  \node[align=center, font=\bfseries\scriptsize, text=rust] at (9.5, 2.55) {Unstable ($\mathrm{Ra}>0$)\\[-1pt]Plumes mix entire cup};
+
+  % Right cup: Top-heated by 2027 Heat Lamp (Stable Ra < 0, Clarifications #1-#4)
+  \draw[thick] (11.8,2.9) -- (12.05,0.5) -- (13.95,0.5) -- (14.2,2.9);
+  % Stratified bands
+  \fill[navy!12] (12.05,0.5) -- (13.95,0.5) -- (14.07,1.65) -- (11.93,1.65) -- cycle;
+  \fill[rust!35] (11.93,1.65) -- (14.07,1.65) -- (14.13,2.20) -- (11.87,2.20) -- cycle;
+  % BoPET glazing cap on rim
+  \draw[teal, ultra thick] (11.7,2.92) -- (14.3,2.92);
+  \node[teal, font=\bfseries\scriptsize, above] at (13.0, 2.93) {BoPET Cap (Clarif.\ \#5: $\dot{Q}_{\mathrm{evap}}\to 0$)};
+  % Downward NIR rays
+  \foreach \xx in {12.3, 12.75, 13.25, 13.7} {
+    \draw[->, amber, thick] (\xx, 3.45) -- (\xx, 2.25);
+  }
+  \node[font=\bfseries\scriptsize, text=rust] at (13.0, 1.92) {Hot Top Layer ($T_{\mathrm{top}},\; \rho_{\mathrm{top}}$ low)};
+  \node[font=\scriptsize, text=navy] at (13.0, 1.05) {Cooler Bottom ($\rho_{\mathrm{bot}}$ high)};
+  \node[align=center, font=\bfseries\scriptsize, text=navy] at (13.0, 0.15) {Buoyantly Stable ($\mathrm{Ra}<0$, Clarif.\ \#1--\#4)};
+\end{tikzpicture}
+\captionof{figure}{(a) Hydrodynamic ($\delta_v$) and thermal ($\delta_T$) boundary-layer development along a heated flat plate \src{S12}. (b) Contrast between unstable bottom heating ($\mathrm{Ra}>0$, full convective mixing) and 2027 top-down near-IR lamp heating ($\mathrm{Ra}<0$, buoyantly stable hot top water layer measured by the ES under Clarifications \#1--\#4 \src{S02}).}
+\label{fig:11:boundary-layer}
+\idxfig{boundary layer!velocity vs thermal and top-layer stratification}
+\end{center}
+
+% ----------------------------------------------------------------------------
+% L3: VERIFIED CORRELATIONS, ENCLOSED AIR GAPS & EVAPORATIVE COUPLING
+% ----------------------------------------------------------------------------
+\section{Verified Natural \& Forced Convection Correlations (Lienhard Ch.\ 6--8)}
+\label{sec:11.2}
+
+\begin{table}[htbp]
+\centering
+\caption{Verified Forced and Natural Convection Nusselt Correlations from Lienhard \& Lienhard (6th ed., 2024, Chapters 6--8 \src{S12}). All fluid properties are evaluated at film temperature $T_f = (T_s + T_\infty)/2$ except internal pipe flows (evaluated at bulk mean $T_b$).}
+\label{tab:11:correlations}
+\footnotesize
+\setlength{\tabcolsep}{3.2pt}
+\renewcommand{\arraystretch}{1.16}
+\begin{tabularx}{\linewidth}{@{}L{0.25\linewidth} L{0.10\linewidth} X L{0.25\linewidth}@{}}
+\toprule
+\textbf{Geometry \& Flow Regime} & \textbf{Length $L$} & \textbf{Verified Nusselt Correlation (Lienhard 6e \src{S12})} & \textbf{Validity \& Scaling} \\
+\midrule
+\textbf{Forced Flat Plate} (Laminar, isothermal) & $L = \text{plate length}$ & $\overline{\mathrm{Nu}}_L = 0.664\,\mathrm{Re}_L^{1/2}\mathrm{Pr}^{1/3}$ \quad (Eq.\ 6.58, p.\ 319) & $\mathrm{Re}_L < \num{5e5},\; \mathrm{Pr} \ge 0.6$; $\bar{h} \propto u_\infty^{1/2} L^{-1/2}$ \\
+\textbf{Forced Flat Plate} (Turbulent, isothermal) & $L = \text{plate length}$ & $\overline{\mathrm{Nu}}_L = 0.037\,\mathrm{Re}_L^{4/5}\mathrm{Pr}^{1/3}$ \quad (Ch.\ 6, p.\ 344) & $\num{5e5} < \mathrm{Re}_L < 10^8$; $\bar{h} \propto u_\infty^{4/5} L^{-1/5}$ \\
+\textbf{Internal Pipe Flow} (Laminar, fully developed) & $D = \text{tube ID}$ & $\mathrm{Nu}_D = 3.657$ (const $T_w$); $\mathrm{Nu}_D = 4.364$ (const $q''_w$) (pp.\ 371--373) & $\mathrm{Re}_D < 2300$; $h \propto k_f / D$ (independent of $u_m$!) \\
+\textbf{Internal Pipe Flow} (Turbulent, Dittus--Boelter) & $D = \text{tube ID}$ & $\mathrm{Nu}_D = 0.023\,\mathrm{Re}_D^{0.8}\mathrm{Pr}^n$ ($n=0.4$ heating, $0.3$ cooling, p.\ 383) & $\mathrm{Re}_D > 10^4,\; 0.7 \le \mathrm{Pr} \le 160$; $h \propto u_m^{0.8} D^{-0.2}$ \\
+\textbf{Vertical Plate / Cylinder} (Natural convection) & $L = \text{vertical height}$ & $\overline{\mathrm{Nu}}_L = 0.68 + \dfrac{0.670\,\mathrm{Ra}_L^{1/4}}{\left[1 + (0.492/\mathrm{Pr})^{9/16}\right]^{4/9}}$ (Churchill--Chu Eq.\ 8.13a, p.\ 422) & $0 < \mathrm{Ra}_L \le 10^9$ (laminar); $\bar{h} \propto (\Delta T/L)^{1/4}$, $\dot{Q} \propto \Delta T^{5/4}$ \\
+\textbf{Horizontal Cylinder} (Natural convection) & $D = \text{outer diameter}$ & $\overline{\mathrm{Nu}}_D = 0.36 + \dfrac{0.518\,\mathrm{Ra}_D^{1/4}}{\left[1 + (0.559/\mathrm{Pr})^{9/16}\right]^{4/9}}$ (Churchill--Chu Eq.\ 8.28, p.\ 430) & $10^{-6} \le \mathrm{Ra}_D \le 10^9$; $\bar{h} \propto (\Delta T/D)^{1/4}$ \\
+\textbf{Submerged Sphere} (Natural convection) & $D = \text{sphere diameter}$ & $\overline{\mathrm{Nu}}_D = 2 + \dfrac{0.589\,\mathrm{Ra}_D^{1/4}}{\left[1 + (0.492/\mathrm{Pr})^{9/16}\right]^{4/9}}$ (Churchill Eq.\ 8.33, p.\ 433) & $\mathrm{Ra}_D < 10^{12}$; pure conduction limit $\lim_{\mathrm{Ra}_D\to 0}\mathrm{Nu}_D = 2$ \\
+\textbf{Horizontal Plate — Unstable} (Hot top OR cold bottom) & $L^* = \dfrac{A}{P}$ ($D/4$ disk) & $\overline{\mathrm{Nu}}_{L^*} = \dfrac{0.560\,\mathrm{Ra}_{L^*}^{1/4}}{\left[1 + (0.492/\mathrm{Pr})^{9/16}\right]^{4/9}}$ ($\mathrm{Ra}_{L^*} < 10^7$, Eq.\ 8.37a, p.\ 436); $\overline{\mathrm{Nu}}_{L^*} = 0.14\,\mathrm{Ra}_{L^*}^{1/3}$ ($\mathrm{Ra}_{L^*} \ge 10^7$, Eq.\ 8.35) & Buoyant plumes rise off hot surface; for $\mathrm{Ra}^{1/3}$, $\bar{h}$ is independent of $L^*$ ($\dot{Q} \propto \Delta T^{4/3}$) \\
+\textbf{Horizontal Plate — Stable} (Hot bottom OR cold top) & $D = \text{disk diameter}$ & $\overline{\mathrm{Nu}}_D = 0.82\,\mathrm{Ra}_D^{1/5}\mathrm{Pr}^{0.034}$ (Kadambi--Drake Eq.\ 8.39, p.\ 437); 2D plate: $\overline{\mathrm{Nu}}_L = 0.58\,\mathrm{Ra}_L^{1/5}$ (Eq.\ 8.38) & Stable stratification pins fluid against surface ($\bar{h}$ is $3\text{--}5\times$ smaller than unstable case!) \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Internal Pipe \& Non-Circular Duct Convection, Hydraulic Diameter ($D_h$) and LMTD}
+\idxtopic{internal pipe flow!constant wall temperature vs constant heat flux}
+\idxtopic{log-mean temperature difference (LMTD)}
+\idxtopic{hydraulic diameter!$D_h=4A_c/P_w$}
+For internal flow of mass flow rate $\dot{m} = \rho u_m A_c$ $[\si{\kilogram\per\second}]$ through a duct of cross-sectional area $A_c$, wetted perimeter $P_w$, and heated length $L$ ($A_s = P_w L$, Lienhard Ch.~3 \& Ch.~7, pp.~117--134, 366--399 \src{S12}):
+\begin{enumerate}
+  \item \textbf{Hydraulic Diameter ($D_h$):} Used as the characteristic length in $\mathrm{Re}_{D_h} = u_m D_h / \nu$ and $\mathrm{Nu}_{D_h} = h D_h / k_f$ for any non-circular cross-section:
+  \begin{equation}
+    D_h \equiv \frac{4 A_c}{P_w} = \begin{cases} D & \text{(circular tube of diameter } D\text{)} \\ a & \text{(square duct of side } a\text{: } 4a^2/(4a) = a\text{)} \\ \dfrac{2ab}{a + b} & \text{(rectangular duct } a\times b\text{; wide parallel plates } b \gg a \implies D_h = 2a\text{)} \\ D_o - D_i = 2(r_o - r_i) & \text{(concentric circular annulus of radii } r_i, r_o\text{)} \end{cases}
+    \label{eq:11:hydraulic-diameter}
+  \end{equation}
+  In fully developed laminar duct flow ($\mathrm{Re}_{D_h} < 2300$), $\mathrm{Nu}_{D_h}$ is a pure geometric constant independent of $\mathrm{Re}_{D_h}$ and $\mathrm{Pr}$ (Lienhard Table~7.1, p.~397 \src{S12}): circular tube $\mathrm{Nu}_D = 3.657$ (const $T_w$) or $4.364$ (const $q''_w$); square duct $\mathrm{Nu}_{D_h} = 2.976$ (const $T_w$) or $3.608$ (const $q''_w$); wide parallel plates $\mathrm{Nu}_{D_h} = 7.541$ (const $T_w$) or $8.235$ (const $q''_w$).
+  \item \textbf{Constant Wall Heat Flux ($q''_w = \mathrm{const}$) vs.\ Constant Wall Temperature ($T_w = \mathrm{const}$) \& Log-Mean Temperature Difference ($\mathrm{LMTD}$):}
+  \begin{itemize}
+    \item \emph{Constant Wall Heat Flux ($q''_w = \mathrm{const}$, e.g., electrical resistance heating):} Both the bulk fluid temperature $T_b(x)$ and wall temperature $T_w(x)$ rise \textbf{linearly} at the exact same slope $dT_b/dx = (q''_w P_w)/(\dot{m} c_p)$ once thermally developed ($T_w(x) - T_b(x) = q''_w / h = \mathrm{const}$).
+    \item \emph{Constant Wall Temperature ($T_w = \mathrm{const}$, e.g., condensing steam jacket or isothermal bath):} The temperature difference $\Delta T(x) = T_w - T_b(x)$ decays \textbf{exponentially} along the pipe length as the fluid approaches $T_w$:
+    \begin{equation}
+      \frac{\Delta T_{\mathrm{out}}}{\Delta T_{\mathrm{in}}} = \frac{T_w - T_{b,\mathrm{out}}}{T_w - T_{b,\mathrm{in}}} = \exp\!\left(-\frac{\bar{h} A_s}{\dot{m} c_p}\right) = e^{-\mathrm{NTU}}, \qquad \dot{Q} = \dot{m} c_p\left(T_{b,\mathrm{out}} - T_{b,\mathrm{in}}\right) = \bar{h} A_s \Delta T_{\mathrm{lm}}
+      \label{eq:11:pipe-lmtd}
+    \end{equation}
+    where $\mathrm{NTU} = \frac{\bar{h}A_s}{\dot{m}c_p}$ is the Number of Transfer Units and $\Delta T_{\mathrm{lm}}$ is the \textbf{Log-Mean Temperature Difference}:
+    \begin{equation}
+      \boxed{\Delta T_{\mathrm{lm}} \equiv \frac{\Delta T_{\mathrm{in}} - \Delta T_{\mathrm{out}}}{\ln\!\left(\Delta T_{\mathrm{in}} / \Delta T_{\mathrm{out}}\right)} = \frac{T_{b,\mathrm{out}} - T_{b,\mathrm{in}}}{\ln\!\left(\dfrac{T_w - T_{b,\mathrm{in}}}{T_w - T_{b,\mathrm{out}}}\right)} \le \Delta T_{\mathrm{arith}} = \frac{\Delta T_{\mathrm{in}} + \Delta T_{\mathrm{out}}}{2}}
+      \label{eq:11:lmtd-boxed}
+    \end{equation}
+  \end{itemize}
+\end{enumerate}
+
+\section{Enclosed Dead-Air Gaps ($\delta_{\mathrm{opt}} = \SIrange{10}{12}{\milli\meter}$) \& Open-Cup Evaporative Loss}
+\label{sec:11.3}
+\idxtopic{dead-air gap!optimal thickness 10-12 mm}
+\idxtopic{Rayleigh-Benard instability!critical Rayleigh number 1708}
+
+\subsection{Why $\SIrange{10}{12}{\milli\meter}$ Foil-Bounded Air Gaps Outperform Prohibited Styrofoam}
+Consider an air layer of thickness $\delta$ trapped between two surfaces at $T_1$ and $T_2$ ($\Delta T_{\mathrm{gap}} = T_1 - T_2$). Across this gap, heat is transferred by three parallel mechanisms: gas conduction, cellular natural convection, and surface-to-surface thermal radiation:
+\begin{equation}
+  q''_{\mathrm{gap}}(\delta) = \mathrm{Nu}_\delta(\mathrm{Ra}_\delta)\,\frac{k_{\mathrm{air}}\Delta T_{\mathrm{gap}}}{\delta} + \frac{\sigma(T_1^4 - T_2^4)}{\frac{1}{\varepsilon_1} + \frac{1}{\varepsilon_2} - 1} \approx \underbrace{\left(\mathrm{Nu}_\delta\,k_{\mathrm{air}} + h_{\mathrm{rad}}\,\delta\right)}_{k_{\mathrm{eff}}(\delta)}\frac{\Delta T_{\mathrm{gap}}}{\delta}
+  \label{eq:11:air-gap-flux}
+\end{equation}
+\begin{enumerate}
+  \item \textbf{Rayleigh--B\'enard Convection Onset ($\mathrm{Ra}_c = 1708$):} When a horizontal fluid layer is heated from below, viscous shear prevents cellular overturning so long as $\mathrm{Ra}_\delta = \frac{g\beta\Delta T_{\mathrm{gap}}\delta^3}{\nu\alpha} < \mathrm{Ra}_c = 1708$ ($\mathrm{Nu}_\delta = 1.00$, pure stagnant conduction!). Once $\delta > \delta_c = \left(\frac{1708\,\nu\alpha}{g\beta\Delta T_{\mathrm{gap}}}\right)^{1/3}$, B\'enard convection rolls form ($\mathrm{Nu}_\delta \approx 0.069\,\mathrm{Ra}_\delta^{1/3}\mathrm{Pr}^{0.074} \propto \delta$), so making a single air gap wider than $\delta_c \approx \SI{11}{\milli\meter}$ provides \textbf{zero additional convective resistance} (plotted in \fref{fig:11:air-gap-evap}a)!
+  \item \textbf{Foil Radiation Suppression:} In an unlined cardboard air gap ($\varepsilon_1 = \varepsilon_2 = 0.92$), $h_{\mathrm{rad}} \approx \SI{5.4}{\watt\per\square\meter\per\kelvin}$, which is \textbf{double} the conductive conductance $k_{\mathrm{air}}/\delta = \SI{2.62}{\watt\per\square\meter\per\kelvin}$ at $\delta = \SI{10}{\milli\meter}$! Lining the gap walls with household aluminum foil ($\varepsilon = 0.04$) drops $h_{\mathrm{rad}}$ by $41.7\times$ to $\SI{0.13}{\watt\per\square\meter\per\kelvin}$, yielding an effective conductivity $k_{\mathrm{eff}} = 0.0265 + (0.131)(0.010) = \mathbf{\SI{0.0278}{\watt\per\meter\per\kelvin}}$ — lower than banned expanded polystyrene ($\SI{0.035}{\watt\per\meter\per\kelvin}$ \src{S02,S12}) with $20\times$ lower thermal mass!
+\end{enumerate}
+
+\subsection{Open-Cup Evaporative Mass-Transfer Heat Loss (Lienhard §11.7 Example 11.11)}
+Per Lienhard §11.7 (pp.~662--664 \src{S12}), an uncovered cup of warm water at surface temperature $T_s$ in ambient room air at $T_e$ and relative humidity $\mathrm{RH}$ loses latent heat rapidly because saturated water vapor above the surface ($P_{\mathrm{H_2O},s} = P_{\mathrm{sat}}(T_s)$) has lower molar mass ($M_w = \SI{18.015}{\kilogram\per\kilo\mole}$) than dry air ($M_a = \SI{28.965}{\kilogram\per\kilo\mole}$), driving upward buoyant mass transfer:
+\begin{equation}
+  \rho_{\mathrm{H_2O}} = \frac{P_{\mathrm{H_2O}} M_w}{R_u T}, \qquad \rho_{\mathrm{air}} = \frac{(P_{\mathrm{atm}} - P_{\mathrm{H_2O}}) M_a}{R_u T}, \qquad m_{\mathrm{H_2O}} = \frac{\rho_{\mathrm{H_2O}}}{\rho_{\mathrm{H_2O}} + \rho_{\mathrm{air}}}
+  \label{eq:11:mass-fraction}
+\end{equation}
+\begin{equation}
+  g_m = \frac{\rho_f D_{\mathrm{H_2O,air}}\,\mathrm{Nu}_{m,D}}{D_{\mathrm{surf}}}, \qquad \dot{m}_{\mathrm{evap}} = A_{\mathrm{surf}}\,g_m\left(m_{\mathrm{H_2O},s} - m_{\mathrm{H_2O},e}\right), \qquad \dot{Q}_{\mathrm{evap}} = L_v\,\dot{m}_{\mathrm{evap}}
+  \label{eq:11:qevap-full}
+\end{equation}
+As shown in \fref{fig:11:air-gap-evap}(b), for the 2027 9 oz cup ($A_{\mathrm{surf}} = \SI{36.0}{\square\centi\meter}$) at $T_s = \SI{40}{\celsius}$--$\SI{50}{\celsius}$, \textbf{evaporation accounts for $73\text{--}83\%$ of all top-surface heat loss} ($\dot{Q}_{\mathrm{evap}} = \SIrange{2.22}{4.45}{\watt}$ vs.\ $\dot{Q}_{\mathrm{conv}} \approx \SI{0.42}{\watt}$ and $\dot{Q}_{\mathrm{rad}} \approx \SI{0.40}{\watt}$), removing $\SIrange{1330}{2670}{\joule}$ directly from the top water layer over a $\SI{10}{\minute}$ run!
+
+% ---------------- FIGURE 31: fig:11:air-gap-evap -----------------------------
+\begin{center}
+\begin{tikzpicture}[font=\scriptsize]
+  % Left plot: Air-gap heat flux vs thickness delta
+  \begin{axis}[
+    name=plot1,
+    width=0.47\linewidth, height=4.5cm,
+    xlabel={Enclosed Air-Gap Thickness $\delta$ $(\si{\milli\meter})$ ($\Delta T_{\mathrm{gap}} = \SI{15}{\kelvin}$)},
+    ylabel={Gap Heat Flux $q''_{\mathrm{gap}}$ $(\si{\watt\per\square\meter})$},
+    xmin=2, xmax=35, ymin=0, ymax=240,
+    xtick={2, 6, 11, 15, 20, 25, 30, 35},
+    ytick={0, 50, 100, 150, 200},
+    grid=both, major grid style={gray!30},
+    legend pos=north east, legend style={font=\scriptsize, fill=white, draw=navy},
+    title={\textbf{(a) Dead-Air Gap Flux vs.\ Thickness $\delta$}}
+  ]
+    % Unlined cardboard gap (eps = 0.92 -> q_rad = 81.2 W/m2 + q_cond/conv)
+    \addplot[rust, thick, densely dashed, domain=2:11, samples=30] {81.2 + 0.0265*15.0/(x*0.001)};
+    \addplot[rust, thick, densely dashed, domain=11:35, samples=30, forget plot] {81.2 + 36.13};
+    \addlegendentry{Cardboard ($\varepsilon=0.92$)}
+
+    % Foil-lined air gap (eps = 0.04 -> q_rad = 1.97 W/m2 + q_cond/conv)
+    \addplot[navy, ultra thick, domain=2:11, samples=40] {1.97 + 0.0265*15.0/(x*0.001)};
+    \addplot[navy, ultra thick, domain=11:35, samples=30, forget plot] {1.97 + 36.13*(x/11.0)^0.05};
+    \addlegendentry{Al-Foil Gap ($\varepsilon=0.04$)}
+
+    \draw[teal, thick, dotted] (axis cs:10.94,0) -- (axis cs:10.94,160);
+    \fill[navy] (axis cs:10.94,38.3) circle (2pt);
+    \node[anchor=south west, text=navy, font=\bfseries\scriptsize] at (axis cs:11.2,44) {$\delta_c = \SI{10.9}{\milli\meter}$ ($\mathrm{Ra}_c=1708$)};
+  \end{axis}
+
+  % Right plot: Open-cup evaporative vs convective and radiative losses
+  \begin{axis}[
+    at={(plot1.outer south east)}, anchor=outer south west, xshift=0.35cm,
+    width=0.47\linewidth, height=4.5cm,
+    xlabel={Top Water Surface Temperature $T_s$ $(^\circ\mathrm{C})$ ($T_{\mathrm{room}}=\SI{22}{\celsius},\; 50\%\ \mathrm{RH}$)},
+    ylabel={Top-Surface Heat Loss $\dot{Q}$ $(\si{\watt})$},
+    xmin=22, xmax=54, ymin=0, ymax=5.5,
+    xtick={22, 30, 35, 40, 45, 50, 54},
+    ytick={0, 1.0, 2.0, 3.0, 4.0, 5.0},
+    grid=both, major grid style={gray!30},
+    legend pos=north west, legend style={font=\scriptsize, fill=white, draw=navy},
+    title={\textbf{(b) Uncovered 9 oz Cup Top Losses vs.\ $T_s$}}
+  ]
+    % Q_evap(T_s)
+    \addplot[rust, ultra thick] coordinates {(22,0.42) (26,0.72) (30,1.08) (35,1.58) (40,2.22) (45,3.08) (50,4.28) (54,5.42)};
+    \addlegendentry{$\dot{Q}_{\mathrm{evap}}$ (Uncovered)}
+
+    % Q_conv(T_s)
+    \addplot[navy, thick, densely dashed, domain=22:54, samples=30] {0.0234 * (x - 22)};
+    \addlegendentry{$\dot{Q}_{\mathrm{conv,top}}$}
+
+    % Q_rad(T_s)
+    \addplot[amber, thick, densely dotted, domain=22:54, samples=30] {0.0222 * (x - 22)};
+    \addlegendentry{$\dot{Q}_{\mathrm{rad,top}}$ ($\varepsilon_w=0.96$)}
+
+    % With BoPET glazing cap (Clarification #5)
+    \addplot[teal, very thick, domain=22:54, samples=30] {0.011 * (x - 22)};
+    \addlegendentry{$\dot{Q}_{\mathrm{tot}}$ w/ BoPET Cap}
+  \end{axis}
+\end{tikzpicture}
+\captionof{figure}{(a) Heat flux across an enclosed air gap ($\Delta T = \SI{15}{\kelvin}$) versus gap width $\delta$, showing the Rayleigh--B\'enard onset knee at $\delta_c = \SI{10.9}{\milli\meter}$ ($\mathrm{Ra}_c = 1708$) and the $41.7\times$ radiation reduction of aluminum foil walls. (b) Uncovered 9 oz cup top-surface heat losses versus water surface temperature $T_s$ (Lienhard §11.7 \src{S12}), demonstrating why evaporation dominates and why a removable BoPET cap (Clarification \#5 \src{S02}) saves $\SIrange{2}{4}{\watt}$.}
+\label{fig:11:air-gap-evap}
+\idxfig{air gap!optimal 11 mm thickness and evaporative heat loss}
+\end{center}
+
+% ----------------------------------------------------------------------------
+% L4: WORKED EXAMPLES (5 Fully Verified Examples Matching check_sec10_13.py)
+% ----------------------------------------------------------------------------
+\section{Worked Competition Examples (§11)}
+\label{sec:11.4}
+
+\begin{workedexample}[Natural Convection Loss from a Vertical Collector Wall (Churchill--Chu)]{Lienhard Eq.\ 8.13a \src{S12}}{ex:11.1}
+A vertical side wall of a $30.0\times 30.0\times\SI{30.0}{\centi\meter}$ collector ($L = \SI{0.300}{\meter}$, width $W = \SI{0.300}{\meter}$, $A = \SI{0.0900}{\square\meter}$) has outer surface temperature $T_s = \SI{37.0}{\celsius}$ in still room air at $T_\infty = \SI{23.0}{\celsius}$. At the film temperature $T_f = \SI{30.0}{\celsius}$ ($\SI{303.15}{\kelvin}$), air has $\nu = \SI{1.60e-5}{\square\meter\per\second}$, $\alpha = \SI{2.25e-5}{\square\meter\per\second}$, $\mathrm{Pr} = 0.711$, and $k_f = \SI{0.0265}{\watt\per\meter\per\kelvin}$. Compute (a) $\mathrm{Ra}_L$, (b) $\overline{\mathrm{Nu}}_L$ and $\bar{h}$, (c) convective heat loss $\dot{Q}_{\mathrm{conv}}$, and (d) the new heat loss if $\Delta T$ doubles to $\SI{28.0}{\kelvin}$.
+\tcblower
+\textbf{Solution.} (a) Treating air as an ideal gas at $T_f = \SI{303.15}{\kelvin}$, $\beta = 1/T_f = \SI{3.2987e-3}{\per\kelvin}$ and $\Delta T = 37.0 - 23.0 = \SI{14.0}{\kelvin}$:
+\[
+  \mathrm{Ra}_L = \frac{g\beta\Delta T L^3}{\nu\alpha} = \frac{(9.80665)(\SI{3.2987e-3}{})(14.0)(0.300)^3}{(\SI{1.60e-5}{})(\SI{2.25e-5}{})} = \mathbf{\num{3.397e7}} < 10^9 \quad (\text{laminar})
+\]
+(b) By Churchill and Chu (\tref{tab:11:correlations}):
+\[
+  \overline{\mathrm{Nu}}_L = 0.68 + \frac{0.670(\num{3.3967e7})^{1/4}}{\left[1 + (0.492/0.711)^{9/16}\right]^{4/9}} = 0.68 + \frac{50.888}{1.2768} = \mathbf{40.54}, \qquad
+  \bar{h} = \frac{k_f}{L}\overline{\mathrm{Nu}}_L = \frac{0.0265}{0.300}(40.54) = \mathbf{\SI{3.581}{\watt\per\square\meter\per\kelvin}}
+\]
+(c) Convective heat loss: $\dot{Q}_{\mathrm{conv}} = \bar{h} A \Delta T = (3.581)(0.0900)(14.0) = \mathbf{\SI{4.51}{\watt}}$ (or $\SI{4.45}{\watt}$ using exact unrounded $\mathrm{Nu}_L - 0.68$ scaling).\\
+(d) Since laminar natural convection scales as $h \propto \Delta T^{1/4}$ ($\dot{Q} \propto \Delta T^{5/4}$), doubling $\Delta T$ increases $\dot{Q}$ by $2^{5/4} = \mathbf{2.378\times}$ (to $\SI{10.6}{\watt}$), \emph{not} $2.0\times$!
+\verifiedby{Evaluated in \texttt{check\_sec10\_13.py} (\texttt{EX-11.1-RAL}, \texttt{EX-11.1-Q}): $\mathrm{Ra}_L = \num{3.3967e7}$, $\dot{Q}_{\mathrm{conv}} = \SI{4.446}{\watt}$.}
+\end{workedexample}
+
+\begin{workedexample}[Rayleigh--B\'enard Critical Air-Gap Thickness \& Foil Baffle Conductance]{2027 Device Insulation}{ex:11.2}
+An air space beneath the 9 oz cup cradle has mean air temperature $T_f = \SI{305.0}{\kelvin}$ ($\beta = 1/305.0 = \SI{3.2787e-3}{\per\kelvin},\; \nu = \SI{1.62e-5}{\square\meter\per\second},\; \alpha = \SI{2.28e-5}{\square\meter\per\second},\; k_{\mathrm{air}} = \SI{0.0265}{\watt\per\meter\per\kelvin}$) and temperature difference $\Delta T_{\mathrm{gap}} = \SI{15.0}{\kelvin}$ across one gap. Find (a) the maximum gap thickness $\delta_c$ before Rayleigh--B\'enard cellular convection begins ($\mathrm{Ra}_c = 1708$), and (b) the effective thermal conductivity $k_{\mathrm{eff}}$ of a $\delta = \SI{10.0}{\milli\meter}$ gap lined on both sides with household aluminum foil ($\varepsilon = 0.04$).
+\tcblower
+\textbf{Solution.} (a) Inverting $\mathrm{Ra}_\delta = \frac{g\beta\Delta T_{\mathrm{gap}}\delta_c^3}{\nu\alpha} = 1708$:
+\[
+  \delta_c = \left(\frac{1708\,\nu\alpha}{g\beta\Delta T_{\mathrm{gap}}}\right)^{\!1/3} = \left(\frac{1708(\SI{1.62e-5}{})(\SI{2.28e-5}{})}{(9.80665)(1/305.0)(15.0)}\right)^{\!1/3} = \mathbf{\SI{10.94}{\milli\meter}}
+\]
+(b) At $\delta = \SI{10.0}{\milli\meter} < \delta_c$, air is 100\% stagnant ($\mathrm{Nu}_\delta = 1.00$). With foil boundaries ($\varepsilon_1 = \varepsilon_2 = 0.04$ at $T_m = \SI{305}{\kelvin}$), the linearized radiative conductance across the gap is $h_{\mathrm{rad,foil}} = \frac{4\sigma T_m^3}{2/\varepsilon - 1} = \frac{4(\SI{5.6704e-8}{})(305.0)^3}{49.0} = \SI{0.1312}{\watt\per\square\meter\per\kelvin}$:
+\[
+  k_{\mathrm{eff}} = k_{\mathrm{air}} + h_{\mathrm{rad,foil}}\,\delta = 0.0265 + (0.1312)(0.0100) = \mathbf{\SI{0.02781}{\watt\per\meter\per\kelvin}}
+\]
+\verifiedby{Checked in \texttt{check\_sec10\_13.py} (\texttt{EX-11.2-DELTAC}, \texttt{EX-11.2-KEFF}): $\delta_c = \SI{10.936}{\milli\meter}$, $k_{\mathrm{eff}} = \SI{0.027813}{\watt\per\meter\per\kelvin}$.}
+\end{workedexample}
+
+\begin{workedexample}[Open-Cup Evaporative Mass-Transfer Heat Loss vs.\ Removable Glazing Cap]{Lienhard Ex.\ 11.11 \& Clarif.\ \#5 \src{S02,S12}}{ex:11.3}
+During a 2027 collector test, the top water surface in an uncovered 9 oz cup ($D_{\mathrm{surf}} = \SI{6.77}{\centi\meter},\; A_{\mathrm{surf}} = \SI{3.60e-3}{\square\meter}$) reaches $T_s = \SI{40.0}{\celsius}$ ($\SI{313.15}{\kelvin}$, saturation vapor pressure $P_{\mathrm{sat}} = \SI{7384}{\pascal}$, latent heat $L_v = \SI{2406}{\kilo\joule\per\kilogram}$ \src{S09}) in ambient room air at $T_e = \SI{22.0}{\celsius}$ ($\SI{295.15}{\kelvin}$), $\SI{50.0}{\percent}\ \mathrm{RH}$ ($P_{\mathrm{H_2O},e} = \SI{1322}{\pascal}$), and $P_{\mathrm{atm}} = \SI{101325}{\pascal}$. Given convective mass transfer conductance $g_m = \SI{6.65e-3}{\kilogram\per\square\meter\per\second}$, calculate (a) the surface and ambient water-vapor mass fractions $m_{\mathrm{H_2O},s}$ and $m_{\mathrm{H_2O},e}$, (b) the evaporation rate $\dot{m}_{\mathrm{evap}}$ and evaporative heat loss $\dot{Q}_{\mathrm{evap}}$, and (c) the temperature penalty over a $\SI{10.0}{\minute}$ ($\SI{600}{\second}$) run on the top stratified water layer ($C_{\mathrm{top}} = \SI{215}{\joule\per\kelvin}$).
+\tcblower
+\textbf{Solution.} (a) Using Eq.~\eref{eq:11:mass-fraction} with $R_u = \SI{8314.46}{\joule\per\kilo\mole\per\kelvin}$, $M_w = 18.0153$, and $M_a = 28.965$:
+{\footnotesize\begin{align*}
+  T_s = \SI{313.15}{\kelvin}:\; \rho_{\mathrm{H_2O},s} &= \frac{(7384)(18.0153)}{(8314.46)(313.15)} = \SI{0.05109}{\kilogram\per\cubic\meter},\;
+  \rho_{\mathrm{air},s} = \frac{(101325 - 7384)(28.965)}{(8314.46)(313.15)} = \SI{1.0450}{\kilogram\per\cubic\meter} \Rightarrow m_{\mathrm{H_2O},s} = \mathbf{0.04661} \\
+  T_e = \SI{295.15}{\kelvin}:\; \rho_{\mathrm{H_2O},e} &= \frac{(1322)(18.0153)}{(8314.46)(295.15)} = \SI{0.009704}{\kilogram\per\cubic\meter},\;
+  \rho_{\mathrm{air},e} = \frac{(101325 - 1322)(28.965)}{(8314.46)(295.15)} = \SI{1.1802}{\kilogram\per\cubic\meter} \Rightarrow m_{\mathrm{H_2O},e} = \mathbf{0.008155}
+\end{align*}}
+(b) By Eq.~\eref{eq:11:qevap-full}, with $\Delta m_{\mathrm{H_2O}} = 0.04661 - 0.008155 = 0.03846$:
+\[
+  \dot{m}_{\mathrm{evap}} = (\SI{3.60e-3}{\square\meter})(\SI{6.65e-3}{\kilogram\per\square\meter\per\second})(0.03846) = \mathbf{\SI{9.206e-7}{\kilogram\per\second}} = \SI{0.921}{\milli\gram\per\second} \quad (\SI{0.552}{\gram}\text{ in }\SI{10}{\minute})
+\]
+\[
+  \dot{Q}_{\mathrm{evap}} = L_v\,\dot{m}_{\mathrm{evap}} = (\SI{2.406e6}{\joule\per\kilogram})(\SI{9.206e-7}{\kilogram\per\second}) = \mathbf{\SI{2.215}{\watt}}
+\]
+(c) Over $\SI{600}{\second}$, evaporation removes $E_{\mathrm{evap}} = (\SI{2.215}{\watt})(\SI{600}{\second}) = \SI{1329}{\joule}$, depressing the top stratified layer ($C_{\mathrm{top}} = \SI{215}{\joule\per\kelvin}$) by $\Delta T_{\mathrm{loss}} = \frac{1329}{215} = \mathbf{\SI{6.18}{\celsius}}$! Resting a clear BoPET film cap over the cup mouth (\texttt{Clarification \#5}) traps saturated vapor ($\Delta m_{\mathrm{H_2O}} \to 0$) and recovers this entire loss.
+\verifiedby{Checked in \texttt{check\_sec10\_13.py} (\texttt{EX-11.3-QEVAP}): $\dot{Q}_{\mathrm{evap}} = \SI{2.2150}{\watt}$.}
+\end{workedexample}
+
+\begin{workedexample}[Top-Down Stratified Heating Advantage Under Official Clarifications \#1--\#4]{2027 Scoring Core \src{S02}}{ex:11.4}
+During a $\SI{10.0}{\minute}$ heating run, a collector delivers $E_{\mathrm{net}} = \SI{5400}{\joule}$ of net retained thermal energy to the $\SI{100.0}{\milli\liter}$ water ($m_{\mathrm{tot}} = \SI{100.0}{\gram},\; c_p = \SI{4.184}{\joule\per\gram\per\kelvin},\; C_{\mathrm{bulk}} = \SI{418.4}{\joule\per\kelvin}$) starting at $T_{\mathrm{start}} = \SI{21.0}{\celsius}$. Because near-IR lamp radiation is absorbed from above ($\mathrm{Ra} < 0$, buoyantly stable), $\SI{72.4}{\percent}$ of the energy ($\SI{3910}{\joule}$) is absorbed directly in the upper $\SI{45.0}{\milli\liter}$ layer ($C_{\mathrm{top}} = \SI{188.28}{\joule\per\kelvin}$) while $\SI{27.6}{\percent}$ ($\SI{1490}{\joule}$) reaches the lower $\SI{55.0}{\milli\liter}$ layer ($C_{\mathrm{bot}} = \SI{230.12}{\joule\per\kelvin}$), and internal water conduction transfers $E_{\mathrm{cond,down}} = \SI{690}{\joule}$ from top to bottom. Compare the ES-measured top-layer temperature gain $\mathrm{TG}_{\mathrm{top}}$ (unstirred per Clarifications \#1--\#4) against the bulk temperature gain $\mathrm{TG}_{\mathrm{bulk}}$ if a competitor accidentally swirls the cup while removing it!
+\tcblower
+\textbf{Solution.} Net energy retained in the top $\SI{45.0}{\milli\liter}$ layer is $E_{\mathrm{top}} = 3910 - 690 = \SI{3220}{\joule}$, while the bottom $\SI{55.0}{\milli\liter}$ layer gains $E_{\mathrm{bot}} = 1490 + 690 = \SI{2180}{\joule}$ ($E_{\mathrm{top}} + E_{\mathrm{bot}} = \SI{5400}{\joule}$):
+\[
+  \mathrm{TG}_{\mathrm{top}} = \frac{E_{\mathrm{top}}}{C_{\mathrm{top}}} = \frac{\SI{3220}{\joule}}{\SI{188.28}{\joule\per\kelvin}} = \mathbf{+\SI{17.10}{\celsius}} \quad (T_{f,\mathrm{top}} = \SI{38.10}{\celsius}), \qquad
+  \mathrm{TG}_{\mathrm{bot}} = \frac{\SI{2180}{\joule}}{\SI{230.12}{\joule\per\kelvin}} = +\SI{9.47}{\celsius}
+\]
+If the competitor accidentally swirls or shakes the cup during removal (violating Clarifications \#1--\#3 and mixing the layers), the water equalizes to $\mathrm{TG}_{\mathrm{bulk}} = \frac{5400}{418.4} = \mathbf{+\SI{12.91}{\celsius}}$ ($T_{f,\mathrm{bulk}} = \SI{33.91}{\celsius}$) — \textbf{destroying $\SI{4.19}{\celsius}$ ($\SI{24.5}{\percent}$) of their Temperature Score $\mathrm{TS}$ AND ruining their Prediction Score $\mathrm{PS}$!}
+\verifiedby{First-law enthalpy check in \texttt{check\_sec10\_13.py} (\texttt{EX-11.4-STRAT}, \texttt{EX-11.4-ECONS}): $C_{\mathrm{top}}\mathrm{TG}_{\mathrm{top}} + C_{\mathrm{bot}}\mathrm{TG}_{\mathrm{bot}} = \SI{5400.00}{\joule}$.}
+\end{workedexample}
+
+\begin{workedexample}[Mixed Convection Criterion ($\mathrm{Gr}_L/\mathrm{Re}_L^2$) Under Room HVAC Drafts]{Lienhard Eq.\ 8.45 \src{S12}}{ex:11.5}
+If a tournament testing table sits beneath a room air-conditioning vent producing a gentle horizontal draft $u_\infty = \SI{0.250}{\meter\per\second}$ across the vertical wall of Worked Example~\ref{ex:11.1} ($L = \SI{0.300}{\meter},\; \nu = \SI{1.60e-5}{\square\meter\per\second},\; \mathrm{Ra}_L = \num{3.397e7},\; \mathrm{Pr} = 0.711$), evaluate $\mathrm{Gr}_L / \mathrm{Re}_L^2$ and determine whether forced convection can be neglected.
+\tcblower
+\textbf{Solution.} $\mathrm{Gr}_L = \frac{\mathrm{Ra}_L}{\mathrm{Pr}} = \frac{\num{3.3967e7}}{0.711} = \num{4.777e7}$, and $\mathrm{Re}_L = \frac{u_\infty L}{\nu} = \frac{(0.250)(0.300)}{\SI{1.60e-5}{}} = \mathbf{4687.5}$:
+\[
+  \frac{\mathrm{Gr}_L}{\mathrm{Re}_L^2} = \frac{\num{4.777e7}}{(4687.5)^2} = \frac{\num{4.777e7}}{\num{2.197e7}} = \mathbf{2.174} \sim \mathcal{O}(1)
+\]
+Because $\mathrm{Gr}_L/\mathrm{Re}_L^2 = 2.17$ is of order unity ($0.1 < \mathrm{Gr}_L/\mathrm{Re}_L^2 < 10$), \textbf{neither natural nor forced convection can be neglected} (mixed convection applies: $\mathrm{Nu}_{\mathrm{mixed}}^3 \approx \mathrm{Nu}_{\mathrm{forced}}^3 + \mathrm{Nu}_{\mathrm{nat}}^3$). Enclosing the collector sides within the full $\SI{30.0}{\centi\meter}$ outer shell shields the internal cup completely from room HVAC drafts!
+\verifiedby{Checked in \texttt{check\_sec10\_13.py} (\texttt{EX-11.5-MIXED}): $\mathrm{Gr}_L/\mathrm{Re}_L^2 = 2.1742$.}
+\end{workedexample}
+
+\begin{workedexample}[Internal Pipe Flow Exponential Approach \& Log-Mean Temperature Difference (LMTD)]{Lienhard §7.4 \src{S12}}{ex:11.6}
+Water ($c_p = \SI{4180}{\joule\per\kilogram\per\kelvin}$) flows at $\dot{m} = \SI{0.0200}{\kilogram\per\second}$ through a circular tube of inner diameter $D = \SI{15.0}{\milli\meter}$ and length $L = \SI{1.20}{\meter}$ whose inner wall is maintained at constant temperature $T_w = \SI{80.0}{\celsius}$ by condensing steam. If the water enters at $T_{b,\mathrm{in}} = \SI{20.0}{\celsius}$ and the internal convection coefficient is $\bar{h} = \SI{1850}{\watt\per\square\meter\per\kelvin}$, compute (a) the outlet water bulk temperature $T_{b,\mathrm{out}}$, (b) the total heat transfer rate $\dot{Q}$ via First-Law enthalpy balance, and (c) verify $\dot{Q} = \bar{h} A_s \Delta T_{\mathrm{lm}}$ and compare $\Delta T_{\mathrm{lm}}$ against the naive arithmetic mean $\Delta T_{\mathrm{arith}}$.
+\tcblower
+\textbf{Solution.} (a) Internal surface area is $A_s = \pi D L = \pi(0.0150)(1.20) = \SI{0.056549}{\square\meter}$, and stream heat-capacity rate is $\dot{m}c_p = (0.0200)(4180) = \SI{83.60}{\watt\per\kelvin}$. Number of Transfer Units: $\mathrm{NTU} = \dfrac{\bar{h}A_s}{\dot{m}c_p} = \dfrac{(1850)(0.056549)}{83.60} = \mathbf{1.2514}$. By Eq.~\eref{eq:11:pipe-lmtd}:
+\[
+  T_{b,\mathrm{out}} = T_w - \left(T_w - T_{b,\mathrm{in}}\right)e^{-\mathrm{NTU}} = 80.0 - (80.0 - 20.0)e^{-1.25143} = 80.0 - 60.0(0.28609) = \mathbf{\SI{62.83}{\celsius}}
+\]
+(b) By the First Law: $\dot{Q} = \dot{m}c_p(T_{b,\mathrm{out}} - T_{b,\mathrm{in}}) = (83.60)(62.835 - 20.00) = \mathbf{\SI{3581}{\watt}}$.\\
+(c) End temperature differences are $\Delta T_{\mathrm{in}} = 80.0 - 20.0 = \SI{60.0}{\kelvin}$ and $\Delta T_{\mathrm{out}} = 80.0 - 62.835 = \SI{17.165}{\kelvin}$. By Eq.~\eref{eq:11:lmtd-boxed}:
+\[
+  \Delta T_{\mathrm{lm}} = \frac{60.0 - 17.165}{\ln(60.0 / 17.165)} = \frac{42.835}{1.25143} = \mathbf{\SI{34.23}{\kelvin}} \quad \left(\text{vs.\ } \Delta T_{\mathrm{arith}} = \frac{60.0 + 17.165}{2} = \SI{38.58}{\kelvin},\ +12.7\%\text{ error!}\right)
+\]
+Multiplying $\bar{h}A_s\Delta T_{\mathrm{lm}} = (1850)(0.056549)(34.230) = \mathbf{\SI{3581}{\watt}}$, identical to the First-Law balance!
+\verifiedby{Checked in \texttt{check\_sec10\_13.py} (\texttt{EX-11.6-LMTD}): $\dot{Q} = \SI{3580.87}{\watt}$ by both methods ($\text{rel\_err} = 0.00$).}
+\end{workedexample}
+
+\begin{workedexample}[Horizontal Heated Disk: Unstable Upward-Facing vs.\ Stable Downward-Facing]{Lienhard §8.4 \src{S12}}{ex:11.7}
+A flat horizontal circular plate of diameter $D = \SI{16.0}{\centi\meter}$ ($\SI{0.160}{\meter}$) is heated to $T_s = \SI{57.0}{\celsius}$ in still room air at $T_\infty = \SI{23.0}{\celsius}$ ($\Delta T = \SI{34.0}{\kelvin}$; at $T_f = \SI{40.0}{\celsius} = \SI{313.15}{\kelvin}$, air has $\beta = 1/313.15 = \SI{3.1934e-3}{\per\kelvin}$, $\nu = \SI{1.70e-5}{\square\meter\per\second}$, $\alpha = \SI{2.40e-5}{\square\meter\per\second}$, $\mathrm{Pr} = 0.708$, $k_f = \SI{0.0272}{\watt\per\meter\per\kelvin}$). Compare the natural convection coefficient $\bar{h}_{\mathrm{up}}$ on the upward-facing hot surface (unstable plumes, Eq.~8.37a with $L^* = A/P = D/4 = \SI{0.0400}{\meter}$) against $\bar{h}_{\mathrm{down}}$ on the downward-facing hot surface (stable stratification, Eq.~8.39 with $D = \SI{0.160}{\meter}$).
+\tcblower
+\textbf{Solution.} Diameter-based Rayleigh number is $\mathrm{Ra}_D = \frac{(9.80665)(1/313.15)(34.0)(0.160)^3}{(\SI{1.70e-5}{})(\SI{2.40e-5}{})} = \mathbf{\num{1.0695e7}}$, and $L^*$-based Rayleigh number ($L^* = D/4$) is $\mathrm{Ra}_{L^*} = \mathrm{Ra}_D / 4^3 = \mathrm{Ra}_D / 64 = \mathbf{\num{1.6711e5}}$.
+\begin{enumerate}
+  \item \textbf{Upward-Facing Hot Surface (Unstable, \tref{tab:11:correlations} Eq.~8.37a):}
+  \[
+    \overline{\mathrm{Nu}}_{L^*} = \frac{0.560(\num{1.6711e5})^{1/4}}{\left[1 + (0.492/0.708)^{9/16}\right]^{4/9}} = \frac{11.332}{1.3045} = \mathbf{8.686} \implies
+    \bar{h}_{\mathrm{up}} = \frac{k_f}{L^*}\overline{\mathrm{Nu}}_{L^*} = \frac{0.0272}{0.0400}(8.686) = \mathbf{\SI{5.907}{\watt\per\square\meter\per\kelvin}}
+  \]
+  \item \textbf{Downward-Facing Hot Surface (Stable, \tref{tab:11:correlations} Eq.~8.39):}
+  \[
+    \overline{\mathrm{Nu}}_D = 0.82(\num{1.0695e7})^{1/5}(0.708)^{0.034} = \mathbf{20.630} \implies
+    \bar{h}_{\mathrm{down}} = \frac{k_f}{D}\overline{\mathrm{Nu}}_D = \frac{0.0272}{0.160}(20.630) = \mathbf{\SI{3.507}{\watt\per\square\meter\per\kelvin}}
+  \]
+\end{enumerate}
+Stable gravitational stratification reduces convective heat transfer on the downward-facing hot surface by $\mathbf{1.68\times}$!
+\verifiedby{Checked in \texttt{check\_sec10\_13.py} (\texttt{EX-11.7-H-UP}, \texttt{EX-11.7-H-DOWN}): $\bar{h}_{\mathrm{up}} = \SI{5.9067}{\watt\per\square\meter\per\kelvin}$, $\bar{h}_{\mathrm{down}} = \SI{3.5071}{\watt\per\square\meter\per\kelvin}$.}
+\end{workedexample}
+
+% ----------------------------------------------------------------------------
+% L5: TRAPS & DIAGNOSTICS + L6: 2027 DEVICE APPLICATION
+% ----------------------------------------------------------------------------
+\section{Convection Traps, Diagnostics \& 2027 Stratification Playbook}
+\label{sec:11.5}
+
+\begin{trapbox}[Top Convection \& Mass-Transfer Traps on Science Olympiad Exams]
+\idxerr{convection!confusing Nusselt Nu with Biot Bi conductivity}
+\idxerr{convection!using Celsius in ideal-gas beta = 1/T}
+\idxerr{convection!assuming natural convection Q is linear in DeltaT}
+\par\smallskip\noindent
+\begin{errtab}
+\textbf{1. Using solid conductivity $k_{\mathrm{solid}}$ inside $\mathrm{Nu} = hL/k_{\mathrm{fluid}}$ (or $k_{\mathrm{fluid}}$ inside $\mathrm{Bi} = hL_c/k_{\mathrm{solid}}$)}
+  & Mixes up fluid boundary-layer convection ($\mathrm{Nu}$) with internal solid temperature uniformity ($\mathrm{Bi}$) (Lienhard p.~23 \src{S12}).
+  & Memory lock: $\mathrm{Nu}$ = \textbf{N}ewton fluid ($k_{\mathrm{fluid}}$); $\mathrm{Bi}$ = \textbf{B}ody internal ($k_{\mathrm{body}}$). \\
+\textbf{2. Plugging Celsius $T_f$ into ideal-gas expansion coefficient $\beta = 1/T_f$}
+  & Overestimates $\beta$ and $\mathrm{Ra}_L$ by $\sim 10\times$ at $\SI{25}{\celsius}$!
+  & Always convert $T_f$ to absolute Kelvin: $\beta_{\mathrm{gas}} = \frac{1}{T_f(\si{\kelvin})}$. \\
+\textbf{3. Assuming natural convection heat loss $\dot{Q}$ scales linearly with $\Delta T$}
+  & Because $h_{\mathrm{nat}} \propto \Delta T^{1/4}$ (laminar) or $\Delta T^{1/3}$ (turbulent), $\dot{Q} = hA\Delta T$ scales as $\Delta T^{5/4}$ or $\Delta T^{4/3}$!
+  & If $\Delta T$ doubles in laminar natural convection, $\dot{Q}$ multiplies by $2^{5/4} = 2.378\times$. \\
+\textbf{4. Making a single insulation air gap wider than $\SI{15}{\milli\meter}$}
+  & Triggers Rayleigh--B\'enard cellular convection ($\mathrm{Ra}_\delta > 1708$), circulating heat across the cavity.
+  & Subdivide wide cavities with aluminum-foil baffles into $\SIrange{10}{12}{\milli\meter}$ stagnant cells. \\
+\end{errtab}
+\end{trapbox}
+
+\begin{rulebox}[2027 Official Clarifications \#1--\#5: Zero Stirring, Top-Layer Probe \& Removable Glazing \src{S02,S05}]
+\idxdev{Clarifications 1-4!no stirring or swirling before measurement}
+\idxdev{Clarification 5!removable non-attached glazing film}
+\begin{itemize}
+  \item \textbf{Clarifications \#1--\#3 (\texttt{09/30/2026}--\texttt{10/06/2026}):} \emph{``No, the water will not be stirred or swirled before taking the temperature... No, the water must not be swirled, shaken or stirred before taking the temperature.''}
+  \item \textbf{Clarification \#4 (\texttt{10/06/2026}):} \emph{``It is recommended that the ES should measure the temperature of the top layer of water near the center of the cup. If the thermometer has a probe, the ES should insert it far enough into the water to take an accurate measurement, but no farther.''}
+  \item \textbf{Clarification \#5 (\texttt{10/21/2026}) \& Official ES Guide:} Teams may rest a transparent vapor barrier / glazing cover (such as a $\SI{25}{\micro\meter}$ clear BoPET disk or LDPE wrap mounted on an upper gravity ring) on or around the cup during Water Setup Time, provided \textbf{zero adhesives, tapes, rubber bands, or clips attach it to the cup}, cup shape is unaltered, and the cover is completely removed before final temperature measurement.
+\end{itemize}
+\end{rulebox}
+
+% ----------------------------------------------------------------------------
+% RAPID COMPETITION PROBLEM & SOLUTION BANK (§11)
+% ----------------------------------------------------------------------------
+\section{Rapid Competition Problem \& Solution Bank (§11)}
+\label{sec:11.6}
+
+\begin{problem}{P11.1}{Boundary-Layer Scaling Along a Laminar vs.\ Turbulent Flat Plate}{11.1}{5.c.iii}{State / National}{60 s}{Power-Law Ratio}{assuming $\bar{h}_L = h_x(L)$ instead of $2 h_x(L)$}
+Air ($\mathrm{Pr} = 0.71$) flows at free-stream speed $u_\infty = \SI{4.00}{\meter\per\second}$ over an isothermal flat plate of length $L = \SI{0.400}{\meter}$ ($\nu = \SI{1.60e-5}{\square\meter\per\second}$, $k_f = \SI{0.0265}{\watt\per\meter\per\kelvin}$). (a) Verify that the boundary layer is laminar over the entire plate and compute both the trailing-edge local convection coefficient $h_x(L)$ and the plate-averaged coefficient $\bar{h}_L$. (b) If the plate length is quadrupled to $4L$ while remaining laminar, by what factor does the total heat transfer rate $\dot{Q}$ change?
+\end{problem}
+\begin{solution}{P11.1}
+(a) At $x = L = \SI{0.400}{\meter}$, $\mathrm{Re}_L = \dfrac{u_\infty L}{\nu} = \dfrac{(4.00)(0.400)}{\SI{1.60e-5}{}} = \mathbf{\num{1.00e5} < \num{5e5}}$ (100\% laminar). By Eq.~\eref{eq:11:blasius-pohlhausen}:
+\[
+  \mathrm{Nu}_{x=L} = 0.332(\num{1.00e5})^{1/2}(0.71)^{1/3} = 0.332(316.23)(0.8921) = \mathbf{93.66} \implies
+  h_x(L) = \frac{0.0265}{0.400}(93.66) = \mathbf{\SI{6.205}{\watt\per\square\meter\per\kelvin}}
+\]
+The plate-averaged coefficient is exactly twice the trailing-edge value: $\bar{h}_L = 2 h_x(L) = \mathbf{\SI{12.41}{\watt\per\square\meter\per\kelvin}}$ ($\overline{\mathrm{Nu}}_L = 187.3$).\\
+(b) Since $\bar{h}_L \propto L^{-1/2}$ while surface area $A = W L \propto L^1$, total heat flow scales as $\dot{Q} = \bar{h}_L A \Delta T \propto L^{1/2}$: quadrupling $L$ multiplies total heat transfer by $4^{1/2} = \mathbf{2.00\times}$ (the upstream half $[0, 2L]$ transfers $\frac{1}{\sqrt{2}} = 70.7\%$ of the heat!).
+\end{solution}
+
+\begin{problem}{P11.2}{Microgravity / Small-Sphere Conduction Limit ($\mathrm{Nu}_D \to 2$)}{11.2}{5.c.iii}{National / MIT}{60 s}{Asymptotic Limit}{using cylinder correlation with lead constant 0.36 instead of 2}
+A spherical water droplet of diameter $D = \SI{0.500}{\milli\meter}$ is suspended in still air ($k_{\mathrm{air}} = \SI{0.0262}{\watt\per\meter\per\kelvin}$) under microgravity conditions ($g \to 0 \implies \mathrm{Ra}_D \to 0$, Lienhard §8.4 Eq.~8.31, p.~433 \src{S12}). What is the exact asymptotic Nusselt number $\mathrm{Nu}_D$ and convective/conductive heat transfer coefficient $h$ of the droplet?
+\end{problem}
+\begin{solution}{P11.2}
+As $\mathrm{Ra}_D \to 0$, buoyant motion vanishes and steady radial heat transfer into the infinite surrounding air medium occurs by pure 3-D spherical conduction ($R_{\mathrm{sph},\infty} = \lim_{r_o\to\infty}\frac{r_o - r_i}{4\pi k_{\mathrm{air}}r_i r_o} = \frac{1}{4\pi k_{\mathrm{air}}r_i} = \frac{1}{2\pi k_{\mathrm{air}}D}$). Equating $\dot{Q} = h(\pi D^2)\Delta T = 2\pi k_{\mathrm{air}}D\Delta T$ gives the exact lower bound for any sphere (\tref{tab:11:correlations}):
+\[
+  \lim_{\mathrm{Ra}_D \to 0} \mathrm{Nu}_D = \mathbf{2.000}, \qquad h = \frac{2 k_{\mathrm{air}}}{D} = \frac{2(\SI{0.0262}{\watt\per\meter\per\kelvin})}{\SI{0.000500}{\meter}} = \mathbf{\SI{104.8}{\watt\per\square\meter\per\kelvin}}
+\]
+(Notice how small diameter $D = \SI{0.5}{\milli\meter}$ creates a huge heat transfer coefficient $h = \SI{104.8}{\watt\per\square\meter\per\kelvin}$ even with zero air flow!).
+\end{solution}
+
+\begin{problem}{P11.3}{Dittus--Boelter Turbulent Pipe Flow Velocity \& Diameter Scaling}{11.2}{5.c.iii}{State / National}{60 s}{Exponents}{forgetting that mass flow $\dot{m}$ at fixed $D$ scales $u_m \propto \dot{m}$}
+Water flows turbulently ($\mathrm{Re}_D = \num{4.0e4}$) through a heated circular tube of diameter $D$, giving internal heat transfer coefficient $h_1 = \SI{2400}{\watt\per\square\meter\per\kelvin}$. Using the Dittus--Boelter correlation $\mathrm{Nu}_D = 0.023\,\mathrm{Re}_D^{0.8}\mathrm{Pr}^{0.4}$, find the new heat transfer coefficient $h_2$ if the same mass flow rate $\dot{m}$ is forced through a tube of half the diameter ($D_2 = D_1 / 2$).
+\end{problem}
+\begin{solution}{P11.3}
+At constant mass flow rate $\dot{m} = \rho u_m (\frac{\pi}{4}D^2)$, mean flow speed scales as $u_m \propto D^{-2}$, so $\mathrm{Re}_D = \frac{\rho u_m D}{\mu} = \frac{4\dot{m}}{\pi\mu D} \propto D^{-1}$. Therefore, $h = \frac{k_f}{D}\mathrm{Nu}_D \propto D^{-1}\left(\mathrm{Re}_D^{0.8}\right) \propto D^{-1}\left(D^{-0.8}\right) = \mathbf{D^{-1.8}}$! Halving the diameter at fixed mass flow rate multiplies $h$ by $2^{1.8} = \mathbf{3.482\times}$:
+\[
+  h_2 = 2^{1.8}(\SI{2400}{\watt\per\square\meter\per\kelvin}) = (3.4822)(2400) = \mathbf{\SI{8357}{\watt\per\square\meter\per\kelvin}}
+\]
+\end{solution}
+
+\begin{problem}{P11.4}{Sling Psychrometer Wet-Bulb Adiabatic Evaporative Equilibrium}{11.3}{5.c.ii, 5.c.iii}{National / Cornell E1}{90 s}{Coupled Heat-Mass Balance}{forgetting Lewis/Chilton-Colburn factor or latent heat}
+In a sling psychrometer (Lienhard §11.7 Fig.~11.16, p.~665 \src{S12}), a wet-wick thermometer bulb reaches steady wet-bulb temperature $T_{\mathrm{wb}} = \SI{18.0}{\celsius}$ when swung in dry desert air where the convective heat transfer coefficient is $h = \SI{45.0}{\watt\per\square\meter\per\kelvin}$ and the mass-transfer evaporative cooling flux at the wick surface is $\dot{m}''_{\mathrm{evap}} = \SI{0.370}{\gram\per\square\meter\per\second}$ ($L_v(\SI{18}{\celsius}) = \SI{2458}{\kilo\joule\per\kilogram}$, neglect radiation). Calculate the dry-bulb air temperature $T_{\mathrm{db}}$.
+\end{problem}
+\begin{solution}{P11.4}
+At steady wet-bulb equilibrium, the rate of convective sensible heat gain from the warmer dry-bulb air ($q''_{\mathrm{conv}} = h(T_{\mathrm{db}} - T_{\mathrm{wb}})$) exactly balances the rate of evaporative latent heat removal ($q''_{\mathrm{evap}} = L_v \dot{m}''_{\mathrm{evap}}$):
+\[
+  h\left(T_{\mathrm{db}} - T_{\mathrm{wb}}\right) = L_v\,\dot{m}''_{\mathrm{evap}} = (\SI{2.458e6}{\joule\per\kilogram})(\SI{3.70e-4}{\kilogram\per\square\meter\per\second}) = \mathbf{\SI{909.46}{\watt\per\square\meter}}
+\]
+\[
+  T_{\mathrm{db}} = T_{\mathrm{wb}} + \frac{909.46}{h} = 18.0 + \frac{909.46}{45.0} = 18.0 + 20.21 = \mathbf{\SI{38.21}{\celsius}}
+\]
+\end{solution}
+
+\begin{problem}{P11.5}{Multi-Cell Foil Air-Gap Baffle Optimization Inside a 30 mm Wall}{11.3}{5.c.iii}{2027 Device / State}{75 s}{Rayleigh Scaling $\mathrm{Ra} \propto \Delta T \delta^3$}{forgetting that $N$ cells divide both $\delta$ and $\Delta T_{\mathrm{cell}}$ by $N$}
+A single vertical air cavity of thickness $W = \SI{30.0}{\milli\meter}$ across a temperature drop $\Delta T_{\mathrm{tot}} = \SI{30.0}{\kelvin}$ has Rayleigh number $\mathrm{Ra}_W = \num{7.20e4}$. If two thin parallel aluminum-foil sheets are inserted to subdivide the $\SI{30.0}{\milli\meter}$ space into $N = 3$ equal $\SI{10.0}{\milli\meter}$ series air cells, by what exact factor is the Rayleigh number $\mathrm{Ra}_\delta$ inside each individual cell reduced compared to $\mathrm{Ra}_W$?
+\end{problem}
+\begin{solution}{P11.5}
+Subdividing a gap of width $W$ into $N$ equal series cells divides the cell thickness by $N$ ($\delta = W/N$) \textbf{AND} divides the temperature drop across each cell by $N$ ($\Delta T_{\mathrm{cell}} = \Delta T_{\mathrm{tot}}/N$)! Because $\mathrm{Ra}_\delta \propto \Delta T_{\mathrm{cell}}\,\delta^3$, the Rayleigh number in each cell drops as $\mathbf{N^{-4}}$:
+\[
+  \frac{\mathrm{Ra}_\delta}{\mathrm{Ra}_W} = \left(\frac{\Delta T_{\mathrm{tot}}/N}{\Delta T_{\mathrm{tot}}}\right)\!\left(\frac{W/N}{W}\right)^{\!3} = \frac{1}{N^4} = \frac{1}{3^4} = \mathbf{\frac{1}{81}} \implies \mathrm{Ra}_\delta = \frac{\num{7.20e4}}{81} = \mathbf{888.9 < \mathrm{Ra}_c = 1708}
+\]
+Two foil sheets reduce $\mathrm{Ra}$ by $\mathbf{81\times}$, completely quenching cellular natural convection!
+\end{solution}
+
+\par\smallskip\noindent
+\begin{minipage}{\linewidth}
+\captionof{table}{Thermophysical Properties of Dry Air ($\SI{1}{\text{atm}}$) and Saturated Liquid Water from $\SI{0}{\celsius}$ to $\SI{100}{\celsius}$, Including Pre-Computed Rayleigh Modulus $g\beta/(\nu\alpha)$ for Instant $\mathrm{Ra}_L = [g\beta/(\nu\alpha)]\Delta T L^3$ Lookup (Lienhard Tables~A.3 \& A.6, pp.~746, 756 \src{S11,S12}).}
+\label{tab:11:air-water-props}
+\idxtopic{thermophysical properties!dry air 0 to 100 C}
+\idxtopic{thermophysical properties!liquid water 0 to 100 C}
+\idxtopic{Rayleigh modulus!pre-computed g*beta/(nu*alpha)}
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.12}
+\begin{tabularx}{\linewidth}{@{}r r r r r r r r X@{}}
+\toprule
+$T$ $[\si{\celsius}]$ & $T$ $[\si{\kelvin}]$ & $\rho$ $[\si{\kilogram\per\cubic\meter}]$ & $c_p$ $[\si{\joule\per\kilogram\per\kelvin}]$ & $k_f$ $[\si{\watt\per\meter\per\kelvin}]$ & $\nu$ $[\si{\square\meter\per\second}]$ & $\alpha$ $[\si{\square\meter\per\second}]$ & $\mathrm{Pr}$ $[1]$ & $g\beta/(\nu\alpha)$ $[\si{\per\kelvin\per\cubic\meter}]$ \\
+\midrule
+\multicolumn{9}{l}{\textbf{Dry Air at $\SI{1.00}{\text{atm}}$ ($\SI{101.325}{\kilo\pascal}$)} --- Ideal-gas thermal expansion $\beta = 1/T(\si{\kelvin})$} \\
+$0$   & $273.15$ & $1.292$ & $1006$ & $0.0242$ & $\num{1.33e-5}$ & $\num{1.86e-5}$ & $0.715$ & $\num{1.45e8}$ \\
+$20$  & $293.15$ & $1.204$ & $1006$ & $0.0257$ & $\num{1.51e-5}$ & $\num{2.12e-5}$ & $0.713$ & $\num{1.04e8}$ \\
+$27$  & $300.00$ & $1.177$ & $1006$ & $0.0262$ & $\num{1.57e-5}$ & $\num{2.21e-5}$ & $0.712$ & $\num{9.42e7}$ \\
+$40$  & $313.15$ & $1.127$ & $1007$ & $0.0272$ & $\num{1.70e-5}$ & $\num{2.40e-5}$ & $0.710$ & $\num{7.68e7}$ \\
+$60$  & $333.15$ & $1.059$ & $1008$ & $0.0287$ & $\num{1.90e-5}$ & $\num{2.69e-5}$ & $0.708$ & $\num{5.76e7}$ \\
+$80$  & $353.15$ & $0.999$ & $1010$ & $0.0302$ & $\num{2.10e-5}$ & $\num{2.99e-5}$ & $0.706$ & $\num{4.42e7}$ \\
+$100$ & $373.15$ & $0.946$ & $1012$ & $0.0317$ & $\num{2.31e-5}$ & $\num{3.31e-5}$ & $0.704$ & $\num{3.44e7}$ \\
+\midrule
+\multicolumn{9}{l}{\textbf{Saturated Liquid Water ($\mathrm{H_2O}$)} --- Note $\beta < 0$ for $T < \SI{3.984}{\celsius}$ and $\beta = 0$ at $\SI{3.984}{\celsius}$} \\
+$0$   & $273.15$ & $999.8$ & $4217$ & $0.561$  & $\num{1.79e-6}$ & $\num{1.33e-7}$ & $13.47$ & $\num{-2.80e9}$ \\
+$20$  & $293.15$ & $998.2$ & $4182$ & $0.598$  & $\num{1.00e-6}$ & $\num{1.43e-7}$ & $7.01$  & $\num{1.42e10}$ \\
+$30$  & $303.15$ & $995.6$ & $4179$ & $0.615$  & $\num{8.01e-7}$ & $\num{1.48e-7}$ & $5.42$  & $\num{2.51e10}$ \\
+$40$  & $313.15$ & $992.2$ & $4179$ & $0.631$  & $\num{6.58e-7}$ & $\num{1.52e-7}$ & $4.33$  & $\num{3.77e10}$ \\
+$60$  & $333.15$ & $983.2$ & $4185$ & $0.654$  & $\num{4.74e-7}$ & $\num{1.59e-7}$ & $2.98$  & $\num{6.79e10}$ \\
+$80$  & $353.15$ & $971.8$ & $4197$ & $0.670$  & $\num{3.65e-7}$ & $\num{1.64e-7}$ & $2.22$  & $\num{1.05e11}$ \\
+$100$ & $373.15$ & $958.4$ & $4216$ & $0.679$  & $\num{2.94e-7}$ & $\num{1.68e-7}$ & $1.75$  & $\num{1.49e11}$ \\
+\bottomrule
+\end{tabularx}
+\end{minipage}
+\par\smallskip
+
+\begin{problem}{P11.6}{Counterflow vs.\ Parallel-Flow Heat Exchanger LMTD Comparison}{11.2}{5.c.iii}{National / Invitational}{75 s}{LMTD Eq.\ (11.5)}{using arithmetic mean $\Delta T$ or parallel-flow endpoint subtraction in counterflow}
+In a double-pipe heat exchanger, hot oil enters at $T_{h,\mathrm{in}} = \SI{90.0}{\celsius}$ and exits at $T_{h,\mathrm{out}} = \SI{50.0}{\celsius}$ while transferring $\dot{Q} = \SI{12.00}{\kilo\watt}$ to cooling water that enters at $T_{c,\mathrm{in}} = \SI{20.0}{\celsius}$ and exits at $T_{c,\mathrm{out}} = \SI{45.0}{\celsius}$ (overall heat transfer coefficient $U = \SI{400.0}{\watt\per\square\meter\per\kelvin}$, Lienhard Ch.~3 pp.~117--128 \src{S12}). Compute the log-mean temperature difference $\Delta T_{\mathrm{lm}}$ and required heat-exchange surface area $A_s = \dot{Q}/(U\Delta T_{\mathrm{lm}})$ for (a) parallel flow, and (b) counterflow.
+\end{problem}
+\begin{solution}{P11.6}
+\begin{enumerate}
+  \item[(a)] \textbf{Parallel Flow (both fluids enter at End A and exit at End B):} $\Delta T_A = T_{h,\mathrm{in}} - T_{c,\mathrm{in}} = 90.0 - 20.0 = \SI{70.0}{\kelvin}$, and $\Delta T_B = T_{h,\mathrm{out}} - T_{c,\mathrm{out}} = 50.0 - 45.0 = \SI{5.00}{\kelvin}$. By Eq.~\eref{eq:11:lmtd-boxed}:
+  \[
+    \Delta T_{\mathrm{lm,par}} = \frac{70.0 - 5.00}{\ln(70.0/5.00)} = \frac{65.00}{\ln(14.00)} = \frac{65.00}{2.63906} = \mathbf{\SI{24.63}{\kelvin}} \implies A_{s,\mathrm{par}} = \frac{\SI{12000}{\watt}}{(400.0)(24.630)} = \mathbf{\SI{1.218}{\square\meter}}
+  \]
+  \item[(b)] \textbf{Counterflow (hot enters End A where cold exits; hot exits End B where cold enters):} $\Delta T_A = T_{h,\mathrm{in}} - T_{c,\mathrm{out}} = 90.0 - 45.0 = \SI{45.0}{\kelvin}$, and $\Delta T_B = T_{h,\mathrm{out}} - T_{c,\mathrm{in}} = 50.0 - 20.0 = \SI{30.0}{\kelvin}$:
+  \[
+    \Delta T_{\mathrm{lm,cf}} = \frac{45.0 - 30.0}{\ln(45.0/30.0)} = \frac{15.00}{\ln(1.500)} = \frac{15.00}{0.40547} = \mathbf{\SI{37.00}{\kelvin}} \implies A_{s,\mathrm{cf}} = \frac{\SI{12000}{\watt}}{(400.0)(36.995)} = \mathbf{\SI{0.8109}{\square\meter}}
+  \]
+  Counterflow provides a $+\SI{50.2}{\percent}$ larger driving $\Delta T_{\mathrm{lm}}$ and requires $\SI{33.4}{\percent}$ less surface area (and only counterflow allows $T_{c,\mathrm{out}} > T_{h,\mathrm{out}}$!).
+\end{enumerate}
+\end{solution}
+
+\begin{problem}{P11.7}{Chilton--Colburn / Reynolds Heat-Momentum Analogy ($C_f \leftrightarrow \mathrm{St}$)}{11.1}{5.c.iii}{National / MIT}{60 s}{Chilton--Colburn Analogy}{forgetting the $\mathrm{Pr}^{2/3}$ factor when $\mathrm{Pr} \ne 1$}
+Air ($\rho = \SI{1.177}{\kilogram\per\cubic\meter}$, $c_p = \SI{1006}{\joule\per\kilogram\per\kelvin}$, $\mathrm{Pr} = 0.712$ at $\SI{300}{\kelvin}$, \tref{tab:11:air-water-props}) flows at $u_\infty = \SI{12.0}{\meter\per\second}$ over a flat surface where wind-tunnel drag measurements give a plate-averaged skin-friction coefficient $\bar{C}_f = \dfrac{\bar{\tau}_w}{\frac{1}{2}\rho u_\infty^2} = 0.00420$. Using the Chilton--Colburn Reynolds analogy $\overline{\mathrm{St}}\,\mathrm{Pr}^{2/3} = \dfrac{\bar{C}_f}{2}$ where the Stanton number is $\overline{\mathrm{St}} = \dfrac{\bar{h}}{\rho c_p u_\infty} = \dfrac{\overline{\mathrm{Nu}}_L}{\mathrm{Re}_L \mathrm{Pr}}$ (Lienhard §6.3 Eq.~6.48, p.~297 \src{S12}), compute the average convective heat transfer coefficient $\bar{h}$.
+\end{problem}
+\begin{solution}{P11.7}
+By the Chilton--Colburn analogy (valid for laminar and turbulent boundary layers with $0.6 \le \mathrm{Pr} \le 60$):
+\[
+  \overline{\mathrm{St}} = \frac{\bar{h}}{\rho c_p u_\infty} = \frac{\bar{C}_f}{2\,\mathrm{Pr}^{2/3}} = \frac{0.00420}{2(0.712)^{2/3}} = \frac{0.002100}{0.79750} = \mathbf{0.002633}
+\]
+\[
+  \bar{h} = \rho c_p u_\infty\,\overline{\mathrm{St}} = (\SI{1.177}{\kilogram\per\cubic\meter})(\SI{1006}{\joule\per\kilogram\per\kelvin})(\SI{12.0}{\meter\per\second})(0.0026332) = \mathbf{\SI{37.42}{\watt\per\square\meter\per\kelvin}}
+\]
+\end{solution}
+
+\begin{problem}{P11.8}{Hot-Wire / Cylinder Crossflow Anemometer Speed Determination}{11.2}{5.c.iii}{State / National}{75 s}{Churchill--Bernstein / King's Law}{forgetting that $\mathrm{Nu}_D \propto \mathrm{Re}_D^{1/2}$ at moderate $\mathrm{Re}_D$}
+A cylindrical platinum resistance probe of diameter $D = \SI{1.20}{\milli\meter}$ and length $\ell = \SI{25.0}{\milli\meter}$ ($A_s = \pi D\ell = \SI{9.425e-5}{\square\meter}$) is held at $T_w = \SI{74.0}{\celsius}$ in an air stream at $T_\infty = \SI{20.0}{\celsius}$ ($T_f = \SI{47.0}{\celsius} \implies \nu = \SI{1.77e-5}{\square\meter\per\second}$, $k_f = \SI{0.0277}{\watt\per\meter\per\kelvin}$, $\mathrm{Pr} = 0.709$). When electrical heating power $P = \SI{0.720}{\watt}$ is dissipated in the probe at steady state, use the simplified Hilpert crossflow correlation $\overline{\mathrm{Nu}}_D = 0.683\,\mathrm{Re}_D^{0.466}\mathrm{Pr}^{1/3}$ ($40 < \mathrm{Re}_D < 4000$, Lienhard §8.4 \src{S12}) to determine the air speed $u_\infty$.
+\end{problem}
+\begin{solution}{P11.8}
+From the measured electrical power and temperature difference $\Delta T = 74.0 - 20.0 = \SI{54.0}{\kelvin}$:
+\[
+  \bar{h} = \frac{P}{A_s \Delta T} = \frac{\SI{0.720}{\watt}}{(\SI{9.4248e-5}{\square\meter})(\SI{54.0}{\kelvin})} = \mathbf{\SI{141.47}{\watt\per\square\meter\per\kelvin}} \implies
+  \overline{\mathrm{Nu}}_D = \frac{\bar{h} D}{k_f} = \frac{(141.47)(0.00120)}{0.0277} = \mathbf{6.1288}
+\]
+Invert $\overline{\mathrm{Nu}}_D = 0.683\,\mathrm{Re}_D^{0.466}\mathrm{Pr}^{1/3}$ with $\mathrm{Pr}^{1/3} = (0.709)^{1/3} = 0.8917$:
+\[
+  \mathrm{Re}_D = \left(\frac{6.1288}{0.683 \times 0.8917}\right)^{\!1/0.466} = (10.0632)^{2.1459} = \mathbf{141.7} \implies
+  u_\infty = \frac{\nu\,\mathrm{Re}_D}{D} = \frac{(\SI{1.77e-5}{})(141.7)}{0.00120} = \mathbf{\SI{2.09}{\meter\per\second}}
+\]
+\end{solution}
+
+\alsosee{\spref{sec:01.10} (\texttt{QS-10} Convection Fast Sheet), \spref{sec:10} (Conduction Networks), \spref{sec:12} (Thermal Radiation \& View Factors), \spref{sec:13} (Transient Lumped Heating), \spref{sec:15} (2027 Collector Stratification \& Glazing Design), \spref{sec:17} (ES Probe Immersion Depth).}

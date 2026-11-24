@@ -1,0 +1,93 @@
+% ============================================================================
+% device_handbook.tex — Standalone 2027 Heat-Lamp Collector Device Engineering,
+% Calibration & Day-Of Prediction Handbook (Part J Deliverable #6)
+%
+% Single-sourced from src/sec14.tex, src/sec15.tex, src/sec16.tex,
+% src/appD.tex, src/appE.tex, and src/appF.tex via thermobinder.sty
+% in \companionmode=1 (cross-references to §§0--13, 17--23, App A--C, G--H
+% resolve automatically via xr-hyper against booklet-ext.aux).
+% ============================================================================
+\providecommand{\companionmode}{1}
+\providecommand{\grayproof}{0}
+\ifnum\grayproof=1 \PassOptionsToPackage{gray}{xcolor}\fi
+\documentclass[10pt,twoside,openany,letterpaper]{book}
+\usepackage{thermobinder}
+
+\renewcommand{\binderfooterlabel}{2027 Heat-Lamp Collector Device Handbook \textperiodcentered\ Rev.\ 2026-11-22}
+
+\newcommand{\inputsec}[1]{%
+  \IfFileExists{#1}{\input{#1}}{%
+    \IfFileExists{sections/#1}{\input{sections/#1}}{%
+      \IfFileExists{appendices/#1}{\input{appendices/#1}}{\typeout{BINDER-SKIPPED #1}}}}}
+
+\begin{document}
+\mainmatter
+
+% ============================================================================
+% PAGE 1: STANDALONE COVER, CRITICAL SAFETY/IMPOUND BANNER & DEVICE TOC
+% ============================================================================
+\thermotabnoclear{6}
+\thispagestyle{plain}
+
+\noindent\colorbox{navy}{\parbox{\dimexpr\linewidth-2\fboxsep}{%
+  \vspace{4pt}
+  {\sffamily\bfseries\Large\color{white} 2026--2027 SCIENCE OLYMPIAD --- THERMODYNAMICS (DIVISION C)}\\[3pt]
+  {\sffamily\bfseries\large\color{white} 2027 Heat-Lamp Collector Engineering, Calibration \& Prediction Handbook}\\[2pt]
+  {\sffamily\footnotesize\color{white} Companion Sub-Binder (\texttt{Tab 6: DEVICE \S\S14--16 + Appendices D, E, F}) \hfill Verified Baseline: \texttt{2026-11-22} \textbar\ Rules \& Clarifications \#1--\#9}
+  \vspace{3pt}%
+}}
+
+\vspace{3pt}
+\scopebanner{REQUIRED}[DO NOT IMPOUND THIS HANDBOOK (Rule 2.d \& Official Clarification \#9: Impound ONLY the Physical Device \& Spare Parts!)]
+
+\begin{rulebox}[CRITICAL 2027 DEVICE RULES \& HARD SAFETY BAN (Rule 3.b.i--iii \& Official Clarifications \#1--\#9)]
+\begin{itemize}
+  \item \textbf{2027 Functional Objective (Rules~\texttt{1, 3.a, 4.a--g}):} Collect downward radiant energy from an ES-provided \textbf{$\SIrange{100}{125}{\watt}$ untinted non-LED/halogen/ceramic heat lamp} at \textbf{$h_{\mathrm{bulb}} = \SIrange{40}{50}{\centi\meter}$ (Reg) / $\SIrange{40}{55}{\centi\meter}$ (State) / $\SIrange{40}{65}{\centi\meter}$ (Natl)} to heat \textbf{$\SI{100}{\milli\liter}$ of room-temperature water} in an ES-provided \textbf{$\SI{9}{oz}$ clear plastic party cup} ($\approx\SI{10.0}{\centi\meter}$ tall, $\SI{7.5}{\centi\meter}$ mouth) inside a \textbf{$\SI{30.0}{\centi\meter}\times\SI{30.0}{\centi\meter}\times\SI{30.0}{\centi\meter}$ bounding cube} for \textbf{$\SI{10.0}{\minute}$ (Reg) or $\SIrange{10}{15}{\minute}$ (State/Natl)}.
+  \item \textbf{\textcolor{rust}{ZERO-TOLERANCE POLYSTYRENE / STYROFOAM / \texttt{\#6~PS} BAN (Rule~\texttt{3.b.i,iii} \& Clarification~\#6, \texttt{10/22/2026}):}} \textbf{Polystyrene in all forms} (Styrofoam, EPS bead foam, XPS blue/pink/green board, craft foam-core posterboard with PS core, and rigid \texttt{\#6~PS} plastics), alongside \textbf{fiberglass, mineral wool, and asbestos}, is classified as a \textbf{Rule~\texttt{3.b.i} hazardous material under a heat lamp}. Any device containing these materials \textbf{will NOT be allowed to be set up, modified, or tested ($\mathbf{\mathrm{TS}=0, \mathrm{PS}=0}$)}!
+  \item \textbf{Zero Water Contact, Removable Glazing \& Zero Swirling (Rule~\texttt{3.e, 5.II.d,g} \& Clarifications~\#1--\#8):} No part of the device may contact the water (\texttt{3.e}); nothing may be added to the water (\texttt{3.e}); no adhesives, tape, rubber bands, or clips may be attached to the cup (\texttt{Clarif.~\#5}), though a gravity-resting clear BoPET glazing window that is completely removed before $T_{\mathrm{final}}$ measurement is legal (\texttt{Clarif.~\#5, \#7, \#8}); \textbf{neither students nor the ES may stir, swirl, or shake the water} (\texttt{Clarif.~\#1--\#3}), and the ES probes the \textbf{top water layer near the center of the cup} (\texttt{Clarif.~\#4}).
+\end{itemize}
+\end{rulebox}
+
+\begin{center}
+\captionof{table}{Device Engineering \& Calibration Handbook Navigator (Single-Sourced from Master Competition Binder) \src{S01,S02,S04}.}\label{tab:devbook:toc}
+\footnotesize\setlength{\tabcolsep}{3.0pt}\renewcommand{\arraystretch}{1.15}
+\begin{tabularx}{\linewidth}{@{}l>{\raggedright\arraybackslash}p{0.31\linewidth}l>{\raggedright\arraybackslash}X@{}}
+\toprule
+\hdr{Section / App.} & \hdr{Title \& Figures / Tables} & \hdr{2027 Rule Mapping} & \hdr{Competition Block Use \& Key Engineering Content} \\
+\midrule
+\textbf{\sref{sec:14}} (\texttt{sec14.tex}) & \textbf{Material, Optical \& Insulation Property Encyclopedia} (\fref{fig:14:two-band-optical}--\fref{fig:14:insulator-k-chart}; \tref{tab:14:reflectors}--\tref{tab:14:resin-codes}) & Rules~\texttt{3.b.i--iii, 3.e, 5.c.iii} \& Clarif.~\#5, \#6 & Two-band selectivity ($\alpha_{\mathrm{NIR}}$ vs.\ $\varepsilon_{\mathrm{MIR}}$), Shiny vs.\ Dull Al-foil specularity proof, Hale \& Querry water NIR spectra, BoPET glazing, $\SI{10}{\milli\meter}$ foil-air baffles ($\mathrm{Ra}_\delta < 1708$), and \texttt{\#6~PS} hazard registry. \\
+\rowcolor{rowalt}\textbf{\sref{sec:15}} (\texttt{sec15.tex}) & \textbf{Competition Device Engineering --- 2027 100--125\,W Heat-Lamp Collector} (\fref{fig:15:collector-cutaway}--\fref{fig:15:cup-cradle-clearance}; \tref{tab:15:rule-translation}--\tref{tab:15:choreography-script}) & Rules~\texttt{3.a--h, 4.a--g, 5.II.a--g} \& Clarif.~\#1--\#9 & $\SI{29.6}{\centi\meter}$ two-piece hood+cradle cutaway, coaxial-disk view factors, $30^\circ$ cone ray rejection vs.\ 3-stage finite-conjugate ellipsoid/CPC, 4-node RC network, top-layer stratification ($\kappa_{\mathrm{strat}}=1.56$), 3-fin cork seat, 20-pt checklist, FMEA, BOM, and partner choreography. \\
+\textbf{\sref{sec:16}} (\texttt{sec16.tex}) & \textbf{Device Calibration, Heating-Curve Prediction \& Day-Of Lookup Tables} (\fref{fig:16:pe-sensitivity}--\fref{fig:16:postheat-cooling}; \tref{tab:16:sensitivity}--\tref{tab:16:emergency-decision}) & Rules~\texttt{5.II.a--i, 6.b--j} \& Scoresheet \texttt{v2.0.0} & Official v2.0.0 $\mathrm{TS}/\mathrm{PS}/\mathrm{PE}$ math (Celsius denominator!), 5-variable prediction model \& 10-second linear superposition, Master 36-Condition DOE Matrix, 26-row National $\SI{1}{\centi\meter}$ table, post-lamp cooling \& probe offsets, mismatch recovery, and 30-second prediction worksheet. \\
+\rowcolor{rowalt}\textbf{App.~\ref{app:D}} (\texttt{appD.tex}) & \textbf{Print-Ready 2027 Collector Test Log \& Design-Change Forms} & Rules~\texttt{2.d, 5.II.a--h} & Day-of competition block parameter entry form, 20-run DOE calibration trial log, and physical revision log. \\
+\textbf{App.~\ref{app:E}} (\texttt{appE.tex}) & \textbf{Clause-by-Clause 2027 Rules \& Clarifications Compliance Matrix} & Rules~\texttt{1--6} \& Clarif.~\#1--\#9 & Complete clause-by-clause audit tracing every 2027 rule and official clarification to device hardware and binder pages. \\
+\rowcolor{rowalt}\textbf{App.~\ref{app:F}} (\texttt{appF.tex}) & \textbf{One-Page Verify-Against-Current-Rules \& Host-Modifications Checklist} & General Rules~\texttt{3, 7} (\texttt{p.\ C1}) & Pre-tournament verification checklist for \texttt{soinc.org} corrections/clarifications and host-announced bulb/station parameters. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{devicebox}[Five-Phase Competition Block Rapid Execution Summary (Partner B Device Lead Protocol)]
+\begin{enumerate}
+  \item \textbf{Morning Impound (\texttt{Rule 2.d}, Clarif.~\#9):} Equilibrate open collector to room temp ($\ge\SI{20}{\minute}$); impound \textbf{only} physical device + spare BoPET glazing rings. Keep this handbook, calculators (\texttt{2.b}), and plumb card with team!
+  \item \textbf{3-Min Device Setup (\texttt{Rule 5.II.a--b}, Lamp OFF):} Read posted $h_{\mathrm{bulb}}, t_{\mathrm{heat}}, T_{\mathrm{room}}, P_{\mathrm{bulb}}$. Lock pedestal into \textbf{Slot~A} ($\SIrange{40}{48}{\centi\meter}$), \textbf{Slot~B} ($\SIrange{49}{57}{\centi\meter}$), or \textbf{Slot~C} ($\SIrange{58}{65}{\centi\meter}$); align crosshairs under cold bulb; pre-compute $S_0 = \mathrm{TG}_{\mathrm{table}} + k_{\mathrm{room}}T_{\mathrm{room}} - \Delta T_{\mathrm{cool}}$ from \tref{tab:16:doe-36} / \tref{tab:16:natl-1cm}.
+  \item \textbf{1-Min Water Setup (\texttt{Rule 5.II.c--d}, Lamp OFF):} Receive $\SI{9}{oz}$ cup ($\SI{100}{\milli\liter}$) and $T_{\mathrm{start}}$ from ES. Seat cup on 3-fin cork cradle ($\SI{3}{\second}$), lower upper reflector hood + gravity BoPET window onto 4 guide dowels ($\SI{4}{\second}$), verify centering, and step back $\ge\SI{1.0}{\meter}$!
+  \item \textbf{Heating Window (\texttt{Rule 5.II.e--f}, $\SIrange{10}{15}{\minute}$, Lamp ON):} \textbf{Hands off!} Compute $T_{\mathrm{pred}} = S_0 + k_{\mathrm{start}}T_{\mathrm{start}}$ to $\SI{0.1}{\celsius}$ in $\SI{15}{\second}$, verify on Class~III calculator (\texttt{PRGM:THERMO27}), and \textbf{submit prediction card to ES immediately} before joining Partner~A on the written exam.
+  \item \textbf{1-Min Final Measurement (\texttt{Rule 5.II.g--h}, Lamp OFF):} Wait until ES is at station ready to probe; lift upper hood + BoPET cap straight up off dowels ($\SI{2}{\second}$); lift bare cup vertically by top rim with \textbf{zero tilt or swirl} ($\SI{4}{\second}$) and place on Testing Surface. Verify recorded scoresheet data!
+\end{enumerate}
+\end{devicebox}
+
+% ============================================================================
+% SINGLE-SOURCED DEVICE CHAPTERS (§§14--16) & DEVICE APPENDICES (D, E, F)
+% ============================================================================
+\thermotab{6}
+\inputsec{sec14}
+\inputsec{sec15}
+\inputsec{sec16}
+
+\thermotab{9}
+\appendix
+\inputsec{appD}
+\inputsec{appE}
+\inputsec{appF}
+
+\label{LastContentPage}
+\end{document}

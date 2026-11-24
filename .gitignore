@@ -1,0 +1,21 @@
+# Python bytecode
+__pycache__/
+*.py[cod]
+
+# Temporary LaTeX compilation intermediates inside src/ (final PDFs live in output/)
+src/*.aux
+src/*.log
+src/*.out
+src/*.toc
+src/*.idx
+src/*.ilg
+src/*.ind
+src/*.fls
+src/*.fdb_latexmk
+src/*.synctex.gz
+src/*.pdf
+
+# Temporary smoke/work build directories
+build/smoke/
+build/gray_work/
+qa/renders/test_style*

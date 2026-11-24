@@ -1,0 +1,260 @@
+% ============================================================================
+% src/sec21.tex — §21 Exam Strategy, 50-Minute Timeline, Two-Partner Split &
+%                     Device Setup/Water-Insertion Choreography (Target: 5 pp)
+% ============================================================================
+\binderchapter{21}{Exam Strategy, 50-Minute Timeline, Two-Partner Split \& Device Setup/Water-Insertion Choreography}{§21 Exam Strategy \& Partner Protocol}{sec:21}
+\scopebanner{REQUIRED}[2027 Rules 1, 2.a--d, 5.I--II, 6.a--j (All Tournament Levels)]
+
+\idxtopic{exam strategy and partner protocol}
+\idxtopic{triage protocol (4-pass system)}
+\idxtopic{removable binder pages (Rule 2.c)}
+\idxtopic{calculator discipline (Class III, Rule 2.b)}
+\idxtopic{tiebreaker hierarchy (Rule 6.j)}
+
+In 2027 Division C Thermodynamics, two competitors have approximately \textbf{50 minutes} to execute a high-precision \textbf{Part II Heat-Lamp Collector run} (\SI{50}{\text{pts}}: Temperature Score $\mathrm{TS} = \SI{30}{\text{pts}}$ + Prediction Score $\mathrm{PS} = \SI{20}{\text{pts}}$) while simultaneously solving a marathon \textbf{Part I Written Exam} ($\mathrm{ES} = \SI{50}{\text{pts}}$) \src{S01,S04}. Because both parts are normalized to the tournament-leading raw score, championship execution is governed by \textbf{point-per-minute return on investment (ROI)}, zero-penalty device choreography, and ruthless partner division of labor.
+
+\section{Two-Minute Triage \& The Cornell 2027 Normalization Law}\label{sec:21.1}
+
+\begin{formulacard}[2027 Official Score Normalization \& Marginal Point Value (\RULEf)]
+Under 2027 Rule \texttt{6.c--i} and the Official National Scoresheet (\texttt{v2.0.0}) \src{S01,S04}, final tournament score $\mathrm{FS}$ ($\le \SI{100.0}{\text{pts}}$) is:
+\begin{equation}\label{eq:21:fs}
+  \mathrm{FS} = \mathrm{ES} + M_{\mathrm{pen}}\left(\mathrm{TS}_{\mathrm{raw}} + \mathrm{PS}_{\mathrm{raw}}\right), \qquad M_{\mathrm{pen}} = (0.7)^{V_{\mathrm{const}}}\,(0.9)^{V_{\mathrm{comp}}}
+\end{equation}
+where each component is normalized to the field maximum across all competing teams:
+\begin{equation}\label{eq:21:norm}
+  \mathrm{ES} = 50\left(\frac{R_{\mathrm{exam}}}{R_{\mathrm{exam,\max}}}\right), \quad
+  \mathrm{TS}_{\mathrm{raw}} = 30\left(\frac{\mathrm{TG}}{\mathrm{TG}_{\max}}\right), \quad
+  \mathrm{PS}_{\mathrm{raw}} = 20\left(\frac{\mathrm{PE}}{\mathrm{PE}_{\max}}\right), \quad
+  \mathrm{PE} = \max\!\left(0,\,1 - \frac{|T_f - T_{\mathrm{pred}}|}{T_f}\right)
+\end{equation}
+\textbf{Marginal Tournament Value of 1 Raw Exam Point vs.\ $\SI{1.0}{\celsius}$ of Device Gain/Error:}
+\begin{equation}\label{eq:21:marginal}
+  \frac{\partial \mathrm{FS}}{\partial R_{\mathrm{exam}}} = \frac{50}{R_{\mathrm{exam,\max}}}, \qquad
+  \frac{\partial \mathrm{FS}}{\partial \mathrm{TG}} = \frac{30\,M_{\mathrm{pen}}}{\mathrm{TG}_{\max}}, \qquad
+  \frac{\partial \mathrm{FS}}{\partial |\Delta T_{\mathrm{err}}|} \approx -\frac{20\,M_{\mathrm{pen}}}{T_f\,\mathrm{PE}_{\max}}
+\end{equation}
+\idxformula{Final Score normalization FS = ES + TS + PS}
+\idxformula{Marginal point value dFS/dR and dFS/dTG}
+\end{formulacard}
+
+\subsection{The Cornell 2027 Empirical Triage Law}
+At the November 14, 2026 Cornell University Invitational (\texttt{E1}, $n=55$ Division C teams, maximum possible raw written score $= \SI{238.0}{\text{pts}}$) \src{S25}, the \textbf{highest raw exam score in the entire 55-team field was $\SI{85.00}{\text{pts}}$ ($35.7\%$)}, while the median team scored only $\approx \SI{38.5}{\text{pts}}$ ($16.2\%$, scaling to $\mathrm{ES} = \SI{22.65}{\text{pts}}$). Crucially, the exam contained $\SI{25.0}{\text{pts}}$ of \textbf{Tier 1} (foundational 1-step) items and $\SI{65.0}{\text{pts}}$ of \textbf{Tier 2} (standard 2--3 step) items---totaling \textbf{$\SI{90.0}{\text{raw pts}} > \SI{85.00}{\text{pts}}$}!
+\begin{itemize}
+  \item \textbf{Strategic Corollary 1 (Never Get Trapped in a Tier 3 Tar Pit Early):} Any team that sweeps $90\%$ of Tier 1 and Tier 2 items ($\approx \SI{81}{\text{raw pts}}$) plus partial-credit equations on Tier 3 items wins $\mathrm{ES} = \SI{50.0}{\text{pts}}$, whereas a team that spends 25 minutes grinding through a single 40-point Tier 3 derivation (such as Drude transport or a 24-cell steam table) while leaving Tier 1--2 pages blank loses $15\text{--}\SI{25}{\text{normalized pts}}$.
+  \item \textbf{Strategic Corollary 2 (Four-Pass Packet Sweep):} Execute every written exam in four disciplined passes:
+  \begin{enumerate}
+    \item \textbf{Pass 0 ($t = 0\text{--}\SI{2}{\minute}$ --- Packet Audit, Unstaple \& Split):} Check total pages, total raw points, designated Tiebreaker (\texttt{TB}) questions, significant-figure instructions, and MCQ guessing rules. If the Event Supervisor permits unstapling (explicitly recommended on Cornell exams \src{S30}), unstaple the test booklet and divide sheets between Partner A and Partner B by topic domain.
+    \item \textbf{Pass 1 ($t = 2\text{--}\SI{14}{\minute}$ --- Fast Tier 1 Harvest):} Sweep all 1-step multiple-choice (\texttt{FMT-1}), temperature/unit conversions (\texttt{FMT-2}), intensive/extensive classifications, process matchings, and 8-scientist (\texttt{5.c.v}) attributions using the detached \sref{sec:01} Quick Sheets (\texttt{QS-01}, \texttt{QS-06}, \texttt{QS-14}). Target throughput: $\ge \SI{3.5}{\text{raw pts/min}}$.
+    \item \textbf{Pass 2 ($t = 14\text{--}\SI{38}{\minute}$ --- Tier 2 Core \& Tiebreaker Priority Sweep):} Solve all designated \textbf{Tiebreaker (\texttt{TB})} problems first, followed by standard calorimetry ledgers (\texttt{5.c.ii}), phase diagram / lever-rule readings (\texttt{5.c.ii}), 1D conduction / Newton heating / Stefan--Boltzmann radiation (\texttt{5.c.iii, vi}), Carnot/Stirling/Rankine cycle legs (\texttt{5.c.iv}), and $\Delta S / \Delta H / \Delta G$ calculations (\texttt{5.c.vii}).
+    \item \textbf{Pass 3 ($t = 38\text{--}\SI{47}{\minute}$ --- Tier 3 Symbolic Equation Harvest):} On remaining multi-part Tier 3 problems, write the \textbf{symbolic governing equation, variable definitions, and algebraic setup} on every blank subpart before computing numbers. University grading rubrics (\texttt{E1, E2, E4}) award \textbf{$40\%\text{--}60\%$ of subpart points for the symbolic equation alone} \src{S25,S26,S28}.
+  \end{enumerate}
+\end{itemize}
+
+\section{Synchronized 50-Minute Two-Partner Choreography \& Device Transitions}\label{sec:21.2}
+
+\idxtopic{50-minute hybrid event timeline}
+\idxdev{3-minute Device Setup Time choreography (Rule 5.II.b)}
+\idxdev{1-minute Water Setup Time choreography (Rule 5.II.d)}
+\idxdev{1-minute Final Measurement cup extraction (Rule 5.II.g)}
+
+Because Part II Device Testing occurs on a staggered supervisor schedule while Part I is underway (\texttt{Rule 5.II.f}: \textit{``Teams may work on Part I during the Heating Time at the Event Supervisor's discretion''}) \src{S01,S05}, the team must operate as an asymmetric two-core processor. \textbf{Partner A (Lead Theorist)} stays anchored to the written exam for all 50 minutes, while \textbf{Partner B (Lead Device Engineer)} handles the $\approx \SI{6}{\minute}$ of active hands-on device operations and devotes the remaining \textbf{$\approx \SI{44}{\minute}$} to written test sections \texttt{5.c.i, iii, v, vi}.
+
+\begin{table}[h!]
+\centering
+\caption{Synchronized 50-Minute Partner A / Partner B Master Execution Timeline \src{S01,S02,S05}.}\label{tab:21:timeline}
+\footnotesize
+\setlength{\tabcolsep}{3.5pt}
+\renewcommand{\arraystretch}{1.14}
+\begin{tabularx}{\linewidth}{@{}L{0.15\linewidth} L{0.18\linewidth} X X@{}}
+\toprule
+\hdr{Clock Window} & \hdr{Event Phase (\RULEf)} & \hdr{Partner A (Lead Theorist: \texttt{5.c.ii, iv, vii})} & \hdr{Partner B (Device Lead + \texttt{5.c.i, iii, v, vi})} \\
+\midrule
+\textbf{Pre-Block} (Impound) & Impound (\texttt{Rule 2.d, 3.g}) & Verifies both Class III calculators (\texttt{2.b}), pencils, erasers, and binder tabs; keeps binder \& nomograms (not impounded!). & Impounds device \& spare parts at room temp (\texttt{2.d}); verifies cube clearance ($\le \SI{29.6}{\centi\meter}$) and zero \texttt{\#6 PS} (\texttt{3.b.i}). \\
+\rowcolor{rowalt}
+\textbf{$0{:}00\text{--}2{:}00$} & Block Start \& Packet Triage (\texttt{5.II.a}) & Audits written test pages/rubric; marks all \texttt{TB} items; separates packet into Pile A (\texttt{5.c.ii, iv, vii}) and Pile B (\texttt{5.c.i, iii, v, vi}). & Records ES-announced bulb height $h$ ($\SIrange{40}{65}{\centi\meter}$), Heating Time $t_{\mathrm{heat}}$ ($\SIrange{10}{15}{\minute}$), $T_{\mathrm{room}}$, $T_{\mathrm{bath}}$, and wattage $P_{\mathrm{bulb}}$ ($\SIrange{100}{125}{\watt}$). \\
+\textbf{$2{:}00\text{--}5{:}00$} & \textbf{3-Min Device Setup} (\texttt{Rule 5.II.b}) & Solves Pile A Pass-1 items (phase diagram reading, gas law ratios, process identification, $\Delta H/\Delta S$ signs). & Sets device internal cradle to slot for height $h$; passes inspection; pre-computes $T_{\mathrm{pred}}$ base terms from \sref{sec:16} DOE table. \\
+\rowcolor{rowalt}
+\textbf{$5{:}00\text{--}6{:}00$} & \textbf{1-Min Water Setup} (\texttt{Rule 5.II.c--d}) & Continues Pile A written solving uninterrupted; double-checks Partner B's $T_{\mathrm{pred}}$ addition if called. & Receives \SI{9}{oz} cup w/ \SI{100}{\milli\liter} water; logs $T_{\mathrm{start}}$ (to \SI{0.1}{\celsius}); seats cup on 3-fin cradle ($\le \SI{12}{\second}$); lowers hood w/ unattached BoPET cap (\texttt{Clarif.\ \#5,7,8}). \\
+\textbf{$6{:}00\text{--}10{:}00$} & \textbf{Heating Window Pt.\ 1} (\texttt{Rule 5.II.e--f}) & Finishes Pile A Pass 1; begins high-point FRQs (steam tables, Rankine/Carnot cycles, multiphase calorimetry). & Computes $T_{\mathrm{pred}} = \mathrm{TG}_{\mathrm{tab}} + k_s T_{\mathrm{start}} + k_r T_{\mathrm{room}}$; cross-checks w/ Partner A; \textbf{submits $T_{\mathrm{pred}}$ (in \si{\celsius}) to ES at $t_{\mathrm{heat}} = \SI{3}{\minute}$!} \\
+\rowcolor{rowalt}
+\textbf{$10{:}00\text{--}15{:}30$} & \textbf{Heating Window Pt.\ 2} (\texttt{Rule 5.II.e--f}) & Deep FRQ solving on Pile A (\texttt{5.c.ii, iv, vii}); calls out 15-min checkpoint status. & Sweeps Pile B Pass 1: 8-scale temperature conversions (\texttt{QS-01}), energy units, intensive/extensive, and 8 scientists (\texttt{QS-14}). \\
+\textbf{$15{:}30\text{--}17{:}00$} & \textbf{1-Min Final Measurement} (\texttt{Rule 5.II.g--i}) & Continues Pile A FRQs without pause (zero distraction during cup extraction). & At lamp-off, lifts hood straight up (removing BoPET cap), sets cup smoothly on Testing Surface \textbf{with zero swirl/tilt (\texttt{Clarif.\ \#1--4})} in $\le \SI{8}{\second}$; signs Part II data sheet. \\
+\rowcolor{rowalt}
+\textbf{$17{:}00\text{--}30{:}00$} & Written Exam Core Sprint (Checkpoint 2) & Solves remaining Pile A Tier 2/3 problems (Clapeyron slope, binary eutectic lever rule, exergy destruction). & Solves Pile B Tier 2 problems: Fourier conduction networks (\texttt{QS-09}), Newton heating/cooling (\texttt{QS-12}), Stefan--Boltzmann (\texttt{QS-11}). \\
+\textbf{$30{:}00\text{--}42{:}00$} & Joint FRQ \& Tiebreaker Convergence (Checkpoint 3) & Partners swap unsolved subparts; Partner A attacks highest-weight remaining calculation tiebreakers (\texttt{TB \#1--\#5}). & Partner B writes symbolic governing equations on all remaining Tier 3 subparts and verifies unit conversions on Partner A's FRQs. \\
+\rowcolor{rowalt}
+\textbf{$42{:}00\text{--}47{:}00$} & Partial-Credit \& Carry-Forward Sweep (Checkpoint 4) & Fills in backup-table or assumed-value carry-forward steps on any incomplete multi-part chain. & Checks every MCQ bubble / answer box against the blank-vs-guessing rule; eliminates decoys on remaining MCQs. \\
+\textbf{$47{:}00\text{--}50{:}00$} & Final Audit \& Re-Assembly & Audits every numerical box on Pages 1--5 for \textbf{units, sig figs, and Kelvin vs.\ \si{\celsius} ratios}. & Audits Pages 6--10 for units/sig figs; verifies Team \# and Name on every sheet; re-orders answer packet cleanly. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{devicebox}[Critical 60-Second Cup Extraction Choreography (\texttt{Rule 5.II.g} \& \texttt{Clarifications \#1--\#8})]
+\idxdev{zero-swirl cup extraction protocol}
+\idxdev{complete removal of BoPET glazing wrap before T_final}
+\begin{enumerate}
+  \item \textbf{T-Minus \SI{30}{\second} Before Heating Time Ends:} Partner B caps their pen, moves to the testing station (keeping hands $\ge \SI{30}{\centi\meter}$ clear of the device and clamp lamp while the lamp is still on so \texttt{Rule 5.II.e} is never violated), and visually locates the corner lift grips of the upper reflector hood.
+  \item \textbf{T-Plus \SI{0}{\second} (ES Turns Lamp Off):} Partner B lifts the upper reflector hood straight upward off its alignment dowels ($\approx \SI{2}{\second}$). Because the non-attached clear BoPET vapor-barrier film rests inside the upper hood throat (\texttt{Clarification \#5}), lifting the hood automatically separates the vapor cover from the cup. \textit{(If a separate gravity-resting film disc was placed on the cup rim, lift it off the cup first and set it inside the device!)}
+  \item \textbf{T-Plus \SI{3}{\second} to \SI{8}{\second} (Vertical Lift Without Swirling):} Grasp the \SI{9}{oz} clear plastic cup gently near its dry top rim with two fingers and lift it straight up and onto the Testing Surface beside the device in one smooth motion. \textbf{NEVER swirl, swish, shake, tilt, or tap the cup!} Under \texttt{Clarifications \#1, \#2, \#3, and \#4} \src{S02}, the ES measures the \textbf{top water layer near the center of the cup} without stirring; preserving the hot near-IR stratified surface layer yields $1.3\times\text{--}1.8\times$ higher measured temperature gain $\mathrm{TG}$ than a mixed cup (\sref{sec:15}).
+\end{enumerate}
+\end{devicebox}
+
+\begin{workedexample}[Tournament Score Normalization \& Penalty Cost Analysis]{2027 Rule 6.c--i}{ex:21.1}
+At a 55-team invitational modeled on Cornell 2027 (\texttt{E1}) \src{S25}, the tournament maxima are $R_{\mathrm{exam,\max}} = \SI{85.00}{\text{pts}}$ (out of $238$), $\mathrm{TG}_{\max} = \SI{24.0}{\celsius}$, and $\mathrm{PE}_{\max} = 0.9960$. Team Alpha earns raw Part I score $R_{\mathrm{exam}} = \SI{68.00}{\text{pts}}$, heats water from $T_{\mathrm{start}} = \SI{22.0}{\celsius}$ to $T_f = \SI{43.6}{\celsius}$, and submits prediction $T_{\mathrm{pred}} = \SI{43.2}{\celsius}$ at $t_{\mathrm{heat}} = \SI{3}{\minute}$.
+\textbf{(a)} Compute Team Alpha's normalized scores $\mathrm{ES}, \mathrm{TS}, \mathrm{PS}$, and $\mathrm{FS}$ with zero violations.
+\textbf{(b)} How many tournament points would Team Alpha lose if they forgot to impound their device (\texttt{Clarification \#9}: $V_{\mathrm{const}} = 1 \implies M_{\mathrm{pen}} = 0.7$), and how many raw written exam points on \texttt{E1} would be required to make up that penalty?
+
+\textbf{Solution.}
+\textbf{(a) Zero-violation normalized scores:}
+\begin{align*}
+  \mathrm{ES} &= 50 \times \frac{68.00}{85.00} = \SI{40.000}{\text{pts}}, \qquad
+  \mathrm{TG} = T_f - T_{\mathrm{start}} = 43.6 - 22.0 = \SI{21.6}{\celsius} \implies \mathrm{TS} = 30 \times \frac{21.6}{24.0} = \SI{27.000}{\text{pts}} \\
+  \mathrm{PE} &= 1 - \frac{|43.6 - 43.2|}{43.6} = 1 - \frac{0.4}{43.6} = 0.990826 \implies \mathrm{PS} = 20 \times \frac{0.990826}{0.9960} = \SI{19.8961}{\text{pts}}
+\end{align*}
+Summing via \eref{eq:21:fs} with $M_{\mathrm{pen}} = 1.0$:
+\[
+  \mathrm{FS}_{\mathrm{clean}} = 40.000 + 27.000 + 19.8961 = \mathbf{\SI{86.896}{\text{pts}}} \quad (\text{rounded to } \SI{86.90}{\text{pts}}).
+\]
+\textbf{(b) Cost of 1 construction/impound violation ($M_{\mathrm{pen}} = 0.7$):}
+Under Rule \texttt{6.h} and Clarification \#9 \src{S01,S02,S04}, both $\mathrm{TS}$ and $\mathrm{PS}$ are multiplied by $0.7$:
+\[
+  \mathrm{FS}_{\mathrm{pen}} = 40.000 + 0.7\left(27.000 + 19.8961\right) = 40.000 + 32.8273 = \SI{72.827}{\text{pts}} \implies \Delta\mathrm{FS}_{\mathrm{lost}} = 86.8961 - 72.8273 = \mathbf{\SI{14.069}{\text{pts}}}.
+\]
+Because each raw written point on \texttt{E1} is worth $50/85.00 = \SI{0.58824}{\text{ES pts}}$, recovering $\SI{14.069}{\text{pts}}$ on the written exam would require:
+\[
+  \Delta R_{\mathrm{exam}} = \frac{14.0688}{50 / 85.00} = \mathbf{\SI{23.92}{\text{raw exam points}}} \quad (\text{more than an entire 20-point FRQ!}).
+\]
+\verifiedby{Independent Python script \texttt{check\_sec21\_23.py} (\texttt{SEC21\_SCORING\_PENALTY\_EXAMPLE}): $\mathrm{FS}_{\mathrm{clean}} = 86.89610$, $\Delta\mathrm{FS}_{\mathrm{lost}} = 14.06883\text{ pts}$.}
+\end{workedexample}
+
+\section{Tabletop Ergonomics, Detached Quick Sheets (Rule 2.c) \& Dual Calculator Discipline}\label{sec:21.3}
+
+\begin{rulebox}[Exploiting 2027 Rule 2.c (Removable Pages) \& Rule 2.b (Two Class III Calculators)]
+\begin{itemize}
+  \item \textbf{Rule \texttt{2.c} (Unrestricted Removable Notes):} \textit{``Participants are responsible for organizing and containing their notes efficiently and may separate or remove pages from containers for use during any part of the event.''} \src{S01} Unlike events that mandate keeping all pages locked inside closed binder rings, Thermodynamics competitors may place detached laminated Quick Sheets (\texttt{QS-01}..\texttt{QS-14}) and the \sref{sec:16} Calibration Nomogram flat across the table for zero-flip, $<3$-second visual lookup.
+  \item \textbf{Rule \texttt{2.b} (Two Stand-Alone Class III Calculators):} Each team may bring \textbf{up to two Class III calculators} (programmable graphing or scientific calculators; no laptops/phones/tablets per \texttt{p.\ C74}) for use during \textbf{any part of the event} \src{S01,S06}. Both partners must hold a dedicated calculator at all times.
+\end{itemize}
+\end{rulebox}
+
+\begin{center}
+\begin{tikzpicture}[font=\scriptsize, >=Latex, scale=0.96, every node/.style={transform shape}]
+  % Outer table boundary
+  \draw[thick, draw=navy, fill=boxbglight, rounded corners=3pt] (0,0) rectangle (15.6,5.3);
+  \node[anchor=north west, font=\sffamily\bfseries\scriptsize, text=navy] at (0.2,5.15)
+    {COMPETITION TABLETOP ERGONOMIC MAP (60 in $\times$ 30 in Desk --- 2027 Rule 2.b \& 2.c Detached-Sheet Configuration)};
+
+  % Left Zone: Partner A
+  \draw[draw=navy, fill=white, thick, rounded corners=2pt] (0.25,0.35) rectangle (5.15,4.65);
+  \node[fill=navy, text=white, font=\sffamily\bfseries\scriptsize, minimum width=4.9cm, anchor=north] at (2.7,4.65)
+    {PARTNER A ZONE (Lead Theorist: 5.c.ii, iv, vii)};
+  \draw[draw=teal, fill=boxbg, rounded corners=1.5pt] (0.45,3.25) rectangle (2.65,4.05);
+  \node[align=center] at (1.55,3.65) {\textbf{Detached QS-03, 04}\\Calorimetry, Phase\\Diagrams \& Lever Rule};
+  \draw[draw=teal, fill=boxbg, rounded corners=1.5pt] (2.80,3.25) rectangle (4.95,4.05);
+  \node[align=center] at (3.875,3.65) {\textbf{Detached QS-06, 07, 08}\\Processes, Cycles,\\$\Delta S, \Delta H, \Delta G$ \& Steam};
+  \draw[draw=black, fill=white, rounded corners=1.5pt] (0.45,1.55) rectangle (3.55,3.05);
+  \node[align=center] at (2.0,2.30) {\textbf{Active Exam Pile A}\\(FRQs on Phases, Gases,\\Cycles, Steam Tables, Exergy)\\+ Scratch Work Sheet};
+  \draw[draw=slate, fill=boxbg, thick, rounded corners=1.5pt] (3.70,1.55) rectangle (4.95,3.05);
+  \node[align=center] at (4.325,2.30) {\textbf{Calc \#1}\\(Class III)\\Consts in\\Regs \texttt{A--H}};
+  \draw[draw=navy, fill=boxbglight, rounded corners=1pt] (0.45,0.50) rectangle (4.95,1.35);
+  \node[align=center] at (2.7,0.925) {\textbf{Main Binder Ring Spine (Tabs 3, 4, 8, 9 Open)}\\Fast Backup Access to \S4--\S9 \& App.\ A NIST Steam Tables};
+
+  % Center Shared Command Bridge
+  \draw[draw=amber, fill=white, thick, rounded corners=2pt] (5.35,0.35) rectangle (10.25,4.65);
+  \node[fill=amber, text=white, font=\sffamily\bfseries\scriptsize, minimum width=4.9cm, anchor=north] at (7.8,4.65)
+    {SHARED CENTER BRIDGE (Triage, Timer \& Conversion Hub)};
+  \draw[draw=rust, fill=boxbg, thick, rounded corners=1.5pt] (5.55,3.30) rectangle (10.05,4.10);
+  \node[align=center] at (7.8,3.70) {\textbf{Wristwatch / Timer + Master Answer Sheet \& TB Checklist}\\Checkpoints at $t = 15, 30, 42, 47\text{ min}$ $\cdot$ \textbf{$T_{\mathrm{pred}}$ Submitted by $t_{\mathrm{heat}}=\SI{3}{\minute}$!}};
+  \draw[draw=teal, fill=boxbg, rounded corners=1.5pt] (5.55,2.25) rectangle (7.70,3.15);
+  \node[align=center] at (6.625,2.70) {\textbf{Detached QS-01 \& 05}\\CODATA Constants, 8 Temp\\Scales, Energy Units, $R$};
+  \draw[draw=teal, fill=boxbg, rounded corners=1.5pt] (7.85,2.25) rectangle (10.05,3.15);
+  \node[align=center] at (8.95,2.70) {\textbf{Detached QS-14 \& §0}\\8 Named Scientists (\texttt{5.c.v})\\+ 10-Sec Equation Router};
+  \draw[draw=black, dashed, fill=boxbglight, rounded corners=1.5pt] (5.55,0.50) rectangle (10.05,2.05);
+  \node[align=center] at (7.8,1.275) {\textbf{Completed \& Audited Exam PagesTray}\\Stacked in Numerical Order $\cdot$ Checked for Units ($\si{\kilo\joule\per\kilogram}$ vs.\ $\si{\joule\per\gram}$),\\Significant Figures (3 vs.\ 4 digits), and Kelvin Ratios};
+
+  % Right Zone: Partner B
+  \draw[draw=slate, fill=white, thick, rounded corners=2pt] (10.45,0.35) rectangle (15.35,4.65);
+  \node[fill=slate, text=white, font=\sffamily\bfseries\scriptsize, minimum width=4.9cm, anchor=north] at (12.9,4.65)
+    {PARTNER B ZONE (Device Lead + 5.c.i, iii, v, vi)};
+  \draw[draw=rust, fill=boxbg, rounded corners=1.5pt] (10.65,3.25) rectangle (12.85,4.05);
+  \node[align=center] at (11.75,3.65) {\textbf{Detached QS-13 \& §16}\\2027 Collector DOE Table\\\& $T_{\mathrm{pred}}$ Nomogram (\texttt{2.d})};
+  \draw[draw=teal, fill=boxbg, rounded corners=1.5pt] (13.00,3.25) rectangle (15.15,4.05);
+  \node[align=center] at (14.075,3.65) {\textbf{Detached QS-09..12}\\Conduction, Convection,\\Radiation \& Transient $\tau$};
+  \draw[draw=slate, fill=boxbg, thick, rounded corners=1.5pt] (10.65,1.55) rectangle (11.90,3.05);
+  \node[align=center] at (11.275,2.30) {\textbf{Calc \#2}\\(Class III)\\DOE Fit \&\\$\sigma, k_B, h$};
+  \draw[draw=black, fill=white, rounded corners=1.5pt] (12.05,1.55) rectangle (15.15,3.05);
+  \node[align=center] at (13.6,2.30) {\textbf{Active Exam Pile B}\\(Scales, Units, History,\\Heat Transfer, Blackbody)\\+ Part II Prediction Sheet};
+  \draw[draw=slate, fill=boxbglight, rounded corners=1pt] (10.65,0.50) rectangle (15.15,1.35);
+  \node[align=center] at (12.9,0.925) {\textbf{Device Setup Tools (\texttt{Rule 2.d}) \& Secondary Binder}\\Metric Ruler/Height Gauge (for 3-min Setup) + Tabs 5, 6, 7};
+\end{tikzpicture}
+\captionof{figure}{Optimal two-partner tabletop layout exploiting 2027 Rule \texttt{2.c} (detachable quick sheets and nomograms) and Rule \texttt{2.b} (dual Class III calculators) to achieve $<5\text{-second}$ formula retrieval without ring-flipping congestion.}\label{fig:21:workspace-layout}
+\idxfig{competition tabletop workspace layout for two partners (Rule 2.b and 2.c)}
+\end{center}
+
+\subsection{Dual Class III Calculator Pre-Load \& Cross-Check Discipline (\texttt{Rule 2.b})}
+Before entering the competition room, verify that both Class III calculators have fresh batteries, are set to \textbf{floating-point / scientific display} (never fixed-decimal truncation!), and have identical fundamental constants stored in memory registers \src{S01,S07}:
+\begin{itemize}
+  \item \textbf{Standard Register Map:} \texttt{R} $= \num{8.3144626}$ ($\si{\joule\per\mole\per\kelvin}$); \texttt{K} $= \num{1.380649e-23}$ ($\si{\joule\per\kelvin}$); \texttt{N} $= \num{6.02214076e23}$ ($\si{\per\mole}$); \texttt{S} $= \num{5.6703744e-8}$ ($\sigma$, $\si{\watt\per\square\meter\per\kelvin\tothe{4}}$); \texttt{H} $= \num{6.62607015e-34}$ ($\si{\joule\second}$); \texttt{C} $= \num{2.99792458e8}$ ($\si{\meter\per\second}$); \texttt{W} $= \num{4184.0}$ ($c_w$, $\si{\joule\per\kilogram\per\kelvin}$); \texttt{F} $= \num{333550}$ ($L_f$, $\si{\joule\per\kilogram}$); \texttt{V} $= \num{2256400}$ ($L_v$, $\si{\joule\per\kilogram}$); \texttt{P} $= \num{101325}$ ($\si{\pascal}$).
+  \item \textbf{Mandatory Two-Calculator Verification on Critical Values:} Two numbers must \textbf{always} be punched independently on both calculators before submission: (1) the Part II Final Temperature Prediction $T_{\mathrm{pred}}$ (worth $\SI{20}{\text{pts}}$), and (2) the \#1 Written Tiebreaker calculation (\texttt{TB \#1}, worth $\SIrange{10}{16}{\text{pts}}$ on university exams).
+\end{itemize}
+
+\section{Partial-Credit Harvesting, MCQ Guessing Mathematics \& Tiebreaker Protocol}\label{sec:21.4}
+
+\idxtopic{partial-credit harvesting from grading rubrics}
+\idxtopic{MCQ guessing expected value and blank-credit rule}
+
+\subsection{Anatomy of University Invitational Grading Rubrics (\texttt{E1--E6})}
+Direct forensic analysis of the official grading rubrics from Cornell (\texttt{E1, E6}), MIT (\texttt{E2, E3}), and Golden Gate (\texttt{E4, E5}) \src{S25,S26,S27,S28,S29,S30} reveals four universal scoring laws:
+\begin{enumerate}
+  \item \textbf{Symbolic Formula Credit ($40\%\text{--}60\%$ of Subpart Points):} On \texttt{E1} (Cornell 2027), \texttt{E2} (MIT 2019), and \texttt{E4} (GGSO 2019), writing the symbolic governing equation (e.g., $Q_{\mathrm{steam}} = m_s h_{fg} + m_s c_p(120 - T_f) = m_w c_p(T_f - 20)$, or $P = \varepsilon\sigma A T^4$, or $\Delta S = m c\ln(T_f/T_i)$) earns \textbf{1 to 4 points immediately}, even if no final number is computed.
+  \item \textbf{Carry-Forward (Error-Propagation) Protection ($100\%$ Credit on Downstream Parts):} Both \texttt{E1} (p.\ 1: \textit{``Apply carry-forward credit when a student uses an earlier incorrect numerical value consistently with a valid later method''}) and \texttt{E4} (p.\ 1: \textit{``Do not deduct any points for cascading errors''}) award \textbf{full credit} on parts (b)--(f) if you clearly state your carried-forward value from part (a) and show the symbolic equation! If you cannot solve part (a), \textbf{declare a physically reasonable placeholder value} (or use the exam's backup table, as in \texttt{E1 Q29}) and solve parts (b)--(f) for full credit.
+  \item \textbf{Explicit Unit \& Significant-Figure Deductions ($10\%\text{--}33\%$ Penalty):} On \texttt{E2} (MIT 2019), every 2-point final answer block awards $\SI{1.0}{\text{pt}}$ for the numerical value, $\SI{0.5}{\text{pt}}$ for exact significant figures (3 sig figs), and $\SI{0.5}{\text{pt}}$ for explicit units---meaning omitting units or writing 2 sig figs instead of 3 forfeits \textbf{$25\%\text{--}50\%$ of the answer points}!
+  \item \textbf{MCQ Blank-Credit vs.\ All-or-Nothing Multi-Select Traps:} Always read the section header before guessing on multiple choice:
+\end{enumerate}
+
+\begin{workedexample}[Optimal MCQ Guessing Threshold Under Blank-Credit vs.\ All-or-Nothing Rules]{Game Theory}{ex:21.2}
+Compare two actual Multiple-Choice scoring rules from our corpus:
+\textbf{(a) MIT 2019 (\texttt{E2}) Blank-Credit Rule:} 4 choices (\texttt{a--d}); $+\SI{3}{\text{pts}}$ correct, $+\SI{1}{\text{pt}}$ left blank, $\SI{0}{\text{pts}}$ wrong \src{S26}. How many distractors must you eliminate before guessing beats leaving the question blank?
+\textbf{(b) Cornell 2027 (\texttt{E1 Q8--Q9}) Select-All-That-Apply Rule:} 6 options (\texttt{A--F}); $+\SI{2}{\text{pts}}$ awarded \textit{only} if every correct option and zero incorrect options are selected ($\SI{0}{\text{pts}}$ otherwise) \src{S25}. If you verify 4 options with certainty and are $50/50$ uncertain on the remaining 2 options, what is your expected value?
+
+\textbf{Solution.}
+\textbf{(a) MIT 2019 ($+3 / +1 / 0$) Elimination Threshold:}
+If $m \in \{0, 1, 2\}$ distractors are eliminated out of $4$ choices, $k = 4 - m$ equally likely choices remain, so the probability of guessing correctly is $p = 1/k$ and the expected value of guessing is $\mathbb{E}[\text{guess}] = 3/k$, compared against the guaranteed $\mathbb{E}[\text{blank}] = \SI{1.00}{\text{pt}}$:
+\begin{itemize}
+  \item $m = 0$ eliminated ($k = 4$ choices left): $\mathbb{E}[\text{guess}] = 3/4 = \SI{0.75}{\text{pts}} < \SI{1.00}{\text{pt}} \implies$ \textbf{LEAVE BLANK} (guessing loses $\SI{0.25}{\text{pts/question}}$!).
+  \item $m = 1$ eliminated ($k = 3$ choices left): $\mathbb{E}[\text{guess}] = 3/3 = \SI{1.00}{\text{pt}} = \mathbb{E}[\text{blank}] \implies$ \textbf{Break-even} (leave blank to minimize variance, or guess if trailing on tiebreakers).
+  \item $m \ge 2$ eliminated ($k = 2$ choices left): $\mathbb{E}[\text{guess}] = 3/2 = \mathbf{\SI{1.50}{\text{pts}}} > \SI{1.00}{\text{pt}} \implies$ \textbf{ALWAYS GUESS} ($+\SI{0.50}{\text{pt}}$ expected gain).
+\end{itemize}
+\textbf{(b) Cornell 2027 All-or-Nothing Multi-Select ($+2 / 0 / 0$):}
+Because leaving the question blank gives $\SI{0}{\text{pts}}$, any positive probability of hitting the exact combination has $\mathbb{E}[\text{guess}] > 0$. With 2 independent $50/50$ binary options remaining ($2^2 = 4$ combinations), $p = 1/4 = 0.25$ and $\mathbb{E}[\text{guess}] = 2 \times 0.25 = \mathbf{\SI{0.50}{\text{pts}}} > 0 \implies$ \textbf{NEVER LEAVE BLANK when blank credit is zero}.
+\verifiedby{Independent Python script \texttt{check\_sec21\_23.py} (\texttt{SEC21\_MCQ\_EV\_BLANK\_RULE}): $\mathbb{E}_{k=4}=0.75$, $\mathbb{E}_{k=3}=1.00$, $\mathbb{E}_{k=2}=1.50\text{ pts}$.}
+\end{workedexample}
+
+\begin{trapbox}[Tiebreaker Hierarchy (\texttt{Rule 6.j}) \& Designated \texttt{TB} Question Strategy]
+\idxerr{ignoring designated tiebreaker questions on written exam}
+Under 2027 Rule \texttt{6.j} \src{S01,S04}, overall event ties are broken in strict sequence:
+\textbf{1st Tiebreaker:} Best Temperature Score ($\mathrm{TS}$) $\longrightarrow$ \textbf{2nd Tiebreaker:} Best Exam Score ($\mathrm{ES}$) $\longrightarrow$ \textbf{3rd Tiebreaker:} Preselected test questions (\texttt{TB \#1, TB \#2, ...}).
+However, \textbf{ties in raw Part I Exam Score ($R_{\mathrm{exam}}$)} occur frequently among teams clustered in the modal score bin (\texttt{E1}: 21 of 55 teams scored between $\SI{27.86}{\text{pts}}$ and $\SI{39.29}{\text{pts}}$ \src{S25})! Whenever an exam labels specific items as \texttt{(TB \#1)}, \texttt{(TB \#2)}, etc.\ (as on \texttt{E1} and \texttt{E2}), \textbf{those items must be attempted during Pass 2}, even if only to record the governing equation and partial setup.
+\end{trapbox}
+
+\section{Handling Ambiguous Questions \& Online / Satellite / MiniSO Adaptations}\label{sec:21.5}
+
+\idxtopic{ambiguous exam questions and convention declaration}
+\idxtopic{online, satellite, and miniSO tournament adaptations}
+
+\begin{enumerate}
+  \item \textbf{Defensive Convention Declaration on Ambiguous Problems:}
+  If a written question asks for ``the work $W$ during compression'' without specifying whether $W$ means work done \textit{by} the gas ($W_{\mathrm{by}} < 0$) or work done \textit{on} the gas ($w_{\mathrm{on}} > 0$), \textbf{write both labeled values in the answer box}:
+  \[
+    \text{``}W_{\mathrm{by\ gas}} = \SI{-5.15}{\kilo\joule} \quad (\text{or } w_{\mathrm{on\ gas}} = \SI{+5.15}{\kilo\joule})\text{''}
+  \]
+  This takes 3 extra seconds and guarantees full credit regardless of whether the supervisor used a physics key (\texttt{E1, E3, E4, E6}) or a chemistry key (\texttt{E7, E8}) \src{S25,S28,S31}. Similarly, if water properties are not given in the problem header, state the standard value used (e.g., $c_w = \SI{4.184}{\kilo\joule\per\kilogram\per\kelvin}$, $L_f = \SI{334}{\kilo\joule\per\kilogram}$, $L_v = \SI{2260}{\kilo\joule\per\kilogram}$, $P_{\mathrm{atm}} = \SI{101.325}{\kilo\pascal}$).
+  \item \textbf{Online / Satellite / MiniSO Platform Protocol (Scilympiad / Avogadro):}
+  When an invitational runs in online or satellite mode (\sref{app:F} Host Verification Checklist):
+  \begin{itemize}
+    \item \textbf{Rule \texttt{2.c} Paper-Notes Baseline vs.\ Digital PDF Rules:} Under national Rule \texttt{2.c}, notes must be printed on paper and Class IV devices (laptops/tablets) are prohibited for calculation (\texttt{p.\ C74}) \src{S01}. \textbf{Always use physical printed binder pages and stand-alone Class III calculators} even during online testing unless the tournament host's written modification document explicitly authorizes searching a local PDF.
+    \item \textbf{Zero-Collision Partner Question Split on Digital Platforms:} On Scilympiad/Avogadro, two partners typing in the same question box simultaneously can overwrite each other's buffer. Enforce a strict \textbf{Odd/Even or Section-Block Split}: Partner A claims even-numbered / Phase-Cycle-Entropy blocks; Partner B claims odd-numbered / Foundations-Transfer-History blocks, announcing ``Saving Q\#'' aloud before clicking Next.
+    \item \textbf{Auto-Graded Numeric Box Formatting:} Online platforms often parse numeric boxes via string/float matching before manual human re-grading. Unless the box explicitly includes units outside the text field, enter the \textbf{exact floating-point number to the requested significant figures} in the numeric box and type the full equation, units, and sign-convention note in the adjacent free-response work box.
+  \end{itemize}
+\end{enumerate}
+
+\alsosee{\sref{sec:00} (Command Center \& 10-Second Router), \sref{sec:01} (14 Removable Quick Sheets \texttt{QS-01}..\texttt{QS-14}), \sref{sec:16} (2027 Collector Prediction Nomogram), \sref{sec:20} (Misconceptions \& Error Catalog), \sref{sec:22} (Evidence-Based Tournament Intelligence), and \sref{app:F} (One-Page Rules \& Host-Modifications Checklist).}

@@ -1,0 +1,684 @@
+% ============================================================================
+% sec13.tex — §13 Transient Thermal Systems — Lumped Capacitance (Bi < 0.1),
+%             2027 Radiative-Lamp Heating ODE, Newton Cooling & Penetration
+% Target: 10 pages | Figures: fig:13:lumped-heating, fig:13:biot-regimes
+% ============================================================================
+\binderchapter{13}{Transient Thermal Systems — Lumped Capacitance, 2027 Radiative-Lamp Heating ODE, Newton Cooling \& Semi-Infinite Penetration}{§13 Transient Thermal Systems}{sec:13}
+\scopebanner{REQUIRED}[2027 Rule 5.c.iii \& Part II Device Heating-Curve Prediction (Biot/Fourier tagged \SUPPf) \textbar\ Sources: \src{S01}, \src{S12}, \src{S17}, \src{S25}]
+
+\idxtopic{transient heat transfer!lumped capacitance model}
+\idxtopic{Biot number!criterion Bi < 0.1}
+\idxtopic{Fourier number!dimensionless time}
+\idxtopic{Newton's law of cooling!exponential decay and time constant}
+\idxtopic{2027 heat-lamp collector!forced heating ODE solution}
+\idxtopic{semi-infinite solid!penetration depth and thermal effusivity}
+
+% ----------------------------------------------------------------------------
+% L1: FORMULA & DECISION CARD
+% ----------------------------------------------------------------------------
+\begin{formulacard}[§13 Master Lumped-Capacitance, 2027 Forced Heating, Sensor Lag \& Penetration Card \src{S12,S25}]
+\begin{ftab}
+$L_c = \dfrac{V}{A_s}, \quad \mathrm{Bi} = \dfrac{h L_c}{k_{\mathrm{solid}}}$
+  & $L_c$: characteristic length $(\si{\meter})$ [slab half-thickness $L$, cylinder $R/2$, sphere $R/3$, cube $a/6$]; $k_{\mathrm{solid}}$: \textbf{solid} conductivity $(\si{\watt\per\meter\per\kelvin})$
+  & \LUMP\ \SUPPf
+  & Lumped-capacitance validity: $\mathrm{Bi} < 0.1$ ensures internal $\Delta T_{\mathrm{body}} < 5\%$ \idxformula{Biot number!$\mathrm{Bi}=hL_c/k_{\mathrm{solid}}<0.1$} \\
+$\mathrm{Fo} = \dfrac{\alpha t}{L_c^2}, \quad \dfrac{t}{\tau} = \mathrm{Bi}\cdot\mathrm{Fo}$
+  & $\mathrm{Fo}$: Fourier dimensionless time; $\alpha = k_s/(\rho c_p)$ $(\si{\square\meter\per\second})$; $\tau = \dfrac{\rho c_p V}{h A_s} = R_{\mathrm{th}}C$ $(\si{\second})$
+  & \SUPPf
+  & Lienhard Eq.~(5.7) p.~196 \src{S12}; relates diffusion time scale $L_c^2/\alpha$ to $\tau$ \idxformula{Fourier number!$\mathrm{Fo}=\alpha t/L_c^2$} \\
+$\dfrac{T(t) - T_\infty}{T_i - T_\infty} = e^{-t/\tau}, \quad \tau = R_{\mathrm{th}} C = \dfrac{m c_p}{h A_s}$
+  & $T_i = T(0)$: initial temperature; $T_\infty$: constant ambient temperature; $C = m c_p$ $(\si{\joule\per\kelvin})$; $R_{\mathrm{th}} = 1/(hA_s)$ $(\si{\kelvin\per\watt})$
+  & \LUMP
+  & Unforced Newton cooling/warming ($\dot{Q}_{\mathrm{source}}=0$); $t_{1/2} = \tau\ln 2 = 0.6931\tau$ \idxformula{Newton cooling curve!$T(t)=T_\infty+(T_i-T_\infty)e^{-t/\tau}$} \\
+$C_{\mathrm{eff}}\dfrac{dT}{dt} = P_{\mathrm{abs}} - \dfrac{T(t) - T_{\mathrm{room}}}{R_{\mathrm{th}}}$
+  & $P_{\mathrm{abs}}$: net absorbed lamp radiant power $(\si{\watt})$; $R_{\mathrm{th}} = 1/(UA)_{\mathrm{loss}}$ $(\si{\kelvin\per\watt})$; $C_{\mathrm{eff}}$: effective thermal capacitance $(\si{\joule\per\kelvin})$
+  & \RULEf
+  & Governing energy-balance ODE of the 2027 Heat-Lamp Collector \idxformula{2027 collector heating ODE!$C_{\mathrm{eff}}dT/dt=P_{\mathrm{abs}}-(T-T_{\mathrm{room}})/R_{\mathrm{th}}$} \\
+$T(t) = T_{\mathrm{ss}} - \left(T_{\mathrm{ss}} - T_{\mathrm{start}}\right)e^{-t/\tau}$
+  & $T_{\mathrm{ss}} = T_{\mathrm{room}} + P_{\mathrm{abs}} R_{\mathrm{th}}$: asymptotic stagnation temp; $\tau = C_{\mathrm{eff}} R_{\mathrm{th}}$; initial slope $(dT/dt)_0 = \dfrac{P_{\mathrm{abs}}}{C_{\mathrm{eff}}} - \dfrac{T_{\mathrm{start}}-T_{\mathrm{room}}}{\tau}$
+  & \RULEf
+  & Exact closed-form algebraic solution for 2027 collector temperature $T(t)$ \idxformula{2027 collector heating solution!$T(t)=T_{\mathrm{ss}}-(T_{\mathrm{ss}}-T_{\mathrm{start}})e^{-t/\tau}$} \\
+$\mathrm{TG}(t) \approx \dfrac{P_{\mathrm{abs}} t}{C_{\mathrm{eff}}}\!\left(1 - \dfrac{t}{2 C_{\mathrm{eff}} R_{\mathrm{th}}}\right)$
+  & Second-order algebraic expansion of $\mathrm{TG}(t) = T(t) - T_{\mathrm{start}}$ when $T_{\mathrm{start}} \approx T_{\mathrm{room}}$ and $t \lesssim \tau$
+  & \RULEf
+  & Separates optical gain $P_{\mathrm{abs}}t/C_{\mathrm{eff}}$ from finite heat-loss curvature $t/(2\tau)$ \idxformula{short-time heating expansion!$\mathrm{TG}(t)\approx(P_{\mathrm{abs}}t/C_{\mathrm{eff}})(1-t/(2\tau))$} \\
+$T_{\mathrm{ss}} = \dfrac{T_1^2 - T_0 T_2}{2T_1 - T_0 - T_2}, \quad \tau = \dfrac{\Delta t}{\ln\!\left(\dfrac{T_1 - T_0}{T_2 - T_1}\right)}$
+  & $T_0 = T(0),\; T_1 = T(\Delta t),\; T_2 = T(2\Delta t)$: three temperatures measured at equal time intervals $\Delta t$ (e.g., $t = 0, 5, 10\,\si{\minute}$)
+  & \flag{3-PT-FIT}
+  & Exact algebra-only extraction of $T_{\mathrm{ss}}$ and $\tau$ from 3 data points! \idxformula{three-point exponential fit!$T_{\mathrm{ss}}=(T_1^2-T_0T_2)/(2T_1-T_0-T_2)$} \\
+$T_p(t) = T_w - \left(T_w - T_{p,0}\right)e^{-t/\tau_p}$
+  & $\tau_p = m_p c_{p,p}/(h_p A_p)$: probe time constant $(\si{\second})$; at $t = 5\tau_p$, remaining error is $e^{-5} = 0.674\%$ ($99.33\%$ settled)
+  & \flag{SENSOR}
+  & Thermometer dynamic immersion lag; ramp lag in bath $\dot{T}_w=b$ is $\Delta T_{\mathrm{lag}} = -b\tau_p$ \idxformula{thermometer response lag!$T_p(t)=T_w-(T_w-T_{p,0})e^{-t/\tau_p}$} \\
+$\delta_t \approx 2\sqrt{\alpha t}, \quad T_{\mathrm{int}} = \dfrac{b_1 T_1 + b_2 T_2}{b_1 + b_2}$
+  & $\delta_t$: semi-infinite thermal diffusion depth $(\si{\meter})$; $b_i = \sqrt{k_i\rho_i c_{p,i}}$: thermal effusivity; $T_{\mathrm{int}}$: instantaneous contact interface temp
+  & \SUPPf
+  & Downward heat diffusion in unstirred cup ($\delta_t \approx \SI{18.8}{\milli\meter}$ in $\SI{600}{\second}$) \& touch warmth \idxformula{thermal penetration depth!$\delta_t=2\sqrt{\alpha t}$} \\
+$t_{\mathrm{rad,vac}} = \dfrac{m c_p}{3\varepsilon\sigma A}\!\left(\dfrac{1}{T_f^3} - \dfrac{1}{T_i^3}\right)$
+  & Exact cooling time of a lumped body ($C=mc_p$) radiating into deep space ($T_{\mathrm{env}}\to\SI{0}{\kelvin}$) via $C\,dT/dt = -\varepsilon\sigma A T^4$
+  & \TIERf
+  & 2027 Cornell Invitational \src{S25} ($T$ in $\si{\kelvin}$) \idxformula{radiative vacuum cooling time!$t=(mc_p/(3\varepsilon\sigma A))(T_f^{-3}-T_i^{-3})$} \\
+\end{ftab}
+\end{formulacard}
+
+% ----------------------------------------------------------------------------
+% L2: COMPACT EXPLANATION, BIOT NUMBER & RC ANALOGY
+% ----------------------------------------------------------------------------
+\section{Lumped-Capacitance Validity ($\mathrm{Bi} < 0.1$) \& Electrical $RC$ Analogy}
+\label{sec:13.1}
+
+\subsection{Internal vs.\ External Thermal Resistance and the Biot Number Criterion}
+When a body of volume $V$, surface area $A_s$, density $\rho$, specific heat $c_p$, and thermal conductivity $k_{\mathrm{solid}}$ exchanges heat with a surrounding environment via surface heat transfer coefficient $h_{\mathrm{eff}} = h_{\mathrm{conv}} + h_{\mathrm{rad}}$, the ratio of internal conductive resistance inside the body ($R_{\mathrm{cond,int}} \sim L_c / (k_{\mathrm{solid}}A_s)$) to external boundary-layer resistance at the surface ($R_{\mathrm{conv,ext}} = 1/(h_{\mathrm{eff}}A_s)$) is the dimensionless \textbf{Biot number} (Lienhard §1.3 pp.~22--24 \& §5.2 pp.~194--197 \src{S12}):
+\begin{equation}
+  \mathrm{Bi} \equiv \frac{R_{\mathrm{cond,int}}}{R_{\mathrm{conv,ext}}} = \frac{h_{\mathrm{eff}} L_c}{k_{\mathrm{solid}}}, \qquad L_c \equiv \frac{V}{A_s} = \begin{cases} L & \text{(plane slab of half-thickness } L\text{ exposed on both faces)} \\ R/2 = D/4 & \text{(long cylinder of radius } R\text{)} \\ R/3 = D/6 & \text{(sphere of radius } R\text{ or cube of side } 2R\text{)} \end{cases}
+  \label{eq:13:biot-def}
+\end{equation}
+As shown in \fref{fig:13:biot-regimes} (modeled on Lienhard Figs.~1.10--1.11 and 2.11 \src{S12}):
+\begin{enumerate}
+  \item \textbf{Lumped-Capacitance Regime ($\mathrm{Bi} < 0.1$):} Internal conduction resistance is negligible compared to surface resistance ($k_{\mathrm{solid}}$ is large or $L_c$ is small). Spatial temperature variations inside the body are $<5\%$ of $|T - T_\infty|$, so the entire object can be modeled at a single uniform temperature $T(t)$ with lumped thermal capacitance $C = \rho c_p V = m c_p$ $[\si{\joule\per\kelvin}]$ and lumped boundary resistance $R_{\mathrm{th}} = 1/(h_{\mathrm{eff}}A_s)$ $[\si{\kelvin\per\watt}]$.
+  \item \textbf{Intermediate / Stratified Regime ($0.1 \le \mathrm{Bi} \le 10$ — The Unstirred 2027 Water Cup!):} For the $\SI{100}{\milli\liter}$ quiescent water column in the 9~oz cup ($L_w \approx \SI{36}{\milli\meter} = \SI{0.036}{\meter}$, $k_w = \SI{0.613}{\watt\per\meter\per\kelvin}$) heated from above with top-surface loss coefficient $h_{\mathrm{top}} \approx \SI{12}{\watt\per\square\meter\per\kelvin}$, the vertical Biot number is $\mathrm{Bi}_z = \frac{h_{\mathrm{top}}L_w}{k_w} = \frac{(12)(0.036)}{0.613} = \mathbf{0.71 > 0.1}$! Because $\mathrm{Bi}_z > 0.1$ and top-down heating is buoyantly stable ($\mathrm{Ra} < 0$), a significant vertical temperature gradient persists across the water column (\fref{fig:13:biot-regimes}, middle curve), keeping the ES-measured top water layer warmer than the bottom layer!
+  \item \textbf{Conduction-Limited / Semi-Infinite Regime ($\mathrm{Bi} > 20$):} External convection offers negligible resistance ($T_{\mathrm{surface}} \to T_\infty$ almost instantly), and transient response is governed by internal thermal diffusion $\mathrm{Fo} = \alpha t / L_c^2$.
+\end{enumerate}
+
+\subsection{Electrical $RC$ Circuit Analogy and Why Thermal Systems Never Overshoot}
+In the lumped-capacitance regime ($\mathrm{Bi} < 0.1$), temperature difference $\theta(t) = T(t) - T_\infty$ $[\si{\kelvin}]$ is analogous to capacitor voltage $V(t)$, heat flow rate $\dot{Q}(t)$ $[\si{\watt}]$ is analogous to electric current $I(t)$, thermal resistance $R_{\mathrm{th}} = 1/(h_{\mathrm{eff}}A_s)$ $[\si{\kelvin\per\watt}]$ is analogous to electrical resistance $R$, and thermal capacitance $C = m c_p$ $[\si{\joule\per\kelvin}]$ is analogous to electrical capacitance $C_e$, giving the thermal time constant:
+\begin{equation}
+  \tau = R_{\mathrm{th}} C = \frac{m c_p}{h_{\mathrm{eff}} A_s} = \frac{\rho c_p L_c}{h_{\mathrm{eff}}} \quad [\si{\second}], \qquad \frac{t}{\tau} = \frac{h_{\mathrm{eff}} t}{\rho c_p L_c} = \left(\frac{h_{\mathrm{eff}} L_c}{k_s}\right)\!\left(\frac{\alpha t}{L_c^2}\right) = \mathrm{Bi}\cdot\mathrm{Fo}
+  \label{eq:13:tau-bifo}
+\end{equation}
+As emphasized by Lienhard §5.2 (Fig.~5.2--5.3, p.~197 \src{S12}), while mechanical spring-mass-damper systems have mass $m$ and electrical circuits have inductance $L_e$ that can cause underdamped oscillations past equilibrium, \textbf{the Second Law of Thermodynamics forbids any thermal element analogous to mass or inductance}: a passive thermal system's temperature approaches $T_{\mathrm{ss}}$ monotonically and can never spontaneously overshoot its equilibrium temperature!
+
+% ---------------- FIGURE 34 & 35: Side-by-Side or Stacked Vector Plots -------
+\begin{center}
+\begin{tikzpicture}[font=\scriptsize]
+  % Figure 34: fig:13:lumped-heating
+  \begin{axis}[
+    width=0.88\linewidth, height=4.7cm,
+    xlabel={Dimensionless Time $t / \tau = t / (C_{\mathrm{eff}}R_{\mathrm{th}}) = \mathrm{Bi}\cdot\mathrm{Fo}$ (For 2027 Collector with $\tau \approx \SI{900}{\second}$, $t = \SIrange{10}{15}{\minute}$ is $t/\tau \in [0.67, 1.00]$)},
+    ylabel={Normalized Response $\theta(t) / \theta_{\max}$},
+    xmin=0, xmax=5.2, ymin=0, ymax=1.08,
+    xtick={0, 0.693, 1.0, 2.0, 3.0, 4.0, 5.0},
+    xticklabels={$0$, $0.693\ (t_{1/2})$, $1\tau\ (63.2\%)$, $2\tau\ (86.5\%)$, $3\tau\ (95.0\%)$, $4\tau\ (98.2\%)$, $5\tau\ (99.3\%)$},
+    ytick={0, 0.2, 0.368, 0.5, 0.632, 0.8, 0.95, 1.0},
+    grid=both, major grid style={gray!30},
+    legend pos=south east, legend style={font=\scriptsize, fill=white, draw=navy},
+    clip=true
+  ]
+    % Shaded 2027 competition heating window t/tau in [0.67, 1.00]
+    \fill[amber!14] (axis cs:0.664,0) rectangle (axis cs:1.00,1.08);
+    \node[amber!80!black, font=\bfseries\scriptsize, align=center] at (axis cs:0.83, 0.18) {2027 Run\\[-1pt]$10\text{--}15\text{ min}$};
+
+    % Forced Heating curve: 1 - exp(-x)
+    \addplot[rust, ultra thick, domain=0:5.2, samples=36] {1 - exp(-x)};
+    \addlegendentry{Forced Heating: $\dfrac{T(t)-T_i}{T_{\mathrm{ss}}-T_i} = 1 - e^{-t/\tau}$}
+
+    % Unforced Cooling curve: exp(-x)
+    \addplot[navy, ultra thick, densely dashed, domain=0:5.2, samples=36] {exp(-x)};
+    \addlegendentry{Newton Cooling: $\dfrac{T(t)-T_\infty}{T_i-T_\infty} = e^{-t/\tau}$}
+
+    % Initial tangent slope at t=0: y = x
+    \addplot[teal, thick, densely dotted, domain=0:1.08, samples=20] {x};
+    \addlegendentry{Zero-Loss Tangent: $\left(\dfrac{dT}{dt}\right)_0 t = \dfrac{P_{\mathrm{abs}}t}{C_{\mathrm{eff}}}$}
+
+    % Asymptote y = 1.0
+    \draw[black, thin, dashed] (axis cs:0,1.0) -- (axis cs:5.2,1.0);
+    \draw[rust, dotted, thick] (axis cs:1.0,0) -- (axis cs:1.0,0.6321) -- (axis cs:0,0.6321);
+    \fill[rust] (axis cs:1.0,0.6321) circle (2pt);
+    \fill[navy] (axis cs:1.0,0.3679) circle (2pt);
+    \fill[rust] (axis cs:3.0,0.9502) circle (2pt);
+    \fill[rust] (axis cs:5.0,0.9933) circle (2pt) node[below left, text=rust, font=\bfseries\scriptsize] {$5\tau$: $99.33\%$ Settled};
+  \end{axis}
+\end{tikzpicture}
+\captionof{figure}{Universal dimensionless lumped-capacitance forced heating curve $1 - e^{-t/\tau}$ and unforced Newton cooling curve $e^{-t/\tau}$, showing the zero-loss initial tangent $t/\tau$, the $1\tau$ ($63.2\%$), $3\tau$ ($95.0\%$), and $5\tau$ ($99.33\%$) landmarks, and the 2027 competition heating window ($t/\tau \approx 0.67\text{--}1.00$) \src{S12}.}
+\label{fig:13:lumped-heating}
+\idxfig{lumped capacitance!dimensionless heating and cooling curves}
+\end{center}
+
+% ----------------------------------------------------------------------------
+% L3: FORCED HEATING ODE, 3-POINT EXTRACTION, SENSOR LAG & PENETRATION
+% ----------------------------------------------------------------------------
+\section{2027 Collector Forced Heating ODE \& Algebra-Only Parameter Extraction}
+\label{sec:13.2}
+
+\begin{derivation}[Algebra-Only (\texttt{5.d.iv} Compliant) Solution of the 2027 Forced Radiative-Heating Equation \src{S01,S12}]
+During the 2027 Heating Time ($t \in [\SI{600}{\second}, \SI{900}{\second}]$), the collector water layer (effective thermal capacitance $C_{\mathrm{eff}}$ $[\si{\joule\per\kelvin}]$) absorbs constant radiant lamp power $P_{\mathrm{abs}}(h, P_{\mathrm{bulb}})$ $[\si{\watt}]$ while losing heat to the ambient room at $T_{\mathrm{room}}$ through overall parasitic resistance $R_{\mathrm{th}} = 1/(UA)_{\mathrm{loss}}$ $[\si{\kelvin\per\watt}]$:
+\begin{equation}
+  C_{\mathrm{eff}}\frac{dT}{dt} = P_{\mathrm{abs}} - \frac{T(t) - T_{\mathrm{room}}}{R_{\mathrm{th}}} = -\frac{1}{R_{\mathrm{th}}}\Big[T(t) - \underbrace{\left(T_{\mathrm{room}} + P_{\mathrm{abs}} R_{\mathrm{th}}\right)}_{T_{\mathrm{ss}}}\Big]
+  \label{eq:13:forced-ode}
+\end{equation}
+Notice that $T_{\mathrm{ss}} = T_{\mathrm{room}} + P_{\mathrm{abs}} R_{\mathrm{th}}$ is the constant \textbf{steady-state stagnation temperature} where heat loss would exactly balance absorbed power ($dT/dt = 0$). Shifting the temperature variable to the remaining deficit $\Phi(t) \equiv T_{\mathrm{ss}} - T(t)$ (since $T_{\mathrm{ss}}$ is constant, $d\Phi/dt = -dT/dt$) transforms Eq.~\eref{eq:13:forced-ode} into the standard exponential decay $\frac{d\Phi}{dt} = -\frac{\Phi}{\tau}$ with $\tau = C_{\mathrm{eff}}R_{\mathrm{th}}$ and initial deficit $\Phi(0) = T_{\mathrm{ss}} - T_{\mathrm{start}}$:
+\begin{equation}
+  \boxed{T(t) = T_{\mathrm{ss}} - \left(T_{\mathrm{ss}} - T_{\mathrm{start}}\right)e^{-t/\tau} = T_{\mathrm{start}} + \left[P_{\mathrm{abs}}R_{\mathrm{th}} - \left(T_{\mathrm{start}} - T_{\mathrm{room}}\right)\right]\!\left(1 - e^{-t/(C_{\mathrm{eff}}R_{\mathrm{th}})}\right)}
+  \label{eq:13:forced-solution}
+\end{equation}
+\textbf{Three-Point Equal-Interval Algebraic Parameter Extraction (Zero Calculus or Nonlinear Solver Needed!):}
+Suppose you measure three temperatures $T_0 = T(0)$, $T_1 = T(\Delta t)$, and $T_2 = T(2\Delta t)$ at equal time spacing $\Delta t$ (e.g., $t = 0, 5, 10\,\si{\minute}$). From Eq.~\eref{eq:13:forced-solution}, let $E \equiv e^{-\Delta t/\tau}$:
+\[
+  T_1 - T_0 = \left(T_{\mathrm{ss}} - T_0\right)(1 - E), \qquad T_2 - T_1 = \left(T_{\mathrm{ss}} - T_0\right)E(1 - E)
+\]
+Dividing the two increments eliminates $T_{\mathrm{ss}}$ immediately to give $\tau$, and substituting $E = \frac{T_2 - T_1}{T_1 - T_0}$ solves for $T_{\mathrm{ss}}$ directly:
+\begin{equation}
+  \boxed{E = e^{-\Delta t/\tau} = \frac{T_2 - T_1}{T_1 - T_0} \implies \tau = \frac{\Delta t}{\ln\!\left(\dfrac{T_1 - T_0}{T_2 - T_1}\right)}, \qquad T_{\mathrm{ss}} = \frac{T_1^2 - T_0 T_2}{2T_1 - T_0 - T_2}}
+  \label{eq:13:three-point-exact}
+\end{equation}
+\end{derivation}
+
+% ---------------- FIGURE 35: fig:13:biot-regimes -----------------------------
+\begin{center}
+\begin{tikzpicture}[font=\scriptsize]
+  \begin{axis}[
+    width=0.86\linewidth, height=4.4cm,
+    xlabel={Normalized Spatial Coordinate $x/L$ Across Slab or Water Depth $z/L_w$ ($0 = \text{Insulated Base},\; 1 = \text{Top Boundary}$)},
+    ylabel={Dimensionless Temperature $\Theta(x) = \dfrac{T(x)-T_{\mathrm{base}}}{T_\infty - T_{\mathrm{base}}}$},
+    xmin=0, xmax=1.35, ymin=0, ymax=1.08,
+    xtick={0, 0.25, 0.5, 0.75, 1.0, 1.35},
+    xticklabels={$0$ (Center/Base), $0.25$, $0.50$, $0.75$, $1.0$ (Surface), Fluid $T_\infty$},
+    ytick={0, 0.2, 0.4, 0.6, 0.8, 1.0},
+    grid=both, major grid style={gray!30},
+    legend pos=north west, legend style={font=\scriptsize, fill=white, draw=navy},
+    clip=true
+  ]
+    % Shaded external boundary layer region x in [1.0, 1.35]
+    \fill[gray!12] (axis cs:1.0,0) rectangle (axis cs:1.35,1.08);
+    \draw[black, thick] (axis cs:1.0,0) -- (axis cs:1.0,1.08);
+    \node[align=center, font=\bfseries\scriptsize] at (axis cs:1.175, 0.16) {External\\[-1pt]Boundary\\[-1pt]Layer ($1/h$)};
+
+    % Bi = 0.05 (Lumped regime: internal drop is only 0.05/1.05 = 4.8%, external drop is 95.2%)
+    \addplot[navy, ultra thick] coordinates {(0,0) (0.5,0.024) (1.0,0.0476) (1.12,0.55) (1.35,1.0)};
+    \addlegendentry{$\mathrm{Bi} = 0.05 < 0.1$ (Lumped Metal: $T_{\mathrm{body}}$ Uniform)}
+
+    % Bi = 0.71 (2027 Stratified Water Column in 9 oz Cup: L_w=36 mm, k_w=0.61 W/mK)
+    \addplot[rust, ultra thick, densely dashed] coordinates {(0,0) (0.5,0.208) (1.0,0.415) (1.12,0.75) (1.35,1.0)};
+    \addlegendentry{$\mathrm{Bi}_z = 0.71$ (2027 Water Cup: Stratified Top Layer!)}
+
+    % Bi = 20 (Conduction-limited insulator: internal drop is 20/21 = 95.2%)
+    \addplot[teal, ultra thick, densely dotted] coordinates {(0,0) (0.5,0.476) (1.0,0.952) (1.12,0.985) (1.35,1.0)};
+    \addlegendentry{$\mathrm{Bi} = 20 \gg 1$ (Thick Insulator: $T_{\mathrm{surf}} \approx T_\infty$)}
+
+    \fill[navy] (axis cs:1.0,0.0476) circle (2pt);
+    \fill[rust] (axis cs:1.0,0.415) circle (2pt) node[above left, text=rust, font=\bfseries\scriptsize] {Top Water Layer Hot};
+    \fill[teal] (axis cs:1.0,0.952) circle (2pt);
+  \end{axis}
+\end{tikzpicture}
+\captionof{figure}{Comparison of internal solid/liquid temperature profiles versus external boundary-layer drops across three Biot number regimes (Lienhard Figs.~1.10--1.11 \& 2.11 \src{S12}): $\mathrm{Bi} = 0.05 < 0.1$ (uniform lumped body), $\mathrm{Bi}_z = 0.71$ (unstirred 2027 water cup exhibiting top-layer thermal stratification), and $\mathrm{Bi} = 20 \gg 1$ (internal conduction-dominated).}
+\label{fig:13:biot-regimes}
+\idxfig{Biot number!internal vs external temperature drop regimes}
+\end{center}
+
+\section{Thermometer Lag ($5\tau_p$), Semi-Infinite Penetration \& Radiative Cooling}
+\label{sec:13.3}
+
+\subsection{Sensor Dynamic Step Lag ($5\tau_p$ Settling Rule) and Linear Ramp-Tracking Lag}
+\begin{enumerate}
+  \item \textbf{Step Immersion Response:} When a thermometer probe of time constant $\tau_p = m_p c_{p,p}/(h_p A_p)$ initially at room temperature $T_{p,0}$ is inserted into water at $T_w$, its reading evolves as $T_p(t) = T_w - (T_w - T_{p,0})e^{-t/\tau_p}$. At $t = 1\tau_p, 2\tau_p, 3\tau_p, 5\tau_p$, the probe has completed $63.21\%, 86.47\%, 95.02\%, \mathbf{99.33\%}$ of the step change. Always wait at least $\mathbf{t \ge 5\tau_p}$ before recording a steady temperature!
+  \item \textbf{Ramp-Tracking Lag (Lienhard §5.2 Eq.~5.12, p.~198 \src{S12}):} If a probe of time constant $\tau_p$ sits in a water bath whose temperature is rising linearly at rate $b = dT_w/dt$ $[\si{\kelvin\per\second}]$ ($T_w(t) = T_i + b t$), solving $\tau_p \frac{dT_p}{dt} + T_p = T_i + b t$ yields:
+  \begin{equation}
+    T_p(t) = T_w(t) - b \tau_p\left(1 - e^{-t/\tau_p}\right) \xrightarrow{t \gg \tau_p} T_p(t) - T_w(t) = -b \tau_p
+    \label{eq:13:ramp-lag}
+  \end{equation}
+  In steady ramp heating, a probe always lags behind the true bath temperature by a constant offset $\Delta T_{\mathrm{lag}} = -b\tau_p$ (i.e., it displays the temperature the bath had $\tau_p$ seconds ago!).
+\end{enumerate}
+
+\subsection{Semi-Infinite Diffusion Depth ($\delta_t \approx 2\sqrt{\alpha t}$), Effusivity ($b$), and $T^4$ Vacuum Cooling}
+\begin{itemize}
+  \item \textbf{Semi-Infinite Penetration Depth ($\delta_t$):} When a surface temperature or heat flux is suddenly applied at $z = 0$ to a thick medium of thermal diffusivity $\alpha = k/(\rho c_p)$ (Lienhard §5.6, pp.~220--230 \src{S12}), the thermal wave penetrates a characteristic depth $\delta_t \approx 2\sqrt{\alpha t}$ where $\mathrm{Fo}_{\delta} = \alpha t / \delta_t^2 = 1/4$ (at $z = 2\sqrt{\alpha t}$, $\mathrm{erfc}(1) = 0.1573$, so $84.3\%$ of the temperature change is confined within $z < 2\sqrt{\alpha t}$). For quiescent water ($\alpha_w = \SI{1.48e-7}{\square\meter\per\second}$ at $\SI{35}{\celsius}$) over a $\SI{10.0}{\minute}$ ($\SI{600}{\second}$) run, $\delta_t = 2\sqrt{(\SI{1.48e-7}{})(600)} = \mathbf{\SI{18.85}{\milli\meter}}$ — half the $\SI{36}{\milli\meter}$ water depth in the 9~oz cup!
+  \item \textbf{Instantaneous Two-Body Contact Temperature via Thermal Effusivity ($b = \sqrt{k\rho c_p}$):} When semi-infinite body $1$ at initial temperature $T_1$ is pressed into sudden contact with semi-infinite body $2$ at initial temperature $T_2$ (Lienhard Eq.~5.51, p.~228 \src{S12}), heat flux continuity at the interface requires their contact plane to jump immediately to the time-invariant \textbf{effusivity-weighted mean temperature}:
+  \begin{equation}
+    T_{\mathrm{int}} = \frac{b_1 T_1 + b_2 T_2}{b_1 + b_2}, \qquad b_i \equiv \sqrt{k_i \rho_i c_{p,i}} \quad \left[\si{\joule\per\square\meter\per\kelvin\per\second\tothe{1/2}}\right]
+    \label{eq:13:effusivity-contact}
+  \end{equation}
+  \item \textbf{Pure Radiative $T^4$ Cooling in Vacuum (State/National Tier, 2027 Cornell Invitational \src{S25}):} For a body of heat capacity $C = m c_p$, area $A$, and emittance $\varepsilon$ cooling by pure Stefan--Boltzmann radiation in a cryogenic vacuum ($T_{\mathrm{env}}^4 \ll T^4$), separating variables in $C\frac{dT}{dt} = -\varepsilon\sigma A T^4$ ($\int T^{-4}dT = -\frac{1}{3}T^{-3}$) yields the exact algebraic cooling time from $T_i$ to $T_f$:
+  \begin{equation}
+    t_{\mathrm{rad,vac}} = \frac{m c_p}{3\varepsilon\sigma A}\!\left(\frac{1}{T_f^3} - \frac{1}{T_i^3}\right), \qquad T(t) = \left(T_i^{-3} + \frac{3\varepsilon\sigma A}{m c_p}\,t\right)^{\!-1/3}
+    \label{eq:13:t4-vacuum}
+  \end{equation}
+\end{itemize}
+
+\subsection{Two-Node Stratified Water Cup Model, One-Term $\mathrm{Bi} > 0.1$ Decay \& Calorimetry Corrections}
+\idxtopic{thermal stratification!two-node coupled ODE model}
+\idxtopic{calorimetry!Regnault-Pfaundler and Dickinson heat-loss correction}
+\begin{enumerate}
+  \item \textbf{Coupled Two-Node Stratified Water Model for the 2027 9 oz Cup ($\mathrm{Bi}_z = 0.71 > 0.1$):}
+  Because $66\text{--}72\%$ of the $\SI{2400}{\kelvin}$ lamp's near-IR energy is absorbed in the upper $\SIrange{5}{10}{\milli\meter}$ of the water column while downward conduction is slow ($R_{w,\mathrm{int}} = \frac{L_{\mathrm{mid}}}{k_w A_{\mathrm{cup}}} \approx \frac{0.018}{(0.62)(0.0036)} = \SI{8.06}{\kelvin\per\watt}$), divide the $\SI{100}{\milli\liter}$ water into an upper measured layer $C_1 = m_1 c_p$ at $T_1(t) = T_{\mathrm{top}}(t)$ (absorbing power $P_1 = f_{\mathrm{top}}P_{\mathrm{abs}}$) and a lower layer $C_2 = m_2 c_p$ at $T_2(t) = T_{\mathrm{bot}}(t)$ (absorbing transmitted power $P_2 = (1 - f_{\mathrm{top}})P_{\mathrm{abs}}$):
+  \begin{equation}
+    C_1\frac{dT_1}{dt} = P_1 - \frac{T_1 - T_{\mathrm{room}}}{R_1} - \frac{T_1 - T_2}{R_{w,\mathrm{int}}}, \qquad
+    C_2\frac{dT_2}{dt} = P_2 + \frac{T_1 - T_2}{R_{w,\mathrm{int}}} - \frac{T_2 - T_{\mathrm{room}}}{R_2}
+    \label{eq:13:two-node-strat}
+  \end{equation}
+  Solving Eq.~\eref{eq:13:two-node-strat} yields a fast top-layer mode ($\tau_{\mathrm{fast}} \approx \SI{420}{\second}$) and a slow bulk mode ($\tau_{\mathrm{slow}} \approx \SI{1150}{\second}$), producing a top-to-bottom stratification differential $\Delta T_{\mathrm{strat}}(t) = T_1(t) - T_2(t) \approx \SIrange{+12}{+20}{\celsius}$ at $t = \SI{600}{\second}$!
+  \item \textbf{One-Term Spatial Transient Conduction Approximation ($\mathrm{Bi} > 0.1,\; \mathrm{Fo} > 0.2$, Lienhard §5.5 pp.~213--218 \src{S12}):}
+  When $\mathrm{Bi} > 0.1$ and dimensionless time $\mathrm{Fo} = \alpha t / L^2 > 0.2$ (where $L$ is the slab half-thickness or cylinder/sphere radius $R$), higher spatial eigenmodes decay rapidly and the centerline temperature $T_{\mathrm{center}}(t)$ and surface temperature $T_{\mathrm{surf}}(t)$ follow a single exponential mode with lead amplitude $A_1$ and eigenvalue $\lambda_1$:
+  \begin{equation}
+    \Theta_{\mathrm{center}}(t) = \frac{T_{\mathrm{center}}(t) - T_\infty}{T_i - T_\infty} \approx A_1 \exp\!\left(-\lambda_1^2\,\mathrm{Fo}\right), \qquad \Theta_{\mathrm{surf}}(t) = \Theta_{\mathrm{center}}(t)\cdot \phi_1(\lambda_1)
+    \label{eq:13:one-term-heisler}
+  \end{equation}
+  For $\mathrm{Bi} \ll 1$, $\lambda_1^2 \approx \mathrm{Bi}$ (slab), $2\mathrm{Bi}$ (cylinder), or $3\mathrm{Bi}$ (sphere) and $A_1 \to 1$, recovering lumped capacitance $\lambda_1^2\mathrm{Fo} = (hL_c/k)(\alpha t/L_c^2) = t/\tau$!
+  \item \textbf{Regnault--Pfaundler / Dickinson Linear-Drift Calorimetry Heat-Loss Correction:}
+  In a laboratory calorimetry run spanning reaction interval $[t_0, t_f]$ ($\Delta t = t_f - t_0$) where the calorimeter exhibits a steady pre-reaction temperature drift rate $r_i = (dT/dt)_{\mathrm{pre}}$ (at $T_0$) and a steady post-reaction cooling drift rate $r_f = (dT/dt)_{\mathrm{post}}$ (at peak temperature $T_{\mathrm{obs}}$), the true adiabatic temperature rise $\Delta T_{\mathrm{corr}}$ corrected for Newton heat leakage to the surroundings is:
+  \begin{equation}
+    \boxed{\Delta T_{\mathrm{corr}} = \left(T_{\mathrm{obs}} - T_0\right) - r_i\,t_m - r_f\left(\Delta t - t_m\right) \approx \left(T_{\mathrm{obs}} - T_0\right) - \left(\frac{r_i + r_f}{2}\right)\Delta t\quad (\text{symmetric rise } t_m = \Delta t/2)}
+    \label{eq:13:regnault-pfaundler}
+  \end{equation}
+  where $t_m \in [0, \Delta t]$ is the Dickinson equal-area midpoint time at which $\int_{t_0}^{t_f}[T(t) - T_0]\,dt = (T_{\mathrm{obs}} - T_0)(\Delta t - t_m)$ (for an exponential calorimetry rise, $t_m \approx 0.35\text{--}0.45\,\Delta t$).
+\end{enumerate}
+
+% ----------------------------------------------------------------------------
+% L4: WORKED EXAMPLES (6 Fully Verified Examples Matching check_sec10_13.py)
+% ----------------------------------------------------------------------------
+\section{Worked Competition Examples (§13)}
+\label{sec:13.4}
+
+\begin{workedexample}[Biot Number Check \& Lumped Cooling of a Cylindrical Resistor]{Lienhard Ex.\ 2.8 \src{S12}}{ex:13.1}
+A cylindrical electronic resistor of diameter $D = \SI{3.60}{\milli\meter}$ ($r_o = \SI{1.80}{\milli\meter}$) and length $\ell = \SI{10.0}{\milli\meter}$ has density $\rho = \SI{2000}{\kilogram\per\cubic\meter}$, specific heat $c_p = \SI{700}{\joule\per\kilogram\per\kelvin}$, and conductivity $k = \SI{10.0}{\watt\per\meter\per\kelvin}$. When power is switched off at $T_i = \SI{72.3}{\celsius}$, it cools in still cabinet air at $T_\infty = \SI{35.0}{\celsius}$ by parallel natural convection ($h = \SI{13.0}{\watt\per\square\meter\per\kelvin}$) and thermal radiation ($h_{\mathrm{rad}} = \SI{7.17}{\watt\per\square\meter\per\kelvin}$). Verify $\mathrm{Bi} < 0.1$, find the thermal time constant $\tau$, and compute the time $t_{95}$ required to complete $95.0\%$ of its temperature drop.
+\tcblower
+\textbf{Solution.} Total surface area (sidewall + 2 circular ends) is $A_s = 2\pi r_o \ell + 2\pi r_o^2 = \SI{1.3345e-4}{\square\meter}$, and volume is $V = \pi r_o^2 \ell = \SI{1.0179e-7}{\square\meter}$, so $L_c = V/A_s = \SI{7.627e-4}{\meter}$. With $h_{\mathrm{eff}} = 13.0 + 7.17 = \SI{20.17}{\watt\per\square\meter\per\kelvin}$:
+\[
+  \mathrm{Bi} = \frac{h_{\mathrm{eff}} L_c}{k} = \frac{(20.17)(\SI{7.627e-4}{})}{10.0} = \mathbf{0.00154 \ll 0.1} \quad (\text{or } \frac{h_{\mathrm{eff}} r_o}{k} = 0.00363 \ll 0.1 \implies \text{lumped model exact!})
+\]
+\[
+  \tau = \frac{\rho c_p V}{h_{\mathrm{eff}} A_s} = \frac{(2000)(700)(\SI{1.0179e-7}{})}{(20.17)(\SI{1.3345e-4}{})} = \mathbf{\SI{52.94}{\second}}, \qquad
+  t_{95} = -\tau\ln(0.05) = 3.00\,\tau = \mathbf{\SI{158.6}{\second}}
+\]
+\verifiedby{Checked in \texttt{check\_sec10\_13.py} (\texttt{EX-13.1-TAU}, \texttt{EX-13.1-T95}): $\tau = \SI{52.940}{\second}$, $t_{95} = \SI{158.59}{\second}$.}
+\end{workedexample}
+
+\begin{workedexample}[2027 Heat-Lamp Collector Transient Heating Curve at $t = 10\text{ min}$ vs.\ $15\text{ min}$]{2027 Part II Prediction}{ex:13.2}
+Under a $\SI{125}{\watt}$ heat lamp at $h = \SI{45.0}{\centi\meter}$, a glazed 2027 collector delivers net absorbed power $P_{\mathrm{abs}} = \SI{24.00}{\watt}$ into an effective thermal capacitance $C_{\mathrm{eff}} = \SI{380.0}{\joule\per\kelvin}$ with parasitic thermal resistance $R_{\mathrm{th}} = \SI{2.3763}{\kelvin\per\watt}$ ($\tau = C_{\mathrm{eff}}R_{\mathrm{th}} = \SI{903.0}{\second} = \SI{15.05}{\minute}$). If $T_{\mathrm{start}} = T_{\mathrm{room}} = \SI{22.00}{\celsius}$, calculate (a) the initial heating rate $(dT/dt)_0$ and stagnation temperature $T_{\mathrm{ss}}$, (b) the exact water temperature $T(t)$ at $t = \SI{10.0}{\minute}$ ($\SI{600}{\second}$) and $t = \SI{15.0}{\minute}$ ($\SI{900}{\second}$), and (c) the error if a team naively extrapolates the initial linear slope $(P_{\mathrm{abs}}/C_{\mathrm{eff}})t$ without accounting for heat loss!
+\tcblower
+\textbf{Solution.} (a) Initial heating rate: $\left(\dfrac{dT}{dt}\right)_0 = \dfrac{P_{\mathrm{abs}}}{C_{\mathrm{eff}}} = \dfrac{24.00}{380.0} = \SI{0.063158}{\kelvin\per\second} = \mathbf{\SI{3.789}{\celsius\per\minute}}$. Stagnation temperature: $T_{\mathrm{ss}} = T_{\mathrm{room}} + P_{\mathrm{abs}}R_{\mathrm{th}} = 22.00 + (24.00)(2.37632) = \mathbf{\SI{79.03}{\celsius}}$.\\
+(b) By Eq.~\eref{eq:13:forced-solution}:
+{\footnotesize\begin{align*}
+  t = \SI{600}{\second}\ (\SI{10.0}{\minute}):\; T(\SI{600}{\second}) &= 79.0316 - (79.0316 - 22.00)e^{-600/903.0} = 22.00 + 57.0316(0.48543) = \mathbf{\SI{49.69}{\celsius}}\ (\mathrm{TG} = +\SI{27.69}{\celsius}) \\
+  t = \SI{900}{\second}\ (\SI{15.0}{\minute}):\; T(\SI{900}{\second}) &= 79.0316 - (79.0316 - 22.00)e^{-900/903.0} = 22.00 + 57.0316(0.63090) = \mathbf{\SI{57.98}{\celsius}}\ (\mathrm{TG} = +\SI{35.98}{\celsius})
+\end{align*}}
+(c) Naive zero-loss linear extrapolation predicts $T_{\mathrm{lin}}(\SI{10}{\minute}) = 22.00 + 37.89 = \SI{59.89}{\celsius}$ (an error of $+\SI{10.20}{\celsius}$!) and $T_{\mathrm{lin}}(\SI{15}{\minute}) = 22.00 + 56.84 = \SI{78.84}{\celsius}$ (an error of $+\SI{20.86}{\celsius}$!).
+\verifiedby{Runge--Kutta \texttt{RK45} integration in \texttt{check\_sec10\_13.py} (\texttt{EX-13.2-T10M}, \texttt{EX-13.2-T15M}): $T(\SI{600}{\second}) = \SI{49.6857}{\celsius}$, $T(\SI{900}{\second}) = \SI{57.9810}{\celsius}$.}
+\end{workedexample}
+
+\begin{workedexample}[Three-Point Equal-Interval Algebraic Extraction of $T_{\mathrm{ss}}$ and $\tau$]{Calibration Lab Shortcut}{ex:13.3}
+During a pre-tournament calibration run, a team records water temperatures at $\Delta t = \SI{300.0}{\second}$ ($\SI{5.00}{\minute}$) intervals: $T_0 = T(0) = \SI{20.00}{\celsius}$, $T_1 = T(\SI{300}{\second}) = \SI{32.00}{\celsius}$, and $T_2 = T(\SI{600}{\second}) = \SI{41.00}{\celsius}$. Using the exact three-point algebraic formulas in Eq.~\eref{eq:13:three-point-exact}, determine the asymptotic stagnation temperature $T_{\mathrm{ss}}$, the system time constant $\tau$, and predict $T(\SI{900}{\second})$ at $t = \SI{15.0}{\minute}$.
+\tcblower
+\textbf{Solution.} First temperature increment is $\Delta T_{01} = T_1 - T_0 = \SI{12.00}{\kelvin}$, and second increment is $\Delta T_{12} = T_2 - T_1 = \SI{9.00}{\kelvin}$ (ratio $E = e^{-\Delta t/\tau} = 9.00/12.00 = 0.7500$). Applying Eq.~\eref{eq:13:three-point-exact}:
+\[
+  T_{\mathrm{ss}} = \frac{T_1^2 - T_0 T_2}{2T_1 - T_0 - T_2} = \frac{32.00^2 - (20.00)(41.00)}{2(32.00) - 20.00 - 41.00} = \frac{1024.0 - 820.0}{64.0 - 61.0} = \frac{204.0}{3.0} = \mathbf{\SI{68.00}{\celsius}}
+\]
+\[
+  \tau = \frac{\Delta t}{\ln\!\left(\dfrac{T_1 - T_0}{T_2 - T_1}\right)} = \frac{\SI{300.0}{\second}}{\ln(12.00 / 9.00)} = \frac{300.0}{\ln(4/3)} = \frac{300.0}{0.287682} = \mathbf{\SI{1042.8}{\second}} = \SI{17.38}{\minute}
+\]
+At $t = \SI{900}{\second} = 3\Delta t$, $e^{-3\Delta t/\tau} = E^3 = (0.7500)^3 = 0.421875$, so $T(\SI{900}{\second}) = 68.00 - (68.00 - 20.00)(0.421875) = \mathbf{\SI{47.75}{\celsius}}$.
+\verifiedby{Forward substitution in \texttt{check\_sec10\_13.py} (\texttt{EX-13.3-TSS}, \texttt{EX-13.3-TAU}, \texttt{EX-13.3-FWD}): $T_{\mathrm{ss}} = \SI{68.00}{\celsius}$, $\tau = \SI{1042.82}{\second}$, $T(\SI{600}{\second}) = \SI{41.0000}{\celsius}$.}
+\end{workedexample}
+
+\begin{workedexample}[Thermometer Probe Step Lag ($2\tau_p$ vs.\ $5\tau_p$) \& Ramp-Tracking Offset]{Lienhard Eq.\ 5.12 \src{S12}}{ex:13.4}
+An Event Supervisor's digital probe thermometer has time constant $\tau_p = \SI{3.50}{\second}$ in water and sits initially in room air at $T_{p,0} = \SI{22.00}{\celsius}$. At the end of a run, the ES inserts the probe into the top layer of water at true temperature $T_w = \SI{47.00}{\celsius}$. Find the displayed reading if the ES reads the thermometer prematurely at $t = \SI{7.00}{\second}$ ($2\tau_p$) versus waiting $t = \SI{17.5}{\second}$ ($5\tau_p$). Also find the steady tracking lag if the probe is left inside a calibration bath warming at $b = \SI{2.70}{\celsius\per\minute}$ ($\SI{0.0450}{\celsius\per\second}$).
+\tcblower
+\textbf{Solution.} Using $T_p(t) = T_w - (T_w - T_{p,0})e^{-t/\tau_p}$ with initial step $T_w - T_{p,0} = \SI{25.00}{\celsius}$:
+\[
+  T_p(\SI{7.00}{\second}) = 47.00 - 25.00\,e^{-2.00} = 47.00 - 3.3834 = \mathbf{\SI{43.62}{\celsius}} \quad (\text{premature error } = \mathbf{-\SI{3.38}{\celsius}}!)
+\]
+\[
+  T_p(\SI{17.5}{\second}) = 47.00 - 25.00\,e^{-5.00} = 47.00 - 0.1684 = \mathbf{\SI{46.83}{\celsius}} \quad (\text{residual lag } = -\SI{0.17}{\celsius})
+\]
+In the warming bath ($b = \SI{0.0450}{\celsius\per\second}$), Eq.~\eref{eq:13:ramp-lag} gives steady lag $\Delta T_{\mathrm{lag}} = -b\tau_p = -(0.0450)(3.50) = \mathbf{-\SI{0.16}{\celsius}}$.
+\verifiedby{Checked in \texttt{check\_sec10\_13.py} (\texttt{EX-13.4-STEP2TAU}, \texttt{EX-13.4-STEP5TAU}): $T_p(2\tau_p) = \SI{43.617}{\celsius}$, $T_p(5\tau_p) = \SI{46.832}{\celsius}$.}
+\end{workedexample}
+
+\begin{workedexample}[Semi-Infinite Water Penetration Depth \& Effusivity Contact Warmth]{Lienhard §5.6 \src{S12}}{ex:13.5}
+(a) Calculate the characteristic thermal diffusion penetration depth $\delta_t = 2\sqrt{\alpha_w t}$ downward from the top surface of quiescent water ($\alpha_w = \SI{1.48e-7}{\square\meter\per\second}$ at $\SI{35}{\celsius}$) over a $\SI{10.0}{\minute}$ ($\SI{600}{\second}$) heating run. (b) Using \tref{tab:10:k-hierarchy}, compare the instantaneous interfacial temperature $T_{\mathrm{int}}$ when a human fingertip ($T_1 = \SI{34.0}{\celsius}$, effusivity $b_{\mathrm{skin}} = \SI{1100}{\joule\per\square\meter\per\kelvin\per\second\tothe{1/2}}$) touches an aluminum block ($b_{\mathrm{Al}} = \SI{24095}{}$) versus balsa wood ($b_{\mathrm{balsa}} = \SI{89.44}{}$), both initially at room temperature $T_2 = \SI{20.0}{\celsius}$.
+\tcblower
+\textbf{Solution.} (a) Downward conductive penetration depth in $\SI{600}{\second}$:
+\[
+  \delta_t = 2\sqrt{(\SI{1.48e-7}{\square\meter\per\second})(\SI{600}{\second})} = \SI{0.018847}{\meter} = \mathbf{\SI{18.85}{\milli\meter}} \quad (\approx 52\%\text{ of the }\SI{36}{\milli\meter}\text{ cup water depth!})
+\]
+(b) By Eq.~\eref{eq:13:effusivity-contact} (explaining why aluminum feels freezing while balsa feels warm):
+\[
+  T_{\mathrm{int,Al}} = \frac{(1100)(34.0) + (24095.3)(20.0)}{1100 + 24095.3} = \mathbf{\SI{20.61}{\celsius}}, \qquad
+  T_{\mathrm{int,balsa}} = \frac{(1100)(34.0) + (89.44)(20.0)}{1100 + 89.44} = \mathbf{\SI{32.95}{\celsius}}
+\]
+\verifiedby{Checked in \texttt{check\_sec10\_13.py} (\texttt{EX-13.5-PENETRATION}, \texttt{EX-13.5-EFFUSIVITY-AL}, \texttt{EX-13.5-EFFUSIVITY-BALSA}): $\delta_t = \SI{18.847}{\milli\meter}$, $T_{\mathrm{int,Al}} = \SI{20.611}{\celsius}$, $T_{\mathrm{int,balsa}} = \SI{32.947}{\celsius}$.}
+\end{workedexample}
+
+\begin{workedexample}[Pure Radiative $T^4$ Cooling in Deep-Space Vacuum]{2027 Cornell Invitational E1 \src{S25}}{ex:13.6}
+A blackened copper sphere of mass $m = \SI{0.500}{\kilogram}$, specific heat $c_p = \SI{384}{\joule\per\kilogram\per\kelvin}$, surface area $A = \SI{0.0150}{\square\meter}$, and emittance $\varepsilon = 0.800$ cools in deep space ($T_{\mathrm{env}} \approx \SI{0}{\kelvin}$) from $T_i = \SI{400.0}{\kelvin}$ to $T_f = \SI{300.0}{\kelvin}$. Calculate the required cooling time $t_{\mathrm{rad,vac}}$.
+\tcblower
+\textbf{Solution.} Total heat capacity is $C = m c_p = (0.500)(384) = \SI{192.0}{\joule\per\kelvin}$. Applying Eq.~\eref{eq:13:t4-vacuum}:
+\[
+  t_{\mathrm{rad,vac}} = \frac{192.0}{3(0.800)(\num{5.6704e-8})(0.0150)}\!\left(\frac{1}{300.0^3} - \frac{1}{400.0^3}\right) = \mathbf{\SI{2013.9}{\second}} = \SI{33.57}{\minute}
+\]
+\verifiedby{Independent \texttt{RK45} integration of $dT/dt = -(\varepsilon\sigma A/C)T^4$ in \texttt{check\_sec10\_13.py} (\texttt{EX-13.6-TVAC}, \texttt{EX-13.6-RKCHK}): $t = \SI{2013.93}{\second}$ gives $T(t) = \SI{300.000}{\kelvin}$.}
+\end{workedexample}
+
+\begin{workedexample}[Post-Lamp-Off Cup Extraction Cooling During the 1-Minute Window (\texttt{Rule 5.II.g})]{2027 Execution Discipline \src{S01}}{ex:13.7}
+At the end of a $\SI{10.0}{\minute}$ heating run, the ES turns off the heat lamp (`Rule 5.II.g`) when the top water layer in the 9~oz cup ($C_{\mathrm{top}} = \SI{215.0}{\joule\per\kelvin}$) is at $T_{\mathrm{off}} = \SI{48.00}{\celsius}$ in a room at $T_{\mathrm{room}} = \SI{22.00}{\celsius}$. Once the upper reflector hood and BoPET glazing cap are lifted off to remove the cup, the open cup loses heat to the room with total top+side conductance $G_{\mathrm{open}} = 1/R_{\mathrm{open}} = \SI{0.14554}{\watt\per\kelvin}$ ($\tau_{\mathrm{cool}} = C_{\mathrm{top}}/G_{\mathrm{open}} = \SI{1477.3}{\second}$). Compare the post-lamp cooling temperature drop $\Delta T_{\mathrm{cool}}$ for (a) a practiced team that removes the cup in $t_{\mathrm{fast}} = \SI{6.0}{\second}$, versus (b) an unpracticed team that fumbles for $t_{\mathrm{slow}} = \SI{50.0}{\second}$ inside the 1-minute window.
+\tcblower
+\textbf{Solution.} By Newton's cooling law, $\Delta T_{\mathrm{cool}}(t) = (T_{\mathrm{off}} - T_{\mathrm{room}})\left(1 - e^{-t/\tau_{\mathrm{cool}}}\right)$ with $T_{\mathrm{off}} - T_{\mathrm{room}} = \SI{26.00}{\kelvin}$:
+\[
+  \Delta T_{\mathrm{cool}}(\SI{6.0}{\second}) = 26.00\left(1 - e^{-6.0 / 1477.26}\right) = \mathbf{\SI{0.105}{\celsius}} \quad (T_{\mathrm{meas}} = \SI{47.89}{\celsius})
+\]
+\[
+  \Delta T_{\mathrm{cool}}(\SI{50.0}{\second}) = 26.00\left(1 - e^{-50.0 / 1477.26}\right) = \mathbf{\SI{0.865}{\celsius}} \quad (T_{\mathrm{meas}} = \SI{47.13}{\celsius})
+\]
+Delaying extraction from $\SI{6}{\second}$ to $\SI{50}{\second}$ throws away $\mathbf{\SI{0.76}{\celsius}}$ of Temperature Gain $\mathrm{TG}$ AND introduces a $\SI{0.76}{\celsius}$ prediction error!
+\verifiedby{Checked in \texttt{check\_sec10\_13.py} (\texttt{EX-13.7-COOL6S}, \texttt{EX-13.7-COOL50S}): $\Delta T_{\mathrm{cool}}(\SI{6}{\second}) = \SI{0.1054}{\celsius}$, $\Delta T_{\mathrm{cool}}(\SI{50}{\second}) = \SI{0.8653}{\celsius}$.}
+\end{workedexample}
+
+\begin{workedexample}[Two-Node Stratified Water Cup Coupled ODE Simulation]{Clarifications \#1--\#4 Physics \src{S02}}{ex:13.8}
+Model the $\SI{100.0}{\milli\liter}$ water in the 9~oz cup using the coupled two-node system Eq.~\eref{eq:13:two-node-strat}: Node~1 (top $\SI{40.0}{\milli\liter}$ layer, $C_1 = \SI{167.36}{\joule\per\kelvin}$) absorbs $P_1 = \SI{16.00}{\watt}$ of near-IR lamp radiation and loses heat to ambient ($T_{\mathrm{room}} = \SI{22.00}{\celsius}$) through top glazing resistance $R_1 = \SI{3.50}{\kelvin\per\watt}$; Node~2 (bottom $\SI{60.0}{\milli\liter}$ layer, $C_2 = \SI{251.04}{\joule\per\kelvin}$) absorbs $P_2 = \SI{4.00}{\watt}$ of transmitted visible/short-NIR radiation and loses heat through cradle resistance $R_2 = \SI{8.00}{\kelvin\per\watt}$; internal water conduction resistance between the layers ($L_{\mathrm{mid}} = \SI{18.0}{\milli\meter},\; k_w = \SI{0.620}{\watt\per\meter\per\kelvin},\; A_{\mathrm{cup}} = \SI{36.0}{\square\centi\meter}$) is $R_{12} = \frac{0.0180}{(0.620)(0.00360)} = \SI{8.0645}{\kelvin\per\watt}$. Starting from $T_1(0) = T_2(0) = \SI{22.00}{\celsius}$, determine $T_{\mathrm{top}}(\SI{600}{\second})$, $T_{\mathrm{bot}}(\SI{600}{\second})$, and the stratification differential $\Delta T_{\mathrm{strat}}(\SI{600}{\second})$ at $t = \SI{10.0}{\minute}$.
+\tcblower
+\textbf{Solution.} Substituting into Eq.~\eref{eq:13:two-node-strat} gives the linear $2\times 2$ matrix system $\frac{d}{dt}\begin{bmatrix}\theta_1 \\ \theta_2\end{bmatrix} = \begin{bmatrix}-0.002448 & +0.0007409 \\ +0.0004940 & -0.0009919\end{bmatrix}\begin{bmatrix}\theta_1 \\ \theta_2\end{bmatrix} + \begin{bmatrix}0.09560 \\ 0.01593\end{bmatrix}$ where $\theta_i = T_i - 22.00$. Integrating to $t = \SI{600.0}{\second}$ yields:
+\[
+  T_{\mathrm{top}}(\SI{600}{\second}) = \mathbf{\SI{53.73}{\celsius}}\ (\mathrm{TG}_{\mathrm{top}} = +\SI{31.73}{\celsius}), \qquad
+  T_{\mathrm{bot}}(\SI{600}{\second}) = \mathbf{\SI{33.82}{\celsius}}\ (\mathrm{TG}_{\mathrm{bot}} = +\SI{11.82}{\celsius})
+\]
+The top-to-bottom stratification differential is $\Delta T_{\mathrm{strat}} = 53.73 - 33.82 = \mathbf{+\SI{19.91}{\celsius}}$ (whereas a stirred cup would read only $0.40(53.73) + 0.60(33.82) = \SI{41.79}{\celsius}$, losing $\SI{11.94}{\celsius}$!).
+\verifiedby{Exact \texttt{RK45} integration in \texttt{check\_sec10\_13.py} (\texttt{EX-13.8-2NODE-TOP}, \texttt{EX-13.8-2NODE-BOT}): $T_{\mathrm{top}} = \SI{53.7346}{\celsius}$, $T_{\mathrm{bot}} = \SI{33.8248}{\celsius}$.}
+\end{workedexample}
+
+\begin{workedexample}[Regnault--Pfaundler / Dickinson Calorimetry Heat-Leak Correction]{Experimental Lab Analysis}{ex:13.9}
+In a coffee-cup dissolution calorimetry experiment, the thermometer records a pre-mixing linear drift rate $r_i = +\SI{0.020}{\celsius\per\minute}$ leading up to mixing at $t_0 = \SI{0.00}{\minute}$ ($T_0 = \SI{21.000}{\celsius}$). The exothermic reaction reaches a peak observed temperature $T_{\mathrm{obs}} = \SI{29.850}{\celsius}$ at $t_f = \SI{4.00}{\minute}$ ($\Delta t = \SI{4.00}{\minute}$), followed by a steady post-reaction Newton cooling drift $r_f = -\SI{0.140}{\celsius\per\minute}$. If the Dickinson equal-area midpoint time is $t_m = 0.40\,\Delta t = \SI{1.60}{\minute}$, compute the true adiabatic temperature rise $\Delta T_{\mathrm{corr}}$.
+\tcblower
+\textbf{Solution.} Observed uncorrected temperature rise is $\Delta T_{\mathrm{obs}} = 29.850 - 21.000 = \SI{8.850}{\celsius}$. Applying Eq.~\eref{eq:13:regnault-pfaundler}:
+\[
+  \Delta T_{\mathrm{corr}} = 8.850 - (+\SI{0.020}{\celsius\per\minute})(\SI{1.60}{\minute}) - (-\SI{0.140}{\celsius\per\minute})(4.00 - 1.60)\,\si{\minute} = 8.850 - 0.032 + 0.336 = \mathbf{\SI{9.154}{\celsius}}
+\]
+Accounting for heat leakage recovers $+\SI{0.304}{\celsius}$ ($+\SI{3.44}{\percent}$) of lost reaction enthalpy!
+\verifiedby{Checked in \texttt{check\_sec10\_13.py} (\texttt{EX-13.9-REGNAULT}): $\Delta T_{\mathrm{corr}} = \SI{9.1540}{\celsius}$.}
+\end{workedexample}
+
+% ----------------------------------------------------------------------------
+% L5: TRAPS & DIAGNOSTICS + L6: 2027 DEVICE APPLICATION
+% ----------------------------------------------------------------------------
+\section{Transient Thermal Traps \& 2027 Post-Heating Extraction Discipline}
+\label{sec:13.5}
+
+\begin{trapbox}[Top Transient Conduction \& Heating-Curve Traps]
+\idxerr{transient!using cylinder diameter D instead of R/2 in Biot L_c}
+\idxerr{transient!linearly extrapolating dT/dt_0 without exponential decay}
+\idxerr{transient!confusing half-time 0.693*tau with time constant tau}
+\par\smallskip\noindent
+\begin{errtab}
+\textbf{1. Using full diameter $D$ instead of $L_c = V/A_s$ ($D/4$ cylinder, $D/6$ sphere) in $\mathrm{Bi} = hL_c/k_s$}
+  & Overestimates $\mathrm{Bi}$ by $4\times$ (cylinder) or $6\times$ (sphere).
+  & Always compute $L_c = V/A_{\mathrm{exposed}}$ first. \\
+\textbf{2. Linearly extrapolating initial heating slope $(P_{\mathrm{abs}}/C_{\mathrm{eff}})t$ to $t = 10\text{--}15\text{ min}$}
+  & Ignores parasitic heat loss $(T - T_{\mathrm{room}})/R_{\mathrm{th}}$ and overpredicts $T_f$ by $8\text{--}20\,^\circ\mathrm{C}$!
+  & Use $T_{\mathrm{ss}} - (T_{\mathrm{ss}} - T_{\mathrm{start}})e^{-t/\tau}$ or the 3-point fit Eq.~\eref{eq:13:three-point-exact}. \\
+\textbf{3. Confusing half-life $t_{1/2} = \tau\ln 2 = 0.6931\tau$ ($50\%$ change) with time constant $\tau$ ($63.21\%$ change)}
+  & At $t = \tau$, remaining deficit is $1/e = 36.79\%$, NOT $50\%$!
+  & $50\% \to 0.693\tau$; $63.2\% \to 1\tau$; $95.0\% \to 3\tau$; $99.3\% \to 5\tau$. \\
+\end{errtab}
+\end{trapbox}
+
+\begin{devicebox}[2027 Collector Thermal-Mass Budget \& Post-Lamp-Off Cup Extraction Timing \src{S01,S02,S05}]
+\idxdev{thermal mass penalty!why heavy metal absorbers lose in 10 min}
+\idxdev{Rule 5.II.g!1-minute cup extraction cooling correction}
+\begin{enumerate}
+  \item \textbf{Parasitic Thermal-Mass Budget ($\sum C_{\mathrm{parasitic}} < \SI{5}{\joule\per\kelvin}$):} Because initial heating slope is $(dT/dt)_0 = P_{\mathrm{abs}}/C_{\mathrm{eff}}$, any heavy glass or thick metal structure thermally coupled to the cup drains energy during a short $\SI{10}{\minute}$ run. Keep all cup-adjacent elements foil-thin ($\SI{25}{\micro\meter}$ BoPET glazing cap: $C = \SI{0.24}{\joule\per\kelvin}$; $\SI{16}{\micro\meter}$ Al-foil mirror liner: $C = \SI{1.18}{\joule\per\kelvin}$; 3-point balsa knife-edge cradle tips: $C < \SI{0.3}{\joule\per\kelvin}$) so $>98\%$ of captured energy heats the water!
+  \item \textbf{Post-Lamp-Off Extraction Window (`Rule 5.II.g` 1-Minute Window):} The instant the ES turns off the lamp, the uncovered water surface begins cooling at $(dT/dt)_{\mathrm{cool}} = -\frac{\dot{Q}_{\mathrm{evap}} + \dot{Q}_{\mathrm{conv}} + \dot{Q}_{\mathrm{rad}}}{C_{\mathrm{top}}} \approx -\frac{\SI{3.2}{\watt}}{\SI{215}{\joule\per\kelvin}} \approx -\SI{0.015}{\celsius\per\second}$ ($-\SI{0.90}{\celsius\per\minute}$). Complete the lift-off hood removal and gentle non-swirling cup placement onto the Testing Surface in a standardized $\mathbf{t_{\mathrm{extract}} = 6\text{--}8\text{ s}}$ (identical to your calibration runs!) so post-lamp cooling is $< \SI{0.12}{\celsius}$ and 100\% absorbed into your empirical calibration curve.
+\end{enumerate}
+\end{devicebox}
+
+% ----------------------------------------------------------------------------
+% RAPID COMPETITION PROBLEM & SOLUTION BANK (§13)
+% ----------------------------------------------------------------------------
+\section{Rapid Competition Problem \& Solution Bank (§13)}
+\label{sec:13.6}
+
+\begin{problem}{P13.1}{Classic Coffee-and-Cream Mixing Paradox (Wait vs.\ Add Cream Immediately)}{13.1}{5.c.iii}{All Levels / Classic Invitational}{75 s}{Newton Cooling Linearity}{assuming order of mixing and cooling commutes when $c_p\Delta T$ mixes at constant $hA$}
+Two students start with identical cups of black coffee of mass $m_c = \SI{200.0}{\gram}$ at $T_{c,0} = \SI{85.00}{\celsius}$ in a room at $T_\infty = \SI{20.00}{\celsius}$ ($\tau = \SI{1200}{\second} = \SI{20.0}{\minute}$). Student~A immediately pours in $m_m = \SI{25.0}{\gram}$ of cold cream at $T_m = \SI{5.00}{\celsius}$ (assume equal $c_p$ and neglect change in $\tau$) and then waits $t = \SI{10.0}{\minute}$ ($\SI{600}{\second}$). Student~B lets the hot black coffee cool for $t = \SI{10.0}{\minute}$ first and then pours in the $\SI{25.0}{\gram}$ of $\SI{5.00}{\celsius}$ cream at the end. Which student has hotter coffee at $t = \SI{10.0}{\minute}$, and by how many $^\circ\mathrm{C}$?
+\end{problem}
+\begin{solution}{P13.1}
+\textbf{Student~A (adding cold cream immediately) ALWAYS ends up with hotter coffee!} Physically, cooling rate $\dot{Q}_{\mathrm{loss}} = hA(T - T_\infty)$ is proportional to temperature excess above the room; adding cold cream immediately drops the coffee's temperature, reducing heat loss to the room throughout the entire $\SI{10}{\minute}$ wait (and even more strongly when $h_{\mathrm{nat}}\propto\Delta T^{1/4}$, radiation $\propto T^4$, and evaporation $\propto P_{\mathrm{sat}}(T)$ are included!). Numerically, with $e^{-600/1200} = e^{-0.500} = 0.60653$:
+\begin{itemize}
+  \item \textbf{Student~A (Mix at $t=0$, then cool):} $T_{A,0} = \dfrac{200(85.0) + 25(5.0)}{225} = \SI{76.111}{\celsius} \implies T_A(\SI{10}{\minute}) = 20.0 + (76.111 - 20.0)(0.60653) = \mathbf{\SI{54.03}{\celsius}}$.
+  \item \textbf{Student~B (Cool first, then mix at $t=\SI{10}{\minute}$):} $T_{B,\mathrm{pre}}(\SI{10}{\minute}) = 20.0 + (85.0 - 20.0)(0.60653) = \SI{59.424}{\celsius} \implies T_B(\SI{10}{\minute}) = \dfrac{200(59.424) + 25(5.0)}{225} = \mathbf{\SI{53.38}{\celsius}}$.
+\end{itemize}
+Student~A's coffee is warmer by $\Delta T = 54.033 - 53.377 = \mathbf{+\SI{0.66}{\celsius}}$! *(Note: Only if the cream were initially at room temperature $T_m = T_\infty = \SI{20.0}{\celsius}$ and $\tau$ remained unchanged would the two temperatures tie; if $T_m < T_\infty$, adding immediately always wins!)*
+\end{solution}
+
+\begin{problem}{P13.2}{Geometric Scaling of Cooling Time Across Sphere Radius ($\mathrm{Bi} \ll 1$ vs.\ $\mathrm{Bi} \gg 1$)}{13.1}{5.c.iii}{State / National}{60 s}{Dimensional Scaling}{confusing lumped $\tau \propto R^1$ with diffusive $t \propto R^2$}
+Compare how the characteristic $95\%$ cooling time $t_{95}$ of a solid sphere of radius $R$ scales with $R$ when $R$ is doubled ($R_2 = 2R_1$) in two opposite regimes: (a) small high-conductivity copper spheres in still air where $\mathrm{Bi} \ll 0.1$ and $h$ is constant, versus (b) large low-conductivity rubber spheres quenched in agitated ice water where $\mathrm{Bi} \gg 20$.
+\end{problem}
+\begin{solution}{P13.2}
+\begin{enumerate}
+  \item[(a)] \textbf{Lumped Regime ($\mathrm{Bi} \ll 0.1$):} $\tau = \dfrac{\rho c_p V}{h A_s} = \dfrac{\rho c_p (\frac{4}{3}\pi R^3)}{h (4\pi R^2)} = \dfrac{\rho c_p R}{3 h} \propto \mathbf{R^1}$. Doubling $R$ multiplies cooling time by $\mathbf{2.00\times}$ (or by $2^{5/4} = 2.38\times$ if laminar natural convection $h \propto R^{-1/4}$ applies).
+  \item[(b)] \textbf{Internal Conduction-Limited Regime ($\mathrm{Bi} \gg 20$):} Surface temperature jumps immediately to $T_\infty$, and cooling is governed by the Fourier number $\mathrm{Fo} = \dfrac{\alpha t}{R^2} = \mathrm{const} \implies t_{95} \propto \dfrac{R^2}{\alpha} \propto \mathbf{R^2}$. Doubling $R$ multiplies cooling time by $\mathbf{4.00\times}$!
+\end{enumerate}
+\end{solution}
+
+\begin{problem}{P13.3}{2027 Collector Bulb-Wattage Switch ($125\text{ W} \to 100\text{ W}$) with $T_{\mathrm{start}} \ne T_{\mathrm{room}}$}{13.2}{5.II.a--f}{2027 Part II Prediction}{75 s}{Forced Heating Equation}{scaling $T_{\mathrm{final}}$ by $100/125$ instead of scaling only $P_{\mathrm{abs}}$!}
+A team's collector has calibrated parameters $R_{\mathrm{th}} = \SI{2.400}{\kelvin\per\watt}$ and $\tau = C_{\mathrm{eff}}R_{\mathrm{th}} = \SI{900.0}{\second}$ ($\SI{15.00}{\minute}$). Under a $\SI{125.0}{\watt}$ bulb at $h = \SI{50.0}{\centi\meter}$, absorbed radiant power is $P_{\mathrm{abs},125} = \SI{18.50}{\watt}$. At the tournament, the ES announces $h = \SI{50.0}{\centi\meter}$, a $\mathbf{\SI{100.0}{\watt}}$ bulb ($P_{\mathrm{abs},100} = 0.800\,P_{\mathrm{abs},125} = \SI{14.80}{\watt}$), heating time $t = \SI{12.00}{\minute}$ ($\SI{720.0}{\second}$), room temperature $T_{\mathrm{room}} = \SI{23.00}{\celsius}$, and starting water temperature $T_{\mathrm{start}} = \SI{19.50}{\celsius}$. Calculate the exact predicted final temperature $T_{\mathrm{pred}}$.
+\end{problem}
+\begin{solution}{P13.3}
+Under the $\SI{100.0}{\watt}$ bulb, the asymptotic stagnation temperature is:
+\[
+  T_{\mathrm{ss},100} = T_{\mathrm{room}} + P_{\mathrm{abs},100}R_{\mathrm{th}} = 23.00 + (14.80)(2.400) = 23.00 + 35.52 = \mathbf{\SI{58.52}{\celsius}}
+\]
+At $t = \SI{720.0}{\second}$, $e^{-t/\tau} = e^{-720.0/900.0} = e^{-0.8000} = 0.449329$, and $1 - e^{-t/\tau} = 0.550671$. By Eq.~\eref{eq:13:forced-solution}:
+\[
+  T_{\mathrm{pred}}(\SI{720}{\second}) = T_{\mathrm{ss},100} - \left(T_{\mathrm{ss},100} - T_{\mathrm{start}}\right)e^{-t/\tau} = 58.52 - (58.52 - 19.50)(0.449329) = 58.52 - 17.5328 = \mathbf{\SI{40.99}{\celsius}} \longrightarrow \mathbf{\SI{41.0}{\celsius}}
+\]
+\emph{Fatal Trap Check:} Simply multiplying the $\SI{125}{\watt}$ final temperature ($\SI{45.88}{\celsius}$) by $0.80$ would give $\SI{36.7}{\celsius}$ — an error of $-\SI{4.3}{\celsius}$! Only the absorbed power term $P_{\mathrm{abs}}R_{\mathrm{th}}$ scales with bulb wattage.
+\end{solution}
+
+\begin{problem}{P13.4}{Two-Body Contact Effusivity Matching}{13.3}{5.c.iii}{National / Cornell E1}{60 s}{Effusivity $b = \sqrt{k\rho c_p}$}{using conductivity $k$ ratio instead of effusivity $b$ ratio}
+A semi-infinite copper block ($T_{\mathrm{Cu}} = \SI{100.0}{\celsius}$, effusivity $b_{\mathrm{Cu}} = \SI{37000}{\joule\per\square\meter\per\kelvin\per\second\tothe{1/2}}$ from \tref{tab:10:k-hierarchy}) is brought into sudden perfect contact with a semi-infinite liquid water column ($T_w = \SI{20.0}{\celsius}$, effusivity $b_w = \SI{1598}{\joule\per\square\meter\per\kelvin\per\second\tothe{1/2}}$). What is the instantaneous interface temperature $T_{\mathrm{int}}$ immediately after contact?
+\end{problem}
+\begin{solution}{P13.4}
+By Eq.~\eref{eq:13:effusivity-contact}:
+\[
+  T_{\mathrm{int}} = \frac{b_{\mathrm{Cu}} T_{\mathrm{Cu}} + b_w T_w}{b_{\mathrm{Cu}} + b_w} = \frac{(37000)(100.0) + (1598)(20.0)}{37000 + 1598} = \frac{\num{3.73196e6}}{38598} = \mathbf{\SI{96.69}{\celsius}}
+\]
+Because $b_{\mathrm{Cu}} / b_w = 23.15$, the interface stays within $\SI{3.31}{\celsius}$ of the copper's initial temperature!
+\end{solution}
+
+\begin{problem}{P13.5}{Calorimetric Perturbation of the Top Water Layer by a Cold Metal Probe}{13.3}{4.f, 5.II.g}{2027 Lab / All Levels}{60 s}{Thermal Equilibrium}{ignoring thermal mass of thick metal probe tip}
+An Event Supervisor's heavy stainless-steel probe tip has active immersed mass $m_p = \SI{2.20}{\gram}$ ($c_{p,\mathrm{SS}} = \SI{460}{\joule\per\kilogram\per\kelvin} = \SI{0.460}{\joule\per\gram\per\kelvin} \implies C_p = \SI{1.012}{\joule\per\kelvin}$) and enters the top stratified water layer ($m_{\mathrm{top,local}} = \SI{25.0}{\gram},\; c_{p,w} = \SI{4.184}{\joule\per\gram\per\kelvin} \implies C_{w,\mathrm{local}} = \SI{104.6}{\joule\per\kelvin}$) from an air-conditioned room at $T_{p,0} = \SI{20.00}{\celsius}$. If the true water temperature before probe insertion is $T_{w,0} = \SI{46.00}{\celsius}$, by how much does the probe's own thermal mass cool the local water zone at equilibrium?
+\end{problem}
+\begin{solution}{P13.5}
+By First-Law energy conservation between the probe tip and local water zone:
+\[
+  \Delta T_{\mathrm{drain}} = T_{\mathrm{eq}} - T_{w,0} = -\frac{C_p}{C_{w,\mathrm{local}} + C_p}\left(T_{w,0} - T_{p,0}\right) = -\frac{1.012}{104.6 + 1.012}(46.00 - 20.00) = -(0.009582)(26.00) = \mathbf{-\SI{0.25}{\celsius}}
+\]
+\end{solution}
+
+\begin{problem}{P13.6}{Newton Cooling with Linearly Falling Room Temperature ($T_\infty(t) = T_i - b t$)}{13.3}{5.c.iii}{National / Lienhard §5.2}{75 s}{Ramp Response Eq.\ (13.6)}{assuming $T(t) = T_\infty(t)$ at long times instead of $T_\infty(t) + b\tau$}
+A well-stirred water vessel of thermal time constant $\tau = \SI{600.0}{\second}$ ($\SI{10.0}{\minute}$) starts in thermal equilibrium with a room at $T(0) = T_\infty(0) = \SI{25.00}{\celsius}$. At $t = 0$, the room temperature begins dropping at a steady linear rate $b = \SI{0.300}{\celsius\per\minute}$ ($\SI{0.00500}{\celsius\per\second}$) so $T_\infty(t) = 25.00 - 0.00500\,t$. Find the vessel's temperature $T(t)$ and its temperature excess $T(t) - T_\infty(t)$ above the room at $t = \SI{20.0}{\minute}$ ($\SI{1200}{\second}$).
+\end{problem}
+\begin{solution}{P13.6}
+By Eq.~\eref{eq:13:ramp-lag} (with sign reversed for a falling bath, $T_\infty(t) = T_i - b t$), the vessel lags behind the falling room temperature by $+b\tau(1 - e^{-t/\tau})$:
+\[
+  T(t) - T_\infty(t) = +b\tau\left(1 - e^{-t/\tau}\right) = (0.00500)(600.0)\left(1 - e^{-1200/600}\right) = 3.00(1 - e^{-2}) = 3.00(0.86466) = \mathbf{+\SI{2.594}{\celsius}}
+\]
+Since $T_\infty(\SI{1200}{\second}) = 25.00 - (0.300)(20.0) = \SI{19.00}{\celsius}$, the vessel temperature at $t = \SI{20.0}{\minute}$ is $T(\SI{1200}{\second}) = 19.00 + 2.594 = \mathbf{\SI{21.59}{\celsius}}$.
+\end{solution}
+
+\par\smallskip\noindent
+\begin{minipage}{\linewidth}
+\captionof{table}{Part A: Exact One-Term Heisler Eigenvalues ($\lambda_1$), Centerline Amplitudes ($A_1$), and Surface-to-Center Ratios ($\theta_{\mathrm{surf}}/\theta_{\mathrm{center}}$) for Plane Slab (Half-Thickness $L$), Infinite Cylinder (Radius $R$), and Sphere (Radius $R$) when $\mathrm{Fo} \ge 0.2$ (Lienhard §5.3 Tables~5.1--5.2, pp.~217--222 \src{S12}). Here $\mathrm{Bi} = hL/k$ (slab) or $hR/k$ (cylinder/sphere), and $\theta(0,t)/\theta_i = A_1 \exp(-\lambda_1^2 \mathrm{Fo})$. Part B: Gaussian Error Function $\mathrm{erf}(\eta)$ and $\mathrm{erfc}(\eta) = 1 - \mathrm{erf}(\eta)$ for Semi-Infinite Conduction $\eta = x/(2\sqrt{\alpha t})$ (Lienhard Table~5.3, p.~232 \src{S12}).}
+\label{tab:13:heisler-erf}
+\idxtopic{Heisler charts!analytical eigenvalue table for slab, cylinder, sphere}
+\idxtopic{error function erf(eta)!semi-infinite conduction lookup table}
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.12}
+\begin{tabularx}{\linewidth}{@{}r r r r r r r r r X@{}}
+\toprule
+$\mathrm{Bi}$ & \multicolumn{3}{c}{\textbf{Plane Slab} ($\theta_s/\theta_c = \cos\lambda_1$)} & \multicolumn{3}{c}{\textbf{Infinite Cylinder} ($\theta_s/\theta_c = J_0(\lambda_1)$)} & \multicolumn{3}{c}{\textbf{Sphere} ($\theta_s/\theta_c = \frac{\sin\lambda_1}{\lambda_1}$)} \\
+$[1]$ & $\lambda_1$ $[\si{\radian}]$ & $A_1$ $[1]$ & $\theta_s/\theta_c$ & $\lambda_1$ $[\si{\radian}]$ & $A_1$ $[1]$ & $\theta_s/\theta_c$ & $\lambda_1$ $[\si{\radian}]$ & $A_1$ $[1]$ & $\theta_s/\theta_c$ \\
+\midrule
+$0.02$ & $0.1410$ & $1.0033$ & $0.9901$ & $0.1995$ & $1.0050$ & $0.9901$ & $0.2445$ & $1.0060$ & $0.9901$ \\
+$0.05$ & $0.2218$ & $1.0082$ & $0.9755$ & $0.3143$ & $1.0124$ & $0.9755$ & $0.3854$ & $1.0149$ & $0.9754$ \\
+$0.10$ & $0.3111$ & $1.0161$ & $0.9518$ & $0.4417$ & $1.0246$ & $0.9518$ & $0.5423$ & $1.0298$ & $0.9516$ \\
+$0.20$ & $0.4328$ & $1.0311$ & $0.9078$ & $0.6170$ & $1.0483$ & $0.9071$ & $0.7593$ & $1.0592$ & $0.9064$ \\
+$0.50$ & $0.6533$ & $1.0701$ & $0.7940$ & $0.9408$ & $1.1143$ & $0.7900$ & $1.1656$ & $1.1441$ & $0.7885$ \\
+$1.00$ & $0.8603$ & $1.1191$ & $0.6522$ & $1.2558$ & $1.2071$ & $0.6422$ & $1.5708$ & $1.2732$ & $0.6366$ \\
+$2.00$ & $1.0769$ & $1.1785$ & $0.4741$ & $1.5994$ & $1.3384$ & $0.4557$ & $2.0288$ & $1.4793$ & $0.4421$ \\
+$5.00$ & $1.3138$ & $1.2402$ & $0.2542$ & $1.9898$ & $1.5029$ & $0.2300$ & $2.5704$ & $1.7870$ & $0.2104$ \\
+$10.0$ & $1.4289$ & $1.2620$ & $0.1415$ & $2.1795$ & $1.5677$ & $0.1220$ & $2.8363$ & $1.9249$ & $0.1058$ \\
+$50.0$ & $1.5400$ & $1.2727$ & $0.0308$ & $2.3572$ & $1.5993$ & $0.0249$ & $3.0788$ & $1.9962$ & $0.0204$ \\
+$\infty$ & $\pi/2=1.5708$ & $4/\pi=1.2732$ & $0.0000$ & $2.4048$ & $1.6020$ & $0.0000$ & $\pi=3.1416$ & $2.0000$ & $0.0000$ \\
+\midrule
+\multicolumn{10}{l}{\textbf{Part B: Semi-Infinite Error Function Lookup} ($\eta = \dfrac{x}{2\sqrt{\alpha t}}$; constant $T_s$: $\dfrac{T(x,t) - T_s}{T_i - T_s} = \mathrm{erf}(\eta)$, $\dfrac{T(x,t) - T_i}{T_s - T_i} = \mathrm{erfc}(\eta)$)} \\
+$\eta$: & $0.00$ & $0.10$ & $0.20$ & $0.30$ & $0.40$ & $0.50$ & $0.60$ & $0.70$ & $0.80$ \\
+$\mathrm{erf}(\eta)$: & $0.0000$ & $0.1125$ & $0.2227$ & $0.3286$ & $0.4284$ & $0.5205$ & $0.6039$ & $0.6778$ & $0.7421$ \\
+$\mathrm{erfc}(\eta)$: & $1.0000$ & $0.8875$ & $0.7773$ & $0.6714$ & $0.5716$ & $0.4795$ & $0.3961$ & $0.3222$ & $0.2579$ \\
+\midrule
+$\eta$: & $0.90$ & $1.00$ & $1.10$ & $1.20$ & $1.40$ & $1.60$ & $1.80$ & $2.00$ & $2.50$ \\
+$\mathrm{erf}(\eta)$: & $0.7969$ & $0.8427$ & $0.8802$ & $0.9103$ & $0.9523$ & $0.9763$ & $0.9891$ & $0.9953$ & $0.9996$ \\
+$\mathrm{erfc}(\eta)$: & $0.2031$ & $0.1573$ & $0.1198$ & $0.0897$ & $0.0477$ & $0.0237$ & $0.0109$ & $0.0047$ & $0.0004$ \\
+\bottomrule
+\end{tabularx}
+\end{minipage}
+\par\smallskip
+
+\par\smallskip\noindent
+\begin{minipage}{\linewidth}
+\captionof{table}{2027 Heat-Lamp Collector Parametric Sensitivity Matrix for $T_f(t) = T_{\mathrm{room}} + P_{\mathrm{abs}}R_{\mathrm{th}}(1 - e^{-t/\tau}) + (T_{\mathrm{start}} - T_{\mathrm{room}})e^{-t/\tau}$ Evaluated at Baseline $P_{\mathrm{bulb}} = \SI{125}{\watt}$, $h = \SI{50.0}{\centi\meter}$, $t = \SI{900}{\second}$ ($\SI{15.0}{\minute}$), $\tau = \SI{1200}{\second}$, $R_{\mathrm{th}} = \SI{2.40}{\kelvin\per\watt}$, $P_{\mathrm{abs}} = \SI{18.75}{\watt}$ ($T_{\mathrm{ss}} - T_{\mathrm{room}} = \SI{45.00}{\kelvin}$, $e^{-t/\tau} = e^{-0.750} = 0.47237$, $1 - e^{-t/\tau} = 0.52763$, $\Delta T_f = +\SI{23.74}{\celsius}$ when $T_{\mathrm{start}} = T_{\mathrm{room}} = \SI{21.00}{\celsius}$, $T_f = \SI{44.74}{\celsius}$).}
+\label{tab:13:2027-doe-sensitivity}
+\idxdev{prediction sensitivity matrix!closed-form partial derivatives}
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.12}
+\begin{tabularx}{\linewidth}{@{}L{0.23\linewidth} L{0.32\linewidth} r X@{}}
+\toprule
+\textbf{Tournament Input $x_i$} & \textbf{Exact Closed-Form Partial Derivative $\partial T_f / \partial x_i$} & \textbf{Baseline Sensitivity} & \textbf{Effect on Prediction $T_{\mathrm{pred}}$} \\
+\midrule
+Starting water temp $T_{\mathrm{start}}$ &
+  $\dfrac{\partial T_f}{\partial T_{\mathrm{start}}} = e^{-t/\tau}$ &
+  $\mathbf{+\SI{0.472}{\celsius\per\celsius}}$ &
+  $+\SI{1.00}{\celsius}$ higher $T_{\mathrm{start}}$ raises $T_f$ by $+\SI{0.472}{\celsius}$ \\
+Ambient room temp $T_{\mathrm{room}}$ &
+  $\dfrac{\partial T_f}{\partial T_{\mathrm{room}}} = 1 - e^{-t/\tau}$ &
+  $\mathbf{+\SI{0.528}{\celsius\per\celsius}}$ &
+  Notice $\frac{\partial T_f}{\partial T_{\mathrm{start}}} + \frac{\partial T_f}{\partial T_{\mathrm{room}}} \equiv 1.000$ \\
+Heating duration $t$ &
+  $\dfrac{\partial T_f}{\partial t} = \dfrac{T_{\mathrm{ss}} - T_{\mathrm{start}}}{\tau}\,e^{-t/\tau}$ &
+  $\mathbf{+\SI{1.063}{\celsius\per\minute}}$ ($+\SI{0.0177}{\celsius\per\second}$) &
+  Going from $\SI{10}{\minute}$ to $\SI{15}{\minute}$ adds $+\SI{5.94}{\celsius}$ \\
+Bulb wattage $P_{\mathrm{bulb}}$ ($\SI{100}{\watt}$ vs $\SI{125}{\watt}$) &
+  $\dfrac{\partial T_f}{\partial P_{\mathrm{bulb}}} = \dfrac{P_{\mathrm{abs}} R_{\mathrm{th}}}{P_{\mathrm{bulb}}}\left(1 - e^{-t/\tau}\right)$ &
+  $\mathbf{+\SI{0.190}{\celsius\per\watt}}$ &
+  Switching $\SI{125}{\watt} \to \SI{100}{\watt}$ drops $T_f$ by $\mathbf{-\SI{4.75}{\celsius}}$! \\
+Bulb height $h$ ($\SIrange{40}{65}{\centi\meter}$, $P_{\mathrm{abs}} \propto d^{-n}$) &
+  $\dfrac{\partial T_f}{\partial h} = -\dfrac{n}{h - z_{\mathrm{ap}}}\,P_{\mathrm{abs}}R_{\mathrm{th}}\left(1 - e^{-t/\tau}\right)$ &
+  $\mathbf{-\SI{0.68}{\celsius\per\centi\meter}}$ (at $h = \SI{50}{\centi\meter}$) &
+  Raising lamp by $+\SI{5.0}{\centi\meter}$ drops $T_f$ by $\sim\mathbf{-\SI{3.4}{\celsius}}$ \\
+Evaporative glazing cover (\texttt{Clarif.\ \#5}) &
+  $\Delta T_{f,\mathrm{glaze}} \approx \Delta P_{\mathrm{evap}} R_{\mathrm{th}}\left(1 - e^{-t/\tau}\right)$ &
+  $\mathbf{+\SI{2.8}{\celsius}\text{ to }+\SI{4.8}{\celsius}}$ &
+  Removing $\SIrange{2.2}{3.8}{\watt}$ latent loss raises $T_f$ by $\SIrange{2.8}{4.8}{\celsius}$ \\
+\bottomrule
+\end{tabularx}
+\end{minipage}
+\par\smallskip
+
+\begin{problem}{P13.7}{Heisler One-Term Center, Surface, and Total Energy Calculation for a Quenched Sphere ($\mathrm{Bi} = 2.00$)}{13.3}{5.c.iii}{National / MIT}{90 s}{Table 13.1 Eigenvalues}{using lumped formula when $\mathrm{Bi} = 2.00 \gg 0.1$}
+A solid glass sphere of radius $R = \SI{20.0}{\milli\meter}$ ($k = \SI{1.10}{\watt\per\meter\per\kelvin}$, $\alpha = \SI{6.25e-7}{\square\meter\per\second}$), initially at uniform temperature $T_i = \SI{120.0}{\celsius}$, is plunged at $t = 0$ into a circulating bath at $T_\infty = \SI{20.0}{\celsius}$ ($\theta_i = \SI{100.0}{\kelvin}$) with convection coefficient $h = \SI{110.0}{\watt\per\square\meter\per\kelvin}$. Using \tref{tab:13:heisler-erf}, calculate at $t = \SI{320.0}{\second}$: (a) the Biot number $\mathrm{Bi}$ and Fourier number $\mathrm{Fo}$, (b) the exact sphere center temperature $T(0,t)$, and (c) the sphere outer surface temperature $T(R,t)$.
+\end{problem}
+\begin{solution}{P13.7}
+\begin{enumerate}
+  \item[(a)] Using sphere radius $R = \SI{0.0200}{\meter}$ in the Heisler convention of \tref{tab:13:heisler-erf}:
+  \[
+    \mathrm{Bi}_R = \frac{h R}{k} = \frac{(110.0)(0.0200)}{1.10} = \mathbf{2.000}, \qquad
+    \mathrm{Fo} = \frac{\alpha t}{R^2} = \frac{(\SI{6.25e-7}{\square\meter\per\second})(\SI{320.0}{\second})}{(0.0200)^2} = \frac{\num{2.00e-4}}{\num{4.00e-4}} = \mathbf{0.5000 \ge 0.2}
+  \]
+  \item[(b)] From \tref{tab:13:heisler-erf} (Sphere row at $\mathrm{Bi} = 2.00$), $\lambda_1 = \SI{2.0288}{\radian}$, $A_1 = 1.4793$, and $\theta_s/\theta_c = 0.4421$. The dimensionless center temperature excess is:
+  \[
+    \frac{\theta(0,t)}{\theta_i} = A_1 \exp\!\left(-\lambda_1^2 \mathrm{Fo}\right) = (1.4793)\exp\!\left(-(2.0288)^2(0.5000)\right) = 1.4793\,e^{-2.05801} = (1.4793)(0.12771) = \mathbf{0.18892}
+  \]
+  \[
+    T(0, \SI{320}{\second}) = T_\infty + 0.18892\,\theta_i = 20.0 + (0.18892)(100.0) = \mathbf{\SI{38.89}{\celsius}}
+  \]
+  \item[(c)] At the outer surface $r = R$, $\theta(R,t) = (\theta_s/\theta_c)\,\theta(0,t) = (0.4421)(\SI{18.892}{\kelvin}) = \SI{8.352}{\kelvin}$, so $T(R, \SI{320}{\second}) = 20.0 + 8.35 = \mathbf{\SI{28.35}{\celsius}}$ (a $\SI{10.54}{\celsius}$ radial temperature drop from center to surface!).
+\end{enumerate}
+\end{solution}
+
+\begin{problem}{P13.8}{Diurnal \& Annual Periodic Thermal Wave Penetration in Soil}{13.3}{5.c.iii}{National / Invitational}{75 s}{Damped Wave $\delta_{\mathrm{wave}} = \sqrt{2\alpha/\omega}$}{forgetting factor of $2\pi$ in angular frequency $\omega = 2\pi/P$}
+When the surface of a semi-infinite soil half-space ($\alpha_{\mathrm{soil}} = \SI{5.40e-7}{\square\meter\per\second}$, \tref{tab:10:k-hierarchy}) experiences a sinusoidal temperature oscillation $T(0,t) - \bar{T} = \Delta T_0 \cos(\omega t)$ of period $P$ ($\omega = 2\pi/P$), the subsurface temperature wave decays exponentially and lags in phase according to Lienhard §5.6 Eq.~(5.65), p.~244 \src{S12}:
+\[
+  T(x,t) - \bar{T} = \Delta T_0 \exp\!\left(-\frac{x}{\delta_{\mathrm{wave}}}\right)\cos\!\left(\omega t - \frac{x}{\delta_{\mathrm{wave}}}\right), \qquad \delta_{\mathrm{wave}} = \sqrt{\frac{2\alpha}{\omega}} = \sqrt{\frac{\alpha P}{\pi}}
+\]
+Calculate the $1/e$ thermal-wave damping depth $\delta_{\mathrm{wave}}$ and the depth $x_{\pi} = \pi\delta_{\mathrm{wave}}$ where the subsurface temperature is exactly $180^\circ$ out of phase with the surface (warmest in winter, coolest in summer!) for (a) the diurnal 24-hour cycle ($P_{\mathrm{day}} = \SI{86400}{\second}$), and (b) the annual 365-day seasonal cycle ($P_{\mathrm{yr}} = \SI{3.1536e7}{\second}$).
+\end{problem}
+\begin{solution}{P13.8}
+\begin{enumerate}
+  \item[(a)] \textbf{Diurnal (24-Hour) Wave:}
+  \[
+    \delta_{\mathrm{day}} = \sqrt{\frac{(\SI{5.40e-7}{\square\meter\per\second})(\SI{86400}{\second})}{\pi}} = \sqrt{\SI{0.014851}{\square\meter}} = \mathbf{\SI{0.1219}{\meter}} = \mathbf{\SI{12.19}{\centi\meter}}, \qquad
+    x_{\pi,\mathrm{day}} = \pi(\SI{0.1219}{\meter}) = \mathbf{\SI{0.3829}{\meter}}
+  \]
+  \item[(b)] \textbf{Annual (365-Day) Seasonal Wave ($\sqrt{365} = 19.105\times$ deeper):}
+  \[
+    \delta_{\mathrm{yr}} = 19.105(\SI{0.12186}{\meter}) = \mathbf{\SI{2.328}{\meter}}, \qquad
+    x_{\pi,\mathrm{yr}} = \pi(\SI{2.328}{\meter}) = \mathbf{\SI{7.314}{\meter}} \quad (\text{where amplitude is } e^{-\pi} = \mathbf{4.32\%}\text{ of }\Delta T_0)
+  \]
+\end{enumerate}
+\end{solution}
+
+\begin{problem}{P13.9}{Two-Stage 2027 Collector Heating + Post-Lamp Extraction Cooldown Before ES Probe Reading}{13.2}{5.II.e--g}{2027 Part II Prediction}{75 s}{Piecewise ODE Solution}{forgetting the 30-to-45 s cooling drop between lamp shutoff and ES thermometer reading}
+At the end of an announced $t_1 = \SI{720.0}{\second}$ ($\SI{12.00}{\minute}$) heating period in a room at $T_{\mathrm{room}} = \SI{21.00}{\celsius}$, a team's water cup reaches $T_1 = \SI{47.80}{\celsius}$ inside the collector. At $t = t_1$, the heat lamp is turned off ($P_{\mathrm{abs}} = 0$). It takes $\Delta t_{\mathrm{in}} = \SI{20.0}{\second}$ inside the closed collector ($\tau_{\mathrm{in}} = \SI{1200}{\second}$) before the team opens the top and extracts the cup, followed by $\Delta t_{\mathrm{out}} = \SI{25.0}{\second}$ on the open table ($\tau_{\mathrm{out}} = \SI{480.0}{\second}$ due to exposed sidewall convection and uncovered evaporation) before the Event Supervisor's probe settles. Calculate the exact final measured temperature $T_f$ and the prediction error if the team forgets to subtract post-lamp extraction cooling.
+\end{problem}
+\begin{solution}{P13.9}
+During the $\Delta t_{\mathrm{in}} = \SI{20.0}{\second}$ dwell inside the collector with the lamp off:
+\[
+  T_2 = T_{\mathrm{room}} + \left(T_1 - T_{\mathrm{room}}\right)e^{-\Delta t_{\mathrm{in}}/\tau_{\mathrm{in}}} = 21.00 + (47.80 - 21.00)e^{-20.0/1200} = 21.00 + 26.80(0.98347) = \mathbf{\SI{47.36}{\celsius}}
+\]
+During the $\Delta t_{\mathrm{out}} = \SI{25.0}{\second}$ open-table exposure before the probe reading settles:
+\[
+  T_f = T_{\mathrm{room}} + \left(T_2 - T_{\mathrm{room}}\right)e^{-\Delta t_{\mathrm{out}}/\tau_{\mathrm{out}}} = 21.00 + (47.357 - 21.00)e^{-25.0/480.0} = 21.00 + 26.357(0.94925) = \mathbf{\SI{46.02}{\celsius}}
+\]
+Post-lamp wait and extraction cooling drops the measured temperature by $\Delta T_{\mathrm{cool}} = 47.80 - 46.02 = \mathbf{-\SI{1.78}{\celsius}}$! Including this two-stage decay factor in the team's prediction chart recovers $\frac{1.78}{46.02}\times 20 = \mathbf{+\SI{0.77}{\text{PS points}}}$ in final tournament score!
+\end{solution}
+
+\begin{problem}{P13.10}{Semi-Infinite Wall Instantaneous Surface Heat Flux $q''_s(t)$ and Cumulative Absorbed Energy $Q''(t)$}{13.3}{5.c.iii}{National / Cornell E1}{75 s}{Effusivity Integral}{forgetting factor of 2 when integrating $t^{-1/2}$ from $0$ to $t$}
+A thick concrete slab ($k = \SI{1.30}{\watt\per\meter\per\kelvin}$, $\rho = \SI{2300}{\kilogram\per\cubic\meter}$, $c_p = \SI{880}{\joule\per\kilogram\per\kelvin}$, effusivity $b = \sqrt{k\rho c_p} = \SI{1622.1}{\joule\per\square\meter\per\kelvin\per\second\tothe{1/2}}$, Lienhard §5.6 Eq.~5.53, p.~233 \src{S12}) is initially at uniform temperature $T_i = \SI{18.0}{\celsius}$. At $t = 0$, its surface temperature is suddenly raised to $T_s = \SI{58.0}{\celsius}$ ($\Delta T_s = \SI{40.0}{\kelvin}$). Compute (a) the instantaneous surface heat flux $q''_s(t) = \frac{b\,\Delta T_s}{\sqrt{\pi t}}$ at $t = \SI{100.0}{\second}$, and (b) the total cumulative thermal energy per unit area $Q''(t) = \int_0^t q''_s(t')\,dt'$ absorbed during the first $\SI{100.0}{\second}$.
+\end{problem}
+\begin{solution}{P13.10}
+\begin{enumerate}
+  \item[(a)] Differentiating $\frac{T(x,t)-T_s}{T_i-T_s} = \mathrm{erf}\!\left(\frac{x}{2\sqrt{\alpha t}}\right)$ at $x = 0$ gives $q''_s(t) = -k\left.\frac{\partial T}{\partial x}\right|_{x=0} = \frac{k(T_s - T_i)}{\sqrt{\pi\alpha t}} = \frac{b\,\Delta T_s}{\sqrt{\pi t}}$:
+  \[
+    q''_s(\SI{100.0}{\second}) = \frac{(\SI{1622.1}{})(\SI{40.0}{\kelvin})}{\sqrt{\pi(\SI{100.0}{\second})}} = \frac{\num{64884}}{17.7245} = \mathbf{\SI{3661}{\watt\per\square\meter}} = \mathbf{\SI{3.661}{\kilo\watt\per\square\meter}}
+  \]
+  \item[(b)] Because $\int_0^t (t')^{-1/2}\,dt' = 2 t^{1/2}$, the cumulative energy absorbed per unit area from $0$ to $t$ is \textbf{exactly twice} the product $q''_s(t)\cdot t$:
+  \[
+    Q''(\SI{100.0}{\second}) = \frac{2 b\,\Delta T_s \sqrt{t}}{\sqrt{\pi}} = 2\,q''_s(\SI{100.0}{\second})\,(\SI{100.0}{\second}) = 2(\SI{3660.7}{\watt\per\square\meter})(\SI{100.0}{\second}) = \mathbf{\SI{7.321e5}{\joule\per\square\meter}} = \mathbf{\SI{732.1}{\kilo\joule\per\square\meter}}
+  \]
+\end{enumerate}
+\end{solution}
+
+\begin{problem}{P13.11}{Optimal Parasitic Thermal-Mass Tradeoff of a Metallic Cup Sleeve in a 10-Minute Sprint}{13.2}{3.e, 5.II.e}{2027 Device Optimization}{75 s}{Differentiating $T(t)$ wrt $C_{\mathrm{eff}}$}{adding a heavy metal cup holder that steals heat capacity from the 100 g water}
+In a $\SI{600.0}{\second}$ ($\SI{10.00}{\minute}$) heating run at $T_{\mathrm{start}} = T_{\mathrm{room}} = \SI{21.00}{\celsius}$, a bare $\SI{100.0}{\gram}$ water cup ($C_w = \SI{420.5}{\joule\per\kelvin}$, $R_{\mathrm{th}} = \SI{2.400}{\kelvin\per\watt}$) absorbs $P_{\mathrm{abs},0} = \SI{16.50}{\watt}$. A student proposes adding a dry external black-anodized aluminum absorber collar around the cup sidewall that increases absorbed radiant power by $+\Delta P_{\mathrm{abs}} = +\SI{1.50}{\watt}$ (to $P_{\mathrm{abs},1} = \SI{18.00}{\watt}$), but adds aluminum mass $m_{\mathrm{Al}} = \SI{120.0}{\gram}$ ($c_{p,\mathrm{Al}} = \SI{900}{\joule\per\kilogram\per\kelvin} \implies \Delta C_{\mathrm{Al}} = \SI{108.0}{\joule\per\kelvin}$). Does the heavy aluminum collar increase or decrease the water temperature at $t = \SI{600.0}{\second}$, and what is the maximum allowable aluminum mass $m_{\mathrm{Al,max}}$ before the parasitic heat capacity outweighs the $+\SI{1.50}{\watt}$ optical gain?
+\end{problem}
+\begin{solution}{P13.11}
+\begin{enumerate}
+  \item[(a)] \textbf{Baseline Bare Cup ($C_0 = \SI{420.5}{\joule\per\kelvin}$, $\tau_0 = C_0 R_{\mathrm{th}} = \SI{1009.2}{\second}$):}
+  \[
+    \Delta T_0(\SI{600}{\second}) = P_{\mathrm{abs},0} R_{\mathrm{th}}\left(1 - e^{-600/1009.2}\right) = (16.50)(2.400)\left(1 - e^{-0.59453}\right) = 39.60(0.44818) = \mathbf{+\SI{17.75}{\celsius}}
+  \]
+  \item[(b)] \textbf{With $\SI{120.0}{\gram}$ Aluminum Collar ($C_1 = 420.5 + 108.0 = \SI{528.5}{\joule\per\kelvin}$, $\tau_1 = C_1 R_{\mathrm{th}} = \SI{1268.4}{\second}$):}
+  \[
+    \Delta T_1(\SI{600}{\second}) = (18.00)(2.400)\left(1 - e^{-600/1268.4}\right) = 43.20(0.37689) = \mathbf{+\SI{16.28}{\celsius}} \quad (\mathbf{-\SI{1.47}{\celsius}}\text{ WORSE!})
+  \]
+  Even though the collar captures $+\SI{1.50}{\watt}$ more power, its $\SI{108}{\joule\per\kelvin}$ parasitic heat capacity slows the initial heating rate $(dT/dt)_0 = P_{\mathrm{abs}}/C_{\mathrm{eff}}$ from $\SI{2.354}{\celsius\per\minute}$ down to $\SI{2.044}{\celsius\per\minute}$!
+  \item[(c)] \textbf{Breakeven Mass Cutoff at $t = \SI{600}{\second}$:} Requiring $\Delta T_1(\SI{600}{\second}) \ge \SI{17.748}{\celsius}$ gives $1 - e^{-600/\tau_1} \ge \frac{17.748}{43.20} = 0.41083 \implies \tau_1 \le \frac{600}{-\ln(0.58917)} = \SI{1134.1}{\second} \implies C_1 \le \frac{1134.1}{2.400} = \SI{472.5}{\joule\per\kelvin} \implies \Delta C_{\mathrm{Al}} \le \SI{52.0}{\joule\per\kelvin} \implies m_{\mathrm{Al,max}} = \mathbf{\SI{57.8}{\gram}}$ (and for a $\SI{25}{\micro\meter}$ foil sleeve of mass $\SI{1.5}{\gram}$, $\Delta C = \SI{1.35}{\joule\per\kelvin}$, giving $\Delta T = \mathbf{+\SI{19.26}{\celsius}}$, a net gain of $+\SI{1.51}{\celsius}$!).
+\end{enumerate}
+\end{solution}
+
+\begin{problem}{P13.12}{Multi-Stage Linearly Ramped Heating Followed by Isothermal Hold}{13.3}{5.c.iii}{National / Invitational}{75 s}{Superposition of Ramp + Step}{failing to carry the end-of-ramp lag $-b\tau(1-e^{-t_1/\tau})$ into the hold stage}
+A sample of thermal time constant $\tau = \SI{100.0}{\second}$ starts in equilibrium with a programmable furnace at $T(0) = T_f(0) = \SI{20.00}{\celsius}$. From $t = 0$ to $t_1 = \SI{200.0}{\second}$, the furnace ramps linearly upward at $b = \SI{0.500}{\celsius\per\second}$ to $T_f(\SI{200}{\second}) = \SI{120.00}{\celsius}$, and then holds constant at $T_f = \SI{120.00}{\celsius}$ for $t > \SI{200.0}{\second}$. Calculate the sample temperature $T(t)$ (a) at the end of the ramp ($t_1 = \SI{200.0}{\second}$), and (b) after $\SI{100.0}{\second}$ of the isothermal hold ($t_2 = \SI{300.0}{\second}$).
+\end{problem}
+\begin{solution}{P13.12}
+\begin{enumerate}
+  \item[(a)] At the end of the linear ramp ($t_1 = \SI{200.0}{\second} = 2.00\,\tau$), Eq.~\eref{eq:13:ramp-lag} gives:
+  \[
+    T(\SI{200}{\second}) = T_f(\SI{200}{\second}) - b\tau\left(1 - e^{-t_1/\tau}\right) = 120.00 - (0.500)(100.0)\left(1 - e^{-2.00}\right) = 120.00 - 50.00(0.86466) = \mathbf{\SI{76.77}{\celsius}}
+  \]
+  \item[(b)] During the isothermal hold ($t \ge t_1$, furnace fixed at $T_f = \SI{120.00}{\celsius}$), the remaining deficit $\Delta T_1 = 120.00 - 76.767 = \SI{43.233}{\kelvin}$ decays exponentially over $\Delta t = t_2 - t_1 = \SI{100.0}{\second} = 1.00\,\tau$:
+  \[
+    T(\SI{300}{\second}) = 120.00 - (43.233)e^{-100.0/100.0} = 120.00 - 43.233(0.36788) = 120.00 - 15.905 = \mathbf{\SI{104.10}{\celsius}}
+  \]
+\end{enumerate}
+\end{solution}
+
+\alsosee{\spref{sec:01.12} (\texttt{QS-12} Transient Fast Sheet), \spref{sec:10} (Conduction \& Diffusivity), \spref{sec:11} (Convection \& Stratification), \spref{sec:12} (Radiation Laws), \spref{sec:15} (4-Node Collector Circuit), \spref{sec:16} (36-Run DOE Calibration \& $\mathrm{PE}$ Prediction), \spref{sec:17} (Thermometer $5\tau_p$ Lag), \spref{sec:18} (Semi-Log Regression).}

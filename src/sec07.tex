@@ -1,0 +1,938 @@
+% ============================================================================
+% sec07.tex — §7 First Law of Thermodynamics, Internal Energy, Boundary Work
+%             & Master Process Atlas (Target: 14 pages)
+% ============================================================================
+\binderchapter{7}{First Law of Thermodynamics, Internal Energy, Boundary Work \& Master Process Atlas}{First Law \& Process Atlas}{sec:07}
+\scopebanner{REQUIRED}[2027 Rule 5.c.iv (All Tournament Levels) \textbar\ Closed-System Process Atlas \& Open Steady-Flow First Law]
+
+\idxtopic{First Law of Thermodynamics}\idxtopic{internal energy}\idxtopic{boundary work}\idxtopic{state function vs. path function}\idxtopic{isochoric process}\idxtopic{isobaric process}\idxtopic{isothermal process}\idxtopic{adiabatic process}\idxtopic{polytropic process}\idxtopic{Joule free expansion}\idxtopic{Joule--Thomson throttling}
+
+The First Law of Thermodynamics and ideal-gas process analysis form the quantitative backbone of Rule~\texttt{5.c.iv}, accounting for $20\text{--}30\%$ of written points across the 8-exam invitational corpus \src{S25,S26,S27,S28}. Every process work and heat equation in this chapter is formulated in closed algebraic and geometric form under Rule~\texttt{5.d.iii--iv} \src{S01,S06}.
+
+% ============================================================================
+\section{Energy Accounting, The First Law \& Physics-to-Chemistry Sign Convention Lock}\label{sec:07.1}
+% ============================================================================
+\idxtopic{sign convention!First Law Physics vs. Chemistry}\idxtopic{mechanical equivalent of heat}\idxtopic{Joule paddle-wheel experiment}
+
+The total energy $E_{\mathrm{tot}}$ of a thermodynamic system consists of macroscopic kinetic energy $K_{\mathrm{macro}} = \frac{1}{2}mv_{\mathrm{cm}}^2$, macroscopic potential energy $U_{\mathrm{grav}} = mg_n z$, and microscopic \textbf{internal energy $U$} (the sum of all molecular translational, rotational, vibrational kinetic energies and intermolecular/chemical potential energies in the center-of-mass frame) \src{S13,S16}. For a stationary closed system ($\Delta K_{\mathrm{macro}} = 0, \Delta U_{\mathrm{grav}} = 0$), conservation of energy states:
+\begin{equation}\label{eq:07:first-law}
+  \boxed{\Delta U = U_2 - U_1 = Q - W_{\mathrm{by}}} \ \text{(Physics Locked)} \quad \Longleftrightarrow \quad \boxed{\Delta U = q + w_{\mathrm{on}}, \ w_{\mathrm{on}} = -W_{\mathrm{by}}} \ \text{(Chemistry / IUPAC)}
+\end{equation}
+\idxformula{First Law of Thermodynamics (Physics): $\Delta U = Q - W_{\mathrm{by}}$}\idxformula{First Law of Thermodynamics (Chemistry): $\Delta U = q + w_{\mathrm{on}}$}
+
+\begin{formulacard}[Master First-Law Sign Convention \& Physics-to-Chemistry Translation Matrix \src{S13,S16,S33}]
+\begin{itemize}
+  \item \textbf{Heat $Q$ (identical in BOTH Physics and Chemistry!):} $Q > 0$ when heat energy enters the system from the surroundings (\textbf{endothermic} / heating); $Q < 0$ when heat energy leaves the system to the surroundings (\textbf{exothermic} / cooling).
+  \item \textbf{Work $W_{\mathrm{by}}$ vs.\ $w_{\mathrm{on}}$ (OPPOSITE SIGNS!):}
+  \begin{itemize}
+    \item \textbf{Expansion ($\Delta V = V_2 - V_1 > 0$):} Gas pushes piston outward $\implies W_{\mathrm{by}} > 0$ (Physics), $w_{\mathrm{on}} = -W_{\mathrm{by}} < 0$ (Chemistry).
+    \item \textbf{Compression ($\Delta V = V_2 - V_1 < 0$):} Surroundings push piston inward $\implies W_{\mathrm{by}} < 0$ (Physics), $w_{\mathrm{on}} = -W_{\mathrm{by}} > 0$ (Chemistry).
+  \end{itemize}
+\end{itemize}
+\par\smallskip\noindent
+\footnotesize\setlength{\tabcolsep}{3.5pt}\renewcommand{\arraystretch}{1.12}
+\begin{tabularx}{\linewidth}{@{}l c c c c X@{}}
+\toprule
+\textbf{Thermodynamic Process / Action} & $\Delta V$ & \textbf{Heat $Q$} & \textbf{Physics $W_{\mathrm{by}}$} & \textbf{Chem.\ $w_{\mathrm{on}}$} & \textbf{Internal Energy $\Delta U$ (Identical in Both!)} \\
+\midrule
+\textbf{Isochoric Heating} (rigid tank) & $0$ & $>0$ & $0$ & $0$ & $\Delta U = +Q = nC_{V,m}\Delta T > 0$ ($\Delta T > 0$) \\
+\textbf{Isochoric Cooling} (rigid tank) & $0$ & $<0$ & $0$ & $0$ & $\Delta U = Q = nC_{V,m}\Delta T < 0$ ($\Delta T < 0$) \\
+\textbf{Isobaric Expansion} ($P=\mathrm{const}$) & $>0$ & $+nC_{P,m}\Delta T > 0$ & $+P\Delta V > 0$ & $-P\Delta V < 0$ & $\Delta U = Q - P\Delta V = +nC_{V,m}\Delta T > 0$ \\
+\textbf{Isobaric Compression} ($P=\mathrm{const}$) & $<0$ & $nC_{P,m}\Delta T < 0$ & $P\Delta V < 0$ & $-P\Delta V > 0$ & $\Delta U = Q - P\Delta V = nC_{V,m}\Delta T < 0$ \\
+\textbf{Isothermal Expansion} (ideal gas) & $>0$ & $+nRT\ln(V_2/V_1)$ & $+nRT\ln(V_2/V_1)$ & $-nRT\ln(V_2/V_1)$ & $\Delta U = 0 \implies Q = W_{\mathrm{by}} = -w_{\mathrm{on}} > 0$ \\
+\textbf{Isothermal Compression} (ideal gas) & $<0$ & $nRT\ln(V_2/V_1)<0$ & $nRT\ln(V_2/V_1)<0$ & $-nRT\ln(V_2/V_1)>0$ & $\Delta U = 0 \implies Q = W_{\mathrm{by}} = -w_{\mathrm{on}} < 0$ \\
+\textbf{Adiabatic Expansion} ($Q=0$) & $>0$ & $0$ & $+\dfrac{P_1V_1-P_2V_2}{\gamma-1}>0$ & $-\dfrac{P_1V_1-P_2V_2}{\gamma-1}<0$ & $\Delta U = -W_{\mathrm{by}} = +w_{\mathrm{on}} < 0$ (\textbf{gas cools!}) \\
+\textbf{Adiabatic Compression} ($Q=0$) & $<0$ & $0$ & $\dfrac{P_1V_1-P_2V_2}{\gamma-1}<0$ & $-\dfrac{P_1V_1-P_2V_2}{\gamma-1}>0$ & $\Delta U = -W_{\mathrm{by}} = +w_{\mathrm{on}} > 0$ (\textbf{gas warms!}) \\
+\textbf{Adiabatic Free Expansion} (vacuum) & $>0$ & $0$ & $0$ & $0$ & $\Delta U = 0$ ($\Delta T = 0$ ideal; $\Delta T < 0$ vdW real gas) \\
+\textbf{Clockwise $P$--$V$ Cycle} (Engine) & $0$ & $Q_H - Q_C > 0$ & $+\mathrm{Area} > 0$ & $-\mathrm{Area} < 0$ & $\Delta U_{\mathrm{cycle}} = 0 \implies W_{\mathrm{net,by}} = Q_{\mathrm{net}} > 0$ \\
+\textbf{Counterclockwise $P$--$V$ Cycle} (Refrig.) & $0$ & $Q_C - Q_H < 0$ & $-\mathrm{Area} < 0$ & $+\mathrm{Area} > 0$ & $\Delta U_{\mathrm{cycle}} = 0 \implies W_{\mathrm{in}} = w_{\mathrm{net,on}} = Q_H - Q_C > 0$ \\
+\bottomrule
+\end{tabularx}
+\end{formulacard}
+
+\begin{twocol}[0.49]
+\begin{formulacard}[State vs.\ Path Functions \& Joule Work Modes \src{S13,S23}]
+\begin{itemize}
+  \item \textbf{State Functions ($U, H, S, G, F, P, V, T, \rho$):} Depend \emph{only} on equilibrium endpoints $(1, 2)$, never on the path taken:
+  \begin{equation}\label{eq:07:state-fn}
+    \Delta U_{1\to 2,\text{Path I}} = \Delta U_{1\to 2,\text{Path II}} = U_2 - U_1, \quad \Delta U_{\mathrm{cycle}} = 0
+  \end{equation}
+  \item \textbf{Path Functions ($Q, W_{\mathrm{by}}, S_{\mathrm{gen}}$):} Boundary transfer interactions that depend on the specific trajectory on a $P$--$V$ or $T$--$S$ diagram. A system never ``contains'' heat or work; never write $\Delta Q$ or $\Delta W$!\idxerr{treating heat $Q$ or work $W$ as a state function}
+  \item \textbf{Non-Boundary Shaft \& Electrical Work Inputs ($W_{\mathrm{by}} < 0, w_{\mathrm{on}} > 0$):}
+  \begin{equation}\label{eq:07:joule-work}
+    w_{\mathrm{paddle,on}} = N_{\mathrm{drop}} m_{\mathrm{wt}} g_n h, \quad w_{\mathrm{elec,on}} = I^2 R_\Omega t = V_{\mathrm{rms}} I t
+  \end{equation}
+  \idxformula{Joule paddle-wheel and electrical work: $w_{\mathrm{on}} = N m g_n h + I^2 R_\Omega t$}
+\end{itemize}
+\end{formulacard}
+\nextcol[0.49]
+\begin{workedexample}[Paddle-Wheel + Expansion First-Law Ledger]{Regional/State \textbar\ Tier 1}{ex:07.1}
+A cylinder with a movable piston holds a gas that absorbs $\SI{120.0}{\text{cal}_{\mathrm{th}}}$ of heat from a flame while a falling-weight paddle wheel (two $\SI{5.000}{\kilogram}$ lead masses dropping $\SI{2.000}{\meter}$ each, $N_{\mathrm{drop}} = 5$ times, $g_n = \SI{9.80665}{\meter\per\square\second}$) stirs the gas and the gas expands against the piston, performing $\SI{850.0}{\joule}$ of $PV$ boundary work on the external atmosphere. Find $Q$, total Physics work $W_{\mathrm{by}}$, Chemistry work $w_{\mathrm{on}}$, and $\Delta U$.
+\par\smallskip\noindent
+\textbf{Solution.}
+\begin{enumerate}
+  \item \textbf{Heat input in Joules:} $Q = (120.0\,\si{\text{cal}_{\mathrm{th}}})(\SI{4.184}{\joule\per\text{cal}_{\mathrm{th}}}) = \mathbf{+\SI{502.08}{\joule}}$.
+  \item \textbf{Paddle-wheel work done ON gas:}
+  \[
+    W_{\mathrm{paddle,on}} = 5 \times (2\times \SI{5.000}{\kilogram})(9.80665)(2.000) = +\SI{980.67}{\joule}
+  \]
+  \item \textbf{Net Physics work $W_{\mathrm{by}}$ vs.\ Chemistry work $w_{\mathrm{on}}$:}
+  \[
+    W_{\mathrm{by}} = 850.0 - 980.67 = \mathbf{\SI{-130.67}{\joule}}, \quad w_{\mathrm{on}} = \mathbf{+\SI{130.67}{\joule}}
+  \]
+  \item \textbf{Internal energy change:}
+  \[
+    \Delta U = Q - W_{\mathrm{by}} = 502.08 - (-130.67) = \mathbf{+\SI{632.75}{\joule}}
+  \]
+\end{enumerate}
+\verifiedby{$\Delta U = q + w_{\mathrm{on}} = 502.08 + 130.67 = \SI{632.75}{\joule}$ (\texttt{check\_sec06\_09.py::ex07\_1}).}
+\end{workedexample}
+\end{twocol}
+
+% ============================================================================
+\section{Moving-Boundary $P$--$V$ Work, Geometric Area Rules \& Multi-Stage Compression}\label{sec:07.2}
+% ============================================================================
+\idxtopic{P--V diagram area}\idxtopic{quasistatic vs. reversible process}\idxtopic{intercooled multi-stage compression}
+
+When a gas expands or compresses against a piston of cross-sectional area $A$ through displacement $\Delta x = \Delta V / A$ against external pressure $P_{\mathrm{ext}}$, the mechanical work done \textbf{by} the gas is $W_{\mathrm{by}} = F_{\mathrm{ext}}\Delta x = (P_{\mathrm{ext}}A)(\Delta V/A) = P_{\mathrm{ext}}\Delta V$. For a \textbf{quasistatic} (infinitely slow, frictionless) process, the gas stays in internal mechanical equilibrium ($P_{\mathrm{ext}} = P_{\mathrm{gas}}(V)$ at every instant), so $W_{\mathrm{by}}$ equals the \textbf{signed geometric area} under the path $P(V)$ on a $P$--$V$ diagram \src{S06,S13}:
+
+\begin{formulacard}[Algebraic \& Geometric $P$--$V$ Area Formulas (Rule 5.d.iii Zero-Calculus Toolkit) \src{S06,S13,S26}]
+\par\smallskip\noindent
+\footnotesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.15}
+\begin{tabularx}{\linewidth}{@{}l l X@{}}
+\toprule
+\textbf{Path / Cycle Geometry on $P$--$V$ Plane} & \textbf{Closed Algebraic Work Formula $W_{\mathrm{by}}$} & \textbf{Sign \& Unit Rules ($1\,\si{\kilo\pascal}\cdot\si{\liter} = \SI{1}{\joule}$!)} \\
+\midrule
+\textbf{Isochoric Vertical Segment} ($V_1 = V_2$) & $W_{\mathrm{by}} = 0$ & Zero horizontal width $\implies$ zero area. \\
+\textbf{Isobaric Horizontal Segment} ($P = P_0$) & $W_{\mathrm{by}} = P_0(V_2 - V_1)$ & Rectangle of height $P_0$ and signed base $\Delta V$. \\
+\textbf{Straight-Line Chord} $(P_1,V_1)\to(P_2,V_2)$ & $W_{\mathrm{by}} = \frac{1}{2}(P_1 + P_2)(V_2 - V_1)$ & Trapezoid of mean height $\bar{P}=\frac{1}{2}(P_1+P_2)$ and base $\Delta V$. \\
+\textbf{Rectangular Closed Cycle} ($\Delta P \times \Delta V$) & $W_{\mathrm{net,by}} = \pm(P_{\mathrm{high}} - P_{\mathrm{low}})(V_{\max} - V_{\min})$ & $+$ if \textbf{clockwise} (engine); $-$ if \textbf{counterclockwise}. \\
+\textbf{Triangular Closed Cycle} (base $\Delta V$, height $\Delta P$) & $W_{\mathrm{net,by}} = \pm\frac{1}{2}(P_{\mathrm{high}} - P_{\mathrm{low}})(V_{\max} - V_{\min})$ & $\pm\frac{1}{2}\,\text{base}\times\text{height}$ (check loop orientation!). \\
+\textbf{Circular / Elliptical Cycle} (diameters $\Delta P, \Delta V$) & $W_{\mathrm{net,by}} = \pm\pi a b = \pm\frac{\pi}{4}(P_{\mathrm{high}} - P_{\mathrm{low}})(V_{\max} - V_{\min})$ & Semi-axes $a = \Delta V/2$ and $b = \Delta P/2$. \\
+\textbf{Single-Step Irreversible Jump} (fixed $P_{\mathrm{ext}}$) & $W_{\mathrm{by,irrev}} = P_{\mathrm{ext}}(V_2 - V_1)$ & Rectangle at constant height $P_{\mathrm{ext}}$ (NOT area under $nRT/V$!). \\
+\bottomrule
+\end{tabularx}
+\idxformula{Trapezoidal P--V path work: $W_{\mathrm{by}} = \frac{1}{2}(P_1+P_2)(V_2-V_1)$}\idxformula{Elliptical P--V cycle work: $W_{\mathrm{net}} = \pm\frac{\pi}{4}\Delta P\Delta V$}
+\end{formulacard}
+
+\par\smallskip\noindent
+\begin{minipage}{\linewidth}
+\centering
+\begin{tikzpicture}[font=\scriptsize]
+\begin{axis}[
+    width=0.84\linewidth,
+    height=4.5cm,
+    xlabel={Volume $V$ ($\si{\liter}$)},
+    ylabel={Pressure $P$ ($\si{\kilo\pascal}$)},
+    xmin=1.0, xmax=7.0,
+    ymin=0, ymax=460,
+    grid=both,
+    grid style={gray!25},
+    tick label style={font=\scriptsize},
+    label style={font=\scriptsize\bfseries}
+]
+% Shaded lower rectangle under D-B (100 kPa from V=2 to V=6 -> 400 J)
+\addplot[fill=boxbg, draw=none] coordinates {(2,0) (2,100) (6,100) (6,0)} \closedcycle;
+% Shaded lower triangle for chord A-B (from 100 to 400 -> 600 J)
+\addplot[fill=teal!18, draw=none] coordinates {(2,100) (2,400) (6,100)} \closedcycle;
+% Shaded upper triangle for A-C-B (from chord to C -> 600 J)
+\addplot[fill=amber!18, draw=none] coordinates {(2,400) (6,400) (6,100)} \closedcycle;
+
+% Path I: A -> C -> B (Upper isobar then isochor)
+\draw[rust, ultra thick, -{Stealth[length=2.2mm]}] (axis cs:2,400) -- (axis cs:6,400)
+  node[midway, above, fill=white, inner sep=1pt] {\textbf{Path I ($A\to C\to B$)}: $W_{\mathrm{I}} = +\SI{1600}{\joule}$};
+\draw[rust, ultra thick, -{Stealth[length=2.2mm]}] (axis cs:6,400) -- (axis cs:6,100);
+
+% Path II: A -> B (Straight chord)
+\draw[navy, ultra thick, -{Stealth[length=2.2mm]}] (axis cs:2,400) -- (axis cs:6,100)
+  node[midway, sloped, above, fill=white, inner sep=1pt] {\textbf{Path II ($A\to B$)}: $W_{\mathrm{II}} = +\SI{1000}{\joule}$};
+
+% Path III: A -> D -> B (Isochor then lower isobar)
+\draw[teal, ultra thick, -{Stealth[length=2.2mm]}] (axis cs:2,400) -- (axis cs:2,100);
+\draw[teal, ultra thick, -{Stealth[length=2.2mm]}] (axis cs:2,100) -- (axis cs:6,100)
+  node[midway, below, fill=white, inner sep=1pt] {\textbf{Path III ($A\to D\to B$)}: $W_{\mathrm{III}} = +\SI{400}{\joule}$};
+
+% State points
+\fill[black] (axis cs:2,400) circle (2.2pt) node[above left] {$A(\SI{2}{\liter},\SI{400}{\kilo\pascal})$};
+\fill[rust]  (axis cs:6,400) circle (2.2pt) node[above right] {$C(\SI{6}{\liter},\SI{400}{\kilo\pascal})$};
+\fill[black] (axis cs:6,100) circle (2.2pt) node[below right] {$B(\SI{6}{\liter},\SI{100}{\kilo\pascal})$};
+\fill[teal]  (axis cs:2,100) circle (2.2pt) node[below left] {$D(\SI{2}{\liter},\SI{100}{\kilo\pascal})$};
+\end{axis}
+\end{tikzpicture}
+\captionof{figure}{Path dependence of boundary work $W_{\mathrm{by}}$ vs.\ path independence of $\Delta U = U_B - U_A$ between states $A(\SI{2.00}{\liter}, \SI{400}{\kilo\pascal})$ and $B(\SI{6.00}{\liter}, \SI{100}{\kilo\pascal})$ \src{S13}. Upper path $A\to C\to B$ performs $W_{\mathrm{I}} = \SI{1600}{\joule}$; straight chord $A\to B$ performs trapezoid area $W_{\mathrm{II}} = \SI{1000}{\joule}$; lower path $A\to D\to B$ performs $W_{\mathrm{III}} = \SI{400}{\joule}$.}\label{fig:07:pv-work-paths}
+\idxfig{Path dependence of P--V boundary work across three paths A to B}
+\end{minipage}
+\par\smallskip
+
+\begin{workedexample}[Three-Path $P$--$V$ Work \& Heat Ledger Between Identical Endpoints]{Classic Invitational FRQ \textbar\ Tier 2}{ex:07.2}
+A monatomic ideal gas ($\gamma = 5/3, C_{V,m} = \frac{3}{2}R$) is taken from State~$A$ ($P_A = \SI{400.0}{\kilo\pascal}, V_A = \SI{2.000}{\liter}$) to State~$B$ ($P_B = \SI{100.0}{\kilo\pascal}, V_B = \SI{6.000}{\liter}$) along the three paths in \fref{fig:07:pv-work-paths}: Path~I ($A\to C\to B$), Path~II (straight line $A\to B$), and Path~III ($A\to D\to B$). (a) Compute $\Delta U_{A\to B}$ for all three paths. (b) Compute $W_{\mathrm{by}}$ and $Q$ for each path. (c) If the gas goes from $A\to C\to B$ and returns via $B\to D\to A$, find the net cycle work $W_{\mathrm{net,by}}$ and net heat $Q_{\mathrm{net}}$.
+\par\smallskip\noindent
+\textbf{Solution.}
+\begin{enumerate}
+  \item \textbf{(a) State-function internal energy change $\Delta U_{A\to B}$ (using $U = \frac{3}{2}PV$ and $1\,\si{\kilo\pascal\liter} = \SI{1}{\joule}$):}
+  \[
+    U_A = \frac{3}{2}P_A V_A = \frac{3}{2}(400.0)(2.000) = \SI{1200.0}{\joule}, \qquad U_B = \frac{3}{2}P_B V_B = \frac{3}{2}(100.0)(6.000) = \SI{900.0}{\joule}
+  \]
+  \[
+    \Delta U_{\mathrm{I}} = \Delta U_{\mathrm{II}} = \Delta U_{\mathrm{III}} = U_B - U_A = 900.0 - 1200.0 = \mathbf{\SI{-300.0}{\joule}} \quad (\text{identical for every path!})
+  \]
+  \item \textbf{(b) Work $W_{\mathrm{by}}$ (geometric area) and Heat $Q = \Delta U + W_{\mathrm{by}}$ for each path:}
+  \begin{itemize}
+    \item \textbf{Path I ($A\to C\to B$):} $W_{\mathrm{I}} = P_A(V_B - V_A) + 0 = 400.0(6.000 - 2.000) = \mathbf{+\SI{1600.0}{\joule}} \implies Q_{\mathrm{I}} = -300.0 + 1600.0 = \mathbf{+\SI{1300.0}{\joule}}$.
+    \item \textbf{Path II (Chord $A\to B$):} $W_{\mathrm{II}} = \frac{1}{2}(P_A + P_B)(V_B - V_A) = \frac{1}{2}(500.0)(4.000) = \mathbf{+\SI{1000.0}{\joule}} \implies Q_{\mathrm{II}} = -300.0 + 1000.0 = \mathbf{+\SI{700.0}{\joule}}$.
+    \item \textbf{Path III ($A\to D\to B$):} $W_{\mathrm{III}} = 0 + P_B(V_B - V_A) = 100.0(4.000) = \mathbf{+\SI{400.0}{\joule}} \implies Q_{\mathrm{III}} = -300.0 + 400.0 = \mathbf{+\SI{100.0}{\joule}}$.
+  \end{itemize}
+  \item \textbf{(c) Clockwise rectangular cycle $A\to C\to B\to D\to A$:}
+  Returning from $B\to D\to A$ reverses Path~III ($W_{B\to D\to A} = \SI{-400.0}{\joule}$), so the net work equals the enclosed rectangle area:
+  \[
+    W_{\mathrm{net,by}} = W_{\mathrm{I}} + W_{B\to D\to A} = 1600.0 - 400.0 = (400.0 - 100.0)(6.000 - 2.000) = \mathbf{+\SI{1200.0}{\joule}} = Q_{\mathrm{net}}
+  \]
+\end{enumerate}
+\verifiedby{Leg-by-leg heat sum on Path I: $Q_{A\to C} = \frac{5}{2}P_A\Delta V = +\SI{4000}{\joule}$ and $Q_{C\to B} = \frac{3}{2}V_B\Delta P = \SI{-2700}{\joule} \implies Q_{\mathrm{I}} = +\SI{1300}{\joule}$ (\texttt{check\_sec06\_09.py::ex07\_2}).}
+\end{workedexample}
+
+\begin{workedexample}[Isothermal vs.\ Adiabatic-Isobaric \& $N$-Stage Intercooled Compression]{2019 MIT E2 P4 (TB \#1 \& \#2) \textbar\ Tier 3}{ex:07.3}
+One mole ($n = \SI{1.000}{\mole}$) of monatomic Helium ($\gamma = 5/3$, $C_{P,m} = \frac{5}{2}R$, $(\gamma-1)/\gamma = 2/5 = 0.400$) is compressed from State~1 ($P_1 = \SI{1.000}{\bar}, T_1 = \SI{298.0}{\kelvin}$) to final State~2 ($P_2 = \SI{8.000}{\bar}, T_2 = \SI{298.0}{\kelvin}$, so $P_2/P_1 = 8.000$). Compare the work input $w_{\mathrm{on}} = -W_{\mathrm{by}}$ required along four different compression strategies: (a) reversible isothermal compression at $T_1 = \SI{298.0}{\kelvin}$; (b) \textbf{maximum-work} 2-leg path (adiabatic compression $1\to A$ to $P_2 = \SI{8.000}{\bar}$, followed by isobaric cooling $A\to 2$ at $P_2$ back to $T_1$); (c) \textbf{minimum-work} 2-leg path (isobaric cooling $1\to B$ at $P_1$, followed by adiabatic compression $B\to 2$ reaching $(P_2, T_1)$); and (d) a 3-stage intercooled compressor where each stage doubles the pressure ($\SI{1}{\bar}\to\SI{2}{\bar}\to\SI{4}{\bar}\to\SI{8}{\bar}$) via adiabatic compression followed by isobaric cooling back to $\SI{298.0}{\kelvin}$.
+\par\smallskip\noindent
+\textbf{Solution.}
+\begin{enumerate}
+  \item \textbf{(a) Reversible isothermal compression work input ($T = \SI{298.0}{\kelvin}, nRT_1 = \SI{2477.71}{\joule}$):}
+  \[
+    w_{\mathrm{on,iso}} = -W_{\mathrm{by,iso}} = nRT_1\ln\left(\frac{P_2}{P_1}\right) = (2477.71)\ln(8.000) = \mathbf{+\SI{5152.3}{\joule}} \quad (\text{MIT key rounds to } \SI{5150}{\joule})
+  \]
+  \item \textbf{(b) Maximum-work 2-leg path (Adiabatic compression $1\to A$ to $\SI{8.00}{\bar}$, then isobaric cooling $A\to 2$):}
+  Along adiabat $1\to A$, $T_A = T_1(P_2/P_1)^{(\gamma-1)/\gamma} = T_1(8.000)^{2/5} = 2.29740\,T_1 = \SI{684.62}{\kelvin}$. Since $\Delta U_{1\to 2} = 0$, the total work done on the gas across both legs equals the heat rejected during the isobaric cooling $A\to 2$, or directly:
+  \[
+    w_{\mathrm{on,\max}} = \underbrace{nC_{V,m}(T_A - T_1)}_{\text{adiabat } 1\to A} + \underbrace{nR(T_A - T_1)}_{\text{isobar } A\to 2} = nC_{P,m}T_1\left[\left(\frac{P_2}{P_1}\right)^{2/5} - 1\right] = \frac{5}{2}(2477.71)(2.29740 - 1) = \mathbf{+\SI{8036.4}{\joule}}
+  \]
+  \item \textbf{(c) Minimum-work 2-leg path (Isobaric pre-cooling $1\to B$ at $\SI{1.00}{\bar}$, then adiabatic compression $B\to 2$):}
+  To land on $(P_2, T_1)$ after adiabatic compression $B\to 2$, the gas must first be pre-cooled at $P_1$ to $T_B = T_1(P_1/P_2)^{2/5} = T_1 / 2.29740 = 0.435275\,T_1 = \SI{129.71}{\kelvin}$. Total work done on the gas is:
+  \[
+    w_{\mathrm{on,\min}} = nC_{P,m}(T_1 - T_B) = nC_{P,m}T_1\left[1 - \left(\frac{P_1}{P_2}\right)^{2/5}\right] = \frac{5}{2}(2477.71)(1 - 0.435275) = \mathbf{+\SI{3498.0}{\joule}}
+  \]
+  \item \textbf{(d) $N=3$ intercooled adiabatic-isobaric stages (each stage has pressure ratio $r_s = (P_2/P_1)^{1/3} = 2.000$):}
+  \[
+    w_{\mathrm{on},N=3} = N\,nC_{P,m}T_1\left[\left(\frac{P_2}{P_1}\right)^{\frac{2}{5N}} - 1\right] = 3 \times \frac{5}{2}(2477.71)\left(2.000^{2/5} - 1\right) = 18582.8(1.319508 - 1) = \mathbf{+\SI{5937.4}{\joule}}
+  \]
+  *(Note: In \texttt{2019 MIT E2 P4b(iv)}, the problem statement defined its multi-step path via pre-cooling steps $N\,nC_{P,m}T_1[1 - 2^{-2/5}] = \SI{4499.6}{\joule}$; as $N\to\infty$, both upper and lower staircases converge to the isothermal limit $\SI{5152.3}{\joule}$!)*
+\end{enumerate}
+\verifiedby{Limit check as $N\to\infty$: $\lim_{N\to\infty} N\frac{5}{2}RT_1[8^{2/(5N)} - 1] = \frac{5}{2}RT_1\cdot\frac{2}{5}\ln 8 = RT_1\ln 8 = \SI{5152.3}{\joule}$ (\texttt{check\_sec06\_09.py::ex07\_3}).}
+\end{workedexample}
+
+% ============================================================================
+\section{Master Closed-System Ideal-Gas Process Atlas (8 Canonical Processes)}\label{sec:07.3}
+% ============================================================================
+\idxtopic{Master Process Table}\idxtopic{isochoric process}\idxtopic{isobaric process}\idxtopic{isothermal process}\idxtopic{adiabatic process}\idxtopic{polytropic process}
+
+For any closed system of $n$ moles of an ideal gas ($PV = nRT$) with constant heat capacities $C_{V,m} = \frac{f}{2}R = \frac{R}{\gamma - 1}$ and $C_{P,m} = \frac{f+2}{2}R = \frac{\gamma R}{\gamma - 1}$, two universal state-function identities hold across \textbf{every} process regardless of path \src{S13,S18}:
+\begin{equation}\label{eq:07:universal-u-h}
+  \boxed{\Delta U = nC_{V,m}(T_2 - T_1) = \frac{nR(T_2 - T_1)}{\gamma - 1} = \frac{P_2V_2 - P_1V_1}{\gamma - 1}}, \qquad \boxed{\Delta H = nC_{P,m}(T_2 - T_1) = \frac{\gamma(P_2V_2 - P_1V_1)}{\gamma - 1} = \gamma\,\Delta U}
+\end{equation}
+\idxformula{Universal ideal-gas internal energy change: $\Delta U = nC_{V,m}\Delta T = (P_2V_2 - P_1V_1)/(\gamma - 1)$}\idxformula{Universal ideal-gas enthalpy change: $\Delta H = nC_{P,m}\Delta T = \gamma(P_2V_2 - P_1V_1)/(\gamma - 1)$}
+
+\begin{table}[!htbp]
+\centering
+\captionof{table}{Master Closed-System Ideal-Gas Process Atlas ($PV = nRT$, Physics Sign Convention $\Delta U = Q - W_{\mathrm{by}}$) \src{S13,S16,S18}.}\label{tab:07:master-process}
+\scriptsize\setlength{\tabcolsep}{2.2pt}\renewcommand{\arraystretch}{1.22}
+\begin{tabularx}{\linewidth}{@{}l l l l l l l X@{}}
+\toprule
+\textbf{Process} & \textbf{Constraint /} & \textbf{State Law} & \textbf{Work BY Gas} & \textbf{Internal Energy} & \textbf{Heat TO Gas} & \textbf{Enthalpy} & \textbf{Entropy Change} \\
+\textbf{Name} & \textbf{Exponent $n$} & ($1 \to 2$) & $W_{\mathrm{by}} = -w_{\mathrm{on}}$ & $\Delta U = U_2 - U_1$ & $Q = \Delta U + W_{\mathrm{by}}$ & $\Delta H = H_2 - H_1$ & $\Delta S = S_2 - S_1$ \\
+\midrule
+\textbf{1. Isochoric} & $V = \mathrm{const}$ & $\dfrac{P_1}{T_1} = \dfrac{P_2}{T_2}$ & $\mathbf{0}$ & $nC_{V,m}\Delta T$ & $nC_{V,m}\Delta T = \Delta U$ & $nC_{P,m}\Delta T = \gamma Q_V$ & $nC_{V,m}\ln(T_2/T_1)$ \\
+(Isometric) & ($n = \pm\infty$) & & & $= \dfrac{V\Delta P}{\gamma - 1}$ & $= \dfrac{V\Delta P}{\gamma - 1}$ & $= \dfrac{\gamma V\Delta P}{\gamma - 1}$ & $= nC_{V,m}\ln(P_2/P_1)$ \\[4pt]
+\textbf{2. Isobaric} & $P = \mathrm{const}$ & $\dfrac{V_1}{T_1} = \dfrac{V_2}{T_2}$ & $P(V_2 - V_1)$ & $nC_{V,m}\Delta T$ & $nC_{P,m}\Delta T = \Delta H$ & $nC_{P,m}\Delta T = Q_P$ & $nC_{P,m}\ln(T_2/T_1)$ \\
+ & ($n = 0$) & & $= nR\Delta T$ & $= \dfrac{P\Delta V}{\gamma - 1}$ & $= \dfrac{\gamma P\Delta V}{\gamma - 1}$ & $= \dfrac{\gamma P\Delta V}{\gamma - 1}$ & $= nC_{P,m}\ln(V_2/V_1)$ \\[4pt]
+\textbf{3. Isothermal} & $T = \mathrm{const}$ & $P_1 V_1 = P_2 V_2$ & $nRT\ln(V_2/V_1)$ & $\mathbf{0}$ & $nRT\ln(V_2/V_1)$ & $\mathbf{0}$ & $nR\ln(V_2/V_1)$ \\
+(Reversible) & ($n = 1$) & & $= P_1V_1\ln(P_1/P_2)$ & & $= P_1V_1\ln(P_1/P_2)$ & & $= nR\ln(P_1/P_2)$ \\[4pt]
+\textbf{4. Adiabatic} & $Q = 0$ & $P_1V_1^\gamma = P_2V_2^\gamma$ & $nC_{V,m}(T_1-T_2)$ & $nC_{V,m}(T_2 - T_1)$ & $\mathbf{0}$ & $nC_{P,m}(T_2 - T_1)$ & $\mathbf{0}$ (reversible) \\
+(Isentropic) & ($n = \gamma$) & $T_1V_1^{\gamma-1} = T_2V_2^{\gamma-1}$ & $= \dfrac{P_1V_1 - P_2V_2}{\gamma - 1}$ & $= \dfrac{P_2V_2 - P_1V_1}{\gamma - 1}$ & & $= \dfrac{\gamma(P_2V_2 - P_1V_1)}{\gamma - 1}$ & ($>0$ if irrev.) \\[4pt]
+\textbf{5. Polytropic} & $PV^n = \mathrm{const}$ & $T_1V_1^{n-1} = T_2V_2^{n-1}$ & $\dfrac{P_1V_1 - P_2V_2}{n - 1}$ & $nC_{V,m}(T_2 - T_1)$ & $nC_{n,m}(T_2 - T_1)$ & $nC_{P,m}(T_2 - T_1)$ & $nC_{n,m}\ln(T_2/T_1)$ \\
+($n \ne 1$) & ($C_{n,m}=\mathrm{const}$) & $T_1^n P_1^{1-n} = T_2^n P_2^{1-n}$ & $= \dfrac{nR(T_1 - T_2)}{n - 1}$ & $= \dfrac{P_2V_2 - P_1V_1}{\gamma - 1}$ & $C_{n,m} = C_{V,m}\dfrac{n-\gamma}{n-1}$ & & \\[4pt]
+\textbf{6. Linear $PV$} & $P(V)$ chord & $T = \dfrac{PV}{nR}$ & $\dfrac{P_1 + P_2}{2}\Delta V$ & $\dfrac{P_2V_2 - P_1V_1}{\gamma - 1}$ & $\Delta U + \dfrac{P_1+P_2}{2}\Delta V$ & $\dfrac{\gamma(P_2V_2 - P_1V_1)}{\gamma - 1}$ & $nC_{V,m}\ln\dfrac{P_2}{P_1} + nC_{P,m}\ln\dfrac{V_2}{V_1}$ \\[4pt]
+\textbf{7. Free Exp.} & Into vacuum & $T_1 = T_2$ & $\mathbf{0}$ ($P_{\mathrm{ext}} = 0$) & $\mathbf{0}$ & $\mathbf{0}$ & $\mathbf{0}$ & $+nR\ln(V_2/V_1) > 0$ \\
+(Joule) & ($Q=0, W=0$) & $P_1V_1 = P_2V_2$ & & & & & (\textbf{irreversible!}) \\[4pt]
+\textbf{8. Throttling} & Porous plug & $H_1 = H_2$ & Flow work & $\mathbf{0}$ (ideal gas) & $\mathbf{0}$ & $\mathbf{0}$ (\textbf{isenthalpic}) & $+nR\ln(P_1/P_2) > 0$ \\
+(Joule--Thomson) & ($\dot{Q}=0, \dot{W}_s=0$) & $T_1 = T_2$ (ideal) & $\Delta(PV) = 0$ & & & ($h_1 = h_2$ always!) & (\textbf{irreversible!}) \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{derivation}[Zero-Calculus Proofs of Adiabatic Work, Isothermal Work \& Isobaric Energy Partition \src{S06,S13}]
+\begin{enumerate}
+  \item \textbf{Zero-Calculus Proof of Adiabatic Work ($W_{\mathrm{by}} = \frac{P_1V_1 - P_2V_2}{\gamma - 1}$):}
+  By \eref{eq:07:universal-u-h}, $\Delta U = \frac{P_2V_2 - P_1V_1}{\gamma - 1}$ for \emph{any} ideal-gas process. In an adiabatic process, $Q = 0$, so the First Law $\Delta U = Q - W_{\mathrm{by}}$ gives $W_{\mathrm{by}} = -\Delta U = \frac{P_1V_1 - P_2V_2}{\gamma - 1} = \frac{nR(T_1 - T_2)}{\gamma - 1}$ immediately without a single integral!
+  \item \textbf{Three Equivalent Adiabatic State Forms ($PV^\gamma = \mathrm{const}$):} Substituting $P = nRT/V$ or $V = nRT/P$ into $P_1V_1^\gamma = P_2V_2^\gamma$ yields:
+  \begin{equation}\label{eq:07:adiabatic-laws}
+    \boxed{P_1 V_1^\gamma = P_2 V_2^\gamma}, \qquad \boxed{T_1 V_1^{\gamma - 1} = T_2 V_2^{\gamma - 1}}, \qquad \boxed{T_1^\gamma P_1^{1 - \gamma} = T_2^\gamma P_2^{1 - \gamma} \iff \frac{T_2}{T_1} = \left(\frac{P_2}{P_1}\right)^{\frac{\gamma - 1}{\gamma}}}
+  \end{equation}
+  \idxformula{Adiabatic state equations: $PV^\gamma = \mathrm{const}$, $TV^{\gamma-1} = \mathrm{const}$, $T_2/T_1 = (P_2/P_1)^{(\gamma-1)/\gamma}$}
+  \item \textbf{Geometric-Mean Stepping Justification of Isothermal Work $W_{\mathrm{by}} = nRT\ln(V_2/V_1)$:}
+  Divide the isothermal expansion $[V_1, V_2]$ into $M$ equal-ratio steps of multiplier $r = (V_2/V_1)^{1/M}$. Across step $k$, $P_k V_k = nRT$, so the fractional work is $\Delta W_k = P_k \Delta V_k = nRT(\Delta V_k / V_k) = nRT(r - 1)$. Summing $M$ identical steps and using the natural logarithm compound-interest limit $\lim_{M\to\infty} M[(V_2/V_1)^{1/M} - 1] = \ln(V_2/V_1)$ gives $W_{\mathrm{by}} = nRT\ln(V_2/V_1) = P_1V_1\ln(P_1/P_2)$.
+  \item \textbf{Universal Isobaric Energy-Partition Ratios:} In any isobaric heating/expansion ($P = \mathrm{const}$), the fractions of added heat $Q_P = nC_{P,m}\Delta T$ converted into boundary work $W_{\mathrm{by}} = nR\Delta T$ versus stored as internal energy $\Delta U = nC_{V,m}\Delta T$ depend \emph{only} on $\gamma$ (or $f$):
+  \begin{equation}\label{eq:07:isobaric-partition}
+    \boxed{\frac{W_{\mathrm{by}}}{Q_P} = \frac{R}{C_{P,m}} = 1 - \frac{1}{\gamma} = \frac{2}{f + 2}}, \qquad \boxed{\frac{\Delta U}{Q_P} = \frac{C_{V,m}}{C_{P,m}} = \frac{1}{\gamma} = \frac{f}{f + 2}}
+  \end{equation}
+  \idxformula{Isobaric energy partition: $W_{\mathrm{by}}/Q_P = 1 - 1/\gamma = 2/(f+2)$, $\Delta U/Q_P = 1/\gamma = f/(f+2)$}
+  (\textbf{Monatomic $f=3$:} $40\%$ work, $60\%$ $\Delta U$; \textbf{Diatomic $f=5$:} $2/7 = 28.57\%$ work, $5/7 = 71.43\%$ $\Delta U$; \textbf{Polyatomic $f=6$:} $25\%$ work, $75\%$ $\Delta U$.)
+\end{enumerate}
+\end{derivation}
+
+\begin{workedexample}[Adiabatic Scaling \& Heat Capacity Extraction Without Solving for $n$ or $V$]{2018 MIT E3 Q20 \textbar\ Tier 2}{ex:07.4}
+Five moles ($n = \SI{5.000}{\mole}$) of an unknown ideal gas are compressed reversibly and adiabatically from $P_1 = \SI{500.0}{\kilo\pascal}$ and $T_1 = \SI{300.0}{\kelvin}$ to $P_2 = \SI{1000.0}{\kilo\pascal}$, where its temperature is measured to be $T_2 = \SI{378.0}{\kelvin}$ (note that $2^{1/3} = \sqrt[3]{2} \approx 1.25992 \approx 1.260$). (a) Without calculating $\gamma$ or $V$, determine the temperature $T_3$ if the gas is instead expanded reversibly and adiabatically from $(P_1, T_1) = (\SI{500.0}{\kilo\pascal}, \SI{300.0}{\kelvin})$ to $P_3 = \SI{250.0}{\kilo\pascal}$. (b) Extract $\gamma$, $f$, $C_{V,m}$, and $C_{P,m}$ of the gas. (c) Compute the work done $W_{\mathrm{by},1\to 2}$ during the compression $1\to 2$, and the heat required to warm $\SI{5.000}{\mole}$ of this gas by $\Delta T = \SI{10.00}{\kelvin}$ at constant volume ($Q_V$) versus constant pressure ($Q_P$).
+\par\smallskip\noindent
+\textbf{Solution.}
+\begin{enumerate}
+  \item \textbf{(a) Direct ratio scaling from \eref{eq:07:adiabatic-laws}:}
+  Since $T \propto P^{(\gamma-1)/\gamma}$, doubling the pressure ($\SI{500}{\kilo\pascal}\to\SI{1000}{\kilo\pascal}$) multiplies $T$ by the factor $2^{(\gamma-1)/\gamma} = \frac{378.0}{300.0} = 1.260$. Therefore, halving the pressure ($\SI{500}{\kilo\pascal}\to\SI{250}{\kilo\pascal}$) divides $T_1$ by the exact same factor $1.260$:
+  \[
+    T_3 = \frac{T_1}{1.260} = \frac{\SI{300.0}{\kelvin}}{1.260} = \mathbf{\SI{238.10}{\kelvin}} \quad (\text{exact } 300/2^{1/3} = \SI{238.11}{\kelvin})
+  \]
+  \item \textbf{(b) Extracting $\gamma, f, C_{V,m}, C_{P,m}$:}
+  \[
+    2^{(\gamma-1)/\gamma} = 1.260 \approx 2^{1/3} \implies \frac{\gamma - 1}{\gamma} = \frac{1}{3} \implies \boxed{\gamma = \frac{3}{2} = 1.500}, \qquad f = \frac{2}{\gamma - 1} = \mathbf{4}
+  \]
+  \[
+    C_{V,m} = \frac{R}{\gamma - 1} = 2R = \mathbf{\SI{16.629}{\joule\per\mole\per\kelvin}}, \qquad C_{P,m} = \frac{\gamma R}{\gamma - 1} = 3R = \mathbf{\SI{24.943}{\joule\per\mole\per\kelvin}}
+  \]
+  \item \textbf{(c) Adiabatic work $W_{\mathrm{by},1\to 2}$ and isochoric/isobaric heats for $\Delta T = \SI{10.00}{\kelvin}$:}
+  \[
+    W_{\mathrm{by},1\to 2} = -\Delta U_{1\to 2} = -nC_{V,m}(T_2 - T_1) = -(5.000)(2\times 8.314463)(378.0 - 300.0) = \mathbf{\SI{-6.4853}{\kilo\joule}}
+  \]
+  \[
+    Q_V = nC_{V,m}\Delta T = (5.000)(16.6289)(10.00) = \mathbf{+\SI{831.45}{\joule}}, \qquad Q_P = nC_{P,m}\Delta T = (5.000)(24.9434)(10.00) = \mathbf{+\SI{1247.17}{\joule}}
+  \]
+\end{enumerate}
+\verifiedby{Isobaric partition check \eref{eq:07:isobaric-partition}: $\Delta U / Q_P = Q_V / Q_P = 831.45/1247.17 = 2/3 = 1/\gamma$ (\texttt{check\_sec06\_09.py::ex07\_4}).}
+\end{workedexample}
+
+% ============================================================================
+\section{The Polytropic Process Star ($PV^n = \mathrm{const}$), Slope Theorem \& Linear-Chord $T_{\max}$}\label{sec:07.4}
+% ============================================================================
+\idxtopic{polytropic process}\idxtopic{polytropic heat capacity}\idxtopic{adiabat vs. isotherm slope ratio}\idxtopic{maximum temperature on linear P--V path}
+
+Every standard ideal-gas process is a special case of the \textbf{polytropic process} $P V^n = C = \mathrm{const}$, where $n \in (-\infty, \infty)$ is the \textbf{polytropic exponent} \src{S16,S33}:
+\begin{itemize}
+  \item $n = 0 \implies P = \mathrm{const}$ (\textbf{isobaric}, horizontal slope $\Delta P/\Delta V = 0$, $C_{0,m} = C_{P,m}$).
+  \item $n = 1 \implies PV = \mathrm{const}$ (\textbf{isothermal}, slope $\Delta P/\Delta V = -P/V$, $C_{1,m} = \pm\infty$).
+  \item $n = \gamma \implies PV^\gamma = \mathrm{const}$ (\textbf{reversible adiabatic / isentropic}, slope $\Delta P/\Delta V = -\gamma P/V$, $C_{\gamma,m} = 0$).
+  \item $n \to \pm\infty \implies V = \mathrm{const}$ (\textbf{isochoric}, vertical slope $\Delta P/\Delta V = -\infty$, $C_{\infty,m} = C_{V,m}$).
+\end{itemize}
+
+\begin{formulacard}[Polytropic Slope Theorem, Negative Heat Capacity Regime \& Linear-Chord $T_{\max}$ \src{S13,S33}]
+\begin{enumerate}
+  \item \textbf{Algebra-Only Proof That an Adiabat Is $\gamma$ Times Steeper Than an Isotherm:}
+  For a small fractional volume change $\varepsilon = \Delta V / V_0 \ll 1$, the binomial expansion $(1 + \varepsilon)^{-n} \approx 1 - n\varepsilon$ gives $P/P_0 = (V/V_0)^{-n} \approx 1 - n(\Delta V/V_0)$, or:
+  \begin{equation}\label{eq:07:polytropic-slope}
+    \left(\frac{\Delta P}{\Delta V}\right)_{\text{polytropic } n} = -n\,\frac{P}{V} \implies \boxed{\left(\frac{\Delta P}{\Delta V}\right)_{\text{adiabat } (n=\gamma)} = -\gamma\,\frac{P}{V} = \gamma\left(\frac{\Delta P}{\Delta V}\right)_{\text{isotherm } (n=1)}}
+  \end{equation}
+  \idxformula{Adiabat vs. isotherm P--V slope ratio: $(\Delta P/\Delta V)_S = \gamma(\Delta P/\Delta V)_T = -\gamma P/V$}
+  Because $\gamma > 1$, the adiabat is \textbf{always steeper} than the isotherm passing through the same state $(P_0, V_0)$!
+  \item \textbf{Polytropic Molar Heat Capacity ($C_{n,m}$) and the Paradoxical Regime $1 < n < \gamma$:}
+  Combining $\Delta U = n_{\mathrm{mol}}C_{V,m}(T_2 - T_1) = \frac{P_2V_2 - P_1V_1}{\gamma - 1}$ with $W_{\mathrm{by}} = \frac{P_1V_1 - P_2V_2}{n - 1} = \frac{-n_{\mathrm{mol}}R(T_2 - T_1)}{n - 1}$ yields:
+  \begin{equation}\label{eq:07:polytropic-cn}
+    Q = \Delta U + W_{\mathrm{by}} = n_{\mathrm{mol}}\left(C_{V,m} - \frac{R}{n - 1}\right)(T_2 - T_1) = n_{\mathrm{mol}} C_{n,m}(T_2 - T_1), \qquad \boxed{C_{n,m} = C_{V,m}\left(\frac{n - \gamma}{n - 1}\right) = \frac{(n - \gamma)R}{(n - 1)(\gamma - 1)}}
+  \end{equation}
+  \idxformula{Polytropic molar heat capacity: $C_{n,m} = C_{V,m}(n - \gamma)/(n - 1)$}
+  \emph{Crucial Exam Consequence:} Whenever $\mathbf{1 < n < \gamma}$, the polytropic heat capacity is \textbf{strictly negative ($C_{n,m} < 0$)}!
+  \begin{itemize}
+    \item During a polytropic \textbf{expansion} with $1 < n < \gamma$: the gas absorbs heat ($Q > 0$), yet its temperature \textbf{drops} ($\Delta T < 0$) because it performs more boundary work than the heat added ($W_{\mathrm{by}} > Q > 0$)!
+    \item During a polytropic \textbf{compression} with $1 < n < \gamma$: work is done on the gas ($W_{\mathrm{by}} < 0$), heat leaks \textbf{out} ($Q < 0$), yet the gas temperature \textbf{rises} ($\Delta T > 0$)!
+  \end{itemize}
+  \item \textbf{Peak Temperature $T_{\max}$ Along a Negatively Sloped Straight-Line $P$--$V$ Chord (Completing the Square):}
+  Any downward-sloping straight line through $(P_1, V_1)$ and $(P_2, V_2)$ can be extended to its axis intercepts $(0, P_{\mathrm{int}})$ and $(V_{\mathrm{int}}, 0)$ as $\frac{P}{P_{\mathrm{int}}} + \frac{V}{V_{\mathrm{int}}} = 1 \iff P(V) = P_{\mathrm{int}}\left(1 - \frac{V}{V_{\mathrm{int}}}\right)$. The ideal-gas temperature $T(V) = \frac{P(V)V}{nR}$ is a downward-opening parabola:
+  \begin{equation}\label{eq:07:chord-tmax}
+    T(V) = \frac{P_{\mathrm{int}}V_{\mathrm{int}}}{nR}\left(\frac{V}{V_{\mathrm{int}}}\right)\left(1 - \frac{V}{V_{\mathrm{int}}}\right) = \frac{P_{\mathrm{int}}V_{\mathrm{int}}}{4nR}\left[1 - \left(\frac{2V}{V_{\mathrm{int}}} - 1\right)^2\right] \implies \boxed{T_{\max} = \frac{P_{\mathrm{int}}V_{\mathrm{int}}}{4nR} \text{ at } \left(V^*, P^*\right) = \left(\frac{V_{\mathrm{int}}}{2},\, \frac{P_{\mathrm{int}}}{2}\right)}
+  \end{equation}
+  \idxformula{Peak temperature on linear P--V chord: $T_{\max} = P_{\mathrm{int}}V_{\mathrm{int}}/(4nR)$ at $(V_{\mathrm{int}}/2, P_{\mathrm{int}}/2)$}
+\end{enumerate}
+\end{formulacard}
+
+\par\smallskip\noindent
+\begin{minipage}{\linewidth}
+\centering
+\begin{tikzpicture}[font=\scriptsize]
+\begin{axis}[
+    width=0.84\linewidth,
+    height=4.5cm,
+    xlabel={Dimensionless Volume Ratio $V/V_0$},
+    ylabel={Dimensionless Pressure Ratio $P/P_0$},
+    xmin=0.35, xmax=2.5,
+    ymin=0.0, ymax=2.6,
+    grid=both,
+    grid style={gray!25},
+    legend pos=north east,
+    legend style={font=\scriptsize, fill=white, draw=navy},
+    tick label style={font=\scriptsize},
+    label style={font=\scriptsize\bfseries}
+]
+% Shade paradoxical region 1 < n < gamma for expansion (V/V0 > 1) and compression (V/V0 < 1)
+\addplot[navy, very thick, domain=0.40:2.5, samples=36] {1/x};
+\addlegendentry{$n = 1$: Isotherm ($PV = \mathrm{const}, \Delta T = 0$)}
+
+\addplot[rust, very thick, domain=0.48:2.5, samples=36] {x^(-1.4)};
+\addlegendentry{$n = \gamma = 1.4$: Adiabat ($PV^\gamma = \mathrm{const}, Q = 0$)}
+
+\addplot[amber, very thick, dashed, domain=0.44:2.5, samples=36] {x^(-1.25)};
+\addlegendentry{$n = 1.25 \in (1,\gamma)$: Polytropic ($C_{n,m} < 0$)}
+
+% n = 0 (Isobar P/P0 = 1)
+\draw[teal, very thick] (axis cs:0.35,1.0) -- (axis cs:2.5,1.0)
+  node[pos=0.82, above, fill=white, inner sep=1pt] {$n = 0$: Isobar ($P=P_0$)};
+
+% n = infty (Isochor V/V0 = 1)
+\draw[black, very thick, dashdotted] (axis cs:1.0,0.0) -- (axis cs:1.0,2.6)
+  node[pos=0.88, right, fill=white, inner sep=1pt] {$n \to \infty$: Isochor ($V=V_0$)};
+
+% Common pivot point (1,1)
+\fill[black] (axis cs:1.0,1.0) circle (2.4pt) node[below left, fill=white, inner sep=1pt] {\textbf{Pivot $(V_0, P_0)$}};
+
+% Annotations for expansion V > V0
+\node[navy, fill=white, inner sep=1pt] at (axis cs:1.85,0.68) {Isotherm: slope $-P_0/V_0$};
+\node[rust, fill=white, inner sep=1pt] at (axis cs:1.78,0.28) {Adiabat: steeper slope $-\gamma P_0/V_0$};
+\end{axis}
+\end{tikzpicture}
+\captionof{figure}{The Polytropic Process Star $P/P_0 = (V/V_0)^{-n}$ passing through a common reference state $(V_0, P_0)$ \src{S13,S33}. In expansion ($V > V_0$), the adiabat ($n=\gamma$) drops below the isotherm ($n=1$) because $\Delta T < 0$; in compression ($V < V_0$), the adiabat rises above the isotherm because $\Delta T > 0$. Between the two curves ($1 < n < \gamma$), the effective heat capacity $C_{n,m}$ is negative.}\label{fig:07:polytropic-star}
+\idxfig{Polytropic process star PV^n = const through a common state}
+\end{minipage}
+\par\smallskip
+
+\begin{workedexample}[Polytropic Compression with Negative Heat Capacity \& Linear-Chord $T_{\max}$]{National/Invitational \textbar\ Tier 3}{ex:07.5}
+(a) Two moles ($n_{\mathrm{mol}} = \SI{2.000}{\mole}$) of dry air ($\gamma = 1.400, C_{V,m} = \frac{5}{2}R = \SI{20.786}{\joule\per\mole\per\kelvin}$) are compressed polytropically along $PV^{1.250} = \mathrm{const}$ ($n = 1.250$) inside a water-cooled cylinder from $T_1 = \SI{300.0}{\kelvin}$ and $V_1 = \SI{20.00}{\liter}$ to $V_2 = \SI{5.000}{\liter}$. Find the final temperature $T_2$, the boundary work $W_{\mathrm{by}}$, the polytropic molar heat capacity $C_{n,m}$, and the heat transfer $Q$. (b) If the same $2.000\,\si{\mole}$ of air instead expands along the straight-line chord from State~$A$ ($P_A = \SI{400.0}{\kilo\pascal}, V_A = \SI{2.000}{\liter}$) to State~$B$ ($P_B = \SI{100.0}{\kilo\pascal}, V_B = \SI{8.000}{\liter}$), find the maximum temperature $T_{\max}$ reached along the chord and the volume $V_{\mathrm{turn}}$ at which the gas switches from absorbing heat to rejecting heat!
+\par\smallskip\noindent
+\textbf{Solution.}
+\begin{enumerate}
+  \item \textbf{(a) Polytropic compression ($n = 1.250, V_1/V_2 = 4.000$):}
+  \[
+    T_2 = T_1\left(\frac{V_1}{V_2}\right)^{n - 1} = (\SI{300.0}{\kelvin})(4.000)^{0.250} = 300.0 \times \sqrt{2} = \mathbf{\SI{424.264}{\kelvin}} \quad (\Delta T = +\SI{124.264}{\kelvin})
+  \]
+  \[
+    W_{\mathrm{by}} = \frac{n_{\mathrm{mol}}R(T_1 - T_2)}{n - 1} = \frac{(2.000)(8.314463)(-124.264)}{0.250} = \mathbf{\SI{-8.2655}{\kilo\joule}}, \quad \Delta U = n_{\mathrm{mol}}C_{V,m}\Delta T = \mathbf{+\SI{5.1659}{\kilo\joule}}
+  \]
+  \[
+    C_{n,m} = C_{V,m}\left(\frac{n - \gamma}{n - 1}\right) = (20.786)\left(\frac{1.250 - 1.400}{1.250 - 1.000}\right) = -0.600\,C_{V,m} = \mathbf{\SI{-12.472}{\joule\per\mole\per\kelvin}}
+  \]
+  \[
+    Q = \Delta U + W_{\mathrm{by}} = 5.1659 - 8.2655 = n_{\mathrm{mol}}C_{n,m}\Delta T = \mathbf{\SI{-3.0996}{\kilo\joule}}
+  \]
+  Even though $\SI{3.100}{\kilo\joule}$ of heat escapes into the cooling jacket ($Q < 0$), the gas temperature rises by $\SI{124.3}{\kelvin}$ because $\SI{8.266}{\kilo\joule}$ of compression work is done on it!
+  \item \textbf{(b) Peak temperature $T_{\max}$ and heat-reversal point $V_{\mathrm{turn}}$ along chord $A(\SI{2}{\liter},\SI{400}{\kilo\pascal})\to B(\SI{8}{\liter},\SI{100}{\kilo\pascal})$:}
+  The chord slope is $\frac{\Delta P}{\Delta V} = \frac{100 - 400}{8 - 2} = \SI{-50.0}{\kilo\pascal\per\liter}$, giving $P(V) = 500.0 - 50.0\,V$ (intercepts $P_{\mathrm{int}} = \SI{500.0}{\kilo\pascal}, V_{\mathrm{int}} = \SI{10.00}{\liter}$). From \eref{eq:07:chord-tmax}, $T_{\max}$ occurs at the midpoint $(V^*, P^*) = (\SI{5.000}{\liter}, \SI{250.0}{\kilo\pascal}) \in [2, 8]\,\si{\liter}$:
+  \[
+    T_{\max} = \frac{P^* V^*}{n_{\mathrm{mol}}R} = \frac{(250.0)(5.000)}{(2.000)(8.314463)} = \mathbf{\SI{75.170}{\kelvin}} \quad (\text{vs.\ } T_A = T_B = \SI{48.109}{\kelvin})
+  \]
+  \emph{Bonus National Trap — Where does $\delta Q = 0$?} Heat transfer switches sign where the straight chord is \textbf{tangent to an adiabat}, i.e., where the chord slope equals the adiabatic slope $-\gamma P/V$:
+  \[
+    \frac{\Delta P}{\Delta V} = -\frac{P_{\mathrm{int}}}{V_{\mathrm{int}}} = -\gamma\,\frac{P_{\mathrm{int}}(1 - V_{\mathrm{turn}}/V_{\mathrm{int}})}{V_{\mathrm{turn}}} \implies \boxed{V_{\mathrm{turn}} = \frac{\gamma}{\gamma + 1}\,V_{\mathrm{int}}} = \frac{1.400}{2.400}(\SI{10.00}{\liter}) = \mathbf{\SI{5.833}{\liter}}
+  \]
+  Thus the gas absorbs heat on $[2.00, 5.833]\,\si{\liter}$ (even after passing $T_{\max}$ at $\SI{5.00}{\liter}$!) and rejects heat on $[5.833, 8.00]\,\si{\liter}$.
+\end{enumerate}
+\verifiedby{Quadratic energy differential $\delta Q = \frac{5}{2}d(PV) + P\,dV = P_{\mathrm{int}}[3.5 - 6(V/V_{\mathrm{int}})]dV = 0$ at $V/V_{\mathrm{int}} = 3.5/6 = 7/12 = \SI{5.8333}{\liter}$ (\texttt{check\_sec06\_09.py::ex07\_5}).}
+\end{workedexample}
+
+% ============================================================================
+\section[Multi-Leg Closed-Cycle Ledgers ($P, V, T, \Delta U, Q, W_{\mathrm{by}}$)]{Multi-Leg Closed-Cycle Ledgers ($P, V, T, \Delta U, Q, W_{\mathrm{by}}, \Delta H, \Delta S$ Protocol)}\label{sec:07.5}
+% ============================================================================
+\idxtopic{multi-leg cycle ledger}
+
+When an exam presents a 3- or 4-leg thermodynamic cycle and asks for a complete table of state properties $(P_k, V_k, T_k)$ and process transfers $(\Delta U, Q, W_{\mathrm{by}}, \Delta H, \Delta S)$, follow this fail-safe 4-step protocol:
+\begin{enumerate}
+  \item \textbf{Step 1 — Solve All Vertex States $(P_k, V_k, T_k)$ First:} Apply $PV = nRT$ at every vertex before computing any work or heat. Check that $P_k V_k / T_k = nR$ is identical at all vertices.
+  \item \textbf{Step 2 — Fill the $\Delta U$ and $\Delta H$ Columns Using Only Vertex Temperatures:} Compute $\Delta U_{j\to k} = nC_{V,m}(T_k - T_j)$ and $\Delta H_{j\to k} = \gamma\,\Delta U_{j\to k}$ for every leg. Verify immediately that $\sum_{\mathrm{cycle}} \Delta U = 0$ and $\sum_{\mathrm{cycle}} \Delta H = 0$.
+  \item \textbf{Step 3 — Fill the $W_{\mathrm{by}}$ Column from Each Leg's Process Type:} Isochoric $\to 0$; Isobaric $\to P\Delta V = nR\Delta T$; Isothermal $\to nRT\ln(V_k/V_j)$; Adiabatic $\to -\Delta U_{j\to k}$.
+  \item \textbf{Step 4 — Fill the $Q$ Column via $Q = \Delta U + W_{\mathrm{by}}$ and Cross-Check $\sum Q = \sum W_{\mathrm{by}}$:} Never compute $Q$ and $W_{\mathrm{by}}$ with contradictory sign conventions; enforce $Q - W_{\mathrm{by}} = \Delta U$ row by row.
+\end{enumerate}
+
+\begin{workedexample}[Complete 4-Leg Ideal-Gas Cycle Ledger \& Consistency Audit]{Invitational Multi-Part FRQ \textbar\ Tier 2}{ex:07.6}
+One mole ($n = \SI{1.000}{\mole}$) of a diatomic ideal gas ($\gamma = 7/5 = 1.400, C_{V,m} = \frac{5}{2}R, C_{P,m} = \frac{7}{2}R$) executes a 4-step closed cycle starting at State~1 ($P_1 = \SI{100.0}{\kilo\pascal}, T_1 = \SI{300.0}{\kelvin}, V_1 = \SI{24.943}{\liter}$):
+\begin{itemize}
+  \item \textbf{Leg $1\to 2$ (Isochoric heating):} Pressure triples at constant volume $V_1$ to $P_2 = \SI{300.0}{\kilo\pascal}$ ($T_2 = \SI{900.0}{\kelvin}$).
+  \item \textbf{Leg $2\to 3$ (Isothermal expansion):} Gas expands reversibly at $T_3 = T_2 = \SI{900.0}{\kelvin}$ until $V_3 = 2V_1 = \SI{49.887}{\liter}$ ($P_3 = \SI{150.0}{\kilo\pascal}$).
+  \item \textbf{Leg $3\to 4$ (Isochoric cooling):} Gas cools at constant volume $V_4 = V_3 = 2V_1$ back to $T_4 = T_1 = \SI{300.0}{\kelvin}$ ($P_4 = \SI{50.00}{\kilo\pascal}$).
+  \item \textbf{Leg $4\to 1$ (Isothermal compression):} Gas is compressed reversibly at $T_1 = \SI{300.0}{\kelvin}$ from $V_4 = 2V_1$ back to $V_1$.
+\end{itemize}
+Construct the complete cycle ledger for $\Delta U, W_{\mathrm{by}}, Q, \Delta H, \Delta S$ across all 4 legs and determine the cycle's net work output $W_{\mathrm{net,by}}$.
+\par\smallskip\noindent
+\textbf{Solution.} Using $R = \SI{8.314463}{\joule\per\mole\per\kelvin}$, $C_{V,m} = \SI{20.7862}{\joule\per\mole\per\kelvin}$, and $C_{P,m} = \SI{29.1006}{\joule\per\mole\per\kelvin}$:
+\par\smallskip\noindent
+\footnotesize\setlength{\tabcolsep}{4.5pt}\renewcommand{\arraystretch}{1.12}
+\begin{tabularx}{\linewidth}{@{}l l r r r r r@{}}
+\toprule
+\textbf{Leg} & \textbf{Process Type \& Endpoints} & $\Delta U$ ($\si{\joule}$) & $W_{\mathrm{by}}$ ($\si{\joule}$) & $Q = \Delta U + W_{\mathrm{by}}$ ($\si{\joule}$) & $\Delta H$ ($\si{\joule}$) & $\Delta S$ ($\si{\joule\per\kelvin}$) \\
+\midrule
+$1\to 2$ & Isochoric ($V=V_1, \SI{300}{\kelvin}\to\SI{900}{\kelvin}$) & $+12471.7$ & $0.0$ & $+12471.7$ & $+17460.4$ & $+22.836$ \\
+$2\to 3$ & Isothermal ($T=\SI{900}{\kelvin}, V_1\to 2V_1$) & $0.0$ & $+5186.1$ & $+5186.1$ & $0.0$ & $+5.763$ \\
+$3\to 4$ & Isochoric ($V=2V_1, \SI{900}{\kelvin}\to\SI{300}{\kelvin}$) & $-12471.7$ & $0.0$ & $-12471.7$ & $-17460.4$ & $-22.836$ \\
+$4\to 1$ & Isothermal ($T=\SI{300}{\kelvin}, 2V_1\to V_1$) & $0.0$ & $-1728.7$ & $-1728.7$ & $0.0$ & $-5.763$ \\
+\midrule
+\textbf{Cycle Sum} & \textbf{Closed Loop ($1\to 2\to 3\to 4\to 1$)} & $\mathbf{0.0}$ & $\mathbf{+3457.4}$ & $\mathbf{+3457.4}$ & $\mathbf{0.0}$ & $\mathbf{0.000}$ \\
+\bottomrule
+\end{tabularx}
+\par\smallskip\noindent
+Notice that this cycle is a \textbf{Stirling cycle} with volume ratio $V_{\max}/V_{\min} = 2$: its net work is $W_{\mathrm{net,by}} = nR(T_H - T_C)\ln 2 = (1.000)(8.314463)(600.0)(0.693147) = \mathbf{+\SI{3457.4}{\joule}}$.
+\verifiedby{State-function sums $\sum\Delta U = \sum\Delta H = \sum\Delta S = 0$ and $\sum Q - \sum W_{\mathrm{by}} = 3457.40 - 3457.40 = \SI{0.00}{\joule}$ (\texttt{check\_sec06\_09.py::ex07\_6}).}
+\end{workedexample}
+
+% ============================================================================
+\section{Joule Free Expansion ($U = \mathrm{const}$) vs.\ Joule--Thomson Throttling ($H = \mathrm{const}$)}\label{sec:07.6}
+% ============================================================================
+\idxtopic{Joule free expansion}\idxtopic{Joule--Thomson throttling}\idxtopic{Joule--Thomson coefficient $\mu_{\mathrm{JT}}$}\idxtopic{inversion temperature}
+
+One of the highest-frequency conceptual and quantitative traps on Division~C exams (\texttt{2019 MIT E2 MC6--MC7}) is confusing \textbf{Joule free expansion} (an unrestrained closed-system expansion into vacuum where $\mathbf{\Delta U = 0}$) with \textbf{Joule--Thomson throttling} (a continuous steady-flow expansion across a porous plug, capillary tube, or partially opened valve where $\mathbf{\Delta H = 0}$) \src{S13,S16,S26}.
+
+\begin{formulacard}[Joule Free Expansion vs.\ Joule--Thomson Throttling \& Inversion Criterion \src{S13,S16,S33}]
+\begin{enumerate}
+  \item \textbf{Joule Adiabatic Free Expansion (1845 — Closed Double-Chamber Vessel Into Vacuum):}
+  \begin{itemize}
+    \item \emph{System \& First Law:} Rigid insulated outer boundary ($Q = 0$) containing Gas in Chamber~1 ($V_1$) and Vacuum in Chamber~2. Opening the internal stopcock performs zero boundary work against the rigid walls ($W_{\mathrm{by}} = 0$), so $\boxed{\Delta U = Q - W_{\mathrm{by}} = 0 \implies U_2 = U_1}$.
+    \item \emph{Temperature response:} For an \textbf{ideal gas}, $U = U(T)$ only $\implies \Delta T = 0$ (and $\Delta H = \Delta U + \Delta(nRT) = 0$). For a \textbf{Van der Waals real gas}, $U_{\mathrm{vdW}} = nC_{V,m}T - an^2/V$, so doing internal work against attractive forces \textbf{always cools} the gas: $\Delta T_{\mathrm{free}} = -\frac{an}{C_{V,m}}\left(\frac{1}{V_1} - \frac{1}{V_2}\right) < 0$.
+  \end{itemize}
+  \item \textbf{Joule--Thomson Adiabatic Throttling (1852 — Steady Flow Across Porous Plug / Expansion Valve):}
+  \begin{itemize}
+    \item \emph{Algebra-Only Flow-Work Proof That $H_1 = H_2$:} Follow a fixed mass $m$ (or $n$ moles) pushed through an insulated porous plug ($\dot{Q} = 0$, no shaft work $\dot{W}_s = 0$) from upstream pressure $P_1$ (volume $V_1$) to downstream pressure $P_2 < P_1$ (volume $V_2$). The upstream fluid pushes the packet in with work $W_{\mathrm{in,on}} = +P_1 V_1$, while the packet pushes the downstream fluid out with work $W_{\mathrm{out,by}} = +P_2 V_2$. Net work done \emph{by} the packet is $W_{\mathrm{by}} = P_2 V_2 - P_1 V_1$. Applying the First Law $U_2 - U_1 = Q - W_{\mathrm{by}} = 0 - (P_2 V_2 - P_1 V_1)$ gives:
+    \begin{equation}\label{eq:07:throttling-h}
+      \boxed{U_1 + P_1 V_1 = U_2 + P_2 V_2 \iff H_1 = H_2 \quad (\Delta H = 0, \text{ strictly ISENTHALPIC!})}
+    \end{equation}
+    \idxformula{Joule--Thomson throttling conservation: $H_1 = U_1 + P_1V_1 = U_2 + P_2V_2 = H_2$}
+    \item \emph{Joule--Thomson Coefficient $\mu_{\mathrm{JT}}$ and Inversion Temperature $T_{\mathrm{inv}}$:}
+    The rate of temperature change with pressure at constant enthalpy is $\mu_{\mathrm{JT}} \equiv \left(\frac{\Delta T}{\Delta P}\right)_H$. For a dilute Van der Waals gas:
+    \begin{equation}\label{eq:07:mu-jt}
+      \boxed{\mu_{\mathrm{JT}} = \left(\frac{\Delta T}{\Delta P}\right)_H \approx \frac{1}{C_{P,m}}\left(\frac{2a}{RT} - b\right)}, \qquad T_{\mathrm{inv,max}} = \frac{2a}{Rb} = \frac{27}{4}T_c = 6.75\,T_c
+    \end{equation}
+    \idxformula{Joule--Thomson coefficient (vdW): $\mu_{\mathrm{JT}} = (\Delta T/\Delta P)_H \approx \frac{1}{C_{P,m}}(2a/(RT) - b)$}
+    Since throttling always has $\mathbf{\Delta P = P_2 - P_1 < 0}$, the sign of $\Delta T = \mu_{\mathrm{JT}}\Delta P$ is \textbf{opposite} to the sign of $\mu_{\mathrm{JT}}$:
+    \begin{itemize}
+      \item \textbf{Below Inversion Temperature ($T < T_{\mathrm{inv}} \implies \mu_{\mathrm{JT}} > 0$):} $\Delta P < 0$ and $\mu_{\mathrm{JT}} > 0 \implies \mathbf{\Delta T < 0}$ (\textbf{COOLING!}). Includes $\mathrm{N_2}, \mathrm{O_2}, \mathrm{Ar}, \mathrm{CO_2}, \mathrm{CH_4}, \mathrm{NH_3}, \mathrm{R134a}$ at $\SI{300}{\kelvin}$.
+      \item \textbf{Above Inversion Temperature ($T > T_{\mathrm{inv}} \implies \mu_{\mathrm{JT}} < 0$):} Excluded-volume repulsion $b$ dominates ($P_1V_1 > P_2V_2$), so $\Delta P < 0$ and $\mu_{\mathrm{JT}} < 0 \implies \mathbf{\Delta T > 0}$ (\textbf{HEATING!}). Includes $\mathbf{\mathrm{He}}$ ($T_{\mathrm{inv,max}} \approx \SI{40}{\kelvin}$) and $\mathbf{\mathrm{H_2}}$ ($T_{\mathrm{inv,max}} \approx \SI{202}{\kelvin}$) at room temperature ($\SI{300}{\kelvin}$)!
+      \item \textbf{Ideal Gas ($a = b = 0$):} $\mu_{\mathrm{JT}} = 0 \implies \Delta T = 0$ at all pressures.
+    \end{itemize}
+  \end{itemize}
+\end{enumerate}
+\end{formulacard}
+
+\par\smallskip\noindent
+\begin{minipage}{\linewidth}
+\centering
+\begin{tikzpicture}[font=\scriptsize]
+% Left Side: Schematic comparison of Joule Free Expansion vs. Porous-Plug Throttling
+\begin{scope}[shift={(0,0)}]
+  \node[font=\scriptsize\bfseries, navy] at (3.6, 4.15) {(a) Closed Free Expansion vs.\ Open Steady Throttling};
+  % Top box: Joule Free Expansion
+  \draw[thick, fill=boxbg] (0.2, 2.35) rectangle (3.1, 3.75);
+  \draw[thick, fill=white] (3.5, 2.35) rectangle (6.4, 3.75);
+  \draw[thick] (3.1, 2.90) -- (3.5, 2.90) (3.1, 3.20) -- (3.5, 3.20);
+  \draw[rust, very thick] (3.3, 2.75) -- (3.3, 3.35) node[above, font=\scriptsize\bfseries] {Valve};
+  \node[align=center] at (1.65, 3.05) {\textbf{Gas} ($P_1, V_1, T_1$)\\$\Delta U = 0$};
+  \node[align=center] at (4.95, 3.05) {\textbf{Vacuum} ($P_{\mathrm{ext}}=0$)\\$Q=0,\ W_{\mathrm{by}}=0$};
+  \node[navy, font=\scriptsize\bfseries] at (3.3, 2.12) {Joule Free Expansion: $U_1 = U_2$ (Closed Rigid Boundary)};
+
+  % Bottom box: Joule-Thomson Porous Plug
+  \draw[thick, fill=boxbglight] (0.2, 0.45) rectangle (6.4, 1.65);
+  \pattern[pattern=north east lines, pattern color=slate] (3.0, 0.45) rectangle (3.6, 1.65);
+  \draw[thick] (3.0, 0.45) -- (3.0, 1.65) (3.6, 0.45) -- (3.6, 1.65);
+  \draw[navy, very thick, -{Stealth[length=2mm]}] (0.5, 1.05) -- (2.7, 1.05)
+    node[midway, above] {$P_1, T_1, h_1$} node[midway, below] {$+P_1 v_1$ in};
+  \draw[rust, very thick, -{Stealth[length=2mm]}] (3.9, 1.05) -- (6.1, 1.05)
+    node[midway, above] {$P_2 < P_1, T_2, h_2$} node[midway, below] {$-P_2 v_2$ out};
+  \node[fill=white, inner sep=1pt, font=\scriptsize\bfseries] at (3.3, 1.82) {Porous Plug};
+  \node[rust, font=\scriptsize\bfseries] at (3.3, 0.20) {Joule--Thomson Throttling: $h_1 = u_1+P_1v_1 = u_2+P_2v_2 = h_2$};
+\end{scope}
+
+% Right Side: T-P Inversion Diagram & Isenthalps
+\begin{axis}[
+    at={(7.6cm,0.2cm)},
+    width=0.45\linewidth,
+    height=4.0cm,
+    xlabel={Pressure $P$ ($\si{\bar}$)},
+    ylabel={Temperature $T$ ($\si{\kelvin}$)},
+    xmin=0, xmax=500,
+    ymin=50, ymax=680,
+    grid=both,
+    grid style={gray!25},
+    tick label style={font=\scriptsize},
+    label style={font=\scriptsize\bfseries},
+    title={\textbf{(b) J--T Inversion Curve \& Isenthalps ($H=\mathrm{const}$)}}
+]
+% Parabolic inversion curve for N2: P_inv(T) = 420*(1 - ((T - 340)/280)^2)
+\addplot[rust, ultra thick, domain=70:621, samples=36] ({420*(1 - ((x - 345)/276)^2)}, {x});
+% Isenthalps H = const peaking ON the inversion curve
+\addplot[navy, thick, dashed, domain=0:450, samples=36] {160 + 0.25*x - 0.00048*x^2};
+\addplot[navy, thick, dashed, domain=0:480, samples=36] {270 + 0.31*x - 0.00042*x^2};
+\addplot[navy, thick, dashed, domain=0:480, samples=36] {410 + 0.24*x - 0.00048*x^2};
+\addplot[teal, thick, dotted, domain=0:450, samples=36] {570 - 0.16*x};
+
+\node[teal, fill=white, inner sep=1pt, align=center] at (axis cs:180,315) {\textbf{Cooling Dome}\\$\mu_{\mathrm{JT}} > 0$ ($\Delta T < 0$)};
+\node[rust, fill=white, inner sep=1pt, align=center] at (axis cs:330,575) {\textbf{Heating Zone}\\$\mu_{\mathrm{JT}} < 0$ ($\Delta T > 0$)};
+\node[navy, fill=white, inner sep=1pt] at (axis cs:140,145) {Isenthalps $H=\mathrm{const}$};
+\end{axis}
+\end{tikzpicture}
+\captionof{figure}{(a) Physical boundary distinction between closed-system Joule free expansion ($\Delta U = 0$) and steady-flow Joule--Thomson throttling ($\Delta H = 0$). (b) Joule--Thomson $T$--$P$ inversion locus (solid curve, where $\mu_{\mathrm{JT}} = 0$ and isenthalps $H=\mathrm{const}$ reach their peak temperature): throttling ($\Delta P < 0$, moving left along an isenthalp) cools the gas inside the dome ($\mu_{\mathrm{JT}} > 0$) but warms the gas outside the dome ($\mu_{\mathrm{JT}} < 0$) \src{S16,S33}.}\label{fig:07:joule-thomson}
+\idxfig{Joule free expansion vs. Joule--Thomson throttling and T--P inversion curve}
+\end{minipage}
+\par\smallskip
+
+\begin{workedexample}[Joule--Thomson Throttling of $\mathrm{N_2}$ vs.\ $\mathrm{He}$ at $\SI{300}{\kelvin}$ \& Wet-Steam Throttle Quality]{Invitational / National \textbar\ Tier 3}{ex:07.7}
+(a) Using the Van der Waals parameters from \tref{tab:06:vdw-constants} and $C_{P,m}$ from \tref{tab:06:gas-properties}, compute the low-pressure Joule--Thomson coefficient $\mu_{\mathrm{JT}}$ at $T = \SI{300.0}{\kelvin}$ for Nitrogen ($\mathrm{N_2}$: $a = \SI{0.1370}{\pascal\meter^6\per\mole^2}, b = \SI{3.870e-5}{\cubic\meter\per\mole}, C_{P,m} = \SI{29.17}{\joule\per\mole\per\kelvin}$) and Helium ($\mathrm{He}$: $a = \SI{0.00346}{\pascal\meter^6\per\mole^2}, b = \SI{2.380e-5}{\cubic\meter\per\mole}, C_{P,m} = \SI{20.79}{\joule\per\mole\per\kelvin}$), and find the temperature change $\Delta T$ when each gas is throttled from $P_1 = \SI{101.0}{\bar}$ to $P_2 = \SI{1.000}{\bar}$ ($\Delta P = \SI{-100.0}{\bar} = \SI{-1.000e7}{\pascal}$). (b) Saturated liquid water at $T_1 = \SI{150.0}{\celsius}$ ($h_1 = h_{f,\SI{150}{\celsius}} = \SI{632.18}{\kilo\joule\per\kilogram}$) is throttled through an expansion valve to atmospheric pressure $P_2 = \SI{101.325}{\kilo\pascal}$ ($T_{\mathrm{sat}} = \SI{100.0}{\celsius}$, where $h_f = \SI{419.06}{\kilo\joule\per\kilogram}$ and $L_v = h_{fg} = \SI{2256.4}{\kilo\joule\per\kilogram}$ from NIST Table~3.3 \src{S09}). Find the exit vapor quality $x_2$.
+\par\smallskip\noindent
+\textbf{Solution.}
+\begin{enumerate}
+  \item \textbf{(a) Joule--Thomson coefficients at $T = \SI{300.0}{\kelvin}$ ($RT = \SI{2494.34}{\joule\per\mole}$) from \eref{eq:07:mu-jt}:}
+  \begin{itemize}
+    \item \textbf{Nitrogen ($\mathrm{N_2}$):}
+    \[
+      \mu_{\mathrm{JT,N_2}} = \frac{1}{29.17}\left(\frac{2(0.1370)}{2494.34} - 3.870\times 10^{-5}\right) = \frac{1.0985\times 10^{-4} - 3.870\times 10^{-5}}{29.17} = \mathbf{+\SI{2.439e-6}{\kelvin\per\pascal}} = \mathbf{+\SI{0.2439}{\kelvin\per\bar}}
+    \]
+    \[
+      \Delta T_{\mathrm{N_2}} = \mu_{\mathrm{JT,N_2}}\Delta P = (+0.2439\,\si{\kelvin\per\bar})(-100.0\,\si{\bar}) = \mathbf{\SI{-24.39}{\kelvin}} \quad (\mathrm{N_2}\text{ \textbf{cools} to } \SI{275.6}{\kelvin}!)
+    \]
+    \item \textbf{Helium ($\mathrm{He}$):}
+    \[
+      \mu_{\mathrm{JT,He}} = \frac{1}{20.79}\left(\frac{2(0.00346)}{2494.34} - 2.380\times 10^{-5}\right) = \frac{2.774\times 10^{-6} - 2.380\times 10^{-5}}{20.79} = \mathbf{\SI{-1.011e-6}{\kelvin\per\pascal}} = \mathbf{\SI{-0.1011}{\kelvin\per\bar}}
+    \]
+    \[
+      \Delta T_{\mathrm{He}} = \mu_{\mathrm{JT,He}}\Delta P = (-0.1011\,\si{\kelvin\per\bar})(-100.0\,\si{\bar}) = \mathbf{+\SI{10.11}{\kelvin}} \quad (\mathrm{He}\text{ \textbf{warms} to } \SI{310.1}{\kelvin}!)
+    \]
+  \end{itemize}
+  \item \textbf{(b) Isenthalpic flash-evaporation quality of throttled water ($h_2 = h_1 = \SI{632.18}{\kilo\joule\per\kilogram}$):}
+  \[
+    h_2 = h_{f,\SI{100}{\celsius}} + x_2 h_{fg,\SI{100}{\celsius}} = h_1 \implies x_2 = \frac{h_1 - h_{f,\SI{100}{\celsius}}}{h_{fg,\SI{100}{\celsius}}} = \frac{632.18 - 419.06}{2256.4} = \frac{213.12}{2256.4} = \mathbf{0.09445} \quad (9.45\%\text{ flashes to steam!})
+  \]
+\end{enumerate}
+\verifiedby{Max inversion temperatures \eref{eq:07:mu-jt}: $T_{\mathrm{inv,N_2}} = 2a/(Rb) = \SI{851.6}{\kelvin} > \SI{300}{\kelvin}$, whereas $T_{\mathrm{inv,He}} = \SI{34.97}{\kelvin} < \SI{300}{\kelvin}$ (\texttt{check\_sec06\_09.py::ex07\_7}).}
+\end{workedexample}
+
+% ============================================================================
+\section{Open-System Steady-Flow First Law (SFEE) \& Tank-Charging Transients}\label{sec:07.7}
+% ============================================================================
+\idxtopic{steady-flow energy equation (SFEE)}\idxtopic{control volume}\idxtopic{nozzle and diffuser}\idxtopic{turbine and compressor}\idxtopic{tank charging transient}
+
+For an open control volume operating in steady state ($\Delta m_{\mathrm{cv}}/\Delta t = 0$ and $\Delta E_{\mathrm{cv}}/\Delta t = 0$), mass conservation requires $\dot{m}_{\mathrm{in}} = \dot{m}_{\mathrm{out}} = \dot{m} = \rho A v_{\mathrm{flow}} = A v_{\mathrm{flow}}/v$ ($\si{\kilogram\per\second}$). Because the entering fluid brings internal energy $u_1$ plus flow work $P_1 v_1$ ($u_1 + P_1 v_1 = h_1$), the \textbf{Steady-Flow Energy Equation (SFEE)} automatically replaces $u$ with specific enthalpy $h = u + Pv$ \src{S12,S16,S33}:
+\begin{equation}\label{eq:07:sfee}
+  \boxed{\dot{Q}_{\mathrm{cv}} - \dot{W}_{s,\mathrm{by}} = \dot{m}\left[(h_2 - h_1) + \frac{v_{\mathrm{flow},2}^2 - v_{\mathrm{flow},1}^2}{2} + g_n(z_2 - z_1)\right]}, \qquad q_{\mathrm{cv}} - w_{s,\mathrm{by}} = (h_2 - h_1) + \frac{v_{\mathrm{flow},2}^2 - v_{\mathrm{flow},1}^2}{2} + g_n(z_2 - z_1)
+\end{equation}
+\idxformula{Steady-Flow Energy Equation (SFEE): $\dot{Q}_{\mathrm{cv}} - \dot{W}_{s,\mathrm{by}} = \dot{m}[(h_2-h_1) + \frac{1}{2}(v_2^2-v_1^2) + g_n(z_2-z_1)]$}
+
+\begin{formulacard}[Master Steady-Flow Engineering Device \& Unsteady Tank-Charging Table \src{S12,S16,S33}]
+\par\smallskip\noindent
+\footnotesize\setlength{\tabcolsep}{3.5pt}\renewcommand{\arraystretch}{1.15}
+\begin{tabularx}{\linewidth}{@{}l l l X@{}}
+\toprule
+\textbf{Open-System Device} & \textbf{Negligible Terms} & \textbf{Governing Algebraic First-Law Relation} & \textbf{Crucial Unit \& Physics Notes} \\
+\midrule
+\textbf{1. Adiabatic Nozzle} & $\dot{Q}=0, \dot{W}_s=0, \Delta z=0$ & $v_{\mathrm{flow},2} = \sqrt{v_{\mathrm{flow},1}^2 + 2(h_1 - h_2)}$ & Convert $\Delta h$ from $\si{\kilo\joule\per\kilogram}$ to $\mathbf{\si{\joule\per\kilogram}}$ ($\times 1000$)! \\
+\textbf{2. Adiabatic Turbine} & $\dot{Q}=0, \Delta\mathrm{KE}\approx 0$ & $\dot{W}_{t,\mathrm{by}} = \dot{m}(h_1 - h_2) > 0$ & Isentropic efficiency: $\eta_t = \dfrac{h_1 - h_{2a}}{h_1 - h_{2s}} \le 1$. \\
+\textbf{3. Compressor / Pump} & $\dot{Q}=0, \Delta\mathrm{KE}\approx 0$ & $\dot{W}_{\mathrm{in,on}} = -\dot{W}_{s,\mathrm{by}} = \dot{m}(h_2 - h_1) > 0$ & Liquid pump: $w_{p,\mathrm{in}} \approx v_f(P_2 - P_1)$; $\eta_c = \dfrac{h_{2s}-h_1}{h_{2a}-h_1}$. \\
+\textbf{4. Throttling Valve} & $\dot{Q}=0, \dot{W}_s=0, \Delta\mathrm{KE}\approx 0$ & $h_2 = h_1$ ($u_2 + P_2 v_2 = u_1 + P_1 v_1$) & Strictly isenthalpic; pressure drops ($P_2 < P_1$). \\
+\textbf{5. Heat Exchanger} & $\dot{W}_s=0, \dot{Q}_{\mathrm{ext}}=0$ & $\dot{m}_{\mathrm{hot}}(h_{h,\mathrm{in}} - h_{h,\mathrm{out}}) = \dot{m}_{\mathrm{cold}}(h_{c,\mathrm{out}} - h_{c,\mathrm{in}})$ & Each stream stays at constant pressure ($\Delta h = c_p\Delta T$). \\
+\textbf{6. Evacuated Tank Fill} & Insulated rigid tank & $u_{\mathrm{tank},2} = h_{\mathrm{line}} \implies C_{V,m}T_{\mathrm{tank},2} = C_{P,m}T_{\mathrm{line}}$ & $\boxed{T_{\mathrm{tank},2} = \gamma\,T_{\mathrm{line}}}$ (flow work heats tank gas by $\gamma\times$!). \\
+\bottomrule
+\end{tabularx}
+\idxformula{Nozzle exit velocity: $v_{\mathrm{flow},2} = \sqrt{v_{\mathrm{flow},1}^2 + 2(h_1 - h_2)}$}\idxformula{Adiabatic evacuated tank filling temperature: $T_{\mathrm{tank},2} = \gamma T_{\mathrm{line}}$}
+\end{formulacard}
+
+\begin{workedexample}[Adiabatic Steam Nozzle Velocity \& Insulated Evacuated Tank Filling Paradox]{National/Invitational \textbar\ Tier 3}{ex:07.8}
+(a) Superheated steam enters an insulated horizontal converging--diverging nozzle at $P_1 = \SI{1.000}{\mega\pascal}, T_1 = \SI{300.0}{\celsius}$ with specific enthalpy $h_1 = \SI{3051.6}{\kilo\joule\per\kilogram}$ and inlet speed $v_{\mathrm{flow},1} = \SI{50.00}{\meter\per\second}$, and exits at $P_2 = \SI{101.325}{\kilo\pascal}$ with specific enthalpy $h_2 = \SI{2675.6}{\kilo\joule\per\kilogram}$. Calculate the exit speed $v_{\mathrm{flow},2}$. (b) An insulated, rigid, initially evacuated tank ($n_1 = 0$) is connected via a valve to a large supply pipeline carrying dry air ($\gamma = 1.400$) at $T_{\mathrm{line}} = \SI{300.0}{\kelvin}$ and $P_{\mathrm{line}} = \SI{500.0}{\kilo\pascal}$. The valve is opened until the tank pressure reaches $P_{\mathrm{line}}$ and is then closed. Find the final temperature $T_{\mathrm{tank},2}$ of the air inside the tank!
+\par\smallskip\noindent
+\textbf{Solution.}
+\begin{enumerate}
+  \item \textbf{(a) Adiabatic nozzle exit speed (converting $\Delta h = 3051.6 - 2675.6 = \SI{376.0}{\kilo\joule\per\kilogram} = \SI{3.760e5}{\joule\per\kilogram}$!):}
+  \[
+    v_{\mathrm{flow},2} = \sqrt{v_{\mathrm{flow},1}^2 + 2(h_1 - h_2)} = \sqrt{(50.00)^2 + 2(3.760\times 10^5)} = \sqrt{2500 + 752000} = \mathbf{\SI{868.62}{\meter\per\second}}
+  \]
+  \item \textbf{(b) Unsteady tank-filling First-Law ledger:}
+  When $n_2$ moles enter the rigid evacuated tank ($Q = 0, W_{\mathrm{tank,by}} = 0$) from the supply line, the pipeline performs flow work $W_{\mathrm{flow,on}} = P_{\mathrm{line}}V_{\mathrm{line}} = n_2 R T_{\mathrm{line}}$ pushing those $n_2$ moles across the valve, in addition to their internal energy $U_{\mathrm{in}} = n_2 C_{V,m} T_{\mathrm{line}}$. Thus the final internal energy of the tank gas is:
+  \[
+    U_{\mathrm{tank},2} = n_2 C_{V,m} T_{\mathrm{tank},2} = U_{\mathrm{in}} + W_{\mathrm{flow,on}} = n_2(C_{V,m} + R)T_{\mathrm{line}} = n_2 C_{P,m} T_{\mathrm{line}} \implies T_{\mathrm{tank},2} = \gamma T_{\mathrm{line}} = 1.400(\SI{300.0}{\kelvin}) = \mathbf{\SI{420.0}{\kelvin}}
+  \]
+  The air inside the tank warms by $+\SI{120.0}{\kelvin}$ ($\SI{146.9}{\celsius}$) solely from the pipeline's $PV$ push work!
+\end{enumerate}
+\verifiedby{Nozzle kinetic energy check: $\frac{1}{2}(868.62^2 - 50^2) = \SI{376000}{\joule\per\kilogram} = \SI{376.0}{\kilo\joule\per\kilogram}$ (\texttt{check\_sec06\_09.py::ex07\_8}).}
+\end{workedexample}
+
+% ============================================================================
+\section{Coordinate Transformation Atlas ($P$--$V \leftrightarrow P$--$T \leftrightarrow V$--$T$) \& Compound Spring/Stop Cylinders}\label{sec:07.8}
+% ============================================================================
+\idxtopic{P--T and V--T diagram coordinate transformations}\idxtopic{spring-loaded and stop-pin piston-cylinder}\idxtopic{adiabatic tank blowdown and charging}
+
+Invitational and National exams frequently plot ideal-gas cycles on **$P$--$T$** or **$V$--$T$** axes (\texttt{2019 MIT E2 P2b TB \#4}) or couple a gas to mechanical stops and linear springs \src{S26,S28,S33}. Use the conversion matrix below to translate any path across all three thermodynamic planes before calculating work or heat.
+
+\begin{formulacard}[Master $P$--$V \leftrightarrow P$--$T \leftrightarrow V$--$T$ Coordinate Transformation \& Slope Rules \src{S13,S26,S33}]
+\par\smallskip\noindent
+\footnotesize\setlength{\tabcolsep}{3.5pt}\renewcommand{\arraystretch}{1.15}
+\begin{tabularx}{\linewidth}{@{}l l l l X@{}}
+\toprule
+\textbf{Process Type} & \textbf{On $P$--$V$ Plane} & \textbf{On $P$--$T$ Plane} & \textbf{On $V$--$T$ Plane} & \textbf{Slope \& Ray-Through-Origin Comparison Rules} \\
+\midrule
+\textbf{Isochoric} ($V=\mathrm{const}$) & Vertical line & \textbf{Ray through origin} & Horizontal line & On $P$--$T$: $P = \left(\dfrac{nR}{V}\right)T \implies$ \textbf{larger $V$ = shallower ray slope}! \\
+\textbf{Isobaric} ($P=\mathrm{const}$) & Horizontal line & Horizontal line & \textbf{Ray through origin} & On $V$--$T$: $V = \left(\dfrac{nR}{P}\right)T \implies$ \textbf{larger $P$ = shallower ray slope}! \\
+\textbf{Isothermal} ($T=\mathrm{const}$) & Hyperbola $P \propto 1/V$ & Vertical line & Vertical line & Moving up on $P$--$T$ at fixed $T$ is compression ($V$ decreases). \\
+\textbf{Adiabatic} ($PV^\gamma=\mathrm{const}$) & Steep curve $P \propto V^{-\gamma}$ & Curve $P \propto T^{\frac{\gamma}{\gamma-1}}$ & Curve $V \propto T^{-\frac{1}{\gamma-1}}$ & On $P$--$T$: slope $\dfrac{\Delta P}{\Delta T} = \dfrac{\gamma}{\gamma - 1}\dfrac{P}{T}$ is $\mathbf{\dfrac{\gamma}{\gamma - 1}\times}$ steeper than isochor ray! \\
+\bottomrule
+\end{tabularx}
+\par\smallskip\noindent
+\idxformula{Adiabat slope on P--T diagram: $(\Delta P/\Delta T)_S = [\gamma/(\gamma-1)](P/T)$}
+\begin{itemize}
+  \item \textbf{The \texttt{2019 MIT E2 P2b(i)} $P$--$T$ Extensive Work Trap:} A $P$--$T$ diagram specifies intensive variables $(P, T)$ only. Although cycle efficiency $\eta = W_{\mathrm{net}}/Q_H$ and molar heat capacities $C_{V,m}, C_{P,m}$ can be found directly from pressure and temperature ratios on a $P$--$T$ plot, total extensive work $W_{\mathrm{by}}$ ($\si{\joule}$) \textbf{cannot be determined} unless the mole number $n$ (or volume $V$ at one state) is also given!\idxerr{computing extensive work $W$ from a $P$--$T$ diagram when $n$ and $V$ are unknown}
+  \item \textbf{Extracting $C_{V,m}$ and Molecular Geometry from an Adiabat on a $P$--$T$ Plot (\texttt{2019 MIT E2 P2b(iii)}):}
+  Given two points $(T_1, P_1)$ and $(T_2, P_2)$ along a reversible adiabat on a $P$--$T$ graph, taking natural logarithms of $P_2/P_1 = (T_2/T_1)^{\gamma/(\gamma-1)} = (T_2/T_1)^{(C_{V,m}+R)/R}$ yields:
+  \begin{equation}\label{eq:07:pt-adiabat-cv}
+    \frac{\gamma}{\gamma - 1} = \frac{C_{P,m}}{R} = 1 + \frac{C_{V,m}}{R} = \frac{\ln(P_2/P_1)}{\ln(T_2/T_1)} \implies \boxed{\frac{C_{V,m}}{R} = \frac{\ln(P_2/P_1)}{\ln(T_2/T_1)} - 1, \qquad f = 2\left[\frac{\ln(P_2/P_1)}{\ln(T_2/T_1)} - 1\right]}
+  \end{equation}
+  \idxformula{Extracting $C_{V,m}/R$ from P--T adiabat: $C_{V,m}/R = \ln(P_2/P_1)/\ln(T_2/T_1) - 1$}
+\end{itemize}
+\end{formulacard}
+
+\begin{workedexample}[Decoding a Cycle Plotted on $P$--$T$ Axes \& Extracting Molecular Structure]{2019 MIT E2 P2b \textbar\ Tier 3}{ex:07.9}
+An ideal gas undergoes a reversible Carnot cycle plotted on a $P$--$T$ diagram between cold reservoir $T_C = \SI{298.0}{\kelvin}$ and hot reservoir $T_H = \SI{390.0}{\kelvin}$. Along the adiabatic compression leg ($1\to 2$) from $T_1 = T_C = \SI{298.0}{\kelvin}$ to $T_2 = T_H = \SI{390.0}{\kelvin}$, the pressure triples ($P_2/P_1 = 3.000$). (a) Calculate the Carnot thermal efficiency $\eta$. (b) Use \eref{eq:07:pt-adiabat-cv} to determine $C_{V,m}/R$, $C_{P,m}/R$, $\gamma$, the active degrees of freedom $f$, and the molecular geometry of the gas. (c) If $n = \SI{2.000}{\mole}$ and the isothermal expansion leg ($2\to 3$) at $T_H = \SI{390.0}{\kelvin}$ drops the pressure from $P_2 = \SI{600.0}{\kilo\pascal}$ to $P_3 = \SI{300.0}{\kilo\pascal}$, find $Q_H, W_{\mathrm{net,by}}$, and $Q_C$ for the cycle.
+\par\smallskip\noindent
+\textbf{Solution.}
+\begin{enumerate}
+  \item \textbf{(a) Carnot efficiency:}
+  \[
+    \eta = 1 - \frac{T_C}{T_H} = 1 - \frac{298.0}{390.0} = \frac{92.0}{390.0} = \mathbf{0.23590} \quad (23.59\%)
+  \]
+  \item \textbf{(b) Extracting heat capacity and molecular geometry from the $P$--$T$ adiabat \eref{eq:07:pt-adiabat-cv}:}
+  \[
+    1 + \frac{C_{V,m}}{R} = \frac{\ln(P_2/P_1)}{\ln(T_2/T_1)} = \frac{\ln(3.000)}{\ln(390.0/298.0)} = \frac{1.098612}{0.269055} = \mathbf{4.0832 \approx 4.00}
+  \]
+  \[
+    \implies \boxed{C_{V,m} \approx 3R = \SI{24.94}{\joule\per\mole\per\kelvin}}, \qquad C_{P,m} \approx 4R = \SI{33.26}{\joule\per\mole\per\kelvin}, \qquad \gamma = \frac{4}{3} \approx 1.333, \qquad f = 6
+  \]
+  Since $f = 6$ ($3$ translational $+ 3$ rotational degrees of freedom), the gas is a \textbf{nonlinear polyatomic molecule with $\ge 3$ atoms} (such as $\mathrm{H_2O}(g), \mathrm{NH_3}$, or $\mathrm{CH_4}$).
+  \item \textbf{(c) Cycle heat and net work for $n = \SI{2.000}{\mole}$ with $P_2/P_3 = 600.0/300.0 = 2.000$:}
+  \[
+    Q_H = nRT_H\ln\left(\frac{P_2}{P_3}\right) = (2.000)(8.314463)(390.0)\ln(2.000) = \mathbf{+\SI{4494.6}{\joule}}
+  \]
+  \[
+    W_{\mathrm{net,by}} = \eta Q_H = \left(\frac{92.0}{390.0}\right)(4494.6) = \mathbf{+\SI{1060.3}{\joule}}, \qquad Q_C = Q_H - W_{\mathrm{net,by}} = \mathbf{\SI{3434.3}{\joule}}
+  \]
+\end{enumerate}
+\verifiedby{Direct cold-isotherm check: $Q_C = nRT_C\ln 2 = 2(8.314463)(298.0)\ln 2 = \SI{3434.3}{\joule}$ and $Q_H - Q_C = \SI{1060.3}{\joule}$ (\texttt{check\_sec06\_09.py::ex07\_9}).}
+\end{workedexample}
+
+\begin{formulacard}[Three-Stage Stop-Pin \& Spring-Loaded Piston-Cylinder Heating Protocol \src{S16,S33}]
+Consider a vertical cylinder of cross-sectional area $A$ holding $n$ moles of gas beneath a piston of mass $m_p$ resting on lower mechanical stops at volume $V_1$, with a linear spring of stiffness $k_{\mathrm{sp}}$ positioned above the piston so that it first touches at volume $V_2 \ge V_1$:
+\begin{enumerate}
+  \item \textbf{Stage 1 — Piston Seated on Bottom Stops ($V = V_1$, for $P_1 \le P \le P_{\mathrm{lift}}$):}
+  The piston cannot rise until the internal gas pressure balances atmospheric pressure plus the piston's weight:
+  \begin{equation}\label{eq:07:piston-lift}
+    \boxed{P_{\mathrm{lift}} = P_{\mathrm{atm}} + \frac{m_p g_n}{A}}, \qquad T_{\mathrm{lift}} = \frac{P_{\mathrm{lift}}V_1}{nR}, \qquad W_{\mathrm{by},1\to\mathrm{lift}} = 0, \qquad Q_{1\to\mathrm{lift}} = \Delta U_{1\to\mathrm{lift}} = \frac{V_1(P_{\mathrm{lift}} - P_1)}{\gamma - 1}
+  \end{equation}
+  \idxformula{Piston lift-off pressure: $P_{\mathrm{lift}} = P_{\mathrm{atm}} + m_p g_n / A$}
+  \item \textbf{Stage 2 — Free Isobaric Rise Before Spring Contact ($P = P_{\mathrm{lift}}$, for $V_1 \le V \le V_2$):}
+  \begin{equation}\label{eq:07:piston-free}
+    T_2 = \frac{P_{\mathrm{lift}}V_2}{nR}, \qquad W_{\mathrm{by},\mathrm{lift}\to 2} = P_{\mathrm{lift}}(V_2 - V_1), \qquad Q_{\mathrm{lift}\to 2} = \Delta H_{\mathrm{lift}\to 2} = \frac{\gamma P_{\mathrm{lift}}(V_2 - V_1)}{\gamma - 1}
+  \end{equation}
+  \item \textbf{Stage 3 — Linear Spring Compression ($V_2 \le V \le V_3$, spring compressed by $\Delta x = (V - V_2)/A$):}
+  \begin{equation}\label{eq:07:piston-spring-stage}
+    P_3 = P_{\mathrm{lift}} + \frac{k_{\mathrm{sp}}(V_3 - V_2)}{A^2}, \qquad W_{\mathrm{by},2\to 3} = \frac{P_{\mathrm{lift}} + P_3}{2}(V_3 - V_2) = \underbrace{P_{\mathrm{lift}}(V_3 - V_2)}_{\text{atm + piston lift work}} + \underbrace{\frac{1}{2}k_{\mathrm{sp}}(\Delta x_3)^2}_{\text{elastic energy stored in spring}}
+  \end{equation}
+  \idxformula{Three-stage stop+spring piston work: $W_{\mathrm{tot}} = P_{\mathrm{lift}}(V_3 - V_1) + \frac{1}{2}k_{\mathrm{sp}}\Delta x_3^2$}
+\end{enumerate}
+\end{formulacard}
+
+\begin{workedexample}[Three-Stage Stop-Pin + Free-Rise + Spring-Loaded Cylinder Heating Ledger]{National/Invitational FRQ \textbar\ Tier 3}{ex:07.10}
+A vertical cylinder of cross-sectional area $A = \SI{0.01000}{\square\meter}$ ($\SI{100.0}{\square\centi\meter}$) contains $n = \SI{0.5000}{\mole}$ of monatomic Argon ($\gamma = 5/3, C_{V,m} = \frac{3}{2}R$) initially at $P_1 = \SI{100.0}{\kilo\pascal}$ and $V_1 = \SI{10.00}{\liter}$ ($\SI{0.01000}{\cubic\meter}$), with a frictionless piston of mass $m_p = \SI{50.986}{\kilogram}$ resting on lower stops ($P_{\mathrm{atm}} = \SI{100.0}{\kilo\pascal}, g_n = \SI{9.80665}{\meter\per\square\second}$). At a height corresponding to $V_2 = \SI{15.00}{\liter}$ ($\SI{0.01500}{\cubic\meter}$), the top of the piston contacts an unstretched linear spring of stiffness $k_{\mathrm{sp}} = \SI{20.00}{\kilo\newton\per\meter}$ ($\SI{2.000e4}{\newton\per\meter}$). Heat is slowly added to the Argon until the volume reaches $V_3 = \SI{20.00}{\liter}$ ($\SI{0.02000}{\cubic\meter}$). Find (a) the lift-off pressure $P_{\mathrm{lift}}$ and initial/final temperatures $T_1, T_3$, (b) the total boundary work $W_{\mathrm{by},1\to 3}$ and the elastic potential energy $E_{\mathrm{spring}}$ stored in the spring, and (c) the total heat $Q_{1\to 3}$ added to the gas.
+\par\smallskip\noindent
+\textbf{Solution.}
+\begin{enumerate}
+  \item \textbf{(a) Lift-off pressure $P_{\mathrm{lift}}$, final pressure $P_3$, and temperatures $T_1, T_3$:}
+  \[
+    P_{\mathrm{lift}} = P_{\mathrm{atm}} + \frac{m_p g_n}{A} = \SI{100.0e3}{\pascal} + \frac{(50.986)(9.80665)}{0.01000} = 100.0\times 10^3 + 50.00\times 10^3 = \mathbf{\SI{150.0}{\kilo\pascal}}
+  \]
+  From $V_2 = \SI{15.00}{\liter}$ to $V_3 = \SI{20.00}{\liter}$, the piston rises by $\Delta x_3 = \frac{V_3 - V_2}{A} = \frac{\SI{0.00500}{\cubic\meter}}{\SI{0.01000}{\square\meter}} = \SI{0.5000}{\meter}$, compressing the spring:
+  \[
+    P_3 = P_{\mathrm{lift}} + \frac{k_{\mathrm{sp}}\Delta x_3}{A} = \SI{150.0}{\kilo\pascal} + \frac{(\SI{20.00}{\kilo\newton\per\meter})(\SI{0.5000}{\meter})}{\SI{0.01000}{\square\meter}} = 150.0 + 1000.0 = \mathbf{\SI{1150.0}{\kilo\pascal}}
+  \]
+  \[
+    T_1 = \frac{P_1 V_1}{nR} = \frac{(100.0)(10.00)}{(0.5000)(8.314463)} = \mathbf{\SI{240.54}{\kelvin}}, \qquad T_3 = \frac{P_3 V_3}{nR} = \frac{(1150.0)(20.00)}{(0.5000)(8.314463)} = \mathbf{\SI{5532.5}{\kelvin}}
+  \]
+  \item \textbf{(b) Stage-by-stage boundary work $W_{\mathrm{by},1\to 3}$ and spring energy $E_{\mathrm{spring}}$:}
+  \begin{itemize}
+    \item Stage 1 (Isochoric at $V_1 = \SI{10.00}{\liter}$, $P: 100\to\SI{150}{\kilo\pascal}$): $W_1 = \SI{0.00}{\joule}$.
+    \item Stage 2 (Isobaric at $P_{\mathrm{lift}} = \SI{150.0}{\kilo\pascal}$, $V: 10.00\to\SI{15.00}{\liter}$): $W_2 = (150.0)(15.00 - 10.00) = \SI{+750.0}{\joule}$.
+    \item Stage 3 (Linear spring, $V: 15.00\to\SI{20.00}{\liter}$, $P: 150.0\to\SI{1150.0}{\kilo\pascal}$):
+    \[
+      W_3 = \frac{150.0 + 1150.0}{2}(20.00 - 15.00) = \SI{+3250.0}{\joule}, \qquad E_{\mathrm{spring}} = \frac{1}{2}k_{\mathrm{sp}}(\Delta x_3)^2 = \frac{1}{2}(20000)(0.5000)^2 = \mathbf{\SI{2500.0}{\joule}}
+    \]
+  \end{itemize}
+  \[
+    W_{\mathrm{by},1\to 3} = W_1 + W_2 + W_3 = 0 + 750.0 + 3250.0 = \mathbf{+\SI{4000.0}{\joule}} = \mathbf{+\SI{4.000}{\kilo\joule}}
+  \]
+  \item \textbf{(c) Internal energy change $\Delta U_{1\to 3}$ and total heat input $Q_{1\to 3}$:}
+  \[
+    \Delta U_{1\to 3} = \frac{P_3 V_3 - P_1 V_1}{\gamma - 1} = \frac{3}{2}\left[(1150.0)(20.00) - (100.0)(10.00)\right] = \frac{3}{2}(23000 - 1000) = \mathbf{+\SI{33000.0}{\joule}} = \mathbf{+\SI{33.00}{\kilo\joule}}
+  \]
+  \[
+    Q_{1\to 3} = \Delta U_{1\to 3} + W_{\mathrm{by},1\to 3} = 33.00 + 4.000 = \mathbf{+\SI{37.00}{\kilo\joule}}
+  \]
+\end{enumerate}
+\verifiedby{Work partition check \eref{eq:07:piston-spring-stage}: $P_{\mathrm{lift}}(V_3 - V_1) + E_{\mathrm{spring}} = 150.0(10.00) + 2500.0 = 1500.0 + 2500.0 = \SI{4000.0}{\joule}$ (\texttt{check\_sec06\_09.py::ex07\_10}).}
+\end{workedexample}
+
+\begin{formulacard}[General Partial Tank Charging, Adiabatic Blowdown \& Steady-Flow Mixing Chambers \src{S16,S33}]
+\begin{itemize}
+  \item \textbf{Partial Adiabatic Tank Charging ($n_1 > 0 \to n_2$):}
+  An insulated rigid tank of volume $V$ initially holding $n_1$ moles of ideal gas at $(P_1, T_1)$ is charged from a supply manifold at temperature $T_{\mathrm{line}}$ until the tank pressure reaches $P_2$. Energy conservation $U_2 - U_1 = (n_2 - n_1)H_{m,\mathrm{line}}$ implies $n_2 T_2 - n_1 T_1 = \gamma(n_2 - n_1)T_{\mathrm{line}}$. Substituting $n_k = P_k V/(R T_k)$ gives the closed algebraic formula for $T_2$:
+  \begin{equation}\label{eq:07:partial-tank-charge}
+    \boxed{T_2 = \frac{\gamma P_2 T_1 T_{\mathrm{line}}}{\gamma P_1 T_{\mathrm{line}} + (P_2 - P_1)T_1}}
+  \end{equation}
+  \idxformula{Partial adiabatic tank charging temperature: $T_2 = \gamma P_2 T_1 T_{\mathrm{line}}/[\gamma P_1 T_{\mathrm{line}} + (P_2 - P_1)T_1]$}
+  (Note: Setting $P_1 = 0$ immediately recovers the evacuated-tank limit $T_2 = \gamma T_{\mathrm{line}}$!)
+  \item \textbf{Adiabatic Tank Venting / Blowdown ($P_1 \to P_2 < P_1$):}
+  When an insulated tank vents gas rapidly through a valve from $P_1$ down to $P_2$, the gas \emph{remaining inside the tank} expands reversibly and adiabatically against the escaping gas, cooling to:
+  \begin{equation}\label{eq:07:tank-blowdown}
+    \boxed{T_{\mathrm{rem},2} = T_1\left(\frac{P_2}{P_1}\right)^{\frac{\gamma - 1}{\gamma}}}, \qquad \frac{n_2}{n_1} = \left(\frac{P_2}{P_1}\right)^{\frac{1}{\gamma}}
+  \end{equation}
+  \idxformula{Adiabatic tank blowdown temperature: $T_{\mathrm{rem},2} = T_1(P_2/P_1)^{(\gamma-1)/\gamma}$}
+  \item \textbf{Steady-Flow Adiabatic Mixing Chamber ($\dot{Q}=0, \dot{W}_s=0$ at Common Pressure $P$):}
+  When $K$ fluid streams with mass flow rates $\dot{m}_i$ and specific enthalpies $h_i$ mix steadily inside an insulated T-junction or feedwater heater to form a single exit stream $\dot{m}_{\mathrm{out}} = \sum_{i=1}^K \dot{m}_i$:
+  \begin{equation}\label{eq:07:mixing-chamber}
+    \boxed{h_{\mathrm{out}} = \frac{\sum_{i=1}^K \dot{m}_i h_i}{\sum_{i=1}^K \dot{m}_i}}, \qquad \frac{\dot{m}_1}{\dot{m}_2} = \frac{h_{\mathrm{out}} - h_2}{h_1 - h_{\mathrm{out}}} \quad (\text{two-stream enthalpy lever rule})
+  \end{equation}
+  \idxformula{Adiabatic steady-flow mixing chamber: $h_{\mathrm{out}} = (\sum \dot{m}_i h_i)/(\sum \dot{m}_i)$}
+\end{itemize}
+\end{formulacard}
+
+\begin{workedexample}[Partial Tank Charging, Adiabatic Blowdown \& Direct-Contact Steam Mixing]{National Tier \textbar\ Tier 3}{ex:07.11}
+(a) An insulated rigid SCUBA cylinder ($V = \SI{12.00}{\liter}$) initially contains dry air ($\gamma = 1.400$) at $P_1 = \SI{2.000}{\mega\pascal}$ and $T_1 = \SI{300.0}{\kelvin}$. It is rapidly topped off from a compressor manifold at $T_{\mathrm{line}} = \SI{300.0}{\kelvin}$ until the tank pressure reaches $P_2 = \SI{10.00}{\mega\pascal}$. Find the final air temperature $T_2$ inside the cylinder. (b) If the cylinder at $(\SI{10.00}{\mega\pascal}, \SI{388.89}{\kelvin})$ is later vented adiabatically back down to $P_3 = \SI{2.000}{\mega\pascal}$, find the temperature $T_3$ of the remaining air. (c) In a power-plant open feedwater heater operating at $P = \SI{101.325}{\kilo\pascal}$, subcooled liquid water at $T_{w,\mathrm{in}} = \SI{20.00}{\celsius}$ ($h_w = \SI{84.05}{\kilo\joule\per\kilogram}$, $\dot{m}_w = \SI{10.00}{\kilogram\per\second}$) mixes directly with superheated steam at $T_{s,\mathrm{in}} = \SI{150.0}{\celsius}$ ($h_s = \SI{2776.5}{\kilo\joule\per\kilogram}$, NIST Table~3.3 \src{S09}) to produce saturated liquid water at $T_{\mathrm{out}} = \SI{99.97}{\celsius}$ ($h_{\mathrm{out}} = h_f = \SI{419.06}{\kilo\joule\per\kilogram}$). Calculate the required steam mass flow rate $\dot{m}_s$.
+\par\smallskip\noindent
+\textbf{Solution.}
+\begin{enumerate}
+  \item \textbf{(a) Partial adiabatic charging ($T_1 = T_{\mathrm{line}} = \SI{300.0}{\kelvin}, P_2/P_1 = 5.000$):}
+  Evaluating \eref{eq:07:partial-tank-charge} for $P_1 = \SI{2.000}{\mega\pascal}, P_2 = \SI{10.00}{\mega\pascal}, \gamma = 1.400, T_1 = T_{\mathrm{line}} = \SI{300.0}{\kelvin}$:
+  \[
+    T_2 = \frac{1.400(10.00)}{1.400(2.000) + (10.00 - 2.000)}(\SI{300.0}{\kelvin}) = \frac{14.00}{10.80}(\SI{300.0}{\kelvin}) = \mathbf{\SI{388.89}{\kelvin}}
+  \]
+  \item \textbf{(b) Adiabatic blowdown from $(\SI{10.00}{\mega\pascal}, \SI{388.89}{\kelvin})$ to $\SI{2.000}{\mega\pascal}$:}
+  \[
+    T_3 = (\SI{388.89}{\kelvin})\left(\frac{2.000}{10.00}\right)^{0.400/1.400} = 388.89(0.2000)^{2/7} = \mathbf{\SI{245.54}{\kelvin}}
+  \]
+  \item \textbf{(c) Direct-contact steam feedwater heater mass flow rate from \eref{eq:07:mixing-chamber}:}
+  \[
+    \dot{m}_s = \dot{m}_w\,\frac{h_{\mathrm{out}} - h_w}{h_s - h_{\mathrm{out}}} = (\SI{10.00}{\kilogram\per\second})\left(\frac{419.06 - 84.05}{2776.5 - 419.06}\right) = 10.00\left(\frac{335.01}{2357.44}\right) = \mathbf{\SI{1.4211}{\kilogram\per\second}}
+  \]
+\end{enumerate}
+\verifiedby{Mole \& energy balance: $n_1 = \SI{9.622}{\mole}$, $n_2 = P_2V/(RT_2) = \SI{37.113}{\mole}$, and $\dot{m}_s h_s + \dot{m}_w h_w = (\dot{m}_s+\dot{m}_w)h_{\mathrm{out}} = \SI{4786.1}{\kilo\watt}$ (\texttt{check\_sec06\_09.py::ex07\_11}).}
+\end{workedexample}
+
+% ============================================================================
+\section{Rapid-Solve Tournament First-Law \& Process Drill Set}\label{sec:07.9}
+% ============================================================================
+\idxtopic{elliptical P--V cycle}\idxtopic{bomb vs. constant-pressure reaction enthalpy}
+
+\begin{workedexample}[Elliptical $P$--$V$ Cycle Net Work \& Bomb-to-Isobaric Reaction $\Delta H_{\mathrm{rxn}}$]{Invitational Rapid Drill \textbar\ Tier 2}{ex:07.12}
+(a) An ideal gas executes a \textbf{clockwise elliptical cycle} on a $P$--$V$ diagram centered at $(V_0, P_0) = (\SI{5.000}{\liter}, \SI{300.0}{\kilo\pascal})$, oscillating between minimum volume $V_{\min} = \SI{2.000}{\liter}$ and maximum volume $V_{\max} = \SI{8.000}{\liter}$ and between minimum pressure $P_{\min} = \SI{100.0}{\kilo\pascal}$ and maximum pressure $P_{\max} = \SI{500.0}{\kilo\pascal}$ (\texttt{2018 MIT E3 MC9} archetype). If the gas rejects $|Q_{\mathrm{out}}| = \SI{1500.0}{\joule}$ of heat during the cooling half of the ellipse, find the net cycle work $W_{\mathrm{net,by}}$ and the heat absorbed $Q_{\mathrm{in}}$ during the heating half.
+(b) Complete combustion of $\SI{1.000}{\mole}$ of liquid benzene ($\mathrm{C_6H_6}(l) + \frac{15}{2}\mathrm{O_2}(g) \to 6\mathrm{CO_2}(g) + 3\mathrm{H_2O}(l)$) inside a rigid constant-volume bomb calorimeter at $T = \SI{298.15}{\kelvin}$ releases $|q_V| = \SI{3263.9}{\kilo\joule\per\mole}$ ($\Delta U_{\mathrm{rxn}} = \SI{-3263.9}{\kilo\joule\per\mole}$). Calculate the constant-pressure molar enthalpy of combustion $\Delta H_{\mathrm{rxn}}$ at $\SI{298.15}{\kelvin}$.
+\par\smallskip\noindent
+\textbf{Solution.}
+\begin{enumerate}
+  \item \textbf{(a) Elliptical cycle semi-axes $a = (V_{\max}-V_{\min})/2 = \SI{3.000}{\liter}$ and $b = (P_{\max}-P_{\min})/2 = \SI{200.0}{\kilo\pascal}$:}
+  \[
+    W_{\mathrm{net,by}} = +\pi a b = \pi(\SI{3.000}{\liter})(\SI{200.0}{\kilo\pascal}) = 600.0\pi\,\si{\joule} = \mathbf{+\SI{1884.96}{\joule}}
+  \]
+  Since $\Delta U_{\mathrm{cycle}} = 0$, $Q_{\mathrm{net}} = Q_{\mathrm{in}} - |Q_{\mathrm{out}}| = W_{\mathrm{net,by}} \implies Q_{\mathrm{in}} = 1884.96 + 1500.0 = \mathbf{+\SI{3384.96}{\joule}}$.
+  \item \textbf{(b) Bomb-to-isobaric $\Delta H_{\mathrm{rxn}} = \Delta U_{\mathrm{rxn}} + (\Delta n_{\mathrm{gas}})RT$ conversion:}
+  Counting only \textbf{gaseous} species ($\mathrm{C_6H_6}(l)$ and $\mathrm{H_2O}(l)$ have negligible molar volume compared to gases):
+  \[
+    \Delta n_{\mathrm{gas}} = \nu_{\mathrm{CO_2}(g)} - \nu_{\mathrm{O_2}(g)} = 6 - 7.5 = \mathbf{-1.500\,\si{\mole\text{ gas per mole rxn}}}
+  \]
+  \[
+    \Delta H_{\mathrm{rxn}} = \Delta U_{\mathrm{rxn}} + (\Delta n_{\mathrm{gas}})RT = \SI{-3263.9}{\kilo\joule\per\mole} + (-1.500)(\SI{8.314463e-3}{\kilo\joule\per\mole\per\kelvin})(\SI{298.15}{\kelvin}) = -3263.9 - 3.718 = \mathbf{\SI{-3267.62}{\kilo\joule\per\mole}}
+  \]
+\end{enumerate}
+\verifiedby{Atmosphere does compression work $+\SI{3.718}{\kilo\joule\per\mole}$ as $1.5\,\si{\mole}$ of gas is consumed, increasing heat released at constant pressure to $\SI{3267.62}{\kilo\joule\per\mole}$ (\texttt{check\_sec06\_09.py::ex07\_12}).}
+\end{workedexample}
+
+\begin{workedexample}[Single-Step vs.\ Two-Step Irreversible Isothermal Expansion \& Non-Ideal Cycle Closure]{Invitational Rapid Drill \textbar\ Tier 2}{ex:07.13}
+(a) Two moles ($n = \SI{2.000}{\mole}$) of an ideal gas immersed in a constant-temperature bath at $T = \SI{300.0}{\kelvin}$ expand from $P_1 = \SI{10.00}{\bar}$ ($V_1 = \SI{4.9887}{\liter}$) to $P_2 = \SI{1.000}{\bar}$ ($V_2 = \SI{49.887}{\liter}$). Compare the boundary work $W_{\mathrm{by}}$ performed by the gas in: (i) a reversible isothermal expansion, (ii) a single-step irreversible expansion against fixed external pressure $P_{\mathrm{ext}} = P_2 = \SI{1.000}{\bar}$, and (iii) a two-step irreversible expansion where $P_{\mathrm{ext}}$ is first dropped to intermediate pressure $P_{\mathrm{mid}} = \SI{3.1623}{\bar} = \sqrt{P_1 P_2}$ until equilibrium is reached at $V_{\mathrm{mid}}$, and then dropped to $P_2 = \SI{1.000}{\bar}$. Prove algebraically that choosing the geometric mean $P_{\mathrm{mid}} = \sqrt{P_1 P_2}$ maximizes two-step irreversible expansion work!
+(b) A real fluid executes a 3-leg closed cycle $A\to B\to C\to A$. Along $A\to B$, $Q_{AB} = \SI{+50.0}{\kilo\joule}$ and $W_{\mathrm{by},AB} = \SI{+20.0}{\kilo\joule}$. Along $B\to C$, $\Delta U_{BC} = \SI{-15.0}{\kilo\joule}$ and $W_{\mathrm{by},BC} = \SI{-10.0}{\kilo\joule}$. Along $C\to A$, $Q_{CA} = \SI{-25.0}{\kilo\joule}$. Find $\Delta U_{AB}$, $Q_{BC}$, $\Delta U_{CA}$, $W_{\mathrm{by},CA}$, and $W_{\mathrm{net,by}}$ for the cycle.
+\par\smallskip\noindent
+\textbf{Solution.}
+\begin{enumerate}
+  \item \textbf{(a) Reversible vs.\ single-step vs.\ optimal two-step irreversible expansion ($nRT = \SI{4988.68}{\joule}$):}
+  \begin{itemize}
+    \item \textbf{(i) Reversible isothermal:} $W_{\mathrm{rev}} = nRT\ln(P_1/P_2) = (4988.68)\ln(10.00) = \mathbf{+\SI{11486.9}{\joule}}$.
+    \item \textbf{(ii) Single-step irreversible at $P_{\mathrm{ext}} = P_2 = \SI{1.000}{\bar}$:}
+    \[
+      W_{\text{1-step}} = P_2(V_2 - V_1) = nRT\left(1 - \frac{P_2}{P_1}\right) = 4988.68(1 - 0.1000) = \mathbf{+\SI{4489.8}{\joule}} \quad (39.1\%\text{ of } W_{\mathrm{rev}})
+    \]
+    \item \textbf{(iii) Two-step irreversible via $P_{\mathrm{mid}}$:}
+    \[
+      W_{\text{2-step}} = P_{\mathrm{mid}}(V_{\mathrm{mid}} - V_1) + P_2(V_2 - V_{\mathrm{mid}}) = nRT\left[\left(1 - \frac{P_{\mathrm{mid}}}{P_1}\right) + \left(1 - \frac{P_2}{P_{\mathrm{mid}}}\right)\right] = nRT\left[2 - \left(\frac{P_{\mathrm{mid}}}{P_1} + \frac{P_2}{P_{\mathrm{mid}}}\right)\right]
+    \]
+    By the AM--GM inequality, $\frac{P_{\mathrm{mid}}}{P_1} + \frac{P_2}{P_{\mathrm{mid}}} \ge 2\sqrt{\frac{P_2}{P_1}}$ with equality iff $\frac{P_{\mathrm{mid}}}{P_1} = \frac{P_2}{P_{\mathrm{mid}}} \iff \boxed{P_{\mathrm{mid}}^* = \sqrt{P_1 P_2}} = \SI{3.1623}{\bar}$, giving:
+    \[
+      W_{\text{2-step,max}} = 2nRT\left(1 - \sqrt{\frac{P_2}{P_1}}\right) = 2(4988.68)(1 - 10^{-0.5}) = \mathbf{+\SI{6822.2}{\joule}} \quad (59.4\%\text{ of } W_{\mathrm{rev}})
+    \]
+  \end{itemize}
+  \item \textbf{(b) Real-fluid closed-cycle state-function closure ($\Delta U_{AB} + \Delta U_{BC} + \Delta U_{CA} = 0$):}
+  \begin{itemize}
+    \item Leg $A\to B$: $\Delta U_{AB} = Q_{AB} - W_{\mathrm{by},AB} = 50.0 - 20.0 = \mathbf{+\SI{30.0}{\kilo\joule}}$.
+    \item Leg $B\to C$: $Q_{BC} = \Delta U_{BC} + W_{\mathrm{by},BC} = -15.0 + (-10.0) = \mathbf{\SI{-25.0}{\kilo\joule}}$.
+    \item Leg $C\to A$: $\Delta U_{CA} = -(\Delta U_{AB} + \Delta U_{BC}) = -(30.0 - 15.0) = \mathbf{\SI{-15.0}{\kilo\joule}} \implies W_{\mathrm{by},CA} = Q_{CA} - \Delta U_{CA} = -25.0 - (-15.0) = \mathbf{\SI{-10.0}{\kilo\joule}}$.
+    \item Cycle net work: $W_{\mathrm{net,by}} = 20.0 - 10.0 - 10.0 = Q_{\mathrm{net}} = 50.0 - 25.0 - 25.0 = \mathbf{\SI{0.0}{\kilo\joule}}$ (a figure-eight loop with equal clockwise and counterclockwise lobes!).
+  \end{itemize}
+\end{enumerate}
+\verifiedby{$N$-step optimal irreversible expansion work $W_N = N nRT[1 - (P_2/P_1)^{1/N}]$ converges to $nRT\ln(P_1/P_2) = \SI{11486.9}{\joule}$ as $N\to\infty$ (\texttt{check\_sec06\_09.py::ex07\_13}).}
+\end{workedexample}
+
+\begin{workedexample}[Steady-Flow Adiabatic Turbine + Heat Exchanger Network \& Polytropic Shaft Work]{National/Invitational FRQ \textbar\ Tier 3}{ex:07.14}
+Dry air ($M = \SI{28.9655}{\gram\per\mole}, R_s = \SI{287.05}{\joule\per\kilogram\per\kelvin}, c_p = \SI{1006.2}{\joule\per\kilogram\per\kelvin}, \gamma = 1.400$) flows steadily at mass flow rate $\dot{m} = \SI{2.500}{\kilogram\per\second}$ through a two-component power module:
+\begin{itemize}
+  \item \textbf{Component 1 (Adiabatic Gas Turbine, $1\to 2$):} Air enters at $P_1 = \SI{800.0}{\kilo\pascal}, T_1 = \SI{1100.0}{\kelvin}$, and inlet speed $v_{\mathrm{flow},1} = \SI{40.00}{\meter\per\second}$, and expands to $P_2 = \SI{100.0}{\kilo\pascal}$ with exit speed $v_{\mathrm{flow},2} = \SI{160.0}{\meter\per\second}$. The turbine's isentropic efficiency is $\eta_t = 0.8500$.
+  \item \textbf{Component 2 (Exhaust Recuperator Heat Exchanger, $2\to 3$):} The turbine exhaust at $T_{2a}$ passes at constant pressure $P_2 = \SI{100.0}{\kilo\pascal}$ (with negligible kinetic energy change) through a counterflow heat exchanger that cools the air to $T_3 = \SI{400.0}{\kelvin}$ while heating a separate liquid water stream ($\dot{m}_w = \SI{4.000}{\kilogram\per\second}, c_{p,w} = \SI{4184.0}{\joule\per\kilogram\per\kelvin}$) entering at $T_{w,\mathrm{in}} = \SI{295.0}{\kelvin}$.
+\end{itemize}
+Find (a) the ideal isentropic turbine exit temperature $T_{2s}$, (b) the actual turbine exit temperature $T_{2a}$ and shaft power output $\dot{W}_{t,\mathrm{by}}$ (including the kinetic energy change!), and (c) the heat transfer rate $\dot{Q}_{\mathrm{HX}}$ and water exit temperature $T_{w,\mathrm{out}}$ in the recuperator.
+\par\smallskip\noindent
+\textbf{Solution.}
+\begin{enumerate}
+  \item \textbf{(a) Ideal isentropic turbine exit temperature $T_{2s}$ ($P_2/P_1 = 100.0/800.0 = 1/8 = 0.1250$):}
+  \[
+    T_{2s} = T_1\left(\frac{P_2}{P_1}\right)^{\frac{\gamma - 1}{\gamma}} = (\SI{1100.0}{\kelvin})(0.1250)^{0.400/1.400} = 1100.0(0.552045) = \mathbf{\SI{607.25}{\kelvin}}
+  \]
+  \item \textbf{(b) Actual turbine exit temperature $T_{2a}$ and shaft power output $\dot{W}_{t,\mathrm{by}}$ from \eref{eq:07:sfee}:}
+  By the definition of isentropic turbine enthalpy drop $\Delta h_a = \eta_t \Delta h_s$:
+  \[
+    T_1 - T_{2a} = \eta_t(T_1 - T_{2s}) = 0.8500(1100.0 - 607.25) = \SI{418.84}{\kelvin} \implies T_{2a} = 1100.0 - 418.84 = \mathbf{\SI{681.16}{\kelvin}}
+  \]
+  Specific kinetic energy change across the turbine is $\Delta\mathrm{ke} = \frac{1}{2}(v_{\mathrm{flow},2}^2 - v_{\mathrm{flow},1}^2) = \frac{1}{2}(160.0^2 - 40.00^2) = +\SI{12000}{\joule\per\kilogram} = \mathbf{+\SI{12.00}{\kilo\joule\per\kilogram}}$. Applying the SFEE \eref{eq:07:sfee} with $\dot{Q}_{\mathrm{cv}} = 0$:
+  \[
+    w_{t,\mathrm{by}} = c_p(T_1 - T_{2a}) - \frac{v_{\mathrm{flow},2}^2 - v_{\mathrm{flow},1}^2}{2} = (\SI{1.0062}{\kilo\joule\per\kilogram\per\kelvin})(418.84\,\si{\kelvin}) - \SI{12.00}{\kilo\joule\per\kilogram} = 421.43 - 12.00 = \mathbf{\SI{409.43}{\kilo\joule\per\kilogram}}
+  \]
+  \[
+    \dot{W}_{t,\mathrm{by}} = \dot{m}\,w_{t,\mathrm{by}} = (\SI{2.500}{\kilogram\per\second})(\SI{409.43}{\kilo\joule\per\kilogram}) = \mathbf{\SI{1023.6}{\kilo\watt}} = \mathbf{\SI{1.0236}{\mega\watt}}
+  \]
+  \item \textbf{(c) Recuperator heat transfer rate $\dot{Q}_{\mathrm{HX}}$ and water exit temperature $T_{w,\mathrm{out}}$:}
+  \[
+    \dot{Q}_{\mathrm{HX}} = \dot{m} c_p (T_{2a} - T_3) = (\SI{2.500}{\kilogram\per\second})(\SI{1.0062}{\kilo\joule\per\kilogram\per\kelvin})(681.16 - 400.0\,\si{\kelvin}) = \mathbf{\SI{707.26}{\kilo\watt}}
+  \]
+  \[
+    T_{w,\mathrm{out}} = T_{w,\mathrm{in}} + \frac{\dot{Q}_{\mathrm{HX}}}{\dot{m}_w c_{p,w}} = \SI{295.0}{\kelvin} + \frac{\SI{707263}{\watt}}{(\SI{4.000}{\kilogram\per\second})(\SI{4184.0}{\joule\per\kilogram\per\kelvin})} = 295.0 + 42.26 = \mathbf{\SI{337.26}{\kelvin}} \quad (\SI{64.11}{\celsius})
+  \]
+\end{enumerate}
+\verifiedby{Total steady-flow enthalpy drop from $T_1=\SI{1100}{\kelvin}$ to $T_3=\SI{400}{\kelvin}$: $\dot{m}c_p(T_1-T_3) = \SI{1760.85}{\kilo\watt} = \dot{W}_{t,\mathrm{by}} + \dot{m}\Delta\mathrm{ke} + \dot{Q}_{\mathrm{HX}} = 1023.59 + 30.00 + 707.26\,\si{\kilo\watt}$ (\texttt{check\_sec06\_09.py::ex07\_14}).}
+\end{workedexample}
+
+\begin{trapbox}[Top 6 First-Law \& Thermodynamic Process Exam Traps (\S7 Diagnostic Matrix)]
+\par\smallskip\noindent
+\begin{errtab}
+Sign flip between Physics $\Delta U = Q - W_{\mathrm{by}}$ and Chemistry $\Delta U = q + w_{\mathrm{on}}$ & Subtracts a negative compression work twice, flipping the sign of $\Delta U$ or $Q$.\idxerr{Physics vs. Chemistry First-Law work sign flip} & Check physical direction first: \textbf{expansion} lowers $U$ unless heat enters; \textbf{compression} raises $U$ unless heat leaves. \\
+Using $W_{\mathrm{by}} = nRT\ln(V_2/V_1)$ for an \emph{irreversible} or \emph{free} expansion & Overestimates work when gas expands into vacuum ($W=0$) or against constant $P_{\mathrm{ext}} = P_2$.\idxerr{applying reversible isothermal work formula to free or irreversible expansion} & Use $nRT\ln(V_2/V_1)$ \textbf{only} for a reversible isothermal path; for constant $P_{\mathrm{ext}}$, $W_{\mathrm{by}} = P_{\mathrm{ext}}(V_2 - V_1)$; for vacuum, $W_{\mathrm{by}} = 0$. \\
+Using $Q = nC_{V,m}\Delta T$ for an isobaric process (as in \texttt{2018 MIT E3 MC5}) & Omits the boundary expansion work $W_{\mathrm{by}} = nR\Delta T$, underestimating $Q_P$ by factor $1/\gamma$.\idxerr{using $C_V$ instead of $C_P$ for isobaric heat} & At constant $P$, $Q_P = \Delta H = nC_{P,m}\Delta T$; $nC_{V,m}\Delta T$ is $\Delta U$, NOT $Q_P$! \\
+Assuming $Q = 0$ means $\Delta T = 0$ (confusing adiabatic with isothermal) & Sets $\Delta U = 0$ in an adiabatic compression/expansion.\idxerr{confusing adiabatic ($Q=0$) with isothermal ($\Delta T=0$)} & Adiabatic means $Q = 0 \implies \Delta U = -W_{\mathrm{by}} \ne 0$: adiabatic expansion \textbf{cools} ($\Delta T < 0$), compression \textbf{heats} ($\Delta T > 0$). \\
+Confusing Joule free expansion ($\Delta U = 0$) with throttling ($\Delta H = 0$) & Claims enthalpy is not conserved in a throttle valve or that real gases do not cool in free expansion.\idxerr{confusing Joule free expansion ($\Delta U=0$) with Joule--Thomson throttling ($\Delta H=0$)} & Rigid sealed chamber into vacuum $\to \Delta U = 0$; steady flow across valve/plug $\to \Delta H = 0$. \\
+Forgetting $\times 1000$ when converting $\Delta h$ ($\si{\kilo\joule\per\kilogram}$) in nozzle velocity $v = \sqrt{2\Delta h}$ & Underestimates exit velocity by $\sqrt{1000} = 31.62\times$ (gives $\SI{27.5}{\meter\per\second}$ instead of $\SI{869}{\meter\per\second}$!).\idxerr{kJ/kg vs. J/kg factor of 1000 in nozzle velocity formula} & $1\,\si{\kilo\joule\per\kilogram} = \SI{1000}{\meter^2\per\second^2}$; always multiply $\Delta h[\si{\kilo\joule\per\kilogram}]$ by $1000$ inside the square root! \\
+\end{errtab}
+\end{trapbox}
+
+\begin{devicebox}[First-Law Control-Volume Ledger of the 2027 Heat-Lamp Water Cup (\S15 Coupling)]
+\idxdev{open-cup evaporative enthalpy loss in First-Law ledger}
+The $\SI{100.0}{\milli\liter}$ water sample inside the 9~oz cup (\texttt{2027 Rule 5.II.c}) is an \textbf{open control volume} at constant atmospheric pressure $P_{\mathrm{atm}} = \SI{101.325}{\kilo\pascal}$ ($W_{\mathrm{shaft}} = 0$). Its First-Law enthalpy balance over the heating interval $t_{\mathrm{heat}} \in [10, 15]\,\si{\minute}$ is:
+\begin{equation}\label{eq:07:cup-first-law}
+  (m_w c_{p,w} + C_{\mathrm{cup,eff}})\Delta T_w = Q_{\mathrm{opt,abs}} - Q_{\mathrm{cond/conv,loss}} - Q_{\mathrm{rad,IR,loss}} - (\Delta m_{\mathrm{evap}}) L_v
+\end{equation}
+Because water's latent heat of vaporization at $\SI{45}{\celsius}$ is enormous ($L_v = \SI{2394}{\kilo\joule\per\kilogram} = \SI{2394}{\joule\per\gram}$, NIST Table~3.1), evaporating just $\Delta m_{\mathrm{evap}} = \SI{0.50}{\gram}$ of water ($0.5\%$ of the $\SI{100}{\gram}$ sample) steals $\SI{1197}{\joule}$ of enthalpy — erasing $\mathbf{\SI{2.86}{\celsius}}$ of temperature gain $\mathrm{TG}$! Placing an unattached clear BoPET glazing lid above the cup (\texttt{Clarification \#5}) suppresses $\Delta m_{\mathrm{evap}} \to 0$ and preserves that $\SI{2.86}{\celsius}$ gain (\sref{sec:15}).
+\end{devicebox}
+
+\alsosee{Quick Sheet \texttt{QS-06} (\sref{sec:01.6}); Sign Conventions (\sref{sec:02}); Ideal \& Real Gases (\sref{sec:06}); Entropy, Enthalpy \& Exergy (\sref{sec:08}); Thermodynamic Cycles (\sref{sec:09}); Transient Collector Heating (\sref{sec:13}, \sref{sec:15}).}

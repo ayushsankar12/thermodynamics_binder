@@ -1,0 +1,94 @@
+=== 2026-11-22 15:25:00 target=test_style-companion job=test_style-companion rc=(0,0,0) pages=3 time=7.61s
+  errors=0 undefined_refs=0 multiply_defined=0 overfull_hbox=0 (>3pt: 0) overfull_vbox=0 indices=[] skipped_inputs=0 known_upstream_notes=0
+=== 2026-11-22 15:25:10 target=test_style job=test_style rc=(0,0,0) pages=3 time=11.53s
+  errors=0 undefined_refs=0 multiply_defined=0 overfull_hbox=0 (>3pt: 0) overfull_vbox=0 indices=['alpha:0', 'devfail:0', 'error:0', 'figure:0', 'fname:0', 'formula:0', 'fsolve:0', 'topic:0'] skipped_inputs=0 known_upstream_notes=0
+=== 2026-11-22 15:25:21 target=test_style-gray job=test_style-gray rc=(0,0,0) pages=3 time=10.84s
+  errors=0 undefined_refs=0 multiply_defined=0 overfull_hbox=0 (>3pt: 0) overfull_vbox=0 indices=['alpha:0', 'devfail:0', 'error:0', 'figure:0', 'fname:0', 'formula:0', 'fsolve:0', 'topic:0'] skipped_inputs=0 known_upstream_notes=0
+=== 2026-11-22 15:25:28 target=test_style-companion job=test_style-companion rc=(0,0,0) pages=3 time=6.99s
+  errors=0 undefined_refs=0 multiply_defined=0 overfull_hbox=0 (>3pt: 0) overfull_vbox=0 indices=[] skipped_inputs=0 known_upstream_notes=0
+=== 2026-11-22 15:43:47 target=main job=main rc=(0,0,0) pages=2 time=11.27s
+  errors=0 undefined_refs=0 multiply_defined=0 overfull_hbox=0 (>3pt: 0) overfull_vbox=0 indices=['devfail:0', 'error:0', 'figure:0', 'formula:0', 'topic:0'] skipped_inputs=32 known_upstream_notes=0
+  SKIPPED sec00 sec01 sec02 sec03 sec04 sec05 sec06 sec07 sec08 sec09 sec10 sec11 sec12 sec13 sec14 sec15 sec16 sec17 sec18 sec19 sec20 sec21 sec22 sec23 appA appB appC appD appE appF appG appH
+=== 2026-11-22 17:34:53 target=device_handbook job=device_handbook rc=(1,1,1) pages=47 time=302.43s
+  errors=24 undefined_refs=26 multiply_defined=0 overfull_hbox=172 (>3pt: 119) overfull_vbox=1 indices=[] skipped_inputs=0 known_upstream_notes=0
+  ERR C:\science olympiad\Thermodynamics-Binder\src\device_handbook.tex:65: Extra ali
+  ERR C:\science olympiad\Thermodynamics-Binder\src\device_handbook.tex:65: Extra ali
+  ERR C:\science olympiad\Thermodynamics-Binder\src\sec15.tex:198: Misplaced alignmen
+  ERR C:\science olympiad\Thermodynamics-Binder\src\sec15.tex:237: Misplaced alignmen
+  ERR C:\science olympiad\Thermodynamics-Binder\src\sec15.tex:485: You can't use `mac
+  ERR C:\science olympiad\Thermodynamics-Binder\src\sec15.tex:485: You can't use `mac
+  ERR C:\science olympiad\Thermodynamics-Binder\src\sec15.tex:487: You can't use `mac
+  ERR C:\science olympiad\Thermodynamics-Binder\src\sec15.tex:488: Misplaced alignmen
+  ERR C:\science olympiad\Thermodynamics-Binder\src\sec15.tex:768: You can't use `mac
+  ERR C:\science olympiad\Thermodynamics-Binder\src\sec15.tex:948: Misplaced alignmen
+  ERR C:\science olympiad\Thermodynamics-Binder\src\sec15.tex:953: Misplaced alignmen
+  ERR C:\science olympiad\Thermodynamics-Binder\src\sec15.tex:954: Misplaced alignmen
+  ERR C:\science olympiad\Thermodynamics-Binder\src\sec15.tex:956: You can't use `mac
+  ERR C:\science olympiad\Thermodynamics-Binder\src\sec15.tex:957: Misplaced alignmen
+  ERR C:\science olympiad\Thermodynamics-Binder\src\sec16.tex:547: Misplaced alignmen
+  ERR C:\science olympiad\Thermodynamics-Binder\src\sec16.tex:594: Misplaced alignmen
+  ERR C:\science olympiad\Thermodynamics-Binder\src\sec16.tex:624: Misplaced alignmen
+  ERR C:\science olympiad\Thermodynamics-Binder\src\sec16.tex:625: Misplaced alignmen
+  ERR C:\science olympiad\Thermodynamics-Binder\src\sec16.tex:647: Extra alignment ta
+  ERR C:\science olympiad\Thermodynamics-Binder\src\sec16.tex:647: Extra alignment ta
+  ERR C:\science olympiad\Thermodynamics-Binder\src\sec16.tex:647: Extra alignment ta
+  ERR C:\science olympiad\Thermodynamics-Binder\src\sec16.tex:706: Misplaced alignmen
+  ERR C:\science olympiad\Thermodynamics-Binder\src\sec16.tex:706: Misplaced alignmen
+  ERR C:\science olympiad\Thermodynamics-Binder\src\sec16.tex:760: Misplaced alignmen
+  UNDEF app:A
+  UNDEF app:B
+  UNDEF app:H
+  UNDEF sec:00
+  UNDEF sec:00.2
+  UNDEF sec:01
+  UNDEF sec:01.13
+  UNDEF sec:02
+  UNDEF sec:03
+  UNDEF sec:04
+  UNDEF sec:05
+  UNDEF sec:06
+  UNDEF sec:07
+  UNDEF sec:08
+  UNDEF sec:09
+  UNDEF sec:10
+  UNDEF sec:11
+  UNDEF sec:12
+  UNDEF sec:13
+  UNDEF sec:13.2
+  UNDEF sec:17
+  UNDEF sec:18
+  UNDEF sec:20
+  UNDEF sec:21
+  UNDEF sec:22
+  UNDEF sec:23
+=== 2026-11-22 18:03:10 target=quickref job=quickref_12pp rc=(0,0,0) pages=12 time=415.90s
+  errors=0 undefined_refs=0 multiply_defined=0 overfull_hbox=19 (>3pt: 1) overfull_vbox=0 indices=[] skipped_inputs=0 known_upstream_notes=0
+=== 2026-11-22 22:16:08 target=main job=main rc=(1,0,0) pages=264 time=16366.08s
+  errors=0 undefined_refs=5 multiply_defined=0 overfull_hbox=39 (>3pt: 11) overfull_vbox=1 indices=['devfail:0', 'error:0', 'figure:0', 'formula:0', 'topic:0'] skipped_inputs=0 known_upstream_notes=0
+  UNDEF eq:02:firstlaw
+  UNDEF eq:04:latent
+  UNDEF eq:11:lmtd-def
+  UNDEF eq:12:hrad-linearized
+  UNDEF sec:19.5
+=== 2026-11-22 22:36:29 target=quickref job=quickref_12pp rc=(0,0,0) pages=13 time=36.26s
+  errors=0 undefined_refs=0 multiply_defined=0 overfull_hbox=19 (>3pt: 0) overfull_vbox=0 indices=[] skipped_inputs=0 known_upstream_notes=0
+=== 2026-11-22 22:38:43 target=quickref job=quickref_12pp rc=(0,0,0) pages=12 time=35.94s
+  errors=0 undefined_refs=0 multiply_defined=0 overfull_hbox=18 (>3pt: 0) overfull_vbox=0 indices=[] skipped_inputs=0 known_upstream_notes=0
+=== 2026-11-22 22:41:35 target=device job=device_handbook rc=(0,0,0) pages=46 time=154.79s
+  errors=0 undefined_refs=0 multiply_defined=0 overfull_hbox=7 (>3pt: 0) overfull_vbox=0 indices=[] skipped_inputs=0 known_upstream_notes=0
+=== 2026-11-22 22:52:35 target=main job=main rc=(0,0,0) pages=264 time=606.20s
+  errors=0 undefined_refs=0 multiply_defined=0 overfull_hbox=30 (>3pt: 2) overfull_vbox=0 indices=['devfail:0', 'error:0', 'figure:0', 'formula:0', 'topic:0'] skipped_inputs=0 known_upstream_notes=0
+=== 2026-11-22 23:01:29 target=main job=main rc=(0,0,0) pages=264 time=331.24s
+  errors=0 undefined_refs=0 multiply_defined=0 overfull_hbox=28 (>3pt: 0) overfull_vbox=0 indices=['devfail:0', 'error:0', 'figure:0', 'formula:0', 'topic:0'] skipped_inputs=0 known_upstream_notes=0
+=== 2026-11-22 23:07:06 target=gray job=main-gray rc=(0,0,0) pages=260 time=667.95s
+  errors=0 undefined_refs=0 multiply_defined=0 overfull_hbox=28 (>3pt: 0) overfull_vbox=0 indices=['devfail:0', 'error:0', 'figure:0', 'formula:0', 'topic:0'] skipped_inputs=0 known_upstream_notes=0
+=== 2026-11-22 23:13:06 target=gray job=main-gray rc=(0,0,0) pages=264 time=249.89s
+  errors=0 undefined_refs=0 multiply_defined=0 overfull_hbox=28 (>3pt: 0) overfull_vbox=0 indices=['devfail:0', 'error:0', 'figure:0', 'formula:0', 'topic:0'] skipped_inputs=0 known_upstream_notes=0
+=== 2026-11-22 23:23:38 target=quickref job=quickref_12pp rc=(0,0,0) pages=12 time=31.31s
+  errors=0 undefined_refs=0 multiply_defined=0 overfull_hbox=19 (>3pt: 1) overfull_vbox=0 indices=[] skipped_inputs=0 known_upstream_notes=0
+=== 2026-11-22 23:24:53 target=quickref job=quickref_12pp rc=(0,0,0) pages=12 time=15.77s
+  errors=0 undefined_refs=0 multiply_defined=0 overfull_hbox=18 (>3pt: 0) overfull_vbox=0 indices=[] skipped_inputs=0 known_upstream_notes=0
+=== 2026-11-22 23:32:32 target=main job=main rc=(0,0,0) pages=264 time=285.34s
+  errors=0 undefined_refs=0 multiply_defined=0 overfull_hbox=28 (>3pt: 0) overfull_vbox=0 indices=['devfail:0', 'error:0', 'figure:0', 'formula:0', 'topic:0'] skipped_inputs=0 known_upstream_notes=0
+=== 2026-11-22 23:32:39 target=gray job=main-gray rc=(0,0,0) pages=264 time=291.91s
+  errors=0 undefined_refs=0 multiply_defined=0 overfull_hbox=28 (>3pt: 0) overfull_vbox=0 indices=['devfail:0', 'error:0', 'figure:0', 'formula:0', 'topic:0'] skipped_inputs=0 known_upstream_notes=0

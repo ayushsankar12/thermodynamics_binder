@@ -1,0 +1,331 @@
+% ============================================================================
+% sec02.tex — §2 Notation, SI/Imperial Units, Sign Conventions, Significant
+%             Figures & Algebra-Only Math Toolkit
+% Target Page Budget: 6 pages | Figure: fig:02:boundaries
+% ============================================================================
+\binderchapter{2}{Notation, SI/Imperial Units, Sign Conventions, Significant Figures \& Algebra-Only Math Toolkit}{§2 Notation, Units \& Math Toolkit}{sec:02}
+\scopebanner{REQUIRED}[2027 Rules 5.I.b, 5.c.i, 5.d.i--iv (All Tournament Levels --- Foundational Sign, Unit \& Math Contract)]
+
+\idxtopic{sign conventions!First Law physics vs.\ chemistry}
+\idxtopic{system boundaries!open, closed, isolated}
+\idxtopic{units and conversions!SI and imperial}
+\idxtopic{significant figures!Science Olympiad policy}
+\idxtopic{algebra-only math toolkit!Rule 5.d.iv compliance}
+
+\begin{formulacard}[§2 Master Sign, Unit \& Algebra-Only Math Quick Card]
+\begin{ftab}
+$\Delta U = Q - W_{\mathrm{by}}$ & $\Delta U$: internal energy change $(\si{\joule})$; $Q$: heat added \textbf{to} system $(\si{\joule})$; $W_{\mathrm{by}}$: work done \textbf{by} system $(\si{\joule})$ & \CLSD\ \RULEf & \textbf{Primary Binder Convention} (Physics/Engineering) \src{S12,S13} \\
+$\Delta U = q + w_{\mathrm{on}}$ & $w_{\mathrm{on}} = -W_{\mathrm{by}}$: work done \textbf{on} system $(\si{\joule})$; $q = Q$: heat added \textbf{to} system $(\si{\joule})$ & \CLSD & Chemistry / IUPAC convention translation ($w_{\mathrm{on}} = -P_{\mathrm{ext}}\Delta V$) \src{S16} \\
+$W_{\mathrm{by}} = P_{\mathrm{ext}}(V_2 - V_1)$ & $P_{\mathrm{ext}}$: constant external pressure $(\si{\pascal})$; $V_1, V_2$: initial/final volume $(\si{\cubic\meter})$ & \CLSD & Isobaric boundary work ($1\,\si{\pascal\cubic\meter} = 1\,\si{\joule}$; $1\,\si{\liter\kilo\pascal} = 1\,\si{\joule}$) \src{S13} \\
+$W_{\mathrm{by}} = \tfrac{1}{2}(P_1 + P_2)(V_2 - V_1)$ & $P_1, P_2$: endpoint pressures $(\si{\pascal})$; $V_1, V_2$: endpoint volumes $(\si{\cubic\meter})$ & \CLSD\ \REV & Straight-line chord on $P$--$V$ plane (trapezoid area under curve, Rule \texttt{5.d.iii}) \src{S01} \\
+$(1 + \epsilon)^n \approx 1 + n\epsilon$ & $\epsilon$: small dimensionless ratio ($|\epsilon| \ll 1$); $n$: real exponent & \RULEf & Algebraic binomial linear approximation (thermal expansion $n=2,3,-1,\tfrac{1}{2}$) \src{S13} \\
+$y = y_1 + (y_2 - y_1)\dfrac{x - x_1}{x_2 - x_1}$ & $(x_1, y_1), (x_2, y_2)$: adjacent table rows; $x$: target state; $y$: interpolated property & \RULEf & Linear table interpolation (steam tables, DOE bulb-height lookup) \src{S09,S16} \\
+\end{ftab}
+\end{formulacard}
+
+\section{System Boundaries, Control Volumes \& The Locked Sign Contract}
+\label{sec:02.1}
+\idxtopic{control volume vs.\ control mass}
+\idxtopic{boundary types!adiabatic, diathermal, rigid, movable}
+
+Every thermodynamic calculation begins by drawing an explicit **system boundary** (real or imaginary surface) separating the **system** from its **surroundings** (\fref{fig:02:boundaries}) \src{S12,S13,S16}. Sign errors and missing energy terms in written exams almost always trace to an unstated or shifting boundary.
+
+\begin{center}
+\begin{tikzpicture}[>=Stealth,font=\scriptsize,scale=0.95]
+  % Panel 1: Closed System
+  \begin{scope}[xshift=0cm]
+    \draw[thick,navy,fill=boxbglight,rounded corners=3pt] (0,0) rectangle (4.3,2.7);
+    \draw[thick,dashed,rust] (0.25,0.25) rectangle (4.05,2.45);
+    \node[font=\sffamily\bfseries\scriptsize,navy] at (2.15,2.2) {1. CLOSED SYSTEM (Control Mass)};
+    \node[align=center] at (2.15,1.45) {Fixed mass $m = \mathrm{const}$ ($\Delta m = 0$)\\Impermeable boundary ($\dot{m}=0$)\\$\Delta U = Q - W_{\mathrm{by}} = Q + W_{\mathrm{on}}$};
+    \draw[->,very thick,rust] (-0.7,1.65) -- (0.25,1.65) node[midway,above,font=\bfseries] {$Q > 0$};
+    \node[left,font=\scriptsize] at (-0.7,1.4) {(heat in)};
+    \draw[->,very thick,teal] (4.05,1.65) -- (5.0,1.65) node[midway,above,font=\bfseries] {$W_{\mathrm{by}} > 0$};
+    \node[right,font=\scriptsize] at (5.0,1.4) {(work out)};
+    \node[align=center,font=\scriptsize,slate] at (2.15,0.55) {Ex: Sealed piston--cylinder, sealed\\gas tank, covered non-evaporating cup};
+  \end{scope}
+
+  % Panel 2: Open System
+  \begin{scope}[xshift=6.5cm]
+    \draw[thick,navy,fill=boxbglight,rounded corners=3pt] (0,0) rectangle (4.4,2.7);
+    \draw[thick,dash dot,teal] (0.25,0.25) rectangle (4.15,2.45);
+    \node[font=\sffamily\bfseries\scriptsize,navy] at (2.2,2.2) {2. OPEN SYSTEM (Control Volume)};
+    \node[align=center] at (2.2,1.45) {Mass crosses boundary ($\dot{m}_{\mathrm{in}}, \dot{m}_{\mathrm{out}} \neq 0$)\\Carries enthalpy $h = u + Pv$\\Steady: $\dot{Q} - \dot{W}_s = \dot{m}(h_{\mathrm{out}} - h_{\mathrm{in}})$};
+    \draw[->,very thick,navy] (-0.65,1.9) -- (0.25,1.9) node[midway,above] {$\dot{m}_{\mathrm{in}}, h_{\mathrm{in}}$};
+    \draw[->,very thick,navy] (4.15,1.9) -- (5.05,1.9) node[midway,above] {$\dot{m}_{\mathrm{out}}, h_{\mathrm{out}}$};
+    \draw[->,thick,rust] (-0.65,0.95) -- (0.25,0.95) node[midway,above] {$\dot{Q}_{\mathrm{in}}$};
+    \draw[->,thick,teal] (4.15,0.95) -- (5.05,0.95) node[midway,above] {$\dot{W}_s$};
+    \node[align=center,font=\scriptsize,slate] at (2.2,0.55) {Ex: Uncovered evaporating 9 oz cup,\\turbine, compressor, throttling valve};
+  \end{scope}
+
+  % Panel 3: Isolated System
+  \begin{scope}[xshift=13.1cm]
+    \draw[ultra thick,black,fill=boxbg,rounded corners=3pt] (0,0) rectangle (4.1,2.7);
+    \draw[thick,pattern=north east lines,pattern color=midgray] (0,0) rectangle (4.1,0.22);
+    \draw[thick,pattern=north east lines,pattern color=midgray] (0,2.48) rectangle (4.1,2.7);
+    \draw[thick,pattern=north east lines,pattern color=midgray] (0,0.22) rectangle (0.22,2.48);
+    \draw[thick,pattern=north east lines,pattern color=midgray] (3.88,0.22) rectangle (4.1,2.48);
+    \node[font=\sffamily\bfseries\scriptsize,navy] at (2.05,2.15) {3. ISOLATED SYSTEM};
+    \node[align=center] at (2.05,1.4) {$\Delta m = 0, \quad Q = 0, \quad W = 0$\\$\Delta U_{\mathrm{iso}} = \sum \Delta U_i = 0$\\$\Delta S_{\mathrm{iso}} = S_{\mathrm{gen}} \geq 0$};
+    \node[align=center,font=\scriptsize,slate] at (2.05,0.55) {Ex: Ideal sealed calorimeter\\(cup + contents), the Universe};
+  \end{scope}
+\end{tikzpicture}
+\captionof{figure}{System classification and boundary ledger under the locked Physics sign convention ($\Delta U = Q - W_{\mathrm{by}}$). Choosing a closed vs.\ open boundary determines whether flow work $Pv$ is tracked separately or bundled into enthalpy $H = U + PV$ \src{S12,S13,S16}.}\label{fig:02:boundaries}
+\idxfig{system boundaries: closed, open control volume, and isolated}
+\end{center}
+
+\subsection{Boundary Constraint Pairs}
+Every physical wall or interface in a competition problem enforces a mathematical constraint:
+\begin{itemize}
+  \item \textbf{Adiabatic vs.\ Diathermal Boundary:} An \emph{adiabatic} wall prevents heat transfer ($Q = 0$ or $\dot{Q} = 0$; realized by vacuum jacketing, thick low-$k$ insulation, or an acoustic/rapid process where $t_{\mathrm{proc}} \ll \tau_{\mathrm{th}}$). A \emph{diathermal} wall conducts heat freely so separated subsystems equilibrate to a shared temperature $T_A = T_B$ \src{S13,S16}.
+  \item \textbf{Rigid vs.\ Movable/Deformable Boundary:} A \emph{rigid} vessel has fixed volume ($\Delta V = 0 \implies W_{\mathrm{by,boundary}} = \int P\,dV = 0$), though shaft/paddle-wheel or electrical work ($W_{\mathrm{elec}} = -VIt$) may still cross the wall. A \emph{freely movable frictionless piston} of mass $m_p$ and area $A_p$ enforces constant internal pressure $P_{\mathrm{gas}} = P_{\mathrm{atm}} + m_p g / A_p$ (isobaric process) \src{S13}.
+  \item \textbf{Impermeable vs.\ Permeable/Open Boundary:} An uncovered 9~oz cup of warm water under the 2027 heat lamp is an \emph{open system} because water vapor crosses the top free surface ($\dot{m}_{\mathrm{evap}} > 0$), carrying away latent enthalpy $\dot{Q}_{\mathrm{evap}} = \dot{m}_{\mathrm{evap}} L_v$ \src{S01,S12}. Placing an unattached clear BoPET film cap over the rim (\texttt{Clarification \#5}) converts the cup into a \emph{closed system} ($\dot{m}_{\mathrm{evap}} \approx 0$) \src{S02}.
+\end{itemize}
+
+\subsection{First Law Sign Convention Lock \& Physics-to-Chemistry Translation}
+\idxtopic{First Law of Thermodynamics!sign convention translation table}
+\idxformula{First Law (Physics)!$\Delta U = Q - W_{\mathrm{by}}$}
+\idxformula{First Law (Chemistry/IUPAC)!$\Delta U = q + w_{\mathrm{on}}$}
+
+In physics and mechanical engineering textbooks (OpenStax \emph{University Physics Vol.~2}, Lienhard 6e, MIT 2.005/16.Unified) \src{S12,S13}, thermodynamic engines are primary, so expansion work done \textbf{by} the gas is defined as positive ($W_{\mathrm{by}} > 0$) and subtracted from heat added ($\Delta U = Q - W_{\mathrm{by}}$). In chemistry textbooks (IUPAC, MIT 5.60) \src{S16}, all energy entering the system is defined as positive, so compression work done \textbf{on} the gas is positive ($w_{\mathrm{on}} > 0$) and added to heat ($\Delta U = q + w_{\mathrm{on}}$). Both conventions yield the \textbf{exact same physical $\Delta U$} because $W_{\mathrm{on}} = -W_{\mathrm{by}}$ (\tref{tab:02:signtrans}).
+
+\begin{center}
+\captionof{table}{Complete Physics ($\Delta U = Q - W_{\mathrm{by}}$) vs.\ Chemistry/IUPAC ($\Delta U = Q + W_{\mathrm{on}}$) sign translation across all 11 canonical processes \src{S13,S16}.}\label{tab:02:signtrans}
+\footnotesize\setlength{\tabcolsep}{3.5pt}\renewcommand{\arraystretch}{1.14}
+\begin{tabularx}{\linewidth}{@{}l c c c c X@{}}\toprule
+\textbf{Process / Physical Action} & $\boldsymbol{\Delta V}$ & \textbf{Heat $\boldsymbol{Q}$} & \textbf{Physics $\boldsymbol{W_{\mathrm{by}}}$} & \textbf{Chem $\boldsymbol{W_{\mathrm{on}}}$} & \textbf{Internal Energy Change $\boldsymbol{\Delta U}$ (Identical in Both!)} \\\midrule
+1. Isochoric heating (rigid tank) & $0$ & $>0$ & $0$ & $0$ & $\Delta U = +Q = +nC_{V,m}\Delta T > 0$ ($\Delta T > 0$) \\
+2. Isochoric cooling (rigid tank) & $0$ & $<0$ & $0$ & $0$ & $\Delta U = Q = nC_{V,m}\Delta T < 0$ ($\Delta T < 0$) \\
+3. Isobaric expansion ($P=\mathrm{const}$) & $>0$ & $+nC_{P,m}\Delta T > 0$ & $+P\Delta V > 0$ & $-P\Delta V < 0$ & $\Delta U = Q - P\Delta V = +nC_{V,m}\Delta T > 0$ \\
+4. Isobaric compression ($P=\mathrm{const}$) & $<0$ & $nC_{P,m}\Delta T < 0$ & $P\Delta V < 0$ & $-P\Delta V > 0$ & $\Delta U = Q - P\Delta V = nC_{V,m}\Delta T < 0$ \\
+5. Isothermal expansion (ideal gas) & $>0$ & $+nRT\ln(V_2/V_1) > 0$ & $+nRT\ln(V_2/V_1) > 0$ & $-nRT\ln(V_2/V_1) < 0$ & $\Delta U = 0 \implies Q = W_{\mathrm{by}} = -W_{\mathrm{on}} > 0$ \\
+6. Isothermal compression (ideal gas) & $<0$ & $nRT\ln(V_2/V_1) < 0$ & $nRT\ln(V_2/V_1) < 0$ & $-nRT\ln(V_2/V_1) > 0$ & $\Delta U = 0 \implies Q = W_{\mathrm{by}} = -W_{\mathrm{on}} < 0$ \\
+7. Adiabatic expansion ($Q=0$) & $>0$ & $0$ & $+\dfrac{P_1V_1-P_2V_2}{\gamma-1} > 0$ & $-\dfrac{P_1V_1-P_2V_2}{\gamma-1} < 0$ & $\Delta U = -W_{\mathrm{by}} = +W_{\mathrm{on}} < 0$ (gas cools, $\Delta T < 0$) \\
+8. Adiabatic compression ($Q=0$) & $<0$ & $0$ & $\dfrac{P_1V_1-P_2V_2}{\gamma-1} < 0$ & $-\dfrac{P_1V_1-P_2V_2}{\gamma-1} > 0$ & $\Delta U = -W_{\mathrm{by}} = +W_{\mathrm{on}} > 0$ (gas warms, $\Delta T > 0$) \\
+9. Free expansion into vacuum ($P_{\mathrm{ext}}=0$) & $>0$ & $0$ & $0$ & $0$ & $\Delta U = 0$ ($\Delta T = 0$ for ideal gas; $\Delta S = nR\ln(V_2/V_1) > 0$) \\
+10. Clockwise $P$--$V$ cycle (heat engine) & $0_{\mathrm{cyc}}$ & $Q_H - Q_C > 0$ & $+\mathrm{Area} > 0$ & $-\mathrm{Area} < 0$ & $\Delta U_{\mathrm{cycle}} = 0 \implies W_{\mathrm{net,by}} = Q_H - Q_C > 0$ \\
+11. Counterclockwise $P$--$V$ cycle (refrig.) & $0_{\mathrm{cyc}}$ & $Q_C - Q_H < 0$ & $-\mathrm{Area} < 0$ & $+\mathrm{Area} > 0$ & $\Delta U_{\mathrm{cycle}} = 0 \implies W_{\mathrm{in}} = W_{\mathrm{net,on}} = Q_H - Q_C > 0$ \\\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Symbol Disambiguation \& Dimensional Consistency}
+\label{sec:02.2}
+\idxtopic{symbols!collision disambiguation table}
+
+Thermodynamics reuses several Latin and Greek letters for unrelated physical quantities with different dimensions. Before substituting numbers into any formula, check the symbol's **subscript and SI unit** (\tref{tab:02:symcollision}).
+
+\begin{center}
+\captionof{table}{High-risk symbol collisions in thermodynamics and heat transfer: how to disambiguate by context and SI units \src{S07,S12,S13}.}\label{tab:02:symcollision}
+\footnotesize\setlength{\tabcolsep}{3.5pt}\renewcommand{\arraystretch}{1.13}
+\begin{tabularx}{\linewidth}{@{}l l l X@{}}\toprule
+\textbf{Overloaded Letter} & \textbf{Distinct Symbols} & \textbf{SI Units} & \textbf{Physical Meaning \& Disambiguation Rule} \\\midrule
+\multirow{3}{*}{$Q,\ \dot{Q},\ q,\ q''$} & $Q$ & $\si{\joule}$ & Total thermal energy transferred across boundary during a finite time interval $\Delta t$ \\
+ & $\dot{Q} = Q/t$ & $\si{\watt} = \si{\joule\per\second}$ & Heat transfer rate (thermal power); integrate/multiply by time $t$ $(\si{\second})$ to get $Q$ $(\si{\joule})$ \\
+ & $q = Q/m$ vs.\ $q'' = \dot{Q}/A$ & $\si{\joule\per\kilogram}$ vs.\ $\si{\watt\per\square\meter}$ & Mass-specific heat transfer $q$ $(\si{\joule\per\kilogram})$ vs.\ heat flux $q''$ (power per unit area, $\si{\watt\per\square\meter}$) \\\midrule
+\multirow{3}{*}{$c,\ C,\ C_m$} & $c,\ c_p,\ c_v$ & $\si{\joule\per\kilogram\per\kelvin}$ (or $\si{\joule\per\gram\per\kelvin}$) & Mass-specific heat capacity (intensive; $1\,\si{\joule\per\gram\per\kelvin} = \SI{1000}{\joule\per\kilogram\per\kelvin}$) \\
+ & $C = mc = nC_m$ & $\si{\joule\per\kelvin}$ & Total heat capacity of an object or calorimeter $C_{\mathrm{cal}}$ (extensive!) \\
+ & $C_m = Mc,\ C_{P,m},\ C_{V,m}$ & $\si{\joule\per\mole\per\kelvin}$ & Molar heat capacity (intensive; $C_{P,m} - C_{V,m} = R = \SI{8.31446}{\joule\per\mole\per\kelvin}$ for ideal gas) \\\midrule
+\multirow{3}{*}{$R,\ R_s,\ R_{\mathrm{th}},\ R_{\mathrm{val}}$} & $R = N_A k_B$ vs.\ $R_s = R/M$ & $\si{\joule\per\mole\per\kelvin}$ vs.\ $\si{\joule\per\kilogram\per\kelvin}$ & Universal molar gas constant ($\SI{8.31446}{\joule\per\mole\per\kelvin}$) vs.\ specific gas constant ($R_{\mathrm{air}} = \SI{287.05}{\joule\per\kilogram\per\kelvin}$) \\
+ & $R_{\mathrm{th}} = \Delta T / \dot{Q}$ & $\si{\kelvin\per\watt}$ & Lumped thermal resistance ($L/(kA)$ for conduction, $1/(hA)$ for convection) \\
+ & $R_{\mathrm{val}} = R'' = L/k$ & $\si{\square\meter\kelvin\per\watt}$ & Unit-area thermal insulance ($R$-value; $R_{\mathrm{th}} = R_{\mathrm{val}}/A$) \\\midrule
+\multirow{3}{*}{$\alpha_L,\ \alpha_{\mathrm{diff}},\ \alpha_{\mathrm{rad}}$} & $\alpha_L = \frac{1}{L}\frac{\Delta L}{\Delta T}$ & $\si{\per\kelvin}$ (or $\si{\per\celsius}$) & Linear coefficient of thermal expansion ($\beta_V \approx 3\alpha_L$ for isotropic solids) \\
+ & $\alpha = k/(\rho c_p)$ & $\si{\square\meter\per\second}$ & Thermal diffusivity (rate of transient thermal penetration; enters Fourier number $\mathrm{Fo} = \alpha t/L_c^2$) \\
+ & $\alpha,\ \alpha_\lambda$ & dimensionless $\in [0,1]$ & Hemispherical radiative absorptivity ($\alpha + \rho + \tau = 1$; equals $\varepsilon_\lambda$ at equilibrium) \\\midrule
+\multirow{2}{*}{$h,\ h_{\mathrm{conv}},\ h_{\mathrm{plank}}$} & $h = u + Pv$ vs.\ $h_{\mathrm{conv}}$ & $\si{\joule\per\kilogram}$ vs.\ $\si{\watt\per\square\meter\per\kelvin}$ & Specific enthalpy $h$ ($H/m$) vs.\ convective heat transfer coefficient $h$ ($\dot{Q} = hA\Delta T$) \\
+ & $h$ (Planck) vs.\ $h_{\mathrm{bulb}}$ & $\si{\joule\second}$ vs.\ $\si{\centi\meter}$ or $\si{\meter}$ & Planck constant ($\SI{6.62607015e-34}{\joule\second}$) vs.\ 2027 heat-lamp bulb height ($\SIrange{40}{65}{\centi\meter}$) \\\midrule
+\multirow{2}{*}{$k_B,\ k_{\mathrm{cond}},\ \gamma$} & $k_B$ vs.\ $k$ & $\si{\joule\per\kelvin}$ vs.\ $\si{\watt\per\meter\per\kelvin}$ & Boltzmann constant ($\SI{1.380649e-23}{\joule\per\kelvin}$) vs.\ thermal conductivity ($\dot{Q} = kA\Delta T/L$) \\
+ & $\gamma = C_P/C_V$ & dimensionless $>1$ & Adiabatic index / heat-capacity ratio ($\tfrac{5}{3}$ monatomic, $\tfrac{7}{5}$ diatomic, $\tfrac{4}{3}$ nonlinear polyatomic) \\\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{SI Base Units, Exact 2019 SI Definitions \& Multi-Unit Conversion Matrix}
+\label{sec:02.3}
+\idxtopic{2019 SI redefinition!kelvin and kilogram}
+\idxtopic{gas constant R!eight consistent unit forms}
+
+Since May 20, 2019 (9th SI Brochure / NIST CODATA 2022) \src{S07,S08}, all seven SI base units are defined by fixing exact numerical values of fundamental constants:
+\begin{itemize}
+  \item \textbf{The Kelvin ($\si{\kelvin}$):} Defined by fixing the Boltzmann constant to \textbf{exactly} $k_B = \SI{1.380649e-23}{\joule\per\kelvin}$ ($\si{\kilogram\square\meter\per\square\second\per\kelvin}$). A change of $\SI{1}{\kelvin}$ corresponds to a thermal energy scale shift $\Delta(k_B T) = \SI{1.380649e-23}{\joule}$. Consequently, the triple point of water ($T_{\mathrm{tp}} = \SI{273.16}{\kelvin} = \SI{0.01}{\celsius}$ at $P_{\mathrm{tp}} = \SI{611.657}{\pascal}$) is now an experimentally measured quantity with a relative standard uncertainty of $\num{1.5e-7}$ ($\pm\SI{0.0001}{\kelvin}$), whereas the Celsius offset $T(\si{\celsius}) = T(\si{\kelvin}) - 273.15$ remains exact \src{S07,S08}.
+  \item \textbf{The Mole ($\si{\mole}$) \& Universal Gas Constant ($R$):} Fixing Avogadro's constant to \textbf{exactly} $N_A = \SI{6.02214076e23}{\per\mole}$ makes the molar gas constant $R = N_A k_B$ an \textbf{exact 23-digit decimal}:
+  \begin{equation}\label{eq:02:Rforms}
+  \begin{aligned}
+    R = N_A k_B &= \SI{8.31446261815324}{\joule\per\mole\per\kelvin} = \SI{8.314462618}{\pascal\cubic\meter\per\mole\per\kelvin} = \SI{8.314462618}{\liter\kilo\pascal\per\mole\per\kelvin} \\
+      &= \SI{0.08314462618}{\liter\bar\per\mole\per\kelvin} = \SI{0.08205736608}{\liter\,atm\per\mole\per\kelvin} = \SI{62.36359822}{\liter\,Torr\per\mole\per\kelvin} \\
+      &= \SI{1.987204259}{cal_{\mathrm{th}}\per\mole\per\kelvin} = \SI{8.314462618e7}{erg\per\mole\per\kelvin} = \num{1.985875}\ \mathrm{BTU_{IT}/(lbmol\cdot{^\circ R})}.
+  \end{aligned}
+  \end{equation}
+\end{itemize}
+
+\begin{center}
+\captionof{table}{Verified NIST CODATA 2022 \& NIST SP 811 conversion factors for competition calculations \src{S07,S08}.}\label{tab:02:conversions}
+\footnotesize\setlength{\tabcolsep}{3.5pt}\renewcommand{\arraystretch}{1.14}
+\begin{tabularx}{\linewidth}{@{}l l X@{}}\toprule
+\textbf{Dimension} & \textbf{Coherent SI Unit} & \textbf{Exact or NIST SP 811 Conversion Factors} \\\midrule
+\textbf{Energy / Heat / Work} & $\SI{1}{\joule} = \SI{1}{\newton\meter} = \SI{1}{\pascal\cubic\meter}$ & $1\,\mathrm{cal_{th}} = \SI{4.184}{\joule}$ (exact); $1\,\mathrm{cal_{IT}} = \SI{4.1868}{\joule}$ (exact); $1\,\mathrm{Cal}$ (dietary) $= 1\,\mathrm{kcal_{th}} = \SI{4184}{\joule}$; $1\,\mathrm{BTU_{IT}} = \SI{1055.05585262}{\joule} = \SI{251.9958}{cal_{IT}} = \SI{778.16926}{ft\cdot lbf}$; $1\,\mathrm{BTU_{th}} = \SI{1054.3503}{\joule}$; $\SI{1}{\liter\,atm} = \SI{101.325}{\joule}$ (exact); $\SI{1}{\liter\bar} = \SI{100}{\joule}$ (exact); $\SI{1}{\liter\kilo\pascal} = \SI{1}{\joule}$ (exact); $\SI{1}{\kilo\watt\hour} = \SI{3.6e6}{\joule}$ (exact); $1\,\mathrm{therm\ (US)} = 10^5\,\mathrm{BTU} = \SI{1.054804e8}{\joule}$; $1\,\mathrm{erg} = \SI{1e-7}{\joule}$; $\SI{1}{\electronvolt} = \SI{1.602176634e-19}{\joule}$ \\
+\textbf{Power / Heat Rate} & $\SI{1}{\watt} = \SI{1}{\joule\per\second}$ & $1\,\mathrm{BTU_{IT}/h} = \SI{0.29307107}{\watt}$; $1\,\mathrm{BTU_{IT}/s} = \SI{1055.0559}{\watt}$; $1\,\mathrm{ton\ of\ refrigeration} = 200\,\mathrm{BTU_{IT}/min} = \SI{12000}{BTU_{IT}/h} = \SI{3516.8528}{\watt} \approx \SI{3.517}{\kilo\watt}$; $1\,\mathrm{hp\ (mech)} = \SI{550}{ft\cdot lbf/s} = \SI{745.69987}{\watt}$ \\
+\textbf{Pressure} & $\SI{1}{\pascal} = \SI{1}{\newton\per\square\meter} = \SI{1}{\joule\per\cubic\meter}$ & $\SI{1}{atm} = \SI{101325}{\pascal} = \SI{101.325}{\kilo\pascal} = \SI{1.01325}{\bar} = 760\,\mathrm{Torr} = \SI{760}{mmHg}\ (0\,^\circ\mathrm{C}) = \SI{14.6959488}{psi} = \SI{29.92126}{inHg} = \SI{10.33227}{mH_2O}\ (4\,^\circ\mathrm{C})$; $\SI{1}{\bar} = \SI{1e5}{\pascal} = \SI{100}{\kilo\pascal} = \SI{0.98692327}{atm} = \SI{14.5037738}{psi}$; $1\,\mathrm{Torr} = \frac{101325}{760}\,\si{\pascal} = \SI{133.3223684}{\pascal}$; $1\,\mathrm{psi} = \SI{6894.757293}{\pascal}$; $1\,\mathrm{inH_2O}\ (4\,^\circ\mathrm{C}) = \SI{249.0889}{\pascal}$ \\
+\textbf{Specific Heat Capacity} & $\SI{1}{\joule\per\kilogram\per\kelvin} = \SI{1}{\joule\per\kilogram\per\celsius}$ & $\SI{1}{\joule\per\gram\per\kelvin} = \SI{1}{\kilo\joule\per\kilogram\per\kelvin} = \SI{1000}{\joule\per\kilogram\per\kelvin}$; $1\,\mathrm{cal_{th}/(g\cdot^\circ C)} = \SI{4184}{\joule\per\kilogram\per\kelvin}$; $1\,\mathrm{cal_{IT}/(g\cdot^\circ C)} = 1\,\mathrm{BTU_{IT}/(lbm\cdot^\circ F)} = \SI{4186.8}{\joule\per\kilogram\per\kelvin}$ (exact) \\
+\textbf{Latent Heat / Enthalpy} & $\SI{1}{\joule\per\kilogram}$ & $\SI{1}{\kilo\joule\per\kilogram} = \SI{1}{\joule\per\gram}$; $1\,\mathrm{cal_{th}/g} = \SI{4.184}{\kilo\joule\per\kilogram}$; $1\,\mathrm{cal_{IT}/g} = \SI{4.1868}{\kilo\joule\per\kilogram}$; $1\,\mathrm{BTU_{IT}/lbm} = \SI{2.326}{\kilo\joule\per\kilogram} = \SI{2326}{\joule\per\kilogram}$ (exact) \\
+\textbf{Thermal Conductivity} & $\SI{1}{\watt\per\meter\per\kelvin}$ & $1\,\mathrm{BTU_{IT}/(h\cdot ft\cdot^\circ F)} = \SI{1.730735}{\watt\per\meter\per\kelvin}$; $1\,\mathrm{BTU_{IT}\cdot in/(h\cdot ft^2\cdot^\circ F)} = \SI{0.1442279}{\watt\per\meter\per\kelvin}$; $1\,\mathrm{cal_{th}/(s\cdot cm\cdot^\circ C)} = \SI{418.4}{\watt\per\meter\per\kelvin}$ \\
+\textbf{Conductance / $R$-Value} & $h, U$: $\si{\watt\per\square\meter\per\kelvin}$; $R''$: $\si{\square\meter\kelvin\per\watt}$ & $1\,\mathrm{BTU_{IT}/(h\cdot ft^2\cdot^\circ F)} = \SI{5.678263}{\watt\per\square\meter\per\kelvin}$; $1\,\text{R-value (US: }\mathrm{h\cdot ft^2\cdot^\circ F/BTU_{IT}}\text{)} = \SI{0.17611018}{\square\meter\kelvin\per\watt}$ (RSI); $1\,\mathrm{RSI} = 5.678263\,\text{R-value (US)}$; $1\,\mathrm{clo} = \SI{0.155}{\square\meter\kelvin\per\watt}$ \\
+\textbf{Viscosity ($\mu$ and $\nu$)} & $\mu$: $\si{\pascal\second}$; $\nu$: $\si{\square\meter\per\second}$ & $1\,\mathrm{P\ (poise)} = \SI{0.1}{\pascal\second}$; $1\,\mathrm{cP} = \SI{1}{\milli\pascal\second} = \SI{1000}{\micro\pascal\second}$; $1\,\mathrm{St\ (stokes)} = \SI{1e-4}{\square\meter\per\second}$; $1\,\mathrm{cSt} = \SI{1}{\square\milli\meter\per\second} = \SI{1e-6}{\square\meter\per\second}$ \\\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{STP vs.\ SATP Molar Volume Disambiguation}
+\idxtopic{STP vs.\ SATP!molar volume trap}
+Never assume ``STP'' means $\SI{22.4}{\liter\per\mole}$ without checking the pressure standard \src{S07}:
+\begin{itemize}
+  \item \textbf{IUPAC / Modern NIST STP ($T = \SI{273.15}{\kelvin} = \SI{0}{\celsius}$, $P = \SI{1}{\bar} = \SI{100}{\kilo\pascal}$):} $V_m = RT/P = \mathbf{\SI{22.71095}{\liter\per\mole}}$ ($n_0 = \SI{2.651646e25}{\per\cubic\meter}$).
+  \item \textbf{Traditional / US Textbook STP ($T = \SI{273.15}{\kelvin} = \SI{0}{\celsius}$, $P = \SI{1}{atm} = \SI{101.325}{\kilo\pascal}$):} $V_m = RT/P = \mathbf{\SI{22.41397}{\liter\per\mole}}$ ($n_0 = \SI{2.686780e25}{\per\cubic\meter}$).
+  \item \textbf{SATP (Standard Ambient $T = \SI{298.15}{\kelvin} = \SI{25}{\celsius}$, $P = \SI{1}{\bar} = \SI{100}{\kilo\pascal}$):} $V_m = \mathbf{\SI{24.78957}{\liter\per\mole}}$ (or $\mathbf{\SI{24.46540}{\liter\per\mole}}$ at $\SI{25}{\celsius}, \SI{1}{atm}$).
+\end{itemize}
+
+\section{Science Olympiad Significant Figures \& Rounding Policy}
+\label{sec:02.4}
+\idxtopic{significant figures!addition vs.\ multiplication vs.\ logarithms}
+
+Rule \texttt{5.I.b} requires all written answers to be reported in **metric units with appropriate significant figures unless otherwise specified** \src{S01,S06}:
+\begin{enumerate}
+  \item \textbf{Measurement Recording Rule:} Record all certain digits from instrument graduations plus \textbf{one (and only one) estimated digit} (typically $\pm 0.1$ of the smallest graduation for analog scales, or the last displayed digit on a digital thermometer) \src{S06}. Under 2027 Rules \texttt{4.f} and \texttt{5.II.c,g}, the ES thermometer reads to $\mathbf{\SI{0.1}{\celsius}}$ (e.g., $\SI{21.4}{\celsius}$ has 3 sig figs and 1 decimal place) \src{S01}.
+  \item \textbf{Addition \& Subtraction (Decimal-Place Rule):} Round the result to the \textbf{least precise decimal column} among the terms.
+    \begin{itemize}
+      \item \emph{Critical Calorimetry \& Temperature-Convert Trap:} Converting $T_C = \SI{25.0}{\celsius}$ (1 decimal place, 3 sig figs) to kelvin via $T_K = 25.0 + 273.15 = \SI{298.15}{\kelvin} \to \mathbf{\SI{298.2}{\kelvin}}$ limits the kelvin value to \textbf{1 decimal place (4 sig figs)}. Conversely, subtracting two close thermometer readings $T_f - T_i = 28.4\,\si{\celsius} - 22.7\,\si{\celsius} = \mathbf{\SI{5.7}{\celsius}}$ preserves 1 decimal place but drops from 3 sig figs to \textbf{2 sig figs} (limiting $Q = mc\Delta T$ to 2 sig figs!).
+    \end{itemize}
+  \item \textbf{Multiplication, Division, Powers \& Roots (Sig-Fig Count Rule):} Round the final answer to the \textbf{smallest number of significant figures} among any measured factor. Defined exact constants ($k_B, N_A, R, \SI{4.184}{\joule/cal_{th}}, \SI{101325}{\pascal/atm}$, stoichiometric integers, $\tfrac{3}{2}, \tfrac{5}{2}$) have \textbf{infinite significant figures} and never limit precision \src{S06,S07}.
+  \item \textbf{Logarithms \& Exponentials ($\ln x$, $\log_{10} x$, $e^x$):} In $y = \ln x$ or $\log_{10} x$, the number of digits after the decimal point in $y$ (the \emph{mantissa}) equals the number of significant figures in $x$ (e.g., $\ln(\num{2.50}) = 0.91629\ldots \to \mathbf{0.916}$ has 3 decimal places because $\num{2.50}$ has 3 sig figs). In $x = e^y$ or $10^y$, the number of sig figs in $x$ equals the number of decimal places in $y$ \src{S06}.
+  \item \textbf{Guard-Digit Rule:} Never round intermediate values during multi-step calculations! Store full floating-point precision in your Class~III calculator memory (\texttt{STO}/\texttt{ANS}) and round \textbf{only the final reported number} \src{S06}.
+\end{enumerate}
+
+\section{Rule \texttt{5.d.i--iv} Algebra-Only \& Geometry-Only Math Toolkit}
+\label{sec:02.5}
+\idxtopic{Rule 5.d.iv!no trigonometry or calculus required}
+\idxformula{trapezoid area on P-V diagram!$W_{\mathrm{by}} = \frac{1}{2}(P_1+P_2)(V_2-V_1)$}
+
+\begin{rulebox}[2027 Rule 5.d.i--iv \& National Physics Math Guidelines \src{S01,S06}]
+\begin{itemize}
+  \item \textbf{Permitted Mathematics (\texttt{5.d.i--iii}):} Arithmetic (ratios, scientific notation, exponents, roots, absolute values), algebraic manipulations (multi-step and multi-variable symbolic derivations, linear systems, quadratics, logarithms $\ln/\log_{10}$ and exponentials $e^x$ per \texttt{MathGuidelines2022.pdf} Division~C Algebra~II), and geometry (areas and volumes of rectangles, triangles, trapezoids, circles/ellipses, cylinders, spheres, cones, and cubes).
+  \item \textbf{Strict Prohibition (\texttt{5.d.iv}):} \emph{``No questions may require trigonometry or calculus.''} Every problem on a 2027 compliant exam can be solved without differentiation, integration, or trigonometric functions ($\sin, \cos, \tan$).
+\end{itemize}
+\end{rulebox}
+
+\subsection{How Calculus-Origin Formulas Reduce to Pure Algebra \& Geometry}
+\begin{enumerate}
+  \item \textbf{$P$--$V$ Work as Geometric Area (\texttt{5.d.iii}):} Instead of evaluating $\int_{V_1}^{V_2} P(V)\,dV$, identify the geometric shape under the path on the $P$--$V$ plane (remembering $\SI{1}{\kilo\pascal}\times\SI{1}{\liter} = \SI{1}{\joule}$ and $\SI{1}{\mega\pascal}\times\SI{1}{\cubic\meter} = \SI{1}{\mega\joule}$):
+    \begin{itemize}
+      \item \emph{Isochoric vertical line ($V_2 = V_1$):} Base width is zero $\implies W_{\mathrm{by}} = 0$.
+      \item \emph{Isobaric horizontal line ($P = \mathrm{const}$):} Rectangle of height $P$ and width $(V_2 - V_1) \implies W_{\mathrm{by}} = P(V_2 - V_1)$.
+      \item \emph{Straight-line segment from $(V_1, P_1)$ to $(V_2, P_2)$:} Trapezoid of average height $\bar{P} = \tfrac{1}{2}(P_1 + P_2) \implies W_{\mathrm{by}} = \tfrac{1}{2}(P_1 + P_2)(V_2 - V_1)$.
+      \item \emph{Closed cycle (polygon or ellipse):} Net work per cycle is the \textbf{enclosed area} ($+\mathrm{Area}$ if clockwise, $-\mathrm{Area}$ if counterclockwise):
+        \begin{equation}\label{eq:02:cycleareas}
+          W_{\mathrm{rect}} = \Delta P\,\Delta V, \qquad W_{\mathrm{triangle}} = \tfrac{1}{2}\,\Delta P\,\Delta V, \qquad W_{\mathrm{ellipse/circle}} = \pi a b = \frac{\pi}{4}(P_{\max} - P_{\min})(V_{\max} - V_{\min}).
+        \end{equation}
+    \end{itemize}
+  \item \textbf{Zero-Calculus Proof of Reversible Adiabatic Work:} For an ideal gas, internal energy is a state function that always satisfies $\Delta U = nC_{V,m}(T_2 - T_1) = \frac{nR(T_2 - T_1)}{\gamma - 1} = \frac{P_2V_2 - P_1V_1}{\gamma - 1}$ regardless of path. Setting $Q = 0$ in the First Law $\Delta U = Q - W_{\mathrm{by}}$ immediately yields $W_{\mathrm{by}} = -\Delta U = \dfrac{P_1V_1 - P_2V_2}{\gamma - 1}$ by pure algebra without integrating $PV^\gamma$!
+  \item \textbf{Closed-Form Logarithmic Formulas (Direct Calculator \texttt{LN} Key):} For reversible isothermal work $W_{\mathrm{by}} = nRT\ln(V_2/V_1)$, constant-$c$ warming entropy $\Delta S = mc\ln(T_2/T_1)$, ideal-gas entropy $\Delta S = nC_{V,m}\ln(T_2/T_1) + nR\ln(V_2/V_1)$, and cylindrical conduction resistance $R_{\mathrm{cyl}} = \frac{\ln(r_o/r_i)}{2\pi k L}$, substitute the dimensionless ratio directly into the $\ln(\cdot)$ key on your Class~III calculator.
+  \item \textbf{Logarithmic Mean Temperature Difference (LMTD) \& Thin-Annulus Approximations:} When $r_o/r_i = 1 + \epsilon$ with $|\epsilon| \ll 1$, the algebraic Pad\'e approximation $\ln\left(\frac{r_o}{r_i}\right) \approx \frac{r_o - r_i}{(r_o + r_i)/2} = \frac{\Delta r}{r_{\mathrm{avg}}}$ reduces cylindrical conduction to a flat slab of mean area $A_{\mathrm{avg}} = 2\pi r_{\mathrm{avg}} L$ to within $<0.1\%$ for $\epsilon < 0.05$.
+  \item \textbf{Pythagorean Aspect-Ratio Replacement for Sloped Reflectors (Zero Trigonometry!):} For a truncated conical reflector of top radius $R_1$, bottom radius $R_2$, and vertical height $H$, never use $\sin\theta$ or $\cos\theta$; use the slant length $s = \sqrt{H^2 + (R_1 - R_2)^2}$, lateral surface area $A_{\mathrm{lat}} = \pi(R_1 + R_2)\sqrt{H^2 + (R_1 - R_2)^2}$, and frustum volume $V = \frac{1}{3}\pi H(R_1^2 + R_1 R_2 + R_2^2)$ \src{S01}.
+\end{enumerate}
+
+\section{Layered Worked Examples \& Diagnostics}
+\label{sec:02.6}
+
+\begin{workedexample}[First Law Sign Translation \& Multi-Unit Pressure-Volume Work]{Basic $\cdot$ Rule 5.c.i, 5.c.iv}{ex:02.1}
+A closed piston--cylinder assembly contains a gas that expands at a constant external pressure of $P = \SI{2.50}{atm}$ from an initial volume of $V_1 = \SI{1.20}{\liter}$ to a final volume of $V_2 = \SI{4.80}{\liter}$ while absorbing $Q = \SI{350.0}{cal_{th}}$ of heat from a heater. Find (a) the boundary work in joules under both the Physics ($W_{\mathrm{by}}$) and Chemistry ($w_{\mathrm{on}}$) conventions, and (b) the internal energy change $\Delta U$ in joules.
+
+\textbf{Solution.}
+\textbf{(a)} Convert heat and pressure--volume units to coherent SI ($\si{\joule}$):
+\[
+  Q = \SI{350.0}{cal_{th}} \times \SI{4.184}{\joule/cal_{th}} = +\SI{1464.4}{\joule}, \qquad
+  P\Delta V = (\SI{2.50}{atm})(4.80 - \SI{1.20}{\liter}) = \SI{9.00}{\liter\,atm}.
+\]
+Using the exact conversion $\SI{1}{\liter\,atm} = \SI{101.325}{\joule}$:
+\[
+  W_{\mathrm{by}} = +P\Delta V = 9.00 \times \SI{101.325}{\joule} = \mathbf{+\SI{911.925}{\joule} \approx +\SI{912}{\joule}}, \qquad
+  w_{\mathrm{on}} = -W_{\mathrm{by}} = \mathbf{-\SI{911.925}{\joule} \approx -\SI{912}{\joule}}.
+\]
+\textbf{(b)} Internal energy change is identical under both conventions:
+\[
+  \Delta U = Q - W_{\mathrm{by}} = 1464.4 - 911.925 = \mathbf{+\SI{552.475}{\joule} \approx +\SI{552}{\joule}} \quad (\text{or } \Delta U = q + w_{\mathrm{on}} = 1464.4 + (-911.925) = +\SI{552.475}{\joule}).
+\]
+\verifiedby{Direct SI conversion: $P = 2.50 \times \SI{101325}{\pascal} = \SI{253312.5}{\pascal}$, $\Delta V = \SI{3.60e-3}{\cubic\meter} \implies W_{\mathrm{by}} = \SI{911.925}{\joule}$, $\Delta U = \SI{552.475}{\joule}$ (\texttt{check\_sec02\_05.py}).}
+\end{workedexample}
+
+\begin{workedexample}[Geometric $P$--$V$ Cycle Area \& Significant Figures Trap]{Competition $\cdot$ Rules 5.I.b, 5.d.iii}{ex:02.2}
+An ideal gas executes a clockwise right-triangular cycle $A \to B \to C \to A$ on a $P$--$V$ diagram with vertices $A(\SI{2.00}{\liter}, \SI{100.0}{\kilo\pascal})$, $B(\SI{8.00}{\liter}, \SI{400.0}{\kilo\pascal})$ along a straight chord, $C(\SI{8.00}{\liter}, \SI{100.0}{\kilo\pascal})$ isochorically, and $C \to A$ isobarically. Compute (a) the work $W_{\mathrm{by}}$ along each leg $A\to B$, $B\to C$, and $C\to A$, and (b) the net work $W_{\mathrm{net}}$ and net heat $Q_{\mathrm{net}}$ over the complete cycle.
+
+\textbf{Solution.}
+\textbf{(a)} Recall $\SI{1}{\kilo\pascal}\times\SI{1}{\liter} = \SI{1}{\joule}$:
+\begin{itemize}
+  \item Leg $A \to B$ (straight-line expansion from $V_A = \SI{2.00}{\liter}$ to $V_B = \SI{8.00}{\liter}$): Trapezoid area under segment $AB$:
+    \[
+      W_{A\to B} = \tfrac{1}{2}(P_A + P_B)(V_B - V_A) = \tfrac{1}{2}(100.0 + \SI{400.0}{\kilo\pascal})(8.00 - \SI{2.00}{\liter}) = (\SI{250.0}{\kilo\pascal})(\SI{6.00}{\liter}) = \mathbf{+\SI{1500}{\joule} = +\SI{1.50}{\kilo\joule}}.
+    \]
+  \item Leg $B \to C$ (isochoric cooling at $V = \SI{8.00}{\liter}$): $\Delta V = 0 \implies W_{B\to C} = \mathbf{\SI{0}{\joule}}$.
+  \item Leg $C \to A$ (isobaric compression at $P = \SI{100.0}{\kilo\pascal}$ from $\SI{8.00}{\liter}$ to $\SI{2.00}{\liter}$): Rectangle area moving left:
+    \[
+      W_{C\to A} = P_C(V_A - V_C) = (\SI{100.0}{\kilo\pascal})(2.00 - \SI{8.00}{\liter}) = \mathbf{-\SI{600}{\joule} = -\SI{0.600}{\kilo\joule}}.
+    \]
+\end{itemize}
+\textbf{(b)} Over the closed cycle, $\Delta U_{\mathrm{cycle}} = 0$, so $Q_{\mathrm{net}} = W_{\mathrm{net}} = W_{A\to B} + W_{B\to C} + W_{C\to A} = 1500 + 0 - 600 = \mathbf{+\SI{900}{\joule} = +\SI{0.900}{\kilo\joule}}$ (3 sig figs, limited by $\Delta V = \SI{6.00}{\liter}$).
+\verifiedby{Right-triangle enclosed area formula: $W_{\mathrm{net}} = +\tfrac{1}{2}\Delta V\,\Delta P = \tfrac{1}{2}(\SI{6.00}{\liter})(\SI{300.0}{\kilo\pascal}) = +\SI{900.0}{\joule}$ (\texttt{check\_sec02\_05.py}).}
+\end{workedexample}
+
+\begin{workedexample}[Compound Imperial-to-SI Conversion: Refrigeration Tonnage \& Thermal Resistance]{Competition $\cdot$ Rule 5.c.i, 5.c.iii}{ex:02.3}
+A cold-storage room has walls of total area $A = \SI{45.0}{\square\meter}$ insulated to a US rating of $\text{R-}19$ ($\SI{19.0}{h\cdot ft^2\cdot^\circ F/BTU_{IT}}$). When the outside air is $\SI{95.0}{^\circ\text{F}}$ and the inside room is held at $\SI{23.0}{^\circ\text{F}}$, find (a) the SI unit-area insulance $R_{\mathrm{val}}$ ($\si{\square\meter\kelvin\per\watt}$) and total thermal resistance $R_{\mathrm{th}}$ ($\si{\kelvin\per\watt}$), and (b) the steady conductive heat leak $\dot{Q}$ in watts and in tons of refrigeration.
+
+\textbf{Solution.}
+\textbf{(a)} From \tref{tab:02:conversions}, $1\,\text{R-value (US)} = \SI{0.17611018}{\square\meter\kelvin\per\watt}$:
+\[
+  R_{\mathrm{val}} = 19.0 \times \SI{0.17611018}{\square\meter\kelvin\per\watt} = \mathbf{\SI{3.346}{\square\meter\kelvin\per\watt}}, \qquad
+  R_{\mathrm{th}} = \frac{R_{\mathrm{val}}}{A} = \frac{\SI{3.3461}{\square\meter\kelvin\per\watt}}{\SI{45.0}{\square\meter}} = \mathbf{\SI{0.07436}{\kelvin\per\watt}}.
+\]
+\textbf{(b)} Convert the temperature difference using the interval ratio $\Delta T_K = \Delta T_C = \frac{5}{9}\Delta T_F$ (do NOT subtract $32$ from $\Delta T_F$!):
+\[
+  \Delta T_F = 95.0 - 23.0 = \SI{72.0}{^\circ\text{F}} \implies \Delta T_K = \frac{5}{9}(72.0) = \SI{40.0}{\kelvin}.
+\]
+The steady heat leak is:
+\[
+  \dot{Q} = \frac{\Delta T_K}{R_{\mathrm{th}}} = \frac{\SI{40.0}{\kelvin}}{\SI{0.074358}{\kelvin\per\watt}} = \mathbf{\SI{537.9}{\watt} \approx \SI{538}{\watt}}, \qquad
+  \dot{Q}_{\mathrm{tons}} = \frac{\SI{537.94}{\watt}}{\SI{3516.85}{\watt/ton}} = \mathbf{\SI{0.153}{tons\ of\ refrigeration}}.
+\]
+\verifiedby{Direct imperial flux calculation: $A = \SI{45.0}{\square\meter} / (\SI{0.3048}{\meter/ft})^2 = \SI{484.376}{ft^2}$, $\dot{Q} = 484.376 \times 72.0 / 19.0 = \SI{1835.53}{BTU_{IT}/h} = \SI{0.15296}{tons} = \SI{537.94}{\watt}$ (\texttt{check\_sec02\_05.py}).}
+\end{workedexample}
+
+\begin{workedexample}[Algebraic Binomial \& Linear Interpolation Accuracy Check]{National $\cdot$ Rule 5.d.i--ii}{ex:02.4}
+(a) Use the NIST saturation water table (\tref{tab:02:conversions} / App.~A) at $T_1 = \SI{30.0}{\celsius}$ ($P_{\mathrm{sat},1} = \SI{4.2470}{\kilo\pascal}, L_{v,1} = \SI{2429.8}{\kilo\joule\per\kilogram}$) and $T_2 = \SI{35.0}{\celsius}$ ($P_{\mathrm{sat},2} = \SI{5.6290}{\kilo\pascal}, L_{v,2} = \SI{2417.9}{\kilo\joule\per\kilogram}$) to linearly interpolate $P_{\mathrm{sat}}$ and $L_v$ at $T = \SI{32.0}{\celsius}$. (b) A copper sphere increases in radius by $\epsilon = \Delta R / R_0 = \num{1.70e-3}$. Compare the exact fractional volume increase $(1+\epsilon)^3 - 1$ against the binomial linear approximation $3\epsilon$.
+
+\textbf{Solution.}
+\textbf{(a)} The interpolation fraction is $f = (32.0 - 30.0)/(35.0 - 30.0) = 2.0/5.0 = 0.400$:
+\[
+  P_{\mathrm{sat}}(\SI{32.0}{\celsius}) \approx 4.2470 + 0.400(5.6290 - 4.2470) = \mathbf{\SI{4.800}{\kilo\pascal}}, \qquad
+  L_v(\SI{32.0}{\celsius}) \approx 2429.8 + 0.400(2417.9 - 2429.8) = \mathbf{\SI{2425.0}{\kilo\joule\per\kilogram}}.
+\]
+\textbf{(b)} For $\epsilon = \num{1.70e-3}$:
+\[
+  \left(\frac{\Delta V}{V_0}\right)_{\mathrm{linear}} = 3\epsilon = \mathbf{\num{5.1000e-3}}, \qquad
+  \left(\frac{\Delta V}{V_0}\right)_{\mathrm{exact}} = (1.00170)^3 - 1 = \mathbf{\num{5.10867e-3}} \quad (\text{relative error } 0.17\%).
+\]
+\verifiedby{NIST IAPWS-95 exact evaluation at $\SI{32.0}{\celsius}$ gives $L_v = \SI{2425.1}{\kilo\joule\per\kilogram}$ ($0.004\%$ error) and $P_{\mathrm{sat}} = \SI{4.759}{\kilo\pascal}$ ($0.85\%$ secant error) (\texttt{check\_sec02\_05.py}).}
+\end{workedexample}
+
+\begin{trapbox}[§2 Top 5 Sign, Unit \& Sig-Fig Traps Diagnosis Table]
+\begin{errtab}
+Using $R = \SI{8.314}{\joule\per\mole\per\kelvin}$ when $P$ is in $\si{atm}$ and $V$ is in $\si{\liter}$ & Off by a factor of $101.325\times$! ($\SI{1}{\liter\,atm} = \SI{101.325}{\joule}$, whereas $\SI{1}{\liter\kilo\pascal} = \SI{1}{\joule}$) & Either convert $P$ to $\si{\kilo\pascal}$ and $V$ to $\si{\liter}$ (with $R=8.31446$) OR use $R = \SI{0.082057}{\liter\,atm\per\mole\per\kelvin}$. \\
+Using molar mass $M$ in $\si{\gram\per\mole}$ inside $v_{\mathrm{rms}} = \sqrt{3RT/M}$ or $c_s = \sqrt{\gamma RT/M}$ & Speed is too large by $\sqrt{1000} = 31.62\times$ ($\mathrm{N_2}$ at $\SI{300}{\kelvin}$ gives $\SI{16340}{\meter\per\second}$ instead of $\SI{517}{\meter\per\second}$) & Always convert $M$ to $\si{\kilogram\per\mole}$ ($\mathrm{N_2}: \SI{0.028013}{\kilogram\per\mole}$) because $\SI{1}{\joule} = \SI{1}{\kilogram\square\meter\per\square\second}$. \\
+Adding $273.15$ or $32$ when converting a temperature \textbf{difference} $\Delta T$ & $\Delta T = \SI{10}{\celsius}$ falsely converted to $\SI{283.15}{\kelvin}$ or $\SI{50}{^\circ\text{F}}$ & Offset constants cancel in differences: $\Delta T_K = \Delta T_C = \frac{5}{9}\Delta T_F = \frac{5}{4}\Delta T_{\mathrm{R\acute{e}}} = -\frac{2}{3}\Delta T_{\mathrm{De}}$. \\
+Mixing Physics $W_{\mathrm{by}}$ and Chemistry $w_{\mathrm{on}}$ in $\Delta U = Q \pm W$ & Sign of work flips, turning $\Delta U = 100 - 40 = \SI{60}{\joule}$ into $\SI{140}{\joule}$ & Ask physically: \emph{Did the gas expand?} Expansion work leaves the gas ($\Delta U$ decreases by $|W|$). \\
+Using gauge pressure $P_{\mathrm{gauge}}$ instead of $P_{\mathrm{abs}} = P_{\mathrm{gauge}} + P_{\mathrm{atm}}$ in $PV = nRT$ & Fails completely ($P_{\mathrm{gauge}} = 0$ would imply $n=0$ or $T=0$) & Add ambient pressure ($P_{\mathrm{atm}} = \SI{101.325}{\kilo\pascal} = \SI{14.696}{psi}$) before using any gas law or $PV^\gamma$. \\
+\end{errtab}
+\end{trapbox}
+
+\begin{devicebox}[2027 Heat-Lamp Collector Scoring \& Unit Discipline (`Rule 6.a--f`)]
+\idxdev{scoring in Celsius!Rule 6.b--f Prediction Efficiency trap}
+Under 2027 Rule \texttt{6.b}, \textbf{all Part~II device scoring calculations are performed in degrees Celsius ($\si{\celsius}$), NOT kelvin!} Specifically, Temperature Gain is $\mathrm{TG} = T_{\mathrm{final}} - T_{\mathrm{start}}$ (in $\si{\celsius}$) and Prediction Efficiency is:
+\[
+  \mathrm{PE} = \max\!\left(0,\ 1 - \frac{|T_{\mathrm{final}} - T_{\mathrm{pred}}|}{T_{\mathrm{final}}}\right) \quad \text{with } T_{\mathrm{final}} \text{ and } T_{\mathrm{pred}} \text{ in } \mathbf{\si{\celsius}\text{ ( to }\SI{0.1}{\celsius}\text{)}} \src{S01,S04}.
+\]
+Never convert $T_{\mathrm{final}}$ to kelvin inside the denominator of $\mathrm{PE}$, and always submit $T_{\mathrm{pred}}$ in $\si{\celsius}$ rounded to $\SI{0.1}{\celsius}$ before the end of Heating Time (\texttt{Rule 5.II.f}).
+\end{devicebox}
+
+\alsosee{\spref{sec:00} (Scoring \& Router), \spref{sec:01.1} (\texttt{QS-01} Constants \& Scales), \spref{sec:03} (Temperature Scales \& 8 Scientists), \spref{sec:07} (First Law \& Work Paths), and \spref{app:A} (CODATA 2022 Constants Table).}

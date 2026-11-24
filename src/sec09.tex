@@ -1,0 +1,840 @@
+% ============================================================================
+% sec09.tex — §9 Heat Engines, Refrigerators, Heat Pumps, Carnot Bounds &
+%             Named Thermodynamic Cycles (Target: 10 pages)
+% ============================================================================
+\binderchapter{9}{Heat Engines, Refrigerators, Heat Pumps, Carnot Bounds \& Named Thermodynamic Cycles}{Engines, Refrigerators \& Cycles}{sec:09}
+\scopebanner{REQUIRED}[2027 Rule 5.c.iv (All Tournament Levels) \textbar\ Complete Power \& Refrigeration Cycle Atlas]
+
+\idxtopic{heat engine}\idxtopic{thermal efficiency $\eta$}\idxtopic{refrigerator}\idxtopic{heat pump}\idxtopic{coefficient of performance (COP)}\idxtopic{Carnot cycle}\idxtopic{Otto cycle}\idxtopic{Diesel cycle}\idxtopic{Brayton cycle}\idxtopic{Stirling cycle}\idxtopic{Ericsson cycle}\idxtopic{Rankine cycle}
+
+Thermodynamic cycles and cyclic devices (engines, refrigerators, and heat pumps) are core Rule~\texttt{5.c.iv} topics tested at every competition level \src{S01,S25,S26,S30}. Every cycle equation in this chapter follows the positive-magnitude convention ($Q_H > 0, Q_C > 0, W > 0$) and is solved using pure algebra and geometry under Rule~\texttt{5.d.iii--iv} \src{S06,S13}.
+
+% ============================================================================
+\section{Heat Engines ($\eta$), Refrigerators ($\mathrm{COP}_R$), Heat Pumps ($\mathrm{COP}_{\mathrm{HP}}$) \& Cycle Orientation}\label{sec:09.1}
+% ============================================================================
+\idxtopic{cycle orientation!clockwise vs. counterclockwise}\idxtopic{ton of refrigeration}\idxtopic{EER and SEER}
+
+Over one complete cycle of any closed-loop device, the working fluid returns to its initial state ($\Delta U_{\mathrm{cycle}} = 0, \Delta H_{\mathrm{cycle}} = 0, \Delta S_{\mathrm{fluid,cycle}} = 0$). Taking heat absorbed from the hot reservoir $Q_H = |Q_{\mathrm{in}}| > 0$ and heat rejected to the cold reservoir $Q_C = |Q_{\mathrm{out}}| > 0$ as \textbf{positive magnitudes}, the First Law enforces $\boxed{Q_H = Q_C + W}$ for both power and refrigeration cycles \src{S13,S14}:
+
+\begin{formulacard}[Master Efficiency \& Coefficient of Performance (COP) Ledger \src{S08,S13,S33}]
+\par\smallskip\noindent
+\footnotesize\setlength{\tabcolsep}{3.5pt}\renewcommand{\arraystretch}{1.20}
+\begin{tabularx}{\linewidth}{@{}l l l l X@{}}
+\toprule
+\textbf{Cyclic Device} & \textbf{Loop Direction} & \textbf{Desired / Paid} & \textbf{Universal First-Law Formula} & \textbf{Reversible Carnot Limit ($T$ in $\si{\kelvin}$!)} \\
+\midrule
+\textbf{1. Heat Engine} & \textbf{Clockwise} & $\dfrac{\text{Net Work } W_{\mathrm{net}}}{\text{Heat Input } Q_H}$ & $\displaystyle \eta = \frac{W_{\mathrm{net}}}{Q_H} = \frac{Q_H - Q_C}{Q_H} = 1 - \frac{Q_C}{Q_H}$ & $\displaystyle \eta_{\mathrm{Carnot}} = 1 - \frac{T_C}{T_H} < 1$ \\[7pt]
+\textbf{2. Refrigerator / AC} & \textbf{Counterclockwise} & $\dfrac{\text{Cold Heat } Q_C}{\text{Work Input } W_{\mathrm{in}}}$ & $\displaystyle \mathrm{COP}_R = \frac{Q_C}{W_{\mathrm{in}}} = \frac{Q_C}{Q_H - Q_C}$ & $\displaystyle \mathrm{COP}_{R,\mathrm{Carnot}} = \frac{T_C}{T_H - T_C} \in (0,\infty)$ \\[7pt]
+\textbf{3. Heat Pump} & \textbf{Counterclockwise} & $\dfrac{\text{Hot Heat } Q_H}{\text{Work Input } W_{\mathrm{in}}}$ & $\displaystyle \mathrm{COP}_{\mathrm{HP}} = \frac{Q_H}{W_{\mathrm{in}}} = \frac{Q_H}{Q_H - Q_C}$ & $\displaystyle \mathrm{COP}_{\mathrm{HP,Carnot}} = \frac{T_H}{T_H - T_C} = \frac{1}{\eta_{\mathrm{Carnot}}} > 1$ \\
+\bottomrule
+\end{tabularx}
+\par\smallskip\noindent
+\idxformula{Heat engine thermal efficiency: $\eta = W_{\mathrm{net}}/Q_H = 1 - Q_C/Q_H \le 1 - T_C/T_H$}\idxformula{Refrigerator COP: $\mathrm{COP}_R = Q_C/(Q_H - Q_C) \le T_C/(T_H - T_C)$}\idxformula{Heat pump COP: $\mathrm{COP}_{\mathrm{HP}} = Q_H/(Q_H - Q_C) = \mathrm{COP}_R + 1 \le T_H/(T_H - T_C)$}
+\begin{itemize}
+  \item \textbf{Universal Exact Identity ($\mathrm{COP}_{\mathrm{HP}} = \mathrm{COP}_R + 1$):} Dividing the First Law $Q_H = Q_C + W_{\mathrm{in}}$ by $W_{\mathrm{in}}$ yields $\boxed{\mathrm{COP}_{\mathrm{HP}} = \mathrm{COP}_R + 1}$ for \textbf{every} real or ideal refrigerator/heat pump operating between the same two states! Because $Q_C \ge 0$, $\mathrm{COP}_{\mathrm{HP}}$ is \textbf{always $\ge 1$} (where $\mathrm{COP}_{\mathrm{HP}} = 1$ corresponds to an electric space heater converting $100\%$ of $W_{\mathrm{in}}$ directly into $Q_H$ with $Q_C = 0$).
+  \item \textbf{Enclosed Loop Area Identity on $P$--$V$ and $T$--$S$ Diagrams:} For any internally reversible closed cycle, the net work output equals the enclosed area on \textbf{both} the $P$--$V$ plane and the $T$--$S$ plane:
+  \begin{equation}\label{eq:09:loop-area}
+    \boxed{W_{\mathrm{net,by}} = \mathrm{Area}_{P\text{--}V} = \mathrm{Area}_{T\text{--}S} = Q_{\mathrm{net}}} \quad (+\text{ for clockwise power loop; } -\text{ for counterclockwise refrigeration loop})
+  \end{equation}
+  \item \textbf{HVAC Engineering Rating Conversions (NIST SP 811 \src{S08}):}
+  \begin{itemize}
+    \item \textbf{1 Ton of Refrigeration:} The heat rate required to melt $1\text{ short ton}$ ($\SI{2000}{\text{lbm}}$) of ice at $\SI{0}{\celsius}$ ($\SI{32}{\degree\text{F}}$) in $\SI{24}{\hour}$: $\boxed{\SI{1}{\text{ton}} = \SI{200}{\text{BTU}_{\mathrm{IT}}\per\minute} = \SI{12000}{\text{BTU}_{\mathrm{IT}}\per\hour} = \SI{3516.85}{\watt} \approx \SI{3.517}{\kilo\watt}}$.
+    \item \textbf{Energy Efficiency Ratio ($\mathrm{EER}$):} Cooling capacity in $\si{\text{BTU}_{\mathrm{IT}}\per\hour}$ divided by electrical power input in $\si{\watt}$: $\boxed{\mathrm{EER} = 3.41214\,\mathrm{COP}_R}$.
+  \end{itemize}
+\end{itemize}
+\end{formulacard}
+
+\begin{workedexample}[Heat Pump vs.\ Electric Space Heater \& Ton-of-Refrigeration Chiller Audit]{Regional/State Standard \textbar\ Tier 1}{ex:09.1}
+(a) A residential heat pump maintains a house interior at $T_H = \SI{22.00}{\celsius}$ ($\SI{295.15}{\kelvin}$) when the outdoor winter air is at $T_C = \SI{-5.00}{\celsius}$ ($\SI{268.15}{\kelvin}$). The heat-loss rate through the house envelope is $\dot{Q}_{\mathrm{loss}} = \SI{18.00}{\kilo\watt}$. If the heat pump achieves a Second-Law efficiency of $\eta_{\mathrm{II}} = 45.00\%$ of the Carnot limit, find its actual $\mathrm{COP}_{\mathrm{HP}}$, the required electrical power input $\dot{W}_{\mathrm{in}}$, the rate of heat extracted from the cold outdoor air $\dot{Q}_C$, and the electrical power saved compared to a $100\%$-efficient electric baseboard resistance heater.
+(b) An industrial chiller rated at $\SI{15.00}{\text{tons of refrigeration}}$ has an $\mathrm{EER} = 11.94\,\si{\text{BTU}\per(\hour\cdot\watt)}$. Find its cooling rate $\dot{Q}_C$ in $\si{\kilo\watt}$, its $\mathrm{COP}_R$, its compressor power $\dot{W}_{\mathrm{in}}$, and its condenser heat-rejection rate $\dot{Q}_H$.
+\par\smallskip\noindent
+\textbf{Solution.}
+\begin{enumerate}
+  \item \textbf{(a) Heat pump $\mathrm{COP}_{\mathrm{HP}}$, electrical power $\dot{W}_{\mathrm{in}}$, and cold-air heat extraction $\dot{Q}_C$:}
+  \[
+    \mathrm{COP}_{\mathrm{HP,Carnot}} = \frac{T_H}{T_H - T_C} = \frac{295.15}{295.15 - 268.15} = \frac{295.15}{27.00} = \mathbf{10.9315}, \qquad \mathrm{COP}_{\mathrm{HP,actual}} = 0.4500(10.9315) = \mathbf{4.9192}
+  \]
+  \[
+    \dot{W}_{\mathrm{in}} = \frac{\dot{Q}_H}{\mathrm{COP}_{\mathrm{HP,actual}}} = \frac{\SI{18.00}{\kilo\watt}}{4.9192} = \mathbf{\SI{3.6592}{\kilo\watt}}, \qquad \dot{Q}_C = \dot{Q}_H - \dot{W}_{\mathrm{in}} = 18.00 - 3.6592 = \mathbf{\SI{14.341}{\kilo\watt}}
+  \]
+  An electric resistance heater ($\mathrm{COP} = 1.00$) requires $\SI{18.00}{\kilo\watt}$ of electricity, so the heat pump saves $\dot{W}_{\mathrm{saved}} = \dot{Q}_C = \mathbf{\SI{14.341}{\kilo\watt}}$ ($79.67\%$) by pumping free thermal energy from the $\SI{-5}{\celsius}$ outdoor air!
+  \item \textbf{(b) $\SI{15.00}{\text{ton}}$ chiller metrics:}
+  \[
+    \dot{Q}_C = 15.00 \times \SI{3.51685}{\kilo\watt} = \mathbf{\SI{52.753}{\kilo\watt}}, \qquad \mathrm{COP}_R = \frac{\mathrm{EER}}{3.41214} = \frac{11.94}{3.41214} = \mathbf{3.4993}
+  \]
+  \[
+    \dot{W}_{\mathrm{in}} = \frac{\dot{Q}_C}{\mathrm{COP}_R} = \frac{52.753}{3.4993} = \mathbf{\SI{15.075}{\kilo\watt}}, \qquad \dot{Q}_H = \dot{Q}_C + \dot{W}_{\mathrm{in}} = 52.753 + 15.075 = \mathbf{\SI{67.828}{\kilo\watt}}
+  \]
+\end{enumerate}
+\verifiedby{Identity $\mathrm{COP}_{\mathrm{HP}} = \dot{Q}_H/\dot{W}_{\mathrm{in}} = 67.828/15.075 = 4.4993 = \mathrm{COP}_R + 1$ (\texttt{check\_sec06\_09.py::ex09\_1}).}
+\end{workedexample}
+
+% ============================================================================
+\section{The Carnot Cycle, Carnot's Theorem \& Impossible-Machine Claim Diagnostics}\label{sec:09.2}
+% ============================================================================
+\idxtopic{Carnot cycle}\idxtopic{Carnot's theorem}\idxtopic{Kelvin thermodynamic temperature scale}\idxtopic{impossible-machine diagnostic}\idxtopic{Curzon--Ahlborn efficiency}
+
+Sadi Carnot (1824) proved that the most efficient cycle operating between two reservoirs at $T_H$ and $T_C$ must transfer all heat \textbf{isothermally} (zero $\Delta T$ across reservoir boundaries) and change temperature \textbf{adiabatically} \src{S13,S23}:
+\begin{enumerate}
+  \item \textbf{Leg $1\to 2$ (Reversible Isothermal Expansion at $T_H$):} Absorbs $Q_H = W_{1\to 2} = nRT_H\ln(V_2/V_1) > 0$; $\Delta S_{1\to 2} = +Q_H/T_H = +nR\ln(V_2/V_1)$.
+  \item \textbf{Leg $2\to 3$ (Reversible Adiabatic Expansion $T_H \to T_C$):} $Q_{2\to 3} = 0$, $\Delta S_{2\to 3} = 0$, $W_{2\to 3} = +nC_{V,m}(T_H - T_C)$, and $T_H V_2^{\gamma-1} = T_C V_3^{\gamma-1}$.
+  \item \textbf{Leg $3\to 4$ (Reversible Isothermal Compression at $T_C$):} Rejects $Q_C = |W_{3\to 4}| = nRT_C\ln(V_3/V_4) > 0$; $\Delta S_{3\to 4} = -Q_C/T_C = -nR\ln(V_3/V_4)$.
+  \item \textbf{Leg $4\to 1$ (Reversible Adiabatic Compression $T_C \to T_H$):} $Q_{4\to 1} = 0$, $\Delta S_{4\to 1} = 0$, $W_{4\to 1} = -nC_{V,m}(T_H - T_C) = -W_{2\to 3}$, and $T_H V_1^{\gamma-1} = T_C V_4^{\gamma-1}$.
+\end{enumerate}
+Dividing the two adiabatic volume relations $T_H V_2^{\gamma-1} = T_C V_3^{\gamma-1}$ and $T_H V_1^{\gamma-1} = T_C V_4^{\gamma-1}$ yields the exact \textbf{Carnot Volume-Ratio Symmetry} and \textbf{Kelvin Thermodynamic Temperature Ratio}:
+\begin{equation}\label{eq:09:carnot-symmetry}
+  \boxed{\frac{V_2}{V_1} = \frac{V_3}{V_4}, \qquad \frac{P_1}{P_2} = \frac{P_4}{P_3}}, \qquad \implies \qquad \boxed{\left(\frac{Q_C}{Q_H}\right)_{\mathrm{rev}} = \frac{nRT_C\ln(V_3/V_4)}{nRT_H\ln(V_2/V_1)} = \frac{T_C}{T_H}}, \qquad \boxed{\eta_{\mathrm{Carnot}} = 1 - \frac{T_C}{T_H}}
+\end{equation}
+\idxformula{Carnot volume symmetry and efficiency: $V_2/V_1 = V_3/V_4$, $Q_C/Q_H = T_C/T_H$, $\eta_C = 1 - T_C/T_H$}
+
+\par\smallskip\noindent
+\begin{minipage}{\linewidth}
+\centering
+\begin{tikzpicture}[font=\scriptsize]
+% Left Panel: Carnot P-V Diagram
+\begin{axis}[
+    name=carnotpv,
+    width=0.47\linewidth,
+    height=4.2cm,
+    xlabel={Volume $V$ ($\si{\liter}$)},
+    ylabel={Pressure $P$ ($\si{\kilo\pascal}$)},
+    xmin=0.8, xmax=5.6,
+    ymin=0, ymax=550,
+    grid=both,
+    grid style={gray!25},
+    tick label style={font=\scriptsize},
+    label style={font=\scriptsize\bfseries},
+    title={\textbf{(a) Carnot Cycle on $P$--$V$ Plane (2 Isotherms + 2 Adiabats)}}
+]
+% 1 -> 2: Isotherm at TH (V=1.2 to 2.6, P = 580/V)
+\addplot[rust, ultra thick, domain=1.2:2.6, samples=36] {580/x};
+% 2 -> 3: Adiabat TH -> TC (V=2.6 to 4.9, P = 580 * 2.6^0.4 / x^1.4 = 850.5 / x^1.4)
+\addplot[navy, ultra thick, domain=2.6:4.9, samples=36] {850.5 * x^(-1.4)};
+% 3 -> 4: Isotherm at TC (V=2.26 to 4.9, P = 450.3/x)
+\addplot[teal, ultra thick, domain=2.26:4.9, samples=36] {450.3/x};
+% 4 -> 1: Adiabat TC -> TH (V=1.2 to 2.26, P = 483.3 * 1.2^1.4 / x^1.4 = 623.5 / x^1.4)
+\addplot[navy, ultra thick, domain=1.2:2.26, samples=36] {623.5 * x^(-1.4)};
+
+\fill[rust] (axis cs:1.20,483) circle (2pt) node[above right] {$1$};
+\fill[rust] (axis cs:2.60,223) circle (2pt) node[above right] {$2$};
+\fill[teal] (axis cs:4.90,92)  circle (2pt) node[above right] {$3$};
+\fill[teal] (axis cs:2.26,199) circle (2pt) node[below left] {$4$};
+
+\node[rust, fill=white, inner sep=1pt] at (axis cs:2.55,365) {$T_H=\mathrm{const}$ ($Q_H$ in)};
+\node[teal, fill=white, inner sep=1pt] at (axis cs:3.40,75) {$T_C=\mathrm{const}$ ($Q_C$ out)};
+\node[navy, fill=white, inner sep=1pt] at (axis cs:4.15,215) {$Q=0$};
+\end{axis}
+
+% Right Panel: Carnot T-S Diagram (Exact Rectangle!)
+\begin{axis}[
+    at={(carnotpv.east)}, anchor=west, xshift=1.1cm,
+    width=0.47\linewidth,
+    height=4.2cm,
+    xlabel={Entropy $S$ ($\si{\joule\per\kelvin}$)},
+    ylabel={Absolute Temperature $T$ ($\si{\kelvin}$)},
+    xmin=0, xmax=10,
+    ymin=0, ymax=700,
+    xtick={2, 8},
+    xticklabels={$S_1 = S_4$, $S_2 = S_3$},
+    ytick={0, 300, 550},
+    yticklabels={$0$, $T_C=\SI{300}{\kelvin}$, $T_H=\SI{550}{\kelvin}$},
+    grid=both,
+    grid style={gray!25},
+    tick label style={font=\scriptsize},
+    label style={font=\scriptsize\bfseries},
+    title={\textbf{(b) Carnot Cycle on $T$--$S$ Plane (Exact Rectangle!)}}
+]
+% Lower rectangle QC = TC * Delta S
+\addplot[fill=teal!15, draw=none] coordinates {(2,0) (2,300) (8,300) (8,0)} \closedcycle;
+% Upper rectangle W_net = (TH - TC) * Delta S
+\addplot[fill=amber!22, draw=none] coordinates {(2,300) (2,550) (8,550) (8,300)} \closedcycle;
+
+\draw[rust, ultra thick, -{Stealth[length=2mm]}] (axis cs:2,550) -- (axis cs:8,550) node[midway, above] {$1\to 2$: $Q_H = T_H\Delta S$};
+\draw[navy, ultra thick, -{Stealth[length=2mm]}] (axis cs:8,550) -- (axis cs:8,300) node[midway, right] {$2\to 3$};
+\draw[teal, ultra thick, -{Stealth[length=2mm]}] (axis cs:8,300) -- (axis cs:2,300) node[midway, below] {$3\to 4$: $Q_C = T_C\Delta S$};
+\draw[navy, ultra thick, -{Stealth[length=2mm]}] (axis cs:2,300) -- (axis cs:2,550) node[midway, left] {$4\to 1$};
+
+\node[align=center, font=\scriptsize\bfseries] at (axis cs:5,425) {$W_{\mathrm{net}} = (T_H - T_C)\Delta S$\\$\eta_C = \dfrac{W_{\mathrm{net}}}{Q_H} = 1 - \dfrac{T_C}{T_H}$};
+\node[teal, align=center] at (axis cs:5,140) {Rejected Heat Area\\$Q_C = T_C(S_2 - S_1)$};
+\end{axis}
+\end{tikzpicture}
+\captionof{figure}{Paired (a) $P$--$V$ and (b) $T$--$S$ representations of the reversible Carnot heat engine cycle \src{S13}. On the $T$--$S$ plane, the two isotherms are horizontal and the two isentropes are vertical, forming a rectangle of total heat height $T_H$, waste-heat base height $T_C$, and width $\Delta S = S_2 - S_1 = nR\ln(V_2/V_1)$.}\label{fig:09:carnot-pv-ts}
+\idxfig{Paired P--V and T--S diagrams of the Carnot cycle}
+\end{minipage}
+\par\smallskip
+
+\begin{formulacard}[Carnot Sensitivity Rule, 3-Way Machine Claim Audit \& Curzon--Ahlborn Power Limit \src{S13,S33}]
+\begin{enumerate}
+  \item \textbf{Lowering $T_C$ Beats Raising $T_H$ by the Same $\Delta T > 0$ (Algebraic Proof):}
+  Compare decreasing the cold sink to $T_C - \Delta T$ versus increasing the hot source to $T_H + \Delta T$:
+  \begin{equation}\label{eq:09:carnot-sensitivity}
+    \eta_{\mathrm{low\ }T_C} = 1 - \frac{T_C - \Delta T}{T_H} = \eta_C + \frac{\Delta T}{T_H} \quad > \quad \eta_{\mathrm{high\ }T_H} = 1 - \frac{T_C}{T_H + \Delta T} = \eta_C + \frac{T_C\,\Delta T}{T_H(T_H + \Delta T)}
+  \end{equation}
+  \idxformula{Carnot reservoir sensitivity: lowering $T_C$ by $\Delta T$ beats raising $T_H$ by $\Delta T$}
+  Because $\frac{T_C}{T_H + \Delta T} < 1$, \textbf{lowering $T_C$ by $\Delta T$ ALWAYS produces a larger increase in Carnot efficiency than raising $T_H$ by $\Delta T$}!
+  \item \textbf{Two-Step Inventor Claim Diagnostic Protocol (First-Law + Second-Law Audit):}
+  Given claimed cyclic transfers $(Q_H, Q_C, W)$ between reservoirs at $(T_H, T_C)$:
+  \begin{itemize}
+    \item \emph{Check 1 (First Law):} Does $Q_H = Q_C + W$? If $Q_H \ne Q_C + W$, the claim violates \textbf{Conservation of Energy (First Law / PMM1)}.
+    \item \emph{Check 2 (Second Law / Clausius Entropy Generation):} Compute universe entropy generation per cycle:
+    {\footnotesize\begin{equation}\label{eq:09:claim-audit}
+      S_{\mathrm{gen,cycle}} = \begin{cases} \dfrac{Q_C}{T_C} - \dfrac{Q_H}{T_H} & \text{(Engine: } \eta \le \eta_C\text{)}\\[5pt] \dfrac{Q_H}{T_H} - \dfrac{Q_C}{T_C} & \text{(Refrig/HP: } \mathrm{COP} \le \mathrm{COP}_C\text{)} \end{cases} \Rightarrow \begin{cases} S_{\mathrm{gen}} > 0: & \text{\textbf{Possible \& Irreversible} (real)}\\ S_{\mathrm{gen}} = 0: & \text{\textbf{Possible \& Reversible} (Carnot)}\\ S_{\mathrm{gen}} < 0: & \text{\textbf{IMPOSSIBLE} (violates 2nd Law)} \end{cases}
+    \end{equation}}
+  \end{itemize}
+  \item \textbf{Curzon--Ahlborn Efficiency at Maximum Power Output (\texttt{[SUPPLEMENTARY / NATIONALS]}):}
+  An ideal Carnot engine requires zero temperature drop across its heat exchangers and therefore runs infinitely slowly ($\dot{W} \to 0$). For an endoreversible engine with finite heat-exchanger conductance maximizing power output $\dot{W}_{\max}$:
+  \begin{equation}\label{eq:09:curzon-ahlborn}
+    \boxed{\eta_{\mathrm{CA}} = 1 - \sqrt{\frac{T_C}{T_H}}} \quad (\text{accurately predicts real nuclear/coal/geothermal plant efficiencies within } 2\text{--}4\%!)
+  \end{equation}
+  \idxformula{Curzon--Ahlborn efficiency at maximum power: $\eta_{\mathrm{CA}} = 1 - \sqrt{T_C/T_H}$}
+\end{enumerate}
+\end{formulacard}
+
+\begin{workedexample}[4-Vertex Carnot Gas Engine Ledger \& Three-Inventor Claim Audit]{State/National Standard \textbar\ Tier 2}{ex:09.2}
+(a) Two moles ($n = \SI{2.000}{\mole}$) of a diatomic ideal gas ($\gamma = 1.400, C_{V,m} = \frac{5}{2}R$) operate in a Carnot engine between $T_H = \SI{600.0}{\kelvin}$ and $T_C = \SI{300.0}{\kelvin}$. At the start of isothermal expansion, $P_1 = \SI{1000.0}{\kilo\pascal}$ ($V_1 = \SI{9.9774}{\liter}$), and at the end of isothermal expansion $V_2 = 2.000\,V_1 = \SI{19.955}{\liter}$. Calculate $V_3, V_4, Q_H, Q_C$, the adiabatic expansion work $W_{2\to 3}$, the net cycle work $W_{\mathrm{net}}$, and $\eta_C$.
+(b) Audit three engine claims operating between $T_H = \SI{600.0}{\kelvin}$ and $T_C = \SI{300.0}{\kelvin}$ with $Q_H = \SI{100.0}{\kilo\joule}$: Claim~A ($W = \SI{40.0}{\kilo\joule}, Q_C = \SI{60.0}{\kilo\joule}$); Claim~B ($W = \SI{55.0}{\kilo\joule}, Q_C = \SI{45.0}{\kilo\joule}$); Claim~C ($W = \SI{45.0}{\kilo\joule}, Q_C = \SI{50.0}{\kilo\joule}$).
+\par\smallskip\noindent
+\textbf{Solution.}
+\begin{enumerate}
+  \item \textbf{(a) Carnot vertex volumes and work/heat transfers ($nR = \SI{16.6289}{\joule\per\kelvin}$):}
+  Along adiabat $2\to 3$, $V_3/V_2 = (T_H/T_C)^{1/(\gamma-1)} = (600.0/300.0)^{1/0.400} = 2^{2.500} = 4\sqrt{2} = 5.65685$:
+  \[
+    V_3 = 5.65685(\SI{19.955}{\liter}) = \mathbf{\SI{112.88}{\liter}}, \qquad V_4 = \frac{V_1}{V_2}V_3 = 0.5000(112.88) = \mathbf{\SI{56.440}{\liter}}
+  \]
+  \[
+    Q_H = nRT_H\ln\left(\frac{V_2}{V_1}\right) = (16.6289)(600.0)\ln(2.000) = \mathbf{\SI{6915.7}{\joule}}, \quad Q_C = nRT_C\ln\left(\frac{V_3}{V_4}\right) = (16.6289)(300.0)\ln(2.000) = \mathbf{\SI{3457.8}{\joule}}
+  \]
+  \[
+    W_{2\to 3} = +nC_{V,m}(T_H - T_C) = (2.000)(2.5\times 8.314463)(300.0) = \mathbf{+\SI{12471.7}{\joule}} = -W_{4\to 1}
+  \]
+  \[
+    W_{\mathrm{net}} = Q_H - Q_C = 6915.7 - 3457.8 = \mathbf{\SI{3457.8}{\joule}}, \qquad \eta_C = 1 - \frac{300.0}{600.0} = \mathbf{0.5000} \quad (50.00\%)
+  \]
+  \item \textbf{(b) Three-claim feasibility audit from \eref{eq:09:claim-audit}:}
+  \begin{itemize}
+    \item \textbf{Claim A:} $Q_H = 40+60 = \SI{100}{\kilo\joule}$ (1st Law OK); $S_{\mathrm{gen}} = 60/300 - 100/600 = +0.0333\,\si{\kilo\joule\per\kelvin} > 0$ ($\eta = 40\% < 50\% \implies$ \textbf{Valid irreversible engine}).
+    \item \textbf{Claim B:} $Q_H = 55+45 = \SI{100}{\kilo\joule}$ (1st Law OK); $S_{\mathrm{gen}} = 45/300 - 100/600 = -0.0167\,\si{\kilo\joule\per\kelvin} < 0$ ($\eta = 55\% > 50\% \implies$ \textbf{Violates 2nd Law / PMM2}).
+    \item \textbf{Claim C:} $W + Q_C = 45 + 50 = \SI{95}{\kilo\joule} \ne Q_H = \SI{100}{\kilo\joule} \implies$ \textbf{Violates 1st Law (energy not conserved!)}.
+  \end{itemize}
+\end{enumerate}
+\verifiedby{Total work sum $W_{1\to 2} + W_{2\to 3} + W_{3\to 4} + W_{4\to 1} = 6915.7 + 12471.7 - 3457.8 - 12471.7 = \SI{3457.8}{\joule} = W_{\mathrm{net}}$ (\texttt{check\_sec06\_09.py::ex09\_2}).}
+\end{workedexample}
+
+% ============================================================================
+\section{Master Comparison Atlas of Named Power \& Refrigeration Cycles}\label{sec:09.3}
+% ============================================================================
+\idxtopic{named thermodynamic cycles comparison table}
+
+\begin{table}[!htbp]
+\centering
+\captionof{table}{Master Comparison Atlas of the 8 Named Thermodynamic Cycles (2027 Rule~\texttt{5.c.iv}) \src{S13,S25,S30,S33}.}\label{tab:09:master-cycles}
+\scriptsize\setlength{\tabcolsep}{2.5pt}\renewcommand{\arraystretch}{1.20}
+\begin{tabularx}{\linewidth}{@{}l l l l l X@{}}
+\toprule
+\textbf{Cycle Name} & \textbf{4 Constituent Legs} & \textbf{Heat In $Q_H$} & \textbf{Heat Out $Q_C$} & \textbf{Closed Algebraic $\eta$ or $\mathrm{COP}$} & \textbf{Defining Ratios \& Competition Notes} \\
+\textbf{(\& Application)} & ($1\to 2\to 3\to 4\to 1$) & \textbf{Process} & \textbf{Process} & \textbf{Formula} & \\
+\midrule
+\textbf{1. Carnot} & $1\to 2$: Isothermal ($T_H$) & Isothermal & Isothermal & $\displaystyle \eta_C = 1 - \frac{T_C}{T_H}$ & Upper bound for all engines between $T_H, T_C$; \\
+(Reversible Limit) & $2\to 3, 4\to 1$: Isentropic & ($T = T_H$) & ($T = T_C$) & & rectangle on $T$--$S$ diagram. \\[3pt]
+\textbf{2. Otto} & $1\to 2, 3\to 4$: Isentropic & Isochoric & Isochoric & $\displaystyle \eta_{\mathrm{Otto}} = 1 - \frac{1}{r^{\gamma - 1}} = 1 - \frac{T_1}{T_2}$ & Compression ratio $r = V_1/V_2 = V_{\max}/V_{\min}$ \\
+(Gasoline Spark-Ign.) & $2\to 3, 4\to 1$: Isochoric & ($V = V_2$) & ($V = V_1$) & & (typical $r = 8\text{--}12$, limited by auto-ignition knock). \\[3pt]
+\textbf{3. Diesel} & $1\to 2, 3\to 4$: Isentropic & Isobaric & Isochoric & $\displaystyle \eta_{\mathrm{Diesel}} = 1 - \frac{1}{r^{\gamma - 1}}\left[\frac{r_c^\gamma - 1}{\gamma(r_c - 1)}\right]$ & $r = V_1/V_2$; cutoff ratio $r_c = V_3/V_2 = T_3/T_2 > 1$. \\
+(Compression-Ign.) & $2\to 3$: Isobar; $4\to 1$: Isochor & ($P = P_2$) & ($V = V_1$) & & At equal $r$, $\eta_{\mathrm{Otto}} > \eta_{\mathrm{Diesel}}$; actual $r = 15\text{--}22$. \\[3pt]
+\textbf{4. Brayton / Joule} & $1\to 2, 3\to 4$: Isentropic & Isobaric & Isobaric & $\displaystyle \eta_{\mathrm{Brayton}} = 1 - \frac{1}{r_p^{(\gamma - 1)/\gamma}} = 1 - \frac{T_1}{T_2}$ & Pressure ratio $r_p = P_2/P_1$. Max work per kg for \\
+(Gas Turbine / Jet) & $2\to 3, 4\to 1$: Isobaric & ($P = P_2$) & ($P = P_1$) & & fixed $T_1, T_3$ occurs at $T_2 = T_4 = \sqrt{T_1 T_3}$. \\[3pt]
+\textbf{5. Stirling} & $1\to 2, 3\to 4$: Isothermal & Isothermal $T_H$ & Isothermal $T_C$ & \textbf{100\% Regen.:} $\displaystyle \eta = 1 - \frac{T_C}{T_H} = \eta_C$ & Internal regenerator exchanges $nC_{V,m}(T_H-T_C)$ \\
+(Regen.\ External) & $2\to 3, 4\to 1$: Isochoric & (+Regen $4\to 1$) & (+Regen $2\to 3$) & \textbf{No Regen.:} $\frac{R(T_H-T_C)\ln(V_2/V_1)}{RT_H\ln(V_2/V_1)+C_{V,m}(T_H-T_C)}$ & between isochores $2\to 3$ and $4\to 1$. \\[3pt]
+\textbf{6. Ericsson} & $1\to 2, 3\to 4$: Isothermal & Isothermal $T_H$ & Isothermal $T_C$ & \textbf{100\% Regen.:} $\displaystyle \eta = 1 - \frac{T_C}{T_H} = \eta_C$ & Internal regenerator exchanges $nC_{P,m}(T_H-T_C)$ \\
+(Regen.\ Isobaric) & $2\to 3, 4\to 1$: Isobaric & (+Regen $4\to 1$) & (+Regen $2\to 3$) & & between isobars $2\to 3$ and $4\to 1$. \\[3pt]
+\textbf{7. Rankine} & $1\to 2$: Pump; $2\to 3$: Boiler & Isobaric Boiler & Isobaric Cond. & $\displaystyle \eta_{\mathrm{Rank}} = \frac{(h_3 - h_4) - (h_2 - h_1)}{h_3 - h_2}$ & Liquid pump work $w_p = h_2-h_1 \approx v_{f,1}(P_2-P_1)$ \\
+(Steam Power Plant) & $3\to 4$: Turbine; $4\to 1$: Cond. & $q_H = h_3 - h_2$ & $q_C = h_4 - h_1$ & & is $<1\%$ of turbine output $w_t = h_3 - h_4$! \\[3pt]
+\textbf{8. Vapor-Compr.} & $1\to 2$: Compr.; $2\to 3$: Cond. & Evaporator & Condenser & $\displaystyle \mathrm{COP}_R = \frac{q_C}{w_{\mathrm{in}}} = \frac{h_1 - h_4}{h_2 - h_1}$ & Throttle valve ($3\to 4$) is strictly \textbf{isenthalpic} \\
+\textbf{Refrigeration} & $3\to 4$: Throttle; $4\to 1$: Evap. & $q_C = h_1 - h_4$ & $q_H = h_2 - h_3$ & & ($\mathbf{h_4 = h_3}$, irreversible $\Delta s > 0$). \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+% ============================================================================
+\section{Reciprocating Internal-Combustion Cycles: Air-Standard Otto vs.\ Diesel}\label{sec:09.4}
+% ============================================================================
+\idxtopic{Otto cycle}\idxtopic{Diesel cycle}\idxtopic{compression ratio $r$}\idxtopic{cutoff ratio $r_c$}\idxtopic{mean effective pressure (MEP)}
+
+In reciprocating piston engines, let $V_1 = V_{\max}$ be the cylinder volume at Bottom Dead Center (BDC) and $V_2 = V_{\min}$ be the clearance volume at Top Dead Center (TDC), defining the \textbf{compression ratio} $r \equiv V_1/V_2$ and \textbf{Mean Effective Pressure} $\mathrm{MEP} \equiv W_{\mathrm{net}}/(V_1 - V_2)$ \src{S13,S33}:
+
+\begin{formulacard}[Algebra-Only Derivations of Otto \& Diesel Cycle Efficiencies \src{S13,S33}]
+\begin{enumerate}
+  \item \textbf{Air-Standard Otto Cycle (Gasoline Spark-Ignition — Isochoric Heat Addition $2\to 3$ at $V_2$):}
+  Along isentropic compression $1\to 2$ ($V_1\to V_2$) and isentropic power stroke $3\to 4$ ($V_2\to V_1$):
+  \[
+    \frac{T_2}{T_1} = \left(\frac{V_1}{V_2}\right)^{\gamma - 1} = r^{\gamma - 1} = \frac{T_3}{T_4} \implies \frac{T_4 - T_1}{T_3 - T_2} = \frac{T_1}{T_2} = \frac{1}{r^{\gamma - 1}}
+  \]
+  Since heat enters at constant volume $V_2$ ($Q_H = nC_{V,m}(T_3 - T_2)$) and exits at constant volume $V_1$ ($Q_C = nC_{V,m}(T_4 - T_1)$):
+  \begin{equation}\label{eq:09:otto}
+    \boxed{\eta_{\mathrm{Otto}} = 1 - \frac{Q_C}{Q_H} = 1 - \frac{T_4 - T_1}{T_3 - T_2} = 1 - \frac{1}{r^{\gamma - 1}}}
+  \end{equation}
+  \idxformula{Otto cycle efficiency: $\eta_{\mathrm{Otto}} = 1 - 1/r^{\gamma-1}$}
+  \item \textbf{Air-Standard Diesel Cycle (Compression-Ignition — Isobaric Heat Addition $2\to 3$ from $V_2$ to $V_3 = r_c V_2$):}
+  Fuel is injected into hot compressed air at $P_2 = P_3$, expanding the volume by the \textbf{cutoff ratio} $r_c \equiv V_3/V_2 = T_3/T_2 > 1$ before isentropic expansion $3\to 4$ (expansion ratio $r_e = V_1/V_3 = r/r_c$). Using $T_2 = T_1 r^{\gamma-1}$, $T_3 = T_1 r^{\gamma-1} r_c$, and $T_4 = T_3(V_3/V_1)^{\gamma-1} = T_1 r_c^\gamma$, together with $Q_H = nC_{P,m}(T_3 - T_2)$ and $Q_C = nC_{V,m}(T_4 - T_1)$:
+  \begin{equation}\label{eq:09:diesel}
+    \boxed{\eta_{\mathrm{Diesel}} = 1 - \frac{C_{V,m}(T_4 - T_1)}{C_{P,m}(T_3 - T_2)} = 1 - \frac{1}{r^{\gamma - 1}}\left[\frac{r_c^\gamma - 1}{\gamma(r_c - 1)}\right]}
+  \end{equation}
+  \idxformula{Diesel cycle efficiency: $\eta_{\mathrm{Diesel}} = 1 - r^{1-\gamma}[(r_c^\gamma - 1)/(\gamma(r_c - 1))]$}
+  \emph{Otto vs.\ Diesel Exam Trap:} For any $r_c > 1$, the bracket factor $\frac{r_c^\gamma - 1}{\gamma(r_c - 1)} > 1$ (and approaches $1$ as $r_c \to 1$). Therefore:
+  \begin{itemize}
+    \item \textbf{At the SAME compression ratio $r$:} $\mathbf{\eta_{\mathrm{Otto}}(r) > \eta_{\mathrm{Diesel}}(r, r_c)}$ (and for a Dual cycle with mixed isochoric + isobaric combustion, $\eta_{\mathrm{Otto}} > \eta_{\mathrm{Dual}} > \eta_{\mathrm{Diesel}}$).
+    \item \textbf{In REAL engines:} Diesel engines compress \emph{only air} during $1\to 2$ (no fuel pre-ignition knock), allowing much higher compression ratios ($r_{\mathrm{Diesel}} \approx 16\text{--}22$ vs.\ $r_{\mathrm{Otto}} \approx 8\text{--}11$), so \textbf{actual Diesel engines are more efficient than actual Otto engines}!\idxerr{Otto vs. Diesel efficiency comparison at equal $r$ vs. real operating $r$}
+  \end{itemize}
+\end{enumerate}
+\end{formulacard}
+
+\par\smallskip\noindent
+\begin{minipage}{\linewidth}
+\centering
+\begin{tikzpicture}[font=\scriptsize]
+% Left Panel: Air-Standard Otto Cycle
+\begin{axis}[
+    name=ottopv,
+    width=0.47\linewidth,
+    height=4.0cm,
+    xlabel={Volume $V$ (showing $V_2 = V_{\min}$ and $V_1 = r V_2$)},
+    ylabel={Pressure $P$ ($\si{\kilo\pascal}$)},
+    xmin=0.5, xmax=5.5,
+    ymin=0, ymax=3800,
+    xtick={1, 4.8},
+    xticklabels={$V_2 = V_{\mathrm{TDC}}$, $V_1 = r V_2 = V_{\mathrm{BDC}}$},
+    grid=both,
+    grid style={gray!25},
+    tick label style={font=\scriptsize},
+    label style={font=\scriptsize\bfseries},
+    title={\textbf{(a) Air-Standard Otto Cycle ($V=\mathrm{const}$ Heat Add)}}
+]
+% 1 -> 2: Isentropic compression V=4.8 to 1.0 (P = 100 * (4.8/x)^1.4 = 899/x^1.4)
+\addplot[navy, ultra thick, domain=1.0:4.8, samples=36] {899 * x^(-1.4)};
+% 2 -> 3: Isochoric heat addition at V=1.0 (P=899 to 3400)
+\draw[rust, ultra thick, -{Stealth[length=2mm]}] (axis cs:1.0,899) -- (axis cs:1.0,3400)
+  node[midway, right, fill=white, inner sep=1pt] {$Q_H$ in ($V_2$)};
+% 3 -> 4: Isentropic expansion V=1.0 to 4.8 (P = 3400 / x^1.4)
+\addplot[navy, ultra thick, domain=1.0:4.8, samples=36] {3400 * x^(-1.4)};
+% 4 -> 1: Isochoric heat rejection at V=4.8 (P=378 to 100)
+\draw[teal, ultra thick, -{Stealth[length=2mm]}] (axis cs:4.8,378) -- (axis cs:4.8,100)
+  node[midway, left, fill=white, inner sep=1pt] {$Q_C$ out};
+
+\fill[navy] (axis cs:4.8,100)  circle (2pt) node[below left] {$1$};
+\fill[rust] (axis cs:1.0,899)  circle (2pt) node[below left] {$2$};
+\fill[rust] (axis cs:1.0,3400) circle (2pt) node[above right] {$3$};
+\fill[teal] (axis cs:4.8,378)  circle (2pt) node[above right] {$4$};
+\node[navy, fill=white, inner sep=1pt] at (axis cs:3.1,1550) {$PV^\gamma = \mathrm{const}$};
+\end{axis}
+
+% Right Panel: Air-Standard Diesel Cycle
+\begin{axis}[
+    at={(ottopv.east)}, anchor=west, xshift=1.1cm,
+    width=0.47\linewidth,
+    height=4.0cm,
+    xlabel={Volume $V$ (showing $V_2$, $V_3 = r_c V_2$, $V_1 = r V_2$)},
+    ylabel={Pressure $P$ ($\si{\kilo\pascal}$)},
+    xmin=0.5, xmax=5.5,
+    ymin=0, ymax=3800,
+    xtick={1, 2.2, 4.8},
+    xticklabels={$V_2$, $V_3 = r_c V_2$, $V_1 = r V_2$},
+    grid=both,
+    grid style={gray!25},
+    tick label style={font=\scriptsize},
+    label style={font=\scriptsize\bfseries},
+    title={\textbf{(b) Air-Standard Diesel Cycle ($P=\mathrm{const}$ Heat Add)}}
+]
+% 1 -> 2: Isentropic compression V=4.8 to 1.0 (P = 3000/x^1.4)
+\addplot[navy, ultra thick, domain=1.0:4.8, samples=36] {2800 * x^(-1.4)};
+% 2 -> 3: Isobaric heat addition at P2 = 2800 from V=1.0 to V=2.2
+\draw[rust, ultra thick, -{Stealth[length=2mm]}] (axis cs:1.0,2800) -- (axis cs:2.2,2800)
+  node[midway, above, fill=white, inner sep=1pt] {$Q_H$ in ($P_2=\mathrm{const}$)};
+% 3 -> 4: Isentropic expansion V=2.2 to 4.8 (P = 2800 * 2.2^1.4 / x^1.4 = 8443 / x^1.4)
+\addplot[navy, ultra thick, domain=2.2:4.8, samples=36] {8443 * x^(-1.4)};
+% 4 -> 1: Isochoric heat rejection at V=4.8
+\draw[teal, ultra thick, -{Stealth[length=2mm]}] (axis cs:4.8,939) -- (axis cs:4.8,311)
+  node[midway, left, fill=white, inner sep=1pt] {$Q_C$ out};
+
+\fill[navy] (axis cs:4.8,311)  circle (2pt) node[below left] {$1$};
+\fill[rust] (axis cs:1.0,2800) circle (2pt) node[above left] {$2$};
+\fill[rust] (axis cs:2.2,2800) circle (2pt) node[above right] {$3$};
+\fill[teal] (axis cs:4.8,939)  circle (2pt) node[above right] {$4$};
+\end{axis}
+\end{tikzpicture}
+\captionof{figure}{Paired $P$--$V$ indicator diagrams of (a) the air-standard Otto cycle (isochoric heat addition $2\to 3$ at $V_2$) and (b) the air-standard Diesel cycle (isobaric fuel injection and combustion $2\to 3$ from $V_2$ to $V_3 = r_c V_2$) \src{S13,S33}.}\label{fig:09:otto-diesel}
+\idxfig{Paired P--V diagrams of Otto and Diesel cycles}
+\end{minipage}
+\par\smallskip
+
+\begin{workedexample}[Otto vs.\ Diesel Cycle Efficiency, Peak Temperature \& MEP Comparison]{Invitational/State Standard \textbar\ Tier 2}{ex:09.3}
+(a) An air-standard Otto engine ($\gamma = 1.400, c_v = \SI{718.6}{\joule\per\kilogram\per\kelvin}, R_s = \SI{287.05}{\joule\per\kilogram\per\kelvin}$) operates with compression ratio $r = 9.500$. Air enters at State~1 ($P_1 = \SI{100.0}{\kilo\pascal}, T_1 = \SI{300.0}{\kelvin}$) and absorbs $q_H = \SI{800.0}{\kilo\joule\per\kilogram}$ during isochoric combustion $2\to 3$. Find $\eta_{\mathrm{Otto}}$, $T_2, P_2$, peak temperature $T_3$, peak pressure $P_3$, net specific work $w_{\mathrm{net}}$, and the Mean Effective Pressure ($\mathrm{MEP}$).
+(b) Compare $\eta_{\mathrm{Otto}}$ at $r = 9.500$ with (i) a Diesel engine running at the same $r = 9.500$ and cutoff ratio $r_c = 2.000$, and (ii) a realistic Diesel engine running at $r = 18.00$ and $r_c = 2.000$.
+\par\smallskip\noindent
+\textbf{Solution.}
+\begin{enumerate}
+  \item \textbf{(a) Air-standard Otto cycle ($r = 9.500, r^{\gamma-1} = 9.500^{0.400} = 2.46078$):}
+  \[
+    \eta_{\mathrm{Otto}} = 1 - \frac{1}{9.500^{0.400}} = 1 - \frac{1}{2.46078} = \mathbf{0.59363} \quad (59.36\%)
+  \]
+  \[
+    T_2 = T_1 r^{\gamma-1} = (300.0)(2.46078) = \mathbf{\SI{738.24}{\kelvin}}, \qquad P_2 = P_1 r^\gamma = (100.0)(9.500^{1.400}) = \mathbf{\SI{2337.7}{\kilo\pascal}}
+  \]
+  \[
+    T_3 = T_2 + \frac{q_H}{c_v} = 738.24 + \frac{\SI{800000}{\joule\per\kilogram}}{\SI{718.6}{\joule\per\kilogram\per\kelvin}} = 738.24 + 1113.28 = \mathbf{\SI{1851.5}{\kelvin}}, \qquad P_3 = P_2\frac{T_3}{T_2} = \mathbf{\SI{5863.2}{\kilo\pascal}}
+  \]
+  \[
+    w_{\mathrm{net}} = \eta_{\mathrm{Otto}} q_H = (0.59363)(800.0) = \mathbf{\SI{474.90}{\kilo\joule\per\kilogram}}
+  \]
+  With specific volume $v_1 = R_s T_1 / P_1 = (287.05)(300.0)/100000 = \SI{0.86115}{\cubic\meter\per\kilogram}$ and $v_2 = v_1 / 9.500 = \SI{0.090647}{\cubic\meter\per\kilogram}$:
+  \[
+    \mathrm{MEP} = \frac{w_{\mathrm{net}}}{v_1 - v_2} = \frac{\SI{474.90}{\kilo\joule\per\kilogram}}{0.86115 - 0.090647\,\si{\cubic\meter\per\kilogram}} = \mathbf{\SI{616.35}{\kilo\pascal}}
+  \]
+  \item \textbf{(b) Diesel cycle comparison at $r_c = 2.000$ (bracket factor $\frac{2.000^{1.400} - 1}{1.400(2.000 - 1)} = \frac{1.63902}{1.400} = 1.17073 > 1$):}
+  \[
+    \eta_{\mathrm{Diesel}}(r=9.50) = 1 - \frac{1.17073}{2.46078} = \mathbf{0.52425} \ (52.42\% < \eta_{\mathrm{Otto}}), \quad \eta_{\mathrm{Diesel}}(r=18.0) = 1 - \frac{1.17073}{18.00^{0.400}} = \mathbf{0.63158} \ (63.16\% > \eta_{\mathrm{Otto}})
+  \]
+\end{enumerate}
+\verifiedby{Fourth Otto vertex check: $T_4 = T_3/r^{\gamma-1} = \SI{752.41}{\kelvin}$, $q_C = c_v(T_4-T_1) = \SI{325.10}{\kilo\joule\per\kilogram}$, $q_H - q_C = \SI{474.90}{\kilo\joule\per\kilogram}$ (\texttt{check\_sec06\_09.py::ex09\_3}).}
+\end{workedexample}
+
+% ============================================================================
+\section{Gas-Turbine \& Regenerative Cycles: Brayton, Stirling \& Ericsson}\label{sec:09.5}
+% ============================================================================
+\idxtopic{Brayton cycle}\idxtopic{back-work ratio (BWR)}\idxtopic{Stirling cycle}\idxtopic{Ericsson cycle}\idxtopic{regenerator effectiveness}
+
+\begin{formulacard}[Brayton Maximum-Work Theorem \& Regenerative Stirling/Ericsson Cycles \src{S13,S30,S33}]
+\begin{enumerate}
+  \item \textbf{Air-Standard Brayton / Joule Cycle (2 Isobars at $P_1, P_2$ + 2 Isentropes; Pressure Ratio $r_p \equiv P_2/P_1$):}
+  Along isentropic compression $1\to 2$ and expansion $3\to 4$: $\frac{T_2}{T_1} = \frac{T_3}{T_4} = r_p^{(\gamma-1)/\gamma}$, yielding:
+  \begin{equation}\label{eq:09:brayton}
+    \boxed{\eta_{\mathrm{Brayton}} = 1 - \frac{c_p(T_4 - T_1)}{c_p(T_3 - T_2)} = 1 - \frac{T_1}{T_2} = 1 - \frac{1}{r_p^{(\gamma - 1)/\gamma}}}, \qquad \mathrm{BWR} = \frac{w_{\mathrm{comp}}}{w_{\mathrm{turb}}} = \frac{T_2 - T_1}{T_3 - T_4} = \frac{T_2}{T_3} = \frac{T_1}{T_3}r_p^{(\gamma-1)/\gamma}
+  \end{equation}
+  \idxformula{Brayton cycle efficiency and back-work ratio: $\eta_{\mathrm{Brayton}} = 1 - r_p^{-(\gamma-1)/\gamma}$, $\mathrm{BWR} = T_2/T_3$}
+  \item \textbf{Algebra-Only AM--GM Proof of Optimal Brayton Pressure Ratio for Maximum Net Work:}
+  In a gas turbine with fixed ambient inlet temperature $T_1 = T_{\min}$ and metallurgical turbine-blade limit $T_3 = T_{\max}$, since $T_2 T_4 = T_1 T_3 = T_{\min}T_{\max}$, the specific net work $w_{\mathrm{net}} = c_p(T_3 - T_2 - T_4 + T_1) = c_p\left[T_{\max} + T_{\min} - (T_2 + T_{\min}T_{\max}/T_2)\right]$ is maximized when $T_2 + \frac{T_{\min}T_{\max}}{T_2}$ is minimized. By the AM--GM inequality, this occurs at the geometric mean:
+  \begin{equation}\label{eq:09:brayton-opt}
+    \boxed{T_2^* = T_4^* = \sqrt{T_1 T_3} = \sqrt{T_{\min}T_{\max}}}, \qquad \boxed{r_{p,\mathrm{opt}} = \left(\frac{T_{\max}}{T_{\min}}\right)^{\frac{\gamma}{2(\gamma - 1)}}}, \qquad \boxed{w_{\mathrm{net,\max}} = c_p\left(\sqrt{T_{\max}} - \sqrt{T_{\min}}\right)^2}
+  \end{equation}
+  \idxformula{Brayton maximum-work optimization: $T_2^* = T_4^* = \sqrt{T_{\min}T_{\max}}$, $r_{p,\mathrm{opt}} = (T_{\max}/T_{\min})^{\gamma/[2(\gamma-1)]}$}
+  Notice that at maximum net work, the Brayton efficiency equals the Curzon--Ahlborn efficiency $\eta_{\mathrm{Brayton}}(r_{p,\mathrm{opt}}) = 1 - \sqrt{T_{\min}/T_{\max}}$!
+  \item \textbf{Stirling Cycle ($2\text{ Isotherms} + 2\text{ Isochores}$) \& Ericsson Cycle ($2\text{ Isotherms} + 2\text{ Isobars}$) with Regeneration:}
+  In a Stirling engine (\texttt{2018 Cornell E6}), the heat released by the gas during isochoric cooling $2\to 3$ ($Q_{\mathrm{regen,max}} = nC_{V,m}(T_H - T_C)$) equals the heat required during isochoric warming $4\to 1$. With a porous-mesh regenerator of effectiveness $\varepsilon_{\mathrm{reg}} \in [0, 1]$ recycling fraction $\varepsilon_{\mathrm{reg}}$ internally:
+  \begin{equation}\label{eq:09:stirling}
+    \boxed{\eta_{\mathrm{Stirling}}(\varepsilon_{\mathrm{reg}}) = \frac{W_{\mathrm{net}}}{Q_{H,\mathrm{ext}}} = \frac{R(T_H - T_C)\ln(V_{\max}/V_{\min})}{R T_H\ln(V_{\max}/V_{\min}) + (1 - \varepsilon_{\mathrm{reg}})C_{V,m}(T_H - T_C)}} \xrightarrow{\varepsilon_{\mathrm{reg}} = 1} \boxed{1 - \frac{T_C}{T_H} = \eta_{\mathrm{Carnot}}}
+  \end{equation}
+  \idxformula{Stirling cycle efficiency with regenerator effectiveness $\varepsilon_{\mathrm{reg}}$: $\eta = R(T_H-T_C)\ln r / [RT_H\ln r + (1-\varepsilon_{\mathrm{reg}})C_{V,m}(T_H-T_C)]$}
+  (For the Ericsson cycle with regeneration effectiveness $\varepsilon_{\mathrm{reg}}$, replace $C_{V,m}$ with $C_{P,m}$ and $\ln(V_{\max}/V_{\min})$ with $\ln(P_{\max}/P_{\min})$.)
+\end{enumerate}
+\end{formulacard}
+
+\par\smallskip\noindent
+\begin{minipage}{\linewidth}
+\centering
+\begin{tikzpicture}[font=\scriptsize]
+% Left Panel: Brayton Cycle on P-V
+\begin{axis}[
+    name=braytonpv,
+    width=0.47\linewidth,
+    height=3.9cm,
+    xlabel={Specific Volume $v$ ($\si{\cubic\meter\per\kilogram}$)},
+    ylabel={Pressure $P$ ($\si{\kilo\pascal}$)},
+    xmin=0.1, xmax=1.6,
+    ymin=0, ymax=1150,
+    grid=both,
+    grid style={gray!25},
+    tick label style={font=\scriptsize},
+    label style={font=\scriptsize\bfseries},
+    title={\textbf{(a) Air-Standard Brayton Cycle ($r_p = P_2/P_1$)}}
+]
+% 1 -> 2: Isentropic compressor v=0.86 to 0.20 (P = 100*(0.86/x)^1.4 = 81.1/x^1.4)
+\addplot[navy, ultra thick, domain=0.20:0.86, samples=36] {81.1 * x^(-1.4)};
+% 2 -> 3: Isobaric combustor at P2 = 770 from v=0.20 to 0.52
+\draw[rust, ultra thick, -{Stealth[length=2mm]}] (axis cs:0.20,770) -- (axis cs:0.52,770)
+  node[midway, above, fill=white, inner sep=1pt] {$2\to 3$: $q_H$ in ($P_2$)};
+% 3 -> 4: Isentropic turbine v=0.52 to 1.45 (P = 770*(0.52/x)^1.4 = 308/x^1.4)
+\addplot[navy, ultra thick, domain=0.52:1.45, samples=36] {308 * x^(-1.4)};
+% 4 -> 1: Isobaric heat rejection at P1 = 100
+\draw[teal, ultra thick, -{Stealth[length=2mm]}] (axis cs:1.45,100) -- (axis cs:0.86,100)
+  node[midway, above, fill=white, inner sep=1pt] {$4\to 1$: $q_C$ out ($P_1$)};
+
+\fill[navy] (axis cs:0.86,100) circle (2pt) node[below left] {$1$};
+\fill[rust] (axis cs:0.20,770) circle (2pt) node[above left] {$2$};
+\fill[rust] (axis cs:0.52,770) circle (2pt) node[above right] {$3$};
+\fill[teal] (axis cs:1.45,100) circle (2pt) node[below right] {$4$};
+\end{axis}
+
+% Right Panel: Regenerative Stirling Cycle on P-V
+\begin{axis}[
+    at={(braytonpv.east)}, anchor=west, xshift=1.1cm,
+    width=0.47\linewidth,
+    height=3.9cm,
+    xlabel={Volume $V$ (between $V_1 = V_{\min}$ and $V_2 = V_{\max}$)},
+    ylabel={Pressure $P$ ($\si{\kilo\pascal}$)},
+    xmin=0.6, xmax=3.4,
+    ymin=0, ymax=950,
+    xtick={1.0, 2.8},
+    xticklabels={$V_1 = V_{\min}$, $V_2 = V_{\max}$},
+    grid=both,
+    grid style={gray!25},
+    tick label style={font=\scriptsize},
+    label style={font=\scriptsize\bfseries},
+    title={\textbf{(b) Regenerative Stirling Cycle ($2\text{ Isotherms} + 2\text{ Isochores}$)}}
+]
+% 1 -> 2: Isothermal expansion at TH (V=1.0 to 2.8, P = 800/x)
+\addplot[rust, ultra thick, domain=1.0:2.8, samples=36] {800/x};
+% 2 -> 3: Isochoric cooling at V2 = 2.8 (P = 286 to 114)
+\draw[amber, ultra thick, -{Stealth[length=2mm]}] (axis cs:2.8,286) -- (axis cs:2.8,114);
+% 3 -> 4: Isothermal compression at TC (V=1.0 to 2.8, P = 320/x)
+\addplot[teal, ultra thick, domain=1.0:2.8, samples=36] {320/x};
+% 4 -> 1: Isochoric heating at V1 = 1.0 (P = 320 to 800)
+\draw[amber, ultra thick, -{Stealth[length=2mm]}] (axis cs:1.0,320) -- (axis cs:1.0,800);
+
+% Regenerator internal heat transfer arrow
+\draw[amber, very thick, dashed, {Stealth[length=1.8mm]}-{Stealth[length=1.8mm]}]
+  (axis cs:2.72,210) to[bend left=18] node[midway, fill=white, inner sep=1pt] {\textbf{Regenerator} $Q_{\mathrm{regen}}$} (axis cs:1.08,520);
+
+\fill[rust] (axis cs:1.0,800) circle (2pt) node[above right] {$1$};
+\fill[rust] (axis cs:2.8,286) circle (2pt) node[above right] {$2$};
+\fill[teal] (axis cs:2.8,114) circle (2pt) node[below right] {$3$};
+\fill[teal] (axis cs:1.0,320) circle (2pt) node[below left] {$4$};
+\node[rust, fill=white, inner sep=1pt] at (axis cs:2.0,620) {$T_H=\mathrm{const}$ ($Q_H$ in)};
+\node[teal, fill=white, inner sep=1pt] at (axis cs:1.8,100) {$T_C=\mathrm{const}$ ($Q_C$ out)};
+\end{axis}
+\end{tikzpicture}
+\captionof{figure}{Paired $P$--$V$ diagrams of (a) the Brayton gas-turbine cycle (2 isobars + 2 isentropes) and (b) the Stirling cycle (2 isotherms + 2 isochores), where an internal porous regenerator recycles $Q_{\mathrm{regen}} = nC_{V,m}(T_H - T_C)$ between legs $2\to 3$ and $4\to 1$ to attain full Carnot efficiency \src{S13,S30}.}\label{fig:09:brayton-stirling}
+\idxfig{Paired P--V diagrams of Brayton and regenerative Stirling cycles}
+\end{minipage}
+\par\smallskip
+
+\begin{workedexample}[Brayton Maximum-Work Design \& Stirling Regenerator Effectiveness Audit]{2018 Cornell E6 Archetype \textbar\ Tier 3}{ex:09.4}
+(a) An air-standard Brayton gas turbine ($\gamma = 1.400, c_p = \SI{1.0062}{\kilo\joule\per\kilogram\per\kelvin}$) operates between compressor inlet $T_1 = \SI{300.0}{\kelvin}$ and turbine metallurgical limit $T_3 = \SI{1470.0}{\kelvin}$. Find the optimal pressure ratio $r_{p,\mathrm{opt}}$ that maximizes net work per unit mass, the compressor/turbine exit temperatures $T_2^*, T_4^*$, the maximum net specific work $w_{\mathrm{net,\max}}$, the cycle efficiency $\eta_{\mathrm{Brayton}}(r_{p,\mathrm{opt}})$, and the back-work ratio $\mathrm{BWR}$.
+(b) A Stirling engine using $n = \SI{1.000}{\mole}$ of diatomic nitrogen ($C_{V,m} = \frac{5}{2}R$) operates between $T_H = \SI{900.0}{\kelvin}$ and $T_C = \SI{300.0}{\kelvin}$ with volume compression ratio $V_{\max}/V_{\min} = 2.000$ (as in Worked Example~\ref{ex:07.6}). Compare its thermal efficiency $\eta$ for: (i) zero regeneration ($\varepsilon_{\mathrm{reg}} = 0$), (ii) $\varepsilon_{\mathrm{reg}} = 0.850$, and (iii) ideal regeneration ($\varepsilon_{\mathrm{reg}} = 1.000$).
+\par\smallskip\noindent
+\textbf{Solution.}
+\begin{enumerate}
+  \item \textbf{(a) Brayton maximum-work optimization from \eref{eq:09:brayton}--\eref{eq:09:brayton-opt}:}
+  \[
+    T_2^* = T_4^* = \sqrt{T_1 T_3} = \sqrt{(300.0)(1470.0)} = \mathbf{\SI{664.08}{\kelvin}}, \qquad r_{p,\mathrm{opt}} = \left(\frac{T_2^*}{T_1}\right)^{\frac{\gamma}{\gamma - 1}} = \left(\frac{664.08}{300.0}\right)^{3.500} = (2.21359)^{3.500} = \mathbf{16.120}
+  \]
+  \[
+    w_{\mathrm{net,\max}} = c_p\left(\sqrt{T_3} - \sqrt{T_1}\right)^2 = (\SI{1.0062}{\kilo\joule\per\kilogram\per\kelvin})(1470.0 + 300.0 - 2\times 664.08) = 1.0062(441.84) = \mathbf{\SI{444.58}{\kilo\joule\per\kilogram}}
+  \]
+  \[
+    \eta_{\mathrm{Brayton}}(r_{p,\mathrm{opt}}) = 1 - \frac{T_1}{T_2^*} = 1 - \frac{300.0}{664.08} = \mathbf{0.54825} \ (54.82\%), \quad \mathrm{BWR} = \frac{T_2^*}{T_3} = \frac{664.08}{1470.0} = \mathbf{0.45175} \ (45.18\%)
+  \]
+  \item \textbf{(b) Stirling cycle efficiency vs.\ regenerator effectiveness from \eref{eq:09:stirling}:}
+  From Worked Example~\ref{ex:07.6}, $W_{\mathrm{net}} = nR(T_H - T_C)\ln 2 = \SI{3457.4}{\joule}$, isothermal heat input is $Q_{1\to 2} = nRT_H\ln 2 = \SI{5186.1}{\joule}$, and isochoric heat is $Q_{\mathrm{isochor}} = nC_{V,m}(T_H - T_C) = \SI{12471.7}{\joule}$:
+  \[
+    \eta(0) = \frac{3457.4}{5186.1 + 12471.7} = \mathbf{19.58\%}, \quad \eta(0.850) = \frac{3457.4}{5186.1 + 0.150(12471.7)} = \mathbf{48.99\%}, \quad \eta(1) = \frac{3457.4}{5186.1} = \mathbf{66.67\%} = \eta_C
+  \]
+\end{enumerate}
+\verifiedby{Without a regenerator, the Stirling engine loses $47.1$ percentage points of efficiency because $Q_{\mathrm{isochor}} = 2.405\,Q_{1\to 2}$ (\texttt{check\_sec06\_09.py::ex09\_4}).}
+\end{workedexample}
+
+% ============================================================================
+\section{Vapor Power \& Refrigeration Cycles: Rankine \& Vapor-Compression (\texttt{2027 Cornell E1})}\label{sec:09.6}
+% ============================================================================
+\idxtopic{Rankine cycle}\idxtopic{vapor-compression refrigeration cycle}\idxtopic{throttling valve isenthalpic expansion}
+
+\par\smallskip\noindent
+\begin{minipage}{\linewidth}
+\centering
+\begin{tikzpicture}[font=\scriptsize]
+% Left Panel: Rankine Vapor Power Cycle on T-s Dome
+\begin{axis}[
+    name=rankinets,
+    width=0.47\linewidth,
+    height=4.0cm,
+    xlabel={Specific Entropy $s$ ($\si{\kilo\joule\per\kilogram\per\kelvin}$)},
+    ylabel={Temperature $T$ ($\si{\kelvin}$)},
+    xmin=0.5, xmax=8.8,
+    ymin=280, ymax=680,
+    grid=both,
+    grid style={gray!25},
+    tick label style={font=\scriptsize},
+    label style={font=\scriptsize\bfseries},
+    title={\textbf{(a) Rankine Steam Power Cycle (Clockwise on $T$--$s$)}}
+]
+% Saturation Dome
+\addplot[slate, thick, smooth] coordinates {
+  (0.6,290) (1.3,373) (2.3,473) (3.3,573) (4.41,647) (5.7,573) (6.4,473) (7.35,373) (8.4,290)
+};
+% 1 -> 2: Pump (nearly vertical on liquid line from T=320 to 335 at s=1.0)
+\draw[navy, ultra thick, -{Stealth[length=1.8mm]}] (axis cs:1.05,318) -- (axis cs:1.05,355);
+% 2 -> 3: Boiler isobar (subcooled liquid -> two-phase plateau at 510 K -> superheated at 610 K)
+\draw[rust, ultra thick, -{Stealth[length=2mm]}] (axis cs:1.05,355) -- (axis cs:2.65,510) -- (axis cs:6.15,510) -- (axis cs:6.85,615)
+  node[pos=0.45, above, fill=white, inner sep=1pt] {$2\to 3$: Boiler $q_H$};
+% 3 -> 4s (isentropic) and 3 -> 4a (real turbine)
+\draw[navy, ultra thick, -{Stealth[length=2mm]}] (axis cs:6.85,615) -- (axis cs:6.85,318)
+  node[midway, left, fill=white, inner sep=1pt] {$3\to 4s$};
+\draw[amber, very thick, dashed, -{Stealth[length=2mm]}] (axis cs:6.85,615) -- (axis cs:7.35,318)
+  node[midway, right, fill=white, inner sep=1pt] {$4a$};
+% 4 -> 1: Condenser at 318 K
+\draw[teal, ultra thick, -{Stealth[length=2mm]}] (axis cs:6.85,318) -- (axis cs:1.05,318)
+  node[midway, below, fill=white, inner sep=1pt] {$4\to 1$: Condenser $q_C$};
+
+\fill[teal] (axis cs:1.05,318) circle (2pt) node[below left] {$1$};
+\fill[navy] (axis cs:1.05,355) circle (2pt) node[above left] {$2$};
+\fill[rust] (axis cs:6.85,615) circle (2pt) node[above] {$3$};
+\fill[teal] (axis cs:6.85,318) circle (2pt) node[below] {$4s$};
+\end{axis}
+
+% Right Panel: Vapor-Compression Refrigeration Cycle on T-s Dome
+\begin{axis}[
+    at={(rankinets.east)}, anchor=west, xshift=1.1cm,
+    width=0.47\linewidth,
+    height=4.0cm,
+    xlabel={Specific Entropy $s$ ($\si{\kilo\joule\per\kilogram\per\kelvin}$)},
+    ylabel={Temperature $T$ ($\si{\kelvin}$)},
+    xmin=0.5, xmax=2.2,
+    ymin=240, ymax=375,
+    grid=both,
+    grid style={gray!25},
+    tick label style={font=\scriptsize},
+    label style={font=\scriptsize\bfseries},
+    title={\textbf{(b) Vapor-Compression Refrigerator (CCW on $T$--$s$)}}
+]
+% Refrigerant Saturation Dome
+\addplot[slate, thick, smooth] coordinates {
+  (0.75,250) (0.95,285) (1.15,320) (1.38,358) (1.52,374) (1.66,358) (1.76,320) (1.82,285) (1.88,250)
+};
+% 1 -> 2: Isentropic compressor from sat vapor at 263 K (s=1.85) to superheated at 330 K
+\draw[navy, ultra thick, -{Stealth[length=2mm]}] (axis cs:1.85,263) -- (axis cs:1.85,332)
+  node[midway, right, fill=white, inner sep=1pt] {$1\to 2$: $w_{\mathrm{in}}$};
+% 2 -> 3: Condenser at 313 K (desuperheat + condense to sat liquid at s=1.11)
+\draw[rust, ultra thick, -{Stealth[length=2mm]}] (axis cs:1.85,332) -- (axis cs:1.77,313) -- (axis cs:1.11,313)
+  node[midway, above, fill=white, inner sep=1pt] {$2\to 3$: Cond.\ $q_H$};
+% 3 -> 4: Irreversible Isenthalpic Throttle Valve (h4 = h3, s4 > s3!)
+\draw[amber, ultra thick, densely dashed, -{Stealth[length=2mm]}] (axis cs:1.11,313) -- (axis cs:1.19,263)
+  node[midway, left, fill=white, inner sep=1pt] {$3\to 4$: $h_4=h_3$};
+% 4 -> 1: Evaporator at 263 K
+\draw[teal, ultra thick, -{Stealth[length=2mm]}] (axis cs:1.19,263) -- (axis cs:1.85,263)
+  node[midway, below, fill=white, inner sep=1pt] {$4\to 1$: Evap.\ $q_C$};
+
+\fill[teal] (axis cs:1.85,263) circle (2pt) node[below right] {$1$};
+\fill[rust] (axis cs:1.85,332) circle (2pt) node[above right] {$2$};
+\fill[rust] (axis cs:1.11,313) circle (2pt) node[above left] {$3$};
+\fill[amber](axis cs:1.19,263) circle (2pt) node[below left] {$4$};
+\end{axis}
+\end{tikzpicture}
+\captionof{figure}{Paired $T$--$s$ saturation-dome diagrams of (a) the Rankine vapor power cycle (clockwise, with liquid pump $1\to 2$ and steam turbine $3\to 4$) and (b) the vapor-compression refrigeration cycle (counterclockwise, replacing a wet expansion turbine with an irreversible isenthalpic throttle valve $3\to 4$ where $h_4 = h_3$ and $s_4 > s_3$) \src{S25,S33}.}\label{fig:09:rankine-refrigerator}
+\idxfig{Rankine vapor power cycle and vapor-compression refrigeration cycle on T--s dome}
+\end{minipage}
+\par\smallskip
+
+\begin{workedexample}[Complete Rankine Steam Plant (\texttt{2027 Cornell E1 Q29}) \& Vapor-Compression Chiller]{2027 Cornell E1 Q29a,d,f \textbar\ Tier 3}{ex:09.5}
+(a) In \texttt{2027 Cornell E1 Q29}, a Rankine steam engine operates between a boiler at $T_{\mathrm{boil}} = \SI{130.0}{\celsius}$ ($\SI{403.15}{\kelvin}, P_{\mathrm{boil}} = \SI{270.28}{\kilo\pascal}$) and a condenser at $T_{\mathrm{cond}} = \SI{110.0}{\celsius}$ ($\SI{383.15}{\kelvin}, P_{\mathrm{cond}} = \SI{143.38}{\kilo\pascal}$). Dry saturated steam enters the turbine from the boiler ($h_{\mathrm{boil},g} = \SI{2718.6}{\kilo\joule\per\kilogram}, s_{\mathrm{boil},g} = \SI{6.9931}{\kilo\joule\per\kilogram\per\kelvin}$). At $\SI{110.0}{\celsius}$, $v_f = \SI{0.001052}{\cubic\meter\per\kilogram}, h_f = \SI{461.29}{\kilo\joule\per\kilogram}, h_{fg} = \SI{2229.6}{\kilo\joule\per\kilogram}, s_f = \SI{1.4188}{\kilo\joule\per\kilogram\per\kelvin}$, and $s_g = \SI{7.2380}{\kilo\joule\per\kilogram\per\kelvin}$ ($s_{fg} = \SI{5.8192}{\kilo\joule\per\kilogram\per\kelvin}$). Calculate: (i) the ideal isentropic turbine exit quality $x_{\mathrm{exit},s}$ and enthalpy $h_{\mathrm{exit},s}$, (ii) the pump work $w_p = v_f(P_{\mathrm{boil}} - P_{\mathrm{cond}})$, boiler heat $q_{\mathrm{in}}$, ideal turbine work $w_{t,s}$, and ideal First-Law efficiency $\eta_{\mathrm{I}}$, and (iii) the required steam mass flow rate $\dot{m}$ to deliver $\dot{W}_{\mathrm{actual}} = \SI{50.00}{\kilo\watt}$ if the turbine has isentropic efficiency $\eta_s = 0.8000$.
+(b) An R134a vapor-compression refrigerator takes saturated vapor at $P_{\mathrm{evap}} = \SI{200.0}{\kilo\pascal}$ ($h_1 = \SI{392.6}{\kilo\joule\per\kilogram}$), compresses it to $P_{\mathrm{cond}} = \SI{800.0}{\kilo\pascal}$ ($h_2 = \SI{428.6}{\kilo\joule\per\kilogram}$), condenses it to saturated liquid ($h_3 = \SI{243.6}{\kilo\joule\per\kilogram}$), and throttles it back to $\SI{200.0}{\kilo\pascal}$ ($h_{f,\mathrm{evap}} = \SI{186.6}{\kilo\joule\per\kilogram}, h_{fg,\mathrm{evap}} = \SI{206.0}{\kilo\joule\per\kilogram}$). Find $h_4$, quality $x_4$, $q_C, w_{\mathrm{in}}, q_H$, and $\mathrm{COP}_R$.
+\par\smallskip\noindent
+\textbf{Solution.}
+\begin{enumerate}
+  \item \textbf{(a) Rankine cycle analysis (\texttt{2027 Cornell E1 Q29}):}
+  \begin{itemize}
+    \item \emph{(i) Isentropic turbine exit quality ($s_{\mathrm{exit},s} = s_{\mathrm{boil},g} = \SI{6.9931}{\kilo\joule\per\kilogram\per\kelvin}$):}
+    \[
+      x_{\mathrm{exit},s} = \frac{s_{\mathrm{boil},g} - s_{f,110}}{s_{fg,110}} = \frac{6.9931 - 1.4188}{7.2380 - 1.4188} = \frac{5.5743}{5.8192} = \mathbf{0.95792}, \quad h_{\mathrm{exit},s} = 461.29 + 0.95792(2229.6) = \mathbf{\SI{2597.1}{\kilo\joule\per\kilogram}}
+    \]
+    \item \emph{(ii) Pump work, turbine work, and First-Law efficiency:}
+    \[
+      w_p = v_f(P_{\mathrm{boil}} - P_{\mathrm{cond}}) = (0.001052)(270.28 - 143.38) = \mathbf{\SI{0.1335}{\kilo\joule\per\kilogram}}, \quad h_{\mathrm{pump,out}} = 461.29 + 0.1335 = \SI{461.42}{\kilo\joule\per\kilogram}
+    \]
+    \[
+      q_{\mathrm{in}} = 2718.6 - 461.42 = \mathbf{\SI{2257.2}{\kilo\joule\per\kilogram}}, \quad w_{t,s} = 2718.6 - 2597.1 = \mathbf{\SI{121.53}{\kilo\joule\per\kilogram}}, \quad \eta_{\mathrm{I}} = \frac{121.53 - 0.13}{2257.2} = \mathbf{5.378\%}
+    \]
+    *(Note: Using Cornell E1's backup table value $h_{fg,110} = \SI{2232}{\kilo\joule\per\kilogram}$ and $s_{g,110}=\SI{7.21}{\kilo\joule\per\kilogram\per\kelvin}$ gave $x_{2s} = 0.9624, w_{t,s} = \SI{109.92}{\kilo\joule\per\kilogram}, \eta_{\mathrm{I}} = 4.870\%$, as evaluated in Worked Example~\ref{ex:08.6}.)*
+    \item \emph{(iii) Steam mass flow rate for $\eta_s = 0.8000$ ($w_{t,a} = 0.8000\times 121.53 = \SI{97.23}{\kilo\joule\per\kilogram}$, $w_{\mathrm{net},a} = \SI{97.09}{\kilo\joule\per\kilogram}$):}
+    \[
+      \dot{m} = \frac{\dot{W}_{\mathrm{actual}}}{w_{\mathrm{net},a}} = \frac{\SI{50.00}{\kilo\watt}}{\SI{97.09}{\kilo\joule\per\kilogram}} = \mathbf{\SI{0.5150}{\kilogram\per\second}}
+    \]
+  \end{itemize}
+  \item \textbf{(b) R134a vapor-compression chiller ($h_4 = h_3 = \SI{243.6}{\kilo\joule\per\kilogram}$ across throttle):}
+  \[
+    x_4 = \frac{243.6 - 186.6}{206.0} = \mathbf{0.2767}, \quad q_C = h_1 - h_4 = 392.6 - 243.6 = \mathbf{\SI{149.0}{\kilo\joule\per\kilogram}}, \quad w_{\mathrm{in}} = h_2 - h_1 = 428.6 - 392.6 = \mathbf{\SI{36.0}{\kilo\joule\per\kilogram}}
+  \]
+  \[
+    q_H = h_2 - h_3 = 428.6 - 243.6 = \mathbf{\SI{185.0}{\kilo\joule\per\kilogram}} = q_C + w_{\mathrm{in}}, \qquad \mathrm{COP}_R = \frac{q_C}{w_{\mathrm{in}}} = \frac{149.0}{36.0} = \mathbf{4.139}
+  \]
+\end{enumerate}
+\verifiedby{Pump work is only $0.1335/121.53 = 0.11\%$ of turbine work; refrigeration energy balance $149.0 + 36.0 = 185.0\,\si{\kilo\joule\per\kilogram}$ (\texttt{check\_sec06\_09.py::ex09\_5}).}
+\end{workedexample}
+
+% ============================================================================
+\section{Compound, Cascaded \& Combined Cycles (Series Engines \& Engine-Driven Chillers)}\label{sec:09.7}
+% ============================================================================
+\idxtopic{cascaded heat engines}\idxtopic{combined Brayton--Rankine cycle}\idxtopic{cascaded refrigerators}\idxtopic{engine-driven refrigerator}
+
+\begin{formulacard}[Algebraic Formulas for Cascaded Engines, Cascaded Chillers \& Coupled Systems \src{S13,S33}]
+\begin{enumerate}
+  \item \textbf{Two Heat Engines in Series / Combined Cycle (Engine 1 rejects $Q_{C,1} = (1 - \eta_1)Q_H$ directly as heat input $Q_{H,2}$ to Engine 2):}
+  Total work is $W_{\mathrm{tot}} = W_1 + W_2 = \eta_1 Q_H + \eta_2(1 - \eta_1)Q_H$, yielding the universal \textbf{Combined-Cycle Efficiency Identity}:
+  \begin{equation}\label{eq:09:cascade-engine}
+    \boxed{\eta_{\mathrm{combined}} = \eta_1 + \eta_2 - \eta_1\eta_2 = 1 - (1 - \eta_1)(1 - \eta_2)} \quad \xrightarrow{N\text{ stages}} \quad \eta_{1..N} = 1 - \prod_{k=1}^N (1 - \eta_k)
+  \end{equation}
+  \idxformula{Combined / cascaded heat-engine efficiency: $\eta_{\mathrm{combined}} = \eta_1 + \eta_2 - \eta_1\eta_2 = 1 - (1-\eta_1)(1-\eta_2)$}
+  \emph{Two Cascaded Carnot Engines ($T_H \to T_{\mathrm{mid}} \to T_C$):} Since $(1 - \eta_{C,1})(1 - \eta_{C,2}) = \frac{T_{\mathrm{mid}}}{T_H}\frac{T_C}{T_{\mathrm{mid}}} = \frac{T_C}{T_H}$, the combined Carnot efficiency is always $1 - T_C/T_H$ regardless of $T_{\mathrm{mid}}$! However, the intermediate temperature $T_{\mathrm{mid}}$ satisfies two classic tiebreaker conditions:
+  \begin{equation}\label{eq:09:carnot-mid}
+    W_1 = W_2 \iff \boxed{T_{\mathrm{mid}} = \frac{T_H + T_C}{2} \text{ (arith.\ mean)}}; \qquad \eta_1 = \eta_2 \iff \boxed{T_{\mathrm{mid}} = \sqrt{T_H T_C} \text{ (geom.\ mean)}}
+  \end{equation}
+  \idxformula{Cascaded Carnot intermediate temperature: $W_1=W_2 \iff T_{\mathrm{mid}}=(T_H+T_C)/2$; $\eta_1=\eta_2 \iff T_{\mathrm{mid}}=\sqrt{T_HT_C}$}
+  \item \textbf{Two Refrigerators in Series / Cascade ($T_C \to T_{\mathrm{mid}} \to T_H$, where Condenser 1 feeds Evaporator 2, $Q_{H,1} = Q_{C,2}$):}
+  \begin{equation}\label{eq:09:cascade-refrig}
+    \boxed{\mathrm{COP}_{R,\mathrm{cascade}} = \frac{\mathrm{COP}_{R,1}\,\mathrm{COP}_{R,2}}{1 + \mathrm{COP}_{R,1} + \mathrm{COP}_{R,2}}} \iff 1 + \frac{1}{\mathrm{COP}_{R,\mathrm{cascade}}} = \left(1 + \frac{1}{\mathrm{COP}_{R,1}}\right)\left(1 + \frac{1}{\mathrm{COP}_{R,2}}\right)
+  \end{equation}
+  \idxformula{Cascaded refrigerator COP: $\mathrm{COP}_{R,\mathrm{cascade}} = \mathrm{COP}_1\mathrm{COP}_2/(1 + \mathrm{COP}_1 + \mathrm{COP}_2)$}
+  \item \textbf{Heat Engine ($T_H \to T_0$) Directly Driving a Refrigerator ($T_C \to T_0$) or Heat Pump ($T_0 \to T_{\mathrm{room}}$):}
+  Setting $W_{\mathrm{eng}} = \eta_{\mathrm{eng}}Q_H$ equal to $W_{\mathrm{in}} = Q_C / \mathrm{COP}_R$ gives the overall heat ratio:
+  \begin{equation}\label{eq:09:engine-driven-chiller}
+    \boxed{\frac{Q_C}{Q_H} = \eta_{\mathrm{eng}}\,\mathrm{COP}_R \le \left(1 - \frac{T_0}{T_H}\right)\left(\frac{T_C}{T_0 - T_C}\right)}, \qquad \frac{Q_{\mathrm{heating,tot}}}{Q_H} = 1 - \eta_{\mathrm{eng}} + \eta_{\mathrm{eng}}\,\mathrm{COP}_{\mathrm{HP}}
+  \end{equation}
+\end{enumerate}
+\end{formulacard}
+
+\begin{workedexample}[Brayton--Rankine Combined Cycle \& Cascaded Carnot Equal-Work vs.\ Equal-$\eta$ Split]{National/Invitational \textbar\ Tier 3}{ex:09.6}
+(a) A modern natural-gas combined-cycle power plant pairs a Brayton gas-turbine topping cycle ($\eta_1 = 38.00\%$) with a Rankine steam bottoming cycle ($\eta_2 = 32.00\%$) that recovers the gas turbine's exhaust heat. For a fuel heat input rate of $\dot{Q}_H = \SI{500.0}{\mega\watt}$, find the overall combined efficiency $\eta_{\mathrm{combined}}$, the power output of each cycle ($\dot{W}_1, \dot{W}_2$), and the waste heat rejected to the river ($\dot{Q}_{C,2}$).
+(b) Two reversible Carnot engines operate in series between $T_H = \SI{900.0}{\kelvin}$ and $T_C = \SI{100.0}{\kelvin}$. Compare the intermediate reservoir temperature $T_{\mathrm{mid}}$ and individual stage efficiencies $(\eta_1, \eta_2)$ when the engines produce (i) equal work ($W_1 = W_2$) versus (ii) equal thermal efficiency ($\eta_1 = \eta_2$).
+\par\smallskip\noindent
+\textbf{Solution.}
+\begin{enumerate}
+  \item \textbf{(a) Combined Brayton--Rankine plant from \eref{eq:09:cascade-engine}:}
+  \[
+    \eta_{\mathrm{combined}} = 0.3800 + 0.3200 - (0.3800)(0.3200) = 0.7000 - 0.1216 = \mathbf{0.5784} \quad (57.84\% \text{ — NOT } 38\%+32\%=70\%!)
+  \]
+  \[
+    \dot{W}_1 = 0.3800(\SI{500.0}{\mega\watt}) = \mathbf{\SI{190.0}{\mega\watt}}, \quad \dot{Q}_{C,1} = \SI{310.0}{\mega\watt} \implies \dot{W}_2 = 0.3200(\SI{310.0}{\mega\watt}) = \mathbf{\SI{99.20}{\mega\watt}}, \quad \dot{Q}_{C,2} = \mathbf{\SI{210.8}{\mega\watt}}
+  \]
+  \item \textbf{(b) Two cascaded Carnot engines between $T_H = \SI{900.0}{\kelvin}$ and $T_C = \SI{100.0}{\kelvin}$ ($\eta_{\mathrm{tot}} = 1 - 100/900 = 8/9 = 88.89\%$):}
+  \begin{itemize}
+    \item \emph{(i) Equal work ($W_1 = W_2$):} $T_{\mathrm{mid}} = \frac{900.0 + 100.0}{2} = \mathbf{\SI{500.0}{\kelvin}} \implies \eta_1 = 1 - \frac{500}{900} = \mathbf{44.44\%}$, $\eta_2 = 1 - \frac{100}{500} = \mathbf{80.00\%}$.
+    \item \emph{(ii) Equal efficiency ($\eta_1 = \eta_2$):} $T_{\mathrm{mid}} = \sqrt{(900.0)(100.0)} = \mathbf{\SI{300.0}{\kelvin}} \implies \eta_1 = 1 - \frac{300}{900} = \mathbf{66.67\%}$, $\eta_2 = 1 - \frac{100}{300} = \mathbf{66.67\%}$.
+  \end{itemize}
+\end{enumerate}
+\verifiedby{Check (i) $1 - (1 - 4/9)(1 - 4/5) = 1 - (5/9)(1/5) = 8/9$; check (ii) $1 - (1 - 2/3)^2 = 8/9$ (\texttt{check\_sec06\_09.py::ex09\_6}).}
+\end{workedexample}
+
+% ============================================================================
+\section{Polygon $P$--$V$ Cycles, Dual Combustion, Regenerative Brayton \& Ericsson Cycles}\label{sec:09.8}
+% ============================================================================
+\idxtopic{polygon P--V cycle efficiency}\idxtopic{Dual combustion cycle}\idxtopic{regenerative Brayton cycle}\idxtopic{Ericsson cycle}
+
+\begin{formulacard}[Polygon Cycle Positive-Heat Protocol, Dual Cycle \& Regenerative Brayton Crossover \src{S13,S28,S33}]
+\begin{enumerate}
+  \item \textbf{Polygon $P$--$V$ Cycle Efficiency Protocol (The $Q_H = \sum_{Q_k > 0} Q_k$ Positive-Leg Rule):}
+  For a 3- or 4-sided polygon cycle (right triangle, rectangle, parallelogram) on a $P$--$V$ diagram:
+  \begin{itemize}
+    \item Compute $W_{\mathrm{net,by}}$ directly from the enclosed geometric area (e.g., $\frac{1}{2}\Delta P\Delta V$ for a triangle; $\Delta P\Delta V$ for a rectangle).
+    \item Compute the heat transfer $Q_k = \Delta U_k + W_{\mathrm{by},k} = \frac{P_{\mathrm{end}}V_{\mathrm{end}} - P_{\mathrm{start}}V_{\mathrm{start}}}{\gamma - 1} + W_{\mathrm{by},k}$ along each leg $k$ individually.
+    \item Sum \textbf{ONLY the positive heat inputs} to obtain $Q_H = \sum_{Q_k > 0} Q_k$, and evaluate $\boxed{\eta = \frac{W_{\mathrm{net,by}}}{\sum_{Q_k > 0} Q_k}}$ (never divide by $Q_{\mathrm{net}}$!).\idxerr{dividing $W_{\mathrm{net}}$ by $Q_{\mathrm{net}}$ instead of $\sum_{Q_k>0} Q_k$ in cycle efficiency}
+  \end{itemize}
+  \item \textbf{Air-Standard Dual (Mixed Isochoric + Isobaric) Combustion Cycle:}
+  Heat is added partly at constant volume $V_2$ (raising pressure by explosion ratio $r_p \equiv P_3/P_2 = T_3/T_2 > 1$) and partly at constant pressure $P_3$ (expanding volume by cutoff ratio $r_c \equiv V_4/V_3 = T_4/T_3 > 1$):
+  \begin{equation}\label{eq:09:dual-cycle}
+    \boxed{\eta_{\mathrm{Dual}} = 1 - \frac{1}{r^{\gamma - 1}}\left[\frac{r_p r_c^\gamma - 1}{(r_p - 1) + \gamma r_p(r_c - 1)}\right]} \quad (\text{reduces to Otto for } r_c=1 \text{ and Diesel for } r_p=1)
+  \end{equation}
+  \idxformula{Dual combustion cycle efficiency: $\eta_{\mathrm{Dual}} = 1 - r^{1-\gamma}[(r_p r_c^\gamma - 1)/((r_p - 1) + \gamma r_p(r_c - 1))]$}
+  \item \textbf{Regenerative Brayton Gas-Turbine Cycle (Valid Only When $T_4 > T_2 \iff r_p < r_{p,\mathrm{opt}}$):}
+  When turbine exhaust temperature $T_4$ exceeds compressor exit temperature $T_2$, an exhaust recuperator of effectiveness $\varepsilon_{\mathrm{reg}}=1$ preheats compressor air from $T_2$ to $T_4$, reducing combustor fuel heat to $q_H = c_p(T_3 - T_4)$ and exhaust waste heat to $q_C = c_p(T_2 - T_1)$:
+  \begin{equation}\label{eq:09:brayton-regen}
+    \boxed{\eta_{\mathrm{Brayton,regen}}(\varepsilon_{\mathrm{reg}}=1) = 1 - \frac{T_2 - T_1}{T_3 - T_4} = 1 - \left(\frac{T_1}{T_3}\right)r_p^{\frac{\gamma - 1}{\gamma}}} \quad (\text{crosses simple Brayton at } r_p = r_{p,\mathrm{opt}}!)
+  \end{equation}
+  \idxformula{Regenerative Brayton efficiency: $\eta_{\mathrm{Brayton,regen}} = 1 - (T_1/T_3)r_p^{(\gamma-1)/\gamma}$}
+\end{enumerate}
+\end{formulacard}
+
+\begin{workedexample}[Right-Triangle $P$--$V$ Cycle Efficiency \& Dual Combustion Cycle Ledger]{2019 GGSO E4 Archetype \textbar\ Tier 3}{ex:09.7}
+(a) A monatomic ideal gas ($\gamma = 5/3, C_{V,m} = \frac{3}{2}R, C_{P,m} = \frac{5}{2}R$) executes a clockwise right-triangle cycle $A\to B\to C\to A$ on a $P$--$V$ diagram: State~$A$ ($P_A = \SI{100.0}{\kilo\pascal}, V_A = \SI{2.000}{\liter}$), State~$B$ ($P_B = \SI{400.0}{\kilo\pascal}, V_B = \SI{2.000}{\liter}$, isochoric rise $A\to B$), State~$C$ ($P_C = \SI{100.0}{\kilo\pascal}, V_C = \SI{6.000}{\liter}$, downward-sloping hypotenuse $B\to C$, followed by isobaric compression $C\to A$). Calculate $Q_{AB}, Q_{BC}, Q_{CA}$, net work $W_{\mathrm{net}}$, and the cycle thermal efficiency $\eta$ (assuming heat rejected during any sub-segment is not recovered).
+(b) Compare the efficiency of a Dual cycle with compression ratio $r = 14.00$, $\gamma = 1.400$, isochoric pressure ratio $r_p = 1.500$, and isobaric cutoff ratio $r_c = 1.600$ against pure Otto ($r=14.00$) and pure Diesel ($r=14.00, r_c=1.600$) cycles.
+\par\smallskip\noindent
+\textbf{Solution.}
+\begin{enumerate}
+  \item \textbf{(a) Right-triangle cycle leg-by-leg energy audit ($P_A V_A = \SI{200}{\joule}, P_B V_B = \SI{800}{\joule}, P_C V_C = \SI{600}{\joule}$):}
+  \begin{itemize}
+    \item \emph{Enclosed triangle area:} $W_{\mathrm{net}} = +\frac{1}{2}(400.0 - 100.0)(6.000 - 2.000) = \mathbf{+\SI{600.0}{\joule}}$.
+    \item \emph{Leg $A\to B$ (Isochoric heating at $V=\SI{2.00}{\liter}$):} $W_{AB} = 0$, $Q_{AB} = \Delta U_{AB} = \frac{3}{2}(800.0 - 200.0) = \mathbf{+\SI{900.0}{\joule}} > 0$.
+    \item \emph{Leg $B\to C$ (Straight chord):} $W_{BC} = \frac{400.0+100.0}{2}(4.000) = +\SI{1000.0}{\joule}$, $\Delta U_{BC} = \frac{3}{2}(600.0 - 800.0) = -\SI{300.0}{\joule} \implies Q_{BC} = -300.0 + 1000.0 = \mathbf{+\SI{700.0}{\joule}} > 0$.
+    \item \emph{Leg $C\to A$ (Isobaric cooling at $P=\SI{100}{\kilo\pascal}$):} $W_{CA} = 100.0(-4.000) = -\SI{400.0}{\joule}$, $\Delta U_{CA} = \frac{3}{2}(200.0 - 600.0) = -\SI{600.0}{\joule} \implies Q_{CA} = \mathbf{\SI{-1000.0}{\joule}} < 0$.
+  \end{itemize}
+  Using the whole-leg positive-heat sum $Q_H = Q_{AB} + Q_{BC} = 900.0 + 700.0 = \mathbf{\SI{1600.0}{\joule}}$:
+  \[
+    \eta = \frac{W_{\mathrm{net}}}{Q_H} = \frac{600.0}{1600.0} = \mathbf{0.3750} \quad (37.50\%)
+  \]
+  \item \textbf{(b) Dual cycle ($r=14.00, r^{\gamma-1} = 14.00^{0.400} = 2.8738, r_p = 1.500, r_c = 1.600$) from \eref{eq:09:dual-cycle}:}
+  \[
+    \eta_{\mathrm{Dual}} = 1 - \frac{1}{2.8738}\left[\frac{1.500(1.600^{1.400}) - 1}{(1.500 - 1) + 1.400(1.500)(1.600 - 1)}\right] = 1 - \frac{1}{2.8738}\left[\frac{1.8962}{1.7600}\right] = 1 - \frac{1.0774}{2.8738} = \mathbf{0.6251} \ (62.51\%)
+  \]
+  Compared to $\eta_{\mathrm{Otto}}(14) = 1 - 1/2.8738 = \mathbf{65.20\%}$ and $\eta_{\mathrm{Diesel}}(14, 1.6) = 1 - 1.1066/2.8738 = \mathbf{61.49\%}$ ($\eta_{\mathrm{Otto}} > \eta_{\mathrm{Dual}} > \eta_{\mathrm{Diesel}}$!).
+\end{enumerate}
+\verifiedby{Heat sum on triangle cycle: $Q_{AB}+Q_{BC}+Q_{CA} = 900 + 700 - 1000 = \SI{600.0}{\joule} = W_{\mathrm{net}}$ (\texttt{check\_sec06\_09.py::ex09\_7}).}
+\end{workedexample}
+
+\begin{workedexample}[Ericsson Cycle, Regenerative Brayton Crossover \& Cascaded Cryo-Refrigerator]{National/Invitational \textbar\ Tier 3}{ex:09.8}
+(a) In an air-standard Brayton gas turbine ($\gamma = 1.400$) with $T_1 = \SI{300.0}{\kelvin}$ and $T_3 = \SI{1500.0}{\kelvin}$, compare the simple Brayton efficiency \eref{eq:09:brayton} and the ideal regenerative Brayton efficiency \eref{eq:09:brayton-regen} at pressure ratio $r_p = 6.000$ versus $r_p = 25.00$, and find the exact crossover pressure ratio $r_p^*$ above which a regenerator becomes counterproductive!
+(b) A two-stage cascaded cryogenic refrigerator uses Stage~1 ($\mathrm{COP}_{R,1} = 2.000$) between $T_C = \SI{120.0}{\kelvin}$ and $T_{\mathrm{mid}} = \SI{200.0}{\kelvin}$ and Stage~2 ($\mathrm{COP}_{R,2} = 3.000$) between $T_{\mathrm{mid}} = \SI{200.0}{\kelvin}$ and room temperature $T_H = \SI{300.0}{\kelvin}$. For a cold-box cooling load of $\dot{Q}_{C,1} = \SI{12.00}{\kilo\watt}$, find $\dot{W}_{\mathrm{in},1}, \dot{Q}_{H,1} = \dot{Q}_{C,2}, \dot{W}_{\mathrm{in},2}$, and the overall $\mathrm{COP}_{R,\mathrm{cascade}}$.
+\par\smallskip\noindent
+\textbf{Solution.}
+\begin{enumerate}
+  \item \textbf{(a) Simple vs.\ regenerative Brayton efficiencies ($T_1/T_3 = 300/1500 = 0.2000$):}
+  \begin{itemize}
+    \item \emph{At $r_p = 6.000$ ($r_p^{2/7} = 1.6685$):} $\eta_{\mathrm{simple}} = 1 - \frac{1}{1.6685} = \mathbf{40.07\%}$, whereas $\eta_{\mathrm{regen}} = 1 - 0.2000(1.6685) = \mathbf{66.63\%}$ (regeneration boosts efficiency by $+26.56\%$ because $T_4 = \SI{899.0}{\kelvin} \gg T_2 = \SI{500.6}{\kelvin}$!).
+    \item \emph{At $r_p = 25.00$ ($r_p^{2/7} = 2.5094$):} $\eta_{\mathrm{simple}} = 1 - \frac{1}{2.5094} = \mathbf{60.15\%}$, whereas $\eta_{\mathrm{regen}} = 1 - 0.2000(2.5094) = \mathbf{49.81\%}$ (here $T_2 = \SI{752.8}{\kelvin} > T_4 = \SI{597.8}{\kelvin}$, so a regenerator would cool the compressed air!).
+    \item \emph{Crossover pressure ratio $r_p^* = r_{p,\mathrm{opt}}$ where $T_2 = T_4 = \sqrt{T_1 T_3} = \SI{670.82}{\kelvin}$:}
+    \[
+      r_p^* = \left(\frac{T_3}{T_1}\right)^{\frac{\gamma}{2(\gamma - 1)}} = (5.000)^{1.750} = \mathbf{16.719} \quad (\text{where } \eta_{\mathrm{simple}} = \eta_{\mathrm{regen}} = 1 - 1/\sqrt{5} = \mathbf{55.28\%})
+    \]
+  \end{itemize}
+  \item \textbf{(b) Two-stage cascaded cryo-chiller from \eref{eq:09:cascade-refrig}:}
+  \[
+    \dot{W}_{\mathrm{in},1} = \frac{\dot{Q}_{C,1}}{\mathrm{COP}_{R,1}} = \frac{\SI{12.00}{\kilo\watt}}{2.000} = \mathbf{\SI{6.000}{\kilo\watt}}, \qquad \dot{Q}_{H,1} = \dot{Q}_{C,2} = \dot{Q}_{C,1} + \dot{W}_{\mathrm{in},1} = 12.00 + 6.000 = \mathbf{\SI{18.00}{\kilo\watt}}
+  \]
+  \[
+    \dot{W}_{\mathrm{in},2} = \frac{\dot{Q}_{C,2}}{\mathrm{COP}_{R,2}} = \frac{\SI{18.00}{\kilo\watt}}{3.000} = \mathbf{\SI{6.000}{\kilo\watt}} \implies \mathrm{COP}_{R,\mathrm{cascade}} = \frac{\dot{Q}_{C,1}}{\dot{W}_{\mathrm{in},1} + \dot{W}_{\mathrm{in},2}} = \frac{12.00}{6.000 + 6.000} = \mathbf{1.000}
+  \]
+\end{enumerate}
+\verifiedby{Formula \eref{eq:09:cascade-refrig} check: $\mathrm{COP}_{R,\mathrm{cascade}} = (2.000\times 3.000)/(1 + 2.000 + 3.000) = 6.000/6.000 = 1.000$ (\texttt{check\_sec06\_09.py::ex09\_8}).}
+\end{workedexample}
+
+\begin{workedexample}[Ericsson Cycle Ledger \& Engine-Driven Heat-Pump Heating Multiplier]{National/Invitational \textbar\ Tier 3}{ex:09.9}
+(a) Two moles ($n = \SI{2.000}{\mole}$) of monatomic Helium ($\gamma = 5/3, C_{P,m} = \frac{5}{2}R = \SI{20.786}{\joule\per\mole\per\kelvin}$) execute a regenerative \textbf{Ericsson cycle} between $T_H = \SI{800.0}{\kelvin}$ and $T_C = \SI{400.0}{\kelvin}$, and between high pressure $P_{\max} = \SI{500.0}{\kilo\pascal}$ and low pressure $P_{\min} = \SI{100.0}{\kilo\pascal}$ ($P_{\max}/P_{\min} = 5.000$). Calculate the isothermal expansion heat $Q_{1\to 2}$, the isothermal compression heat rejected $Q_{3\to 4}$, the net cycle work $W_{\mathrm{net}}$, the isobaric regenerator heat load $Q_{\mathrm{regen}} = nC_{P,m}(T_H - T_C)$, and the cycle thermal efficiency with $\varepsilon_{\mathrm{reg}} = 1.000$ versus $\varepsilon_{\mathrm{reg}} = 0.000$.
+(b) A reversible Carnot heat engine operates between a combustion furnace at $T_H = \SI{1200.0}{\kelvin}$ and outdoor winter air at $T_0 = \SI{270.0}{\kelvin}$. All of the engine's mechanical work $W$ drives a reversible Carnot heat pump that extracts heat from the outdoor air at $T_0 = \SI{270.0}{\kelvin}$ and delivers heat $Q_{\mathrm{HP}}$ into a building at $T_{\mathrm{room}} = \SI{300.0}{\kelvin}$. Meanwhile, the heat engine's waste heat $Q_{C,\mathrm{eng}}$ is also ducted directly into the building at $\SI{300.0}{\kelvin}$ (so the engine rejects heat at $T_{\mathrm{room}} = \SI{300.0}{\kelvin}$). Find the total building heating multiplier $Q_{\mathrm{heating,tot}} / Q_H$ per unit of furnace fuel burned!
+\par\smallskip\noindent
+\textbf{Solution.}
+\begin{enumerate}
+  \item \textbf{(a) Ericsson cycle ($2\text{ isotherms} + 2\text{ isobars}$) ledger:}
+  \[
+    Q_{1\to 2} = nRT_H\ln\left(\frac{P_{\max}}{P_{\min}}\right) = (2.000)(8.314463)(800.0)\ln(5.000) = \mathbf{+\SI{21413.2}{\joule}}
+  \]
+  \[
+    Q_{3\to 4} = nRT_C\ln\left(\frac{P_{\max}}{P_{\min}}\right) = \mathbf{\SI{10706.6}{\joule}}, \qquad W_{\mathrm{net}} = Q_{1\to 2} - Q_{3\to 4} = \mathbf{+\SI{10706.6}{\joule}}
+  \]
+  \[
+    Q_{\mathrm{regen}} = nC_{P,m}(T_H - T_C) = (2.000)(2.5\times 8.314463)(800.0 - 400.0) = \mathbf{\SI{16628.9}{\joule}}
+  \]
+  \[
+    \eta_{\mathrm{Ericsson}}(\varepsilon_{\mathrm{reg}}=1) = \frac{10706.6}{21413.2} = \mathbf{50.00\%} = \eta_C, \qquad \eta_{\mathrm{Ericsson}}(\varepsilon_{\mathrm{reg}}=0) = \frac{10706.6}{21413.2 + 16628.9} = \mathbf{28.14\%}
+  \]
+  \item \textbf{(b) Combined engine + heat-pump building heating multiplier from \eref{eq:09:engine-driven-chiller}:}
+  With the engine operating between $T_H = \SI{1200.0}{\kelvin}$ and $T_{\mathrm{room}} = \SI{300.0}{\kelvin}$, its efficiency is $\eta_{\mathrm{eng}} = 1 - \frac{300.0}{1200.0} = \mathbf{0.7500}$, delivering work $W = 0.7500\,Q_H$ and direct exhaust heat $Q_{C,\mathrm{eng}} = 0.2500\,Q_H$ to the building. The heat pump operating between $T_0 = \SI{270.0}{\kelvin}$ and $T_{\mathrm{room}} = \SI{300.0}{\kelvin}$ has $\mathrm{COP}_{\mathrm{HP}} = \frac{300.0}{300.0 - 270.0} = \mathbf{10.00}$, delivering $Q_{\mathrm{HP}} = (10.00)(0.7500\,Q_H) = 7.500\,Q_H$. Total heat delivered to the building is:
+  \[
+    \frac{Q_{\mathrm{heating,tot}}}{Q_H} = \frac{Q_{C,\mathrm{eng}} + Q_{\mathrm{HP}}}{Q_H} = (1 - \eta_{\mathrm{eng}}) + \eta_{\mathrm{eng}}\,\mathrm{COP}_{\mathrm{HP}} = 0.2500 + 0.7500(10.00) = \mathbf{7.750}
+  \]
+  Every $\SI{1.00}{\kilo\joule}$ of furnace heat delivers $\SI{7.75}{\kilo\joule}$ of space heating to the $\SI{300}{\kelvin}$ building (by pulling $\SI{6.75}{\kilo\joule}$ from the $\SI{270}{\kelvin}$ outdoor air)!
+\end{enumerate}
+\verifiedby{Universe entropy balance for reversible engine+HP system: $\Delta S_{\mathrm{univ}} = -Q_H/1200 - 6.75Q_H/270 + 7.75Q_H/300 = Q_H(-1/1200 - 1/40 + 31/1200) = 0$ (\texttt{check\_sec06\_09.py::ex09\_9}).}
+\end{workedexample}
+
+\begin{trapbox}[Top 6 Heat-Engine, Refrigerator \& Thermodynamic Cycle Traps (\S9 Diagnostic Matrix)]
+\par\smallskip\noindent
+\begin{errtab}
+Substituting Celsius ($^\circ\mathrm{C}$) or Fahrenheit ($^\circ\mathrm{F}$) into $\eta_C = 1 - T_C/T_H$ or $\mathrm{COP}_C$ & Produces nonsense efficiencies (or division by zero at $\SI{0}{\celsius}$!).\idxerr{using Celsius instead of Kelvin in Carnot efficiency or COP} & Always convert $T_C$ and $T_H$ to \textbf{Kelvin} ($T_{\mathrm{K}} = T_{\mathrm{C}} + 273.15$) or Rankine ($T_{\mathrm{R}} = T_{\mathrm{F}} + 459.67$) before taking any ratio! \\
+Confusing $\mathrm{COP}_R = Q_C/W_{\mathrm{in}}$ with $\mathrm{COP}_{\mathrm{HP}} = Q_H/W_{\mathrm{in}}$ & Off by exactly $1.00$ ($\mathrm{COP}_{\mathrm{HP}} = \mathrm{COP}_R + 1$).\idxerr{confusing refrigerator $\mathrm{COP}_R$ with heat pump $\mathrm{COP}_{\mathrm{HP}}$} & Ask: \emph{Which reservoir is the conditioned space?} Cooling a fridge ($Q_C$) $\to \mathrm{COP}_R$; warming a house ($Q_H$) $\to \mathrm{COP}_{\mathrm{HP}} = \mathrm{COP}_R + 1 \ge 1$. \\
+Rejecting a refrigerator claim because $\mathrm{COP}_R > 1$ (e.g., $\mathrm{COP}_R = 4.2$) & Confuses $\mathrm{COP}$ with engine efficiency $\eta < 1$.\idxerr{assuming $\mathrm{COP} > 1$ violates the Second Law} & $\mathrm{COP}_R$ and $\mathrm{COP}_{\mathrm{HP}}$ routinely exceed $1$ ($3\text{--}6$); compare against $\mathrm{COP}_{\mathrm{Carnot}} = T_C/(T_H - T_C)$, NOT against $100\%$! \\
+Adding efficiencies $\eta_1 + \eta_2$ for two engines in series & Violates energy conservation by double-counting the work extracted by Engine~1.\idxerr{adding series heat-engine efficiencies $\eta_1 + \eta_2$ instead of $\eta_1 + \eta_2 - \eta_1\eta_2$} & Engine~2 only receives $(1 - \eta_1)Q_H$, so $\eta_{\mathrm{combined}} = \eta_1 + \eta_2 - \eta_1\eta_2$. \\
+Leaving an open refrigerator door in a sealed insulated room to ``cool'' the room & Actually \textbf{heats} the room at rate $\dot{W}_{\mathrm{in}} > 0$!\idxerr{open refrigerator door in sealed room heats room by $W_{\mathrm{in}}$} & Taking the whole room as an adiabatic closed system, electrical work $W_{\mathrm{in}}$ enters from the wall outlet: $\Delta U_{\mathrm{room}} = +W_{\mathrm{in}} > 0$. \\
+Using Otto efficiency $1 - r^{1-\gamma}$ for a Brayton cycle given pressure ratio $r_p$ & Uses volume ratio exponent $\gamma - 1$ instead of pressure ratio exponent $(\gamma - 1)/\gamma$. & Volume ratio $r = V_1/V_2 \to \eta_{\mathrm{Otto}} = 1 - r^{1-\gamma}$; pressure ratio $r_p = P_2/P_1 \to \eta_{\mathrm{Brayton}} = 1 - r_p^{-(\gamma-1)/\gamma}$. \\
+\end{errtab}
+\end{trapbox}
+
+\begin{devicebox}[First-Law Optical-to-Thermal Collector Efficiency ($\eta_{\mathrm{coll}}$) vs.\ Carnot Heat-Engine Efficiency]
+\idxdev{collector thermal capture efficiency vs. Carnot work efficiency}
+Never confuse a \textbf{heat engine's thermal-to-work efficiency} ($\eta_{\mathrm{engine}} = W/Q_H \le 1 - T_C/T_H$) with the 2027 Heat-Lamp Collector's \textbf{First-Law optical-to-thermal capture efficiency} ($\eta_{\mathrm{coll}} \equiv \dot{Q}_{\mathrm{water,net}} / P_{\mathrm{lamp,elec}}$)! Because the 2027 collector converts electrical/radiative lamp power into \emph{internal thermal energy} of the water rather than extracting mechanical work from a low-temperature heat reservoir, $\eta_{\mathrm{coll}}$ is governed by the First Law and view-factor optics (\sref{sec:15}), NOT by $1 - T_{\mathrm{room}}/T_{\mathrm{water}}$.(Indeed, the radiation source is the $\SI{2400}{\kelvin}$ tungsten filament, for which $1 - \SI{300}{\kelvin}/\SI{2400}{\kelvin} = 87.5\%$!)
+\end{devicebox}
+
+\alsosee{Quick Sheet \texttt{QS-08} (\sref{sec:01.8}); 8 Named Scientists (\sref{sec:03}); Master Process Atlas (\sref{sec:07}); Entropy, Exergy \& Steam Tables (\sref{sec:08}, \sref{app:A}); Multi-Physics Coupled Problems (\sref{sec:19}).}

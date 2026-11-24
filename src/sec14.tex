@@ -1,0 +1,537 @@
+% ============================================================================
+% sec14.tex — §14 Material, Optical & Insulation Property Encyclopedia
+% Phase 6 Author Group 4 (author-device) | Target: 10.0 pages | Tab 6: DEVICE
+% ============================================================================
+\binderchapter{14}{Material, Optical \& Insulation Property Encyclopedia}{Materials, Optics \& Insulation}{sec:14}
+\scopebanner{REQUIRED}[2027 Rules 3.b.i--iii, 3.e, 5.c.iii \& Official Clarifications \#5, \#6 (All Tournament Levels)]
+
+\idxtopic{materials encyclopedia}\idxtopic{optical properties}\idxtopic{thermal insulation}\idxtopic{2027 heat collector materials}
+Selecting materials for the 2026--2027 Division~C Thermodynamics heat-collecting device requires simultaneous optimization across \textbf{two distinct electromagnetic wavebands} and \textbf{three thermophysical transport regimes} \src{S01,S12}. Under Rules~\texttt{3.a}--\texttt{3.h} and \texttt{4.a}--\texttt{4.g}, an Event Supervisor (ES) downward-facing $\SIrange{100}{125}{\watt}$ untinted incandescent reflector heat lamp suspended at $h_{\mathrm{bulb}} = \SIrange{40}{65}{\centi\meter}$ irradiates $\SI{100}{\milli\liter}$ of room-temperature water inside a $\SI{9}{oz}$ clear plastic party cup enclosed within a $\SI{30.0}{\centi\meter} \times \SI{30.0}{\centi\meter} \times \SI{30.0}{\centi\meter}$ bounding cube \src{S01,S05}. Every material in the collector must satisfy four quantitative criteria: (1)~\textbf{high near-infrared specular reflectance or transmittance} at the lamp's Wien peak ($\lambda_{\max,\mathrm{lamp}} \approx \SI{1.21}{\micro\meter}$), (2)~\textbf{strong mid-infrared radiative trapping} at the warm water's emission peak ($\lambda_{\max,\mathrm{water}} \approx \SI{9.40}{\micro\meter}$), (3)~\textbf{low parasitic thermal conductivity $k$ and volumetric heat capacity $\rho c_p$}, and (4)~\textbf{absolute compliance with Rule~\texttt{3.b.i--iii} and Official Clarification~\#6}, which strictly ban polystyrene/Styrofoam/\texttt{\#6~PS}, fiberglass, mineral wool, and asbestos \src{S01,S02}.
+
+% ============================================================================
+\section{Two-Band Radiative Selectivity \& Thermophysical Selection Framework}\label{sec:14.1}
+\idxtopic{wavelength selectivity}\idxtopic{Kirchhoff law!two-band selectivity}\idxtopic{Wien displacement law!lamp vs water}
+
+Because the tungsten filament of a $\SIrange{100}{125}{\watt}$ heat lamp operates at $T_{\mathrm{fil}} \approx \SIrange{2300}{2450}{\kelvin}$ (nominal $\SI{2400}{\kelvin}$) while the heated water and cup walls remain near $T_w \approx \SIrange{295}{330}{\kelvin}$ ($\SIrange{22}{57}{\celsius}$), the incident and re-emitted radiation fields occupy non-overlapping spectral bands \src{S07,S12}:
+\begin{equation}\label{eq:14:wien-bands}
+  \lambda_{\max,\mathrm{lamp}} = \frac{b}{T_{\mathrm{fil}}} = \frac{\SI{2897.772}{\micro\meter\kelvin}}{\SI{2400}{\kelvin}} = \SI{1.207}{\micro\meter}\ (\text{Near-IR}), \qquad
+  \lambda_{\max,\mathrm{water}} = \frac{b}{T_w} = \frac{\SI{2897.772}{\micro\meter\kelvin}}{\SI{308.15}{\kelvin}} = \SI{9.404}{\micro\meter}\ (\text{Mid-IR})
+\end{equation}
+\idxformula{Wien peak separation (lamp vs. water): \lambda_{\max}=b/T}
+Over $96\%$ of the lamp's glass-transmitted optical power falls in the short-wave visible and near-infrared band ($\lambda \in [\SI{0.38}{\micro\meter}, \SI{2.75}{\micro\meter}]$), whereas over $98\%$ of the thermal radiation emitted by the water, cup, and internal baffles falls in the long-wave mid-infrared band ($\lambda \in [\SI{4.5}{\micro\meter}, \SI{30}{\micro\meter}]$) \src{S12}.
+
+\begin{formulacard}[Two-Band Optical Balance, Specularity \& Parasitic Thermal Capacitance]
+\idxformula{radiation surface balance: \alpha_\lambda + \rho_\lambda + \tau_\lambda = 1}
+\idxformula{areal heat capacity: C'' = \rho c_p \delta}
+\idxformula{selective surface net flux: q''_{\mathrm{net}} = \alpha_{\mathrm{NIR}} q''_{\mathrm{lamp}} - \varepsilon_{\mathrm{MIR}}\sigma(T_s^4 - T_{\mathrm{amb}}^4)}
+\begin{ftab}
+$\alpha_\lambda + \rho_\lambda + \tau_\lambda = 1$
+  & $\alpha_\lambda$: spectral absorptance; $\rho_\lambda$: reflectance; $\tau_\lambda$: transmittance $[-]$. For opaque solids ($\tau_\lambda = 0$), $\rho_\lambda = 1 - \alpha_\lambda$.
+  & \RULEf
+  & Conservation of radiant energy at any interface \src{S12}. \\
+$\rho_{\mathrm{NIR,tot}} = \rho_{\mathrm{NIR,spec}} + \rho_{\mathrm{NIR,diff}}$
+  & $\rho_{\mathrm{NIR,spec}}$: mirror-like specular reflectance ($\theta_r = \theta_i$); $\rho_{\mathrm{NIR,diff}}$: Lambertian diffuse scatter $[-]$.
+  & \RULEf
+  & Concentrating cones require high $\rho_{\mathrm{NIR,spec}} \ge 0.85$; diffuse walls scatter rays out the top aperture. \\
+$\varepsilon_\lambda(T) = \alpha_\lambda(T)$ \newline $\alpha_{\mathrm{NIR}} \neq \varepsilon_{\mathrm{MIR}}$
+  & $\alpha_{\mathrm{NIR}} \equiv \alpha(\lambda \approx \SI{1.2}{\micro\meter})$; $\varepsilon_{\mathrm{MIR}} \equiv \varepsilon(\lambda \approx \SI{9.4}{\micro\meter})$; selectivity ratio $S_{\alpha/\varepsilon} = \alpha_{\mathrm{NIR}}/\varepsilon_{\mathrm{MIR}}$ $[-]$.
+  & \TIERf
+  & Kirchhoff's law holds at each $\lambda$; non-gray surfaces decouple NIR capture from MIR loss \src{S12}. \\
+$q''_{\mathrm{net}} = \alpha_{\mathrm{NIR}} q''_{\mathrm{NIR}} - \varepsilon_{\mathrm{MIR}}\sigma(T_s^4 - T_e^4)$
+  & $q''_{\mathrm{NIR}}$: incident lamp irradiance $[\si{\watt\per\square\meter}]$; $\sigma = \SI{5.6704e-8}{\watt\per\square\meter\per\kelvin\tothe{4}}$; $T_s, T_e$ in $[\si{\kelvin}]$.
+  & \TIERf
+  & Net radiative heat flux absorbed by an opaque collar or water surface \src{S12}. \\
+$C'' = \rho c_p \delta = \dfrac{C_{\mathrm{comp}}}{A_{\mathrm{comp}}}$ \newline $\delta_{\mathrm{th}}(t) = 2\sqrt{\alpha t}, \quad \alpha = \dfrac{k}{\rho c_p}$
+  & $\rho$: density $[\si{\kilogram\per\cubic\meter}]$; $c_p$: specific heat $[\si{\joule\per\kilogram\per\kelvin}]$; $\delta$: thickness $[\si{\meter}]$; $C''$: areal heat capacity $[\si{\joule\per\square\meter\per\kelvin}]$; $\alpha$: thermal diffusivity $[\si{\square\meter\per\second}]$.
+  & \CONSTC
+  & Minimizing parasitic thermal mass ($C_{\mathrm{comp}} \ll C_w = \SI{418.4}{\joule\per\kelvin}$) and transient heat penetration \src{S12}. \\
+\end{ftab}
+\end{formulacard}
+
+\begin{center}
+\begin{tikzpicture}[font=\scriptsize]
+\begin{axis}[
+    width=0.92\linewidth,
+    height=6.0cm,
+    xmin=0.0, xmax=1.02,
+    ymin=0.0, ymax=1.05,
+    xlabel={Mid-IR Thermal Emittance $\varepsilon_{\mathrm{MIR}}$ at $\lambda \approx \SI{9.4}{\micro\meter}$ ($\SI{308}{\kelvin}$ Water Peak) $[-]$},
+    ylabel={Near-IR Lamp Absorptance $\alpha_{\mathrm{NIR}}$ at $\lambda \approx \SI{1.2}{\micro\meter}$ $[-]$},
+    grid=both,
+    grid style={gray!25, dashed},
+    minor tick num=1,
+    tick align=inside,
+    legend style={at={(0.52,0.52)}, anchor=center, font=\scriptsize, fill=white, draw=navy, row sep=1pt}
+]
+% Shaded functional zones
+\fill[teal!10] (axis cs:0.0,0.0) rectangle (axis cs:0.15,0.15);
+\fill[amber!12] (axis cs:0.0,0.78) rectangle (axis cs:0.25,1.02);
+\fill[navy!8] (axis cs:0.75,0.75) rectangle (axis cs:1.00,1.02);
+\fill[rust!10] (axis cs:0.80,0.0) rectangle (axis cs:1.00,0.35);
+
+\node[anchor=south west, text=teal!80!black, font=\scriptsize\bfseries] at (axis cs:0.01,0.16) {Zone I: Specular Reflectors \& Shields ($\rho_{\mathrm{NIR}}\!\to\!1, \varepsilon_{\mathrm{MIR}}\!\to\!0$)};
+\node[anchor=north west, text=amber!80!black, font=\scriptsize\bfseries] at (axis cs:0.01,0.77) {Zone II: Selective Absorbers ($\alpha_{\mathrm{NIR}}/\varepsilon_{\mathrm{MIR}} \gg 1$)};
+\node[anchor=south east, text=navy, font=\scriptsize\bfseries] at (axis cs:0.99,0.66) {Zone III: Blackbody / Water Absorbers};
+\node[anchor=south east, text=rust, font=\scriptsize\bfseries] at (axis cs:0.99,0.02) {Zone IV: Diffuse White Trap ($\varepsilon_{\mathrm{MIR}}\!\approx\!0.92$)};
+
+% Diagonal gray-body line alpha = epsilon
+\addplot[domain=0:1, dashed, thick, gray!70] {x};
+\node[rotate=24, font=\scriptsize, text=gray!60!black] at (axis cs:0.55,0.60) {Gray-Body Locus ($\alpha_{\mathrm{NIR}} = \varepsilon_{\mathrm{MIR}}$)};
+
+% Group 1: Reflectors
+\addplot[only marks, mark=*, mark size=2.4pt, color=teal!80!black] coordinates {
+    (0.035, 0.040)
+    (0.042, 0.050)
+    (0.035, 0.045)
+    (0.050, 0.070)
+};
+\addlegendentry{Metallic Reflectors (Al Foil, Mylar, Sheet)}
+
+% Group 2: Selective Absorbers
+\addplot[only marks, mark=square*, mark size=2.4pt, color=amber!90!black] coordinates {
+    (0.090, 0.950)
+    (0.160, 0.900)
+    (0.160, 0.960)
+    (0.170, 0.810)
+    (0.240, 0.880)
+};
+\addlegendentry{Selective Solar/NIR Coatings (Cr, CuO, Cermet)}
+
+% Group 3: Broadband Absorbers & Water
+\addplot[only marks, mark=triangle*, mark size=2.8pt, color=navy] coordinates {
+    (0.950, 0.960)
+    (0.890, 0.940)
+    (0.960, 0.830)
+    (0.930, 0.920)
+};
+\addlegendentry{Broadband Absorbers \& Liquid Water ($\ge\SI{35}{\milli\meter}$)}
+
+% Group 4: White / Second-surface traps
+\addplot[only marks, mark=diamond*, mark size=2.8pt, color=rust] coordinates {
+    (0.900, 0.260)
+    (0.960, 0.220)
+    (0.920, 0.170)
+};
+\addlegendentry{White Paint/Paper \& 2nd-Surface PMMA Mirror}
+
+% Point labels
+\node[anchor=west, font=\scriptsize] at (axis cs:0.045,0.035) {Shiny Al Foil ($0.035, 0.04$)};
+\node[anchor=west, font=\scriptsize] at (axis cs:0.055,0.095) {Polished Al Sheet ($0.05, 0.07$)};
+\node[anchor=west, font=\scriptsize] at (axis cs:0.100,0.950) {Black Cr on Ni ($S=10.6$)};
+\node[anchor=west, font=\scriptsize] at (axis cs:0.170,0.900) {$\mathrm{CuO}$ on Cu ($S=5.6$)};
+\node[anchor=west, font=\scriptsize] at (axis cs:0.180,0.810) {Ni-Black ($S=4.8$)};
+\node[anchor=west, font=\scriptsize] at (axis cs:0.250,0.880) {Thin Anodized Al};
+\node[anchor=east, font=\scriptsize] at (axis cs:0.940,0.975) {Carbon Soot ($0.95, 0.96$)};
+\node[anchor=east, font=\scriptsize] at (axis cs:0.880,0.930) {Matte Black Paint};
+\node[anchor=east, font=\scriptsize] at (axis cs:0.945,0.825) {Liquid Water ($\varepsilon=0.96, \alpha=0.83$)};
+\node[anchor=east, font=\scriptsize] at (axis cs:0.890,0.260) {White Acrylic Paint ($0.90, 0.26$)};
+\node[anchor=east, font=\scriptsize] at (axis cs:0.950,0.210) {White Paper ($0.96, 0.22$)};
+\node[anchor=east, font=\scriptsize] at (axis cs:0.910,0.155) {2nd-Surf PMMA Mirror};
+\end{axis}
+\end{tikzpicture}
+\captionof{figure}{Two-band spectral selectivity map comparing near-infrared lamp absorptance $\alpha_{\mathrm{NIR}}$ ($\lambda \approx \SI{1.2}{\micro\meter}$) against mid-infrared thermal emittance $\varepsilon_{\mathrm{MIR}}$ ($\lambda \approx \SI{9.4}{\micro\meter}$) across reflectors, selective absorbers, liquid water, and diffuse white surfaces \src{S12,S24}.}\label{fig:14:two-band-optical}
+\idxfig{two-band spectral selectivity map (alpha_NIR vs epsilon_MIR)}
+\end{center}
+
+\begin{workedexample}[Two-Band Net Radiative Heat Flux: Selective vs.\ Non-Selective vs.\ White Collar]{Rule 5.c.vi / §14.1}{ex:14.1}
+A concentrating funnel delivers a near-IR lamp irradiance of $q''_{\mathrm{NIR}} = \SI{4500}{\watt\per\square\meter}$ onto a non-contact upper absorber collar of area $A_c = \SI{40.0}{\square\centi\meter} = \SI{4.00e-3}{\square\meter}$ operating at $T_s = \SI{62.0}{\celsius} = \SI{335.15}{\kelvin}$ inside a room-temperature surround at $T_e = \SI{22.0}{\celsius} = \SI{295.15}{\kelvin}$. Compare the net radiative power $\dot{Q}_{\mathrm{net}} = A_c[\alpha_{\mathrm{NIR}}q''_{\mathrm{NIR}} - \varepsilon_{\mathrm{MIR}}\sigma(T_s^4 - T_e^4)]$ captured by: (a)~selective Black Chrome on Ni foil ($\alpha_{\mathrm{NIR}} = 0.95$, $\varepsilon_{\mathrm{MIR}} = 0.09$), (b)~non-selective Matte Black Acrylic Paint ($\alpha_{\mathrm{NIR}} = 0.94$, $\varepsilon_{\mathrm{MIR}} = 0.89$), and (c)~White Acrylic Paint ($\alpha_{\mathrm{NIR}} = 0.26$, $\varepsilon_{\mathrm{MIR}} = 0.90$) \src{S12}.
+
+\textbf{Solution.} The blackbody exitance difference between $T_s = \SI{335.15}{\kelvin}$ and $T_e = \SI{295.15}{\kelvin}$ is:
+\[
+  \Delta M_{bb} = \sigma(T_s^4 - T_e^4) = (\SI{5.670374e-8}{\watt\per\square\meter\per\kelvin\tothe{4}})\left(335.15^4 - 295.15^4\right) = \SI{715.49}{\watt\per\square\meter} - \SI{430.35}{\watt\per\square\meter} = \SI{285.14}{\watt\per\square\meter}
+\]
+Evaluating $q''_{\mathrm{net}} = \alpha_{\mathrm{NIR}}(\SI{4500}{\watt\per\square\meter}) - \varepsilon_{\mathrm{MIR}}(\SI{285.14}{\watt\per\square\meter})$ and multiplying by $A_c = \SI{4.00e-3}{\square\meter}$:
+\begin{enumerate}
+  \item \textbf{Selective Black Chrome ($\alpha_{\mathrm{NIR}}=0.95, \varepsilon_{\mathrm{MIR}}=0.09$):} $q''_{\mathrm{net}} = 4275.00 - 25.66 = \SI{4249.34}{\watt\per\square\meter} \implies \dot{Q}_{\mathrm{net}} = \mathbf{\SI{17.00}{\watt}}$ (re-radiation loss is only $\SI{0.103}{\watt}$, or $0.60\%$ of absorbed flux).
+  \item \textbf{Matte Black Paint ($\alpha_{\mathrm{NIR}}=0.94, \varepsilon_{\mathrm{MIR}}=0.89$):} $q''_{\mathrm{net}} = 4230.00 - 253.78 = \SI{3976.22}{\watt\per\square\meter} \implies \dot{Q}_{\mathrm{net}} = \mathbf{\SI{15.90}{\watt}}$ (unshielded mid-IR re-radiation loses $\SI{1.015}{\watt}$, or $9.9\times$ more than Black Chrome).
+  \item \textbf{White Acrylic Paint ($\alpha_{\mathrm{NIR}}=0.26, \varepsilon_{\mathrm{MIR}}=0.90$):} $q''_{\mathrm{net}} = 1170.00 - 256.63 = \SI{913.37}{\watt\per\square\meter} \implies \dot{Q}_{\mathrm{net}} = \mathbf{\SI{3.65}{\watt}}$ (loses $74\%$ by diffuse NIR reflection and radiates mid-IR at $\varepsilon_{\mathrm{MIR}}=0.90$ like a blackbody).
+\end{enumerate}
+\verifiedby{Direct Stefan--Boltzmann flux evaluation and linearized check $h_{\mathrm{rad,bb}} = 4\sigma T_m^3 = \SI{7.122}{\watt\per\square\meter\per\kelvin} \implies h_{\mathrm{rad,bb}}(40\,\si{\kelvin}) = \SI{284.9}{\watt\per\square\meter}$ ($0.09\%$ agreement); asserted in \texttt{check\_sec14\_16.py}.}
+\end{workedexample}
+
+% ============================================================================
+\section{Optical Reflector Encyclopedia \& The Shiny vs.\ Dull Aluminum Foil Myth}\label{sec:14.2}
+\idxtopic{reflector materials}\idxtopic{aluminum foil!shiny vs dull myth}\idxtopic{specular vs diffuse reflectance}\idxtopic{aluminized Mylar}
+
+In a 2027 heat-lamp collector, reflective surfaces perform two physically distinct duties: (1)~\textbf{optical beam concentration} inside the upper funnel (redirecting downward lamp rays at $\lambda \approx \SIrange{0.4}{2.7}{\micro\meter}$ into the $\SI{7.5}{\centi\meter}$ cup mouth), and (2)~\textbf{mid-infrared radiant barrier shielding} inside the lower insulation cradle (blocking $\lambda \approx \SIrange{5}{25}{\micro\meter}$ thermal radiation across stagnant air gaps). \tref{tab:14:reflectors} compiles verified thermophysical and spectral properties for all candidate reflectors \src{S12,S24}.
+
+\begin{center}
+\captionof{table}{Thermophysical and two-band optical properties of reflector and radiant-barrier materials at $T = \SIrange{20}{25}{\celsius}$ \src{S01,S02,S12,S24}.}\label{tab:14:reflectors}
+\footnotesize\setlength{\tabcolsep}{2.6pt}\renewcommand{\arraystretch}{1.14}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.19\linewidth}rrrrrrrl>{\raggedright\arraybackslash}X@{}}
+\toprule
+\hdr{Reflector Material} & \hdr{$\rho$} & \hdr{$c_p$} & \hdr{$k$} & \hdr{$C''$ ($\delta$)} & \hdr{$\rho_{\mathrm{NIR,tot}}$} & \hdr{$\rho_{\mathrm{NIR,spec}}$} & \hdr{$\varepsilon_{\mathrm{MIR}}$} & \hdr{$T_{\max}$} & \hdr{2027 Legality \& Optical/Thermal Role} \\
+ & \tiny$[\si{\kilogram\per\cubic\meter}]$ & \tiny$[\si{\joule\per\kilogram\per\kelvin}]$ & \tiny$[\si{\watt\per\meter\per\kelvin}]$ & \tiny$[\si{\joule\per\square\meter\per\kelvin}]$ & \tiny$\SI{1.2}{\micro\meter}$ & \tiny(Focus) & \tiny$\SI{9.4}{\micro\meter}$ & \tiny$[\si{\celsius}]$ & \\
+\midrule
+\textbf{Al Foil --- Shiny Side} ($\delta=\SI{16}{\micro\meter}$ std) & $2707$ & $905$ & $237$ & $39.2$ & $0.96$ & $\mathbf{0.88}$ & $0.035$ & $600$ & \textbf{LEGAL.} Primary funnel liner; high specularity focuses beam; zero fire risk ($T_m=\SI{660}{\celsius}$) \src{S12}. \\
+\rowcolor{rowalt}\textbf{Al Foil --- Dull Side} ($\delta=\SI{16}{\micro\meter}$ std) & $2707$ & $905$ & $237$ & $39.2$ & $0.95$ & $0.62$ & $0.042$ & $600$ & \textbf{LEGAL.} Identical to shiny side as an internal MIR shield ($\varepsilon_{\mathrm{MIR}}\approx 0.04$), but $30\%$ lower specular focus. \\
+\textbf{Heavy-Duty Al Foil} ($\delta=\SI{24}{\micro\meter}$ shiny) & $2707$ & $905$ & $237$ & $58.8$ & $0.96$ & $\mathbf{0.89}$ & $0.035$ & $600$ & \textbf{LEGAL.} Resists creasing during cone rolling while adding only $\SI{1.76}{\joule\per\kelvin}$ per $\SI{300}{\square\centi\meter}$. \\
+\rowcolor{rowalt}\textbf{Aluminized BoPET} (Mylar, $\delta=\SI{12}{\micro\meter}$) & $1390$ & $1170$ & $0.18$ & $\mathbf{19.5}$ & $0.96$ & $\mathbf{0.93}$ & $0.035$ & $150$ & \textbf{LEGAL.} Highest flexible mirror specularity ($\rho_{\mathrm{spec}}\ge 0.92$) and lowest thermal mass; orient Al face to lamp. \\
+\textbf{Polished Al Sheet} (6061/1100, $\SI{0.30}{\milli\meter}$) & $2700$ & $896$ & $167$ & $725.8$ & $0.93$ & $0.87$ & $0.050$ & $500$ & \textbf{LEGAL.} Self-supporting rigid cone without wrinkles; isolate thermally from cup due to higher $C''$ \src{S12}. \\
+\rowcolor{rowalt}\textbf{1st-Surface Al/Ag Mirror} (on $\SI{1.5}{\milli\meter}$ substrate) & $1180$ & $1460$ & $0.17$ & $2584$ & $0.97$ & $\mathbf{0.96}$ & $0.025$ & $85$ & \textbf{LEGAL.} Bare front metallic coating avoids substrate NIR absorption; ideal for planar faceted CPC funnels. \\
+\textbf{2nd-Surface PMMA Mirror} (\texttt{\#7} Acrylic, $\SI{2.0}{\milli\meter}$) & $1180$ & $1460$ & $0.17$ & $3446$ & $0.83$ & $0.82$ & $0.920$ & $85$ & \textbf{LEGAL (\texttt{\#7} PMMA, NOT \texttt{\#6} PS).} Double pass through PMMA absorbs $17\%$ of NIR $>\SI{1.6}{\micro\meter}$ \src{S12}. \\
+\rowcolor{rowalt}\textbf{Silvered Glass Mirror} (Soda-lime, $\SI{2.0}{\milli\meter}$) & $2480$ & $750$ & $1.10$ & $3720$ & $0.87$ & $0.86$ & $0.940$ & $250$ & \textbf{LEGAL.} High optical flatness, but double glass pass absorbs NIR $>\SI{2.7}{\micro\meter}$ and adds high mass \src{S12}. \\
+\textbf{White Cardstock / Acrylic Paint} ($\SI{0.30}{\milli\meter}$) & $790$ & $1340$ & $0.14$ & $317.6$ & $0.74$ & $\mathbf{0.04}$ & $\mathbf{0.930}$ & $120$ & \textbf{LEGAL --- TRAP!} $96\%$ diffuse scatter bounces rays out top; emits mid-IR like a blackbody ($\varepsilon=0.90\text{--}0.98$) \src{S12}. \\
+\rowcolor{rowalt}\textbf{Sintered White PTFE} (Teflon sheet, $\SI{1.0}{\milli\meter}$) & $2200$ & $1050$ & $0.25$ & $2310$ & $0.89$ & $0.05$ & $0.880$ & $260$ & \textbf{LEGAL.} Pure Lambertian diffuse reflector; poor directional concentrator \src{S12}. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{devicebox}[Debunking the Shiny vs.\ Dull Aluminum Foil Myth: Hemispherical Shield vs.\ Specular Funnel]
+\idxtopic{aluminum foil!pack-rolling metallurgy}\idxerr{using dull side of aluminum foil in concentrating cone}\idxdev{specular vs diffuse foil orientation loss}
+A classic Science Olympiad question asks whether the \textbf{shiny (bright) side} or \textbf{dull (matte) side} of household aluminum foil performs better in a thermal device. The rigorous physical answer depends on whether the foil acts as a \textbf{flat insulation radiant barrier} or an \textbf{optical concentrating mirror}:
+\begin{enumerate}
+  \item \textbf{Manufacturing Origin (Pack-Rolling):} Household foil ($\SIrange{16}{24}{\micro\meter}$) is rolled in two stacked sheets during the final finishing pass because thin single sheets tear under roll tension. The outer faces contacting the highly polished steel work rolls emerge \textbf{mirror-shiny} (root-mean-square roughness $\sigma_r \approx \SIrange{0.03}{0.06}{\micro\meter} \ll \lambda_{\mathrm{NIR}}$), while the inner faces pressing against each other undergo free grain deformation and emerge \textbf{satin-dull} ($\sigma_r \approx \SIrange{0.25}{0.45}{\micro\meter}$).
+  \item \textbf{Why Both Sides Perform Identically in Insulation Air Gaps (Myth Debunked):} At mid-infrared thermal wavelengths ($\lambda \approx \SI{9.4}{\micro\meter} \gg \sigma_r$), surface micro-roughness is sub-wavelength on both sides. Total hemispherical emissivity differs by less than $0.008$ ($\varepsilon_{\mathrm{MIR,shiny}} \approx 0.035$ vs.\ $\varepsilon_{\mathrm{MIR,dull}} \approx 0.042$), and total hemispherical NIR reflectance differs by $\le 1\%$ ($\rho_{\mathrm{NIR,tot}} = 0.96$ vs.\ $0.95$). Inside a flat $N$-shield insulation cavity, radiative transfer $\dot{Q}_{\mathrm{rad}} \propto (2/\varepsilon - 1)^{-1}$ changes by $< 0.3\%$ regardless of orientation!
+  \item \textbf{Why the Shiny Side Wins Decisively Inside the Concentrating Funnel ($+26\%$ to $+47\%$ Gain):} At near-IR lamp wavelengths ($\lambda \approx \SIrange{0.7}{1.5}{\micro\meter}$), the dull side's $\SI{0.35}{\micro\meter}$ grain facets satisfy the Beckman--Spizzichino scattering criterion ($4\pi\sigma_r\cos\theta_i/\lambda \gtrsim 1$), converting $\sim 33\%$ of reflected energy into wide-angle \textbf{diffuse scatter} ($\rho_{\mathrm{NIR,spec}} \approx 0.62$, $\rho_{\mathrm{NIR,diff}} \approx 0.33$). Since roughly half of diffusely scattered rays travel upward and escape the top aperture, only $\rho_{\mathrm{eff,dull}} \approx \rho_{\mathrm{spec}} + 0.35\rho_{\mathrm{diff}} \approx 0.735$ reaches the cup per bounce, whereas the shiny side ($\rho_{\mathrm{NIR,spec}} \approx 0.88$, $\rho_{\mathrm{NIR,diff}} \approx 0.08$) delivers $\rho_{\mathrm{eff,shiny}} \approx 0.908$ per bounce ($+23.5\%$ more power on 1 bounce and $0.908^2/0.735^2 = \mathbf{1.526\times}$ more power on 2 bounces!). \textbf{Rule:} Always orient the \textbf{shiny side facing the lamp beam} inside the concentrating cone, and pull the foil taut over a smooth substrate so wrinkles do not create retro-reflecting facets.
+\end{enumerate}
+\end{devicebox}
+
+\begin{workedexample}[Multi-Bounce Ray Delivery \& Parasitic Thermal Mass: Shiny Foil vs.\ Dull Foil vs.\ White Paper]{Rule 3.a / §14.2}{ex:14.2}
+An optical concentrator intercepts $\dot{Q}_{\mathrm{cone,in}} = \SI{42.0}{\watt}$ of downward near-IR lamp rays on its reflective side walls (area $A_w = \SI{0.120}{\square\meter}$). Due to the funnel geometry, $65\%$ of wall-incident rays undergo $k=1$ bounce and $35\%$ undergo $k=2$ bounces before entering the cup aperture. Using single-bounce forward delivery efficiency $\eta_1 = \rho_{\mathrm{NIR,spec}} + f_d\,\rho_{\mathrm{NIR,diff}}$ with forward diffuse view factor $f_d = 0.35$, compute the optical power $\dot{Q}_{\mathrm{deliv}} = \dot{Q}_{\mathrm{cone,in}}(0.65\,\eta_1 + 0.35\,\eta_1^2)$ delivered to the cup and the reflector wall heat capacity $C_w = C'' A_w$ for: (a)~$\SI{16}{\micro\meter}$ Shiny Al Foil ($\rho_{\mathrm{spec}}=0.88, \rho_{\mathrm{diff}}=0.08$), (b)~$\SI{16}{\micro\meter}$ Dull Al Foil ($\rho_{\mathrm{spec}}=0.62, \rho_{\mathrm{diff}}=0.33$), and (c)~$\SI{0.30}{\milli\meter}$ White Cardstock ($\rho_{\mathrm{spec}}=0.04, \rho_{\mathrm{diff}}=0.70$).
+
+\textbf{Solution.} First compute the single-bounce forward efficiency $\eta_1 = \rho_{\mathrm{spec}} + 0.35\,\rho_{\mathrm{diff}}$ and two-bounce weighted transmission $\eta_{\mathrm{cone}} = 0.65\,\eta_1 + 0.35\,\eta_1^2$:
+\begin{enumerate}
+  \item \textbf{Shiny Al Foil ($\SI{16}{\micro\meter}$):} $\eta_1 = 0.88 + 0.35(0.08) = 0.9080$. Weighted transmission: $\eta_{\mathrm{cone}} = 0.65(0.9080) + 0.35(0.9080)^2 = 0.5902 + 0.2886 = \mathbf{0.8788}$ ($87.9\%$). Delivered power: $\dot{Q}_{\mathrm{deliv}} = 42.0(0.8788) = \mathbf{\SI{36.91}{\watt}}$. Wall heat capacity: $C_w = (\SI{39.2}{\joule\per\square\meter\per\kelvin})(\SI{0.120}{\square\meter}) = \mathbf{\SI{4.70}{\joule\per\kelvin}}$.
+  \item \textbf{Dull Al Foil ($\SI{16}{\micro\meter}$):} $\eta_1 = 0.62 + 0.35(0.33) = 0.7355$. Weighted transmission: $\eta_{\mathrm{cone}} = 0.65(0.7355) + 0.35(0.7355)^2 = 0.4781 + 0.1893 = \mathbf{0.6674}$ ($66.7\%$). Delivered power: $\dot{Q}_{\mathrm{deliv}} = 42.0(0.6674) = \mathbf{\SI{28.03}{\watt}}$ (loses $\mathbf{\SI{8.88}{\watt}}$, or $24.1\%$ of concentrated power, to upward diffuse scatter!).
+  \item \textbf{White Cardstock ($\SI{0.30}{\milli\meter}$):} $\eta_1 = 0.04 + 0.35(0.70) = 0.2850$. Weighted transmission: $\eta_{\mathrm{cone}} = 0.65(0.2850) + 0.35(0.2850)^2 = 0.18525 + 0.02843 = \mathbf{0.2137}$ ($21.4\%$). Delivered power: $\dot{Q}_{\mathrm{deliv}} = 42.0(0.2137) = \mathbf{\SI{8.97}{\watt}}$ (a $75.7\%$ optical loss compared to shiny foil, plus $C_w = \SI{38.1}{\joule\per\kelvin}$ and $26\%$ wall heating!).
+\end{enumerate}
+\verifiedby{Ray-bounce polynomial identity $\dot{Q}_{\mathrm{deliv}}/\dot{Q}_{\mathrm{in}} = \sum p_k \eta_1^k$ and energy conservation $\alpha_{\mathrm{wall}} + \rho_{\mathrm{escape}} + \eta_{\mathrm{cone}} = 1$; asserted in \texttt{check\_sec14\_16.py}.}
+\end{workedexample}
+
+% ============================================================================
+\section{Absorber Coatings, Selective Surfaces \& Liquid Water Near-IR Spectroscopy}\label{sec:14.3}
+\idxtopic{absorber coatings}\idxtopic{selective solar absorbers}\idxtopic{water near-IR absorption}\idxtopic{Beer-Lambert law!water NIR}
+
+A widespread misconception transferred from legacy solar-oven builds is that the $\SI{9}{oz}$ clear plastic cup must be wrapped in thick black construction paper to absorb radiation. In reality, liquid water itself is a \textbf{highly selective near-infrared and mid-infrared absorber} \src{S12,S19,S20}. While pure water is transparent to human vision ($\lambda = \SIrange{0.40}{0.70}{\micro\meter}$, penetration depth $\delta_p > \SI{1.6}{\meter}$), a $\SI{2400}{\kelvin}$ tungsten heat lamp emits $91\%$ of its radiation at infrared wavelengths $\lambda > \SI{0.70}{\micro\meter}$, where water's $\mathrm{O-H}$ stretching and bending vibrational overtones absorb intensely within the \textbf{top $\SIrange{1}{10}{\milli\meter}$} of the water column! \tref{tab:14:absorbers} catalogs solid absorber coatings alongside liquid water, and \fref{fig:14:water-nir-depth} + \tref{tab:14:water-bands} present the exact Hale \& Querry (1973) \src{S19} and Kou, Labrie \& Chylek (1993) \src{S20} spectral data.
+
+\begin{center}
+\captionof{table}{Thermophysical and spectral properties of broadband absorbers, wavelength-selective surfaces, and liquid water \src{S09,S12,S19,S24}.}\label{tab:14:absorbers}
+\footnotesize\setlength{\tabcolsep}{2.8pt}\renewcommand{\arraystretch}{1.14}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.23\linewidth}rrrrrrl>{\raggedright\arraybackslash}X@{}}
+\toprule
+\hdr{Absorber / Surface} & \hdr{$\rho$} & \hdr{$c_p$} & \hdr{$k$} & \hdr{$\alpha_{\mathrm{NIR}}$} & \hdr{$\varepsilon_{\mathrm{MIR}}$} & \hdr{$\dfrac{\alpha_{\mathrm{NIR}}}{\varepsilon_{\mathrm{MIR}}}$} & \hdr{$T_{\max}$} & \hdr{2027 Rule Legality \& Engineering Assessment} \\
+ & \tiny$[\si{\kilogram\per\cubic\meter}]$ & \tiny$[\si{\joule\per\kilogram\per\kelvin}]$ & \tiny$[\si{\watt\per\meter\per\kelvin}]$ & \tiny$\SI{1.2}{\micro\meter}$ & \tiny$\SI{9.4}{\micro\meter}$ & \tiny$[-]$ & \tiny$[\si{\celsius}]$ & \\
+\midrule
+\textbf{Liquid Water Layer} ($\SI{100}{\milli\liter}$, depth $L=\SI{38}{\milli\meter}$) & $997.8$ & $4181.3$ & $0.607$ & $\mathbf{0.83}$ & $\mathbf{0.96}$ & $0.86$ & $100$ & \textbf{TARGET FLUID.} Direct volumetric NIR absorption deposits $66.4\%$ in top $\SI{5}{\milli\meter}$ and $72.4\%$ in top $\SI{10}{\milli\meter}$ \src{S09,S12,S19}. \\
+\rowcolor{rowalt}\textbf{Selective: Black Cr on Ni} (Solar foil on collar) & $8900$ & $445$ & $91$ & $\mathbf{0.95}$ & $\mathbf{0.09}$ & $\mathbf{10.56}$ & $350$ & \textbf{LEGAL} on device cradle (never glue to cup!). Absorbs $95\%$ of NIR while suppressing MIR loss by $10\times$ \src{S12}. \\
+\textbf{Selective: Sputtered Cermet} (on thin steel/Al substrate) & $7850$ & $475$ & $55$ & $\mathbf{0.96}$ & $\mathbf{0.16}$ & $\mathbf{6.00}$ & $400$ & \textbf{LEGAL} commercial solar-absorber ribbon for non-contact upper cup radiation collar \src{S12}. \\
+\rowcolor{rowalt}\textbf{Selective: $\mathrm{CuO}$ on Copper} (Ebanol~C blackened Cu foil) & $8954$ & $384$ & $398$ & $\mathbf{0.90}$ & $\mathbf{0.16}$ & $\mathbf{5.63}$ & $300$ & \textbf{LEGAL.} Ultra-high conductivity ($k=\SI{398}{\watt\per\meter\per\kelvin}$) spreads heat around upper water zone \src{S12}. \\
+\textbf{Selective: Nickel Black} (electroplated on foil) & $8900$ & $445$ & $91$ & $0.81$ & $0.17$ & $4.76$ & $300$ & \textbf{LEGAL.} Durable low-emittance absorber surface \src{S12}. \\
+\rowcolor{rowalt}\textbf{Thin Black Anodized Al} ($\SI{0.10}{\milli\meter}$ collar sleeve) & $2700$ & $896$ & $167$ & $0.88$ & $0.24\text{--}0.82$ & $1.1\text{--}3.7$ & $400$ & \textbf{LEGAL.} Thin ($\le\SI{2}{\micro\meter}$) $\mathrm{Al_2O_3}$ pore layer is semi-selective; thick anodize has $\varepsilon_{\mathrm{MIR}}\approx 0.82$ \src{S24}. \\
+\textbf{Matte Black High-Temp Paint} (Carbon black in acrylic) & $1200$ & $1400$ & $0.22$ & $\mathbf{0.94}$ & $0.83\text{--}0.92$ & $1.02\text{--}1.13$ & $150\text{--}650$ & \textbf{LEGAL} on device parts only. High $\alpha_{\mathrm{NIR}}$, but high $\varepsilon_{\mathrm{MIR}}$ requires outer glazing or foil shield \src{S12}. \\
+\rowcolor{rowalt}\textbf{Carbon Soot / Lampblack} (deposited carbon layer) & $1700$ & $710$ & $0.10$ & $\mathbf{0.96}$ & $0.95$ & $1.01$ & $400$ & \textbf{CAUTION:} Must be sealed so zero soot flakes fall into water (Rule~\texttt{3.e} zero-additive rule) \src{S01,S12}. \\
+\textbf{Blackened $\SI{35}{\micro\meter}$ Cu / $\SI{24}{\micro\meter}$ Al Foil Collar} & $8954$ & $384$ & $398$ & $0.94$ & $0.04$ \tiny(back) & Tunable & $300$ & \textbf{LEGAL.} $\SI{100}{\square\centi\meter}$ collar has tiny mass ($C=\SIrange{0.86}{1.20}{\joule\per\kelvin}$, $<0.3\%$ of water) and bare $\varepsilon=0.04$ outer face! \\
+\rowcolor{rowalt}\textbf{Matte Black Paper / Cardstock} ($\SI{0.25}{\milli\meter}$ sleeve) & $790$ & $1340$ & $\mathbf{0.14}$ & $0.92$ & $0.93$ & $0.99$ & $120$ & \textbf{DESIGN TRAP:} Blocks direct NIR from penetrating clear cup wall while conducting poorly ($k=\SI{0.14}{\watt\per\meter\per\kelvin}$) across air gap! \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{twocol}[0.51]
+\begin{center}
+\begin{tikzpicture}[font=\scriptsize]
+\begin{semilogyaxis}[
+    width=\linewidth,
+    height=5.6cm,
+    xmin=0.65, xmax=3.0,
+    ymin=0.0005, ymax=2500,
+    xlabel={Wavelength $\lambda$ $[\si{\micro\meter}]$},
+    ylabel={$1/e$ Penetration Depth $\delta_p(\lambda) = 1/\mu_a$ $[\si{\milli\meter}]$},
+    grid=both,
+    grid style={gray!25, dashed},
+    tick align=inside,
+    legend style={at={(0.98,0.97)}, anchor=north east, font=\scriptsize, fill=white, draw=navy}
+]
+% Shaded 10 mm top layer zone
+\fill[amber!14] (axis cs:0.65,0.0005) rectangle (axis cs:3.0,10.0);
+\draw[rust, thick, dashed] (axis cs:0.65,10.0) -- (axis cs:3.0,10.0);
+\node[anchor=south west, text=rust, font=\scriptsize\bfseries] at (axis cs:0.68,10.5) {Top $\SI{10}{\milli\meter}$ ES Probe Zone};
+\draw[navy, dotted, thick] (axis cs:0.65,38.0) -- (axis cs:3.0,38.0);
+\node[anchor=south west, text=navy, font=\scriptsize] at (axis cs:0.68,40.0) {Cup Water Depth ($\SI{38}{\milli\meter}$)};
+
+% Wien peak vertical line
+\draw[teal!80!black, very thick, dashdotted] (axis cs:1.207,0.0005) -- (axis cs:1.207,2500);
+\node[rotate=90, anchor=north west, text=teal!80!black, font=\scriptsize\bfseries] at (axis cs:1.20,0.001) {$\SI{2400}{\kelvin}$ Lamp Peak ($\SI{1.21}{\micro\meter}$)};
+
+% Penetration depth curve delta_p(lambda) in mm from Hale & Querry (1973) / Kou (1993)
+\addplot[very thick, color=navy, mark=*, mark size=1.5pt] coordinates {
+    (0.70, 1666.7)
+    (0.80, 500.0)
+    (0.90, 147.1)
+    (0.97, 22.22)
+    (1.00, 27.78)
+    (1.10, 58.82)
+    (1.20, 9.615)
+    (1.32, 7.246)
+    (1.44, 0.340)
+    (1.65, 1.852)
+    (1.94, 0.0877)
+    (2.20, 0.588)
+    (2.50, 0.1105)
+    (2.75, 0.018)
+    (2.95, 0.00079)
+};
+\addlegendentry{$\delta_p(\lambda)$ (Hale \& Querry \src{S19})}
+
+\node[anchor=south west, font=\scriptsize] at (axis cs:1.22,11.0) {$\SI{9.62}{\milli\meter}$};
+\node[anchor=north east, font=\scriptsize, text=rust] at (axis cs:1.58,0.28) {$\SI{1.44}{\micro\meter}$ ($\SI{0.34}{\milli\meter}$)};
+\node[anchor=north east, font=\scriptsize, text=rust] at (axis cs:2.15,0.07) {$\SI{1.94}{\micro\meter}$ ($\SI{0.088}{\milli\meter}$)};
+\end{semilogyaxis}
+\end{tikzpicture}
+\captionof{figure}{Liquid water $1/e$ optical penetration depth $\delta_p(\lambda) = 1/\mu_a(\lambda)$ across the near-IR heat-lamp spectrum \src{S19,S20}.}\label{fig:14:water-nir-depth}
+\idxfig{water near-IR penetration depth vs wavelength (Hale and Querry)}
+\end{center}
+\nextcol[0.47]
+\captionof{table}{Liquid water spectral absorption $\mu_a(\lambda)$ and single-pass absorption fraction $1 - e^{-\mu_a z}$ \src{S19,S20}.}\label{tab:14:water-bands}
+\footnotesize\setlength{\tabcolsep}{2.2pt}\renewcommand{\arraystretch}{1.12}
+\begin{tabularx}{\linewidth}{@{}rrrrr>{\raggedright\arraybackslash}X@{}}
+\toprule
+\hdr{$\lambda$} & \hdr{$\mu_a(\lambda)$} & \hdr{$\delta_p$} & \hdr{Top $\SI{2}{\milli\meter}$} & \hdr{Top $\SI{10}{\milli\meter}$} & \hdr{Vibrational Band} \\
+\tiny$[\si{\micro\meter}]$ & \tiny$[\si{\per\centi\meter}]$ & \tiny$[\si{\milli\meter}]$ & \tiny$[\%]$ & \tiny$[\%]$ & \\
+\midrule
+$0.50$ & $0.00025$ & $40{,}000$ & $0.005$ & $0.025$ & Visible window \\
+\rowcolor{rowalt}$0.70$ & $0.0060$ & $1667$ & $0.12$ & $0.60$ & Red edge \\
+$0.97$ & $0.450$ & $22.2$ & $8.6$ & $36.2$ & $3\text{rd}$ $\mathrm{O-H}$ overtone \\
+\rowcolor{rowalt}$\mathbf{1.20}$ & $\mathbf{1.040}$ & $\mathbf{9.62}$ & $\mathbf{18.8}$ & $\mathbf{64.7}$ & \textbf{$\SI{2400}{\kelvin}$ Wien peak} \\
+$1.32$ & $1.380$ & $7.25$ & $24.1$ & $74.8$ & $\SI{2200}{\kelvin}$ Wien peak \\
+\rowcolor{rowalt}$\mathbf{1.44}$ & $\mathbf{29.40}$ & $\mathbf{0.340}$ & $\mathbf{99.7}$ & $\mathbf{100.0}$ & \textbf{$1\text{st}$ $\mathrm{O-H}$ overtone} \\
+$\mathbf{1.94}$ & $\mathbf{114.0}$ & $\mathbf{0.088}$ & $\mathbf{100.0}$ & $\mathbf{100.0}$ & \textbf{$\mathrm{O-H}$ stretch+bend} \\
+\rowcolor{rowalt}$2.50$ & $90.48$ & $0.111$ & $100.0$ & $100.0$ & Near-IR upper band \\
+$2.95$ & $12{,}694$ & $0.00079$ & $100.0$ & $100.0$ & Fund.\ $\mathrm{O-H}$ stretch \\
+\midrule
+\multicolumn{3}{@{}l}{\textbf{Planck $\SI{2400}{\kelvin}$ Integrated:}} & $\mathbf{57.3\%}$ & $\mathbf{72.4\%}$ & ($\mathbf{66.4\%}$ in top $\SI{5}{\milli\meter}$; $\mathbf{82.6\%}$ in $\SI{35}{\milli\meter}$) \\
+\bottomrule
+\end{tabularx}
+\end{twocol}
+
+\begin{workedexample}[Beer--Lambert Near-IR Attenuation \& Bottom-Mirror Second-Pass Gain in Water]{Rule 5.c.vi / §14.3}{ex:14.3}
+Monochromatic rays enter a $\SI{100}{\milli\liter}$ water column of vertical depth $L = \SI{3.80}{\centi\meter}$ ($\SI{38.0}{\milli\meter}$) at normal incidence. Air--water Fresnel reflection at the top surface is $R_F = [(n_w - 1)/(n_w + 1)]^2 = [(1.325 - 1)/(1.325 + 1)]^2 = 0.01955$ ($1.96\%$). An aluminum-foil mirror ($\rho_b = 0.96$) rests beneath the clear cup bottom (cup-base two-pass transmittance $\tau_b = 0.92$). For (a)~$\lambda_1 = \SI{0.97}{\micro\meter}$ ($\mu_a = \SI{0.450}{\per\centi\meter}$), (b)~$\lambda_2 = \SI{1.20}{\micro\meter}$ ($\mu_a = \SI{1.040}{\per\centi\meter}$), and (c)~$\lambda_3 = \SI{1.44}{\micro\meter}$ ($\mu_a = \SI{29.40}{\per\centi\meter}$), compute the fraction of incident power absorbed in the top $z_1 = \SI{1.00}{\centi\meter}$ during the first downward pass, and the total fraction absorbed over the full column after the bottom-mirror second pass.
+
+\textbf{Solution.} By Beer--Lambert's law \src{S19}, the single-pass fraction absorbed between $z=0$ and depth $z$ is $f_1(z) = (1 - R_F)(1 - e^{-\mu_a z})$. The power reaching depth $L = \SI{3.80}{\centi\meter}$ is $(1-R_F)e^{-\mu_a L}$, of which a fraction $\rho_{\mathrm{eff}} = \rho_b\tau_b = (0.96)(0.92) = 0.8832$ reflects back upward through thickness $L$, adding $\Delta f_2 = (1-R_F)e^{-\mu_a L}\,\rho_{\mathrm{eff}}(1 - e^{-\mu_a L})$:
+\begin{enumerate}
+  \item \textbf{At $\lambda_1 = \SI{0.97}{\micro\meter}$ ($\mu_a = \SI{0.450}{\per\centi\meter}$):} Top $\SI{1.00}{\centi\meter}$: $f_1(\SI{1.0}{\centi\meter}) = 0.98045(1 - e^{-0.450}) = \mathbf{35.53\%}$. Full single pass ($L=\SI{3.80}{\centi\meter}$): $f_1(L) = 0.98045(1 - e^{-1.710}) = 80.32\%$. Second pass adds $\Delta f_2 = 0.98045(e^{-1.710})(0.8832)(1 - e^{-1.710}) = \mathbf{12.83\%}$, raising total absorption to $\mathbf{93.15\%}$.
+  \item \textbf{At $\lambda_2 = \SI{1.20}{\micro\meter}$ ($\mu_a = \SI{1.040}{\per\centi\meter}$, Wien peak):} Top $\SI{1.00}{\centi\meter}$: $f_1(\SI{1.0}{\centi\meter}) = 0.98045(1 - e^{-1.040}) = \mathbf{63.40\%}$. Full single pass: $f_1(L) = 0.98045(1 - e^{-3.952}) = 96.16\%$. Second pass adds $\Delta f_2 = \mathbf{1.63\%}$, yielding $\mathbf{97.79\%}$ total absorption.
+  \item \textbf{At $\lambda_3 = \SI{1.44}{\micro\meter}$ ($\mu_a = \SI{29.40}{\per\centi\meter}$, $\mathrm{O-H}$ overtone):} Top $\SI{1.00}{\centi\meter}$: $f_1(\SI{1.0}{\centi\meter}) = 0.98045(1 - e^{-29.40}) = \mathbf{98.05\%}$ (all $98.05\%$ is absorbed within the top $\SI{1.5}{\milli\meter}$!).
+\end{enumerate}
+\verifiedby{Exponential attenuation integral $\int_0^z \mu_a I_0 e^{-\mu_a z'}\,dz' = I_0(1 - e^{-\mu_a z})$; asserted in \texttt{check\_sec14\_16.py}.}
+\end{workedexample}
+
+% ============================================================================
+\section{Transparent Glazings, Vapor Barriers \& 9 oz Party Cup Polymer Physics}\label{sec:14.4}
+\idxtopic{glazing films}\idxtopic{evaporation suppression cap}\idxtopic{BoPET Mylar glazing}\idxtopic{party cup polymer physics}
+
+\begin{rulebox}[Official Clarification \#5 (10/21/2026) \& ES Guide: Non-Attached Removable Glazing Cap]
+\idxtopic{Clarification 5 (removable wrap rule)}
+\textbf{Clarification \#5 (\texttt{10/21/2026}, Sec.~5 / Par.~d / Line~2):} \textit{``When putting the cup in the Device, teams may place something on or around the cup. No adhesives, tapes, or fasteners, such as rubber bands or clips, may be applied to or attached to the cup. The structural integrity and shape of the cup may not be altered in the process of placing the cup in the Device.''} Furthermore, per Rule~\texttt{5.II.g} and the Official ES Guide \src{S02,S05}, \textbf{all such wrap, foil, or covers must be completely removed/separated from the cup} during the 1-minute final measurement window before the ES measures $T_{\mathrm{final}}$.
+\end{rulebox}
+
+\begin{center}
+\captionof{table}{Optical transmittance, thermal capacitance, and softening limits of glazing films and $\SI{9}{oz}$ cup polymers \src{S01,S02,S12}.}\label{tab:14:glazings}
+\footnotesize\setlength{\tabcolsep}{2.5pt}\renewcommand{\arraystretch}{1.14}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.21\linewidth}rrrrrrrl>{\raggedright\arraybackslash}X@{}}
+\toprule
+\hdr{Glazing / Polymer} & \hdr{$\rho$} & \hdr{$c_p$} & \hdr{$k$} & \hdr{$C_{\mathrm{disk}}$\textsuperscript{a}} & \hdr{$\tau_{\mathrm{NIR}}$} & \hdr{$\tau_{\mathrm{MIR}}$} & \hdr{$T_g / T_{\mathrm{soft}}$} & \hdr{$T_m$} & \hdr{2027 Engineering Assessment \& Legality} \\
+ & \tiny$[\si{\kilogram\per\cubic\meter}]$ & \tiny$[\si{\joule\per\kilogram\per\kelvin}]$ & \tiny$[\si{\watt\per\meter\per\kelvin}]$ & \tiny$[\si{\joule\per\kelvin}]$ & \tiny$\SIrange{0.4}{2.5}{\micro\meter}$ & \tiny$\SIrange{5}{15}{\micro\meter}$ & \tiny$[\si{\celsius}]$ & \tiny$[\si{\celsius}]$ & \\
+\midrule
+\textbf{Clear BoPET Film} (Mylar, $\delta=\SI{25}{\micro\meter}$) & $1390$ & $1170$ & $0.18$ & $\mathbf{0.244}$ & $\mathbf{0.90}$ & $\mathbf{0.22}$ & $75 / \mathbf{150}$ & $\mathbf{254}$ & \textbf{TOP RECOMMENDATION:} Zero sag at $\SI{150}{\celsius}$, blocks $78\%$ MIR, lifts off cup in $<\SI{0.5}{\second}$ with zero cling \src{S02}. \\
+\rowcolor{rowalt}\textbf{Clear BoPET Sheet} (Transparency, $\SI{75}{\micro\meter}$) & $1390$ & $1170$ & $0.18$ & $0.732$ & $0.89$ & $\mathbf{0.14}$ & $75 / \mathbf{150}$ & $254$ & \textbf{LEGAL.} Rigid flat gravity cap resting on cup rim or attached to upper reflector hood (Clarif.~\#5, \#7). \\
+\textbf{LDPE Cling Wrap} (Household, $\delta=\SI{12.5}{\micro\meter}$) & $920$ & $2100$ & $0.33$ & $\mathbf{0.145}$ & $\mathbf{0.92}$ & $0.76$ & $\mathbf{85\text{--}95}$ & $110$ & \textbf{LEGAL (Clarif.~\#5).} Cuts evaporation $99\%$, but softens at $\SI{85}{\celsius}$ and clings unless mounted on a drop-ring \src{S12}. \\
+\rowcolor{rowalt}\textbf{PVDC Clear Wrap} (Saran formula, $\SI{13}{\micro\meter}$) & $1650$ & $1340$ & $0.13$ & $0.172$ & $0.90$ & $0.50$ & $135\text{--}145$ & $165$ & \textbf{LEGAL.} Stronger $\mathrm{C-Cl}$ mid-IR blocking and higher softening point than LDPE cling wrap. \\
+\textbf{Polycarbonate Sheet} (Lexan, $\delta=\SI{0.75}{\milli\meter}$) & $1200$ & $1250$ & $0.29$ & $6.75$ & $0.86$ & $\mathbf{<0.05}$ & $147 / 120$ & $260$ & \textbf{LEGAL.} Rigid greenhouse window; blocks $>95\%$ of mid-IR re-radiation \src{S12}. \\
+\rowcolor{rowalt}\textbf{Clear Acrylic Sheet} (\texttt{\#7} PMMA, $\delta=\SI{1.5}{\milli\meter}$) & $1180$ & $1460$ & $0.17$ & $15.51$ & $0.85$ & $<0.05$ & $105 / 85$ & $160$ & \textbf{LEGAL (\texttt{\#7} PMMA).} Rigid window; verify non-styrene \texttt{\#7} stamp before impound \src{S12}. \\
+\textbf{Borosilicate Glass} (Pyrex plate, $\delta=\SI{2.0}{\milli\meter}$) & $2210$ & $753$ & $1.30$ & $19.97$ & $\mathbf{0.91}$ & $\mathbf{<0.02}$ & $500+$ & $820$ & \textbf{LEGAL.} Classic selective window ($\tau>0.90$ for $\lambda<\SI{2.7}{\micro\meter}$, opaque $> \SI{3.5}{\micro\meter}$); mount on frame \src{S12}. \\
+\rowcolor{rowalt}\textbf{ES 9\,oz Clear Cup: \texttt{\#1 PET}} ($\delta\approx\SI{0.30}{\milli\meter}$, $m\approx\SI{6.5}{\gram}$) & $1385$ & $1170$ & $0.19$ & $7.61$\textsuperscript{b} & $0.88$ & $0.25$ & $\mathbf{72\text{--}78}$ & $254$ & \textbf{ES-PROVIDED CUP (Rule~\texttt{4.g}).} Dry upper rim warps if heated above $T_g\approx\SI{74}{\celsius}$! Keep focus at waterline. \\
+\textbf{ES 9\,oz Clear Cup: \texttt{\#5 PP}} ($\delta\approx\SI{0.32}{\milli\meter}$, $m\approx\SI{6.0}{\gram}$) & $905$ & $1900$ & $0.185$ & $11.40$\textsuperscript{b} & $0.88$ & $0.55$ & $125$ & $162$ & \textbf{ES-PROVIDED CUP (Rule~\texttt{4.g}).} Higher softening resistance ($T_{\mathrm{soft}}\approx\SI{125}{\celsius}$); translucent to NIR. \\
+\bottomrule
+\multicolumn{10}{@{}l}{\scriptsize\textsuperscript{a}$C_{\mathrm{disk}} = \rho c_p A_{\mathrm{disk}}\delta$ evaluated for a $A_{\mathrm{disk}} = \SI{60.0}{\square\centi\meter}$ ($D=\SI{8.74}{\centi\meter}$) cup-mouth cover. \textsuperscript{b}Full cup heat capacity (wetted lower $40\%$ couples only $\SIrange{3.0}{4.6}{\joule\per\kelvin}$).}
+\end{tabularx}
+\end{center}
+
+\begin{trapbox}[The Clear PET Party Cup Dry-Rim Softening \& Warping Trap ($T_g \approx \SI{74}{\celsius}$)]
+\idxerr{warping dry upper rim of PET 9 oz cup above 74 C}\idxdev{cup rim thermal distortion violation (Clarification 5)}
+\textbf{Symptom:} After a $\SI{10}{\minute}$ run under a $\SI{125}{\watt}$ lamp at $h = \SI{40}{\centi\meter}$, the top plastic rim of the ES-provided $\SI{9}{oz}$ cup visibly ovals or curls inward, triggering a Clarification~\#5 violation (\textit{``structural integrity and shape of the cup may not be altered''}).
+\textbf{Physical Cause:} Most clear $\SI{9}{oz}$ disposable party cups (e.g., Solo/Dart Clear) are thermoformed from \textbf{amorphous Polyethylene Terephthalate (\texttt{\#1~PET})}, whose glass-transition temperature is only $T_g \approx \SIrange{72}{78}{\celsius}$. Because $\SI{100}{\milli\liter}$ ($\approx \SI{3.38}{fl\,oz}$) of water fills only the \textbf{bottom $\SIrange{3.6}{4.0}{\centi\meter}$} of the $\SI{10.0}{\centi\meter}$ tall cup, the upper $\SI{6.0}{\centi\meter}$ of the plastic wall is \textbf{dry and air-backed}. Water-backed lower plastic cannot exceed $T_w \le \SI{60}{\celsius}$, but dry upper PET exposed to concentrated focal rays rapidly exceeds $\SI{80}{\celsius}$ and relaxes its thermoforming stresses!
+\textbf{Engineering Fix:} (1)~Place the lower focal throat of the concentrating cone at the \textbf{water surface elevation} ($z_{\mathrm{focus}} = z_{\mathrm{base}} + \SI{3.8}{\centi\meter}$), or (2)~let an upper specular aluminum-foil aperture lip overhang the dry cup rim by $\SI{3}{\milli\meter}$ (explicitly legal under Rule~\texttt{3.e} so long as nothing touches the water!) to shade the dry plastic lip while directing all rays into the water.
+\end{trapbox}
+
+\begin{workedexample}[Fresnel Transmittance, Greenhouse Trapping \& Thermal Mass of BoPET vs.\ Glass Glazing]{Rule 5.c.iii / §14.4}{ex:14.4}
+A $\SI{60.0}{\square\centi\meter}$ transparent glazing cover is placed above the $\SI{9}{oz}$ cup mouth. Compare a $\delta_1 = \SI{25.0}{\micro\meter}$ Clear BoPET film ($n_1 = 1.64$ in NIR, bulk NIR attenuation $\mu_{a,1} = \SI{8.0}{\per\centi\meter}$, $\tau_{\mathrm{MIR},1} = 0.22$) against a $\delta_2 = \SI{2.00}{\milli\meter}$ Borosilicate Glass plate ($n_2 = 1.47$ in NIR, $\mu_{a,2} = \SI{0.080}{\per\centi\meter}$, $\tau_{\mathrm{MIR},2} = 0.015$). Compute for each: (a)~normal-incidence single-surface Fresnel reflectance $R_s = [(n-1)/(n+1)]^2$ and two-surface NIR transmittance $\tau_{\mathrm{NIR}} = \frac{(1-R_s)^2 e^{-\mu_a\delta}}{1 - R_s^2 e^{-2\mu_a\delta}}$, (b)~parasitic thermal capacitance $C_{\mathrm{disk}} = \rho c_p A\delta$, and (c)~temperature penalty on the top water layer ($C_{\mathrm{top}} = \SI{215.0}{\joule\per\kelvin}$) if the glazing absorbs $\Delta T_g = \SI{18.0}{\kelvin}$ from the cup headspace.
+
+\textbf{Solution.} Using the exact multiple-reflection slab transmittance formula and data from \tref{tab:14:glazings}:
+\begin{enumerate}
+  \item \textbf{Clear BoPET Film ($\delta_1 = \SI{0.0025}{\centi\meter}, n_1 = 1.64$):} $R_{s,1} = (0.64/2.64)^2 = 0.05877$. Internal transmittance: $\tau_{i,1} = e^{-(8.0)(0.0025)} = 0.98020$. Total NIR transmittance: $\tau_{\mathrm{NIR},1} = \frac{(1-0.05877)^2(0.98020)}{1 - 0.05877^2(0.98020)^2} = \mathbf{0.8714}$ ($87.1\%$). Disk heat capacity: $C_{\mathrm{disk},1} = (1390)(1170)(\SI{6.00e-3}{\square\meter})(\SI{2.50e-5}{\meter}) = \mathbf{\SI{0.2439}{\joule\per\kelvin}}$. Headspace thermal drain: $\Delta T_{\mathrm{loss},1} = \frac{C_{\mathrm{disk},1}\Delta T_g}{C_{\mathrm{top}}} = \frac{0.2439(18.0)}{215.0} = \mathbf{\SI{0.020}{\celsius}}$ (completely negligible!).
+  \item \textbf{Borosilicate Glass ($\delta_2 = \SI{0.200}{\centi\meter}, n_2 = 1.47$):} $R_{s,2} = (0.47/2.47)^2 = 0.03621$. Internal transmittance: $\tau_{i,2} = e^{-(0.080)(0.200)} = 0.98413$. Total NIR transmittance: $\tau_{\mathrm{NIR},2} = \frac{(1-0.03621)^2(0.98413)}{1 - 0.03621^2(0.98413)^2} = \mathbf{0.9153}$ ($91.5\%$). Disk heat capacity: $C_{\mathrm{disk},2} = (2210)(753)(\SI{6.00e-3}{\square\meter})(\SI{2.00e-3}{\meter}) = \mathbf{\SI{19.970}{\joule\per\kelvin}}$ ($81.9\times$ heavier thermal mass!). If thermally coupled to the cup rim, glass drains $\Delta T_{\mathrm{loss},2} = \frac{19.970(18.0)}{215.0} = \mathbf{\SI{1.672}{\celsius}}$ from the top layer!
+\end{enumerate}
+\verifiedby{Airy slab summation $\tau = T_1 T_2 \tau_i \sum_{m=0}^\infty (R_s\tau_i)^{2m}$ and calorimetric energy balance; asserted in \texttt{check\_sec14\_16.py}.}
+\end{workedexample}
+
+% ============================================================================
+\section{Rule-Compliant Insulators \& Multi-Layer Foil-Air-Foil Baffles}\label{sec:14.5}
+\idxtopic{compliant insulators}\idxtopic{corkboard}\idxtopic{balsa wood}\idxtopic{foil-air-foil dead-air gap}\idxtopic{Rayleigh-Benard instability!air gap}
+
+In a transient $\SIrange{10}{15}{\minute}$ heating run, an ideal insulator around and beneath the $\SI{9}{oz}$ cup must possess \textbf{both} low thermal conductivity $k$ $[\si{\watt\per\meter\per\kelvin}]$ (high steady-state resistance $R_{\mathrm{th}}$) \textbf{and} low volumetric heat capacity $\rho c_p$ $[\si{\kilo\joule\per\cubic\meter\per\kelvin}]$ (so the cradle itself does not soak up joules during warm-up). \tref{tab:14:insulators} and \fref{fig:14:insulator-k-chart} demonstrate why \textbf{$\SIrange{10}{12}{\milli\meter}$ stagnant air gaps bounded by low-emissivity aluminum foil} outperform every solid foam—including banned Styrofoam—in both $k_{\mathrm{eff}}$ and $\rho c_p$ \src{S12}.
+
+\begin{center}
+\captionof{table}{Thermophysical and safety properties of Rule~\texttt{3.b}-compliant insulators and structural framing materials \src{S01,S02,S12,S24}.}\label{tab:14:insulators}
+\footnotesize\setlength{\tabcolsep}{2.4pt}\renewcommand{\arraystretch}{1.13}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.22\linewidth}rrrrrrrl>{\raggedright\arraybackslash}X@{}}
+\toprule
+\hdr{Compliant Material} & \hdr{$\rho$} & \hdr{$c_p$} & \hdr{$\rho c_p$} & \hdr{$k$} & \hdr{$\alpha$} & \hdr{$\varepsilon_{\mathrm{MIR}}$} & \hdr{$T_{\max}$} & \hdr{Char / Ign.} & \hdr{2027 Engineering Role \& Source} \\
+ & \tiny$[\si{\kilogram\per\cubic\meter}]$ & \tiny$[\si{\joule\per\kilogram\per\kelvin}]$ & \tiny$[\si{\kilo\joule\per\cubic\meter\per\kelvin}]$ & \tiny$[\si{\watt\per\meter\per\kelvin}]$ & \tiny$[\times 10^{-7}\si{\square\meter\per\second}]$ & \tiny$[-]$ & \tiny$[\si{\celsius}]$ & \tiny$[\si{\celsius}]$ & \\
+\midrule
+\textbf{Stagnant Air + Al Foil Gap} ($\delta=\SIrange{10}{12}{\milli\meter}$) & $\mathbf{1.18}$ & $1007$ & $\mathbf{1.18}$ & $\mathbf{0.0275}$\textsuperscript{a} & $221.3$ & $\mathbf{0.04}$ & $500+$ & Non-comb. & \textbf{BEST-IN-CLASS:} $\mathrm{Ra}_\delta < 1708$ (zero convection) + foil cuts $h_{\mathrm{rad}}$ $41.7\times$; near-zero mass \src{S12}! \\
+\rowcolor{rowalt}\textbf{Closed-Cell PE Foam} (\texttt{\#2/\texttt{\#4} PE}, NOT \texttt{\#6 PS}!) & $35$ & $2150$ & $75.3$ & $\mathbf{0.038}$ & $5.05$ & $0.90$ & $80$ & Soft.\ $85$ / Melt $115$ & \textbf{LEGAL (\texttt{\#2/\#4} Polyolefin).} Shield behind foil so $T<\SI{80}{\celsius}$; carry PE spec sheet at impound \src{S12}. \\
+\textbf{Cotton / Denim Batting} (Cellulose fiber) & $45$ & $1340$ & $60.3$ & $\mathbf{0.039}$ & $6.47$ & $0.90$ & $120$ & Ign.\ $210$ ($400$ borate) & \textbf{LEGAL} natural plant fiber (distinct from banned fiberglass/mineral wool). Keep dry behind foil. \\
+\rowcolor{rowalt}\textbf{Corkboard} (Medium density natural sheet) & $170$ & $1850$ & $314.5$ & $\mathbf{0.040}$ & $1.27$ & $0.88$ & $115$ & Char $200$ / Ign.\ $250$ & \textbf{LEGAL.} High compressive strength for 3-point knife-edge cup pedestal ($A_c < \SI{0.25}{\square\centi\meter}$) \src{S12}. \\
+\textbf{Balsa Wood} (Perpendicular to grain) & $\mathbf{100}$ & $1600$ & $160.0$ & $\mathbf{0.050}$ & $3.13$ & $0.85$ & $120$ & Char $190$ / Ign.\ $230$ & \textbf{LEGAL.} Ultra-light structural ribs, concentrator rings, and cup centering fins \src{S12}. \\
+\rowcolor{rowalt}\textbf{Sheep Wool Batting / Felt} (Keratin fiber) & $145$ & $1500$ & $217.5$ & $0.050$ & $2.30$ & $0.88$ & $130$ & Self-ext.\ / Ign.\ $\mathbf{580}$ & \textbf{LEGAL} natural animal wool; highest fire-safety margin. Label clearly in binder for ES inspection \src{S12}. \\
+\textbf{Dry Sawdust} (Loose cellulosic fill) & $128$ & $1400$ & $179.2$ & $0.050$ & $2.79$ & $0.88$ & $115$ & Char $190$ / Ign.\ $220$ & \textbf{LEGAL.} Traditional loose cavity fill; enclosed foil-air baffles are cleaner and lighter \src{S12}. \\
+\rowcolor{rowalt}\textbf{Corrugated Cardboard} (Fluted air-core board) & $180$ & $1340$ & $241.2$ & $\mathbf{0.055}$ & $2.28$ & $0.92$ & $120$ & Brown $180$ / Ign.\ $\mathbf{232}$ & \textbf{LEGAL.} Primary structural shell and baffle spacer; face lamp-exposed walls with Al foil \src{S12}. \\
+\textbf{Silicone Foam / Sheet} (Closed-cell elastomer) & $300$ & $1400$ & $420.0$ & $0.060$ & $1.43$ & $0.90$ & $\mathbf{220}$ & Decomp.\ $>300$ & \textbf{LEGAL.} High-temp soft centering bumpers and upper thermal seal gaskets around cup \src{S12}. \\
+\rowcolor{rowalt}\textbf{Douglas Fir Plywood} (Structural base plate) & $550$ & $1200$ & $660.0$ & $0.120$ & $1.82$ & $0.85$ & $120$ & Char $200$ / Ign.\ $260$ & \textbf{LEGAL.} Rigid outer floor/frame; isolate from cup by foil-air gaps due to high $\rho c_p$ \src{S12}. \\
+\textbf{Solid Paperboard / Oak} (Dense wood/card) & $790$ & $1340$ & $1059$ & $0.140$ & $1.32$ & $0.92$ & $120$ & Char $190$ / Ign.\ $240$ & \textbf{LEGAL.} Use thin cardstock ($\le\SI{0.4}{\milli\meter}$) as conical formers backed by stagnant air \src{S12}. \\
+\bottomrule
+\multicolumn{10}{@{}l}{\scriptsize\textsuperscript{a}$k_{\mathrm{eff}} = k_{\mathrm{air}} + h_{\mathrm{rad}}\delta = \SI{0.02623}{\watt\per\meter\per\kelvin} + (\SI{0.125}{\watt\per\square\meter\per\kelvin})(\SI{0.010}{\meter}) = \SI{0.02748}{\watt\per\meter\per\kelvin}$ at $T_m = \SI{305}{\kelvin}$ with $\varepsilon = 0.04$ foil walls.}
+\end{tabularx}
+\end{center}
+
+\begin{twocol}[0.50]
+\begin{center}
+\begin{tikzpicture}[font=\scriptsize]
+\begin{semilogxaxis}[
+    width=\linewidth,
+    height=5.3cm,
+    xmin=0.8, xmax=1500,
+    ymin=0.020, ymax=0.160,
+    xlabel={Volumetric Heat Capacity $\rho c_p$ $[\si{\kilo\joule\per\cubic\meter\per\kelvin}]$},
+    ylabel={Thermal Conductivity $k$ $[\si{\watt\per\meter\per\kelvin}]$},
+    grid=both,
+    grid style={gray!25, dashed},
+    tick align=inside
+]
+% Optimal corner
+\fill[teal!12] (axis cs:0.8,0.020) rectangle (axis cs:350,0.062);
+\node[anchor=north west, text=teal!80!black, font=\scriptsize\bfseries] at (axis cs:1.0,0.061) {Optimal Low-$k$, Low-Mass Zone};
+
+% Banned #6 PS / Fiberglass zone box
+\fill[rust!15, draw=rust, thick, dashed] (axis cs:15,0.031) rectangle (axis cs:55,0.044);
+\node[anchor=south, text=rust, font=\scriptsize\bfseries] at (axis cs:32,0.044) {BANNED (\texttt{\#6 PS}, Fiberglass)};
+
+% Compliant points
+\addplot[only marks, mark=star, mark size=3.5pt, thick, color=teal!80!black] coordinates {(1.18, 0.0275)};
+\addplot[only marks, mark=*, mark size=2.3pt, color=navy] coordinates {
+    (75.3, 0.038)
+    (60.3, 0.039)
+    (160.0, 0.050)
+    (217.5, 0.050)
+    (314.5, 0.040)
+    (241.2, 0.055)
+    (420.0, 0.060)
+    (660.0, 0.120)
+    (1059.0, 0.140)
+};
+% Banned points
+\addplot[only marks, mark=x, mark size=3.0pt, very thick, color=rust] coordinates {
+    (24.0, 0.035)
+    (38.0, 0.033)
+    (28.0, 0.038)
+};
+
+\node[anchor=west, font=\scriptsize\bfseries, text=teal!80!black] at (axis cs:1.5,0.0275) {$\SI{10}{\milli\meter}$ Foil-Air Gap ($k_{\mathrm{eff}}\!=\!0.0275$)};
+\node[anchor=south west, font=\scriptsize] at (axis cs:62,0.038) {Cotton / \texttt{\#4} PE Foam};
+\node[anchor=north west, font=\scriptsize] at (axis cs:220,0.039) {Corkboard ($0.040$)};
+\node[anchor=south east, font=\scriptsize] at (axis cs:155,0.050) {Balsa ($0.050$)};
+\node[anchor=west, font=\scriptsize] at (axis cs:230,0.050) {Sheep Wool};
+\node[anchor=west, font=\scriptsize] at (axis cs:250,0.057) {Fluted Cardboard};
+\node[anchor=south east, font=\scriptsize] at (axis cs:640,0.120) {Plywood};
+\node[anchor=east, font=\scriptsize] at (axis cs:1000,0.142) {Solid Card};
+\end{semilogxaxis}
+\end{tikzpicture}
+\captionof{figure}{Thermal conductivity $k$ versus volumetric heat capacity $\rho c_p$ of Rule~\texttt{3.b}-compliant insulators versus prohibited \texttt{\#6~PS} and mineral/glass fibers \src{S01,S02,S12}.}\label{fig:14:insulator-k-chart}
+\idxfig{insulator thermal conductivity vs volumetric heat capacity chart}
+\end{center}
+\nextcol[0.48]
+\begin{workedexample}[3-Layer Foil-Air-Foil Wall vs.\ Corkboard]{Rule 5.c.iii / §14.5}{ex:14.5}
+A cylindrical insulation sleeve of total thickness $L_{\mathrm{tot}} = \SI{30.0}{\milli\meter}$ and mean area $A_m = \SI{0.0450}{\square\meter}$ separates the cup cavity at $T_1 = \SI{46.0}{\celsius}$ from the outer casing at $T_2 = \SI{25.0}{\celsius}$ ($\Delta T_{\mathrm{tot}} = \SI{21.0}{\kelvin}$, $T_m = \SI{308.65}{\kelvin}$). Compare (a)~three $\delta = \SI{10.0}{\milli\meter}$ stagnant air gaps separated by four $\SI{16}{\micro\meter}$ aluminum foil sheets ($\varepsilon = 0.04$, $k_{\mathrm{air}} = \SI{0.0265}{\watt\per\meter\per\kelvin}$, $\nu\alpha = \SI{3.69e-10}{\meter\tothe{4}\per\second\tothe{2}}$, $\beta = 1/T_m$) against (b)~$\SI{30.0}{\milli\meter}$ of solid corkboard ($k_{\mathrm{cork}} = \SI{0.040}{\watt\per\meter\per\kelvin}$, $\rho c_p = \SI{314.5}{\kilo\joule\per\cubic\meter\per\kelvin}$). Verify $\mathrm{Ra}_\delta < 1708$ and compute conductive+radiative heat leak $\dot{Q}$ and sleeve heat capacity $C_{\mathrm{sleeve}}$.
+
+\textbf{Solution.}
+(a) Across each $\delta = \SI{10.0}{\milli\meter}$ air gap, $\Delta T_{\mathrm{gap}} = \SI{21.0}{\kelvin}/3 = \SI{7.00}{\kelvin}$. The Rayleigh number is:
+\[
+  \mathrm{Ra}_\delta = \frac{g\beta\Delta T_{\mathrm{gap}}\delta^3}{\nu\alpha} = \frac{9.807(7.00/308.65)(0.01)^3}{\SI{3.69e-10}{}} = \mathbf{602.7} < 1708
+\]
+so the air is $100\%$ stagnant ($\mathrm{Nu}_\delta = 1$). Across each foil-bounded gap, $h_{\mathrm{rad}} = \frac{4\sigma T_m^3}{2/\varepsilon - 1} = \frac{4(5.6704\times 10^{-8})(308.65)^3}{49} = \SI{0.1360}{\watt\per\square\meter\per\kelvin}$, giving $k_{\mathrm{eff}} = k_{\mathrm{air}} + h_{\mathrm{rad}}\delta = 0.0265 + 0.00136 = \mathbf{\SI{0.02786}{\watt\per\meter\per\kelvin}}$. Thus $\dot{Q}_{\mathrm{foil-air}} = \frac{k_{\mathrm{eff}}A_m\Delta T_{\mathrm{tot}}}{L_{\mathrm{tot}}} = \frac{(0.02786)(0.0450)(21.0)}{0.030} = \mathbf{\SI{0.878}{\watt}}$, and total sleeve heat capacity (4 foil layers + air) is $C_{\mathrm{sleeve}} = 4(39.2)(0.0450) + (1180)(0.0450\times 0.030) = \mathbf{\SI{8.65}{\joule\per\kelvin}}$.
+
+(b) For solid corkboard: $\dot{Q}_{\mathrm{cork}} = \frac{(0.040)(0.0450)(21.0)}{0.030} = \mathbf{\SI{1.260}{\watt}}$ ($43.5\%$ higher heat leak), and $C_{\mathrm{cork}} = (\SI{314500}{\joule\per\cubic\meter\per\kelvin})(0.0450\times 0.030) = \mathbf{\SI{424.6}{\joule\per\kelvin}}$ ($49.1\times$ higher parasitic thermal mass!).
+\verifiedby{Series thermal resistance $R_{\mathrm{th}} = 3\delta/(k_{\mathrm{eff}}A_m) = \SI{23.93}{\kelvin\per\watt}$ vs.\ $R_{\mathrm{cork}} = \SI{16.67}{\kelvin\per\watt}$; asserted in \texttt{check\_sec14\_16.py}.}
+\end{workedexample}
+\end{twocol}
+
+% ============================================================================
+\section{Explicit Prohibited Materials Hazard Registry \& Classroom/Tournament Safety Rules}\label{sec:14.6}
+\idxtopic{prohibited materials (Rule 3.b)}\idxtopic{polystyrene / Styrofoam / \#6 PS ban}\idxtopic{Clarification 6 (polystyrene hazardous ban)}\idxtopic{resin identification codes (\#1--\#7)}\idxtopic{safety rules!heat lamp collector}
+
+\begin{rulebox}[HARD SAFETY BAN: Polystyrene / Styrofoam / \texttt{\#6~PS} Disqualification (Rule 3.b.i--iii \& Official Clarification \#6)]
+\idxerr{using Styrofoam, EPS, XPS, or \#6 PS foamboard under heat lamp}\idxdev{disqualification TS=PS=0 for Rule 3.b.i hazardous materials}
+\begin{itemize}
+  \item \textbf{Rule~\texttt{3.b.i} (Hazardous Materials Prohibition):} Devices may be built from and contain anything \textbf{except}: \textit{``Hazardous materials, including but not limited to asbestos, mineral wool, and fiberglass.''} \src{S01}
+  \item \textbf{Official National Clarification~\#6 (\texttt{10/22/2026}, Sec.~3 / Par.~b / Sub-par.~i, Line~1):} \textit{``\textbf{Q:} Is polystyrene considered a safe material and allowed to be used in this event? \textbf{A:} \textbf{No. Polystyrene (which includes styrofoam and plastics with the recyclable symbol `6' and `PS' on them) is considered hazardous in high heat situations and should not be used in this event.}''} \src{S02}
+  \item \textbf{Mandatory Zero-Score Exclusion (Rule~\texttt{3.b.iii}):} \textit{``If a team uses hazardous materials (3.b.i.), \textbf{the device will not be allowed to be set up, modified, or tested}. Such teams will only be allowed to compete in Part~I.''} \src{S01} Unlike minor dimensional or non-hazardous construction violations (which can be fixed during the 3-minute Device Setup Time under Rule~\texttt{5.II.b}), a Rule~\texttt{3.b.i} hazardous material violation \textbf{cannot be cut out or modified at the tournament} because handling or heating hazardous materials in the testing room is prohibited—resulting in an automatic, unappealable $\mathbf{\mathrm{TS} = 0}$ and $\mathbf{\mathrm{PS} = 0}$ ($50.0\text{ points lost}$)!
+\end{itemize}
+\end{rulebox}
+
+\begin{center}
+\captionof{table}{Complete 2027 prohibited materials, restricted components, and mandatory tournament penalties \src{S01,S02,S04,S05}.}\label{tab:14:prohibited}
+\footnotesize\setlength{\tabcolsep}{2.8pt}\renewcommand{\arraystretch}{1.14}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.20\linewidth}>{\raggedright\arraybackslash}p{0.14\linewidth}>{\raggedright\arraybackslash}p{0.24\linewidth}>{\raggedright\arraybackslash}p{0.18\linewidth}>{\raggedright\arraybackslash}X@{}}
+\toprule
+\hdr{Prohibited Material / Item} & \hdr{Rule Authority} & \hdr{Exact Scope of Prohibition} & \hdr{Tournament Penalty} & \hdr{Approved Legal Replacement} \\
+\midrule
+\textbf{Polystyrene --- ALL Forms} (Styrofoam, EPS bead foam, XPS blue/pink/green board, PS foam-core posterboard, rigid \texttt{\#6~PS}) & \texttt{3.b.i}, \texttt{3.b.iii}, Clarif.~\#6 (\texttt{10/22/26}), ES Guide & All expanded, extruded, or rigid polystyrene polymers ($T_g\approx\SIrange{95}{100}{\celsius}$; softens, outgasses styrene monomer, and melts under focused heat lamp). & \textbf{Barred from setup, modification, or testing ($\mathrm{TS}=0, \mathrm{PS}=0$)!} & Corrugated cardboard + multi-layer $\SI{10}{\milli\meter}$ Al-foil air gaps ($k_{\mathrm{eff}}=\SI{0.0275}{\watt\per\meter\per\kelvin}$), corkboard, balsa, cotton/wool. \\
+\rowcolor{rowalt}\textbf{Fiberglass} (Glass-fiber batt, pipe wrap, loose glass wool, shedding fiberglass cloth/tape) & \texttt{3.b.i}, \texttt{3.b.iii}, Checklist Box~1 & All glass-fiber insulation or shedding glass textiles (skin, eye, and respiratory hazard). & \textbf{Barred from setup, modification, or testing ($\mathrm{TS}=0, \mathrm{PS}=0$)!} & Cotton/denim cellulose batting, sheep wool felt, corkboard, or foil-air baffles. \\
+\textbf{Mineral Wool} (Rock wool, slag wool, ceramic refractory fiber wool) & \texttt{3.b.i}, \texttt{3.b.iii}, Checklist Box~1 & All mineral/rock/slag fibrous insulation (listed in textbook tables for written exam math only!). & \textbf{Barred from setup, modification, or testing ($\mathrm{TS}=0, \mathrm{PS}=0$)!} & Natural sheep wool felt (keratin protein, self-extinguishing at $\SI{580}{\celsius}$) or cotton batting. \\
+\rowcolor{rowalt}\textbf{Asbestos} (Board, paper, loose fiber, or cloth) & \texttt{3.b.i}, \texttt{3.b.iii}, Checklist Box~1 & All asbestos-containing materials (regulated carcinogen). & \textbf{Barred from setup, modification, or testing ($\mathrm{TS}=0, \mathrm{PS}=0$)!} & Silicone elastomer sheet, corkboard, or borosilicate glass plate. \\
+\textbf{Commercial Thermoses, Coolers, or Vacuum Vessels} & \texttt{3.b.ii}, \texttt{6.g}, Checklist Box~5 & Prefabricated Dewars, stainless vacuum tumblers (Yeti/Stanley/HydroFlask), commercial insulated coolers. & Construction violation ($\times 0.7$ to $\mathrm{TS},\mathrm{PS}$ if unfixed in 3-min Setup Time). & Scratch-built student-fabricated multi-wall foil-air-cardboard-cork cradle (\texttt{3.h}). \\
+\rowcolor{rowalt}\textbf{Thermometers or Temperature Probes in Device/Spares} & \texttt{3.b.ii}, \texttt{4.f}, \texttt{6.g}, Checklist Box~5 & Digital probes, thermocouples, thermistors, RTDs, IR sensors, or stick-on LCD strips impounded or used on day of event. & Construction / Competition violation ($\times 0.7$ or $\times 0.9$ penalty). & Use team probes during pre-tournament lab calibration only; remove all sensors before impound! \\
+\textbf{Electrical, Battery, or Chemical Energy Sources} & \texttt{3.f}, \texttt{6.e.iii}, \texttt{6.f.iii}, Checklist Box~2 & Batteries, heaters, Peltier modules, exothermic salts ($\mathrm{CaO}$, hand warmers, phase-change packs), pre-heated masses (\texttt{3.g}). & \textbf{Severe violation: $\mathrm{TS}=0$ and $\mathrm{PS}=0$} (post-test disassembly check per \texttt{3.f}). & Passive optical concentration of ES heat lamp only; impound ventilated at room temperature (\texttt{2.d}). \\
+\rowcolor{rowalt}\textbf{Water-Contacting Parts or Water Additives} & \texttt{3.e}, \texttt{6.g}, Checklist Box~5 & Submerged metal fins/plates, dark dyes/ink, floating oil films, or overhanging cones dipping into water. & Construction violation ($\times 0.7$ multiplier to $\mathrm{TS}$ and $\mathrm{PS}$). & Maintain $\ge\SI{15}{\milli\meter}$ dry air clearance above the $\SI{38}{\milli\meter}$ waterline; rest glazing cap on top $\SI{100}{\milli\meter}$ cup rim. \\
+\textbf{Adhesives, Tapes, Rubber Bands, or Clips on Cup} & \texttt{5.II.d}, Clarif.~\#5 (\texttt{10/21/26}), \texttt{6.h} & Any glue, tape, elastic band, clip, or fastener attached to the ES $\SI{9}{oz}$ cup, or wrap left on cup during $T_{\mathrm{final}}$ reading (\texttt{5.II.g}). & Competition violation ($\times 0.9$ multiplier to $\mathrm{TS}$ and $\mathrm{PS}$). & Gravity-resting clear BoPET cap or upper hood window that lifts off cleanly in $<\SI{2}{\second}$. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{twocol}[0.52]
+\captionof{table}{Polymer Resin Identification Code (\texttt{\#1}--\texttt{\#7}) impound audit guide \src{S01,S02,S12}.}\label{tab:14:resin-codes}
+\footnotesize\setlength{\tabcolsep}{1.8pt}\renewcommand{\arraystretch}{1.12}
+\begin{tabularx}{\linewidth}{@{}c>{\raggedright\arraybackslash}p{0.25\linewidth}rrl>{\raggedright\arraybackslash}X@{}}
+\toprule
+\hdr{Code} & \hdr{Polymer Name} & \hdr{$T_g / T_{\mathrm{soft}}$} & \hdr{$T_m$} & \hdr{2027 Status} & \hdr{Permitted Collector Use} \\
+ & & \tiny$[\si{\celsius}]$ & \tiny$[\si{\celsius}]$ & & \\
+\midrule
+\textbf{\texttt{\#1 PET}} & Polyethylene Terephthalate & $75 / 150$\textsuperscript{a} & $254$ & \textbf{LEGAL} & Clear BoPET (Mylar) glazing film \& aluminized Mylar; ES $\SI{9}{oz}$ cup. \\
+\rowcolor{rowalt}\textbf{\texttt{\#2 HDPE}} & High-Density Polyethylene & $-120 / 115$ & $132$ & \textbf{LEGAL} & Lower structural base rings or unheated outer frame spacers. \\
+\textbf{\texttt{\#3 PVC}} & Polyvinyl Chloride & $82 / 75$ & $180$ & \textbf{AVOID} & Legal, but softens at $\SI{75}{\celsius}$ and dehydrochlorinates ($\mathrm{HCl}$) $> \SI{140}{\celsius}$. \\
+\rowcolor{rowalt}\textbf{\texttt{\#4 LDPE}} & Low-Density Polyethylene & $-110 / 88$ & $110$ & \textbf{LEGAL} & Clear cling wrap (Clarif.~\#5) or foil-shielded closed-cell PE foam. \\
+\textbf{\texttt{\#5 PP}} & Polypropylene & $-10 / 125$ & $162$ & \textbf{LEGAL} & High-temp clear cups, corrugated plastic (\textit{Coroplast}) outer shell. \\
+\rowcolor{rowalt}\textcolor{rust}{\textbf{\texttt{\#6 PS}}} & \textcolor{rust}{\textbf{Polystyrene (EPS/XPS/PS)}} & \textcolor{rust}{$95 / 90$} & \textcolor{rust}{$240$} & \textcolor{rust}{\textbf{BANNED!}} & \textcolor{rust}{\textbf{DISQUALIFIED ($\mathrm{TS}=\mathrm{PS}=0$) per Rule~\texttt{3.b.i} \& Clarif.~\#6!}} \\
+\textbf{\texttt{\#7 Other}} & Polycarbonate (PC) / PMMA & $147 / 105$ & $260$ & \textbf{LEGAL} & Rigid Lexan (PC) or acrylic (PMMA) glazing/mirrors (verify non-PS!). \\
+\bottomrule
+\multicolumn{6}{@{}l}{\scriptsize\textsuperscript{a}Biaxially oriented BoPET film is stable to $\SI{150}{\celsius}$.}
+\end{tabularx}
+\nextcol[0.46]
+\begin{devicebox}[Foam-Core Board Trap \& Safety Protocol]
+\idxerr{using standard craft foam-core posterboard (contains polystyrene core!)}\idxdev{foam-core posterboard polystyrene disqualification}
+\textbf{Craft Foam-Core Posterboard Trap:} Standard craft-store ``foam-core board'' (e.g., Elmer's / Dollar Tree $\SI{5}{\milli\meter}$ paper-faced foam board) has an \textbf{extruded polystyrene (\texttt{\#6~PS}) core}! Using it anywhere in your collector triggers immediate disqualification under Clarification~\#6. Use \textbf{100\% cellulose corrugated cardboard} or \textbf{\texttt{\#5~PP} corrugated plastic (\textit{Coroplast})} instead, and keep a cut cross-section sample + datasheet in your binder for ES verification.
+
+\smallskip
+\textbf{5 Mandatory Lab \& Competition Safety Rules:}
+\begin{enumerate}
+  \item \textbf{Bulb Clearance ($\ge\SI{10.0}{\centi\meter}$):} At minimum bulb height $h = \SI{40.0}{\centi\meter}$, a maximum-height $\SI{30.0}{\centi\meter}$ device sits $\SI{10.0}{\centi\meter}$ below the $\SI{220}{\celsius}$ bulb glass. Never exceed $\SI{29.6}{\centi\meter}$ device height.
+  \item \textbf{Foil-Shield All Cellulosics:} Bare cardboard/balsa chars at $\SIrange{180}{200}{\celsius}$ and ignites at $\SI{232}{\celsius}$. Facing all lamp-exposed surfaces with shiny Al foil ($\alpha_{\mathrm{NIR}}=0.04$) keeps wall temperatures $< \SI{42}{\celsius}$.
+  \item \textbf{Burn Protection:} Never touch the ES clamp-lamp metal hood or $\mathrm{R40}$ bulb during setup or cup removal.
+  \item \textbf{Spill \& Electrical Isolation:} Keep the $\SI{100}{\milli\liter}$ cup away from $\SI{120}{\volt}$ AC power cords and plug junctions.
+  \item \textbf{Post-Test Disassembly Readiness (Rule~\texttt{3.f}):} Use removable dowels or Velcro access panels so the ES can inspect internal insulation layers in $<\SI{30}{\second}$ without destructive cutting.
+\end{enumerate}
+\end{devicebox}
+\end{twocol}
+
+\alsosee{\sref{sec:10} (Conduction Networks), \sref{sec:11} (Air-Gap Convection \& Evaporation), \sref{sec:12} (Thermal Radiation \& Shields), \sref{sec:15} (2027 Collector Engineering), \sref{sec:16} (Calibration \& Prediction), \sref{app:A} (Property Tables), \sref{app:E} (Compliance Matrix).}
