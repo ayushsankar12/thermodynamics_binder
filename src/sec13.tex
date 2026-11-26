@@ -168,11 +168,11 @@ Dividing the two increments eliminates $T_{\mathrm{ss}}$ immediately to give $\t
 \begin{tikzpicture}[font=\scriptsize]
   \begin{axis}[
     width=0.86\linewidth, height=4.4cm,
-    xlabel={Normalized Spatial Coordinate $x/L$ Across Slab or Water Depth $z/L_w$ ($0 = \text{Insulated Base},\; 1 = \text{Top Boundary}$)},
-    ylabel={Dimensionless Temperature $\Theta(x) = \dfrac{T(x)-T_{\mathrm{base}}}{T_\infty - T_{\mathrm{base}}}$},
+    xlabel={Position $x/L$ from the insulated base ($0$) to the heated surface ($1$) [--]},
+    ylabel={$\Theta = \dfrac{T(x)-T_{\mathrm{base}}}{T_\infty - T_{\mathrm{base}}}$ [--]},
     xmin=0, xmax=1.35, ymin=0, ymax=1.08,
     xtick={0, 0.25, 0.5, 0.75, 1.0, 1.35},
-    xticklabels={$0$ (Center/Base), $0.25$, $0.50$, $0.75$, $1.0$ (Surface), Fluid $T_\infty$},
+    xticklabels={$0$ (base), $0.25$, $0.50$, $0.75$, $1.0$ (surface), $T_\infty$},
     ytick={0, 0.2, 0.4, 0.6, 0.8, 1.0},
     grid=both, major grid style={gray!30},
     legend pos=north west, legend style={font=\scriptsize, fill=white, draw=navy},
@@ -181,26 +181,28 @@ Dividing the two increments eliminates $T_{\mathrm{ss}}$ immediately to give $\t
     % Shaded external boundary layer region x in [1.0, 1.35]
     \fill[gray!12] (axis cs:1.0,0) rectangle (axis cs:1.35,1.08);
     \draw[black, thick] (axis cs:1.0,0) -- (axis cs:1.0,1.08);
-    \node[align=center, font=\bfseries\scriptsize] at (axis cs:1.175, 0.16) {External\\[-1pt]Boundary\\[-1pt]Layer ($1/h$)};
 
-    % Bi = 0.05 (Lumped regime: internal drop is only 0.05/1.05 = 4.8%, external drop is 95.2%)
-    \addplot[navy, ultra thick] coordinates {(0,0) (0.5,0.024) (1.0,0.0476) (1.12,0.55) (1.35,1.0)};
-    \addlegendentry{$\mathrm{Bi} = 0.05 < 0.1$ (Lumped Metal: $T_{\mathrm{body}}$ Uniform)}
+    % One-term transient profiles (Fo > 0.2): theta/theta_c = cos(lambda1 x/L), so Theta = 1 - cos(lambda1 x/L).
+    % Zero slope at the insulated base x = 0. lambda1 tan(lambda1) = Bi.
+    % Bi = 0.05 (lambda1 = 0.2218): almost uniform body, nearly all the drop is in the outside film
+    \addplot[navy, ultra thick, domain=0:1, samples=40] {1 - cos(deg(0.2218*x))};
+    \addplot[navy, ultra thick, forget plot] coordinates {(1.0,0.0245) (1.35,1.0)};
+    \addlegendentry{$\mathrm{Bi} = 0.05$ (lumped: body nearly uniform)}
+    % Bi = 0.71 (lambda1 = 0.7548): water column in the 9 oz cup (L_w = 36 mm, k_w = 0.61 W/(m K))
+    \addplot[rust, ultra thick, densely dashed, domain=0:1, samples=40] {1 - cos(deg(0.7548*x))};
+    \addplot[rust, ultra thick, densely dashed, forget plot] coordinates {(1.0,0.2716) (1.35,1.0)};
+    \addlegendentry{$\mathrm{Bi}_z = 0.71$ (unstirred water in the cup)}
+    % Bi = 20 (lambda1 = 1.4961): thick insulator, surface close to T_inf, large internal drop
+    \addplot[teal, ultra thick, densely dotted, domain=0:1, samples=40] {1 - cos(deg(1.4961*x))};
+    \addplot[teal, ultra thick, densely dotted, forget plot] coordinates {(1.0,0.9254) (1.35,1.0)};
+    \addlegendentry{$\mathrm{Bi} = 20$ (thick insulator: $T_{\mathrm{surf}} \approx T_\infty$)}
 
-    % Bi = 0.71 (2027 Stratified Water Column in 9 oz Cup: L_w=36 mm, k_w=0.61 W/mK)
-    \addplot[rust, ultra thick, densely dashed] coordinates {(0,0) (0.5,0.208) (1.0,0.415) (1.12,0.75) (1.35,1.0)};
-    \addlegendentry{$\mathrm{Bi}_z = 0.71$ (2027 Water Cup: Stratified Top Layer!)}
-
-    % Bi = 20 (Conduction-limited insulator: internal drop is 20/21 = 95.2%)
-    \addplot[teal, ultra thick, densely dotted] coordinates {(0,0) (0.5,0.476) (1.0,0.952) (1.12,0.985) (1.35,1.0)};
-    \addlegendentry{$\mathrm{Bi} = 20 \gg 1$ (Thick Insulator: $T_{\mathrm{surf}} \approx T_\infty$)}
-
-    \fill[navy] (axis cs:1.0,0.0476) circle (2pt);
-    \fill[rust] (axis cs:1.0,0.415) circle (2pt) node[above left, text=rust, font=\bfseries\scriptsize] {Top Water Layer Hot};
-    \fill[teal] (axis cs:1.0,0.952) circle (2pt);
+    \fill[navy] (axis cs:1.0,0.0245) circle (2pt);
+    \fill[rust] (axis cs:1.0,0.2716) circle (2pt) node[above left, text=rust, font=\bfseries\scriptsize] {water hottest at the top};
+    \fill[teal] (axis cs:1.0,0.9254) circle (2pt);
   \end{axis}
 \end{tikzpicture}
-\captionof{figure}{Comparison of internal solid/liquid temperature profiles versus external boundary-layer drops across three Biot number regimes (Lienhard Figs.~1.10--1.11 \& 2.11 \src{S12}): $\mathrm{Bi} = 0.05 < 0.1$ (uniform lumped body), $\mathrm{Bi}_z = 0.71$ (unstirred 2027 water cup exhibiting top-layer thermal stratification), and $\mathrm{Bi} = 20 \gg 1$ (internal conduction-dominated).}
+\captionof{figure}{Temperature profiles during heating for three Biot numbers (one-term solution, $\mathrm{Fo} > 0.2$; Lienhard Figs.~1.10--1.11 \& 2.11 \src{S12}): the base is insulated, so every profile starts flat at $x = 0$; heat enters at the surface ($x/L = 1$) through the outside film (shaded) from surroundings at $T_\infty$. For the lamp-heated cup, read $x = 0$ as the nearly insulated cup bottom, $x/L = 1$ as the water surface, and $T_\infty$ as the effective temperature of whatever heats the surface (the lamp-warmed headspace); the top of the water is the hottest layer.}
 \label{fig:13:biot-regimes}
 \idxfig{Biot number!internal vs external temperature drop regimes}
 \end{center}
