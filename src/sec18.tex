@@ -402,14 +402,14 @@ $$T_{\mathrm{ss,3pt}} = \frac{T_1 T_3 - T_2^2}{T_1 + T_3 - 2 T_2} = \frac{(22.00
 \par\smallskip\noindent
 (b)~\textbf{Semi-Log OLS Regression ($N = 6$ points):}
 From the table above, $\bar{t} = \SI{5.000}{\minute}$ and $\bar{Y} = \frac{-1.98552}{6} = -0.330920$. Evaluating the sums of squares \eref{eq:18:ols}:
-$$S_{tt} = (-5)^2 + (-3)^2 + (-1)^2 + 1^2 + 3^2 + 5^2 = \mathbf{70.000\,\si{\square\minute}}, \qquad S_{tY} = \sum_{k=1}^6 (t_k - \bar{t})(Y_k - \bar{Y}) = \mathbf{-4.63274\,\si{\minute}}, \qquad S_{YY} = \mathbf{0.3065976}$$
-$$m = \frac{S_{tY}}{S_{tt}} = \frac{-4.63274}{70.000} = \mathbf{\SI{-0.0661820}{\per\minute}}, \qquad b = \bar{Y} - m\bar{t} = -0.330920 - (-0.0661820)(5.000) = \mathbf{-0.000010} \approx 0$$
-$$R^2 = \frac{S_{tY}^2}{S_{tt} S_{YY}} = \frac{21.46228}{21.46183} = \mathbf{0.999998}, \qquad s_{Y|t} = \sqrt{\frac{S_{YY} - m S_{tY}}{N - 2}} = \sqrt{\frac{\num{4.89e-7}}{4}} = \mathbf{\num{3.50e-4}}$$
-$$u(m) = \frac{s_{Y|t}}{\sqrt{S_{tt}}} = \frac{\num{3.50e-4}}{\sqrt{70.0}} = \mathbf{\SI{4.18e-5}{\per\minute}} \quad\Longrightarrow\quad \tau = -\frac{1}{m} = \mathbf{\SI{15.110}{\minute}} = \mathbf{\SI{906.6}{\second}}, \qquad u(\tau) = \tau^2 u(m) = \mathbf{\SI{0.0105}{\minute}} = \mathbf{\SI{0.63}{\second}}$$
+$$S_{tt} = (-5)^2 + (-3)^2 + (-1)^2 + 1^2 + 3^2 + 5^2 = \mathbf{70.000\,\si{\square\minute}}, \qquad S_{tY} = \sum_{k=1}^6 (t_k - \bar{t})(Y_k - \bar{Y}) = \mathbf{-4.63268\,\si{\minute}}, \qquad S_{YY} = \mathbf{0.3065967}$$
+$$m = \frac{S_{tY}}{S_{tt}} = \frac{-4.63268}{70.000} = \mathbf{\SI{-0.0661811}{\per\minute}}, \qquad b = \bar{Y} - m\bar{t} = -0.330920 - (-0.0661811)(5.000) = \mathbf{-0.000014} \approx 0$$
+$$R^2 = \frac{S_{tY}^2}{S_{tt} S_{YY}} = \frac{21.461724}{21.461766} = \mathbf{0.999998}, \qquad s_{Y|t} = \sqrt{\frac{S_{YY} - m S_{tY}}{N - 2}} = \sqrt{\frac{\num{5.95e-7}}{4}} = \mathbf{\num{3.86e-4}}$$
+$$u(m) = \frac{s_{Y|t}}{\sqrt{S_{tt}}} = \frac{\num{3.86e-4}}{\sqrt{70.0}} = \mathbf{\SI{4.61e-5}{\per\minute}} \quad\Longrightarrow\quad \tau = -\frac{1}{m} = \mathbf{\SI{15.110}{\minute}} = \mathbf{\SI{906.6}{\second}}, \qquad u(\tau) = \tau^2 u(m) = \mathbf{\SI{0.0105}{\minute}} = \mathbf{\SI{0.63}{\second}}$$
 \par\smallskip\noindent
 (c)~\textbf{Grubbs' Outlier Test on the $N = 6$ Replicate $\mathrm{TG}$ Trials:}
-Including all 6 trials: $\bar{x}_{\mathrm{all}} = \SI{20.9333}{\celsius}$ and sample standard deviation $s_{\mathrm{all}} = \SI{1.00003}{\celsius}$. Testing run~\#6 ($x_6 = \SI{18.90}{\celsius}$) via \eref{eq:18:grubbs}:
-$$G = \frac{|18.90 - 20.9333|}{1.00003} = \mathbf{2.0337} > G_{\mathrm{crit}}(\alpha=0.05, N=6) = \mathbf{1.887} \quad (\text{and } > G_{\mathrm{crit}}(\alpha=0.01, N=6) = 1.973!)$$
+Including all 6 trials: $\bar{x}_{\mathrm{all}} = \SI{20.9333}{\celsius}$ and sample standard deviation $s_{\mathrm{all}} = \SI{0.99983}{\celsius}$. Testing run~\#6 ($x_6 = \SI{18.90}{\celsius}$) via \eref{eq:18:grubbs}:
+$$G = \frac{|18.90 - 20.9333|}{0.99983} = \mathbf{2.0337} > G_{\mathrm{crit}}(\alpha=0.05, N=6) = \mathbf{1.887} \quad (\text{and } > G_{\mathrm{crit}}(\alpha=0.01, N=6) = 1.973!)$$
 Because $G > G_{\mathrm{crit}}$ \textbf{and} a physical cause (slipped BoPET vapor cap) was logged, run~\#6 is legitimately excluded. The remaining $n = 5$ valid runs yield $\overline{\mathrm{TG}}_{\mathrm{clean}} = \mathbf{\SI{21.340}{\celsius}}$, $s_{\mathrm{clean}} = \mathbf{\SI{0.0962}{\celsius}}$, and Type~A standard uncertainty $u_A = s_{\mathrm{clean}}/\sqrt{5} = \mathbf{\SI{0.0430}{\celsius}}$.
 \verifiedby{NumPy \texttt{polyfit} / \texttt{std(ddof=1)} exact match ($\tau = \SI{15.1101}{\minute}$, $G = 2.03367 > 1.887$) in Python check \texttt{sec18:ex18.3}.}
 \end{workedexample}
@@ -424,7 +424,7 @@ In a Marcet high-pressure saturation boiler experiment (\texttt{2027 Cornell E1 
 \textbf{Temperature $t_k$ $[\si{\celsius}]$ ($T_k$ $[\si{\kelvin}]$)} & $40.0\ (\SI{313.15}{\kelvin})$ & $60.0\ (\SI{333.15}{\kelvin})$ & $80.0\ (\SI{353.15}{\kelvin})$ & $100.0\ (\SI{373.15}{\kelvin})$ \\
 \textbf{Measured $P_{\mathrm{sat},k}$ $[\si{\kilo\pascal}]$} & $7.384$ & $19.946$ & $47.414$ & $101.42$ \\
 \textbf{Reciprocal $X_k = 1000/T_k$ $[\si{\per\kelvin}]$} & $3.19336$ & $3.00165$ & $2.83166$ & $2.67989$ \\
-\textbf{Log Pressure $Y_k = \ln(P_{\mathrm{sat},k}/\si{\kilo\pascal})$} & $2.00000$ & $2.99303$ & $3.85892$ & $4.61927$ \\
+\textbf{Log Pressure $Y_k = \ln(P_{\mathrm{sat},k}/\si{\kilo\pascal})$} & $1.99932$ & $2.99303$ & $3.85892$ & $4.61927$ \\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -432,15 +432,15 @@ In a Marcet high-pressure saturation boiler experiment (\texttt{2027 Cornell E1 
 (b)~Extract the mean molar enthalpy of vaporization $\Delta H_{\mathrm{vap}}$ $[\si{\kilo\joule\per\mole}]$ across $\SIrange{40}{100}{\celsius}$ ($R = \SI{8.3144626}{\joule\per\mole\per\kelvin}$) and the predicted normal boiling point $T_b$ at $P_0 = \SI{101.325}{\kilo\pascal}$.
 \par\smallskip\noindent
 \textbf{Solution.}
-(a)~Means across $N = 4$ points: $\bar{X} = 2.926640\,\si{\per\kelvin}$ and $\bar{Y} = 3.367805$. Centered sums of squares \eref{eq:18:ols}:
-$$S_{XX} = \mathbf{0.141913}, \qquad S_{XY} = \mathbf{-0.724014}, \qquad S_{YY} = \mathbf{3.693954}$$
-$$m = \frac{S_{XY}}{S_{XX}} = \frac{-0.724014}{0.141913} = \mathbf{\SI{-5.10182}{\kelvin}}, \qquad b = \bar{Y} - m\bar{X} = 3.367805 - (-5.10182)(2.926640) = \mathbf{18.2990}$$
-$$R^2 = \frac{S_{XY}^2}{S_{XX} S_{YY}} = \frac{0.524196}{0.524220} = \mathbf{0.999954}$$
+(a)~Means across $N = 4$ points: $\bar{X} = 2.926639\,\si{\per\kelvin}$ and $\bar{Y} = 3.367633$. Centered sums of squares \eref{eq:18:ols}:
+$$S_{XX} = \mathbf{0.146673}, \qquad S_{XY} = \mathbf{-0.748562}, \qquad S_{YY} = \mathbf{3.820578}$$
+$$m = \frac{S_{XY}}{S_{XX}} = \frac{-0.748562}{0.146673} = \mathbf{\SI{-5.10360}{\kelvin}}, \qquad b = \bar{Y} - m\bar{X} = 3.367633 - (-5.10360)(2.926639) = \mathbf{18.3040}$$
+$$R^2 = \frac{S_{XY}^2}{S_{XX} S_{YY}} = \frac{0.560345}{0.560377} = \mathbf{0.999942}$$
 (b)~Because the horizontal variable was scaled as $X = 1000/T$, the Clausius--Clapeyron relation $\ln P = -\frac{\Delta H_{\mathrm{vap}}}{1000\,R}\left(\frac{1000}{T}\right) + b$ gives slope $m = -\frac{\Delta H_{\mathrm{vap}}}{1000\,R}$, so:
-$$\Delta H_{\mathrm{vap}} = -1000\,R\,m = -(1000)(\SI{8.3144626}{\joule\per\mole\per\kelvin})(-5.10182) = \SI{42419}{\joule\per\mole} = \mathbf{\SI{42.42}{\kilo\joule\per\mole}}$$
+$$\Delta H_{\mathrm{vap}} = -1000\,R\,m = -(1000)(\SI{8.3144626}{\joule\per\mole\per\kelvin})(-5.10360) = \SI{42434}{\joule\per\mole} = \mathbf{\SI{42.43}{\kilo\joule\per\mole}}$$
 *(Matching the arithmetic mean of NIST water $\Delta H_{\mathrm{vap}}(\SI{40}{\celsius}) = \SI{43.35}{\kilo\joule\per\mole}$ and $\Delta H_{\mathrm{vap}}(\SI{100}{\celsius}) = \SI{40.65}{\kilo\joule\per\mole}$, which is $\SI{42.00}{\kilo\joule\per\mole}$, within $1.0\%$!).* Setting $P_{\mathrm{sat}} = \SI{101.325}{\kilo\pascal}$ ($Y_0 = \ln(101.325) = 4.61833$):
-$$X_b = \frac{1000}{T_b} = \frac{Y_0 - b}{m} = \frac{4.61833 - 18.2990}{-5.10182} = 2.68153\,\si{\per\kelvin} \implies T_b = \frac{1000}{2.68153} = \mathbf{\SI{372.92}{\kelvin}} = \mathbf{\SI{99.77}{\celsius}}$$
-\verifiedby{Two-point check $\Delta H_{\mathrm{vap}} = R\ln(101.42/7.384)/(1/313.15 - 1/373.15) = \SI{42.43}{\kilo\joule\per\mole}$ and Python check \texttt{sec18:ex18.4}.}
+$$X_b = \frac{1000}{T_b} = \frac{Y_0 - b}{m} = \frac{4.61833 - 18.3040}{-5.10360} = 2.68158\,\si{\per\kelvin} \implies T_b = \frac{1000}{2.68158} = \mathbf{\SI{372.92}{\kelvin}} = \mathbf{\SI{99.77}{\celsius}}$$
+\verifiedby{Two-point check $\Delta H_{\mathrm{vap}} = R\ln(101.42/7.384)/(1/313.15 - 1/373.15) = \SI{42.42}{\kilo\joule\per\mole}$ and Python check \texttt{sec18:ex18.4}.}
 \end{workedexample}
 
 \begin{workedexample}[5-Stage Heating-Curve Slope/Plateau Extraction \& Binary Eutectic Tie-Line Lever Rule]{\texttt{Cornell E1 Q10--14, Q30 \& GGSO E4 Q9} \src{S25,S28}}{ex:18.5}

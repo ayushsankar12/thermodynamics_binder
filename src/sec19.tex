@@ -213,8 +213,8 @@ Total elapsed time to reach dry saturated steam at $\SI{100.0}{\celsius}$: $t_{1
 For isobaric steam warming with $C_{p,\mathrm{steam}} = m c_{p,\mathrm{steam}} = (0.250)(2080) = \SI{520.0}{\joule\per\kelvin}$, the exact lumped ODE $C_{p,\mathrm{steam}}\frac{dT}{dt} = P_{\mathrm{elec}} - \frac{T - T_{\mathrm{room}}}{R_{\mathrm{wall}}}$ has time constant $\tau_s = C_{p,\mathrm{steam}}R_{\mathrm{wall}} = (520.0)(2.50) = \SI{1300.0}{\second}$ and asymptote $T_{\mathrm{ss}} = 20.0 + (500.0)(2.50) = \SI{1270.0}{\celsius}$:
 $$T_f = T_{\mathrm{ss}} - (T_{\mathrm{ss}} - \SI{100.0}{\celsius})e^{-t_5/\tau_s} = 1270.0 - (1170.0)e^{-200.754/1300.0} = 1270.0 - 1002.58 = \mathbf{\SI{267.42}{\celsius}}\ (\SI{540.57}{\kelvin})$$
 (c)~\textbf{Total Isobaric Boundary Work $W_{\mathrm{by}} = P_0(V_f - V_i)$:}
-Initial ice volume: $V_i = \frac{\SI{0.250}{\kilogram}}{\SI{916.7}{\kilogram\per\cubic\meter}} = \SI{2.727e-4}{\cubic\meter}$. Final steam moles: $n = \frac{\SI{250.0}{\gram}}{\SI{18.01528}{\gram\per\mole}} = \SI{13.8771}{\mole}$, so ideal-gas steam volume at $T_f = \SI{540.57}{\kelvin}$ is $V_f = \frac{n R T_f}{P_0} = \frac{(13.8771)(8.31446)(540.57)}{101325} = \SI{0.61555}{\cubic\meter}$. Thus:
-$$W_{\mathrm{by}} = P_0(V_f - V_i) = (\SI{101.325}{\kilo\pascal})(\SI{0.61555}{\cubic\meter} - \SI{0.00027}{\cubic\meter}) = \mathbf{\SI{62.34}{\kilo\joule}}$$
+Initial ice volume: $V_i = \frac{\SI{0.250}{\kilogram}}{\SI{916.7}{\kilogram\per\cubic\meter}} = \SI{2.727e-4}{\cubic\meter}$. Final steam moles: $n = \frac{\SI{250.0}{\gram}}{\SI{18.01528}{\gram\per\mole}} = \SI{13.8771}{\mole}$, so ideal-gas steam volume at $T_f = \SI{540.57}{\kelvin}$ is $V_f = \frac{n R T_f}{P_0} = \frac{(13.8771)(8.31446)(540.57)}{101325} = \SI{0.61556}{\cubic\meter}$. Thus:
+$$W_{\mathrm{by}} = P_0(V_f - V_i) = (\SI{101.325}{\kilo\pascal})(\SI{0.61556}{\cubic\meter} - \SI{0.00027}{\cubic\meter}) = \mathbf{\SI{62.34}{\kilo\joule}}$$
 \verifiedby{Global enthalpy balance $\sum_{k=1}^5 \Delta H_k = 7.875 + 83.388 + 104.600 + 564.100 + 87.058 = \SI{847.02}{\kilo\joule}$ and Python check \texttt{sec19:ex19.1}.}
 \end{workedexample}
 
@@ -256,8 +256,8 @@ Choose the \textbf{combined gas A + B + piston} as our closed system. Because th
 $$C_{V,\mathrm{tot}} = n_A C_{V,m,A} + n_B C_{V,m,B} = \left[(1.000)\!\left(\tfrac{3}{2}\right) + (1.500)\!\left(\tfrac{5}{2}\right)\right]R = 5.250\,R = (5.250)(\SI{8.3144626}{\joule\per\mole\per\kelvin}) = \mathbf{\SI{43.6509}{\joule\per\kelvin}}$$
 $$T_f = T_i + \frac{Q}{C_{V,\mathrm{tot}}} = 300.0 + \frac{\SI{12471.7}{\joule}}{\SI{43.6509}{\joule\per\kelvin}} = 300.0 + 285.714 = \mathbf{\SI{585.71}{\kelvin}}$$
 Because the piston is frictionless and diathermal, mechanical and thermal equilibrium require $P_{A,f} = P_{B,f} = P_f$ and $T_{A,f} = T_{B,f} = T_f$, so $\frac{V_{A,f}}{V_{B,f}} = \frac{n_A R T_f / P_f}{n_B R T_f / P_f} = \frac{n_A}{n_B}$ (the piston does not move!). Thus $V_{A,f} = \frac{1.000}{2.500}(\SI{30.00}{\liter}) = \mathbf{\SI{12.00}{\liter}}$, $V_{B,f} = \mathbf{\SI{18.00}{\liter}}$, and:
-$$P_f = \frac{(n_A + n_B) R T_f}{V_{\mathrm{tot}}} = \frac{(\SI{2.500}{\mole})(\SI{8.3144626}{\joule\per\mole\per\kelvin})(\SI{585.714}{\kelvin})}{\SI{0.03000}{\cubic\meter}} = \SI{405817}{\pascal} = \mathbf{\SI{405.82}{\kilo\pascal}}$$
-\verifiedby{Individual subsystem check $P_{A,f} = (1.000)(8.31446)(585.714)/0.0120 = \SI{405.82}{\kilo\pascal} = P_{B,f}$ and Python check \texttt{sec19:ex19.4}.}
+$$P_f = \frac{(n_A + n_B) R T_f}{V_{\mathrm{tot}}} = \frac{(\SI{2.500}{\mole})(\SI{8.3144626}{\joule\per\mole\per\kelvin})(\SI{585.714}{\kelvin})}{\SI{0.03000}{\cubic\meter}} = \SI{405825}{\pascal} = \mathbf{\SI{405.83}{\kilo\pascal}}$$
+\verifiedby{Individual subsystem check $P_{A,f} = (1.000)(8.31446)(585.714)/0.0120 = \SI{405.83}{\kilo\pascal} = P_{B,f}$ and Python check \texttt{sec19:ex19.4}.}
 \end{workedexample}
 
 \begin{table}[h!]
@@ -332,7 +332,7 @@ $$\Delta V_{\mathrm{app}} = (\SI{50.100}{\cubic\centi\meter})\left[\num{0.047012
 \par\noindent
 (c)~New capillary column height reading (neglecting the tiny $2\alpha_g\Delta T = 0.03\%$ cross-sectional expansion of $A_c$):
 $$h_1 = h_0 + \frac{\Delta V_{\mathrm{app}}}{A_c} = \SI{5.00}{\centi\meter} + \frac{\SI{2.25262}{\cubic\centi\meter}}{\SI{0.0200}{\square\centi\meter}} = 5.00 + 112.631 = \mathbf{\SI{117.63}{\centi\meter}}$$
-\verifiedby{Absolute volume difference $[V_{\ell,0}(1 + \beta_\ell\Delta T - \kappa\Delta P) - V_0(1+3\alpha_g\Delta T)]/A_c = \SI{117.631}{\centi\meter}$ and Python check \texttt{sec19:ex19.5}.}
+\verifiedby{Absolute volume difference $[V_{\ell,0}(1 + \beta_\ell\Delta T - \kappa\Delta P) - V_0(1+3\alpha_g\Delta T)]/A_c = \SI{117.634}{\centi\meter}$ (within $\SI{0.003}{\centi\meter}$ of the linearized result) and Python check \texttt{sec19:ex19.5}.}
 \end{workedexample}
 
 \begin{workedexample}[Template 6: Linear Spring-Loaded Piston Expansion + Ideal-Gas First-Law Accounting]{Rules 5.c.ii, 5.c.iv}{ex:19.6}
@@ -362,8 +362,8 @@ A spherical probe of diameter $D_p = \SI{0.500}{\meter}$ (projected disk area $A
 $$T_{\mathrm{eq}} = \left(\frac{\alpha_{\mathrm{sol}}\,I_0}{4\,\varepsilon_{\mathrm{IR}}\,\sigma}\right)^{1/4} = \left(\frac{(0.800)(\SI{1361.0}{\watt\per\square\meter})}{4(0.250)(\SI{5.670374e-8}{\watt\per\square\meter\per\kelvin\tothe{4}})}\right)^{1/4} = \left(\num{1.920155e10}\right)^{1/4} = \mathbf{\SI{372.25}{\kelvin}}\ (\SI{99.10}{\celsius})$$
 (b)~Total spherical emitting area: $A_{\mathrm{surf}} = \pi(\SI{0.500}{\meter})^2 = \SI{0.785398}{\square\meter}$. During eclipse in vacuum ($T_{\mathrm{surr}} \to \SI{0}{\kelvin}$), $C_p\frac{dT}{dt} = -\varepsilon_{\mathrm{IR}}\sigma A_{\mathrm{surf}} T^4$. Applying the pre-integrated algebraic formula from Table~\ref{tab:19:archetypes} (Row~4):
 $$\Delta t = \frac{C_p}{3\,\varepsilon_{\mathrm{IR}}\,\sigma\,A_{\mathrm{surf}}}\left(\frac{1}{T_f^3} - \frac{1}{T_i^3}\right) = \frac{\SI{12500}{\joule\per\kelvin}}{3(0.250)(\num{5.670374e-8})(\SI{0.785398}{\square\meter})}\left(\frac{1}{280.0^3} - \frac{1}{372.251^3}\right)$$
-$$\Delta t = (\num{3.74232e11})\left(\num{4.55539e-8} - \num{1.93855e-8}\right) = (\num{3.74232e11})(\num{2.61684e-8}) = \mathbf{\SI{9793.0}{\second}} = \mathbf{\SI{163.22}{\minute}}\ (\SI{2.720}{\hour})$$
-\verifiedby{Direct ODE numerical quadrature $\int_{280}^{372.251} C_p(\varepsilon\sigma A T^4)^{-1}dT = \SI{9793.0}{\second}$ and Python check \texttt{sec19:ex19.7}.}
+$$\Delta t = (\num{3.74237e11})\left(\num{4.55539e-8} - \num{1.93864e-8}\right) = (\num{3.74237e11})(\num{2.61675e-8}) = \mathbf{\SI{9792.9}{\second}} = \mathbf{\SI{163.21}{\minute}}\ (\SI{2.720}{\hour})$$
+\verifiedby{Direct ODE numerical quadrature $\int_{280}^{372.251} C_p(\varepsilon\sigma A T^4)^{-1}dT = \SI{9792.9}{\second}$ and Python check \texttt{sec19:ex19.7}.}
 \end{workedexample}
 
 \begin{workedexample}[Template 8: Two-Stage Intercooled Adiabatic Gas Compression vs.\ Single-Stage Compression]{\texttt{MIT E2 P4b TB \#1} \src{S26}}{ex:19.8}

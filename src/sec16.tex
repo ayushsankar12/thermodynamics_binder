@@ -164,7 +164,7 @@ where each parameter has a direct physical definition and pre-calibrated empiric
   \end{equation}
   \item \textbf{Heating-Time Exponential Growth Ratio $M_t(t)$ $[-]$:} Scales from $t_{\mathrm{ref}} = \SI{600}{\second}$ to any State/National heating duration $t \in [\SI{600}{\second}, \SI{900}{\second}]$ ($\SIrange{10}{15}{\minute}$) using the collector's calibrated effective top-layer time constant $\tau_{\mathrm{eff}} = C_{\mathrm{top,eff}}R_{\mathrm{th,eff}} = \SI{903.0}{\second}$ ($\SI{15.05}{\minute}$):
   \begin{equation}\label{eq:16:time-multiplier}
-    M_t(t) = \frac{1 - e^{-t/\tau_{\mathrm{eff}}}}{1 - e^{-600/\tau_{\mathrm{eff}}}} = \frac{1 - e^{-t/\SI{903.0}{\second}}}{0.48543}
+    M_t(t) = \frac{1 - e^{-t/\tau_{\mathrm{eff}}}}{1 - e^{-600/\tau_{\mathrm{eff}}}} = \frac{1 - e^{-t/\SI{903.0}{\second}}}{0.48544}
   \end{equation}
   \item \textbf{Starting-Water vs.\ Ambient-Room Coupling Weights $k_{\mathrm{start}}(t)$ and $k_{\mathrm{room}}(t)$:} When the ES source water bath $T_{\mathrm{start}}$ differs from the ambient room temperature $T_{\mathrm{room}}$ (e.g., cold tap water filled that morning, $T_{\mathrm{start}} < T_{\mathrm{room}}$), setting $\gamma_{\mathrm{loss}} = 1.00$ rearranges Eq.~\eref{eq:16:master-5var} into the \textbf{10-Second Linear Superposition Formula}:
   \begin{equation}\label{eq:16:fast-superposition}
@@ -201,9 +201,9 @@ At a State tournament, the ES announces at the start of the block (\texttt{Rule 
 \textbf{Solution.}
 1. \textbf{Time-Scaling Multiplier at $t = \SI{780}{\second}$ ($\SI{13.0}{\minute}$):}
 \[
-  e^{-780/903.0} = e^{-0.86379} = 0.42156 \implies 1 - e^{-t/\tau_{\mathrm{eff}}} = 0.57844, \qquad M_t(\SI{13}{\minute}) = \frac{0.57844}{1 - e^{-600/903.0}} = \frac{0.57844}{0.48543} = \mathbf{1.19160}
+  e^{-780/903.0} = e^{-0.86379} = 0.42156 \implies 1 - e^{-t/\tau_{\mathrm{eff}}} = 0.57844, \qquad M_t(\SI{13}{\minute}) = \frac{0.57844}{1 - e^{-600/903.0}} = \frac{0.57844}{0.48544} = \mathbf{1.19156}
 \]
-Thus the isothermal ($T_{\mathrm{start}}=T_{\mathrm{room}}$) table gain at $\SI{13.0}{\minute}$ is $\mathrm{TG}_{\mathrm{table}}(\SI{45}{\centi\meter}, \SI{125}{\watt}, \SI{13}{\minute}) = 27.70 \times 1.19160 = \mathbf{\SI{33.01}{\celsius}}$.
+Thus the isothermal ($T_{\mathrm{start}}=T_{\mathrm{room}}$) table gain at $\SI{13.0}{\minute}$ is $\mathrm{TG}_{\mathrm{table}}(\SI{45}{\centi\meter}, \SI{125}{\watt}, \SI{13}{\minute}) = 27.70 \times 1.19156 = \mathbf{\SI{33.01}{\celsius}}$.
 
 2. \textbf{Ambient-to-Bath Offset Correction ($k_{\mathrm{start}} = 0.42156, k_{\mathrm{room}} = 0.57844$):}
 Because the room ($T_{\mathrm{room}} = \SI{23.2}{\celsius}$) is $\SI{3.6}{\celsius}$ warmer than the starting water ($T_{\mathrm{start}} = \SI{19.6}{\celsius}$), parasitic heat loss to the room is reduced by:
@@ -215,7 +215,7 @@ Because the room ($T_{\mathrm{room}} = \SI{23.2}{\celsius}$) is $\SI{3.6}{\celsi
 \[
   T_{\mathrm{pred}} = T_{\mathrm{start}} + \mathrm{TG}_{\mathrm{table}} + \Delta T_{\mathrm{ambient-boost}} - \Delta T_{\mathrm{cool}} = 19.60 + 33.01 + 2.08 - 0.22 = \mathbf{\SI{54.47}{\celsius} \longrightarrow \text{Submit }\SI{54.5}{\celsius}}
 \]
-\verifiedby{Direct superposition check: $\mathrm{TG}_{\mathrm{table}} + k_{\mathrm{start}}T_{\mathrm{start}} + k_{\mathrm{room}}T_{\mathrm{room}} - \Delta T_{\mathrm{cool}} = 33.007 + 0.42156(19.6) + 0.57844(23.2) - 0.22 = 33.007 + 8.263 + 13.420 - 0.22 = \SI{54.470}{\celsius}$; asserted in \texttt{check\_sec14\_16.py}.}
+\verifiedby{Direct superposition check: $\mathrm{TG}_{\mathrm{table}} + k_{\mathrm{start}}T_{\mathrm{start}} + k_{\mathrm{room}}T_{\mathrm{room}} - \Delta T_{\mathrm{cool}} = 33.006 + 0.42156(19.6) + 0.57844(23.2) - 0.22 = 33.006 + 8.263 + 13.420 - 0.22 = \SI{54.469}{\celsius}$; asserted in \texttt{check\_sec14\_16.py}.}
 \end{workedexample}
 
 \begin{derivation}[Algebra-Only Three-Point Equal-Interval Extraction of $\tau_{\mathrm{eff}}$ and $T_{\mathrm{ss}}$ (Rule 5.d.iv Compliant)]
@@ -247,9 +247,9 @@ In a calibration run at $h = \SI{45.0}{\centi\meter}$ ($\SI{125}{\watt}$ lamp, $
   \Delta T_{\mathrm{ss}} = \frac{16.17^2}{2(16.17) - 27.77} = \frac{261.47}{4.57} = \mathbf{\SI{57.21}{\celsius}}
 \]
 \[
-  \mathrm{TG}(\SI{900}{\second}) = \Delta T_{\mathrm{ss}}\!\left(1 - 0.71738^3\right) = \mathbf{\SI{36.10}{\celsius}}
+  \mathrm{TG}(\SI{900}{\second}) = \Delta T_{\mathrm{ss}}\!\left(1 - 0.71738^3\right) = \mathbf{\SI{36.09}{\celsius}}
 \]
-\verifiedby{Direct check $\Delta T_{\mathrm{ss}}(1 - e^{-600/903.2}) = 57.214(1 - 0.51461) = \SI{27.77}{\celsius}$; asserted in \texttt{check\_sec14\_16.py}.}
+\verifiedby{Direct check $\Delta T_{\mathrm{ss}}(1 - e^{-600/903.2}) = 57.214(1 - 0.51463) = \SI{27.77}{\celsius}$; asserted in \texttt{check\_sec14\_16.py}.}
 \end{workedexample}
 \nextcol[0.50]
 \captionof{table}{Pre-computed ambient-to-bath temperature offset correction $\Delta T_{\mathrm{amb}} = k_{\mathrm{room}}(t)(T_{\mathrm{room}} - T_{\mathrm{start}})$ $[\si{\celsius}]$ \src{S01,S12}.}\label{tab:16:ambient-offset-grid}
@@ -404,15 +404,15 @@ At $h = \SI{50.0}{\centi\meter}$, $\mathrm{TG}_{100}(\SI{10}{\minute}) = \SI{17.
 \[
   \mathrm{TG}_{100}(\SI{53}{\centi\meter}, \SI{10}{\minute}) = 17.10 + 0.600(14.10 - 17.10) = \mathbf{\SI{15.30}{\celsius}} \quad (\text{matches \tref{tab:16:natl-1cm} entry }\SI{15.2}{\celsius}\text{ within }\SI{0.1}{\celsius})
 \]
-2. \textbf{Scale to $t = \SI{14.0}{\minute}$ using $M_{14} = 1.247$ ($k_{\mathrm{start}} = 0.395, k_{\mathrm{room}} = 0.605$) from \tref{tab:16:doe-36}:}
+2. \textbf{Scale to $t = \SI{14.0}{\minute}$ using $M_{14} = 1.247$ ($k_{\mathrm{start}} = 0.394, k_{\mathrm{room}} = 0.606$) from \tref{tab:16:doe-36}:}
 \[
   \mathrm{TG}_{\mathrm{table}}(\SI{53}{\centi\meter}, \SI{100}{\watt}, \SI{14}{\minute}) = 15.30 \times 1.247 = \mathbf{\SI{19.08}{\celsius}}
 \]
 3. \textbf{Apply Superposition Eq.~\eref{eq:16:fast-superposition} for $T_{\mathrm{start}} = \SI{21.0}{\celsius}, T_{\mathrm{room}} = \SI{21.5}{\celsius}$:}
 \[
-  T_{\mathrm{pred}} = 21.00 + 19.08 + 0.605(21.50 - 21.00) - 0.18 = 40.08 + 0.30 - 0.18 = \mathbf{\SI{40.20}{\celsius} \longrightarrow \text{Submit }\SI{40.2}{\celsius}}
+  T_{\mathrm{pred}} = 21.00 + 19.08 + 0.606(21.50 - 21.00) - 0.18 = 40.08 + 0.30 - 0.18 = \mathbf{\SI{40.20}{\celsius} \longrightarrow \text{Submit }\SI{40.2}{\celsius}}
 \]
-\verifiedby{Exact formula evaluation $T_{\mathrm{pred}} = 21.0 + 15.30(1 - e^{-840/903})/(1 - e^{-600/903}) + 0.6052(0.50) - 0.18 = \SI{40.204}{\celsius}$; asserted in \texttt{check\_sec14\_16.py}.}
+\verifiedby{Exact formula evaluation $T_{\mathrm{pred}} = 21.0 + 15.30(1 - e^{-840/903})/(1 - e^{-600/903}) + 0.6055(0.50) - 0.18 = \SI{40.208}{\celsius}$; asserted in \texttt{check\_sec14\_16.py}.}
 \end{workedexample}
 
 \begin{twocol}[0.49]
@@ -738,15 +738,15 @@ Using the calibrated $\SI{10.0}{\minute}$, $\SI{125}{\watt}$ anchor points at $h
 (a) At $h_1 = \SI{45.0}{\centi\meter}$ and $h_2 = \SI{65.0}{\centi\meter}$, the effective distances above $z_{\mathrm{eff}} = \SI{19.50}{\centi\meter}$ are $d_1 = 45.0 - 19.50 = \SI{25.50}{\centi\meter}$ and $d_2 = 65.0 - 19.50 = \SI{45.50}{\centi\meter}$. Taking the natural logarithm of the ratio $\Delta T_{\mathrm{ref},1} / \Delta T_{\mathrm{ref},2} = (d_2 / d_1)^n$:
 \[
   n = \frac{\ln(\Delta T_{\mathrm{ref},1} / \Delta T_{\mathrm{ref},2})}{\ln(d_2 / d_1)} = \frac{\ln(27.70 / 10.60)}{\ln(45.50 / 25.50)} = \frac{\ln(2.61321)}{\ln(1.78431)} = \frac{0.96058}{0.57903} = \mathbf{1.6589}, \qquad
-  A_0 = \Delta T_{\mathrm{ref},1}\,d_1^n = \mathbf{5973.5}
+  A_0 = \Delta T_{\mathrm{ref},1}\,d_1^n = \mathbf{5968.1}
 \]
 (b) Evaluating at $h = \SI{55.0}{\centi\meter}$ in fixed Slot~A ($d = 55.0 - 19.50 = \SI{35.50}{\centi\meter}$) vs.\ raised \textbf{Slot~B} ($d_{\mathrm{Slot\,B}} = \SI{33.60}{\centi\meter}$):
 \[
   \Delta T_{\mathrm{ref,Slot\,A}}(\SI{55}{\centi\meter}) = 27.70\!\left(\frac{25.50}{35.50}\right)^{\!1.6589} = \mathbf{\SI{16.00}{\celsius}}, \qquad
-  \Delta T_{\mathrm{ref,Slot\,B}}(\SI{55}{\centi\meter}) = 27.70\!\left(\frac{25.50}{33.60}\right)^{\!1.6589} = \mathbf{\SI{17.52}{\celsius}}
+  \Delta T_{\mathrm{ref,Slot\,B}}(\SI{55}{\centi\meter}) = 27.70\!\left(\frac{25.50}{33.60}\right)^{\!1.6589} = \mathbf{\SI{17.53}{\celsius}}
 \]
-matching the Slot~B DOE table entry ($\SI{17.5}{\celsius}$) to within $\mathbf{\SI{0.02}{\celsius}}$ and proving why raising the pedestal to Slot~B adds $+\SI{1.52}{\celsius}$!
-\verifiedby{Log-log slope identity $\ln(17.52/27.70)/\ln(33.60/25.50) = -1.6589 = -n$; asserted in \texttt{check\_sec14\_16.py}.}
+matching the Slot~B DOE table entry ($\SI{17.5}{\celsius}$) to within $\mathbf{\SI{0.03}{\celsius}}$ and proving why raising the pedestal to Slot~B adds $+\SI{1.53}{\celsius}$!
+\verifiedby{Log-log slope identity $\ln(17.53/27.70)/\ln(33.60/25.50) = -1.6589 = -n$; asserted in \texttt{check\_sec14\_16.py}.}
 \end{workedexample}
 
 \begin{devicebox}[30-Second Day-Of Prediction Worksheet \& Double-Check Protocol (Copy onto Prediction Scratchpad)]

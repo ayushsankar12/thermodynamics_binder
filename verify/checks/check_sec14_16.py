@@ -408,7 +408,7 @@ def run_checks() -> list[dict]:
     G_base_fins = (0.040 * 1.80e-5 / 0.012) + (0.0278 * 2.188e-3 / 0.010)
     Q_base_fins = G_base_fins * 13.0
     C_fins = 314.5e3 * 1.80e-5 * 0.012
-    # Frustum volume at z_w = 3.8732 cm for 100.0 mL
+    # Frustum volume at z_w = 3.8757 cm for 100.0 mL (exact root; was 3.8732, which holds only 99.93 mL)
     rb, rt, Hcup = 2.650, 3.750, 10.00
     sc = (rt - rb) / Hcup
     zw_100 = ((100.0 * 3.0 * sc / math.pi + rb**3) ** (1.0 / 3.0) - rb) / sc
@@ -423,13 +423,13 @@ def run_checks() -> list[dict]:
     checks.append(_make_record(
         "SEC15:EX15.6B_FRUSTUM_ZW", "§15.6",
         "Worked Example 15.9 (15.6b): Exact 100.0 mL waterline depth z_w in 9 oz cup [cm]",
-        3.8732, zw_100, tol=1e-3,
+        3.8757, zw_100, tol=1e-4,
         method="Exact cubic frustum inversion V(z) = (pi*z/3)*(r_b^2 + r_b*r(z) + r(z)^2)"
     ))
     checks.append(_make_record(
         "SEC15:EX15.6B_DRY_CLEARANCE", "§15.6",
         "Worked Example 15.9 (15.6b): Rule 3.e dry clearance below 2.50 cm overhang [cm]",
-        3.6268, c_rule, tol=1e-3,
+        3.6243, c_rule, tol=1e-4,
         method="Vertical dry margin H_cup - z_w - d_overhang >= 1.5 cm"
     ))
 

@@ -312,61 +312,54 @@ $\mathrm{SF_6}$ & Nonlin.\ Poly.\ & $146.055$ & $6{+}\mathrm{vib}$ & $3.00$ / $1
 \textbf{J--T Throttling} & $H = \mathrm{const}$ & Steady porous plug/valve & $0$ (\IG); $\ne 0$ real & Flow $P_2V_2 - P_1V_1$ & $0$ & $+nR\ln(P_1/P_2)$\\\bottomrule
 \end{tabularx}}
 
-\begin{twocol}[0.54]
 \begin{center}
-\begin{tikzpicture}[font=\scriptsize]
-\begin{axis}[
-    width=0.49\linewidth, height=4.1cm,
-    xlabel={$V/V_0$}, ylabel={$P/P_0$},
-    xmin=0.4, xmax=2.6, ymin=0.2, ymax=2.6,
-    grid=both, grid style={gray!20},
-    tick label style={font=\scriptsize},
-    label style={font=\scriptsize\sffamily},
-    title={\sffamily\scriptsize\bfseries $P$--$V$ Plane from $(P_0,V_0)$}
-]
+\begin{tikzpicture}[font=\footnotesize]
+\begin{axis}[name=pv,
+    width=0.47\linewidth, height=5.6cm,
+    axis lines=left, axis line style={-stealth},
+    xlabel={Volume ratio $V/V_0$ [--]}, ylabel={Pressure ratio $P/P_0$ [--]},
+    xmin=0.4, xmax=2.6, ymin=0, ymax=2.6,
+    xtick={0.5,1,1.5,2,2.5}, ytick={0.5,1,1.5,2,2.5},
+    grid=major, grid style={gray!20},
+    title={\textbf{$P$--$V$ plane through $(V_0,P_0)$}}]
 \addplot[domain=0.45:2.5,samples=2,very thick,black,-{Latex[length=1.8mm]}] {1.0};
-\node[above] at (axis cs:1.95,1.02) {$P=\mathrm{C}$ ($n=0$)};
-\draw[very thick,rust,-{Latex[length=1.8mm]}] (axis cs:1.0,0.25) -- (axis cs:1.0,2.45);
-\node[right,rust] at (axis cs:1.02,2.15) {$V=\mathrm{C}$};
-\addplot[domain=0.45:2.45,samples=40,very thick,teal,dashed,-{Latex[length=1.8mm]}] {1.0/x};
-\node[above right,teal] at (axis cs:1.55,0.65) {$T=\mathrm{C}$};
-\addplot[domain=0.55:2.45,samples=40,very thick,navy,-{Latex[length=1.8mm]}] {1.0/(x^1.4)};
-\node[below left,navy] at (axis cs:1.45,0.52) {$S=\mathrm{C}$ ($\gamma$)};
-\fill[black] (axis cs:1.0,1.0) circle (1.5pt);
+\node[above,fill=white,inner sep=1pt] at (axis cs:2.05,1.03) {isobar};
+\draw[very thick,rust,densely dotted,-{Latex[length=1.8mm]}] (axis cs:1.0,0.15) -- (axis cs:1.0,2.5);
+\node[right,rust,fill=white,inner sep=1pt] at (axis cs:1.04,2.3) {isochore};
+\addplot[domain=0.42:2.5,samples=50,very thick,teal,dashed,-{Latex[length=1.8mm]}] {1.0/x};
+\node[teal,fill=white,inner sep=1pt] at (axis cs:2.05,0.62) {isotherm};
+\addplot[domain=0.52:2.5,samples=50,very thick,navy,dashdotted,-{Latex[length=1.8mm]}] {1.0/(x^1.4)};
+\node[navy,fill=white,inner sep=1pt] at (axis cs:1.95,0.22) {adiabat (steeper)};
+\fill[black] (axis cs:1.0,1.0) circle (1.8pt);
 \end{axis}
-\hspace{1mm}
-\begin{axis}[
-    width=0.49\linewidth, height=4.1cm,
-    xlabel={$(S-S_0)/nR$}, ylabel={$T/T_0$},
+\begin{axis}[at={(pv.outer east)}, anchor=outer west, xshift=3mm,
+    width=0.47\linewidth, height=5.6cm,
+    axis lines=left, axis line style={-stealth},
+    xlabel={Entropy change $(S-S_0)/nR$ [--]}, ylabel={Temperature ratio $T/T_0$ [--]},
     xmin=-1.2, xmax=1.4, ymin=0.4, ymax=2.2,
-    grid=both, grid style={gray!20},
-    tick label style={font=\scriptsize},
-    label style={font=\scriptsize\sffamily},
-    title={\sffamily\scriptsize\bfseries $T$--$S$ Plane from $(T_0,S_0)$}
-]
+    xtick={-1,-0.5,0,0.5,1}, ytick={0.5,1,1.5,2},
+    grid=major, grid style={gray!20},
+    title={\textbf{$T$--$S$ plane through $(S_0,T_0)$}}]
 \addplot[domain=-1.1:1.3,samples=2,very thick,teal,dashed,-{Latex[length=1.8mm]}] {1.0};
-\node[above,teal] at (axis cs:-0.55,1.02) {$T=\mathrm{C}$};
-\draw[very thick,navy,-{Latex[length=1.8mm]}] (axis cs:0.0,0.45) -- (axis cs:0.0,2.1);
-\node[right,navy] at (axis cs:0.03,1.85) {$S=\mathrm{C}$};
-\addplot[domain=-1.0:1.1,samples=40,very thick,rust,-{Latex[length=1.8mm]}] {exp(x/2.5)};
-\node[above left,rust] at (axis cs:0.85,1.52) {$V=\mathrm{C}$};
-\addplot[domain=-1.1:1.25,samples=40,very thick,black,-{Latex[length=1.8mm]}] {exp(x/3.5)};
-\node[below right,black] at (axis cs:0.55,1.12) {$P=\mathrm{C}$};
-\fill[black] (axis cs:0.0,1.0) circle (1.5pt);
+\node[above,teal,fill=white,inner sep=1pt] at (axis cs:-0.7,1.03) {isotherm};
+\draw[very thick,navy,dashdotted,-{Latex[length=1.8mm]}] (axis cs:0.0,0.45) -- (axis cs:0.0,2.12);
+\node[right,navy,fill=white,inner sep=1pt] at (axis cs:0.04,2.0) {adiabat};
+\addplot[domain=-1.0:1.15,samples=50,very thick,rust,densely dotted,-{Latex[length=1.8mm]}] {exp(x/2.5)};
+\node[rust,fill=white,inner sep=1pt] at (axis cs:0.62,1.62) {isochore (steeper)};
+\addplot[domain=-1.1:1.3,samples=50,very thick,black,-{Latex[length=1.8mm]}] {exp(x/3.5)};
+\node[black,fill=white,inner sep=1pt] at (axis cs:0.85,1.08) {isobar};
+\fill[black] (axis cs:0.0,1.0) circle (1.8pt);
 \end{axis}
 \end{tikzpicture}
-\captionof{figure}{Four canonical ideal-gas processes through $(P_0,V_0,T_0,S_0)$ ($\gamma=1.4$).}\label{fig:01:pv-atlas}
+\captionof{figure}{Four canonical ideal-gas processes through one state ($\gamma = 1.4$, diatomic). Arrowheads mark one direction of travel along each path.}\label{fig:01:pv-atlas}
 \end{center}
-\nextcol[0.44]
 \begin{trapbox}[Slope Ratio \& Irreversible Step-Pressure Trap]
-\footnotesize
-\textbf{1. Slope Ratio on $P$--$V$ vs.\ $T$--$S$:}
+\textbf{1. Slope ratio on $P$--$V$ vs.\ $T$--$S$:}
 On $P$--$V$, the adiabat is steeper than the isotherm by $\gamma$: $(\partial P/\partial V)_S = -\gamma P/V = \gamma(\partial P/\partial V)_T$.
 On $T$--$S$, the isochore is steeper than the isobar by $\gamma$: $(\partial T/\partial S)_V = T/(nC_{V,m}) = \gamma(\partial T/\partial S)_P$.\\
-\textbf{2. Irreversible Constant-$P_{\mathrm{ext}}$ Step:}
+\textbf{2. Irreversible constant-$P_{\mathrm{ext}}$ step:}
 If an ideal gas expands against a \emph{sudden constant external pressure} $P_{\mathrm{ext}} = P_2$, work is the rectangle $W_{\mathrm{by}} = P_2(V_2 - V_1)$, NOT $nRT\ln(V_2/V_1)$ and NOT $(P_1V_1-P_2V_2)/(\gamma-1)$! For an adiabatic step against $P_2$, solve $nC_{V,m}(T_2-T_1) = -P_2(V_2-V_1) = -nR P_2(T_2/P_2 - T_1/P_1)$.
 \end{trapbox}
-\end{twocol}
 \end{quicksheet}
 
 % ============================================================================

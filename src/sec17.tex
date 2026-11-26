@@ -206,10 +206,10 @@ An Event Supervisor's digital probe uses a $\SI{10.00}{\kilo\ohm}$ NTC thermisto
 \par\smallskip\noindent
 \textbf{Solution.}
 (a)~From \eref{eq:17:beta}:
-$$\frac{1}{T} = \frac{1}{\SI{298.15}{\kelvin}} + \frac{1}{\SI{3892}{\kelvin}}\ln\!\left(\frac{4912.0}{10000.0}\right) = \num{3.3540164e-3} - \num{1.826699e-4} = \SI{3.1713465e-3}{\per\kelvin} \implies T = \SI{315.3235}{\kelvin} = \mathbf{\SI{42.17}{\celsius}}$$
-(b)~Fractional sensitivity: $\alpha_R = -\frac{\beta}{T^2} = -\frac{3892}{(315.3235)^2} = \mathbf{\SI{-0.03914}{\per\kelvin}} = \mathbf{\SI{-3.914}{\percent\per\kelvin}}$, so $\frac{dR}{dT} = \alpha_R R = (\num{-0.039144})(4912.0) = \mathbf{\SI{-192.3}{\ohm\per\kelvin}}$.
+$$\frac{1}{T} = \frac{1}{\SI{298.15}{\kelvin}} + \frac{1}{\SI{3892}{\kelvin}}\ln\!\left(\frac{4912.0}{10000.0}\right) = \num{3.3540164e-3} - \num{1.826577e-4} = \SI{3.1713587e-3}{\per\kelvin} \implies T = \SI{315.3223}{\kelvin} = \mathbf{\SI{42.17}{\celsius}}$$
+(b)~Fractional sensitivity: $\alpha_R = -\frac{\beta}{T^2} = -\frac{3892}{(315.3223)^2} = \mathbf{\SI{-0.03914}{\per\kelvin}} = \mathbf{\SI{-3.914}{\percent\per\kelvin}}$, so $\frac{dR}{dT} = \alpha_R R = (\num{-0.039144})(4912.0) = \mathbf{\SI{-192.3}{\ohm\per\kelvin}}$.
 (c)~Divider current: $I = \frac{3.30}{10000 + 4912.0} = \SI{0.22130}{\milli\ampere}$. Electrical dissipation: $P_{\mathrm{elec}} = I^2 R = (\num{2.2130e-4})^2(4912.0) = \SI{0.24056}{\milli\watt}$. By \eref{eq:17:selfheat}, $\Delta T_{\mathrm{SH}} = \frac{\SI{0.24056}{\milli\watt}}{\SI{6.50}{\milli\watt\per\kelvin}} = \mathbf{+\SI{0.0370}{\celsius}}$ (well below the $\SI{0.1}{\celsius}$ display resolution; however, in still air where $\delta_{\mathrm{diss}} \approx \SI{1.0}{\milli\watt\per\kelvin}$, $\Delta T_{\mathrm{SH}}$ rises to $+\SI{0.24}{\celsius}$!).
-\verifiedby{Forward substitution $R(\SI{315.3235}{\kelvin}) = 10000\exp[3892(1/315.3235 - 1/298.15)] = \SI{4912.00}{\ohm}$ and Python check \texttt{sec17:ex17.2}.}
+\verifiedby{Forward substitution $R(\SI{315.3223}{\kelvin}) = 10000\exp[3892(1/315.3223 - 1/298.15)] = \SI{4912.00}{\ohm}$ and Python check \texttt{sec17:ex17.2}.}
 \end{workedexample}
 
 \begin{workedexample}[\texttt{Pt100} RTD Lead-Resistance Bias \& IR Pyrometer Emissivity Audit]{Rule 4.f}{ex:17.3}
@@ -596,11 +596,11 @@ Time constant $\tau = -1/m \implies u(\tau) = \dfrac{u(m)}{m^2} = \tau^2 u(m)$; 
 \textbf{Solution.}
 (a)~From \eref{eq:17:typeBtol}--\eref{eq:17:typeBres}: $u_{B,\mathrm{sys}} = \frac{0.40}{\sqrt{3}} = \SI{0.23094}{\celsius}$ and $u_{B,\mathrm{res}} = \frac{0.10}{2\sqrt{3}} = \SI{0.02887}{\celsius}$. For a single reading:
 $$u(T) = \sqrt{u_{B,\mathrm{sys}}^2 + u_{B,\mathrm{res}}^2 + u_A^2} = \sqrt{0.23094^2 + 0.02887^2 + 0.050^2} = \mathbf{\SI{0.2380}{\celsius}}$$
-If two independent thermometers were used ($r = 0$), $u_{\mathrm{uncorr}}(\mathrm{TG}) = \sqrt{2}\,u(T) = \mathbf{\SI{0.3366}{\celsius}}$. Under Rule~\texttt{4.f} (same thermometer, $r_{\mathrm{sys}} = +1$), the correlated systematic variance cancels ($u_{B,\mathrm{sys}}^2 + u_{B,\mathrm{sys}}^2 - 2u_{B,\mathrm{sys}}^2 = 0$), leaving only random and resolution terms:
+If two independent thermometers were used ($r = 0$), $u_{\mathrm{uncorr}}(\mathrm{TG}) = \sqrt{2}\,u(T) = \mathbf{\SI{0.3367}{\celsius}}$. Under Rule~\texttt{4.f} (same thermometer, $r_{\mathrm{sys}} = +1$), the correlated systematic variance cancels ($u_{B,\mathrm{sys}}^2 + u_{B,\mathrm{sys}}^2 - 2u_{B,\mathrm{sys}}^2 = 0$), leaving only random and resolution terms:
 $$u_{\mathrm{corr}}(\mathrm{TG}) = \sqrt{2\left(u_{B,\mathrm{res}}^2 + u_A^2\right)} = \sqrt{2\left(0.02887^2 + 0.050^2\right)} = \mathbf{\SI{0.08165}{\celsius}} \quad (\mathbf{4.12\times\text{\textbf{ lower uncertainty!}}})$$
-(b)~Specific heat of the metal: $c_x = \frac{m_w c_w \Delta T_w}{m_x \Delta T_x} = \frac{(100.00)(4.184)(5.40)}{(85.00)(52.60)} = \mathbf{\SI{0.50533}{\joule\per\gram\per\kelvin}}$. By Rule~3 in Table~\ref{tab:17:gumrules}:
+(b)~Specific heat of the metal: $c_x = \frac{m_w c_w \Delta T_w}{m_x \Delta T_x} = \frac{(100.00)(4.184)(5.40)}{(85.00)(52.60)} = \mathbf{\SI{0.50534}{\joule\per\gram\per\kelvin}}$. By Rule~3 in Table~\ref{tab:17:gumrules}:
 $$\frac{u_c(c_x)}{c_x} = \sqrt{\left(\frac{0.15}{100.00}\right)^2 + \left(\frac{0.05}{85.00}\right)^2 + \left(\frac{0.08165}{5.40}\right)^2 + \left(\frac{0.08165}{52.60}\right)^2} = \mathbf{0.01528}\ (\SI{1.53}{\percent})$$
-*(Notice that $\frac{u(\Delta T_w)}{\Delta T_w} = \SI{1.51}{\percent}$ contributes $>97\%$ of the total variance!)* Thus $u_c(c_x) = (0.50533)(0.01528) = \mathbf{\SI{0.00772}{\joule\per\gram\per\kelvin}}$ and expanded uncertainty ($k=2$) is $U = 2 u_c(c_x) = \mathbf{\SI{0.0154}{\joule\per\gram\per\kelvin}}$, reported as $c_x = \mathbf{\SI{0.505 \pm 0.015}{\joule\per\gram\per\kelvin}}$.
+*(Notice that $\frac{u(\Delta T_w)}{\Delta T_w} = \SI{1.51}{\percent}$ contributes $>97\%$ of the total variance!)* Thus $u_c(c_x) = (0.50534)(0.01528) = \mathbf{\SI{0.00772}{\joule\per\gram\per\kelvin}}$ and expanded uncertainty ($k=2$) is $U = 2 u_c(c_x) = \mathbf{\SI{0.0154}{\joule\per\gram\per\kelvin}}$, reported as $c_x = \mathbf{\SI{0.505 \pm 0.015}{\joule\per\gram\per\kelvin}}$.
 \verifiedby{Monte Carlo / finite-difference perturbation of $c_x(m_w, m_x, \Delta T_w, \Delta T_x)$ and Python check \texttt{sec17:ex17.5}.}
 \end{workedexample}
 

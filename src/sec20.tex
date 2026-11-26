@@ -273,9 +273,9 @@ $$\eta_C = 1 - \frac{T_C}{T_H} = 1 - \frac{\SI{300.15}{\kelvin}}{\SI{500.15}{\ke
 \begin{itemize}
   \item \textbf{\xmark\ Wrong Move (i) --- Factoring $(T_1 - T_2)^4$:} $\sigma(100.0)^4 = \mathbf{\SI{5.67}{\watt}}$ (underestimates true heat loss by $\mathbf{175\times}$!).
   \item \textbf{\xmark\ Wrong Move (ii) --- Fourth Powers in Celsius:} $\sigma(127.0^4 - 27.0^4) = \mathbf{\SI{14.72}{\watt}}$ (underestimates true heat loss by $\mathbf{67.5\times}$!).
-  \item \textbf{\xmark\ Wrong Move (iii) --- Omitting Room Back-Radiation $T_2^4$:} $\sigma(400.15)^4 = \mathbf{\SI{1453.85}{\watt}}$ (overestimates net heat loss by $+\SI{460.28}{\watt}$!).
+  \item \textbf{\xmark\ Wrong Move (iii) --- Omitting Room Back-Radiation $T_2^4$:} $\sigma(400.15)^4 = \mathbf{\SI{1453.79}{\watt}}$ (overestimates net heat loss by $+\SI{460.22}{\watt}$!).
   \item \textbf{\cmark\ Correct Net Radiative Exchange in Kelvin:}
-  $$\dot{Q}_{\mathrm{net}} = \varepsilon\sigma A\left(T_{1,K}^4 - T_{2,K}^4\right) = (\num{5.670374e-8})(\SI{1.000}{\square\meter})\left(400.15^4 - 300.15^4\right) = 1453.850 - 460.275 = \mathbf{\SI{993.57}{\watt}}$$
+  $$\dot{Q}_{\mathrm{net}} = \varepsilon\sigma A\left(T_{1,K}^4 - T_{2,K}^4\right) = (\num{5.670374e-8})(\SI{1.000}{\square\meter})\left(400.15^4 - 300.15^4\right) = 1453.795 - 460.220 = \mathbf{\SI{993.57}{\watt}}$$
 \end{itemize}
 \verifiedby{Exact polynomial identity $T_1^4 - T_2^4 = (T_1^2+T_2^2)(T_1+T_2)(T_1-T_2) = (\num{2.5021e5})(700.30)(100.0) = \num{1.75222e10}\,\si{\kelvin\tothe{4}}$ and Python check \texttt{sec20:ex20.2}.}
 \end{workedexample}
@@ -351,8 +351,8 @@ The Carnot efficiency bound is $\eta_C = 1 - \frac{300.0}{600.0} = \mathbf{0.500
   Heat loss \textbf{INCREASES} by $\frac{15.9155}{9.4948} - 1 = \mathbf{+67.62\%}$ because $r_i < r_{\mathrm{crit}}$!
   \item \textbf{2027 Competition Cup ($r_i = \SI{34.0}{\milli\meter} \gg r_{\mathrm{crit}} = \SI{4.00}{\milli\meter} \to r_o = \SI{37.0}{\milli\meter}$):}
   Bare resistance: $R'_{\mathrm{bare,cup}} = \frac{1}{2\pi(0.0340)(10.0)} = \SI{0.46810}{\meter\cdot\kelvin\per\watt}$. Insulated at $r_o = \SI{37.0}{\milli\meter}$:
-  $$R'_{\mathrm{ins,cup}} = \frac{\ln(37.0/34.0)}{2\pi(0.0400)} + \frac{1}{2\pi(0.0370)(10.0)} = 0.33648 + 0.43015 = \mathbf{\SI{0.76663}{\meter\cdot\kelvin\per\watt}} > R'_{\mathrm{bare,cup}}\text{!}$$
-  Heat loss \textbf{DECREASES} by $1 - \frac{0.46810}{0.76663} = \mathbf{-38.94\%}$ because $r_i \gg r_{\mathrm{crit}}$!
+  $$R'_{\mathrm{ins,cup}} = \frac{\ln(37.0/34.0)}{2\pi(0.0400)} + \frac{1}{2\pi(0.0370)(10.0)} = 0.33644 + 0.43015 = \mathbf{\SI{0.76659}{\meter\cdot\kelvin\per\watt}} > R'_{\mathrm{bare,cup}}\text{!}$$
+  Heat loss \textbf{DECREASES} by $1 - \frac{0.46810}{0.76659} = \mathbf{-38.94\%}$ because $r_i \gg r_{\mathrm{crit}}$!
 \end{itemize}
 (b)~\textbf{Parasitic Thermal Mass Drain (\texttt{ERR-15}):} Water heat capacity is $C_w = (0.1000)(4184) = \SI{418.4}{\joule\per\kelvin}$, while the heavy aluminum sleeve has $C_{\mathrm{Al}} = (0.1400)(900.0) = \SI{126.0}{\joule\per\kelvin}$ ($30.1\%$ of the water!). Without the heavy sleeve, $\mathrm{TG}_{\mathrm{ideal}} = \frac{\SI{9200}{\joule}}{\SI{418.4}{\joule\per\kelvin}} = \mathbf{\SI{21.99}{\celsius}}$; with the coupled sleeve, $\mathrm{TG}_{\mathrm{with\text{ }Al}} = \frac{\SI{9200}{\joule}}{418.4 + 126.0} = \mathbf{\SI{16.90}{\celsius}}$ --- the heavy absorber robs $\mathbf{\SI{5.09}{\celsius}}$ ($\mathbf{23.1\%}$) of temperature gain!
 \verifiedby{Exact cylindrical thermal circuit ratios and Python check \texttt{sec20:ex20.7}.}

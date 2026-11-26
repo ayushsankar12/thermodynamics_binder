@@ -1016,7 +1016,537 @@ def sec12():
     return out
 
 
-SECTIONS = [sec00, sec01, sec02, sec03, sec04, sec05, sec06, sec07, sec08, sec09, sec10, sec11, sec12]
+# --------------------------------------------------------------------------------------
+# §13
+# --------------------------------------------------------------------------------------
+def sec13():
+    out = []
+    r, l = 1.80e-3, 10.0e-3
+    A = 2 * math.pi * r * l + 2 * math.pi * r * r
+    V = math.pi * r * r * l
+    tau = 2000 * 700 * V / (20.17 * A)
+    out += [
+        chk("EX-13.1-V", "sec13", "resistor volume [m3]", "1.0179e-7", V),
+        chk("EX-13.1-BI", "sec13", "Biot number", "0.00154", 20.17 * V / A / 10.0),
+        chk("EX-13.1-TAU", "sec13", "time constant [s]", "52.94", tau),
+        chk("EX-13.1-T95", "sec13", "95% time [s]", "158.6", -tau * math.log(0.05)),
+    ]
+    tau2 = 903.0
+    Tss = 22.00 + 24.00 * 2.37632
+    T6 = Tss - (Tss - 22.00) * math.exp(-600 / tau2)
+    T9 = Tss - (Tss - 22.00) * math.exp(-900 / tau2)
+    out += [
+        chk("EX-13.2-RATE", "sec13", "initial heating rate [C/min]", "3.789", 24.00 / 380.0 * 60),
+        chk("EX-13.2-TSS", "sec13", "stagnation temperature [C]", "79.03", Tss),
+        chk("EX-13.2-F10", "sec13", "1 - exp(-600/903)", "0.48544", 1 - math.exp(-600 / tau2)),
+        chk("EX-13.2-T10", "sec13", "T(10 min) [C]", "49.69", T6),
+        chk("EX-13.2-T15", "sec13", "T(15 min) [C]", "57.98", T9),
+        chk("EX-13.2-LIN15ERR", "sec13", "linear-extrapolation error at 15 min [C]", "20.86", 22.00 + 24.00 / 380.0 * 900 - T9),
+    ]
+    out += [
+        chk("EX-13.4-T7", "sec13", "probe reading at 2 tau [C]", "43.62", 47.00 - 25.00 * math.exp(-2)),
+        chk("EX-13.4-T175", "sec13", "probe reading at 5 tau [C]", "46.83", 47.00 - 25.00 * math.exp(-5)),
+        chk("EX-13.4-LAG", "sec13", "ramp lag [C]", "-0.16", -0.0450 * 3.50),
+        chk("EX-13.5-D", "sec13", "penetration depth [mm]", "18.85", 2000 * math.sqrt(1.48e-7 * 600)),
+        chk("EX-13.5-TAL", "sec13", "skin-aluminum contact T [C]", "20.61", (1100 * 34.0 + 24095.3 * 20.0) / (1100 + 24095.3)),
+        chk("EX-13.5-TBALSA", "sec13", "skin-balsa contact T [C]", "32.95", (1100 * 34.0 + 89.44 * 20.0) / (1100 + 89.44)),
+    ]
+    tc = 215.0 / 0.14554
+    out += [
+        chk("EX-13.7-TAU", "sec13", "open-cup time constant [s]", "1477.3", tc),
+        chk("EX-13.7-D6", "sec13", "cooling in 6 s [C]", "0.105", 26.00 * (1 - math.exp(-6.0 / tc))),
+        chk("EX-13.7-D50", "sec13", "cooling in 50 s [C]", "0.865", 26.00 * (1 - math.exp(-50.0 / tc))),
+        chk("EX-13.7-DIFF", "sec13", "extra loss when slow [C]", "0.76", 26.00 * (math.exp(-6.0 / tc) - math.exp(-50.0 / tc))),
+    ]
+    import numpy as np
+    from scipy.integrate import solve_ivp
+    C1, C2, R1, R2 = 167.36, 251.04, 3.50, 8.00
+    R12 = 0.0180 / (0.620 * 0.00360)
+    M = np.array([[-(1 / R1 + 1 / R12) / C1, 1 / (R12 * C1)], [1 / (R12 * C2), -(1 / R2 + 1 / R12) / C2]])
+    bvec = np.array([16.00 / C1, 4.00 / C2])
+    sol = solve_ivp(lambda t, y: M @ y + bvec, (0, 600.0), [0.0, 0.0], rtol=1e-10, atol=1e-12)
+    th1, th2 = sol.y[:, -1]
+    out += [
+        chk("EX-13.8-R12", "sec13", "inter-layer resistance [K/W]", "8.0645", R12),
+        chk("EX-13.8-A11", "sec13", "matrix a11 [1/s]", "-0.002448", M[0, 0]),
+        chk("EX-13.8-A12", "sec13", "matrix a12 [1/s]", "0.0007409", M[0, 1]),
+        chk("EX-13.8-A21", "sec13", "matrix a21 [1/s]", "0.0004939", M[1, 0]),
+        chk("EX-13.8-A22", "sec13", "matrix a22 [1/s]", "-0.0009919", M[1, 1]),
+        chk("EX-13.8-TTOP", "sec13", "top node at 600 s [C]", "53.73", 22.00 + th1),
+        chk("EX-13.8-TBOT", "sec13", "bottom node at 600 s [C]", "33.82", 22.00 + th2),
+        chk("EX-13.8-MIX", "sec13", "stirred reading [C]", "41.79", 22.00 + 0.4 * th1 + 0.6 * th2),
+    ]
+    out.append(chk("EX-13.9-DT", "sec13", "Regnault-Pfaundler corrected rise [C]", "9.154", 8.850 - 0.020 * 1.60 + 0.140 * 2.40))
+    e = math.exp(-0.5)
+    TA = 20.0 + ((200 * 85.0 + 25 * 5.0) / 225 - 20.0) * e
+    TB = (200 * (20.0 + 65.0 * e) + 25 * 5.0) / 225
+    out += [
+        chk("P13.1-TA", "sec13", "cream first [C]", "54.03", TA),
+        chk("P13.1-TB", "sec13", "cream last [C]", "53.38", TB),
+        chk("P13.1-DIFF", "sec13", "difference [C]", "0.66", TA - TB),
+    ]
+    Tss3 = 23.00 + 14.80 * 2.400
+    T3 = Tss3 - (Tss3 - 19.50) * math.exp(-0.8)
+    Tss125 = 23.00 + 18.50 * 2.400
+    T125 = Tss125 - (Tss125 - 19.50) * math.exp(-0.8)
+    out += [
+        chk("P13.3-T", "sec13", "100 W prediction [C]", "40.99", T3),
+        chk("P13.3-T125", "sec13", "125 W final [C]", "45.88", T125),
+        chk("P13.3-ERR", "sec13", "scaling-trap error [C]", "-4.3", 0.8 * T125 - T3),
+        chk("P13.4-T", "sec13", "Cu-water contact T [C]", "96.69", (37000 * 100.0 + 1598 * 20.0) / 38598),
+        chk("P13.5-DT", "sec13", "probe drain [C]", "-0.25", -1.012 / (104.6 + 1.012) * 26.00),
+        chk("P13.6-LAG", "sec13", "falling-room lag [C]", "2.594", 3.00 * (1 - math.exp(-2))),
+    ]
+    from scipy.optimize import brentq
+    lam = brentq(lambda x: 1 - x / math.tan(x) - 2.0, 0.1, math.pi - 1e-6)
+    A1 = 4 * (math.sin(lam) - lam * math.cos(lam)) / (2 * lam - math.sin(2 * lam))
+    th = A1 * math.exp(-lam ** 2 * 0.5)
+    out += [
+        chk("P13.7-LAM", "sec13", "sphere eigenvalue at Bi = 2", "2.0288", lam),
+        chk("P13.7-A1", "sec13", "sphere A1 at Bi = 2", "1.4793", A1),
+        chk("P13.7-RATIO", "sec13", "theta_s/theta_c", "0.4421", math.sin(lam) / lam),
+        chk("P13.7-TC", "sec13", "center temperature [C]", "38.89", 20.0 + 100.0 * th),
+        chk("P13.7-TS", "sec13", "surface temperature [C]", "28.35", 20.0 + 100.0 * th * math.sin(lam) / lam),
+    ]
+    dd = math.sqrt(5.40e-7 * 86400 / math.pi)
+    dy = math.sqrt(5.40e-7 * 3.1536e7 / math.pi)
+    out += [
+        chk("P13.8-DDAY", "sec13", "diurnal damping depth [m]", "0.1219", dd),
+        chk("P13.8-XDAY", "sec13", "diurnal anti-phase depth [m]", "0.3829", math.pi * dd),
+        chk("P13.8-DYR", "sec13", "annual damping depth [m]", "2.328", dy),
+        chk("P13.8-XYR", "sec13", "annual anti-phase depth [m]", "7.314", math.pi * dy),
+    ]
+    T2 = 21.00 + 26.80 * math.exp(-20.0 / 1200)
+    Tf = 21.00 + (T2 - 21.00) * math.exp(-25.0 / 480.0)
+    b = math.sqrt(1.30 * 2300 * 880)
+    q = b * 40.0 / math.sqrt(math.pi * 100.0)
+    out += [
+        chk("P13.9-T2", "sec13", "after closed dwell [C]", "47.36", T2),
+        chk("P13.9-TF", "sec13", "measured temperature [C]", "46.02", Tf),
+        chk("P13.9-DROP", "sec13", "post-lamp drop [C]", "1.78", 47.80 - Tf),
+        chk("P13.10-B", "sec13", "concrete effusivity", "1622.1", b),
+        chk("P13.10-Q", "sec13", "surface flux at 100 s [W/m2]", "3661", q),
+        chk("P13.10-E", "sec13", "absorbed energy per area [J/m2]", "7.321e5", 2 * q * 100.0),
+    ]
+    d0 = 16.50 * 2.400 * (1 - math.exp(-600 / (420.5 * 2.400)))
+    d1 = 18.00 * 2.400 * (1 - math.exp(-600 / (528.5 * 2.400)))
+    tau_be = 600 / -math.log(1 - d0 / 43.20)
+    dfoil = 18.00 * 2.400 * (1 - math.exp(-600 / ((420.5 + 1.35) * 2.400)))
+    out += [
+        chk("P13.11-D0", "sec13", "bare-cup gain [C]", "17.75", d0),
+        chk("P13.11-D1", "sec13", "collar gain [C]", "16.28", d1),
+        chk("P13.11-DIFF", "sec13", "collar penalty [C]", "-1.47", d1 - d0),
+        chk("P13.11-TAU", "sec13", "break-even tau [s]", "1134.1", tau_be),
+        chk("P13.11-C1", "sec13", "break-even capacitance [J/K]", "472.55", tau_be / 2.400),
+        chk("P13.11-DC", "sec13", "allowed added capacitance [J/K]", "52.05", tau_be / 2.400 - 420.5),
+        chk("P13.11-M", "sec13", "maximum aluminum mass [g]", "57.8", (tau_be / 2.400 - 420.5) / 0.900),
+        chk("P13.11-FOIL", "sec13", "foil-sleeve gain [C]", "19.32", dfoil),
+        chk("P13.11-FOILNET", "sec13", "foil-sleeve net benefit [C]", "1.57", dfoil - d0),
+    ]
+    T1 = 120.00 - 50.00 * (1 - math.exp(-2))
+    out += [
+        chk("P13.12-T1", "sec13", "end of ramp [C]", "76.77", T1),
+        chk("P13.12-T2", "sec13", "after 100 s hold [C]", "104.10", 120.00 - (120.00 - T1) * math.exp(-1)),
+    ]
+    return out
+
+
+# --------------------------------------------------------------------------------------
+# §14
+# --------------------------------------------------------------------------------------
+def coax(r1, r2, d):
+    R1, R2 = r1 / d, r2 / d
+    X = 1 + (1 + R2 ** 2) / R1 ** 2
+    return 0.5 * (X - math.sqrt(X * X - 4 * (R2 / R1) ** 2)), X
+
+
+def sec14():
+    out = []
+    dM = SIG_FULL * (335.15 ** 4 - 295.15 ** 4)
+    Tm = (335.15 + 295.15) / 2
+    out += [
+        chk("EX-14.1-MS", "sec14", "sigma Ts^4 [W/m2]", "715.43", SIG_FULL * 335.15 ** 4),
+        chk("EX-14.1-ME", "sec14", "sigma Te^4 [W/m2]", "430.31", SIG_FULL * 295.15 ** 4),
+        chk("EX-14.1-DM", "sec14", "exitance difference [W/m2]", "285.12", dM),
+        chk("EX-14.1-QSEL", "sec14", "selective collar [W]", "17.00", 4.00e-3 * (0.95 * 4500 - 0.09 * dM)),
+        chk("EX-14.1-QBLK", "sec14", "black paint collar [W]", "15.90", 4.00e-3 * (0.94 * 4500 - 0.89 * dM)),
+        chk("EX-14.1-QWHT", "sec14", "white paint collar [W]", "3.65", 4.00e-3 * (0.26 * 4500 - 0.90 * dM)),
+        chk("EX-14.1-HRAD", "sec14", "linearized 4 sigma Tm^3 [W/(m2 K)]", "7.099", 4 * SIG_FULL * Tm ** 3),
+        chk("EX-14.1-HRADDT", "sec14", "linearized flux at 40 K [W/m2]", "284.0", 4 * SIG_FULL * Tm ** 3 * 40),
+    ]
+    for lab, rs, rd, qd in (("SHINY", 0.88, 0.08, "36.91"), ("DULL", 0.62, 0.33, "28.03"), ("CARD", 0.04, 0.70, "8.97")):
+        e1 = rs + 0.35 * rd
+        out.append(chk(f"EX-14.2-{lab}", "sec14", f"{lab.lower()} reflector delivered power [W]", qd, 42.0 * (0.65 * e1 + 0.35 * e1 ** 2)))
+    RF = ((1.325 - 1) / (1.325 + 1)) ** 2
+    out.append(chk("EX-14.3-RF", "sec14", "air-water Fresnel reflectance", "0.01954", RF))
+    for lab, mu, f1, tot in (("A", 0.450, "35.53", "93.14"), ("B", 1.040, "63.39", "97.79")):
+        fL = (1 - RF) * (1 - math.exp(-mu * 3.80))
+        df = (1 - RF) * math.exp(-mu * 3.80) * 0.8832 * (1 - math.exp(-mu * 3.80))
+        out += [chk(f"EX-14.3-{lab}-TOP", "sec14", f"top 1 cm absorbed, mu={mu} [%]", f1, 100 * (1 - RF) * (1 - math.exp(-mu))),
+                chk(f"EX-14.3-{lab}-TOT", "sec14", f"total absorbed, mu={mu} [%]", tot, 100 * (fL + df))]
+    for lab, n, mu, dl, rho, cp, tau, C in (("BOPET", 1.64, 8.0, 0.0025, 1390, 1170, "0.8713", "0.2439"),
+                                           ("GLASS", 1.47, 0.080, 0.200, 2210, 753, "0.9153", "19.970")):
+        Rs = ((n - 1) / (n + 1)) ** 2
+        ti = math.exp(-mu * dl)
+        out += [chk(f"EX-14.4-{lab}-TAU", "sec14", f"{lab.lower()} NIR transmittance", tau, (1 - Rs) ** 2 * ti / (1 - Rs ** 2 * ti ** 2)),
+                chk(f"EX-14.4-{lab}-C", "sec14", f"{lab.lower()} disk heat capacity [J/K]", C, rho * cp * 6.00e-3 * dl / 100)]
+    hr = 4 * 5.6704e-8 * 308.65 ** 3 / 49
+    k = 0.0265 + hr * 0.0100
+    out += [
+        chk("EX-14.5-RA", "sec14", "gap Rayleigh number", "602.8", 9.807 * (7.00 / 308.65) * 1e-6 / 3.69e-10),
+        chk("EX-14.5-HRAD", "sec14", "foil-gap h_rad [W/(m2 K)]", "0.1361", hr),
+        chk("EX-14.5-KEFF", "sec14", "effective k [W/(m K)]", "0.02786", k),
+        chk("EX-14.5-Q", "sec14", "foil-air sleeve leak [W]", "0.878", k * 0.0450 * 21.0 / 0.030),
+        chk("EX-14.5-PCT", "sec14", "cork extra leak [%]", "43.6", 100 * ((0.040 / k) - 1)),
+        chk("EX-14.5-CCORK", "sec14", "cork sleeve heat capacity [J/K]", "424.6", 314500 * 0.0450 * 0.030),
+    ]
+    return out
+
+
+# --------------------------------------------------------------------------------------
+# §15 (labels 15.1b, 15.2 ... print as 15.2, 15.3 ...)
+# --------------------------------------------------------------------------------------
+def sec15():
+    out = []
+    Fc40 = coax(6.35, 3.75, 30.0)[0]
+    Fa40 = coax(6.35, 15.0, 10.0)[0]
+    Fa295 = coax(6.35, 15.0, 10.5)[0]
+    Fc65, X65 = coax(6.35, 3.75, 55.0)
+    Fa65 = coax(6.35, 15.0, 35.0)[0]
+    out += [
+        chk("EX-15.1-FC40", "sec15", "bulb-to-cup view factor at 40 cm", "0.01474", Fc40),
+        chk("EX-15.1-FA40", "sec15", "bulb-to-aperture view factor at 40 cm", "0.66465", Fa40),
+        chk("EX-15.1-FA295", "sec15", "aperture view factor, rim at 29.5 cm", "0.64355", Fa295),
+        chk("EX-15.1-GAIN", "sec15", "aperture/cup gain at 40 cm", "45.08", Fa40 / Fc40),
+        chk("EX-15.1-GAIN295", "sec15", "gain with rim at 29.5 cm", "43.65", Fa295 / Fc40),
+        chk("EX-15.1-X65", "sec15", "X for cup at 65 cm", "76.369", X65),
+        chk("EX-15.1-FC65", "sec15", "cup view factor at 65 cm", "0.004567", Fc65),
+        chk("EX-15.1-FA65", "sec15", "aperture view factor at 65 cm", "0.15160", Fa65),
+        chk("EX-15.1-GAIN65", "sec15", "gain at 65 cm", "33.19", Fa65 / Fc65),
+        chk("EX-12.2-FCUP", "sec12", "Ex 12.2 bare-cup view factor", "0.01474", Fc40),
+        chk("EX-12.2-GAIN", "sec12", "Ex 12.2 gain", "45.1", 0.6647 / 0.01474),
+    ]
+    F, X = coax(14.50, 3.75, 14.30)
+    fd = 2.15 * F
+    out += [
+        chk("EX-15.1b-X", "sec15", "aperture-to-cup X", "2.03949", X),
+        chk("EX-15.1b-F", "sec15", "aperture-to-cup view factor", "0.03334", F),
+        chk("EX-15.1b-QD", "sec15", "direct beam power [W]", "2.451", fd * 34.20),
+        chk("EX-15.1b-QTOT", "sec15", "total power at glazing cap [W]", "30.352", fd * 34.20 + (1 - fd) * 34.20 * 0.8788),
+        chk("EX-15.1b-QW", "sec15", "wall-delivered power [W]", "27.901", (1 - fd) * 34.20 * 0.8788),
+    ]
+    d1 = math.sqrt(14.5 ** 2 + 18.0 ** 2)
+    d2 = math.sqrt(14.5 ** 2 + 17.0 ** 2)
+    a = (d1 + d2) / 2
+    b = math.sqrt(a * a - 17.5 ** 2)
+    L1 = math.sqrt(1.190 ** 2 + 8.50 ** 2)
+    out += [
+        chk("EX-15.2-A", "sec15", "ellipse semi-major axis [cm]", "22.7289", a),
+        chk("EX-15.2-B", "sec15", "ellipse semi-minor axis [cm]", "14.5035", b),
+        chk("EX-15.2-R", "sec15", "radius at 18.5 cm [cm]", "13.318", b * math.sqrt(1 - 81.0 / a ** 2)),
+        chk("EX-15.2-L", "sec15", "frustum slant height [cm]", "8.5829", L1),
+        chk("EX-15.2-ROUT", "sec15", "unrolled outer radius [cm]", "104.58", 14.50 * L1 / 1.190),
+    ]
+    Ghs = 1 / 220.0 + 1 / 14.20 + 1 / 19.80
+    Rtop = 1 / Ghs + 3.68
+    G = 1 / Rtop + 1 / 9.42 + 1 / 185.0
+    Gopen = 1 / 5.50 + 1 / 14.20 + 1 / 19.80
+    out += [
+        chk("EX-15.3-RTOP", "sec15", "glazed top resistance [K/W]", "11.650", Rtop),
+        chk("EX-15.3-RENC", "sec15", "enclosure resistance [K/W]", "5.066", 1 / G),
+        chk("EX-15.3-REFF", "sec15", "top-layer effective resistance [K/W]", "4.190", 1 / (G + 0.38 / 9.21)),
+        chk("EX-15.3-ROPEN", "sec15", "open-top resistance [K/W]", "3.303", 1 / Gopen),
+        chk("EX-15.3-RENCOPEN", "sec15", "open enclosure resistance [K/W]", "2.414", 1 / (Gopen + 1 / 9.42 + 1 / 185.0)),
+    ]
+    TGal = 27.70 * 220.6 / (220.6 + 0.150 * 896)
+    out += [
+        chk("EX-15.3b-TG", "sec15", "TG with aluminum sleeve [C]", "17.21", TGal),
+        chk("EX-15.3b-LOST", "sec15", "TG lost [C]", "10.49", 27.70 - TGal),
+    ]
+    Tm = (215.0 * 49.70 + 203.4 * 29.34) / 418.4
+    PE = 1 - abs(Tm - 49.70) / Tm
+    out += [
+        chk("EX-15.4-TMIX", "sec15", "mixed temperature [C]", "39.80", Tm),
+        chk("EX-15.4-KAPPA", "sec15", "stratification factor", "1.556", 27.70 / (Tm - 22.00)),
+        chk("EX-15.4-PE", "sec15", "PE after swirl", "0.7513", PE),
+        chk("EX-15.4-LOST", "sec15", "points lost", "15.69", 30 - 30 * (Tm - 22.00) / 27.70 + 20 - 20 * PE),
+        chk("EX-15.4-Q", "sec15", "two-body heat [J]", "2128.0", 215.0 * (49.70 - Tm)),
+    ]
+    md = 3.60e-3 * 6.65e-3 * (0.04680 - 0.00816)
+    dm = (7384 - 1322) * 1.50e-4 * 18.0153 / (8.31446 * 313.15)
+    out += [
+        chk("EX-15.5-MDOT", "sec15", "evaporation rate [kg/s]", "9.250e-7", md),
+        chk("EX-15.5-Q", "sec15", "evaporative power [W]", "2.226", 2.406e6 * md),
+        chk("EX-15.5-DT", "sec15", "top-layer penalty [C]", "6.21", 2.406e6 * md * 600 / 215.0),
+        chk("EX-15.5-DM", "sec15", "headspace saturation mass [g]", "6.292e-3", dm),
+        chk("EX-15.5-RHO", "sec15", "ideal-gas vapor density at 40 C [g/m3]", "51.09", 7384 * 18.0153 / (8.31446 * 313.15)),
+    ]
+    Gf = 0.040 * 1.80e-5 / 0.012 + 0.0278 * 21.88e-4 / 0.010
+    out += [
+        chk("EX-15.6-G", "sec15", "fin pedestal conductance [W/K]", "6.143e-3", Gf),
+        chk("EX-15.6-Q", "sec15", "fin pedestal leak [W]", "0.080", Gf * 13.0),
+        chk("EX-15.6-QPLY", "sec15", "plywood floor leak [W]", "0.287", 0.120 * 22.06e-4 / 0.012 * 13.0),
+    ]
+    from scipy.optimize import brentq
+    zw = brentq(lambda z: math.pi / (3 * 0.11) * ((2.65 + 0.11 * z) ** 3 - 2.65 ** 3) - 100.0, 1, 8)
+    out += [
+        chk("EX-15.6b-ZW", "sec15", "100 mL water depth [cm]", "3.876", zw),
+        chk("EX-15.6b-R", "sec15", "water surface radius at the printed z_w = 3.876 cm [cm]", "3.0764", 2.650 + 0.1100 * 3.876),
+        chk("EX-15.6b-CLEAR", "sec15", "dry clearance below lip [cm]", "3.62", 10.00 - zw - 2.50),
+    ]
+    return out
+
+
+# --------------------------------------------------------------------------------------
+# §16 (labels 16.2b, 16.3 ... print as 16.3, 16.4 ...)
+# --------------------------------------------------------------------------------------
+def Mt(t_min, tau=903.0):
+    return (1 - math.exp(-60 * t_min / tau)) / (1 - math.exp(-600 / tau))
+
+
+def sec16():
+    out = []
+    ES = 50 * 88.5 / 92.0
+    PEa = 1 - 0.3 / 49.7
+    PEb = 1 - 0.3 / 30.1
+    TSb = 30 * 8.1 / 27.7
+    out += [
+        chk("EX-16.1-ES", "sec16", "exam score [pts]", "48.10", ES),
+        chk("EX-16.1-FSA", "sec16", "Team Alpha final [pts]", "98.02", ES + 30 + 20 * PEa / 0.9980),
+        chk("EX-16.1-FSB", "sec16", "Team Beta final [pts]", "76.71", ES + TSb + 20 * PEb / 0.9980),
+        chk("EX-16.1-FSBPEN", "sec16", "Team Beta with violation [pts]", "68.13", ES + 0.7 * (TSb + 20 * PEb / 0.9980)),
+    ]
+    out += [
+        chk("EX-16.0-DEN", "sec16", "1 - exp(-600/903)", "0.48544", 1 - math.exp(-600 / 903.0)),
+        chk("EX-16.2-MT13", "sec16", "M_t(13 min)", "1.19156", Mt(13)),
+        chk("EX-16.2-TG", "sec16", "TG_table(45 cm, 13 min) [C]", "33.01", 27.70 * Mt(13)),
+        chk("EX-16.2-PRED", "sec16", "prediction [C]", "54.47", 19.60 + 27.70 * Mt(13) + (1 - math.exp(-780 / 903.0)) * 3.6 - 0.22),
+    ]
+    for m, val in ((11, "1.068"), (12, "1.132"), (13, "1.192"), (14, "1.247"), (15, "1.300")):
+        out.append(chk(f"TAB-16.MT-{m}", "sec16", f"M_t({m} min) to 3 decimals", val, Mt(m)))
+    for m, ks in ((10, "0.515"), (11, "0.481"), (12, "0.451"), (13, "0.422"), (14, "0.394"), (15, "0.369")):
+        out.append(chk(f"TAB-16.KSTART-{m}", "sec16", f"k_start({m} min)", ks, math.exp(-60 * m / 903.0)))
+    tau = 300 / math.log(16.17 / 11.60)
+    dss = 16.17 ** 2 / (2 * 16.17 - 27.77)
+    out += [
+        chk("EX-16.2b-TAU", "sec16", "fitted tau [s]", "903.2", tau),
+        chk("EX-16.2b-DSS", "sec16", "steady-state gain [C]", "57.21", dss),
+        chk("EX-16.2b-TG900", "sec16", "15-min gain [C]", "36.09", dss * (1 - (11.60 / 16.17) ** 3)),
+    ]
+    TG53 = 17.10 + 0.600 * (14.10 - 17.10)
+    out += [
+        chk("EX-16.3-TG53", "sec16", "interpolated TG_100(53 cm) [C]", "15.30", TG53),
+        chk("EX-16.3-PRED", "sec16", "prediction with table M14 = 1.247, k_room = 0.606 [C]", "40.20", 21.00 + TG53 * 1.247 + 0.606 * 0.50 - 0.18),
+        chk("EX-16.3-PREDX", "sec16", "prediction with exact M14 (verified-by line) [C]", "40.208", 21.00 + TG53 * Mt(14) + (1 - math.exp(-840 / 903.0)) * 0.50 - 0.18),
+    ]
+    out += [
+        chk("EX-16.4-A", "sec16", "open-extraction cooling [C]", "0.932", 0.05 + 0.0245 * 36),
+        chk("EX-16.4-B", "sec16", "staged-extraction cooling [C]", "0.547", 0.05 + 0.0070 * 22 + 0.0245 * 14),
+    ]
+    import statistics as st
+    x = [49.6, 49.8, 49.7, 49.5, 49.9, 49.7]
+    sr = st.stdev(x)
+    ur = sr * math.sqrt(7 / 6)
+    out += [
+        chk("EX-16.5-S", "sec16", "repeatability s [C]", "0.1414", sr),
+        chk("EX-16.5-URUN", "sec16", "single-run uncertainty [C]", "0.1528", ur),
+        chk("EX-16.5-PE", "sec16", "expected PE", "0.99755", 1 - math.sqrt(2 / math.pi) * ur / 49.700),
+        chk("EX-16.6-PRED", "sec16", "PAR38-adjusted prediction [C]", "36.23", 22.00 + 1.160 * 12.40 - 0.15),
+        chk("EX-16.6-SAVE", "sec16", "PS points saved", "1.05", 20 * 1.9 / 36.2),
+    ]
+    n = math.log(27.70 / 10.60) / math.log(45.50 / 25.50)
+    out += [
+        chk("EX-16.7-N", "sec16", "power-law exponent", "1.6589", n),
+        chk("EX-16.7-A0", "sec16", "power-law amplitude", "5968.1", 27.70 * 25.50 ** n),
+        chk("EX-16.7-SLOTA", "sec16", "Slot A prediction at 55 cm [C]", "16.00", 27.70 * (25.50 / 35.50) ** n),
+        chk("EX-16.7-SLOTB", "sec16", "Slot B prediction at 55 cm [C]", "17.53", 27.70 * (25.50 / 33.60) ** n),
+    ]
+    return out
+
+
+# --------------------------------------------------------------------------------------
+# §17 - §20
+# --------------------------------------------------------------------------------------
+def sec17_20():
+    out = []
+    bapp = 1.120e-3 - 3 * 3.30e-6
+    out += [
+        chk("EX-17.1-S", "sec17", "capillary sensitivity [mm/K]", "2.2085", 250.0 * bapp / (math.pi / 4 * 0.400 ** 2)),
+        chk("EX-17.1-T", "sec17", "stem-corrected temperature [C]", "66.97", 65.00 + 0.00104 * 45.0 * 42.0),
+    ]
+    inv = 1 / 298.15 + math.log(4912.0 / 10000.0) / 3892
+    out += [
+        chk("EX-17.2-INV", "sec17", "1/T [1/K]", "3.1713587e-3", inv),
+        chk("EX-17.2-T", "sec17", "thermistor temperature [K]", "315.3223", 1 / inv),
+        chk("EX-17.2-DRDT", "sec17", "dR/dT [ohm/K]", "-192.3", -3892 * inv ** 2 * 4912.0),
+        chk("EX-17.2-SH", "sec17", "self-heating [C]", "0.0370", (3.30 / 14912.0) ** 2 * 4912.0 * 1000 / 6.50),
+    ]
+    A, B = 3.9083e-3, -5.775e-7
+    tcvd = lambda R: (-A + math.sqrt(A * A - 4 * B * (1 - R / 100.0))) / (2 * B)
+    Ta, To = 295.15, 317.15
+    out += [
+        chk("EX-17.3-TTRUE", "sec17", "RTD true temperature [C]", "43.18", tcvd(116.77)),
+        chk("EX-17.3-BIAS", "sec17", "2-wire lead bias [C]", "1.815", tcvd(117.47) - tcvd(116.77)),
+        chk("EX-17.3-IRW", "sec17", "IR reading on water [C]", "44.21", (Ta ** 4 + 0.96 / 0.95 * (To ** 4 - Ta ** 4)) ** 0.25 - 273.15),
+        chk("EX-17.3-IRF", "sec17", "IR reading on foil [C]", "23.03", (Ta ** 4 + 0.04 / 0.95 * (To ** 4 - Ta ** 4)) ** 0.25 - 273.15),
+    ]
+    Teq = (185.0 * 46.50 + 0.450 * 21.50) / 185.45
+    Tb = 100.00 + 0.03686 * (-18.0) - 0.000020 * 18.0 ** 2
+    out += [
+        chk("EX-17.4-TEQ", "sec17", "equilibrium after probe drain [C]", "46.439", Teq),
+        chk("EX-17.4-T2", "sec17", "reading at 2 tau [C]", "43.06", Teq - (Teq - 21.50) * math.exp(-2)),
+        chk("EX-17.4-TB", "sec17", "boiling point at 742 mmHg [C]", "99.330", Tb),
+        chk("EX-17.4-TTRUE", "sec17", "two-point calibrated reading [C]", "44.56", Tb * 44.50 / 99.20),
+    ]
+    us, ur = 0.40 / math.sqrt(3), 0.10 / (2 * math.sqrt(3))
+    u = math.sqrt(us ** 2 + ur ** 2 + 0.050 ** 2)
+    uc = math.sqrt(2 * (ur ** 2 + 0.050 ** 2))
+    cx = 100.00 * 4.184 * 5.40 / (85.00 * 52.60)
+    rel = math.sqrt((0.15 / 100) ** 2 + (0.05 / 85) ** 2 + (uc / 5.40) ** 2 + (uc / 52.60) ** 2)
+    out += [
+        chk("EX-17.5-U", "sec17", "single-reading uncertainty [C]", "0.2380", u),
+        chk("EX-17.5-UNC", "sec17", "uncorrelated TG uncertainty [C]", "0.3367", math.sqrt(2) * u),
+        chk("EX-17.5-UC", "sec17", "correlated TG uncertainty [C]", "0.08165", uc),
+        chk("EX-17.5-CX", "sec17", "specific heat [J/(g K)]", "0.50534", cx),
+        chk("EX-17.5-REL", "sec17", "relative uncertainty", "0.01528", rel),
+        chk("EX-17.5-UCX", "sec17", "standard uncertainty [J/(g K)]", "0.00772", cx * rel),
+    ]
+    Q = SIG_FULL * 5.000e-3 * 500.0 ** 4
+    out += [
+        chk("EX-17.6-T", "sec17", "thermocouple temperature [C]", "42.64", 40.0 + 10.0 * (1.724 - 1.612) / (2.036 - 1.612)),
+        chk("EX-17.6-Q", "sec17", "cavity power [W]", "17.720", Q),
+        chk("EX-17.6-U", "sec17", "power uncertainty [W]", "0.365", Q * math.sqrt(0.005 ** 2 + 0.020 ** 2)),
+    ]
+    x = (5.942025 - 1.1346) / (7.5445 - 1.1346)
+    vfg = 1.6718 - 0.0010435
+    out += [
+        chk("EX-18.1-H", "sec18", "wet-steam enthalpy [kJ/kg]", "2077.77", 355.96 + x * (2651.7 - 355.96)),
+        chk("EX-18.1-HBI", "sec18", "bilinear superheated h [kJ/kg]", "2804.85", 0.2 * 2782.3 + 0.3 * 2824.4 + 0.2 * 2776.1 + 0.3 * 2819.5),
+        chk("EX-18.1-HFG", "sec18", "central-difference Clapeyron h_fg [kJ/kg]", "2262.5", 373.15 * vfg * (120.90 - 84.609) / 10),
+        chk("EX-18.2-W", "sec18", "trapezoidal work [J]", "1037.5", 1.00 * (0.5 * 420.0 + 310.0 + 240.0 + 195.0 + 0.5 * 165.0)),
+        chk("EX-18.3-TSS", "sec18", "3-point T_ss [C]", "61.663", (22.00 * 38.45 - 31.32 ** 2) / (22.00 + 38.45 - 2 * 31.32)),
+    ]
+    import numpy as np
+    t = np.array([0, 2, 4, 6, 8, 10.0])
+    Y = np.array([0.0, -0.13210, -0.26527, -0.39675, -0.52975, -0.66165])
+    StY = float(((t - 5) * (Y - Y.mean())).sum())
+    SYY = float(((Y - Y.mean()) ** 2).sum())
+    m = StY / 70.0
+    sres = math.sqrt((SYY - m * StY) / 4)
+    out += [
+        chk("EX-18.3-STY", "sec18", "S_tY", "-4.63268", StY),
+        chk("EX-18.3-SYY", "sec18", "S_YY", "0.3065967", SYY),
+        chk("EX-18.3-M", "sec18", "slope [1/min]", "-0.0661811", m),
+        chk("EX-18.3-S", "sec18", "residual standard error", "3.86e-4", sres),
+        chk("EX-18.3-UM", "sec18", "slope uncertainty [1/min]", "4.61e-5", sres / math.sqrt(70.0)),
+        chk("EX-18.3-TAU", "sec18", "tau [min]", "15.110", -1 / m),
+        chk("EX-18.3-UTAU", "sec18", "tau uncertainty [min]", "0.0105", sres / math.sqrt(70.0) / m ** 2),
+    ]
+    import statistics as st
+    g = [21.30, 21.45, 21.20, 21.35, 21.40, 18.90]
+    out += [
+        chk("EX-18.3-SALL", "sec18", "all-run std [C]", "0.99983", st.stdev(g)),
+        chk("EX-18.3-G", "sec18", "Grubbs statistic", "2.0337", abs(18.90 - st.mean(g)) / st.stdev(g)),
+        chk("EX-18.3-UA", "sec18", "clean Type A uncertainty [C]", "0.0430", st.stdev(g[:5]) / math.sqrt(5)),
+    ]
+    T = np.array([313.15, 333.15, 353.15, 373.15])
+    X = 1000 / T
+    Yp = np.log(np.array([7.384, 19.946, 47.414, 101.42]))
+    Sxx = float(((X - X.mean()) ** 2).sum())
+    Sxy = float(((X - X.mean()) * (Yp - Yp.mean())).sum())
+    mm = Sxy / Sxx
+    bb = float(Yp.mean()) - mm * float(X.mean())
+    out += [
+        chk("EX-18.4-Y1", "sec18", "ln(7.384)", "1.99932", math.log(7.384)),
+        chk("EX-18.4-SXX", "sec18", "S_XX", "0.146673", Sxx),
+        chk("EX-18.4-SXY", "sec18", "S_XY", "-0.748562", Sxy),
+        chk("EX-18.4-M", "sec18", "slope [K]", "-5.10360", mm),
+        chk("EX-18.4-B", "sec18", "intercept", "18.3040", bb),
+        chk("EX-18.4-DH", "sec18", "Delta H_vap [kJ/mol]", "42.43", -mm * 8.3144626),
+        chk("EX-18.4-TB", "sec18", "normal boiling point [C]", "99.77", 1000 / ((math.log(101.325) - bb) / mm) - 273.15),
+        chk("EX-18.4-2PT", "sec18", "two-point Delta H_vap [kJ/mol]", "42.42", 8.3144626 * math.log(101.42 / 7.384) / (1 / 313.15 - 1 / 373.15) / 1e3),
+    ]
+    out += [
+        chk("EX-18.5-CS", "sec18", "solid specific heat [J/(kg K)]", "1750", 250.0 * 112.0 / (0.400 * 40.0)),
+        chk("EX-18.5-LF", "sec18", "latent heat [kJ/kg]", "180.0", 250.0 * 288.0 / 0.400 / 1e3),
+        chk("EX-18.5-SN", "sec18", "tin in liquid [g]", "162.80", 0.555 * 500.0 * 22.0 / 37.5),
+    ]
+    tt = [7875.0 / 511.0, 83387.5 / 508.0, 104600.0 / 488.0, 564100.0 / 468.0]
+    t5 = 1800.0 - sum(tt)
+    Tf = 1270.0 - 1170.0 * math.exp(-t5 / 1300.0)
+    Vf = (250.0 / 18.01528) * 8.31446 * (Tf + 273.15) / 101325
+    out += [
+        chk("EX-19.1-T", "sec19", "time to dry steam [s]", "1599.25", sum(tt)),
+        chk("EX-19.1-TF", "sec19", "final steam temperature [C]", "267.42", Tf),
+        chk("EX-19.1-VF", "sec19", "final steam volume [m3]", "0.61556", Vf),
+        chk("EX-19.1-W", "sec19", "boundary work [kJ]", "62.34", 101.325 * (Vf - 0.250 / 916.7)),
+    ]
+    QH = 2.00 * (0.92 * 1000.0 - 0.10 * SIG_FULL * (450.0 ** 4 - 300.0 ** 4))
+    out += [
+        chk("EX-19.2-QH", "sec19", "collector heat [W]", "1466.82", QH),
+        chk("EX-19.2-QB", "sec19", "building heat [W]", "3789.3", 7.75 * QH / 3),
+    ]
+    x2s = (6.7450 - 0.6492) / 7.4996
+    h2s = 191.81 + x2s * 2392.1
+    w = 0.85 * (3116.1 - h2s)
+    out += [
+        chk("EX-19.3-X2S", "sec19", "isentropic quality", "0.81282", x2s),
+        chk("EX-19.3-W", "sec19", "turbine work [kJ/kg]", "832.96", w),
+        chk("EX-19.3-SGEN", "sec19", "entropy generation via identity [kJ/(kg K)]", "0.46085", (3116.1 - w - h2s) / 318.96),
+    ]
+    Tf4 = 300.0 + 12471.7 / (5.25 * 8.3144626)
+    out += [
+        chk("EX-19.4-TF", "sec19", "final temperature [K]", "585.71", Tf4),
+        chk("EX-19.4-PF", "sec19", "final pressure [kPa]", "405.83", 2.500 * 8.3144626 * Tf4 / 0.03000 / 1e3),
+    ]
+    dV = 50.100 * ((9.50e-4 - 9.75e-6) * 50.00 - 8.20e-5 * 25.00)
+    out += [
+        chk("EX-19.5-DV", "sec19", "apparent volume change [cm3]", "2.2526", dV),
+        chk("EX-19.5-H1", "sec19", "meniscus reading [cm]", "117.63", 5.00 + dV / 0.0200),
+        chk("EX-19.5-EXACT", "sec19", "absolute-volume meniscus check [cm]", "117.634",
+            (50.100 * (1 + 9.50e-4 * 50 - 8.20e-5 * 25) - 50.000 * (1 + 3 * 3.25e-6 * 50)) / 0.0200),
+        chk("EX-19.6-T2", "sec19", "spring-piston final T [K]", "1347.05", 5600.0 / (0.500 * 8.3144626)),
+    ]
+    Teq7 = (0.800 * 1361.0 / (4 * 0.250 * SIG_FULL)) ** 0.25
+    k = 12500.0 / (3 * 0.250 * SIG_FULL * math.pi * 0.25)
+    out += [
+        chk("EX-19.7-TEQ", "sec19", "probe equilibrium T [K]", "372.25", Teq7),
+        chk("EX-19.7-DT", "sec19", "eclipse cooling time [s]", "9792.9", k * (1 / 280.0 ** 3 - 1 / Teq7 ** 3)),
+    ]
+    Cp = 3.5 * 8.3144626
+    out += [
+        chk("EX-19.8-W1", "sec19", "single-stage shaft work [kJ]", "15.251", 2 * Cp * 300.0 * (9 ** (2 / 7) - 1) / 1e3),
+        chk("EX-19.8-W2", "sec19", "two-stage shaft work [kJ]", "12.877", 4 * Cp * 300.0 * (3 ** (2 / 7) - 1) / 1e3),
+        chk("EX-19.8-WISO", "sec19", "isothermal work [kJ]", "10.961", 2 * 8.3144626 * 300.0 * math.log(9) / 1e3),
+    ]
+    out += [
+        chk("EX-20.2-ETA", "sec20", "Carnot efficiency", "0.39988", 200.00 / 500.15),
+        chk("EX-20.2-W3", "sec20", "no back-radiation answer [W]", "1453.79", SIG_FULL * 400.15 ** 4),
+        chk("EX-20.2-BACK", "sec20", "back-radiation term [W]", "460.22", SIG_FULL * 300.15 ** 4),
+        chk("EX-20.2-Q", "sec20", "net exchange [W]", "993.57", SIG_FULL * (400.15 ** 4 - 300.15 ** 4)),
+        chk("EX-20.3-LOST", "sec20", "points lost", "16.25", (20 - 20 * 0.75) + (30 - 30 * 15.0 / 24.0)),
+        chk("EX-20.4-Q", "sec20", "heat [J]", "-3518.55", 3.5 * 251.325 * -4.00),
+        chk("EX-20.5-DH", "sec20", "benzene Delta H [kJ/mol]", "-3271.32", -10.500 * 7.780 / 0.0250 - 1.5 * 8.31446e-3 * 298.15),
+        chk("EX-20.5-DSU", "sec20", "freezing Delta S_univ [J/K]", "46.40", 333550 * (1 / 263.15 - 1 / 273.15)),
+    ]
+    Rc = math.log(37.0 / 34.0) / (2 * math.pi * 0.0400) + 1 / (2 * math.pi * 0.0370 * 10.0)
+    out += [
+        chk("EX-20.7-RWIRE", "sec20", "insulated wire resistance [m K/W]", "9.4948", math.log(4) / (2 * math.pi * 0.04) + 1 / (2 * math.pi * 0.004 * 10)),
+        chk("EX-20.7-RCUP", "sec20", "insulated cup resistance [m K/W]", "0.76659", Rc),
+        chk("EX-20.7-DEC", "sec20", "cup loss decrease [%]", "38.94", 100 * (1 - 1 / (2 * math.pi * 0.0340 * 10.0) / Rc)),
+        chk("EX-20.7-TG", "sec20", "TG with sleeve [C]", "16.90", 9200 / (418.4 + 126.0)),
+    ]
+    return out
+
+
+def sec01_extra():
+    # Ex 01.3 [printed 1.2] (as printed: L_f = 333.4, c_ice = 2.093)
+    Q12 = 50 * 2.093 * 20 + 50 * 333.4
+    Qav = 200 * 4.184 * 30 + 10 * 2256.4 + 10 * 4.184 * 100
+    return [chk("EX-01.3-TF", "sec01", "three-phase mix final T [C]", "30.42", (Qav - Q12) / (260.0 * 4.184))]
+
+
+SECTIONS = [sec00, sec01, sec02, sec03, sec04, sec05, sec06, sec07, sec08, sec09, sec10, sec11, sec12, sec13, sec14, sec15, sec16, sec17_20, sec01_extra]
 
 
 def run_checks():

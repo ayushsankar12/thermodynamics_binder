@@ -490,9 +490,9 @@ def check_sec18() -> list[dict]:
             "sec18:ex18.4:clausius_clapeyron_dHvap",
             "sec18",
             "OLS Clausius-Clapeyron molar enthalpy of vaporization [kJ/mol]",
-            42.4192,
+            42.4337,
             float(dH_vap_kJ),
-            1e-3,
+            1e-4,
             "NumPy polyfit slope of ln(P_sat) vs 1000/T multiplied by -R",
         )
     )
