@@ -211,7 +211,7 @@ Furthermore, by the enclosure summation rule (Lienhard Example~10.3, p.~565 \src
 \end{enumerate}
 
 \subsection{Oppenheim Radiosity-Space Resistance Network and $N$ Radiation Shields}
-In a diffuse-gray enclosure, each opaque surface $i$ (area $A_i$, temperature $T_i$, emittance $\varepsilon_i$, reflectance $\rho_i = 1 - \varepsilon_i$) has a surface resistance $R_{\mathrm{surf},i} = \frac{1-\varepsilon_i}{\varepsilon_i A_i}$ connecting its blackbody emissive potential $E_{b,i} = \sigma T_i^4$ to its outgoing \textbf{radiosity node} $J_i = \varepsilon_i\sigma T_i^4 + (1-\varepsilon_i)G_i$ (Lienhard §10.4, pp.~569--573 \src{S12}). Two radiosity nodes $J_1$ and $J_2$ are connected by the geometric space resistance $R_{\mathrm{space},12} = \frac{1}{A_1 F_{1\to 2}} = \frac{1}{A_2 F_{2\to 1}}$, as drawn in \fref{fig:12:shields-viewfactor}(a).
+In a diffuse-gray enclosure, each opaque surface $i$ (area $A_i$, temperature $T_i$, emittance $\varepsilon_i$, reflectance $\rho_i = 1 - \varepsilon_i$) has a surface resistance $R_{\mathrm{surf},i} = \frac{1-\varepsilon_i}{\varepsilon_i A_i}$ connecting its blackbody emissive potential $E_{b,i} = \sigma T_i^4$ to its outgoing \textbf{radiosity node} $J_i = \varepsilon_i\sigma T_i^4 + (1-\varepsilon_i)G_i$ (Lienhard §10.4, pp.~569--573 \src{S12}). Two radiosity nodes $J_1$ and $J_2$ are connected by the geometric space resistance $R_{\mathrm{space},12} = \frac{1}{A_1 F_{1\to 2}} = \frac{1}{A_2 F_{2\to 1}}$, as drawn in \fref{fig:12:shields-viewfactor}.
 When $N$ thin parallel reflective sheets (shields $s_1, \dots, s_N$, each with emittance $\varepsilon_s$ on both faces and $F=1$) are placed in series between parallel walls $1$ ($\varepsilon_1$) and $2$ ($\varepsilon_2$):
 \begin{equation}
   \dot{Q}_{\mathrm{net},1\to 2} = \frac{\sigma A\left(T_1^4 - T_2^4\right)}{\left(\dfrac{1}{\varepsilon_1} + \dfrac{1}{\varepsilon_2} - 1\right) + \sum_{k=1}^N \left(\dfrac{2}{\varepsilon_{s,k}} - 1\right)} \xrightarrow{\varepsilon_1=\varepsilon_2=\varepsilon_s=\varepsilon} \frac{\sigma A\left(T_1^4 - T_2^4\right)}{(N + 1)\left(\dfrac{2}{\varepsilon} - 1\right)} = \frac{\dot{Q}_{0\text{ shields}}}{N + 1}
@@ -219,60 +219,56 @@ When $N$ thin parallel reflective sheets (shields $s_1, \dots, s_N$, each with e
 \end{equation}
 A single floating shield ($N=1$) with $\varepsilon_s = \varepsilon_1 = \varepsilon_2$ reaches steady radiative equilibrium at the fourth-power mean temperature $T_s = \left[\frac{1}{2}(T_1^4 + T_2^4)\right]^{1/4}$ and cuts radiative heat transfer in half; if the shield has much lower emissivity ($\varepsilon_s = 0.04$ aluminum foil) than cardboard walls ($\varepsilon_1 = \varepsilon_2 = 0.92$), a single foil sheet reduces radiative flux by $\frac{2/0.92 - 1 + 2/0.04 - 1}{2/0.92 - 1} = \mathbf{42.7\times}$!
 
-% ---------------- FIGURE 33: fig:12:shields-viewfactor -----------------------
+% ---------------- FIGURE 12.2: fig:12:shields-viewfactor (shield network) -----
 \begin{center}
-\begin{tikzpicture}[font=\scriptsize, >=Latex, scale=0.95]
-  % Left panel: Oppenheim Radiosity Network with N Shields
-  \node[font=\sffamily\bfseries\scriptsize, color=navy] at (4.2, 3.65) {(a) Two-Body + Radiation Shield Resistance Network};
+\begin{tikzpicture}[font=\footnotesize, >=Latex]
   % Physical plates + shield
   \fill[gray!35] (0.2,0.4) rectangle (0.45,3.1);
   \draw[thick] (0.2,0.4) rectangle (0.45,3.1);
-  \node[above] at (0.32, 3.1) {Wall 1 ($T_1,\varepsilon_1$)};
-
-  \draw[teal, ultra thick] (1.6,0.4) -- (1.6,3.1);
-  \node[teal, font=\bfseries\scriptsize, above] at (1.6, 3.1) {Foil Shield ($T_s,\varepsilon_s=0.04$)};
-
-  \fill[gray!35] (2.75,0.4) rectangle (3.0,3.1);
-  \draw[thick] (2.75,0.4) rectangle (3.0,3.1);
-  \node[above] at (2.88, 3.1) {Wall 2 ($T_2,\varepsilon_2$)};
-
-  \draw[->, rust, thick] (0.55,2.3) -- (1.5,2.3);
-  \draw[->, teal, thick] (1.5,2.0) -- (0.55,2.0) node[midway, below, font=\scriptsize] {$\rho_s=0.96$};
-  \draw[->, rust, dashed] (1.7,2.15) -- (2.65,2.15) node[midway, above] {$\dot{Q}_{\mathrm{rad}}\ll\dot{Q}_0$};
-
-  % Series circuit diagram below/right of plates
-  \coordinate (E1) at (3.5, 1.8);
-  \coordinate (J1) at (4.8, 1.8);
-  \coordinate (Js1) at (6.1, 1.8);
-  \coordinate (EbS) at (7.4, 1.8);
-  \coordinate (Js2) at (8.7, 1.8);
-  \node[align=center, draw=navy, fill=boxbg, rounded corners=1.5pt, inner sep=3.5pt] at (6.15, 1.8)
-    {$E_{b1}=\sigma T_1^4 \;\xrightarrow{\;\frac{1-\varepsilon_1}{\varepsilon_1 A_1}\;}\; J_1 \;\xrightarrow{\;\frac{1}{A_1 F_{1s}}\;}\; J_{s,1} \;\xrightarrow{\;\frac{1-\varepsilon_s}{\varepsilon_s A_s}\;}\; E_{bs}=\sigma T_s^4 \;\xrightarrow{\;\frac{1-\varepsilon_s}{\varepsilon_s A_s}\;}\; J_{s,2} \;\xrightarrow{\;\frac{1}{A_s F_{s2}}\;}\; J_2 \;\xrightarrow{\;\frac{1-\varepsilon_2}{\varepsilon_2 A_2}\;}\; E_{b2}=\sigma T_2^4$};
-  \node[align=center, text=rust, font=\bfseries\scriptsize] at (6.15, 0.72)
-    {Shield temperature ($F_{1s}=F_{s2}=1,\; \varepsilon_1=\varepsilon_2$): $T_s = \left[\frac{1}{2}\left(T_1^4 + T_2^4\right)\right]^{1/4}$ (always closer to the hotter temperature $T_1$!)};
-
-  % Right panel: Coaxial View Factor Geometry for 2027 Heat Lamp
-  \node[font=\sffamily\bfseries\scriptsize, color=navy] at (12.3, 3.65) {(b) 2027 Lamp-to-Aperture Coaxial Disk View Factor};
-  % Lamp face at top
-  \fill[amber!30, draw=amber, very thick] (11.3, 3.0) rectangle (13.3, 3.25);
-  \node[above, font=\bfseries\scriptsize] at (12.3, 3.23) {R40 Lamp ($r_1=\SI{6.35}{\centi\meter}$ at $z=h$)};
-  % Top aperture of 30 cm cube
-  \draw[navy, ultra thick] (10.3, 1.9) -- (14.3, 1.9);
-  \node[right, font=\bfseries\scriptsize, text=navy] at (14.3, 1.9) {$z_{\mathrm{ap}}=\SI{29.5}{\centi\meter}$ ($r_2=\SI{15}{\centi\meter}$)};
-  % Conical reflector walls tapering to cup mouth
-  \draw[teal, ultra thick] (10.3, 1.9) -- (11.7, 0.65);
-  \draw[teal, ultra thick] (14.3, 1.9) -- (12.9, 0.65);
-  % Cup at bottom
-  \fill[navy!15, draw=navy, thick] (11.7, 0.65) -- (11.82, 0.15) -- (12.78, 0.15) -- (12.9, 0.65) -- cycle;
-  \node[below, font=\bfseries\scriptsize] at (12.3, 0.15) {9 oz Cup ($r_{\mathrm{cup}}=\SI{3.75}{\centi\meter}$)};
-  % Dimension arrows
-  \draw[<->, rust, thick] (10.1, 1.9) -- (10.1, 3.0) node[midway, left] {$d_{\mathrm{ap}}=h-29.5$};
-  \node[fill=white, draw=amber, inner sep=2pt, font=\bfseries\scriptsize] at (12.3, 2.42) {$F_{\mathrm{bulb}\to\mathrm{ap}}(40\text{ cm}) = 0.665$};
-  \node[font=\scriptsize, text=teal] at (12.3, 1.25) {$45.1\times$ bare-cup view factor!};
+  \node[above, align=center] at (0.32, 3.1) {Wall 1\\($T_1,\varepsilon_1$)};
+  \draw[teal, ultra thick] (2.2,0.4) -- (2.2,3.1);
+  \node[teal, font=\bfseries\footnotesize, above, align=center] at (2.2, 3.1) {Foil shield\\($T_s,\ \varepsilon_s = 0.04$)};
+  \fill[gray!35] (3.95,0.4) rectangle (4.2,3.1);
+  \draw[thick] (3.95,0.4) rectangle (4.2,3.1);
+  \node[above, align=center] at (4.08, 3.1) {Wall 2\\($T_2,\varepsilon_2$)};
+  \draw[->, rust, thick] (0.55,2.4) -- (2.1,2.4);
+  \draw[->, teal, thick] (2.1,1.95) -- (0.55,1.95) node[midway, below] {$\rho_s = 0.96$};
+  \draw[->, rust, dashed] (2.3,1.2) -- (3.85,1.2) node[midway, above] {$\dot{Q}_{\mathrm{rad}} \ll \dot{Q}_0$};
+  % Series resistance chain, two lines
+  \node[anchor=west, align=left, draw=navy, fill=boxbg, rounded corners=1.5pt, inner sep=4pt] at (4.9, 2.05)
+    {$E_{b1}=\sigma T_1^4 \xrightarrow{\frac{1-\varepsilon_1}{\varepsilon_1 A_1}} J_1 \xrightarrow{\frac{1}{A_1 F_{1s}}} J_{s,1} \xrightarrow{\frac{1-\varepsilon_s}{\varepsilon_s A_s}} E_{bs}=\sigma T_s^4$\\[4pt]
+     $\phantom{E_{b1}=\sigma T_1^4} \xrightarrow{\frac{1-\varepsilon_s}{\varepsilon_s A_s}} J_{s,2} \xrightarrow{\frac{1}{A_s F_{s2}}} J_2 \xrightarrow{\frac{1-\varepsilon_2}{\varepsilon_2 A_2}} E_{b2}=\sigma T_2^4$};
+  \node[anchor=west, align=left, text=rust, font=\bfseries\footnotesize] at (4.9, 0.35)
+    {Equal emittances, $F_{1s} = F_{s2} = 1$: \ $T_s = \left[\tfrac{1}{2}\left(T_1^4 + T_2^4\right)\right]^{1/4}$\\(always closer to the hotter wall)};
 \end{tikzpicture}
-\captionof{figure}{(a) Oppenheim surface-and-space radiation resistance network with an intermediate low-emissivity aluminum-foil radiation shield ($\varepsilon_s = 0.04$) \src{S12}. (b) Coaxial-disk view-factor geometry between the $\SI{12.7}{\centi\meter}$ R40 heat lamp face at height $h$ and the $\SI{30.0}{\centi\meter}$ collector top aperture versus a bare 9~oz cup.}
+\captionof{figure}{Oppenheim surface-and-space resistance network with one low-emissivity aluminum-foil radiation shield ($\varepsilon_s = 0.04$) between two walls: six resistances in series \src{S12}.}
 \label{fig:12:shields-viewfactor}
-\idxfig{radiation shield!Oppenheim resistance network and lamp view factor}
+\idxfig{radiation shield!Oppenheim resistance network}
+\end{center}
+
+% ---------------- FIGURE 12.3: fig:12:lamp-viewfactor (coaxial disks) ---------
+\begin{center}
+\begin{tikzpicture}[font=\footnotesize, >=Latex]
+  % Lamp face at top
+  \fill[amber!30, draw=amber, very thick] (1.0, 3.0) rectangle (3.0, 3.25);
+  \node[right, font=\bfseries\footnotesize] at (3.1, 3.12) {R40 lamp face, $r_1 = \SI{6.35}{\centi\meter}$, at height $h$};
+  % Top aperture of 30 cm cube
+  \draw[navy, ultra thick] (0.0, 1.9) -- (4.0, 1.9);
+  \node[right, font=\bfseries\footnotesize, text=navy] at (4.1, 1.9) {aperture at $z_{\mathrm{ap}} = \SI{30.0}{\centi\meter}$, $r_2 = \SI{15}{\centi\meter}$};
+  % Conical reflector walls tapering to cup mouth
+  \draw[teal, ultra thick] (0.0, 1.9) -- (1.4, 0.65);
+  \draw[teal, ultra thick] (4.0, 1.9) -- (2.6, 0.65);
+  % Cup at bottom
+  \fill[navy!15, draw=navy, thick] (1.4, 0.65) -- (1.52, 0.15) -- (2.48, 0.15) -- (2.6, 0.65) -- cycle;
+  \node[right, font=\bfseries\footnotesize] at (2.7, 0.4) {9 oz cup, $r_{\mathrm{cup}} = \SI{3.75}{\centi\meter}$};
+  % Dimension arrow
+  \draw[<->, rust, thick] (-0.25, 1.9) -- (-0.25, 3.0) node[midway, left] {$d_{\mathrm{ap}} = h - 30.0$};
+  \node[anchor=north west, fill=white, draw=amber, inner sep=2pt, font=\bfseries\footnotesize, align=left] at (7.2, 1.5)
+    {At $h = \SI{40}{\centi\meter}$: $F_{\mathrm{bulb}\to\mathrm{ap}} = 0.665$\\bare cup on the table: $F = 0.0147$\\ratio $= 45.1\times$ (Ex.~\ref{ex:12.2})};
+\end{tikzpicture}
+\captionof{figure}{Coaxial-disk view-factor geometry between the $\SI{12.7}{\centi\meter}$ R40 lamp face at height $h$ and a $\SI{30}{\centi\meter}$-wide collector aperture at $z_{\mathrm{ap}} = \SI{30.0}{\centi\meter}$, compared with a bare 9~oz cup.}
+\label{fig:12:lamp-viewfactor}
+\idxfig{view factor!lamp to collector aperture (coaxial disks)}
 \end{center}
 
 \subsection{Planetary Radiative Equilibrium and Multi-Layer Atmospheric Greenhouse Model}
@@ -304,7 +300,7 @@ The tungsten filament of a $\SI{125.0}{\watt}$ R40 heat lamp operates at $T_{\ma
 \end{workedexample}
 
 \begin{workedexample}[Coaxial-Disk View Factor: Top Collector Aperture vs.\ Bare 9 oz Cup]{Lienhard Table 10.3 \src{S12}}{ex:12.2}
-An R40 heat lamp of face diameter $D_1 = \SI{12.70}{\centi\meter}$ ($r_1 = \SI{6.35}{\centi\meter}$) is mounted at regional minimum height $h = \SI{40.0}{\centi\meter}$ above the Testing Surface (\fref{fig:12:shields-viewfactor}b). Compare the coaxial-disk view factor $F_{1\to 2}$ from the lamp face to: (a) a collector's inscribed circular top aperture of radius $r_2 = \SI{15.0}{\centi\meter}$ elevated to $z_{\mathrm{ap}} = \SI{30.0}{\centi\meter}$ ($d_{\mathrm{ap}} = 40.0 - 30.0 = \SI{10.0}{\centi\meter}$), versus (b) a bare 9~oz cup of mouth radius $r_{\mathrm{cup}} = \SI{3.75}{\centi\meter}$ resting on the Testing Surface with rim height $z_{\mathrm{cup}} = \SI{10.0}{\centi\meter}$ ($d_{\mathrm{cup}} = 40.0 - 10.0 = \SI{30.0}{\centi\meter}$).
+An R40 heat lamp of face diameter $D_1 = \SI{12.70}{\centi\meter}$ ($r_1 = \SI{6.35}{\centi\meter}$) is mounted at regional minimum height $h = \SI{40.0}{\centi\meter}$ above the Testing Surface (\fref{fig:12:lamp-viewfactor}). Compare the coaxial-disk view factor $F_{1\to 2}$ from the lamp face to: (a) a collector's inscribed circular top aperture of radius $r_2 = \SI{15.0}{\centi\meter}$ elevated to $z_{\mathrm{ap}} = \SI{30.0}{\centi\meter}$ ($d_{\mathrm{ap}} = 40.0 - 30.0 = \SI{10.0}{\centi\meter}$), versus (b) a bare 9~oz cup of mouth radius $r_{\mathrm{cup}} = \SI{3.75}{\centi\meter}$ resting on the Testing Surface with rim height $z_{\mathrm{cup}} = \SI{10.0}{\centi\meter}$ ($d_{\mathrm{cup}} = 40.0 - 10.0 = \SI{30.0}{\centi\meter}$).
 \tcblower
 \textbf{Solution.} Using Eq.~\eref{eq:12:coaxial-disks}:\\
 (a) For the elevated collector top aperture ($d_{\mathrm{ap}} = \SI{10.0}{\centi\meter}$): $R_1 = \frac{6.35}{10.0} = 0.635$, $R_2 = \frac{15.0}{10.0} = 1.500$, so $X = 1 + \frac{1 + 1.500^2}{0.635^2} = 9.0600$, and:
