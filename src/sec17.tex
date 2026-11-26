@@ -3,10 +3,10 @@
 % Target: 12 pages | Figures: fig:17:thermometer-response, fig:17:probe-depth-bias
 % ============================================================================
 \binderchapter{17}{Laboratory \& Measurement Handbook (Thermometer Physics, Probe Time Constant $5\tau$, Immersion Bias, Calibration \& GUM Uncertainty Propagation)}{Laboratory \& Measurement Handbook}{sec:17}
-\scopebanner{REQUIRED}[2027 Rules 4.f, 5.I.b, 5.II.c,g \& Clarifications \#1--\#4 (All Tournament Levels)]
+\scopebanner{REQUIRED}[2027 Rules 4.f, 5.I.b, 5.II.c,g \& FAQs 09/30--10/06/2026 on stirring and probe depth (All Tournament Levels)]
 
 \idxtopic{thermometry!overview}\idxtopic{laboratory measurement handbook}\idxdev{thermometer protocol (Rule 4.f)}
-Accurate thermal metrology links Part~I written laboratory analysis (\sref{sec:18}) to Part~II 2027 Heat-Lamp Collector temperature prediction (\sref{sec:15}--\sref{sec:16}) \src{S01,S05}. Under 2027 Rule~\texttt{4.f}, the Event Supervisor (ES) provides a non-mercury thermometer reading to $\SI{0.1}{\celsius}$ (\emph{liquid-in-glass spirit, electronic digital probe, or non-contact infrared}) and uses the \textbf{same thermometer} for a team's starting ($T_{\mathrm{start}}$) and final ($T_f$) water readings \src{S01,S02}. This chapter covers the sensor physics of all five thermometer families, dynamic thermal lag ($\tau_p$ and the $5\tau_p$ settling rule), top-layer immersion and radial stratification bias under Official Clarifications~\texttt{\#1--\texttt{\#4}}, fixed-point ice/steam calibration, JCGM GUM / NIST TN~1297 uncertainty propagation \src{S21}, and step-by-step classroom-safe calorimetry and heat-lamp collector validation protocols.
+Accurate thermal metrology links Part~I written laboratory analysis (\sref{sec:18}) to Part~II 2027 Heat-Lamp Collector temperature prediction (\sref{sec:15}--\sref{sec:16}) \src{S01,S05}. Under 2027 Rule~\texttt{4.f}, the Event Supervisor (ES) provides a non-mercury thermometer reading to $\SI{0.1}{\celsius}$ (\emph{liquid-in-glass spirit, electronic digital probe, or non-contact infrared}) and uses the \textbf{same thermometer} for a team's starting ($T_{\mathrm{start}}$) and final ($T_f$) water readings \src{S01,S02}. This chapter covers the sensor physics of all five thermometer families, dynamic thermal lag ($\tau_p$ and the $5\tau_p$ settling rule), top-layer immersion and radial stratification bias under the FAQs on stirring and probe depth (09/30--10/06/2026), fixed-point ice/steam calibration, JCGM GUM / NIST TN~1297 uncertainty propagation \src{S21}, and step-by-step classroom-safe calorimetry and heat-lamp collector validation protocols.
 
 % ============================================================================
 \section{Physics \& Specifications of the Five Thermometer Technologies (\texttt{Rule 4.f})}\label{sec:17.1}
@@ -38,7 +38,7 @@ $-50$ to $+150$ &
 $\pm\SIrange{0.1}{0.2}{\celsius}$ &
 $\SIrange{0.8}{3.5}{\second}$ ($\SIrange{4}{18}{\second}$) &
 $4$--$10$ (bead at tip) &
-\textbf{Most common ES probe.} High sensitivity ($\alpha_R \approx \SI{-4}{\percent\per\kelvin}$) \& small tip sample top $\SIrange{5}{12}{\milli\meter}$ layer (\texttt{Clarif.~\#4}). \\
+\textbf{Most common ES probe.} High sensitivity ($\alpha_R \approx \SI{-4}{\percent\per\kelvin}$) \& small tip sample top $\SIrange{5}{12}{\milli\meter}$ layer (FAQ 10/06/2026 on probe depth). \\
 \textbf{3.~Platinum RTD (\texttt{Pt100} / \texttt{Pt1000})} \idxtopic{RTD (Pt100/Pt1000)}\idxformula{Callendar-Van Dusen equation} &
 $R(t) = R_0(1 + A t + B t^2)$ ($t \ge \SI{0}{\celsius}$, $R_0 = \SI{100.00}{\ohm}$) &
 $-200$ to $+600$ &
@@ -180,7 +180,7 @@ A handheld IR thermometer uses a germanium or Fresnel silicon lens to focus mid-
 \begin{trapbox}[Four Critical Infrared Thermometer Traps in 2027 Thermodynamics Testing]
 \begin{enumerate}
   \item \textbf{Trap 1 --- Shooting Through the Clear \texttt{\#1 PET} / \texttt{\#5 PP} Plastic Cup Sidewall or Cling-Wrap Glazing:} \idxerr{shooting IR gun through plastic wrap or cup wall}
-  Because water and plastics are visually transparent at $\lambda = \SIrange{0.4}{0.7}{\micro\meter}$, students falsely assume an IR thermometer can ``see through'' a clear $\SI{9}{oz}$ plastic cup wall or a plastic cling-wrap cover to read the water inside. In the $\SIrange{8}{14}{\micro\meter}$ thermal-IR band, glass and clear plastics ($\ge\SI{0.3}{\milli\meter}$ PET/PP) are \textbf{virtually opaque} ($\tau_{\mathrm{MIR}} < 0.05\text{--}0.25$, $\varepsilon_{\mathrm{MIR}} \approx 0.90\text{--}0.94$) \src{S12}! Shooting an IR gun at the cup sidewall or through an unremoved top plastic film measures the \textbf{cooler exterior plastic temperature}, not the water! Under Official Clarification~\texttt{\#5} and the ES Guide \src{S02,S05}, any team-placed film or lid \textbf{must be completely removed from the cup} during the 1-minute Final Measurement window so the ES thermometer views or contacts the bare top water surface directly.
+  Because water and plastics are visually transparent at $\lambda = \SIrange{0.4}{0.7}{\micro\meter}$, students falsely assume an IR thermometer can ``see through'' a clear $\SI{9}{oz}$ plastic cup wall or a plastic cling-wrap cover to read the water inside. In the $\SIrange{8}{14}{\micro\meter}$ thermal-IR band, glass and clear plastics ($\ge\SI{0.3}{\milli\meter}$ PET/PP) are \textbf{virtually opaque} ($\tau_{\mathrm{MIR}} < 0.05\text{--}0.25$, $\varepsilon_{\mathrm{MIR}} \approx 0.90\text{--}0.94$) \src{S12}! Shooting an IR gun at the cup sidewall or through an unremoved top plastic film measures the \textbf{cooler exterior plastic temperature}, not the water! Under FAQ 10/21/2026 (items on the cup) and the ES Guide \src{S02,S05}, any team-placed film or lid \textbf{must be completely removed from the cup} during the 1-minute Final Measurement window so the ES thermometer views or contacts the bare top water surface directly.
   \item \textbf{Trap 2 --- Shooting at Bare Liquid Water Surface (Why Top-Down IR Works Well on Open Water):}
   In the $\SIrange{8}{14}{\micro\meter}$ band, liquid water has an absorption coefficient $\mu_a > \SI{600}{\per\centi\meter}$ (penetration depth $\delta_p < \SI{17}{\micro\meter}$) and a hemispherical emissivity of $\varepsilon_w = \mathbf{0.96}$ at $\SI{40}{\celsius}$ (normal-incidence $\varepsilon_{w,n} = 0.985$, Lienhard Table~10.1 p.~546 \src{S12}). Thus, an IR gun preset to $\varepsilon_{\mathrm{set}} = 0.95$ aimed vertically downward at bare water reads within $+\SI{0.2}{\celsius}$ of the true surface skin temperature (which is slightly cooled by evaporation once uncovered).
   \item \textbf{Trap 3 --- Shooting at Polished Metals or Aluminum Foil ($\varepsilon_{\mathrm{true}} = 0.04$):}
@@ -373,13 +373,13 @@ When a thermometer probe of sensing-tip mass $m_p$, specific heat $c_p$, wetted 
 \end{center}
 
 % ============================================================================
-\section{Immersion Depth, Stem Conduction \& Radial Stratification Bias (\texttt{Clarifications \#1--\#4})}\label{sec:17.4}
-\idxtopic{stratification bias!probe depth and radial placement}\idxdev{Clarification #4 top-layer probe placement}\idxtopic{Clarifications #1-#4!probe placement}
+\section{Immersion Depth, Stem Conduction \& Radial Stratification Bias}\label{sec:17.4}
+\idxtopic{stratification bias!probe depth and radial placement}\idxdev{top-layer probe placement (FAQ 10/06/2026)}\idxtopic{FAQs on stirring and probe depth!probe placement}
 
-\begin{rulebox}[2027 Official National Clarifications \texttt{\#1--\#4}: Unstirred Stratified Cup \& Top-Layer Measurement \src{S02,S05}]
+\begin{rulebox}[FAQs 09/30, 10/01 and 10/06/2026: Unstirred Cup \& Top-Layer Measurement \src{S02,S05}]
 \begin{itemize}
-  \item \textbf{Clarifications \texttt{\#1, \#2, \#3} (\texttt{09/30/2026--10/06/2026}):} \emph{``No, the water must not be swirled, shaken or stirred before taking the temperature.''}
-  \item \textbf{Clarification \texttt{\#4} (\texttt{10/06/2026}, Sec.~5 / Par.~II.g):} \emph{``It is recommended that the ES should measure the temperature of the top layer of water near the center of the cup. If the thermometer has a probe, the ES should insert it far enough into the water to take an accurate measurement, but no farther.''}
+  \item \textbf{FAQ 10/06/2026 (also 09/30 and 10/01/2026):} \emph{``No, the water must not be swirled, shaken or stirred before taking the temperature.''}
+  \item \textbf{FAQ 10/06/2026 (probe depth):} \emph{``This will be up to the local Event Supervisor to determine the temperature measuring protocol \ldots\ It is recommended that the ES should measure the temperature of the top layer of water near the center of the cup. If the thermometer has a probe, the ES should insert it far enough into the water to take an accurate measurement, but no farther.''}
 \end{itemize}
 \end{rulebox}
 
@@ -635,9 +635,9 @@ Thus $u_c(\dot{Q}) = (\SI{17.720}{\watt})(0.020616) = \mathbf{\SI{0.365}{\watt}}
 \textbf{Protocol B: 2027 Heat-Lamp Collector Calibration \& Stratification Validation (\texttt{Rule 5.II})}
 \begin{enumerate}
   \item \textbf{Station Geometry \& Lamp Pre-Warm:} Mount clamp lamp with $\SI{125}{\watt}$ (or $\SI{100}{\watt}$) clear untinted incandescent heat-lamp bulb facing straight down (\texttt{Rule 4.a--d}). Set vertical height $h \in \SIrange{40.0}{65.0}{\centi\meter}$ from table surface to bottommost tip of bulb (\texttt{Rule 4.c}) using a rigid meterstick and plumb line. Turn lamp ON for $\ge\SI{3}{\minute}$ off to the side so filament and glass envelope reach thermal steady state.
-  \item \textbf{3-Min Device Setup \& 1-Min Water Setup Simulation:} Start master timer. Configure collector pedestal slot for height $h$ (\texttt{Rule 5.II.b}). Dispense $\SI{99.67 \pm 0.05}{\gram}$ ($\SI{100.00}{\milli\liter}$ at $\SI{22}{\celsius}$) water from source bath into a fresh $\SI{9}{oz}$ clear cup, measure $T_{\mathrm{start}}$ at $z = \SI{8}{\milli\meter}$ after $5\tau_p$, place non-attached clear BoPET film cap on cup rim (\texttt{Clarif.~\#5}), seat cup into collector cradle, and center under lamp at $t = 0$.
-  \item \textbf{Heating Window \& Unswirled Top-Layer Extraction:} Heat for exact target duration $t \in \{10, 12, 15\}\,\si{\minute}$. At lamp turn-off, lift upper reflector hood straight up (removing the clear film cap cleanly) and lift the $\SI{9}{oz}$ cup vertically onto the Testing Surface in $<\SI{8}{\second}$ \textbf{with zero tilting, swirling, or vibration} (\texttt{Clarif.~\#1--\#3}).
-  \item \textbf{Clarification~\texttt{\#4} Probe Reading \& Cool-Down Return:} Lower probe clamp into top water layer ($z = \SI{8 \pm 2}{\milli\meter}$, $r = \SI{0}{\milli\meter}$), wait $5\tau_p$ ($\SI{10}{\second}$), and log $T_f$ in Appendix~D test log. Cool collector back to $T_{\mathrm{room}}$ with a fan before the next trial!
+  \item \textbf{3-Min Device Setup \& 1-Min Water Setup Simulation:} Start master timer. Configure collector pedestal slot for height $h$ (\texttt{Rule 5.II.b}). Dispense $\SI{99.67 \pm 0.05}{\gram}$ ($\SI{100.00}{\milli\liter}$ at $\SI{22}{\celsius}$) water from source bath into a fresh $\SI{9}{oz}$ clear cup, measure $T_{\mathrm{start}}$ at $z = \SI{8}{\milli\meter}$ after $5\tau_p$, place non-attached clear BoPET film cap on cup rim (FAQ 10/21/2026 on items on the cup), seat cup into collector cradle, and center under lamp at $t = 0$.
+  \item \textbf{Heating Window \& Unswirled Top-Layer Extraction:} Heat for exact target duration $t \in \{10, 12, 15\}\,\si{\minute}$. At lamp turn-off, lift upper reflector hood straight up (removing the clear film cap cleanly) and lift the $\SI{9}{oz}$ cup vertically onto the Testing Surface in $<\SI{8}{\second}$ \textbf{with zero tilting, swirling, or vibration} (FAQs 09/30, 10/01 and 10/06/2026 on stirring and swirling).
+  \item \textbf{FAQ 10/06/2026 on probe depth Probe Reading \& Cool-Down Return:} Lower probe clamp into top water layer ($z = \SI{8 \pm 2}{\milli\meter}$, $r = \SI{0}{\milli\meter}$), wait $5\tau_p$ ($\SI{10}{\second}$), and log $T_f$ in Appendix~D test log. Cool collector back to $T_{\mathrm{room}}$ with a fan before the next trial!
 \end{enumerate}
 \end{twocol}
 \end{devicebox}
@@ -645,7 +645,7 @@ Thus $u_c(\dot{Q}) = (\SI{17.720}{\watt})(0.020616) = \mathbf{\SI{0.365}{\watt}}
 \begin{rulebox}[Mandatory Laboratory Safety \& Impound Compliance Checklist (Thermal, Electrical, Glass \& Chemical)]
 \begin{itemize}
   \item \textbf{Thermal Burn \& Fire Prevention:} A $\SI{125}{\watt}$ heat lamp glass face reaches $\SIrange{180}{230}{\celsius}$; never touch the bulb or metal clamp shroud until cooled for $\ge\SI{15}{\minute}$. Keep all paper/cardboard/balsa collector surfaces $\ge\SI{10}{\centi\meter}$ below the bulb and faced with reflective aluminum foil ($\rho_{\mathrm{NIR}} = 0.96$) so structural temperatures stay $<\SI{45}{\celsius}$ (well below the $\SI{218}{\celsius}$ paper ignition point and $\SI{74}{\celsius}$ \texttt{\#1 PET} cup softening point).
-  \item \textbf{Zero-Tolerance Prohibited Materials Audit (\texttt{Rule 3.b.i} \& \texttt{Clarification \#6}):} Verify that \textbf{zero Polystyrene / Styrofoam / \texttt{\#6 PS} plastic}, fiberglass, mineral wool, asbestos, or mercury thermometers are present anywhere in the device or lab kit (\texttt{Rule 3.b.iii} bars any device containing prohibited hazardous materials from testing: $\mathrm{TS}=0, \mathrm{PS}=0$!).
+  \item \textbf{Zero-Tolerance Prohibited Materials Audit (\texttt{Rule 3.b.i} \& FAQ 10/22/2026 on polystyrene):} Verify that \textbf{zero Polystyrene / Styrofoam / \texttt{\#6 PS} plastic}, fiberglass, mineral wool, asbestos, or mercury thermometers are present anywhere in the device or lab kit (\texttt{Rule 3.b.iii} bars any device containing prohibited hazardous materials from testing: $\mathrm{TS}=0, \mathrm{PS}=0$!).
   \item \textbf{Electrical \& Water-Spill Separation:} Plug the clamp lamp into a GFCI-protected $\SI{120}{\volt}$ outlet with a drip loop so water spills on the Testing Surface can never reach electrical cords. Never place or remove the water cup while looking directly into the incandescent filament.
 \end{itemize}
 \end{rulebox}

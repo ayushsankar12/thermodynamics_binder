@@ -57,7 +57,7 @@ python build/export_markdown.py      # Export LaTeX → Markdown mirror (residua
 - **14 detachable Quick Sheets** (QS-01..QS-14) — each exactly 1 printed page
 - **5 printed indices** — Topic (650), Formula (253), Figure (66), Error (114), Device (81) = **1,164 entries**
 - **10-second question router** — symptom → equation in < 10 s via flowchart + tabs + indices
-- **2027 rules compliant** — Clause-by-clause matrix (App E), 9 clarifications, 0 corrections
+- **2027 rules compliant** — Clause-by-clause matrix (App E), 11 official FAQs (checked 26 Nov 2026), 0 corrections
 - **Sign convention locked** — Physics primary (ΔU = Q − W_by), Chemistry cross-referenced
 
 ## Sources

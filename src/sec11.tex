@@ -4,7 +4,7 @@
 % Target: 8 pages | Figures: fig:11:boundary-layer, fig:11:air-gap-evap
 % ============================================================================
 \binderchapter{11}{Convective Heat Transfer, Dimensionless Groups, Dead-Air Gaps, Evaporative Coupling \& Top-Layer Thermal Stratification}{§11 Convection \& Stratification}{sec:11}
-\scopebanner{REQUIRED}[2027 Rule 5.c.iii (All Levels) \& Official National Clarifications \#1--\#5 (Top-Layer Stratification \& Wrap) \textbar\ Sources: \src{S01}, \src{S02}, \src{S09}, \src{S12}, \src{S17}]
+\scopebanner{REQUIRED}[2027 Rule 5.c.iii (All Levels) \& FAQs 09/30, 10/01, 10/06 and 10/21/2026 (no stirring; probe depth; items on the cup) \textbar\ Sources: \src{S01}, \src{S02}, \src{S09}, \src{S12}, \src{S17}]
 
 \idxtopic{convection!Newton's law of cooling}
 \idxtopic{convection!natural vs forced}
@@ -122,23 +122,23 @@ Notice that for laminar forced flow over a flat plate, $h_x \propto x^{-1/2}$, s
   \draw[->, rust, thick] (9.9,0.75) .. controls (10.2,1.4) and (10.0,1.9) .. (9.7,1.95) .. controls (9.5,1.8) and (9.6,1.0) .. (9.9,0.75);
   \node[align=center, font=\bfseries\scriptsize, text=rust] at (9.5, 2.55) {Unstable ($\mathrm{Ra}>0$)\\[-1pt]Plumes mix entire cup};
 
-  % Right cup: Top-heated by 2027 Heat Lamp (Stable Ra < 0, Clarifications #1-#4)
+  % Right cup: Top-heated by 2027 Heat Lamp (Stable Ra < 0, FAQs 09/30--10/06/2026 on stirring and probe depth)
   \draw[thick] (11.8,2.9) -- (12.05,0.5) -- (13.95,0.5) -- (14.2,2.9);
   % Stratified bands
   \fill[navy!12] (12.05,0.5) -- (13.95,0.5) -- (14.07,1.65) -- (11.93,1.65) -- cycle;
   \fill[rust!35] (11.93,1.65) -- (14.07,1.65) -- (14.13,2.20) -- (11.87,2.20) -- cycle;
   % BoPET glazing cap on rim
   \draw[teal, ultra thick] (11.7,2.92) -- (14.3,2.92);
-  \node[teal, font=\bfseries\scriptsize, above] at (13.0, 2.93) {BoPET Cap (Clarif.\ \#5: $\dot{Q}_{\mathrm{evap}}\to 0$)};
+  \node[teal, font=\bfseries\scriptsize, above] at (13.0, 2.93) {BoPET Cap (FAQ 10/21/2026 on items on the cup: $\dot{Q}_{\mathrm{evap}}\to 0$)};
   % Downward NIR rays
   \foreach \xx in {12.3, 12.75, 13.25, 13.7} {
     \draw[->, amber, thick] (\xx, 3.45) -- (\xx, 2.25);
   }
   \node[font=\bfseries\scriptsize, text=rust] at (13.0, 1.92) {Hot Top Layer ($T_{\mathrm{top}},\; \rho_{\mathrm{top}}$ low)};
   \node[font=\scriptsize, text=navy] at (13.0, 1.05) {Cooler Bottom ($\rho_{\mathrm{bot}}$ high)};
-  \node[align=center, font=\bfseries\scriptsize, text=navy] at (13.0, 0.15) {Buoyantly Stable ($\mathrm{Ra}<0$, Clarif.\ \#1--\#4)};
+  \node[align=center, font=\bfseries\scriptsize, text=navy] at (13.0, 0.15) {Buoyantly Stable ($\mathrm{Ra}<0$, FAQs 09/30--10/06/2026 on stirring and probe depth)};
 \end{tikzpicture}
-\captionof{figure}{(a) Hydrodynamic ($\delta_v$) and thermal ($\delta_T$) boundary-layer development along a heated flat plate \src{S12}. (b) Contrast between unstable bottom heating ($\mathrm{Ra}>0$, full convective mixing) and 2027 top-down near-IR lamp heating ($\mathrm{Ra}<0$, buoyantly stable hot top water layer measured by the ES under Clarifications \#1--\#4 \src{S02}).}
+\captionof{figure}{(a) Hydrodynamic ($\delta_v$) and thermal ($\delta_T$) boundary-layer development along a heated flat plate \src{S12}. (b) Contrast between unstable bottom heating ($\mathrm{Ra}>0$, full convective mixing) and 2027 top-down near-IR lamp heating ($\mathrm{Ra}<0$, buoyantly stable hot top water layer measured by the ES under FAQs 09/30--10/06/2026 on stirring and probe depth \src{S02}).}
 \label{fig:11:boundary-layer}
 \idxfig{boundary layer!velocity vs thermal and top-layer stratification}
 \end{center}
@@ -285,12 +285,12 @@ As shown in \fref{fig:11:air-gap-evap}(b), for the 2027 9 oz cup ($A_{\mathrm{su
     \addplot[amber, thick, densely dotted, domain=22:54, samples=30] {0.0222 * (x - 22)};
     \addlegendentry{$\dot{Q}_{\mathrm{rad,top}}$ ($\varepsilon_w=0.96$)}
 
-    % With BoPET glazing cap (Clarification #5)
+    % With BoPET glazing cap (FAQ 10/21/2026 on items on the cup)
     \addplot[teal, very thick, domain=22:54, samples=30] {0.011 * (x - 22)};
     \addlegendentry{$\dot{Q}_{\mathrm{tot}}$ w/ BoPET Cap}
   \end{axis}
 \end{tikzpicture}
-\captionof{figure}{(a) Heat flux across an enclosed air gap ($\Delta T = \SI{15}{\kelvin}$) versus gap width $\delta$, showing the Rayleigh--B\'enard onset knee at $\delta_c = \SI{10.9}{\milli\meter}$ ($\mathrm{Ra}_c = 1708$) and the $41.7\times$ radiation reduction of aluminum foil walls. (b) Uncovered 9 oz cup top-surface heat losses versus water surface temperature $T_s$ (Lienhard §11.7 \src{S12}), demonstrating why evaporation dominates and why a removable BoPET cap (Clarification \#5 \src{S02}) saves $\SIrange{2}{4}{\watt}$.}
+\captionof{figure}{(a) Heat flux across an enclosed air gap ($\Delta T = \SI{15}{\kelvin}$) versus gap width $\delta$, showing the Rayleigh--B\'enard onset knee at $\delta_c = \SI{10.9}{\milli\meter}$ ($\mathrm{Ra}_c = 1708$) and the $41.7\times$ radiation reduction of aluminum foil walls. (b) Uncovered 9 oz cup top-surface heat losses versus water surface temperature $T_s$ (Lienhard §11.7 \src{S12}), demonstrating why evaporation dominates and why a removable BoPET cap (FAQ 10/21/2026 on items on the cup \src{S02}) saves $\SIrange{2}{4}{\watt}$.}
 \label{fig:11:air-gap-evap}
 \idxfig{air gap!optimal 11 mm thickness and evaporative heat loss}
 \end{center}
@@ -332,7 +332,7 @@ An air space beneath the 9 oz cup cradle has mean air temperature $T_f = \SI{305
 \verifiedby{Checked in \texttt{check\_sec10\_13.py} (\texttt{EX-11.2-DELTAC}, \texttt{EX-11.2-KEFF}): $\delta_c = \SI{10.936}{\milli\meter}$, $k_{\mathrm{eff}} = \SI{0.027813}{\watt\per\meter\per\kelvin}$.}
 \end{workedexample}
 
-\begin{workedexample}[Open-Cup Evaporative Mass-Transfer Heat Loss vs.\ Removable Glazing Cap]{Lienhard Ex.\ 11.11 \& Clarif.\ \#5 \src{S02,S12}}{ex:11.3}
+\begin{workedexample}[Open-Cup Evaporative Mass-Transfer Heat Loss vs.\ Removable Glazing Cap]{Lienhard Ex.\ 11.11 \& FAQ 10/21/2026 on items on the cup \src{S02,S12}}{ex:11.3}
 During a 2027 collector test, the top water surface in an uncovered 9 oz cup ($D_{\mathrm{surf}} = \SI{6.77}{\centi\meter},\; A_{\mathrm{surf}} = \SI{3.60e-3}{\square\meter}$) reaches $T_s = \SI{40.0}{\celsius}$ ($\SI{313.15}{\kelvin}$, saturation vapor pressure $P_{\mathrm{sat}} = \SI{7384}{\pascal}$, latent heat $L_v = \SI{2406}{\kilo\joule\per\kilogram}$ \src{S09}) in ambient room air at $T_e = \SI{22.0}{\celsius}$ ($\SI{295.15}{\kelvin}$), $\SI{50.0}{\percent}\ \mathrm{RH}$ ($P_{\mathrm{H_2O},e} = \SI{1322}{\pascal}$), and $P_{\mathrm{atm}} = \SI{101325}{\pascal}$. Given convective mass transfer conductance $g_m = \SI{6.65e-3}{\kilogram\per\square\meter\per\second}$, calculate (a) the surface and ambient water-vapor mass fractions $m_{\mathrm{H_2O},s}$ and $m_{\mathrm{H_2O},e}$, (b) the evaporation rate $\dot{m}_{\mathrm{evap}}$ and evaporative heat loss $\dot{Q}_{\mathrm{evap}}$, and (c) the temperature penalty over a $\SI{10.0}{\minute}$ ($\SI{600}{\second}$) run on the top stratified water layer ($C_{\mathrm{top}} = \SI{215}{\joule\per\kelvin}$).
 \tcblower
 \textbf{Solution.} (a) Using Eq.~\eref{eq:11:mass-fraction} with $R_u = \SI{8314.46}{\joule\per\kilo\mole\per\kelvin}$, $M_w = 18.0153$, and $M_a = 28.965$:
@@ -349,19 +349,19 @@ During a 2027 collector test, the top water surface in an uncovered 9 oz cup ($D
 \[
   \dot{Q}_{\mathrm{evap}} = L_v\,\dot{m}_{\mathrm{evap}} = (\SI{2.406e6}{\joule\per\kilogram})(\SI{9.206e-7}{\kilogram\per\second}) = \mathbf{\SI{2.215}{\watt}}
 \]
-(c) Over $\SI{600}{\second}$, evaporation removes $E_{\mathrm{evap}} = (\SI{2.215}{\watt})(\SI{600}{\second}) = \SI{1329}{\joule}$, depressing the top stratified layer ($C_{\mathrm{top}} = \SI{215}{\joule\per\kelvin}$) by $\Delta T_{\mathrm{loss}} = \frac{1329}{215} = \mathbf{\SI{6.18}{\celsius}}$! Resting a clear BoPET film cap over the cup mouth (\texttt{Clarification \#5}) traps saturated vapor ($\Delta m_{\mathrm{H_2O}} \to 0$) and recovers this entire loss.
+(c) Over $\SI{600}{\second}$, evaporation removes $E_{\mathrm{evap}} = (\SI{2.215}{\watt})(\SI{600}{\second}) = \SI{1329}{\joule}$, depressing the top stratified layer ($C_{\mathrm{top}} = \SI{215}{\joule\per\kelvin}$) by $\Delta T_{\mathrm{loss}} = \frac{1329}{215} = \mathbf{\SI{6.18}{\celsius}}$! Resting a clear BoPET film cap over the cup mouth (FAQ 10/21/2026 on items on the cup) traps saturated vapor ($\Delta m_{\mathrm{H_2O}} \to 0$) and recovers this entire loss.
 \verifiedby{Checked in \texttt{check\_sec10\_13.py} (\texttt{EX-11.3-QEVAP}): $\dot{Q}_{\mathrm{evap}} = \SI{2.2150}{\watt}$.}
 \end{workedexample}
 
-\begin{workedexample}[Top-Down Stratified Heating Advantage Under Official Clarifications \#1--\#4]{2027 Scoring Core \src{S02}}{ex:11.4}
-During a $\SI{10.0}{\minute}$ heating run, a collector delivers $E_{\mathrm{net}} = \SI{5400}{\joule}$ of net retained thermal energy to the $\SI{100.0}{\milli\liter}$ water ($m_{\mathrm{tot}} = \SI{100.0}{\gram},\; c_p = \SI{4.184}{\joule\per\gram\per\kelvin},\; C_{\mathrm{bulk}} = \SI{418.4}{\joule\per\kelvin}$) starting at $T_{\mathrm{start}} = \SI{21.0}{\celsius}$. Because near-IR lamp radiation is absorbed from above ($\mathrm{Ra} < 0$, buoyantly stable), $\SI{72.4}{\percent}$ of the energy ($\SI{3910}{\joule}$) is absorbed directly in the upper $\SI{45.0}{\milli\liter}$ layer ($C_{\mathrm{top}} = \SI{188.28}{\joule\per\kelvin}$) while $\SI{27.6}{\percent}$ ($\SI{1490}{\joule}$) reaches the lower $\SI{55.0}{\milli\liter}$ layer ($C_{\mathrm{bot}} = \SI{230.12}{\joule\per\kelvin}$), and internal water conduction transfers $E_{\mathrm{cond,down}} = \SI{690}{\joule}$ from top to bottom. Compare the ES-measured top-layer temperature gain $\mathrm{TG}_{\mathrm{top}}$ (unstirred per Clarifications \#1--\#4) against the bulk temperature gain $\mathrm{TG}_{\mathrm{bulk}}$ if a competitor accidentally swirls the cup while removing it!
+\begin{workedexample}[Top-Down Stratified Heating Advantage in Unstirred Water]{2027 Scoring Core \src{S02}}{ex:11.4}
+During a $\SI{10.0}{\minute}$ heating run, a collector delivers $E_{\mathrm{net}} = \SI{5400}{\joule}$ of net retained thermal energy to the $\SI{100.0}{\milli\liter}$ water ($m_{\mathrm{tot}} = \SI{100.0}{\gram},\; c_p = \SI{4.184}{\joule\per\gram\per\kelvin},\; C_{\mathrm{bulk}} = \SI{418.4}{\joule\per\kelvin}$) starting at $T_{\mathrm{start}} = \SI{21.0}{\celsius}$. Because near-IR lamp radiation is absorbed from above ($\mathrm{Ra} < 0$, buoyantly stable), $\SI{72.4}{\percent}$ of the energy ($\SI{3910}{\joule}$) is absorbed directly in the upper $\SI{45.0}{\milli\liter}$ layer ($C_{\mathrm{top}} = \SI{188.28}{\joule\per\kelvin}$) while $\SI{27.6}{\percent}$ ($\SI{1490}{\joule}$) reaches the lower $\SI{55.0}{\milli\liter}$ layer ($C_{\mathrm{bot}} = \SI{230.12}{\joule\per\kelvin}$), and internal water conduction transfers $E_{\mathrm{cond,down}} = \SI{690}{\joule}$ from top to bottom. Compare the ES-measured top-layer temperature gain $\mathrm{TG}_{\mathrm{top}}$ (unstirred per FAQs 09/30--10/06/2026 on stirring and probe depth) against the bulk temperature gain $\mathrm{TG}_{\mathrm{bulk}}$ if a competitor accidentally swirls the cup while removing it!
 \tcblower
 \textbf{Solution.} Net energy retained in the top $\SI{45.0}{\milli\liter}$ layer is $E_{\mathrm{top}} = 3910 - 690 = \SI{3220}{\joule}$, while the bottom $\SI{55.0}{\milli\liter}$ layer gains $E_{\mathrm{bot}} = 1490 + 690 = \SI{2180}{\joule}$ ($E_{\mathrm{top}} + E_{\mathrm{bot}} = \SI{5400}{\joule}$):
 \[
   \mathrm{TG}_{\mathrm{top}} = \frac{E_{\mathrm{top}}}{C_{\mathrm{top}}} = \frac{\SI{3220}{\joule}}{\SI{188.28}{\joule\per\kelvin}} = \mathbf{+\SI{17.10}{\celsius}} \quad (T_{f,\mathrm{top}} = \SI{38.10}{\celsius}), \qquad
   \mathrm{TG}_{\mathrm{bot}} = \frac{\SI{2180}{\joule}}{\SI{230.12}{\joule\per\kelvin}} = +\SI{9.47}{\celsius}
 \]
-If the competitor accidentally swirls or shakes the cup during removal (violating Clarifications \#1--\#3 and mixing the layers), the water equalizes to $\mathrm{TG}_{\mathrm{bulk}} = \frac{5400}{418.4} = \mathbf{+\SI{12.91}{\celsius}}$ ($T_{f,\mathrm{bulk}} = \SI{33.91}{\celsius}$) — \textbf{destroying $\SI{4.20}{\celsius}$ ($\SI{24.5}{\percent}$) of their Temperature Score $\mathrm{TS}$ AND ruining their Prediction Score $\mathrm{PS}$!}
+If the competitor accidentally swirls or shakes the cup during removal (violating FAQs 09/30, 10/01 and 10/06/2026 on stirring and swirling and mixing the layers), the water equalizes to $\mathrm{TG}_{\mathrm{bulk}} = \frac{5400}{418.4} = \mathbf{+\SI{12.91}{\celsius}}$ ($T_{f,\mathrm{bulk}} = \SI{33.91}{\celsius}$) — \textbf{destroying $\SI{4.20}{\celsius}$ ($\SI{24.5}{\percent}$) of their Temperature Score $\mathrm{TS}$ AND ruining their Prediction Score $\mathrm{PS}$!}
 \verifiedby{First-law enthalpy check in \texttt{check\_sec10\_13.py} (\texttt{EX-11.4-STRAT}, \texttt{EX-11.4-ECONS}): $C_{\mathrm{top}}\mathrm{TG}_{\mathrm{top}} + C_{\mathrm{bot}}\mathrm{TG}_{\mathrm{bot}} = \SI{5400.00}{\joule}$.}
 \end{workedexample}
 
@@ -439,13 +439,13 @@ Stable gravitational stratification reduces convective heat transfer on the down
 \end{errtab}
 \end{trapbox}
 
-\begin{rulebox}[2027 Official Clarifications \#1--\#5: Zero Stirring, Top-Layer Probe \& Removable Glazing \src{S02,S05}]
-\idxdev{Clarifications 1-4!no stirring or swirling before measurement}
-\idxdev{Clarification 5!removable non-attached glazing film}
+\begin{rulebox}[FAQs 09/30, 10/01, 10/06 and 10/21/2026: No Stirring, Top-Layer Probe \& Items on the Cup \src{S02,S05}]
+\idxdev{FAQs on stirring and probe depth!no stirring or swirling before measurement}
+\idxdev{FAQ 10/21/2026 (items on the cup)!removable non-attached glazing film}
 \begin{itemize}
-  \item \textbf{Clarifications \#1--\#3 (\texttt{09/30/2026}--\texttt{10/06/2026}):} \emph{``No, the water will not be stirred or swirled before taking the temperature... No, the water must not be swirled, shaken or stirred before taking the temperature.''}
-  \item \textbf{Clarification \#4 (\texttt{10/06/2026}):} \emph{``It is recommended that the ES should measure the temperature of the top layer of water near the center of the cup. If the thermometer has a probe, the ES should insert it far enough into the water to take an accurate measurement, but no farther.''}
-  \item \textbf{Clarification \#5 (\texttt{10/21/2026}) \& Official ES Guide:} Teams may rest a transparent vapor barrier / glazing cover (such as a $\SI{25}{\micro\meter}$ clear BoPET disk or LDPE wrap mounted on an upper gravity ring) on or around the cup during Water Setup Time, provided \textbf{zero adhesives, tapes, rubber bands, or clips attach it to the cup}, cup shape is unaltered, and the cover is completely removed before final temperature measurement.
+  \item \textbf{FAQs 09/30 and 10/06/2026 (no stirring or swirling; 10/01/2026 says the same):} \emph{``No, the water will not be stirred or swirled before taking the temperature... No, the water must not be swirled, shaken or stirred before taking the temperature.''}
+  \item \textbf{FAQ 10/06/2026 (probe depth):} \emph{``This will be up to the local Event Supervisor to determine the temperature measuring protocol \ldots\ It is recommended that the ES should measure the temperature of the top layer of water near the center of the cup. If the thermometer has a probe, the ES should insert it far enough into the water to take an accurate measurement, but no farther.''}
+  \item \textbf{FAQ 10/21/2026 (items on the cup) \& Official ES Guide:} Teams may rest a transparent vapor barrier / glazing cover (such as a $\SI{25}{\micro\meter}$ clear BoPET disk or LDPE wrap mounted on an upper gravity ring) on or around the cup during Water Setup Time, provided \textbf{zero adhesives, tapes, rubber bands, or clips attach it to the cup}, cup shape is unaltered, and the cover is completely removed before final temperature measurement.
 \end{itemize}
 \end{rulebox}
 

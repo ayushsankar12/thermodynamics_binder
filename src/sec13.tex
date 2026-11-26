@@ -365,7 +365,7 @@ Delaying extraction from $\SI{6}{\second}$ to $\SI{50}{\second}$ throws away $\m
 \verifiedby{Checked in \texttt{check\_sec10\_13.py} (\texttt{EX-13.7-COOL6S}, \texttt{EX-13.7-COOL50S}): $\Delta T_{\mathrm{cool}}(\SI{6}{\second}) = \SI{0.1054}{\celsius}$, $\Delta T_{\mathrm{cool}}(\SI{50}{\second}) = \SI{0.8653}{\celsius}$.}
 \end{workedexample}
 
-\begin{workedexample}[Two-Node Stratified Water Cup Coupled ODE Simulation]{Clarifications \#1--\#4 Physics \src{S02}}{ex:13.8}
+\begin{workedexample}[Two-Node Stratified Water Cup Coupled ODE Simulation]{FAQs 09/30--10/06/2026 on stirring and probe depth Physics \src{S02}}{ex:13.8}
 Model the $\SI{100.0}{\milli\liter}$ water in the 9~oz cup using the coupled two-node system Eq.~\eref{eq:13:two-node-strat}: Node~1 (top $\SI{40.0}{\milli\liter}$ layer, $C_1 = \SI{167.36}{\joule\per\kelvin}$) absorbs $P_1 = \SI{16.00}{\watt}$ of near-IR lamp radiation and loses heat to ambient ($T_{\mathrm{room}} = \SI{22.00}{\celsius}$) through top glazing resistance $R_1 = \SI{3.50}{\kelvin\per\watt}$; Node~2 (bottom $\SI{60.0}{\milli\liter}$ layer, $C_2 = \SI{251.04}{\joule\per\kelvin}$) absorbs $P_2 = \SI{4.00}{\watt}$ of transmitted visible/short-NIR radiation and loses heat through cradle resistance $R_2 = \SI{8.00}{\kelvin\per\watt}$; internal water conduction resistance between the layers ($L_{\mathrm{mid}} = \SI{18.0}{\milli\meter},\; k_w = \SI{0.620}{\watt\per\meter\per\kelvin},\; A_{\mathrm{cup}} = \SI{36.0}{\square\centi\meter}$) is $R_{12} = \frac{0.0180}{(0.620)(0.00360)} = \SI{8.0645}{\kelvin\per\watt}$. Starting from $T_1(0) = T_2(0) = \SI{22.00}{\celsius}$, determine $T_{\mathrm{top}}(\SI{600}{\second})$, $T_{\mathrm{bot}}(\SI{600}{\second})$, and the stratification differential $\Delta T_{\mathrm{strat}}(\SI{600}{\second})$ at $t = \SI{10.0}{\minute}$.
 \tcblower
 \textbf{Solution.} Substituting into Eq.~\eref{eq:13:two-node-strat} gives the linear $2\times 2$ matrix system $\frac{d}{dt}\begin{bmatrix}\theta_1 \\ \theta_2\end{bmatrix} = \begin{bmatrix}-0.002448 & +0.0007409 \\ +0.0004939 & -0.0009919\end{bmatrix}\begin{bmatrix}\theta_1 \\ \theta_2\end{bmatrix} + \begin{bmatrix}0.09560 \\ 0.01593\end{bmatrix}$ where $\theta_i = T_i - 22.00$. Integrating to $t = \SI{600.0}{\second}$ yields:
@@ -567,7 +567,7 @@ Bulb height $h$ ($\SIrange{40}{65}{\centi\meter}$, $P_{\mathrm{abs}} \propto d^{
   $\dfrac{\partial T_f}{\partial h} = -\dfrac{n}{h - z_{\mathrm{ap}}}\,P_{\mathrm{abs}}R_{\mathrm{th}}\left(1 - e^{-t/\tau}\right)$ &
   $\mathbf{-\SI{0.68}{\celsius\per\centi\meter}}$ (at $h = \SI{50}{\centi\meter}$) &
   Raising lamp by $+\SI{5.0}{\centi\meter}$ drops $T_f$ by $\sim\mathbf{-\SI{3.4}{\celsius}}$ \\
-Evaporative glazing cover (\texttt{Clarif.\ \#5}) &
+Evaporative glazing cover (FAQ 10/21/2026 on items on the cup) &
   $\Delta T_{f,\mathrm{glaze}} \approx \Delta P_{\mathrm{evap}} R_{\mathrm{th}}\left(1 - e^{-t/\tau}\right)$ &
   $\mathbf{+\SI{2.8}{\celsius}\text{ to }+\SI{4.8}{\celsius}}$ &
   Removing $\SIrange{2.2}{3.8}{\watt}$ latent loss raises $T_f$ by $\SIrange{2.8}{4.8}{\celsius}$ \\

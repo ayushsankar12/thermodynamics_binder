@@ -4,7 +4,7 @@
 % ============================================================================
 \setcounter{chapter}{3}
 \binderapp{D}{2027 Heat-Lamp Collector Test Log \& Design-Change Forms}{App.\ D Collector Test Log \& Forms}{app:D}
-\scopebanner{REQUIRED}[2027 Rules 2.d, 3.a--h, 4.a--g, 5.II.a--h \& Official Clarifications \#1--\#9 {\src{S01,S02,S04}}]
+\scopebanner{REQUIRED}[2027 Rules 2.d, 3.a--h, 4.a--g, 5.II.a--h \& the 11 official FAQs {\src{S01,S02,S04}}]
 \idxtopic{device test log and calibration worksheet}
 \idxdev{DOE calibration trial log form}
 \idxdev{day-of competition prediction worksheet}
@@ -19,7 +19,7 @@
 \textbf{Tournament:} & \dotfill & \textbf{Date:} & \dotfill & \textbf{Team \# / Block:} & \dotfill \\
 \textbf{Bulb Power $P_{\mathrm{bulb}}$:} & $\underline{\hspace{1.2cm}}\,\si{\watt}$ (\texttt{100--125 W}) & \textbf{Bulb Shape/Brand:} & \dotfill & \textbf{Bulb Height $h_{\mathrm{bulb}}$:} & $\underline{\hspace{1.2cm}}\,\si{\centi\meter}$ (\texttt{40--65 cm}) \\
 \textbf{Heating Time $t_{\mathrm{heat}}$:} & $\underline{\hspace{1.2cm}}\,\si{\minute}$ (\texttt{10--15 min}) & \textbf{Room Temp $T_{\mathrm{room}}$:} & $\underline{\hspace{1.2cm}}\,\si{\celsius}$ & \textbf{Bath Temp $T_{\mathrm{bath}}$:} & $\underline{\hspace{1.2cm}}\,\si{\celsius}$ \\
-\textbf{ES Thermometer Type:} & \multicolumn{3}{l}{$\square$ Digital Probe \quad $\square$ Non-Mercury Glass \quad $\square$ Non-Contact IR} & \textbf{Probe Protocol:} & $\square$ Top-Center (\texttt{Clarif.\ \#4}) \\
+\textbf{ES Thermometer Type:} & \multicolumn{3}{l}{$\square$ Digital Probe \quad $\square$ Non-Mercury Glass \quad $\square$ Non-Contact IR} & \textbf{Probe Protocol:} & $\square$ Top-Center (FAQ 10/06/2026 on probe depth) \\
 \midrule
 \textbf{1.\ Starting Water $T_i$:} & $\mathbf{\underline{\hspace{1.4cm}}\,\si{\celsius}}$ (\texttt{5.II.c}) & \textbf{2.\ Model Base $\mathrm{TG}_0(h,t,P)$:} & $+\,\underline{\hspace{1.3cm}}\,\si{\celsius}$ (\sref{sec:16}) & \textbf{3.\ Drift Corr.\ $\Delta\mathrm{TG}_{\mathrm{amb}}$:} & $\pm\,\underline{\hspace{1.3cm}}\,\si{\celsius}$ \\
 \textbf{4.\ Predicted $T_{\mathrm{pred}}$:} & $\mathbf{\underline{\hspace{1.4cm}}\,\si{\celsius}}$ (\texttt{File $<t_{\mathrm{end}}$!}) & \textbf{5.\ Actual Final $T_f$:} & $\mathbf{\underline{\hspace{1.4cm}}\,\si{\celsius}}$ (\texttt{5.II.g}) & \textbf{6.\ Achieved $\mathrm{TG} / \mathrm{PE}$:} & $\mathrm{TG}=\underline{\hspace{0.8cm}}\,\si{\celsius}$ \textbar\ $\mathrm{PE}=\underline{\hspace{0.9cm}}$ \\
@@ -93,14 +93,14 @@ Whenever any reflector geometry, foil/BoPET lining, cup cradle insulation, or un
 \toprule
 \textbf{Check} & \textbf{2027 Rule} & \textbf{Physical Compliance Verification Item (\src{S01,S02,S04,S05})} & \textbf{Measured / Verified Value} \\
 \midrule
-$\square$ & \texttt{Rule 3.b.i} \& \textbf{Clarif.\ \#6} & \textbf{ZERO Hazardous Materials / ZERO Polystyrene:} Device and spare parts contain \textbf{NO asbestos, mineral wool, fiberglass, Styrofoam (EPS/XPS), or \texttt{\#6 PS} plastic}. & All polymers labeled (\texttt{\#1 BoPET}, \texttt{\#2 HDPE}, cork, balsa, cardboard, cotton) \\
+$\square$ & \texttt{Rule 3.b.i} \& \textbf{FAQ 10/22/2026 on polystyrene} & \textbf{ZERO Hazardous Materials / ZERO Polystyrene:} Device and spare parts contain \textbf{NO asbestos, mineral wool, fiberglass, Styrofoam (EPS/XPS), or \texttt{\#6 PS} plastic}. & All polymers labeled (\texttt{\#1 BoPET}, \texttt{\#2 HDPE}, cork, balsa, cardboard, cotton) \\
 \rowcolor{rowalt}$\square$ & \texttt{Rule 3.b.ii} & \textbf{ZERO Prohibited Commercial Gear:} No thermometers, probes, commercial thermoses, coolers, or vacuum-sealed vessels anywhere in device. & Custom student-built housing (\texttt{3.h}) \\
 $\square$ & \texttt{Rule 3.c} \& \texttt{4.g} & \textbf{9 oz Party Cup Fit:} Standard ES-provided 9 oz clear plastic party cup ($\approx\SI{10.0}{\centi\meter}$ tall, $\approx\SI{7.5}{\centi\meter}$ mouth) inserts and extracts in $< \SI{10}{\second}$ without binding. & Cradle ID $=\underline{\hspace{1.2cm}}\,\si{\centi\meter}$ \\
 \rowcolor{rowalt}$\square$ & \texttt{Rule 3.d} & \textbf{Maximum $\SI{30.0}{\centi\meter}$ Cubic Envelope:} Device \emph{with cup inserted and lid closed} measures $\le \SI{30.0}{\centi\meter}$ along Length, Width, and Height. & $L=\underline{\hspace{0.9cm}}$ $W=\underline{\hspace{0.9cm}}$ $H=\underline{\hspace{0.9cm}}\,\si{\centi\meter}$ \\
 $\square$ & \texttt{Rule 3.e} & \textbf{Zero Water Contact \& Zero Additives:} Internal upper reflector overhang/collar and unattached BoPET cap clear the $\SI{100}{\milli\liter}$ water meniscus ($z_{\mathrm{water}}\approx\SI{3.8}{\centi\meter}$) by $\ge \SI{2.0}{\centi\meter}$. & Min clearance above water $=\underline{\hspace{1.0cm}}\,\si{\centi\meter}$ \\
 \rowcolor{rowalt}$\square$ & \texttt{Rule 3.f} & \textbf{Zero Internal Energy Sources:} No batteries, wires, electrical components, or chemical reactants. Modular joints ready for post-test disassembly inspection if requested. & 100\% passive collector \\
 $\square$ & \texttt{Rule 2.d} \& \texttt{3.g} & \textbf{Room-Temperature Open Impound:} Device and spare parts impounded with lid open/ventilated so all components are at room temperature. & $T_{\mathrm{dev}} = T_{\mathrm{room}} = \underline{\hspace{1.0cm}}\,\si{\celsius}$ \\
-\rowcolor{rowalt}$\square$ & \texttt{Rule 5.II.d} \& \textbf{Clarif.\ \#5} & \textbf{Unattached Removable Vapor Cap:} Clear BoPET film ring rests by gravity alone; \textbf{ZERO tape, glue, rubber bands, or clips attach to the cup}; removed completely before $T_f$. & Mass of cap $=\underline{\hspace{1.0cm}}\,\si{\gram}$ \\
+\rowcolor{rowalt}$\square$ & \texttt{Rule 5.II.d} \& \textbf{FAQ 10/21/2026 on items on the cup} & \textbf{Unattached Removable Vapor Cap:} Clear BoPET film ring rests by gravity alone; \textbf{ZERO tape, glue, rubber bands, or clips attach to the cup}; removed completely before $T_f$. & Mass of cap $=\underline{\hspace{1.0cm}}\,\si{\gram}$ \\
 \bottomrule
 \end{tabularx}}
 \par\vspace{3pt}\noindent

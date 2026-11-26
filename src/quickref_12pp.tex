@@ -19,8 +19,8 @@
 % ============================================================================
 % PAGE 1: QR-01 — Competition Command Strip, 2027 Rules, Scoring & Router
 % ============================================================================
-\begin{quicksheet}[QR-01 --- 2027 Competition Command Center, Rules, Clarifications \& 10-Second Router]\label{qr:01}
-\scopebanner{REQUIRED}[2027 Division C Rules 1--6 \& All 9 Official SOINC Clarifications (09/30/2026--10/28/2026) \src{S01,S02,S04}]
+\begin{quicksheet}[QR-01 --- 2027 Competition Command Center, Rules, FAQs \& 10-Second Router]\label{qr:01}
+\scopebanner{REQUIRED}[2027 Division C Rules 1--6 \& the 11 Official FAQs (checked 26 Nov 2026) \src{S01,S02,S04}]
 
 \begin{twocol}[0.51]
 \begin{rulebox}[2027 Official Rules \& Scoring Formulas \src{S01,S04}]
@@ -30,8 +30,8 @@
 \toprule
 \textbf{Clause} & \textbf{Verified 2027 Rule Specification \& Competition Constraint} \\
 \midrule
-\textbf{2.a--d} & \textbf{Eye Protection:} \textbf{NONE required} (\texttt{p.\ C57} \& Checklist). \textbf{Calculators:} Up to \textbf{2 Class~III} (\texttt{2.b}). \textbf{Notes/Binder:} Unrestricted paper notes/resources of any size in any form; pages \textbf{may be separated/removed} (\texttt{2.c})! \textbf{Impound:} Device + spare parts \textbf{ONLY} at room temp (\texttt{2.d}); prepared graphs/tables \& binder stay with team (\textbf{NO Plot Score / Design Log in 2027!}). \\
-\textbf{3.a--h} & \textbf{Envelope:} Fits inside $\mathbf{\SI{30.0}{\centi\meter}\times\SI{30.0}{\centi\meter}\times\SI{30.0}{\centi\meter}}$ cube in testing configuration. \textbf{Cup:} ES-provided \textbf{9~oz clear plastic party cup} ($\SI{100}{\milli\liter}$ room-temp water; \texttt{3.c, 4.g}) inserted \& removed within $\SI{1.0}{\minute}$ (\texttt{5.II.d,g}). \textbf{No Water Contact (\texttt{3.e}):} Zero device contact with water inside cup! \textbf{Banned (\texttt{3.b.i--iii}):} No internal energy sources, \textbf{NO \texttt{\#6 PS} / Styrofoam} (\texttt{Clarif.\ \#6})! \\
+\textbf{2.a--d} & \textbf{Eye protection:} none required by the event header; \textbf{Category C goggles if your device contains glass} (FAQ). \textbf{Calculators:} Up to \textbf{2 Class~III} (\texttt{2.b}). \textbf{Notes/Binder:} Unrestricted paper notes/resources of any size in any form; pages \textbf{may be separated/removed} (\texttt{2.c})! \textbf{Impound:} Device + spare parts \textbf{ONLY} at room temp (\texttt{2.d}); prepared graphs/tables \& binder stay with team (\textbf{NO Plot Score / Design Log in 2027!}). \\
+\textbf{3.a--h} & \textbf{Envelope:} Fits inside $\mathbf{\SI{30.0}{\centi\meter}\times\SI{30.0}{\centi\meter}\times\SI{30.0}{\centi\meter}}$ cube in testing configuration. \textbf{Cup:} ES-provided \textbf{9~oz clear plastic party cup} ($\SI{100}{\milli\liter}$ room-temp water; \texttt{3.c, 4.g}) inserted \& removed within $\SI{1.0}{\minute}$ (\texttt{5.II.d,g}). \textbf{No Water Contact (\texttt{3.e}):} Zero device contact with water inside cup! \textbf{Banned (\texttt{3.b.i--iii}):} No internal energy sources, \textbf{NO \texttt{\#6 PS} / Styrofoam} (FAQ 10/22/2026 on polystyrene)! \\
 \textbf{4.a--g} & \textbf{Lamp Station:} Downward $100\text{--}\SI{125}{\watt}$ incandescent reflector heat lamp (\SI{120}{\volt} AC); bottom of bulb at height $h_{\mathrm{bulb}}$ above table: \textbf{Regionals} $40\text{--}\SI{50}{\centi\meter}$ ($\SI{5}{\centi\meter}$ steps); \textbf{States} $40\text{--}\SI{55}{\centi\meter}$ ($\SI{5}{\centi\meter}$ steps); \textbf{Nationals} $40\text{--}\SI{65}{\centi\meter}$ ($\SI{1}{\centi\meter}$ steps). Water: $\mathbf{\SI{100}{\milli\liter}}$ ambient room-$T$ tap water ($\sim 18\text{--}\SI{24}{\celsius}$). \\
 \textbf{5.II} & \textbf{Timing:} $\SI{3.0}{\minute}$ Setup $\to$ $\SI{1.0}{\minute}$ Water load ($\SI{100}{\milli\liter}$ cup) $\to$ $t_{\mathrm{heat}} \in [10, 15]\,\si{\minute}$ Lamp ON (submit $T_{\mathrm{pred}}$ during run) $\to$ Lamp OFF + $\SI{1.0}{\minute}$ extraction window before ES reads top-layer $T_f$ to $\ge\SI{0.1}{\celsius}$. \\
 \bottomrule
@@ -44,20 +44,24 @@
 \[
   \mathrm{PE} = \max\!\left(0,\ 1 - \frac{|T_f - T_{\mathrm{pred}}|}{T_f}\right)\ (^\circ\mathrm{C}!),\; \mathrm{PS} = 20\!\left(\frac{\mathrm{PE}_{\mathrm{team}}}{\mathrm{PE}_{\max}}\right)M_{\mathrm{pen}},\; \mathbf{\mathrm{FS} = \mathrm{ES} + \mathrm{TS} + \mathrm{PS}}
 \]
-\emph{Penalty Multiplier on BOTH $\mathrm{TS}$ \& $\mathrm{PS}$:} $\mathbf{M_{\mathrm{pen}} = 0.7^{V_{\mathrm{constr}}} \times 0.9^{V_{\mathrm{comp}}}}$ (non-impound $= +1\,V_{\mathrm{constr}}$ per \texttt{Clarif.\ \#9}; \texttt{\#6 PS}/Styrofoam or internal energy source $\to \mathrm{TS}=\mathrm{PS}=0$). \textbf{Tiebreakers (\texttt{6.j}):} 1.~Best $\mathrm{TS}$ $\to$ 2.~Best $\mathrm{ES}$ $\to$ 3.~Preselected written test questions (\texttt{TB~\#1..N}).
+\emph{Penalty Multiplier on BOTH $\mathrm{TS}$ \& $\mathrm{PS}$:} $\mathbf{M_{\mathrm{pen}} = 0.7^{V_{\mathrm{constr}}} \times 0.9^{V_{\mathrm{comp}}}}$ (non-impound $= +1\,V_{\mathrm{constr}}$ per FAQ 10/28/2026 on impound; \texttt{\#6 PS}/Styrofoam or internal energy source $\to \mathrm{TS}=\mathrm{PS}=0$). \textbf{Tiebreakers (\texttt{6.j}):} 1.~Best $\mathrm{TS}$ $\to$ 2.~Best $\mathrm{ES}$ $\to$ 3.~Preselected written test questions (\texttt{TB~\#1..N}).
 \end{rulebox}
 \nextcol[0.47]
-\begin{formulacard}[All 9 Official 2027 Rule Clarifications \src{S02}]
+\begin{formulacard}[The 11 Official FAQs (checked 26 Nov 2026, \texttt{soinc.org/thermodynamics-div-c}) \src{S02}]
 \par\smallskip\noindent
 \scriptsize\setlength{\tabcolsep}{2.2pt}\renewcommand{\arraystretch}{1.10}
-\begin{tabularx}{\linewidth}{@{}c X@{}}
+\begin{tabularx}{\linewidth}{@{}l X@{}}
 \toprule
-\textbf{\#} & \textbf{Official SOINC Ruling \& Direct Engineering Impact} \\
+\textbf{Date} & \textbf{What the FAQ says (summary) and what we do} \\
 \midrule
-\textbf{1--4} & \textbf{Unstirred Top-Layer ES Measurement:} Water is \textbf{NOT stirred} before $T_f$ is read; ES places probe tip near the \textbf{top-center} of the water ($z\approx 5\text{--}\SI{12}{\milli\meter}$). \emph{Action:} Engineer stable thermal stratification ($T_{\mathrm{top}} > T_{\mathrm{bot}}$) and \textbf{NEVER swirl} the cup during removal! \\
-\textbf{5} & \textbf{Unattached Cup Glazing Rule:} Clear film/plastic cover \textbf{may rest on the device frame} above the cup, but \textbf{nothing may be taped, glued, clipped, or resting on the cup rim itself}. \\
-\textbf{6} & \textbf{Explicit \texttt{\#6 PS} / Styrofoam Ban:} All expanded/extruded polystyrene (\texttt{\#6 PS}, EPS, XPS, Styrofoam, foam peanuts/cups) is \textbf{strictly prohibited}. Use cork, balsa, cardboard, cotton, wool, or PI/PU foam. \\
-\textbf{7--9} & \textbf{Glazing Removal, Cup Access \& Impound Penalty:} Removable glazing cap must come completely off before $T_f$ measurement (\texttt{\#7, \#8}); non-impound incurs $\times 0.7$ construction violation (\texttt{\#9}); notes/tables stay with team (\texttt{2.c, 2.d})! \\
+undated & \textbf{Glass} is allowed in the device; teams using glass should wear \textbf{Category C goggles} when interacting with it. \\
+undated & \textbf{Tongs, hot pads, heat-resistant gloves} and similar items may be brought in to remove the cup. \\
+09/30, 10/01, 10/06 & Water is \textbf{not stirred, swirled or shaken} before the reading, by the ES or the team. Calibrate for unstirred water; lift the cup straight up. \\
+10/06 & \textbf{Probe depth} is the local ES's call; recommended: \textbf{top layer near the center}, probe only as deep as needed. \\
+10/21 & Teams \textbf{may place something on or around the cup}, but \textbf{no adhesives, tape or fasteners} (rubber bands, clips) on the cup, and the cup's shape must not change. \\
+10/22 & \textbf{Polystyrene} (Styrofoam, \texttt{6}/\texttt{PS} plastics) is hazardous under the lamp: do not use it. \\
+10/22 & \textbf{Opening a lid} to insert the cup counts as ``inserting or removing the cup''; opening/closing a lid or door or moving/turning the device to insert the cup is \textbf{not modifying} it. \\
+10/28 & A device \textbf{not impounded} incurs \textbf{one additional construction violation}. \\
 \bottomrule
 \end{tabularx}
 \end{formulacard}
@@ -792,7 +796,7 @@ $\mathrm{CH_4}(g)$ & $-74.87$ & $186.25$ & $\mathrm{C_2H_5OH}(l)$ & $-277.69$ & 
     \item \textbf{NTC Thermistor:} $R(T) = R_0\exp\left[\beta\left(\frac{1}{T} - \frac{1}{T_0}\right)\right]$ ($\beta \approx \SI{3950}{\kelvin}$); highest sensitivity, nonlinear, self-heating $I^2R / G_{\mathrm{th}}$.
     \item \textbf{Thermocouple (Types K/T, NIST ITS-90 \src{S22}):} Seebeck EMF $\Delta V = S_{AB}(T_{\mathrm{meas}} - T_{\mathrm{ref}})$ ($\sim\SI{40}{\micro\volt\per\kelvin}$); measures $\Delta T$ only, requires cold-junction reference compensation; fastest $\tau_p$ ($\SIrange{0.1}{1.5}{\second}$).
     \item \textbf{IR Pyrometer Trap:} Measures \textbf{only the top $\sim\SI{10}{\micro\meter}$ surface skin} ($\varepsilon_{\mathrm{water}} \approx 0.96$ in $8\text{--}\SI{14}{\micro\meter}$) and cannot see through glass or plastic!
-    \item \textbf{2027 Immersion Depth Bias (\texttt{Clarif.\ \#4}):} Because near-IR lamp radiation heats the top $\SI{10}{\milli\meter}$ of water, probing at $z = \SI{8}{\milli\meter}$ reads $1.25\text{--}1.45\times$ higher $\mathrm{TG}$ than probing at the bottom ($z = \SI{35}{\milli\meter}$).
+    \item \textbf{2027 Immersion Depth Bias (FAQ 10/06/2026 on probe depth):} Because near-IR lamp radiation heats the top $\SI{10}{\milli\meter}$ of water, probing at $z = \SI{8}{\milli\meter}$ reads $1.25\text{--}1.45\times$ higher $\mathrm{TG}$ than probing at the bottom ($z = \SI{35}{\milli\meter}$).
   \end{enumerate}
 \end{itemize}
 \end{formulacard}
@@ -833,7 +837,7 @@ $\mathrm{CH_4}(g)$ & $-74.87$ & $186.25$ & $\mathrm{C_2H_5OH}(l)$ & $-277.69$ & 
 \scriptsize
 \begin{itemize}
   \item \textbf{Two-Band Selective Trapping \& Top-Layer Stratification:}
-  A $\SI{2400}{\kelvin}$ heat lamp peaks at $\lambda_{\max} = \SI{1.21}{\micro\meter}$ (near-IR), where liquid water absorbs $>68\%$ of incident energy directly in the \textbf{top $\SI{10}{\milli\meter}$} \src{S19,S20}. Since warm water at $\SI{50}{\celsius}$ ($\rho = \SI{988}{\kilogram\per\cubic\meter}$) floats stably atop cooler $\SI{40}{\celsius}$ water ($\rho = \SI{992}{\kilogram\per\cubic\meter}$), the unstirred top layer probed by the ES (\texttt{Clarif.\ \#1--\#4}) achieves $\mathbf{\mathrm{TG}_{\mathrm{top}} = 1.28\text{--}1.42\,\mathrm{TG}_{\mathrm{bulk}}}$!
+  A $\SI{2400}{\kelvin}$ heat lamp peaks at $\lambda_{\max} = \SI{1.21}{\micro\meter}$ (near-IR), where liquid water absorbs $>68\%$ of incident energy directly in the \textbf{top $\SI{10}{\milli\meter}$} \src{S19,S20}. Since warm water at $\SI{50}{\celsius}$ ($\rho = \SI{988}{\kilogram\per\cubic\meter}$) floats stably atop cooler $\SI{40}{\celsius}$ water ($\rho = \SI{992}{\kilogram\per\cubic\meter}$), the unstirred top layer probed by the ES (FAQs 09/30--10/06/2026 on stirring and probe depth) achieves $\mathbf{\mathrm{TG}_{\mathrm{top}} = 1.28\text{--}1.42\,\mathrm{TG}_{\mathrm{bulk}}}$!
   \item \textbf{Day-Of Prediction Formula (Submit $T_{\mathrm{pred}}$ in $^\circ\mathrm{C}$ to $\SI{0.1}{\celsius}$):}
   \[
     \boxed{T_{\mathrm{pred}} = T_i + \mathrm{TG}_{\mathrm{table}}(h_{\mathrm{bulb}}, t_{\mathrm{heat}}, P_{\mathrm{lamp}}) - \Delta T_{\mathrm{drift}}(T_i - T_{\mathrm{room}}) - \Delta T_{\mathrm{cool}}(t_{\mathrm{wait}})}
@@ -883,7 +887,7 @@ $\mathbf{\SI{65.0}{\centi\meter}}$ & $+9.8$ & $+10.6$ & $+11.5$ & $+12.3$ & $+13
 \end{trapbox}
 \begin{rulebox}[Pre-Block 60-Second Impound \& Safety Checklist]
 \scriptsize
-\ding{51}\ \textbf{Eye Protection: NONE required} (\texttt{p.\ C57} \& Checklist) \textbar\ \ding{51}\ Two Class~III calculators + spare batteries (\texttt{2.b}) \textbar\ \ding{51}\ Collector fits $\le\SI{29.6}{\centi\meter}$ cube, zero \texttt{\#6 PS}/Styrofoam (\texttt{3.b.i--iii, Clarif.\ \#6}) \textbar\ \ding{51}\ Zero water contact \& removable unattached BoPET glazing lid (\texttt{3.e, Clarif.\ \#5, \#7, \#8}) \textbar\ \ding{51}\ Impound ONLY room-temp device + spare parts (\texttt{2.d, Clarif.\ \#9}); keep binder \& prepared prediction tables/graphs with team (\texttt{2.c, 2.d}).
+\ding{51}\ \textbf{Eye protection:} none required by the event header; \textbf{Category C goggles if your device contains glass} (FAQ) \textbar\ \ding{51}\ Tongs, hot pads or heat-resistant gloves for the hot cup (FAQ) \textbar\ \ding{51}\ Two Class~III calculators + spare batteries (\texttt{2.b}) \textbar\ \ding{51}\ Collector fits $\le\SI{29.6}{\centi\meter}$ cube, zero \texttt{\#6 PS}/Styrofoam (\texttt{3.b.i--iii, FAQ 10/22/2026 on polystyrene}) \textbar\ \ding{51}\ Zero water contact \& removable unattached BoPET glazing lid (\texttt{3.e, FAQs 10/21 and 10/22/2026 on the cup and lid}) \textbar\ \ding{51}\ Impound ONLY room-temp device + spare parts (\texttt{2.d, FAQ 10/28/2026 on impound}); keep binder \& prepared prediction tables/graphs with team (\texttt{2.c, 2.d}).
 \end{rulebox}
 \end{twocol}
 \label{LastContentPage}

@@ -180,3 +180,23 @@ Checked and correct (no change) in §13–§23: Ex 13.4, 13.5, 13.7, 13.9; P13.1
 | Fig 3.2 vs QS-02 | `sec03.tex`, `sec01.tex`, `quickref_12pp.tex`, `appA.tex` | Invar α 0.9×10⁻⁶ → **1.2×10⁻⁶ /K** everywhere (Fig 3.2 label, Ex 03.4, App A, QuickRef) | consistency |
 
 Checks after Phase 2: **1374**, all pass (`verify_all.py`).
+
+---
+
+## Phase 3 — Rules and compliance
+
+Source: the Thermodynamics – Div C FAQ page (`soinc.org/thermodynamics-div-c`), read 26 Nov 2026 — **11 entries** (2 undated, 9 dated 09/30–10/28/2026), matching the list in the overhaul prompt. No rules text was added; FAQ content is paraphrased and labeled as such, except sentences already quoted in the binder that match the page.
+
+| Change | Files | Old → New | Reason |
+|---|---|---|---|
+| FAQ citations | all `src/*.tex` (189 numbered citations, converted by script, then hand-checked) | "Clarification #1 … #9", "Clarif. #n", "C1–C9" → **"FAQ mm/dd/2026 (topic)"**; e.g. #4 → FAQ 10/06/2026 (probe depth), #5 → FAQ 10/21/2026 (items on the cup), #6 → FAQ 10/22/2026 (polystyrene), #9 → FAQ 10/28/2026 (impound); "#1–#3" → FAQs 09/30, 10/01 and 10/06/2026 | the "#1–#9" numbering is the binder's own invention |
+| §0.1 FAQ ledger | `sec00.tex` | 9-row "Clarifications Ledger" → **11-row table**: date · topic · what the FAQ says (paraphrase) · what we do; adds the two undated FAQs (glass + Category C goggles; tongs/hot pads/gloves) | 2 FAQs were missing |
+| Counts | cover, §0, §15 intro, App E/F/G/H, QuickRef, `README.md`, `markdown/README.md`, `build/architecture-lock.md` | "9 clarifications / nine Official National Clarifications" → **"11 official FAQs (checked 26 Nov 2026)"**; source URL `soinc.org/division-c-events` → `soinc.org/thermodynamics-div-c` | count was wrong |
+| Eye protection | cover, `sec00.tex`, `appE.tex`, `appF.tex`, QuickRef (×2) | "Eye Protection: None (required)" → **"None required by the event header; Category C goggles if your device contains glass (FAQ)"** | FAQ (glass) |
+| Event-day checklists | `sec23.tex` (§23.7 row 10), `appF.tex`, QuickRef | added **tongs, hot pads or heat-resistant gloves** (FAQ, undated) and Category C goggles if the device contains glass | FAQ (tools) |
+| QuickRef QR-01 FAQ card | `quickref_12pp.tex` | "nothing may be taped, glued, clipped, **or resting on the cup rim itself**" → FAQ 10/21/2026: teams **may place something on or around the cup**; no adhesives/tape/fasteners; cup shape unchanged. "#7, #8: glazing cap must come completely off" → FAQs 10/22/2026 (opening a lid = inserting the cup; inserting actions are not modifying). Card rebuilt as 8 dated rows covering all 11 FAQs | contradicted the FAQ |
+| Quote attributions | `sec11.tex`, `sec15.tex`, `sec17.tex` rule boxes | "No, the water must not be swirled, shaken or stirred…" attributed to "#1, #2, #3 (09/30–10/06)" → **FAQ 10/06/2026** (09/30 and 10/01 say the same in other words); probe-depth quote now starts with the FAQ's first point (the local ES sets the protocol) | exact attribution |
+| Titles | §11, §14, §15, §17 rule boxes and §17.4 heading | long "(Clarifications #1–#4)" suffixes → short dated titles; §17.4 heading drops the suffix | readability |
+| `REVIEW_NEEDED.md` | — | section B: TS formula conflict (B1), multipliers and stacking (B2), TG/PE formulas (B3), tiebreak (B4), heights/times/setup windows (B5), notes rule and calculators (B6), cup-cover removal (B7), polystyrene consequence (B8), prediction deadline (B9) — **not changed in the binder**; A2: two-node lump vs. profile; C1–C2 | prompt Phase 3 |
+
+No numbers changed in Phase 3. `verify_all.py`: 1374/1374.

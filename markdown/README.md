@@ -1,6 +1,6 @@
 # 2026–2027 Science Olympiad Division C Thermodynamics — Editable Markdown Source Mirror
 
-> **Verified Rules Baseline:** `official-2027-C.pdf` (pp. C57–C59) + **9 Official 2027 National Clarifications** (`09/30/2026`–`10/28/2026`) + **0 Rules Corrections** (`Accessed 2026-11-22`).
+> **Verified Rules Baseline:** `official-2027-C.pdf` (pp. C57–C59) + **11 official FAQs** (checked 26 Nov 2026, soinc.org/thermodynamics-div-c) + **0 Rules Corrections**.
 > **Reproducible Generator:** `python build/export_markdown.py`
 > **Unified Searchable Single-File Edition:** [`Thermodynamics_DivC_Complete_Binder.md`](Thermodynamics_DivC_Complete_Binder.md)
 
@@ -37,7 +37,7 @@
 | 26 | **Tab 9: INDEX/APP** | [`appB.md`](appB.md) | `src/appB.tex` | Appendix B: Master Equation & Formula Chooser Index (Algebra-Only 5.d.iv Compliant) | **3 pp** |
 | 27 | **Tab 9: INDEX/APP** | [`appC.md`](appC.md) | `src/appC.tex` | Appendix C: Five Multi-Indices (Topic, Formula, Diagram, Error & Collector Failure-Mode) | **4 pp** |
 | 28 | **Tab 9: INDEX/APP** | [`appD.md`](appD.md) | `src/appD.tex` | Appendix D: Printable 2027 Heat-Lamp Collector Test Log & Calibration Forms | **2 pp** |
-| 29 | **Tab 9: INDEX/APP** | [`appE.md`](appE.md) | `src/appE.tex` | Appendix E: 2027 Official Rules & Clarifications (#1-#9) Clause-by-Clause Compliance Matrix | **2 pp** |
+| 29 | **Tab 9: INDEX/APP** | [`appE.md`](appE.md) | `src/appE.tex` | Appendix E: 2027 Official Rules & FAQs Clause-by-Clause Compliance Matrix | **2 pp** |
 | 30 | **Tab 9: INDEX/APP** | [`appF.md`](appF.md) | `src/appF.tex` | Appendix F: One-Page Pre-Tournament Rules & Host-Modifications Verification Checklist | **1 pp** |
 | 31 | **Tab 9: INDEX/APP** | [`appG.md`](appG.md) | `src/appG.tex` | Appendix G: Sourced Primary & Authoritative References Summary ([S01]-[S35]) | **1 pp** |
 | 32 | **Tab 9: INDEX/APP** | [`appH.md`](appH.md) | `src/appH.tex` | Appendix H: Tournament-Specific Open Questions & Binder Maintenance Guide | **1 pp** |

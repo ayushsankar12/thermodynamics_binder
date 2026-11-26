@@ -97,7 +97,7 @@ At a State tournament ($h_{\mathrm{bulb}} = \SI{45.0}{\centi\meter}$, $t_{\mathr
   \item \textbf{Team Alpha (3-Stage Glazed CPC):} $T_{\mathrm{start}} = \SI{22.0}{\celsius}$, $T_{\mathrm{final}} = \SI{49.7}{\celsius}$, submitted $T_{\mathrm{pred}} = \SI{49.4}{\celsius}$ ($|\Delta T_{\mathrm{err}}| = \SI{0.3}{\celsius}$).
   \item \textbf{Team Beta (Open $30^\circ$ Straight Cone):} $T_{\mathrm{start}} = \SI{22.0}{\celsius}$, $T_{\mathrm{final}} = \SI{30.1}{\celsius}$, submitted $T_{\mathrm{pred}} = \SI{29.8}{\celsius}$ (same $|\Delta T_{\mathrm{err}}| = \SI{0.3}{\celsius}$).
 \end{itemize}
-Compute $\mathrm{ES}, \mathrm{TG}, \mathrm{TS}, \mathrm{PE}, \mathrm{PS}$, and Final Score $\mathrm{FS}$ for both teams, and verify the point loss if Team~Beta also forgot to impound its spare glazing ring ($V_{\mathrm{constr}} = 1$, Clarification~\#9).
+Compute $\mathrm{ES}, \mathrm{TG}, \mathrm{TS}, \mathrm{PE}, \mathrm{PS}$, and Final Score $\mathrm{FS}$ for both teams, and verify the point loss if Team~Beta also forgot to impound its spare glazing ring ($V_{\mathrm{constr}} = 1$, FAQ 10/28/2026 on impound).
 
 \textbf{Solution.} Both teams earn Exam Score $\mathrm{ES} = 50 \times (88.5 / 92.0) = \mathbf{\SI{48.10}{pts}}$.
 \begin{enumerate}
@@ -528,7 +528,7 @@ $\Delta T_{\mathrm{cool}}(t_{\mathrm{closed}}, t_{\mathrm{open}}) = r_{\mathrm{c
 \idxfig{post-lamp-off cup extraction and waiting-window cooling correction}
 \end{center}
 \nextcol[0.48]
-\captionof{table}{ES thermometer technology offsets $\delta_{\mathrm{probe}}$ relative to a $z=\SI{8}{\milli\meter}$ digital thermistor tip (Rule~\texttt{4.f}, Clarif.~\#4) \src{S01,S02,S22}.}\label{tab:16:probe-offsets}
+\captionof{table}{ES thermometer technology offsets $\delta_{\mathrm{probe}}$ relative to a $z=\SI{8}{\milli\meter}$ digital thermistor tip (Rule~\texttt{4.f}, FAQ 10/06/2026 on probe depth) \src{S01,S02,S22}.}\label{tab:16:probe-offsets}
 \footnotesize\setlength{\tabcolsep}{2.2pt}\renewcommand{\arraystretch}{1.12}
 \begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.28\linewidth}rrr>{\raggedright\arraybackslash}X@{}}
 \toprule
@@ -769,7 +769,7 @@ Execute these five steps in sequence during the \textbf{3-Minute Device Setup Ti
 \hdr{Event-Day Anomaly} & \hdr{Detection Cue (\texttt{5.II.a--d})} & \hdr{Immediate Physical Action} & \hdr{Quantitative Adjustment to $T_{\mathrm{pred}}$} \\
 \midrule
 \textbf{1. Primary BoPET Window Splashed or Torn} & Water droplet or crease on underside of glazing film during Water Setup. & Swap in impounded spare BoPET drop-ring from clear zip-bag in $<\SI{8}{\second}$ (\texttt{2.d}). & $\mathbf{\SI{0.0}{\celsius}}$ (spare BoPET ring is optically and thermally identical to primary window). \\
-\rowcolor{rowalt}\textbf{2. ES Forbids All Removable Cup Covers} (Local Host Rule) & ES announces no loose cover may rest over cup mouth (despite Clarif.~\#5). & Remove BoPET drop-ring during 3-min Setup Time so zero violation occurs (\texttt{6.h}). & Multiply $\mathrm{TG}_{\mathrm{table}}$ by $\mathbf{0.726}$ (or subtract $\Delta T_{\mathrm{evap}} = \SIrange{4.8}{7.6}{\celsius}$ per \tref{tab:15:heat-budget}). \\
+\rowcolor{rowalt}\textbf{2. ES Forbids All Removable Cup Covers} (Local Host Rule) & ES announces no loose cover may rest over cup mouth (despite FAQ 10/21/2026 on items on the cup). & Remove BoPET drop-ring during 3-min Setup Time so zero violation occurs (\texttt{6.h}). & Multiply $\mathrm{TG}_{\mathrm{table}}$ by $\mathbf{0.726}$ (or subtract $\Delta T_{\mathrm{evap}} = \SIrange{4.8}{7.6}{\celsius}$ per \tref{tab:15:heat-budget}). \\
 \textbf{3. Off-Center Lamp Clamp Stand Post} & Lamp stand base foot prevents centering outer $\SI{29.6}{\centi\meter}$ square box (\texttt{4.d}). & Rotate square collector base $\SI{45}{\degree}$ so corner notch straddles lamp post while cup stays centered! & $\mathbf{\SI{0.0}{\celsius}}$ once cup crosshair is aligned directly beneath bulb tip. \\
 \rowcolor{rowalt}\textbf{4. Cold Morning Source Water Bath} ($T_{\mathrm{start}} < \SI{18.0}{\celsius}$) & ES announces ice-chilled or cold tap bath ($T_{\mathrm{room}} - T_{\mathrm{start}} > +\SI{4.0}{\celsius}$). & Wipe outer cup wall dry before seating on cork fins; add $\Delta T_{\mathrm{amb}}$ from \tref{tab:16:ambient-offset-grid}. & Add $+k_{\mathrm{room}}(t)(T_{\mathrm{room}} - T_{\mathrm{start}}) + \SI{0.15}{\celsius}$ (suppressed evaporation at lower $T_{\mathrm{final}}$). \\
 \textbf{5. ES Uses Deep-Stem Glass or RTD Thermometer} & Observe long glass spirit bulb or $\SI{25}{\milli\meter}$ stainless RTD probe at check-in (\texttt{4.f}). & Keep extraction ultra-smooth; apply probe-depth offset $\delta_{\mathrm{probe}}$ from \tref{tab:16:probe-offsets}. & Subtract $\mathbf{\SI{1.4}{\celsius}}$ (Pt100 RTD) or $\mathbf{\SI{2.1}{\celsius}}$ (spirit glass thermometer) from thermistor baseline. \\

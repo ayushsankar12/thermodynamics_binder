@@ -293,11 +293,11 @@ $\SI{1}{\text{atm}}$ (std.\ pressure) & $\SI{101325}{\pascal} = \SI{1.01325}{\te
 \end{tabularx}
 \par}\smallskip
 
-\begin{devicebox}[2027 Heat-Lamp Collector Physics \& Optical/Thermal Design Summary (\texttt{Rules 3--6} \& \texttt{Clarifications \#1--\#9})]
+\begin{devicebox}[2027 Heat-Lamp Collector Physics \& Optical/Thermal Design Summary (\texttt{Rules 3--6} \& the 11 official FAQs)]
 \begin{enumerate}
   \item \textbf{Lamp Spectrum \& Aperture Concentration:} A $\SIrange{100}{125}{\watt}$ incandescent heat-lamp tungsten filament ($T_{\mathrm{fil}} \approx \SIrange{2300}{2450}{\kelvin}$) peaks at $\lambda_{\max} = \SI{2897.8}{\micro\meter\kelvin} / \SI{2400}{\kelvin} = \mathbf{\SI{1.21}{\micro\meter}}$ (near-IR) and emits $\approx 82\%\text{--}86\%$ of its electrical power as radiation. Funneling the full allowed $\SI{29.6}{\centi\meter} \times \SI{29.6}{\centi\meter}$ top aperture ($A_{\mathrm{ap}} = \SI{876}{\square\centi\meter}$) down onto the $\SI{7.5}{\centi\meter}$ mouth of the \SI{9}{oz} clear plastic cup ($A_{\mathrm{cup}} = \SI{44.2}{\square\centi\meter}$) via a specular shiny-side aluminum foil compound reflector ($\rho_{\mathrm{NIR,spec}} = 0.88\text{--}0.91$ shiny side vs.\ $0.58\text{--}0.68$ dull side!) provides a geometric concentration potential of $C_{\mathrm{geom}} = 876 / 44.2 = \mathbf{19.8\times}$ \src{S12,S19}.
-  \item \textbf{Near-IR Water Surface Absorption \& Stable Stratification (\texttt{Clarifications \#1--\#4}):} From Hale \& Querry (1973) and Kou et al.\ (1993) \src{S19,S20}, liquid water's absorption coefficient jumps from $\mu_a(\SI{1.0}{\micro\meter}) = \SI{0.36}{\per\centi\meter}$ to $\mu_a(\SI{1.45}{\micro\meter}) = \SI{28.8}{\per\centi\meter}$ ($\delta_p = \SI{0.35}{\milli\meter}$) and $\mu_a(\SI{1.95}{\micro\meter}) = \SI{114}{\per\centi\meter}$ ($\delta_p = \SI{0.088}{\milli\meter}$). Thus \textbf{$>68\%$ of absorbed lamp power is deposited directly into the top $\SI{10}{\milli\meter}$ water layer}. Because warmer water above $\SI{4}{\celsius}$ is less dense than cooler water below it ($\partial\rho/\partial z > 0, \mathrm{Ra} < 0$), natural convection is completely suppressed! Under \texttt{Clarifications \#1--\#4} (zero stirring/swirling; ES measures top water layer near cup center) \src{S02}, this stratified top layer ($C_{\mathrm{top,eff}} \approx \SI{215}{\joule\per\kelvin}$ vs.\ bulk $\SI{418.4}{\joule\per\kelvin}$) boosts measured $\mathrm{TG}$ by \textbf{$1.5\times\text{--}1.9\times$} over a mixed cup.
-  \item \textbf{Why Non-Attached Glazing (\texttt{Clarification \#5}) Saves $\SIrange{3.5}{7.0}{\celsius}$:} As proved in Lienhard Example 11.11 (pp.\ 662--664) \src{S12}, evaporative mass transfer from an uncovered $\SI{40}{\celsius}$ water cup ($\dot{Q}_{\mathrm{evap}} \approx \SI{2.22}{\watt}$, $L_v = \SI{2406}{\kilo\joule\per\kilogram}$) accounts for \textbf{$73\%\text{--}82\%$ of all top-surface heat loss} and cools the exact top skin the ES thermometer measures! Resting a non-attached clear BoPET film window ($\tau_{\mathrm{NIR}} = 0.90$, no tape/adhesives/clips on the cup per \texttt{Clarification \#5}) traps saturated $100\%\ \mathrm{RH}$ air above the cup and eliminates evaporative loss.
+  \item \textbf{Near-IR Water Surface Absorption \& Stable Stratification (FAQs 09/30--10/06/2026 on stirring and probe depth):} From Hale \& Querry (1973) and Kou et al.\ (1993) \src{S19,S20}, liquid water's absorption coefficient jumps from $\mu_a(\SI{1.0}{\micro\meter}) = \SI{0.36}{\per\centi\meter}$ to $\mu_a(\SI{1.45}{\micro\meter}) = \SI{28.8}{\per\centi\meter}$ ($\delta_p = \SI{0.35}{\milli\meter}$) and $\mu_a(\SI{1.95}{\micro\meter}) = \SI{114}{\per\centi\meter}$ ($\delta_p = \SI{0.088}{\milli\meter}$). Thus \textbf{$>68\%$ of absorbed lamp power is deposited directly into the top $\SI{10}{\milli\meter}$ water layer}. Because warmer water above $\SI{4}{\celsius}$ is less dense than cooler water below it ($\partial\rho/\partial z > 0, \mathrm{Ra} < 0$), natural convection is completely suppressed! Under FAQs 09/30--10/06/2026 on stirring and probe depth (zero stirring/swirling; ES measures top water layer near cup center) \src{S02}, this stratified top layer ($C_{\mathrm{top,eff}} \approx \SI{215}{\joule\per\kelvin}$ vs.\ bulk $\SI{418.4}{\joule\per\kelvin}$) boosts measured $\mathrm{TG}$ by \textbf{$1.5\times\text{--}1.9\times$} over a mixed cup.
+  \item \textbf{Why Non-Attached Glazing (FAQ 10/21/2026 on items on the cup) Saves $\SIrange{3.5}{7.0}{\celsius}$:} As proved in Lienhard Example 11.11 (pp.\ 662--664) \src{S12}, evaporative mass transfer from an uncovered $\SI{40}{\celsius}$ water cup ($\dot{Q}_{\mathrm{evap}} \approx \SI{2.22}{\watt}$, $L_v = \SI{2406}{\kilo\joule\per\kilogram}$) accounts for \textbf{$73\%\text{--}82\%$ of all top-surface heat loss} and cools the exact top skin the ES thermometer measures! Resting a non-attached clear BoPET film window ($\tau_{\mathrm{NIR}} = 0.90$, no tape/adhesives/clips on the cup per FAQ 10/21/2026 on items on the cup) traps saturated $100\%\ \mathrm{RH}$ air above the cup and eliminates evaporative loss.
 \end{enumerate}
 \end{devicebox}
 
@@ -333,7 +333,7 @@ $\SI{1}{\text{atm}}$ (std.\ pressure) & $\SI{101325}{\pascal} = \SI{1.01325}{\te
 \textbf{T13} & Leaving units or exact sig figs off final answers (\texttt{E1, E2, E4, E6}) & Loses $\SI{1.0}{\text{pt}}$ per problem ($25\%\text{--}33\%$ of score) on \texttt{E2} MIT and \texttt{E4} GGSO rubrics! & In the final 3 minutes, audit every answer box for explicit units and requested sig figs. \\
 \rowcolor{rowalt}
 \textbf{T14} & Blind guessing on $+3\text{ correct} / +1\text{ blank} / 0\text{ wrong}$ MCQs (\texttt{E2}) & Expected value of 4-choice blind guess is $\SI{0.75}{\text{pts}} < \SI{1.00}{\text{pt}}$ blank credit! & When blank credit $= 1/3$ of correct credit, guess \textbf{only} after eliminating $\ge 2$ choices (\sref{sec:21.4}). \\
-\textbf{T15} & Swirling the \SI{9}{oz} cup during removal or using \texttt{\#6 PS} Styrofoam (\texttt{2027 Part II}) & Swirling destroys top-layer stratification ($-5\text{ to }-\SI{9}{\celsius}$ in $\mathrm{TG}$!); \texttt{\#6 PS} disqualifies device ($\mathrm{TS}=\mathrm{PS}=0$)! & Lift cup straight up with zero tilt/swirl (\texttt{Clarif.\ \#1--4}); purge all \texttt{\#6 PS} (\texttt{Clarif.\ \#6}). \\
+\textbf{T15} & Swirling the \SI{9}{oz} cup during removal or using \texttt{\#6 PS} Styrofoam (\texttt{2027 Part II}) & Swirling destroys top-layer stratification ($-5\text{ to }-\SI{9}{\celsius}$ in $\mathrm{TG}$!); \texttt{\#6 PS} disqualifies device ($\mathrm{TS}=\mathrm{PS}=0$)! & Lift cup straight up with zero tilt/swirl (FAQs 09/30--10/06/2026 on stirring and probe depth); purge all \texttt{\#6 PS} (FAQ 10/22/2026 on polystyrene). \\
 \bottomrule
 \end{tabularx}
 \par}\smallskip
@@ -347,7 +347,7 @@ Prove algebraically the exact temperatures where \textbf{(a)} Kelvin and Fahrenh
 \verifiedby{Independent Python script \texttt{check\_sec21\_23.py} (\texttt{SEC23\_SCALE\_INTERSECTIONS}): $x = 574.5875$, $y = 60.0$.}
 \end{workedexample}
 
-\begin{workedexample}[Rapid Cram Drill 2: Open-Cup Evaporation Loss vs.\ BoPET Glazing Cap]{Clarification \#5}{ex:23.2}
+\begin{workedexample}[Rapid Cram Drill 2: Open-Cup Evaporation Loss vs.\ BoPET Glazing Cap]{FAQ 10/21/2026 on items on the cup}{ex:23.2}
 During a 10-minute 2027 collector run, an uncovered \SI{9}{oz} cup holding \SI{100}{\milli\liter} ($\SI{100.0}{\gram}$) of water at mean surface temperature $\SI{40.0}{\celsius}$ ($L_v = \SI{2406}{\joule\per\gram}$) loses $\Delta m_{\mathrm{evap}} = \SI{0.550}{\gram}$ of water by evaporation \src{S12}. How many degrees Celsius of temperature gain $\mathrm{TG}$ are lost from \textbf{(a)} the ES-measured top stratified layer ($C_{\mathrm{top,eff}} = \SI{215.0}{\joule\per\kelvin}$), and \textbf{(b)} the bulk water ($C_{\mathrm{bulk}} = \SI{418.4}{\joule\per\kelvin}$)?
 
 \textbf{Solution.}
@@ -369,26 +369,28 @@ In Cornell 2027 (\texttt{E1 Q29}) \src{S25}, a Rankine steam cycle absorbs $q_{\
 
 \section{2027 Heat-Lamp Collector Pre-Block Sanity Checklist \& 60-Second Partner Card}\label{sec:23.7}
 
-\begin{rulebox}[Master Pre-Impound \& Competition-Block Compliance Checklist (\texttt{official-2027-C.pdf} pp.\ C57--C59 \& \texttt{Clarifications \#1--\#9})]
+\begin{rulebox}[Master Pre-Impound \& Competition-Block Compliance Checklist (\texttt{official-2027-C.pdf} pp.\ C57--C59 \& the 11 official FAQs)]
 \scriptsize
 \par\smallskip\noindent
 \begin{tabularx}{\linewidth}{@{}l L{0.23\linewidth} X L{0.23\linewidth}@{}}
 \toprule
-\hdr{Check} & \hdr{2027 Rule / Clarification} & \hdr{Mandatory Verification Criterion Before \& During Block} & \hdr{Penalty If Violated} \\
+\hdr{Check} & \hdr{2027 Rule / FAQ} & \hdr{Mandatory Verification Criterion Before \& During Block} & \hdr{Penalty If Violated} \\
 \midrule
-\ding{111} \textbf{1} & \textbf{Rule \texttt{3.b.i} \& Clarif.\ \#6} (\texttt{10/22/2026}) & \textbf{ZERO Polystyrene / Styrofoam / \texttt{\#6 PS} plastic}, fiberglass, mineral wool, or asbestos anywhere in device or spare parts! & \textbf{Device banned from testing ($\mathrm{TS}=0, \mathrm{PS}=0$)!} \\
+\ding{111} \textbf{1} & \textbf{Rule \texttt{3.b.i} \& FAQ 10/22/2026 (polystyrene)} & \textbf{ZERO Polystyrene / Styrofoam / \texttt{\#6 PS} plastic}, fiberglass, mineral wool, or asbestos anywhere in device or spare parts! & \textbf{Device banned from testing ($\mathrm{TS}=0, \mathrm{PS}=0$)!} \\
 \rowcolor{rowalt}
 \ding{111} \textbf{2} & \textbf{Rule \texttt{3.b.ii} \& \texttt{3.f}} & Zero thermometers, probes, commercial thermoses/coolers/vacuum vessels, batteries, electrical parts, or chemical heaters. & $\mathrm{TS}=0, \mathrm{PS}=0$ (or $0.7\times$ construction penalty). \\
-\ding{111} \textbf{3} & \textbf{Rule \texttt{2.d} \& Clarif.\ \#9} (\texttt{10/28/2026}) & Impound \textbf{device and spare parts only} at \textbf{room temperature} before impound deadline. Keep binder, calculators, tools, and \sref{sec:16} DOE tables with you! & $1$ Construction Violation ($\mathbf{0.7\times}$ on $\mathrm{TS}$ and $\mathrm{PS}$!). \\
+\ding{111} \textbf{3} & \textbf{Rule \texttt{2.d} \& FAQ 10/28/2026 (impound)} & Impound \textbf{device and spare parts only} at \textbf{room temperature} before impound deadline. Keep binder, calculators, tools, and \sref{sec:16} DOE tables with you! & $1$ Construction Violation ($\mathbf{0.7\times}$ on $\mathrm{TS}$ and $\mathrm{PS}$!). \\
 \rowcolor{rowalt}
 \ding{111} \textbf{4} & \textbf{Rule \texttt{3.c} \& \texttt{3.d}} & Device + inserted \SI{9}{oz} clear plastic cup fits inside a $\mathbf{\SI{30.0}{\centi\meter} \times \SI{30.0}{\centi\meter} \times \SI{30.0}{\centi\meter}}$ cube (build to $\le \SI{29.5}{\centi\meter}$ external envelope!). & $1$ Construction Violation ($\mathbf{0.7\times}$ on $\mathrm{TS}$ and $\mathrm{PS}$). \\
 \ding{111} \textbf{5} & \textbf{Rule \texttt{3.e}} & Parts of device/funnel may extend inside top of cup, but \textbf{NO part of the device may touch the \SI{100}{\milli\liter} water} ($\ge \SI{15}{\milli\meter}$ clearance above water line) and nothing added to water. & $1$ Construction Violation ($\mathbf{0.7\times}$ on $\mathrm{TS}$ and $\mathrm{PS}$). \\
 \rowcolor{rowalt}
 \ding{111} \textbf{6} & \textbf{Rule \texttt{5.II.b}} (3-Min Device Setup) & Adjust internal pedestal slot to announced bulb height $h$ ($\SIrange{40}{65}{\centi\meter}$) and fix any construction issues \textbf{within $\SI{3.0}{\minute}$}. No device modifications after Setup Time! & $0.9\times$ Competition or $0.7\times$ Construction Penalty. \\
-\ding{111} \textbf{7} & \textbf{Rule \texttt{5.II.d} \& Clarif.\ \#5, \#7, \#8} & Within $\SI{1.0}{\minute}$ Water Setup: lift hood/lid (\texttt{Clarif.\ \#7--8}), seat cup on cradle, rest non-attached BoPET vapor cap over cup \textbf{with ZERO tape, glue, rubber bands, or clips} (\texttt{Clarif.\ \#5}), center under lamp. & $0.9\times$ Competition or $0.7\times$ Construction Penalty. \\
+\ding{111} \textbf{7} & \textbf{Rule \texttt{5.II.d} \& FAQs 10/21 and 10/22/2026 on the cup and lid} & Within $\SI{1.0}{\minute}$ Water Setup: lift hood/lid (FAQs 10/22/2026 on inserting the cup), seat cup on cradle, rest non-attached BoPET vapor cap over cup \textbf{with ZERO tape, glue, rubber bands, or clips} (FAQ 10/21/2026 on items on the cup), center under lamp. & $0.9\times$ Competition or $0.7\times$ Construction Penalty. \\
 \rowcolor{rowalt}
 \ding{111} \textbf{8} & \textbf{Rule \texttt{5.II.e--f}} (Heating Window) & \textbf{NEVER touch device or lamp setup during Heating Time!} Submit final temperature prediction $T_{\mathrm{pred}}$ (in $\mathbf{\si{\celsius}}$ to $\SI{0.1}{\celsius}$) \textbf{before Heating Time ends} (target: at $t_{\mathrm{heat}} = \SI{3}{\minute}$). & Touching $\implies \mathrm{TS}=\mathrm{PS}=0$; late $T_{\mathrm{pred}} \implies \mathbf{\mathrm{PS}=0}$! \\
-\ding{111} \textbf{9} & \textbf{Rule \texttt{5.II.g} \& Clarif.\ \#1--\#4} & At lamp-off, remove cup completely from all device parts/wraps and set on Testing Surface within $\SI{1}{\minute}$ \textbf{with ZERO swirling, shaking, tilting, or stirring}! & Swirling destroys top-layer stratification \& violates Clarif.\ \#1--\#3! \\
+\ding{111} \textbf{9} & \textbf{Rule \texttt{5.II.g} \& FAQs 09/30--10/06/2026 on stirring and probe depth} & At lamp-off, remove cup completely from all device parts/wraps and set on Testing Surface within $\SI{1}{\minute}$ \textbf{with ZERO swirling, shaking, tilting, or stirring}! & Swirling destroys top-layer stratification \& violates FAQs 09/30, 10/01 and 10/06/2026 on stirring and swirling! \\
+\rowcolor{rowalt}
+\ding{111} \textbf{10} & \textbf{FAQs (undated): tools \& glass} & Bring \textbf{tongs, hot pads or heat-resistant gloves} to lift the hot cup (allowed by FAQ). If the device contains glass, wear \textbf{Category C goggles} when handling it (FAQ). & --- \\
 \bottomrule
 \end{tabularx}
 \end{rulebox}
@@ -407,10 +409,10 @@ In Cornell 2027 (\texttt{E1 Q29}) \src{S25}, a Rankine steam cycle absorbs $q_{\
 \textbf{\sffamily\color{slate} PARTNER B (Device Lead + \texttt{5.c.i, iii, v, vi})}
 \begin{enumerate}
   \item \textbf{Minutes $0\text{--}5$ (3-Min Setup):} Log ES-announced $h$ ($\SIrange{40}{65}{\centi\meter}$), $t_{\mathrm{heat}}$ ($\SIrange{10}{15}{\minute}$), $P_{\mathrm{bulb}}$ ($\SIrange{100}{125}{\watt}$), and $T_{\mathrm{room}}$. Set pedestal slot for height $h$; look up $\mathrm{TG}_{\mathrm{tab}}, k_{\mathrm{start}}, k_{\mathrm{room}}$ on \texttt{QS-13} / \sref{sec:16}.
-  \item \textbf{Minute $5\text{--}6$ (1-Min Water Setup):} Log $T_{\mathrm{start}}$ (to $\SI{0.1}{\celsius}$); seat \SI{9}{oz} cup on 3-fin cradle ($\le \SI{12}{\second}$); lower reflector hood w/ unattached BoPET vapor cap (\texttt{Clarif.\ \#5}); center under lamp.
+  \item \textbf{Minute $5\text{--}6$ (1-Min Water Setup):} Log $T_{\mathrm{start}}$ (to $\SI{0.1}{\celsius}$); seat \SI{9}{oz} cup on 3-fin cradle ($\le \SI{12}{\second}$); lower reflector hood w/ unattached BoPET vapor cap (FAQ 10/21/2026 on items on the cup); center under lamp.
   \item \textbf{Minute $6\text{--}9$ (Submit $T_{\mathrm{pred}}$):} Compute $T_{\mathrm{pred}}$ on Calculator \#2, verify w/ Partner A, and \textbf{submit $T_{\mathrm{pred}}$ in \si{\celsius} to ES immediately}.
   \item \textbf{Minutes $9\text{--}15$ \& $17\text{--}47$ ($\SI{40}{\minute}$ Written Sprint):} Sweep Pile B: 8 temperature scales \& energy units (\texttt{QS-01}), 8 named scientists (\texttt{QS-14}), conduction/convection/Newton heating (\texttt{QS-09, 10, 12}), and blackbody Stefan--Boltzmann/Wien (\texttt{QS-11}).
-  \item \textbf{Lamp-Off Window ($\SI{1}{\minute}$):} Lift hood straight up (removing BoPET cap), lift cup smoothly onto Testing Surface \textbf{with ZERO swirl/tilt (\texttt{Clarif.\ \#1--4})} in $\le \SI{8}{\second}$!
+  \item \textbf{Lamp-Off Window ($\SI{1}{\minute}$):} Lift hood straight up (removing BoPET cap), lift cup smoothly onto Testing Surface \textbf{with ZERO swirl/tilt (FAQs 09/30--10/06/2026 on stirring and probe depth)} in $\le \SI{8}{\second}$!
 \end{enumerate}
 \end{twocol}
 \end{formulacard}
