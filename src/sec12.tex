@@ -333,7 +333,7 @@ An insulated flat collector plate receives short-wave irradiance $G = \SI{600.0}
 \tcblower
 \textbf{Solution.} Setting $q''_{\mathrm{net}} = 0$ in Eq.~\eref{eq:12:selective-balance}: $8.00(T_p - 308.15) + \varepsilon_{\mathrm{MIR}}(\SI{5.6704e-8}{})(T_p^4 - 291.15^4) = 600.0\,\alpha_{\mathrm{SW}}$.\\
 (a) Non-selective black ($\alpha=\varepsilon=0.90$, absorbed flux $\SI{540}{\watt\per\square\meter}$): $T_p = \SI{338.12}{\kelvin} = \mathbf{\SI{64.97}{\celsius}}$ ($\approx\SI{65}{\celsius}$ in Lienhard Ex.~10.12).\\
-(b) White acrylic paint ($\alpha=0.26,\; \varepsilon=0.90$, absorbed flux $\SI{156}{\watt\per\square\meter}$): $T_p = \SI{312.01}{\kelvin} = \mathbf{\SI{38.86}{\celsius}}$ ($\SI{26.1}{\celsius}$ cooler than black!).\\
+(b) White acrylic paint ($\alpha=0.26,\; \varepsilon=0.90$, absorbed flux $\SI{156}{\watt\per\square\meter}$): $T_p = \SI{312.59}{\kelvin} = \mathbf{\SI{39.44}{\celsius}}$ ($\SI{25.5}{\celsius}$ cooler than black!).\\
 (c) Selective Black Chrome ($\alpha=0.95,\; \varepsilon=0.09$, absorbed flux $\SI{570}{\watt\per\square\meter}$ with $10\times$ lower mid-IR re-radiation!):
 \[
   8.00(T_p - 308.15) + (0.09)(\SI{5.6704e-8}{})(T_p^4 - 291.15^4) = 570.0 \implies T_p = \SI{371.79}{\kelvin} = \mathbf{\SI{98.64}{\celsius}}
@@ -375,7 +375,7 @@ A small electronic component of surface area $A = \SI{1.3345e-4}{\square\meter}$
   h_{\mathrm{rad}} = 4(0.900)(\SI{5.670374e-8}{})(326.80)^3 = \mathbf{\SI{7.125}{\watt\per\square\meter\per\kelvin}}
 \]
 (b) Linearized power: $\dot{Q}_{\mathrm{rad,lin}} = (7.1246)(\SI{1.3345e-4}{})(37.30) = \mathbf{\SI{0.03546}{\watt}}$, compared to exact $\dot{Q}_{\mathrm{rad,ex}} = (0.900)(\SI{5.670374e-8}{})(\SI{1.3345e-4}{})(345.45^4 - 308.15^4) = \mathbf{\SI{0.03558}{\watt}}$.\\
-(c) Fractional difference is $\frac{0.035580 - 0.035464}{0.035580} = \mathbf{0.00325} = \SI{0.325}{\percent}$, matching $\frac{1}{4}\!\left(\frac{37.30}{326.80}\right)^{\!2} = \mathbf{0.003254}$!
+(c) Fractional difference is $\frac{0.035580 - 0.035464}{0.035580} = \mathbf{0.00325} = \SI{0.325}{\percent}$, matching $\frac{1}{4}\!\left(\frac{37.30}{326.80}\right)^{\!2} = \mathbf{0.003257}$!
 \verifiedby{Checked in \texttt{check\_sec10\_13.py} (\texttt{EX-12.7-HRAD}, \texttt{EX-12.7-EXACT}): $h_{\mathrm{rad}} = \SI{7.1246}{\watt\per\square\meter\per\kelvin}$.}
 \end{workedexample}
 
@@ -448,11 +448,11 @@ Two large parallel plates at $T_1 = \SI{400.0}{\kelvin}$ ($\varepsilon_1 = 0.800
 \[
   T_s^4 = \frac{20.250\,T_1^4 + 1.500\,T_2^4}{20.250 + 1.500} = \frac{20.250(400^4) + 1.500(300^4)}{21.750} = \num{2.4393e10}\ \si{\kelvin\tothe{4}} \implies T_s = \mathbf{\SI{395.2}{\kelvin}}
 \]
-(b) Flipping the shield leaves the \textbf{total series resistance} $R_{\mathrm{tot}}'' = 1.500 + 20.250 = 21.750$ and \textbf{net heat flux $q''_{1\to 2}$ completely unchanged}, but shifts the shield temperature $T_s$ from $\SI{395.2}{\kelvin}$ (close to $T_1$) to $\SI{310.7}{\kelvin}$ (close to $T_2$)!
+(b) Flipping the shield leaves the \textbf{total series resistance} $R_{\mathrm{tot}}'' = 1.500 + 20.250 = 21.750$ and \textbf{net heat flux $q''_{1\to 2}$ completely unchanged}, but shifts the shield temperature $T_s$ from $\SI{395.2}{\kelvin}$ (close to $T_1$) to $\SI{310.6}{\kelvin}$ (close to $T_2$)!
 \end{solution}
 
 \begin{problem}{P12.4}{Thermodynamic Second-Law Limit on Optical Concentration Ratio $C_{\max}$}{12.2}{5.c.iv, 5.c.vi}{National}{60 s}{Second Law + Reciprocity}{exceeding $1/\sin^2\theta_s$ or $T_{\mathrm{target}} > T_{\mathrm{source}}$}
-An R40 heat lamp of radiating disk radius $r_{\mathrm{source}} = \SI{6.35}{\centi\meter}$ at temperature $T_{\mathrm{source}} = \SI{2400}{\kelvin}$ sits at distance $d = \SI{20.0}{\centi\meter}$ above a collector aperture ($\sin\theta_s = r_{\mathrm{source}}/\sqrt{r_{\mathrm{source}}^2 + d^2} = 0.3027$). According to the Second Law of Thermodynamics (conservation of optical \'etendue / view-factor reciprocity $A_1 F_{1\to 2} = A_2 F_{2\to 1}$ with $F_{2\to 1} \le 1$), what is the maximum theoretical geometric concentration ratio $C_{\max} = A_{\mathrm{ap}}/A_{\mathrm{receiver}}$ achievable by any passive 3-D ideal concentrator?
+An R40 heat lamp of radiating disk radius $r_{\mathrm{source}} = \SI{6.35}{\centi\meter}$ at temperature $T_{\mathrm{source}} = \SI{2400}{\kelvin}$ sits at distance $d = \SI{20.0}{\centi\meter}$ above a collector aperture ($\sin\theta_s = r_{\mathrm{source}}/\sqrt{r_{\mathrm{source}}^2 + d^2} = 0.3026$). According to the Second Law of Thermodynamics (conservation of optical \'etendue / view-factor reciprocity $A_1 F_{1\to 2} = A_2 F_{2\to 1}$ with $F_{2\to 1} \le 1$), what is the maximum theoretical geometric concentration ratio $C_{\max} = A_{\mathrm{ap}}/A_{\mathrm{receiver}}$ achievable by any passive 3-D ideal concentrator?
 \end{problem}
 \begin{solution}{P12.4}
 For a 3-D axisymmetric source subtending half-angle $\theta_s$ at the aperture, view-factor reciprocity requires $A_{\mathrm{ap}} F_{\mathrm{ap}\to\mathrm{source}} = A_{\mathrm{ap}}\sin^2\theta_s \le A_{\mathrm{rec}} F_{\mathrm{rec}\to\mathrm{ap}} \le A_{\mathrm{rec}}(1)$. If $C_{\mathrm{geom}} > 1/\sin^2\theta_s$, an isolated receiver could reach a steady temperature $T_{\mathrm{rec}} > T_{\mathrm{source}}$, violating the Clausius statement of the Second Law! Thus:
@@ -474,9 +474,9 @@ For a 3-D axisymmetric source subtending half-angle $\theta_s$ at the aperture, 
 \toprule
 $\lambda T$ $[\si{\micro\meter\kelvin}]$ & $F_{0\to\lambda T}$ & $\lambda T$ $[\si{\micro\meter\kelvin}]$ & $F_{0\to\lambda T}$ & $\lambda T$ $[\si{\micro\meter\kelvin}]$ & $F_{0\to\lambda T}$ & $\lambda T$ $[\si{\micro\meter\kelvin}]$ & $F_{0\to\lambda T}$ \\
 \midrule
-$1000$ & $0.00032$ & $2400$ & $0.14026$ & $3800$ & $0.44338$ & $6480$ & $0.77635$ \\
+$1000$ & $0.00032$ & $2400$ & $0.14026$ & $3800$ & $0.44338$ & $6480$ & $0.77492$ \\
 $1400$ & $0.00779$ & $2600$ & $0.18312$ & $4000$ & $0.48088$ & $7000$ & $0.80811$ \\
-$1680$ & $0.02540$ & $2880$ & $0.24603$ & $4107.6$ & $0.50000$ & $8000$ & $0.85629$ \\
+$1680$ & $0.02661$ & $2880$ & $0.24603$ & $4107.2$ & $0.50000$ & $8000$ & $0.85629$ \\
 $1800$ & $0.03934$ & $2897.8$ & $0.25006$ & $4600$ & $0.57928$ & $10000$ & $0.91420$ \\
 $2000$ & $0.06673$ & $3200$ & $0.31810$ & $5000$ & $0.63375$ & $15000$ & $0.96898$ \\
 $2200$ & $0.10089$ & $3600$ & $0.40361$ & $6000$ & $0.73782$ & $25000$ & $0.99222$ \\
@@ -490,12 +490,12 @@ Using \tref{tab:12:blackbody-fraction}, determine for a $\SI{2400}{\kelvin}$ bla
 \end{problem}
 \begin{solution}{P12.5}
 \begin{enumerate}
-  \item[(a)] At $\lambda_1 = \SI{0.700}{\micro\meter}$, $\lambda_1 T = (0.700)(2400) = \SI{1680}{\micro\meter\kelvin} \implies F_{0\to 1680} = \mathbf{0.02540}$ ($\mathbf{\SI{2.54}{\percent}}$ visible/UV).
-  \item[(b)] At $\lambda_2 = \SI{1.200}{\micro\meter}$, $\lambda_2 T = \SI{2880}{\micro\meter\kelvin} \implies F_{0\to 2880} = 0.24603$. At $\lambda_3 = \SI{2.700}{\micro\meter}$ (bulb glass cutoff), $\lambda_3 T = \SI{6480}{\micro\meter\kelvin} \implies F_{0\to 6480} = 0.77635$. The power fraction in $[\SI{1.20}{\micro\meter}, \SI{2.70}{\micro\meter}]$ is:
+  \item[(a)] At $\lambda_1 = \SI{0.700}{\micro\meter}$, $\lambda_1 T = (0.700)(2400) = \SI{1680}{\micro\meter\kelvin} \implies F_{0\to 1680} = \mathbf{0.02661}$ ($\mathbf{\SI{2.66}{\percent}}$ visible/UV).
+  \item[(b)] At $\lambda_2 = \SI{1.200}{\micro\meter}$, $\lambda_2 T = \SI{2880}{\micro\meter\kelvin} \implies F_{0\to 2880} = 0.24603$. At $\lambda_3 = \SI{2.700}{\micro\meter}$ (bulb glass cutoff), $\lambda_3 T = \SI{6480}{\micro\meter\kelvin} \implies F_{0\to 6480} = 0.77492$. The power fraction in $[\SI{1.20}{\micro\meter}, \SI{2.70}{\micro\meter}]$ is:
   \[
-    \Delta F_{1.2\to 2.7\,\mu\mathrm{m}} = F_{0\to 6480} - F_{0\to 2880} = 0.77635 - 0.24603 = \mathbf{0.53032} \quad (\mathbf{\SI{53.03}{\percent}}\text{ of total filament emission!})
+    \Delta F_{1.2\to 2.7\,\mu\mathrm{m}} = F_{0\to 6480} - F_{0\to 2880} = 0.77492 - 0.24603 = \mathbf{0.52889} \quad (\mathbf{\SI{52.89}{\percent}}\text{ of total filament emission!})
   \]
-  \item[(c)] From \tref{tab:12:blackbody-fraction}, $F_{0\to\lambda_{\mathrm{med}} T} = 0.50000$ occurs at $\lambda_{\mathrm{med}} T = \SI{4107.6}{\micro\meter\kelvin} \implies \lambda_{\mathrm{med}} = \dfrac{4107.6}{2400} = \mathbf{\SI{1.7115}{\micro\meter}}$ (notice that $\lambda_{\mathrm{med}} = 1.4175\,\lambda_{\max}$ because the Planck tail is skewed toward long wavelengths, while $25.0\%$ of power lies below $\lambda_{\max}$ and $75.0\%$ lies above $\lambda_{\max}$!).
+  \item[(c)] From \tref{tab:12:blackbody-fraction}, $F_{0\to\lambda_{\mathrm{med}} T} = 0.50000$ occurs at $\lambda_{\mathrm{med}} T = \SI{4107.2}{\micro\meter\kelvin} \implies \lambda_{\mathrm{med}} = \dfrac{4107.2}{2400} = \mathbf{\SI{1.7113}{\micro\meter}}$ (notice that $\lambda_{\mathrm{med}} = 1.4174\,\lambda_{\max}$ because the Planck tail is skewed toward long wavelengths, while $25.0\%$ of power lies below $\lambda_{\max}$ and $75.0\%$ lies above $\lambda_{\max}$!).
 \end{enumerate}
 \end{solution}
 
@@ -506,15 +506,15 @@ A horizontal oxidized steel steam pipe of outer diameter $D = \SI{50.0}{\milli\m
 \begin{enumerate}
   \item[(a)] Using the linearized radiation coefficient at $T_s = \SI{380.15}{\kelvin}$ and $T_{\mathrm{surr}} = \SI{300.15}{\kelvin}$ ($\Delta T = \SI{80.0}{\kelvin}$):
   \[
-    h_{\mathrm{rad},1} = \varepsilon_1 \sigma\left(T_s^2 + T_{\mathrm{surr}}^2\right)\left(T_s + T_{\mathrm{surr}}\right) = (0.850)(\num{5.670374e-8})\left(380.15^2 + 300.15^2\right)(680.30) = \mathbf{\SI{7.688}{\watt\per\square\meter\per\kelvin}}
+    h_{\mathrm{rad},1} = \varepsilon_1 \sigma\left(T_s^2 + T_{\mathrm{surr}}^2\right)\left(T_s + T_{\mathrm{surr}}\right) = (0.850)(\num{5.670374e-8})\left(380.15^2 + 300.15^2\right)(680.30) = \mathbf{\SI{7.692}{\watt\per\square\meter\per\kelvin}}
   \]
   Notice that in still air, $h_{\mathrm{rad},1} = \SI{7.69}{\watt\per\square\meter\per\kelvin} > h_{\mathrm{conv}} = \SI{6.80}{\watt\per\square\meter\per\kelvin}$! Total parallel loss is:
   \[
-    \dot{Q}_{\mathrm{tot},1} = \left(h_{\mathrm{conv}} + h_{\mathrm{rad},1}\right)A_s\Delta T = (6.80 + 7.688)(0.31416)(80.0) = \mathbf{\SI{364.1}{\watt}}
+    \dot{Q}_{\mathrm{tot},1} = \left(h_{\mathrm{conv}} + h_{\mathrm{rad},1}\right)A_s\Delta T = (6.80 + 7.692)(0.31416)(80.0) = \mathbf{\SI{364.2}{\watt}}
   \]
   \item[(b)] Wrapping shiny aluminum foil tape reduces $\varepsilon$ from $0.850$ to $0.040$:
   \[
-    h_{\mathrm{rad},2} = \frac{0.040}{0.850}(\SI{7.688}{\watt\per\square\meter\per\kelvin}) = \mathbf{\SI{0.362}{\watt\per\square\meter\per\kelvin}}, \qquad
+    h_{\mathrm{rad},2} = \frac{0.040}{0.850}(\SI{7.692}{\watt\per\square\meter\per\kelvin}) = \mathbf{\SI{0.362}{\watt\per\square\meter\per\kelvin}}, \qquad
     \dot{Q}_{\mathrm{tot},2} = (6.80 + 0.362)(0.31416)(80.0) = \mathbf{\SI{180.0}{\watt}}
   \]
   This achieves a $\mathbf{\SI{50.6}{\percent}}$ reduction in total heat loss with zero foam thickness!

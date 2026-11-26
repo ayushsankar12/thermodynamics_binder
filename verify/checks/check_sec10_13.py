@@ -521,11 +521,11 @@ def run_checks() -> list[dict]:
     ))
 
     # Ex 10.10: Comparative Cut-Bar Alloy Identification (Brass reference k_ref = 109 W/mK, L_ref = 25.0 mm,
-    # DeltaT_ref = 18.40 K; unknown alloy L_x = 30.0 mm, DeltaT_x = 14.4115 K -> k_x = 167.0 W/mK = Alloy 6061-T6)
-    k_x_cutbar = 109.0 * (30.0 / 25.0) * (18.40 / 14.4115)  # 167.00 W/mK
+    # DeltaT_ref = 18.40 K; unknown alloy L_x = 30.0 mm, DeltaT_x = 14.41 K (as stated) -> k_x = 167.0 W/mK = Alloy 6061-T6)
+    k_x_cutbar = 109.0 * (30.0 / 25.0) * (18.40 / 14.41)  # 167.02 W/mK
     results.append(_record(
         "EX-10.10-CUTBAR", "sec10", "Comparative cut-bar unknown alloy thermal conductivity k_x [W/mK]",
-        167.00, k_x_cutbar, 1e-4, "Series heat-flux continuity q''_ref = q''_x"
+        167.02, k_x_cutbar, 1e-4, "Series heat-flux continuity q''_ref = q''_x"
     ))
 
     # Ex 11.6: Internal Pipe Flow Exponential Approach & Log-Mean Temperature Difference (LMTD)

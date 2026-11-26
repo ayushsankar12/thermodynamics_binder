@@ -264,7 +264,7 @@ Find the multiplicity $\Omega$ and entropy $S/k_B$ of (a) an Einstein solid of $
 \par\smallskip\noindent
 \textbf{Solution.}
 (a) From \eref{eq:08:einstein-solid}: $\Omega(4,6) = \binom{6+4-1}{6} = \binom{9}{6} = \frac{9\times 8\times 7}{3\times 2\times 1} = \mathbf{84} \implies S/k_B = \ln(84) = \mathbf{4.4308}$ ($S = \SI{6.117e-23}{\joule\per\kelvin}$).
-(b) From \eref{eq:08:two-state-omega}: $\Omega(100,50) = \frac{100!}{(50!)^2} = \mathbf{1.0089\times 10^{29}} \implies S/k_B = \ln\Omega = \mathbf{66.7839}$ (vs.\ $\ln(2^{100}) = 69.3147$ for all microstates).
+(b) From \eref{eq:08:two-state-omega}: $\Omega(100,50) = \frac{100!}{(50!)^2} = \mathbf{1.0089\times 10^{29}} \implies S/k_B = \ln\Omega = \mathbf{66.7838}$ (vs.\ $\ln(2^{100}) = 69.3147$ for all microstates).
 \verifiedby{Exact factorial evaluation in Python \texttt{math.comb(9,6)=84}, \texttt{math.comb(100,50)=1.0089e29} (\texttt{check\_sec06\_09.py::ex08\_3}).}
 \end{workedexample}
 \end{twocol}
@@ -339,7 +339,7 @@ $\mathrm{Al}$ & solid ($s$) & $0.00$ & $28.30$ & $0.00$ & $\mathrm{NaCl}$ & soli
     h_g = h_f + h_{fg} = 506.00 + 2202.6 = \mathbf{\SI{2708.60}{\kilo\joule\per\kilogram}}, \quad u_g = h_g - P_{\mathrm{sat}}v_g = 2708.60 - 177.19 = \mathbf{\SI{2531.41}{\kilo\joule\per\kilogram}}
   \]
   \[
-    s_f = c_w\ln\left(\frac{393.15}{273.16}\right) = \mathbf{\SI{1.5355}{\kilo\joule\per\kilogram\per\kelvin}}, \quad s_g = s_f + \frac{h_{fg}}{T} = 1.5355 + \frac{2202.6}{393.15} = \mathbf{\SI{7.1379}{\kilo\joule\per\kilogram\per\kelvin}}
+    s_f = c_w\ln\left(\frac{393.15}{273.16}\right) = \mathbf{\SI{1.5356}{\kilo\joule\per\kilogram\per\kelvin}}, \quad s_g = s_f + \frac{h_{fg}}{T} = 1.5356 + \frac{2202.6}{393.15} = \mathbf{\SI{7.1380}{\kilo\joule\per\kilogram\per\kelvin}}
   \]
   \item \textbf{(b) Kirchhoff temperature correction of $\Delta_{\mathrm{vap}}H_m^\circ$ from $T_0 = \SI{373.15}{\kelvin}$ to $T = \SI{310.15}{\kelvin}$:}
   For $\mathrm{H_2O}(l) \to \mathrm{H_2O}(g)$, $\Delta_{\mathrm{vap}}C_P^\circ = C_{P,m}(g) - C_{P,m}(l) = 33.58 - 75.33 = \SI{-41.75}{\joule\per\mole\per\kelvin} = \SI{-0.04175}{\kilo\joule\per\mole\per\kelvin}$:
@@ -468,7 +468,7 @@ Using the NIST data in \tref{tab:08:thermochem}, analyze the industrial water-ga
   \]
   \item \textbf{(b) Equilibrium constant $K_{\mathrm{eq}}(\SI{298.15}{\kelvin})$ and crossover temperature $T^*$:}
   \[
-    K_{\mathrm{eq}}(\SI{298.15}{\kelvin}) = \exp\left(\frac{-\Delta_r G^\circ}{RT_1}\right) = \exp\left(\frac{+28619}{(8.314463)(298.15)}\right) = e^{11.5448} = \mathbf{1.032\times 10^5}, \quad T^* = \frac{\Delta_r H^\circ}{\Delta_r S^\circ} = \frac{\SI{-41150}{\joule\per\mole}}{\SI{-42.03}{\joule\per\mole\per\kelvin}} = \mathbf{\SI{979.06}{\kelvin}}
+    K_{\mathrm{eq}}(\SI{298.15}{\kelvin}) = \exp\left(\frac{-\Delta_r G^\circ}{RT_1}\right) = \exp\left(\frac{+28619}{(8.314463)(298.15)}\right) = e^{11.5447} = \mathbf{1.032\times 10^5}, \quad T^* = \frac{\Delta_r H^\circ}{\Delta_r S^\circ} = \frac{\SI{-41150}{\joule\per\mole}}{\SI{-42.03}{\joule\per\mole\per\kelvin}} = \mathbf{\SI{979.06}{\kelvin}}
   \]
   \item \textbf{(c) Van't Hoff equilibrium constant at $T_2 = \SI{800.0}{\kelvin}$:}
   \[
@@ -493,7 +493,7 @@ Using the NIST data in \tref{tab:08:thermochem}, analyze the industrial water-ga
     \item \emph{Pathway (ii) ($\mathrm{ATP}\to\mathrm{AMP}+\mathrm{PP_i}$):} $\Delta G_{\mathrm{net,ii}} = \Delta G_1 + \Delta G_3 = +31.50 - 45.90 = \mathbf{\SI{-14.40}{\kilo\joule\per\mole}} < 0$ (\textbf{spontaneous!}).
     \item \emph{Equilibrium constant enhancement at $\SI{310.15}{\kelvin}$:}
     \[
-      \frac{K_{\mathrm{coupled,ii}}}{K_{\mathrm{coupled,i}}} = \exp\left(\frac{-(\Delta G_{\mathrm{net,ii}} - \Delta G_{\mathrm{net,i}})}{RT}\right) = \exp\left(\frac{+15400}{(8.314463)(310.15)}\right) = e^{5.9720} = \mathbf{392.3}
+      \frac{K_{\mathrm{coupled,ii}}}{K_{\mathrm{coupled,i}}} = \exp\left(\frac{-(\Delta G_{\mathrm{net,ii}} - \Delta G_{\mathrm{net,i}})}{RT}\right) = \exp\left(\frac{+15400}{(8.314463)(310.15)}\right) = e^{5.9719} = \mathbf{392.3}
     \]
   \end{itemize}
   \item \textbf{(b) $\mathrm{H_2/O_2}$ fuel-cell thermodynamics from \tref{tab:08:thermochem}:}
@@ -609,7 +609,7 @@ In \texttt{2027 Cornell E1 Q29}, a Rankine steam cycle operates in an environmen
 \begin{enumerate}
   \item \textbf{(a) Residual entropy of $n_{\mathrm{ice}} = 100.0 / 18.0153 = \SI{5.55084}{\mole}$ of Ice~Ih:}
   \[
-    S_{0,\mathrm{ice}} = n_{\mathrm{ice}} R \ln\left(\frac{3}{2}\right) = (5.55084)(8.314463)\ln(1.500) = (46.1523)(0.405465) = \mathbf{\SI{18.713}{\joule\per\kelvin}}
+    S_{0,\mathrm{ice}} = n_{\mathrm{ice}} R \ln\left(\frac{3}{2}\right) = (5.55084)(8.314463)\ln(1.500) = (46.1522)(0.405465) = \mathbf{\SI{18.713}{\joule\per\kelvin}}
   \]
   \item \textbf{(b) Equivalent moles of solid $\mathrm{CO}$ ($S_{0,m,\mathrm{CO}} = R\ln 2 = \SI{5.7631}{\joule\per\mole\per\kelvin}$):}
   \[
@@ -620,17 +620,17 @@ In \texttt{2027 Cornell E1 Q29}, a Rankine steam cycle operates in an environmen
 \end{workedexample}
 
 \begin{workedexample}[Debye $T^3$ Cryogenic Entropy, Steady-Conduction $\dot{S}_{\mathrm{gen}}$ \& Ohmic Exergy Loss]{National/Invitational \textbar\ Tier 3}{ex:08.9}
-(a) At cryogenic temperatures ($T \ll \Theta_D$), the molar heat capacity of a non-metallic insulating crystal obeys Debye's $T^3$ law: $C_{V,m}(T) = A T^3$. Given that dividing $C_{V,m}(T)/T = A T^2$ and accumulating from $\SI{0}{\kelvin}$ to $T$ yields $S_m(T) = \frac{1}{3}A T^3 = \frac{1}{3}C_{V,m}(T)$, calculate the absolute molar entropy $S_m(\SI{10.00}{\kelvin})$ and internal energy $U_m(\SI{10.00}{\kelvin}) - U_m(\SI{0}{\kelvin}) = \frac{1}{4}A T^4 = \frac{1}{4}T C_{V,m}(T)$ of diamond ($\Theta_D = \SI{2230}{\kelvin}$, $A = \frac{12\pi^4 R}{5\Theta_D^3} = \SI{1.751e-7}{\joule\per\mole\per\kelvin^4}$) at $T = \SI{10.00}{\kelvin}$.
+(a) At cryogenic temperatures ($T \ll \Theta_D$), the molar heat capacity of a non-metallic insulating crystal obeys Debye's $T^3$ law: $C_{V,m}(T) = A T^3$. Given that dividing $C_{V,m}(T)/T = A T^2$ and accumulating from $\SI{0}{\kelvin}$ to $T$ yields $S_m(T) = \frac{1}{3}A T^3 = \frac{1}{3}C_{V,m}(T)$, calculate the absolute molar entropy $S_m(\SI{10.00}{\kelvin})$ and internal energy $U_m(\SI{10.00}{\kelvin}) - U_m(\SI{0}{\kelvin}) = \frac{1}{4}A T^4 = \frac{1}{4}T C_{V,m}(T)$ of diamond ($\Theta_D = \SI{2230}{\kelvin}$, $A = \frac{12\pi^4 R}{5\Theta_D^3} = \SI{1.753e-7}{\joule\per\mole\per\kelvin^4}$) at $T = \SI{10.00}{\kelvin}$.
 (b) A cylindrical copper rod ($k = \SI{398.0}{\watt\per\meter\per\kelvin}, A = \SI{5.000e-4}{\square\meter}, L = \SI{0.2500}{\meter}$) with insulated sides connects a hot reservoir at $T_H = \SI{500.0}{\kelvin}$ to a cold reservoir at $T_C = \SI{300.0}{\kelvin}$ in an environment at $T_0 = \SI{300.0}{\kelvin}$. In steady state, find the heat conduction rate $\dot{Q}$, the entropy change rate of the copper rod itself $\dot{S}_{\mathrm{rod}}$, the universe entropy generation rate $\dot{S}_{\mathrm{gen}}$, and the Gouy--Stodola rate of exergy destruction $\dot{X}_{\mathrm{dest}}$.
 \par\smallskip\noindent
 \textbf{Solution.}
 \begin{enumerate}
   \item \textbf{(a) Debye cryogenic heat capacity, absolute entropy, and thermal energy of diamond at $T = \SI{10.00}{\kelvin}$:}
   \[
-    C_{V,m}(\SI{10.00}{\kelvin}) = A T^3 = (\SI{1.751e-7}{\joule\per\mole\per\kelvin^4})(10.00\,\si{\kelvin})^3 = \mathbf{\SI{1.751e-4}{\joule\per\mole\per\kelvin}}
+    C_{V,m}(\SI{10.00}{\kelvin}) = A T^3 = (\SI{1.753e-7}{\joule\per\mole\per\kelvin^4})(10.00\,\si{\kelvin})^3 = \mathbf{\SI{1.753e-4}{\joule\per\mole\per\kelvin}}
   \]
   \[
-    S_m(\SI{10.00}{\kelvin}) = \frac{1}{3}C_{V,m}(\SI{10.00}{\kelvin}) = \mathbf{\SI{5.837e-5}{\joule\per\mole\per\kelvin}}, \qquad \Delta U_m(\SI{0}{\kelvin}\to\SI{10.00}{\kelvin}) = \frac{1}{4}T C_{V,m}(T) = \mathbf{\SI{4.378e-4}{\joule\per\mole}}
+    S_m(\SI{10.00}{\kelvin}) = \frac{1}{3}C_{V,m}(\SI{10.00}{\kelvin}) = \mathbf{\SI{5.843e-5}{\joule\per\mole\per\kelvin}}, \qquad \Delta U_m(\SI{0}{\kelvin}\to\SI{10.00}{\kelvin}) = \frac{1}{4}T C_{V,m}(T) = \mathbf{\SI{4.382e-4}{\joule\per\mole}}
   \]
   \item \textbf{(b) Steady-state conduction bar entropy generation and exergy destruction (\texttt{2027 Cornell E1 Q7} trap):}
   \[

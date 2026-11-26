@@ -202,13 +202,13 @@ Dividing the two adiabatic volume relations $T_H V_2^{\gamma-1} = T_C V_3^{\gamm
     V_3 = 5.65685(\SI{19.955}{\liter}) = \mathbf{\SI{112.88}{\liter}}, \qquad V_4 = \frac{V_1}{V_2}V_3 = 0.5000(112.88) = \mathbf{\SI{56.440}{\liter}}
   \]
   \[
-    Q_H = nRT_H\ln\left(\frac{V_2}{V_1}\right) = (16.6289)(600.0)\ln(2.000) = \mathbf{\SI{6915.7}{\joule}}, \quad Q_C = nRT_C\ln\left(\frac{V_3}{V_4}\right) = (16.6289)(300.0)\ln(2.000) = \mathbf{\SI{3457.8}{\joule}}
+    Q_H = nRT_H\ln\left(\frac{V_2}{V_1}\right) = (16.6289)(600.0)\ln(2.000) = \mathbf{\SI{6915.8}{\joule}}, \quad Q_C = nRT_C\ln\left(\frac{V_3}{V_4}\right) = (16.6289)(300.0)\ln(2.000) = \mathbf{\SI{3457.9}{\joule}}
   \]
   \[
     W_{2\to 3} = +nC_{V,m}(T_H - T_C) = (2.000)(2.5\times 8.314463)(300.0) = \mathbf{+\SI{12471.7}{\joule}} = -W_{4\to 1}
   \]
   \[
-    W_{\mathrm{net}} = Q_H - Q_C = 6915.7 - 3457.8 = \mathbf{\SI{3457.8}{\joule}}, \qquad \eta_C = 1 - \frac{300.0}{600.0} = \mathbf{0.5000} \quad (50.00\%)
+    W_{\mathrm{net}} = Q_H - Q_C = 6915.8 - 3457.9 = \mathbf{\SI{3457.9}{\joule}}, \qquad \eta_C = 1 - \frac{300.0}{600.0} = \mathbf{0.5000} \quad (50.00\%)
   \]
   \item \textbf{(b) Three-claim feasibility audit from \eref{eq:09:claim-audit}:}
   \begin{itemize}
@@ -217,7 +217,7 @@ Dividing the two adiabatic volume relations $T_H V_2^{\gamma-1} = T_C V_3^{\gamm
     \item \textbf{Claim C:} $W + Q_C = 45 + 50 = \SI{95}{\kilo\joule} \ne Q_H = \SI{100}{\kilo\joule} \implies$ \textbf{Violates 1st Law (energy not conserved!)}.
   \end{itemize}
 \end{enumerate}
-\verifiedby{Total work sum $W_{1\to 2} + W_{2\to 3} + W_{3\to 4} + W_{4\to 1} = 6915.7 + 12471.7 - 3457.8 - 12471.7 = \SI{3457.8}{\joule} = W_{\mathrm{net}}$ (\texttt{check\_sec06\_09.py::ex09\_2}).}
+\verifiedby{Total work sum $W_{1\to 2} + W_{2\to 3} + W_{3\to 4} + W_{4\to 1} = 6915.8 + 12471.7 - 3457.9 - 12471.7 = \SI{3457.9}{\joule} = W_{\mathrm{net}}$ (\texttt{check\_sec06\_09.py::ex09\_2}).}
 \end{workedexample}
 
 % ============================================================================
@@ -638,12 +638,12 @@ In reciprocating piston engines, let $V_1 = V_{\max}$ be the cylinder volume at 
       w_p = v_f(P_{\mathrm{boil}} - P_{\mathrm{cond}}) = (0.001052)(270.28 - 143.38) = \mathbf{\SI{0.1335}{\kilo\joule\per\kilogram}}, \quad h_{\mathrm{pump,out}} = 461.29 + 0.1335 = \SI{461.42}{\kilo\joule\per\kilogram}
     \]
     \[
-      q_{\mathrm{in}} = 2718.6 - 461.42 = \mathbf{\SI{2257.2}{\kilo\joule\per\kilogram}}, \quad w_{t,s} = 2718.6 - 2597.1 = \mathbf{\SI{121.53}{\kilo\joule\per\kilogram}}, \quad \eta_{\mathrm{I}} = \frac{121.53 - 0.13}{2257.2} = \mathbf{5.378\%}
+      q_{\mathrm{in}} = 2718.6 - 461.42 = \mathbf{\SI{2257.2}{\kilo\joule\per\kilogram}}, \quad w_{t,s} = 2718.6 - 2597.06 = \mathbf{\SI{121.54}{\kilo\joule\per\kilogram}}, \quad \eta_{\mathrm{I}} = \frac{121.54 - 0.13}{2257.2} = \mathbf{5.379\%}
     \]
     *(Note: Using Cornell E1's backup table value $h_{fg,110} = \SI{2232}{\kilo\joule\per\kilogram}$ and $s_{g,110}=\SI{7.21}{\kilo\joule\per\kilogram\per\kelvin}$ gave $x_{2s} = 0.9624, w_{t,s} = \SI{109.92}{\kilo\joule\per\kilogram}, \eta_{\mathrm{I}} = 4.870\%$, as evaluated in Worked Example~\ref{ex:08.6}.)*
-    \item \emph{(iii) Steam mass flow rate for $\eta_s = 0.8000$ ($w_{t,a} = 0.8000\times 121.53 = \SI{97.23}{\kilo\joule\per\kilogram}$, $w_{\mathrm{net},a} = \SI{97.09}{\kilo\joule\per\kilogram}$):}
+    \item \emph{(iii) Steam mass flow rate for $\eta_s = 0.8000$ ($w_{t,a} = 0.8000\times 121.54 = \SI{97.23}{\kilo\joule\per\kilogram}$, $w_{\mathrm{net},a} = \SI{97.10}{\kilo\joule\per\kilogram}$):}
     \[
-      \dot{m} = \frac{\dot{W}_{\mathrm{actual}}}{w_{\mathrm{net},a}} = \frac{\SI{50.00}{\kilo\watt}}{\SI{97.09}{\kilo\joule\per\kilogram}} = \mathbf{\SI{0.5150}{\kilogram\per\second}}
+      \dot{m} = \frac{\dot{W}_{\mathrm{actual}}}{w_{\mathrm{net},a}} = \frac{\SI{50.00}{\kilo\watt}}{\SI{97.10}{\kilo\joule\per\kilogram}} = \mathbf{\SI{0.5149}{\kilogram\per\second}}
     \]
   \end{itemize}
   \item \textbf{(b) R134a vapor-compression chiller ($h_4 = h_3 = \SI{243.6}{\kilo\joule\per\kilogram}$ across throttle):}
@@ -654,7 +654,7 @@ In reciprocating piston engines, let $V_1 = V_{\max}$ be the cylinder volume at 
     q_H = h_2 - h_3 = 428.6 - 243.6 = \mathbf{\SI{185.0}{\kilo\joule\per\kilogram}} = q_C + w_{\mathrm{in}}, \qquad \mathrm{COP}_R = \frac{q_C}{w_{\mathrm{in}}} = \frac{149.0}{36.0} = \mathbf{4.139}
   \]
 \end{enumerate}
-\verifiedby{Pump work is only $0.1335/121.53 = 0.11\%$ of turbine work; refrigeration energy balance $149.0 + 36.0 = 185.0\,\si{\kilo\joule\per\kilogram}$ (\texttt{check\_sec06\_09.py::ex09\_5}).}
+\verifiedby{Pump work is only $0.1335/121.54 = 0.11\%$ of turbine work; refrigeration energy balance $149.0 + 36.0 = 185.0\,\si{\kilo\joule\per\kilogram}$ (\texttt{check\_sec06\_09.py::ex09\_5}).}
 \end{workedexample}
 
 % ============================================================================
@@ -758,9 +758,9 @@ In reciprocating piston engines, let $V_1 = V_{\max}$ be the cylinder volume at 
   \]
   \item \textbf{(b) Dual cycle ($r=14.00, r^{\gamma-1} = 14.00^{0.400} = 2.8738, r_p = 1.500, r_c = 1.600$) from \eref{eq:09:dual-cycle}:}
   \[
-    \eta_{\mathrm{Dual}} = 1 - \frac{1}{2.8738}\left[\frac{1.500(1.600^{1.400}) - 1}{(1.500 - 1) + 1.400(1.500)(1.600 - 1)}\right] = 1 - \frac{1}{2.8738}\left[\frac{1.8962}{1.7600}\right] = 1 - \frac{1.0774}{2.8738} = \mathbf{0.6251} \ (62.51\%)
+    \eta_{\mathrm{Dual}} = 1 - \frac{1}{2.8738}\left[\frac{1.500(1.600^{1.400}) - 1}{(1.500 - 1) + 1.400(1.500)(1.600 - 1)}\right] = 1 - \frac{1}{2.8738}\left[\frac{1.8964}{1.7600}\right] = 1 - \frac{1.0775}{2.8738} = \mathbf{0.6251} \ (62.51\%)
   \]
-  Compared to $\eta_{\mathrm{Otto}}(14) = 1 - 1/2.8738 = \mathbf{65.20\%}$ and $\eta_{\mathrm{Diesel}}(14, 1.6) = 1 - 1.1066/2.8738 = \mathbf{61.49\%}$ ($\eta_{\mathrm{Otto}} > \eta_{\mathrm{Dual}} > \eta_{\mathrm{Diesel}}$!).
+  Compared to $\eta_{\mathrm{Otto}}(14) = 1 - 1/2.8738 = \mathbf{65.20\%}$ and $\eta_{\mathrm{Diesel}}(14, 1.6) = 1 - 1.1083/2.8738 = \mathbf{61.44\%}$ ($\eta_{\mathrm{Otto}} > \eta_{\mathrm{Dual}} > \eta_{\mathrm{Diesel}}$!).
 \end{enumerate}
 \verifiedby{Heat sum on triangle cycle: $Q_{AB}+Q_{BC}+Q_{CA} = 900 + 700 - 1000 = \SI{600.0}{\joule} = W_{\mathrm{net}}$ (\texttt{check\_sec06\_09.py::ex09\_7}).}
 \end{workedexample}
@@ -774,7 +774,7 @@ In reciprocating piston engines, let $V_1 = V_{\max}$ be the cylinder volume at 
   \item \textbf{(a) Simple vs.\ regenerative Brayton efficiencies ($T_1/T_3 = 300/1500 = 0.2000$):}
   \begin{itemize}
     \item \emph{At $r_p = 6.000$ ($r_p^{2/7} = 1.6685$):} $\eta_{\mathrm{simple}} = 1 - \frac{1}{1.6685} = \mathbf{40.07\%}$, whereas $\eta_{\mathrm{regen}} = 1 - 0.2000(1.6685) = \mathbf{66.63\%}$ (regeneration boosts efficiency by $+26.56\%$ because $T_4 = \SI{899.0}{\kelvin} \gg T_2 = \SI{500.6}{\kelvin}$!).
-    \item \emph{At $r_p = 25.00$ ($r_p^{2/7} = 2.5094$):} $\eta_{\mathrm{simple}} = 1 - \frac{1}{2.5094} = \mathbf{60.15\%}$, whereas $\eta_{\mathrm{regen}} = 1 - 0.2000(2.5094) = \mathbf{49.81\%}$ (here $T_2 = \SI{752.8}{\kelvin} > T_4 = \SI{597.8}{\kelvin}$, so a regenerator would cool the compressed air!).
+    \item \emph{At $r_p = 25.00$ ($r_p^{2/7} = 2.5085$):} $\eta_{\mathrm{simple}} = 1 - \frac{1}{2.5085} = \mathbf{60.14\%}$, whereas $\eta_{\mathrm{regen}} = 1 - 0.2000(2.5085) = \mathbf{49.83\%}$ (here $T_2 = \SI{752.5}{\kelvin} > T_4 = \SI{598.0}{\kelvin}$, so a regenerator would cool the compressed air!).
     \item \emph{Crossover pressure ratio $r_p^* = r_{p,\mathrm{opt}}$ where $T_2 = T_4 = \sqrt{T_1 T_3} = \SI{670.82}{\kelvin}$:}
     \[
       r_p^* = \left(\frac{T_3}{T_1}\right)^{\frac{\gamma}{2(\gamma - 1)}} = (5.000)^{1.750} = \mathbf{16.719} \quad (\text{where } \eta_{\mathrm{simple}} = \eta_{\mathrm{regen}} = 1 - 1/\sqrt{5} = \mathbf{55.28\%})
@@ -799,16 +799,16 @@ In reciprocating piston engines, let $V_1 = V_{\max}$ be the cylinder volume at 
 \begin{enumerate}
   \item \textbf{(a) Ericsson cycle ($2\text{ isotherms} + 2\text{ isobars}$) ledger:}
   \[
-    Q_{1\to 2} = nRT_H\ln\left(\frac{P_{\max}}{P_{\min}}\right) = (2.000)(8.314463)(800.0)\ln(5.000) = \mathbf{+\SI{21413.2}{\joule}}
+    Q_{1\to 2} = nRT_H\ln\left(\frac{P_{\max}}{P_{\min}}\right) = (2.000)(8.314463)(800.0)\ln(5.000) = \mathbf{+\SI{21410.6}{\joule}}
   \]
   \[
-    Q_{3\to 4} = nRT_C\ln\left(\frac{P_{\max}}{P_{\min}}\right) = \mathbf{\SI{10706.6}{\joule}}, \qquad W_{\mathrm{net}} = Q_{1\to 2} - Q_{3\to 4} = \mathbf{+\SI{10706.6}{\joule}}
+    Q_{3\to 4} = nRT_C\ln\left(\frac{P_{\max}}{P_{\min}}\right) = \mathbf{\SI{10705.3}{\joule}}, \qquad W_{\mathrm{net}} = Q_{1\to 2} - Q_{3\to 4} = \mathbf{+\SI{10705.3}{\joule}}
   \]
   \[
     Q_{\mathrm{regen}} = nC_{P,m}(T_H - T_C) = (2.000)(2.5\times 8.314463)(800.0 - 400.0) = \mathbf{\SI{16628.9}{\joule}}
   \]
   \[
-    \eta_{\mathrm{Ericsson}}(\varepsilon_{\mathrm{reg}}=1) = \frac{10706.6}{21413.2} = \mathbf{50.00\%} = \eta_C, \qquad \eta_{\mathrm{Ericsson}}(\varepsilon_{\mathrm{reg}}=0) = \frac{10706.6}{21413.2 + 16628.9} = \mathbf{28.14\%}
+    \eta_{\mathrm{Ericsson}}(\varepsilon_{\mathrm{reg}}=1) = \frac{10705.3}{21410.6} = \mathbf{50.00\%} = \eta_C, \qquad \eta_{\mathrm{Ericsson}}(\varepsilon_{\mathrm{reg}}=0) = \frac{10705.3}{21410.6 + 16628.9} = \mathbf{28.14\%}
   \]
   \item \textbf{(b) Combined engine + heat-pump building heating multiplier from \eref{eq:09:engine-driven-chiller}:}
   With the engine operating between $T_H = \SI{1200.0}{\kelvin}$ and $T_{\mathrm{room}} = \SI{300.0}{\kelvin}$, its efficiency is $\eta_{\mathrm{eng}} = 1 - \frac{300.0}{1200.0} = \mathbf{0.7500}$, delivering work $W = 0.7500\,Q_H$ and direct exhaust heat $Q_{C,\mathrm{eng}} = 0.2500\,Q_H$ to the building. The heat pump operating between $T_0 = \SI{270.0}{\kelvin}$ and $T_{\mathrm{room}} = \SI{300.0}{\kelvin}$ has $\mathrm{COP}_{\mathrm{HP}} = \frac{300.0}{300.0 - 270.0} = \mathbf{10.00}$, delivering $Q_{\mathrm{HP}} = (10.00)(0.7500\,Q_H) = 7.500\,Q_H$. Total heat delivered to the building is:
