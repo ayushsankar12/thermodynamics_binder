@@ -183,7 +183,7 @@ Under Rule~\texttt{4.a--c} and the Official ES Guide \src{S01,S05}, the testing 
 $d_{\mathrm{ap}} = h_{\mathrm{bulb}} - z_{\mathrm{ap}}$ \newline $d_{\mathrm{cup}} = h_{\mathrm{bulb}} - z_{\mathrm{cup}}$
   & $h_{\mathrm{bulb}} \in [\SI{40}{\centi\meter}, \SI{65}{\centi\meter}]$: height from table to bottom of bulb (\texttt{4.c}); $z_{\mathrm{ap}} \le \SI{29.5}{\centi\meter}$: collector top rim height; $z_{\mathrm{cup}} = \SI{10.0}{\centi\meter}$: bare cup rim height.
   & \RULEf
-  & Raising the aperture to $z_{\mathrm{ap}}=\SI{29.5}{\centi\meter}$ cuts source distance from $\SI{30.0}{\centi\meter}$ to $\SI{10.5}{\centi\meter}$ at $h=\SI{40}{\centi\meter}$! \\
+  & Raising the collector top plane to $z_{\mathrm{ap}}=\SI{30.0}{\centi\meter}$ cuts source distance from $\SI{30.0}{\centi\meter}$ to $\SI{10.0}{\centi\meter}$ at $h=\SI{40}{\centi\meter}$! \\
 $R_1 = \dfrac{r_1}{d}, \quad R_2 = \dfrac{r_2}{d}$ \newline $X = 1 + \dfrac{1 + R_2^2}{R_1^2}$ \newline $F_{1\to 2} = \dfrac{1}{2}\!\left[X - \sqrt{X^2 - 4\!\left(\dfrac{R_2}{R_1}\right)^{\!2}}\right]$
   & $r_1 = \SI{6.35}{\centi\meter}$: bulb face radius; $r_2$: target aperture radius ($r_{\mathrm{ap}}=\SIrange{14.5}{15.0}{\centi\meter}$ vs.\ bare cup $r_{\mathrm{cup}}=\SI{3.75}{\centi\meter}$); $d$: axial separation $[\si{\centi\meter}]$; $F_{1\to 2}$: diffuse view factor $[-]$.
   & \GRAY
@@ -203,13 +203,13 @@ An ES mounts a $\SI{125}{\watt}$ $\mathrm{R40}$ heat lamp ($r_1 = \SI{6.35}{\cen
   \item \textbf{At $h_{\mathrm{bulb}} = \SI{40.0}{\centi\meter}$:}
     \begin{itemize}
       \item \textit{Bare Cup ($d_{\mathrm{cup}} = 40.0 - 10.0 = \SI{30.0}{\centi\meter}, r_2 = \SI{3.75}{\centi\meter}$):} $R_1 = 6.35/30.0 = 0.21167$, $R_2 = 3.75/30.0 = 0.12500$, $X = 1 + (1 + 0.015625)/0.044803 = 23.6688 \implies F_{\mathrm{bulb}\to\mathrm{cup}}(\SI{40}{\centi\meter}) = \mathbf{0.01474}$ ($1.47\%$ of diffuse radiation, or $\SI{1.55}{\watt}$).
-      \item \textit{Collector Top Plane ($z_{\mathrm{ap}} = \SI{30.0}{\centi\meter}, d = \SI{10.0}{\centi\meter}, r_2 = \SI{15.0}{\centi\meter}$):} $R_1 = 6.35/10.0 = 0.6350$, $R_2 = 15.0/10.0 = 1.5000$, $X = 1 + (1 + 2.250)/0.403225 = 9.0600 \implies F_{\mathrm{bulb}\to\mathrm{ap}}(\SI{40}{\centi\meter}) = \mathbf{0.66465}$ ($66.5\%$ of diffuse radiation, or $\SI{69.79}{\watt}$; at the recessed rim $z_{\mathrm{ap}} = \SI{29.5}{\centi\meter}$ where $d = \SI{10.5}{\centi\meter}$, $F = \mathbf{0.64355}$).
-      \item \textit{Combined Area $\times$ Proximity View-Factor Ratio:} $F_{\mathrm{ap}}/F_{\mathrm{cup}} = 0.66465 / 0.01474 = \mathbf{45.08\times}$ more intercepted power ($43.65\times$ at $z_{\mathrm{ap}}=\SI{29.5}{\centi\meter}$)!
+      \item \textit{Collector Top Plane ($z_{\mathrm{ap}} = \SI{30.0}{\centi\meter}, d = \SI{10.0}{\centi\meter}, r_2 = \SI{15.0}{\centi\meter}$):} $R_1 = 6.35/10.0 = 0.6350$, $R_2 = 15.0/10.0 = 1.5000$, $X = 1 + (1 + 2.250)/0.403225 = 9.0600 \implies F_{\mathrm{bulb}\to\mathrm{ap}}(\SI{40}{\centi\meter}) = \mathbf{0.66465}$ ($66.5\%$ of diffuse radiation, or $\SI{69.79}{\watt}$).
+      \item \textit{Combined Area $\times$ Proximity View-Factor Ratio:} $F_{\mathrm{ap}}/F_{\mathrm{cup}} = 0.66465 / 0.01474 = \mathbf{45.08\times}$ more intercepted power!
     \end{itemize}
   \item \textbf{At $h_{\mathrm{bulb}} = \SI{65.0}{\centi\meter}$:}
     \begin{itemize}
       \item \textit{Bare Cup ($d_{\mathrm{cup}} = \SI{55.0}{\centi\meter}$):} $R_1 = 0.11545$, $R_2 = 0.06818$, $X = 76.369 \implies F_{\mathrm{bulb}\to\mathrm{cup}}(\SI{65}{\centi\meter}) = \mathbf{0.004567}$ ($0.46\%$).
-      \item \textit{Collector Top Plane ($d = \SI{35.0}{\centi\meter}$ at $z_{\mathrm{ap}}=\SI{30.0}{\centi\meter}$):} $R_1 = 0.18143$, $R_2 = 0.42857$, $X = 36.960 \implies F_{\mathrm{bulb}\to\mathrm{ap}}(\SI{65}{\centi\meter}) = \mathbf{0.15160}$ ($15.2\%$, a $\mathbf{33.19\times}$ gain over the bare cup; at $d=\SI{35.5}{\centi\meter}$, $F = \mathbf{0.14807}$).
+      \item \textit{Collector Top Plane ($d = \SI{35.0}{\centi\meter}$ at $z_{\mathrm{ap}}=\SI{30.0}{\centi\meter}$):} $R_1 = 0.18143$, $R_2 = 0.42857$, $X = 36.960 \implies F_{\mathrm{bulb}\to\mathrm{ap}}(\SI{65}{\centi\meter}) = \mathbf{0.15160}$ ($15.2\%$, a $\mathbf{33.19\times}$ gain over the bare cup).
     \end{itemize}
 \end{enumerate}
 \verifiedby{Reciprocity check $A_1 F_{1\to 2} = A_2 F_{2\to 1}$ and small-disk asymptotic limit $F_{1\to 2} \to r_2^2 / (r_1^2 + r_2^2 + d^2)$; asserted in \texttt{check\_sec14\_16.py}.}
@@ -266,7 +266,7 @@ yielding a total concentrated optical power of $\dot{Q}_{\mathrm{cup,gross}} = 2
 \section{Optical Concentration Geometry: Straight Cones vs.\ 3-Stage Finite-Conjugate Funnels}\label{sec:15.3}
 \idxtopic{ray tracing!conical reflector vs ellipsoid}\idxtopic{ray rejection trap in wide cones}\idxtopic{prolate ellipsoid concentrator}\idxtopic{compound parabolic concentrator (CPC)}
 
-Intercepting $\SI{66.5}{\percent}$ of the lamp's radiation at the $\SI{29.5}{\centi\meter}$ top plane is useless if the reflector funnel bounces those rays back out the top aperture! Understanding the \textbf{conical ray-rejection law} and \textbf{finite-conjugate ellipsoidal focusing} is the single highest-leverage optical engineering principle in the 2027 event.
+Intercepting $\SI{66.5}{\percent}$ of the lamp's radiation at the $\SI{30.0}{\centi\meter}$ top plane is useless if the reflector funnel bounces those rays back out the top aperture! Understanding the \textbf{conical ray-rejection law} and \textbf{finite-conjugate ellipsoidal focusing} is the single highest-leverage optical engineering principle in the 2027 event.
 
 \subsection{Why Wide Straight Cones Reject $73\%$ of Incident Rays}
 Consider a straight truncated cone tapering from top radius $r_{\mathrm{ap}}$ at elevation $z_{\mathrm{ap}}$ to bottom exit radius $r_{\mathrm{bot}}$ at elevation $z_{\mathrm{bot}}$ (vertical height $H_c = z_{\mathrm{ap}} - z_{\mathrm{bot}}$, wall slope ratio $s = (r_{\mathrm{ap}} - r_{\mathrm{bot}})/H_c = \tan\phi$, where $\phi$ is the wall half-angle relative to the vertical axis). By the law of specular reflection ($\theta_r = \theta_i$ relative to the local wall normal, which is tilted upward by angle $\phi$), \textbf{every reflection off a straight cone wall increases a downward meridian ray's angle $\theta$ relative to the vertical axis by $2\phi$}:
@@ -344,21 +344,18 @@ Notice that Eqs.~\eref{eq:15:ellipsoid}--\eref{eq:15:ellipsoid-ab} require \text
     width=\linewidth,
     height=5.6cm,
     xmin=39, xmax=66,
-    ymin=0, ymax=34,
+    ymin=0, ymax=36,
     xlabel={ES Announced Bulb Height $h_{\mathrm{bulb}}$ $[\si{\centi\meter}]$},
     ylabel={Net Absorbed Power $\dot{Q}_{\mathrm{abs}}$ $[\si{\watt}]$},
     grid=both,
     grid style={gray!25, dashed},
     tick align=inside,
-    legend style={at={(0.98,0.97)}, anchor=north east, font=\scriptsize, fill=white, draw=navy, row sep=0.5pt}
+    legend style={at={(0.5,-0.28)}, anchor=north, legend columns=2, font=\scriptsize, fill=white, draw=navy, column sep=3pt}
 ]
-% Tier vertical bands
-\fill[teal!8] (axis cs:40,0) rectangle (axis cs:50,34);
-\fill[amber!8] (axis cs:50,0) rectangle (axis cs:55,34);
-\fill[navy!6] (axis cs:55,0) rectangle (axis cs:65,34);
-\node[anchor=south, font=\scriptsize\bfseries, text=teal!80!black] at (axis cs:45,0.3) {Reg ($\SIrange{40}{50}{\centi\meter}$)};
-\node[anchor=south, font=\scriptsize\bfseries, text=amber!80!black] at (axis cs:52.5,0.3) {State};
-\node[anchor=south, font=\scriptsize\bfseries, text=navy] at (axis cs:60,0.3) {Nationals ($\SI{1}{\centi\meter}$)};
+% Tier ranges as bracket bars (every tier starts at 40 cm)
+\draw[|-|, thick, black] (axis cs:40,27.0) -- (axis cs:50,27.0) node[right, font=\scriptsize\bfseries] {Regional 40--50 (5\,cm steps)};
+\draw[|-|, thick, black] (axis cs:40,30.0) -- (axis cs:55,30.0) node[right, font=\scriptsize\bfseries] {State 40--55};
+\draw[|-|, thick, black] (axis cs:40,33.0) -- (axis cs:65,33.0) node[pos=0.62, fill=white, inner sep=1pt, font=\scriptsize\bfseries] {Nationals 40--65 (1\,cm steps)};
 
 % Curve 1: 125 W 3-Stage Ellipsoid/CPC (with Slot A/B/C tuning)
 \addplot[very thick, color=navy, mark=*, mark size=1.8pt] coordinates {
@@ -391,7 +388,7 @@ Notice that Eqs.~\eref{eq:15:ellipsoid}--\eref{eq:15:ellipsoid-ab} require \text
 \addlegendentry{$\SI{125}{\watt}$ Bare $\SI{9}{oz}$ Cup}
 \end{axis}
 \end{tikzpicture}
-\captionof{figure}{Net optical power $\dot{Q}_{\mathrm{abs}}(h_{\mathrm{bulb}})$ absorbed by the water across Regional, State, and National bulb heights for $\SI{125}{\watt}$ and $\SI{100}{\watt}$ lamps \src{S01,S12}.}\label{fig:15:height-irradiance}
+\captionof{figure}{Modeled net optical power $\dot{Q}_{\mathrm{abs}}(h_{\mathrm{bulb}})$ absorbed by the water for $\SI{125}{\watt}$ and $\SI{100}{\watt}$ lamps (reference collector). Bars at top: bulb-height range of each tier. The tuned curves peak at $\SI{45}{\centi\meter}$ because the ellipsoidal reflector's upper focus is set at $h_{\mathrm{design}} = \SI{45.0}{\centi\meter}$ (Ex~\ref{ex:15.2}); a bulb above or below that point is imaged above or below the water's top layer, so capture falls off on both sides \src{S01,S12}. \textbf{How to read this:} find the announced height on the $x$-axis and go up to your design's curve.}\label{fig:15:height-irradiance}
 \idxfig{lamp view factor and collected optical power vs bulb height}
 \end{center}
 \end{twocol}
@@ -402,14 +399,14 @@ Notice that Eqs.~\eref{eq:15:ellipsoid}--\eref{eq:15:ellipsoid-ab} require \text
 \begin{tabularx}{\linewidth}{@{}rrrrrrrrrr>{\raggedright\arraybackslash}X@{}}
 \toprule
 \hdr{Bulb $h$} & \hdr{$d_{\mathrm{ap}}$} & \hdr{$F_{\mathrm{bulb}\to\mathrm{ap}}$} & \hdr{$F_{\mathrm{bulb}\to\mathrm{cup}}$} & \hdr{Bare Cup} & \hdr{$30^\circ$ Cone} & \hdr{$15^\circ$ Cone} & \hdr{\textbf{3-Stage CPC}} & \hdr{\textbf{Optical}} & \hdr{$\dot{Q}_{\mathrm{abs,125W}}$} & \hdr{3-Min Setup Pedestal} \\
-\tiny$[\si{\centi\meter}]$ & \tiny$[\si{\centi\meter}]$ & \tiny($z_{\mathrm{ap}}\!=\!29.5$) & \tiny($z_{\mathrm{cup}}\!=\!10.0$) & \tiny Capture & \tiny Capture & \tiny Capture & \tiny\textbf{Capture} & \tiny\textbf{Gain} & \tiny(Glazed) $[\si{\watt}]$ & \hdr{Slot \& Tier} \\
+\tiny$[\si{\centi\meter}]$ & \tiny$[\si{\centi\meter}]$ & \tiny($z_{\mathrm{ap}}\!=\!30.0$) & \tiny($z_{\mathrm{cup}}\!=\!10.0$) & \tiny Capture & \tiny Capture & \tiny Capture & \tiny\textbf{Capture} & \tiny\textbf{Gain} & \tiny(Glazed) $[\si{\watt}]$ & \hdr{Slot \& Tier} \\
 \midrule
-$\mathbf{40}$ & $10.5$ & $0.6647$ & $0.0147$ & $2.30\%$ & $6.13\%$ & $19.42\%$ & $\mathbf{31.39\%}$ & $\mathbf{13.7\times}$ & $\mathbf{\SI{21.5}{\watt}}$ & \textbf{Slot~A} (Reg/State/Nat) \\
-\rowcolor{rowalt}$\mathbf{45}$ & $15.5$ & $0.4776$ & $0.0110$ & $1.70\%$ & $4.78\%$ & $16.50\%$ & $\mathbf{41.43\%}$ & $\mathbf{24.4\times}$ & $\mathbf{\SI{24.0}{\watt}}$ & \textbf{Slot~A} (Reg/State/Nat) \\
-$\mathbf{50}$ & $20.5$ & $0.3454$ & $0.0085$ & $1.30\%$ & $3.81\%$ & $14.15\%$ & $\mathbf{37.35\%}$ & $\mathbf{28.6\times}$ & $\mathbf{\SI{18.5}{\watt}}$ & \textbf{Slot~A/B} (Reg/State/Nat) \\
-\rowcolor{rowalt}$\mathbf{55}$ & $25.5$ & $0.2557$ & $0.0068$ & $1.03\%$ & $3.11\%$ & $12.10\%$ & $\mathbf{27.60\%}$ & $\mathbf{26.7\times}$ & $\mathbf{\SI{15.2}{\watt}}$ & \textbf{Slot~B} (State/Nat) \\
-$\mathbf{60}$ & $30.5$ & $0.1944$ & $0.0055$ & $0.84\%$ & $2.58\%$ & $10.65\%$ & $\mathbf{24.80\%}$ & $\mathbf{29.5\times}$ & $\mathbf{\SI{11.8}{\watt}}$ & \textbf{Slot~B/C} (Nationals) \\
-\rowcolor{rowalt}$\mathbf{65}$ & $35.5$ & $0.1516$ & $0.0046$ & $0.69\%$ & $2.19\%$ & $9.46\%$ & $\mathbf{18.90\%}$ & $\mathbf{27.4\times}$ & $\mathbf{\SI{9.2}{\watt}}$ & \textbf{Slot~C} (Nationals) \\
+$\mathbf{40}$ & $10.0$ & $0.6647$ & $0.0147$ & $2.30\%$ & $6.13\%$ & $19.42\%$ & $\mathbf{31.39\%}$ & $\mathbf{13.7\times}$ & $\mathbf{\SI{21.5}{\watt}}$ & \textbf{Slot~A} (Reg/State/Nat) \\
+\rowcolor{rowalt}$\mathbf{45}$ & $15.0$ & $0.4776$ & $0.0110$ & $1.70\%$ & $4.78\%$ & $16.50\%$ & $\mathbf{41.43\%}$ & $\mathbf{24.4\times}$ & $\mathbf{\SI{24.0}{\watt}}$ & \textbf{Slot~A} (Reg/State/Nat) \\
+$\mathbf{50}$ & $20.0$ & $0.3454$ & $0.0085$ & $1.30\%$ & $3.81\%$ & $14.15\%$ & $\mathbf{37.35\%}$ & $\mathbf{28.6\times}$ & $\mathbf{\SI{18.5}{\watt}}$ & \textbf{Slot~A/B} (Reg/State/Nat) \\
+\rowcolor{rowalt}$\mathbf{55}$ & $25.0$ & $0.2557$ & $0.0068$ & $1.03\%$ & $3.11\%$ & $12.10\%$ & $\mathbf{27.60\%}$ & $\mathbf{26.7\times}$ & $\mathbf{\SI{15.2}{\watt}}$ & \textbf{Slot~B} (State/Nat) \\
+$\mathbf{60}$ & $30.0$ & $0.1944$ & $0.0055$ & $0.84\%$ & $2.58\%$ & $10.65\%$ & $\mathbf{24.80\%}$ & $\mathbf{29.5\times}$ & $\mathbf{\SI{11.8}{\watt}}$ & \textbf{Slot~B/C} (Nationals) \\
+\rowcolor{rowalt}$\mathbf{65}$ & $35.0$ & $0.1516$ & $0.0046$ & $0.69\%$ & $2.19\%$ & $9.46\%$ & $\mathbf{18.90\%}$ & $\mathbf{27.4\times}$ & $\mathbf{\SI{9.2}{\watt}}$ & \textbf{Slot~C} (Nationals) \\
 \bottomrule
 \end{tabularx}
 \end{center}

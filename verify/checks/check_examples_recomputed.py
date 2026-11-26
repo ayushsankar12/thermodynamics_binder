@@ -1210,15 +1210,12 @@ def sec15():
     out = []
     Fc40 = coax(6.35, 3.75, 30.0)[0]
     Fa40 = coax(6.35, 15.0, 10.0)[0]
-    Fa295 = coax(6.35, 15.0, 10.5)[0]
     Fc65, X65 = coax(6.35, 3.75, 55.0)
     Fa65 = coax(6.35, 15.0, 35.0)[0]
     out += [
         chk("EX-15.1-FC40", "sec15", "bulb-to-cup view factor at 40 cm", "0.01474", Fc40),
         chk("EX-15.1-FA40", "sec15", "bulb-to-aperture view factor at 40 cm", "0.66465", Fa40),
-        chk("EX-15.1-FA295", "sec15", "aperture view factor, rim at 29.5 cm", "0.64355", Fa295),
         chk("EX-15.1-GAIN", "sec15", "aperture/cup gain at 40 cm", "45.08", Fa40 / Fc40),
-        chk("EX-15.1-GAIN295", "sec15", "gain with rim at 29.5 cm", "43.65", Fa295 / Fc40),
         chk("EX-15.1-X65", "sec15", "X for cup at 65 cm", "76.369", X65),
         chk("EX-15.1-FC65", "sec15", "cup view factor at 65 cm", "0.004567", Fc65),
         chk("EX-15.1-FA65", "sec15", "aperture view factor at 65 cm", "0.15160", Fa65),
@@ -1226,6 +1223,10 @@ def sec15():
         chk("EX-12.2-FCUP", "sec12", "Ex 12.2 bare-cup view factor", "0.01474", Fc40),
         chk("EX-12.2-GAIN", "sec12", "Ex 12.2 gain", "45.1", 0.6647 / 0.01474),
     ]
+    for h, fa, fc in ((40, "0.6647", "0.0147"), (45, "0.4776", "0.0110"), (50, "0.3454", "0.0085"),
+                      (55, "0.2557", "0.0068"), (60, "0.1944", "0.0055"), (65, "0.1516", "0.0046")):
+        out += [chk(f"TAB-15.4-FAP-{h}", "sec15", f"Table 15.4 F_bulb->ap (z_ap = 30.0 cm, d = {h - 30} cm)", fa, coax(6.35, 15.0, h - 30.0)[0]),
+                chk(f"TAB-15.4-FCUP-{h}", "sec15", f"Table 15.4 F_bulb->cup (z_cup = 10.0 cm)", fc, coax(6.35, 3.75, h - 10.0)[0])]
     F, X = coax(14.50, 3.75, 14.30)
     fd = 2.15 * F
     out += [
