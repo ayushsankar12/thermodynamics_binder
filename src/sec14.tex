@@ -52,16 +52,16 @@ $C'' = \rho c_p \delta = \dfrac{C_{\mathrm{comp}}}{A_{\mathrm{comp}}}$ \newline 
 \begin{tikzpicture}[font=\scriptsize]
 \begin{axis}[
     width=0.92\linewidth,
-    height=6.0cm,
+    height=7.6cm,
     xmin=0.0, xmax=1.02,
-    ymin=0.0, ymax=1.05,
+    ymin=0.0, ymax=1.07,
     xlabel={Mid-IR Thermal Emittance $\varepsilon_{\mathrm{MIR}}$ at $\lambda \approx \SI{9.4}{\micro\meter}$ ($\SI{308}{\kelvin}$ Water Peak) $[-]$},
     ylabel={Near-IR Lamp Absorptance $\alpha_{\mathrm{NIR}}$ at $\lambda \approx \SI{1.2}{\micro\meter}$ $[-]$},
     grid=both,
     grid style={gray!25, dashed},
     minor tick num=1,
     tick align=inside,
-    legend style={at={(0.52,0.52)}, anchor=center, font=\scriptsize, fill=white, draw=navy, row sep=1pt}
+    legend style={at={(0.5,-0.2)}, anchor=north, legend columns=2, font=\footnotesize, fill=white, draw=navy, row sep=1pt, column sep=6pt}
 ]
 % Shaded functional zones
 \fill[teal!10] (axis cs:0.0,0.0) rectangle (axis cs:0.15,0.15);
@@ -69,14 +69,14 @@ $C'' = \rho c_p \delta = \dfrac{C_{\mathrm{comp}}}{A_{\mathrm{comp}}}$ \newline 
 \fill[navy!8] (axis cs:0.75,0.75) rectangle (axis cs:1.00,1.02);
 \fill[rust!10] (axis cs:0.80,0.0) rectangle (axis cs:1.00,0.35);
 
-\node[anchor=south west, text=teal!80!black, font=\scriptsize\bfseries] at (axis cs:0.01,0.16) {Zone I: Specular Reflectors \& Shields ($\rho_{\mathrm{NIR}}\!\to\!1, \varepsilon_{\mathrm{MIR}}\!\to\!0$)};
-\node[anchor=north west, text=amber!80!black, font=\scriptsize\bfseries] at (axis cs:0.01,0.77) {Zone II: Selective Absorbers ($\alpha_{\mathrm{NIR}}/\varepsilon_{\mathrm{MIR}} \gg 1$)};
-\node[anchor=south east, text=navy, font=\scriptsize\bfseries] at (axis cs:0.99,0.66) {Zone III: Blackbody / Water Absorbers};
-\node[anchor=south east, text=rust, font=\scriptsize\bfseries] at (axis cs:0.99,0.02) {Zone IV: Diffuse White Trap ($\varepsilon_{\mathrm{MIR}}\!\approx\!0.92$)};
+\node[anchor=south west, text=teal!80!black, font=\footnotesize\bfseries] at (axis cs:0.01,0.17) {Zone I: reflectors \& shields};
+\node[anchor=north west, text=amber!80!black, font=\footnotesize\bfseries] at (axis cs:0.01,0.70) {Zone II: selective absorbers};
+\node[anchor=north east, text=navy, font=\footnotesize\bfseries] at (axis cs:0.99,0.72) {Zone III: black absorbers \& water};
+\node[anchor=south east, text=rust, font=\footnotesize\bfseries] at (axis cs:0.99,0.02) {Zone IV: white surfaces (trap)};
 
 % Diagonal gray-body line alpha = epsilon
-\addplot[domain=0:1, dashed, thick, gray!70] {x};
-\node[rotate=24, font=\scriptsize, text=gray!60!black] at (axis cs:0.55,0.60) {Gray-Body Locus ($\alpha_{\mathrm{NIR}} = \varepsilon_{\mathrm{MIR}}$)};
+\addplot[domain=0:1, dashed, thick, gray!70, forget plot] {x};
+\node[rotate=31, font=\footnotesize, text=gray!50!black, fill=white, inner sep=1pt] at (axis cs:0.48,0.48) {gray body: $\alpha_{\mathrm{NIR}} = \varepsilon_{\mathrm{MIR}}$};
 
 % Group 1: Reflectors
 \addplot[only marks, mark=*, mark size=2.4pt, color=teal!80!black] coordinates {
@@ -114,19 +114,21 @@ $C'' = \rho c_p \delta = \dfrac{C_{\mathrm{comp}}}{A_{\mathrm{comp}}}$ \newline 
 };
 \addlegendentry{White Paint/Paper \& 2nd-Surface PMMA Mirror}
 
-% Point labels
-\node[anchor=west, font=\scriptsize] at (axis cs:0.045,0.035) {Shiny Al Foil ($0.035, 0.04$)};
-\node[anchor=west, font=\scriptsize] at (axis cs:0.055,0.095) {Polished Al Sheet ($0.05, 0.07$)};
-\node[anchor=west, font=\scriptsize] at (axis cs:0.100,0.950) {Black Cr on Ni ($S=10.6$)};
-\node[anchor=west, font=\scriptsize] at (axis cs:0.170,0.900) {$\mathrm{CuO}$ on Cu ($S=5.6$)};
-\node[anchor=west, font=\scriptsize] at (axis cs:0.180,0.810) {Ni-Black ($S=4.8$)};
-\node[anchor=west, font=\scriptsize] at (axis cs:0.250,0.880) {Thin Anodized Al};
-\node[anchor=east, font=\scriptsize] at (axis cs:0.940,0.975) {Carbon Soot ($0.95, 0.96$)};
-\node[anchor=east, font=\scriptsize] at (axis cs:0.880,0.930) {Matte Black Paint};
-\node[anchor=east, font=\scriptsize] at (axis cs:0.945,0.825) {Liquid Water ($\varepsilon=0.96, \alpha=0.83$)};
-\node[anchor=east, font=\scriptsize] at (axis cs:0.890,0.260) {White Acrylic Paint ($0.90, 0.26$)};
-\node[anchor=east, font=\scriptsize] at (axis cs:0.950,0.210) {White Paper ($0.96, 0.22$)};
-\node[anchor=east, font=\scriptsize] at (axis cs:0.910,0.155) {2nd-Surf PMMA Mirror};
+% Point labels (leader lines keep labels clear of markers and of each other)
+\tikzset{lead/.style={gray!60!black, thin}}
+\draw[lead] (axis cs:0.050,0.070) -- (axis cs:0.13,0.115) node[right, font=\footnotesize, text=black] {Polished Al sheet};
+\draw[lead] (axis cs:0.035,0.040) -- (axis cs:0.13,0.045) node[right, font=\footnotesize, text=black] {Shiny Al foil, aluminized Mylar};
+\draw[lead] (axis cs:0.160,0.960) -- (axis cs:0.32,1.000) node[right, font=\footnotesize, text=black] {Cermet};
+\draw[lead] (axis cs:0.090,0.950) -- (axis cs:0.32,0.940) node[right, font=\footnotesize, text=black] {Black Cr on Ni};
+\draw[lead] (axis cs:0.160,0.900) -- (axis cs:0.32,0.880) node[right, font=\footnotesize, text=black] {CuO on Cu};
+\draw[lead] (axis cs:0.240,0.880) -- (axis cs:0.32,0.820) node[right, font=\footnotesize, text=black] {Thin anodized Al};
+\draw[lead] (axis cs:0.170,0.810) -- (axis cs:0.32,0.760) node[right, font=\footnotesize, text=black] {Ni-black};
+\draw[lead] (axis cs:0.950,0.960) -- (axis cs:0.70,1.000) node[left, font=\footnotesize, text=black] {Carbon soot};
+\draw[lead] (axis cs:0.890,0.940) -- (axis cs:0.70,0.940) node[left, font=\footnotesize, text=black] {Matte black paint};
+\draw[lead] (axis cs:0.960,0.830) -- (axis cs:0.70,0.820) node[left, font=\footnotesize, text=black] {Liquid water};
+\draw[lead] (axis cs:0.900,0.260) -- (axis cs:0.66,0.330) node[left, font=\footnotesize, text=black] {White acrylic paint};
+\draw[lead] (axis cs:0.960,0.220) -- (axis cs:0.66,0.255) node[left, font=\footnotesize, text=black] {White paper};
+\draw[lead] (axis cs:0.920,0.170) -- (axis cs:0.66,0.180) node[left, font=\footnotesize, text=black] {Second-surface PMMA mirror};
 \end{axis}
 \end{tikzpicture}
 \captionof{figure}{Two-band spectral selectivity map comparing near-infrared lamp absorptance $\alpha_{\mathrm{NIR}}$ ($\lambda \approx \SI{1.2}{\micro\meter}$) against mid-infrared thermal emittance $\varepsilon_{\mathrm{MIR}}$ ($\lambda \approx \SI{9.4}{\micro\meter}$) across reflectors, selective absorbers, liquid water, and diffuse white surfaces \src{S12,S24}.}\label{fig:14:two-band-optical}

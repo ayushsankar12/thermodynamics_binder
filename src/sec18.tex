@@ -307,15 +307,14 @@ Never rely on $R^2 > 0.99$ alone to validate a physical model! Always inspect th
     xlabel={Heating Time $t_k$ $[\si{\minute}]$ Across a 10-Minute Calibration Run},
     ylabel={Residual $r_k = T_{\mathrm{meas},k} - T_{\mathrm{fit},k}$ $[\si{\celsius}]$},
     xmin=-0.3, xmax=10.5,
-    ymin=-1.35, ymax=1.35,
+    ymin=-1.45, ymax=1.5,
     xtick={0,1,2,3,4,5,6,7,8,9,10},
     ytick={-1.2,-0.8,-0.4,0,0.4,0.8,1.2},
     grid=both,
-    grid style={gray!25, dashed},
-    legend style={at={(0.02,0.97)}, anchor=north west, font=\scriptsize, fill=white, draw=navy}
+    grid style={gray!25, dashed}
 ]
-  % Zero baseline and +-0.10 C noise band
-  \addplot[black, semithick] coordinates {(-0.3,0) (10.5,0)};
+  % Zero baseline and +-0.12 C noise band (forget plot: no legend entries)
+  \addplot[black, semithick, forget plot] coordinates {(-0.3,0) (10.5,0)};
   \addplot[gray, densely dotted, forget plot] coordinates {(-0.3,0.12) (10.5,0.12)};
   \addplot[gray, densely dotted, forget plot] coordinates {(-0.3,-0.12) (10.5,-0.12)};
 
@@ -323,22 +322,20 @@ Never rely on $R^2 > 0.99$ alone to validate a physical model! Always inspect th
   \addplot[navy, thick, mark=*, mark size=1.8pt] coordinates {
     (0,-0.01) (1,0.04) (2,-0.02) (3,0.05) (4,-0.04) (5,0.02) (6,0.03) (7,-0.05) (8,-0.01) (9,0.04) (10,-0.03)
   };
-  \addlegendentry{Pattern A (Random White Noise $|r_k|\le\SI{0.05}{\celsius}$): Valid First-Order Model}
+  \node[anchor=west, font=\footnotesize\bfseries, text=navy, fill=white, inner sep=1pt] at (axis cs:6.4,-0.36) {A: random scatter (model OK)};
 
   % Pattern B: Unmodeled heat loss curvature (fitting linear T = T_i + m*t to exponential curve)
   \addplot[rust, very thick, dashed, mark=square*, mark size=1.8pt] coordinates {
     (0,-0.82) (1,-0.18) (2,0.34) (3,0.72) (4,0.96) (5,1.06) (6,1.02) (7,0.84) (8,0.52) (9,0.06) (10,-0.54)
   };
-  \addlegendentry{Pattern B (Inverted-U Curvature): Unmodeled Heat Loss / Wrong $T_{\mathrm{ss}}$}
+  \node[anchor=south, font=\footnotesize\bfseries, text=rust, fill=white, inner sep=1pt] at (axis cs:5,1.12) {B: inverted U (unmodeled heat loss or wrong $T_{\mathrm{ss}}$)};
 
   % Pattern C: Stratification / lid-slip step jump at t = 6 min
   \addplot[amber, very thick, dashdotted, mark=triangle*, mark size=2.2pt] coordinates {
     (0,0.02) (1,0.05) (2,-0.01) (3,0.04) (4,0.01) (5,0.03) (6,-0.92) (7,-1.05) (8,-1.12) (9,-1.16) (10,-1.20)
   };
-  \addlegendentry{Pattern C (Step Drop at $t=\SI{6}{\minute}$): Probe Slipped Deeper or Vapor Cap Dislodged}
-
-  \draw[->, amber, thick] (axis cs:5.6,-0.55) -- (axis cs:5.95,-0.88);
-  \node[anchor=east, font=\scriptsize\bfseries, text=amber, fill=white, inner sep=1pt] at (axis cs:5.55,-0.55) {Discontinuity at $t^*=\SI{6}{\minute}$};
+  \draw[->, amber!80!black, thick] (axis cs:4.6,-0.85) -- (axis cs:5.85,-0.9);
+  \node[anchor=east, font=\footnotesize\bfseries, text=amber!80!black, fill=white, inner sep=1pt] at (axis cs:4.55,-0.85) {C: step at $t^* = \SI{6}{\minute}$ (probe moved or cap slipped)};
 \end{axis}
 \end{tikzpicture}
 \captionof{figure}{Three diagnostic residual patterns $r_k = T_{\mathrm{meas},k} - T_{\mathrm{fit},k}$ versus time $t_k$. Pattern~A (random scatter inside $\pm 2u_{\mathrm{rand}}$) confirms a physically valid model; Pattern~B (arch curvature) reveals unmodeled heat loss or an erroneous asymptote $T_{\mathrm{ss}}$; Pattern~C (abrupt step shift) flags a mid-run probe depth shift or vapor-cover failure \src{S21}.}\label{fig:18:residuals}
