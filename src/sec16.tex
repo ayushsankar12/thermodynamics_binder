@@ -260,19 +260,19 @@ In a calibration run at $h = \SI{45.0}{\centi\meter}$ ($\SI{125}{\watt}$ lamp, $
 \tiny$[\si{\celsius}]$ & \tiny$\SI{10}{\minute}$ & \tiny$\SI{11}{\minute}$ & \tiny$\SI{12}{\minute}$ & \tiny$\SI{13}{\minute}$ & \tiny$\SI{14}{\minute}$ & \tiny$\SI{15}{\minute}$ & \hdr{Regime} \\
 \midrule
 $\mathbf{+4.0}$ & $+1.94$ & $+2.07$ & $+2.20$ & $+2.31$ & $+2.42$ & $+2.52$ & Cold tap \\
-\rowcolor{rowalt}$\mathbf{+3.0}$ & $+1.46$ & $+1.55$ & $+1.65$ & $+1.73$ & $+1.82$ & $+1.89$ & Cold bath \\
+\rowcolor{rowalt}$\mathbf{+3.0}$ & $+1.46$ & $+1.56$ & $+1.65$ & $+1.74$ & $+1.82$ & $+1.89$ & Cold bath \\
 $\mathbf{+2.0}$ & $+0.97$ & $+1.04$ & $+1.10$ & $+1.16$ & $+1.21$ & $+1.26$ & Cool bath \\
 \rowcolor{rowalt}$\mathbf{+1.0}$ & $+0.49$ & $+0.52$ & $+0.55$ & $+0.58$ & $+0.61$ & $+0.63$ & Slight cool \\
-$\mathbf{+0.5}$ & $+0.24$ & $+0.26$ & $+0.28$ & $+0.29$ & $+0.30$ & $+0.32$ & Near eq. \\
+$\mathbf{+0.5}$ & $+0.24$ & $+0.26$ & $+0.27$ & $+0.29$ & $+0.30$ & $+0.32$ & Near eq. \\
 \rowcolor{rowalt}$\mathbf{0.0}$ & $\mathbf{0.00}$ & $\mathbf{0.00}$ & $\mathbf{0.00}$ & $\mathbf{0.00}$ & $\mathbf{0.00}$ & $\mathbf{0.00}$ & \textbf{Isothermal} \\
-$\mathbf{-0.5}$ & $-0.24$ & $-0.26$ & $-0.28$ & $-0.29$ & $-0.30$ & $-0.32$ & Near eq. \\
+$\mathbf{-0.5}$ & $-0.24$ & $-0.26$ & $-0.27$ & $-0.29$ & $-0.30$ & $-0.32$ & Near eq. \\
 \rowcolor{rowalt}$\mathbf{-1.0}$ & $-0.49$ & $-0.52$ & $-0.55$ & $-0.58$ & $-0.61$ & $-0.63$ & Slight warm \\
 $\mathbf{-2.0}$ & $-0.97$ & $-1.04$ & $-1.10$ & $-1.16$ & $-1.21$ & $-1.26$ & Warm bath \\
-\rowcolor{rowalt}$\mathbf{-3.0}$ & $-1.46$ & $-1.55$ & $-1.65$ & $-1.73$ & $-1.82$ & $-1.89$ & Hot bath \\
+\rowcolor{rowalt}$\mathbf{-3.0}$ & $-1.46$ & $-1.56$ & $-1.65$ & $-1.74$ & $-1.82$ & $-1.89$ & Hot bath \\
 $\mathbf{-4.0}$ & $-1.94$ & $-2.07$ & $-2.20$ & $-2.31$ & $-2.42$ & $-2.52$ & Cold room \\
 \midrule
-\textbf{Weight $k_{\mathrm{room}}$} & $0.485$ & $0.518$ & $0.550$ & $0.578$ & $0.605$ & $0.631$ & $1-e^{-t/\tau}$ \\
-\rowcolor{rowalt}\textbf{Weight $k_{\mathrm{start}}$} & $0.515$ & $0.482$ & $0.450$ & $0.422$ & $0.395$ & $0.369$ & $e^{-t/\tau}$ \\
+\textbf{Weight $k_{\mathrm{room}}$} & $0.485$ & $0.519$ & $0.549$ & $0.578$ & $0.606$ & $0.631$ & $1-e^{-t/\tau}$ \\
+\rowcolor{rowalt}\textbf{Weight $k_{\mathrm{start}}$} & $0.515$ & $0.481$ & $0.451$ & $0.422$ & $0.394$ & $0.369$ & $e^{-t/\tau}$ \\
 \bottomrule
 \end{tabularx}
 \end{twocol}
@@ -309,14 +309,14 @@ To guarantee zero calculator-entry mistakes under tournament time pressure, \fre
 
 % 6 curves for t = 15, 14, 13, 12, 11, 10 min (125 W bulb; for 100 W multiply by 0.800)
 \addplot[very thick, color=navy, mark=*, mark size=1.6pt] coordinates {
-    (40, 33.1) (45, 36.9) (50, 28.5) (55, 23.4) (60, 18.2) (65, 14.2)
+    (40, 32.2) (45, 36.0) (50, 27.7) (55, 22.7) (60, 17.7) (65, 13.8)
 };
-\addlegendentry{$t = \SI{15.0}{\minute}$ ($M_t = 1.334$)}
+\addlegendentry{$t = \SI{15.0}{\minute}$ ($M_t = 1.300$)}
 
 \addplot[thick, color=teal!80!black, mark=square*, mark size=1.4pt] coordinates {
-    (40, 31.6) (45, 35.3) (50, 27.1) (55, 22.3) (60, 17.3) (65, 13.5)
+    (40, 30.9) (45, 34.6) (50, 26.6) (55, 21.8) (60, 17.0) (65, 13.2)
 };
-\addlegendentry{$t = \SI{14.0}{\minute}$ ($M_t = 1.274$)}
+\addlegendentry{$t = \SI{14.0}{\minute}$ ($M_t = 1.247$)}
 
 \addplot[thick, color=amber!90!black, mark=triangle*, mark size=1.6pt] coordinates {
     (40, 29.6) (45, 33.0) (50, 25.4) (55, 20.9) (60, 16.2) (65, 12.6)
@@ -324,14 +324,14 @@ To guarantee zero calculator-entry mistakes under tournament time pressure, \fre
 \addlegendentry{$t = \SI{13.0}{\minute}$ ($M_t = 1.192$)}
 
 \addplot[very thick, color=rust, dashed, mark=diamond*, mark size=1.6pt] coordinates {
-    (40, 28.3) (45, 31.6) (50, 24.4) (55, 20.0) (60, 15.6) (65, 12.1)
+    (40, 28.1) (45, 31.4) (50, 24.1) (55, 19.8) (60, 15.4) (65, 12.0)
 };
-\addlegendentry{$t = \SI{12.0}{\minute}$ ($M_t = 1.143$)}
+\addlegendentry{$t = \SI{12.0}{\minute}$ ($M_t = 1.132$)}
 
 \addplot[thick, color=slate, dashdotted, mark=o, mark size=1.4pt] coordinates {
-    (40, 26.7) (45, 29.8) (50, 22.9) (55, 18.8) (60, 14.6) (65, 11.4)
+    (40, 26.5) (45, 29.6) (50, 22.8) (55, 18.7) (60, 14.5) (65, 11.3)
 };
-\addlegendentry{$t = \SI{11.0}{\minute}$ ($M_t = 1.076$)}
+\addlegendentry{$t = \SI{11.0}{\minute}$ ($M_t = 1.068$)}
 
 \addplot[very thick, color=black, mark=star, mark size=2.0pt] coordinates {
     (40, 24.8) (45, 27.7) (50, 21.3) (55, 17.5) (60, 13.6) (65, 10.6)
@@ -354,21 +354,21 @@ To guarantee zero calculator-entry mistakes under tournament time pressure, \fre
 \cmidrule(lr){4-6}\cmidrule(lr){7-9}\cmidrule(lr){10-12}
 \hdr{$h$ $[\si{\centi\meter}]$} & & \tiny$\SI{125}{\watt}$ & \hdr{$\SI{10}{\minute}$} & \hdr{$\SI{12}{\minute}$} & \hdr{$\SI{15}{\minute}$} & \hdr{$\SI{10}{\minute}$} & \hdr{$\SI{12}{\minute}$} & \hdr{$\SI{15}{\minute}$} & \hdr{$\SI{10}{\minute}$} & \hdr{$\SI{12}{\minute}$} & \hdr{$\SI{15}{\minute}$} & \hdr{Tier Scope} \\
 \midrule
-$\mathbf{40.0}$ & \textbf{A} & $\SI{21.5}{\watt}$ & $+24.8$ & $+28.3$ & $+33.1$ & $+19.8$ & $+22.7$ & $+26.5$ & $46.8$ & $50.3$ & $55.1$ & Reg / State / Nat \\
-\rowcolor{rowalt}$\mathbf{45.0}$ & \textbf{A} & $\SI{24.0}{\watt}$ & $+27.7$ & $+31.6$ & $+36.9$ & $+22.2$ & $+25.3$ & $+29.5$ & $49.7$ & $53.6$ & $58.9$ & Reg / State / Nat \\
-$\mathbf{50.0}$ & \textbf{A/B} & $\SI{18.5}{\watt}$ & $+21.3$ & $+24.4$ & $+28.5$ & $+17.1$ & $+19.5$ & $+22.8$ & $43.3$ & $46.4$ & $50.5$ & Reg / State / Nat \\
-\rowcolor{rowalt}$\mathbf{55.0}$ & \textbf{B} & $\SI{15.2}{\watt}$ & $+17.5$ & $+20.0$ & $+23.4$ & $+14.1$ & $+16.0$ & $+18.7$ & $39.5$ & $42.0$ & $45.4$ & State / Nationals \\
-$\mathbf{60.0}$ & \textbf{B/C} & $\SI{11.8}{\watt}$ & $+13.6$ & $+15.6$ & $+18.2$ & $+10.9$ & $+12.4$ & $+14.5$ & $35.6$ & $37.6$ & $40.2$ & Nationals ($\SI{1}{\centi\meter}$) \\
-\rowcolor{rowalt}$\mathbf{65.0}$ & \textbf{C} & $\SI{9.2}{\watt}$ & $+10.6$ & $+12.1$ & $+14.2$ & $+8.5$ & $+9.7$ & $+11.3$ & $32.6$ & $34.1$ & $36.2$ & Nationals ($\SI{1}{\centi\meter}$) \\
+$\mathbf{40.0}$ & \textbf{A} & $\SI{21.5}{\watt}$ & $+24.8$ & $+28.1$ & $+32.2$ & $+19.8$ & $+22.5$ & $+25.8$ & $46.8$ & $50.1$ & $54.2$ & Reg / State / Nat \\
+\rowcolor{rowalt}$\mathbf{45.0}$ & \textbf{A} & $\SI{24.0}{\watt}$ & $+27.7$ & $+31.4$ & $+36.0$ & $+22.2$ & $+25.1$ & $+28.8$ & $49.7$ & $53.4$ & $58.0$ & Reg / State / Nat \\
+$\mathbf{50.0}$ & \textbf{A/B} & $\SI{18.5}{\watt}$ & $+21.3$ & $+24.1$ & $+27.7$ & $+17.0$ & $+19.3$ & $+22.1$ & $43.3$ & $46.1$ & $49.7$ & Reg / State / Nat \\
+\rowcolor{rowalt}$\mathbf{55.0}$ & \textbf{B} & $\SI{15.2}{\watt}$ & $+17.5$ & $+19.8$ & $+22.7$ & $+14.0$ & $+15.8$ & $+18.2$ & $39.5$ & $41.8$ & $44.7$ & State / Nationals \\
+$\mathbf{60.0}$ & \textbf{B/C} & $\SI{11.8}{\watt}$ & $+13.6$ & $+15.4$ & $+17.7$ & $+10.9$ & $+12.3$ & $+14.1$ & $35.6$ & $37.4$ & $39.7$ & Nationals ($\SI{1}{\centi\meter}$) \\
+\rowcolor{rowalt}$\mathbf{65.0}$ & \textbf{C} & $\SI{9.2}{\watt}$ & $+10.6$ & $+12.0$ & $+13.8$ & $+8.5$ & $+9.6$ & $+11.0$ & $32.6$ & $34.0$ & $35.8$ & Nationals ($\SI{1}{\centi\meter}$) \\
 \midrule
 \multicolumn{13}{@{}p{0.97\linewidth}@{}}{\textbf{Exact 1-Minute State/National Time-Scaling Factors ($\mathrm{TG}(h,t) = \mathrm{TG}(h,\SI{10}{\minute})\times M_t(t)$) and Coupling Weights:}} \\
 \multicolumn{13}{@{}p{0.97\linewidth}@{}}{\scriptsize%
   $\bullet\ \mathbf{t=\SI{10}{\minute}}$ ($\SI{600}{\second}$): $M_{10}=\mathbf{1.000}$, $k_{\mathrm{start}}=\mathbf{0.515}$, $k_{\mathrm{room}}=\mathbf{0.485}$ \quad
-  $\bullet\ \mathbf{t=\SI{11}{\minute}}$ ($\SI{660}{\second}$): $M_{11}=\mathbf{1.069}$, $k_{\mathrm{start}}=\mathbf{0.482}$, $k_{\mathrm{room}}=\mathbf{0.518}$ \quad
-  $\bullet\ \mathbf{t=\SI{12}{\minute}}$ ($\SI{720}{\second}$): $M_{12}=\mathbf{1.132}$, $k_{\mathrm{start}}=\mathbf{0.450}$, $k_{\mathrm{room}}=\mathbf{0.550}$ \newline
+  $\bullet\ \mathbf{t=\SI{11}{\minute}}$ ($\SI{660}{\second}$): $M_{11}=\mathbf{1.068}$, $k_{\mathrm{start}}=\mathbf{0.481}$, $k_{\mathrm{room}}=\mathbf{0.519}$ \quad
+  $\bullet\ \mathbf{t=\SI{12}{\minute}}$ ($\SI{720}{\second}$): $M_{12}=\mathbf{1.132}$, $k_{\mathrm{start}}=\mathbf{0.451}$, $k_{\mathrm{room}}=\mathbf{0.549}$ \newline
   $\bullet\ \mathbf{t=\SI{13}{\minute}}$ ($\SI{780}{\second}$): $M_{13}=\mathbf{1.192}$, $k_{\mathrm{start}}=\mathbf{0.422}$, $k_{\mathrm{room}}=\mathbf{0.578}$ \quad
-  $\bullet\ \mathbf{t=\SI{14}{\minute}}$ ($\SI{840}{\second}$): $M_{14}=\mathbf{1.247}$, $k_{\mathrm{start}}=\mathbf{0.395}$, $k_{\mathrm{room}}=\mathbf{0.605}$ \quad
-  $\bullet\ \mathbf{t=\SI{15}{\minute}}$ ($\SI{900}{\second}$): $M_{15}=\mathbf{1.299}$, $k_{\mathrm{start}}=\mathbf{0.369}$, $k_{\mathrm{room}}=\mathbf{0.631}$} \\
+  $\bullet\ \mathbf{t=\SI{14}{\minute}}$ ($\SI{840}{\second}$): $M_{14}=\mathbf{1.247}$, $k_{\mathrm{start}}=\mathbf{0.394}$, $k_{\mathrm{room}}=\mathbf{0.606}$ \quad
+  $\bullet\ \mathbf{t=\SI{15}{\minute}}$ ($\SI{900}{\second}$): $M_{15}=\mathbf{1.300}$, $k_{\mathrm{start}}=\mathbf{0.369}$, $k_{\mathrm{room}}=\mathbf{0.631}$} \\
 \bottomrule
 \end{tabularx}
 \end{center}
@@ -382,12 +382,12 @@ $\mathbf{60.0}$ & \textbf{B/C} & $\SI{11.8}{\watt}$ & $+13.6$ & $+15.6$ & $+18.2
 \tiny$[\si{\centi\meter}]$ & & \tiny$[\si{\celsius}]$ & \tiny$[\si{\celsius}]$ & \tiny$[\si{\celsius\per\centi\meter}]$ & \tiny$[\si{\centi\meter}]$ & & \tiny$[\si{\celsius}]$ & \tiny$[\si{\celsius}]$ & \tiny$[\si{\celsius\per\centi\meter}]$ & \tiny$[\si{\centi\meter}]$ & & \tiny$[\si{\celsius}]$ & \tiny$[\si{\celsius}]$ & \tiny$[\si{\celsius\per\centi\meter}]$ \\
 \midrule
 $\mathbf{40}$ & A & $24.8$ & $19.8$ & $+0.58$ & $\mathbf{49}$ & B & $22.6$ & $18.1$ & $-1.28$ & $\mathbf{58}$ & C & $15.2$ & $12.1$ & $-0.78$ (Slot~C switch) \\
-\rowcolor{rowalt}$\mathbf{41}$ & A & $25.4$ & $20.3$ & $+0.58$ & $\mathbf{50}$ & B & $21.3$ & $17.1$ & $-1.02$ & $\mathbf{59}$ & C & $14.4$ & $11.5$ & $-0.78$ \\
+\rowcolor{rowalt}$\mathbf{41}$ & A & $25.4$ & $20.3$ & $+0.58$ & $\mathbf{50}$ & B & $21.3$ & $17.0$ & $-1.02$ & $\mathbf{59}$ & C & $14.4$ & $11.5$ & $-0.78$ \\
 $\mathbf{42}$ & A & $26.0$ & $20.8$ & $+0.58$ & $\mathbf{51}$ & B & $20.5$ & $16.4$ & $-0.76$ & $\mathbf{60}$ & C & $13.6$ & $10.9$ & $-0.70$ \\
 \rowcolor{rowalt}$\mathbf{43}$ & A & $26.5$ & $21.2$ & $+0.58$ & $\mathbf{52}$ & B & $19.8$ & $15.8$ & $-0.76$ & $\mathbf{61}$ & C & $13.0$ & $10.4$ & $-0.60$ \\
 $\mathbf{44}$ & A & $27.1$ & $21.7$ & $+0.58$ & $\mathbf{53}$ & B & $19.0$ & $15.2$ & $-0.76$ & $\mathbf{62}$ & C & $12.4$ & $9.9$ & $-0.60$ \\
 \rowcolor{rowalt}$\mathbf{45}$ & A & $\mathbf{27.7}$ & $\mathbf{22.2}$ & $0.00$\textsuperscript{a} & $\mathbf{54}$ & B & $18.3$ & $14.6$ & $-0.76$ & $\mathbf{63}$ & C & $11.8$ & $9.4$ & $-0.60$ \\
-$\mathbf{46}$ & A & $26.4$ & $21.1$ & $-1.28$ & $\mathbf{55}$ & B & $17.5$ & $14.1$ & $-0.76$ & $\mathbf{64}$ & C & $11.2$ & $9.0$ & $-0.60$ \\
+$\mathbf{46}$ & A & $26.4$ & $21.1$ & $-1.28$ & $\mathbf{55}$ & B & $17.5$ & $14.0$ & $-0.76$ & $\mathbf{64}$ & C & $11.2$ & $9.0$ & $-0.60$ \\
 \rowcolor{rowalt}$\mathbf{47}$ & A & $25.1$ & $20.1$ & $-1.28$ & $\mathbf{56}$ & B & $16.7$ & $13.4$ & $-0.78$ & $\mathbf{65}$ & C & $10.6$ & $8.5$ & $-0.60$ (Natl Max $h$) \\
 $\mathbf{48}$ & A & $23.9$ & $19.1$ & $-1.28$ & $\mathbf{57}$ & B & $15.9$ & $12.8$ & $-0.78$ & --- & --- & --- & --- & --- \\
 \bottomrule
@@ -400,19 +400,19 @@ At the 2027 National Tournament (\texttt{Rule 4.c.iii}), the ES announces $h_{\m
 
 \textbf{Solution.}
 1. \textbf{From \tref{tab:16:natl-1cm} (or Linear Interpolation between $\SI{50}{\centi\meter}$ and $\SI{55}{\centi\meter}$):}
-At $h = \SI{50.0}{\centi\meter}$, $\mathrm{TG}_{100}(\SI{10}{\minute}) = \SI{17.10}{\celsius}$; at $h = \SI{55.0}{\centi\meter}$, $\mathrm{TG}_{100}(\SI{10}{\minute}) = \SI{14.10}{\celsius}$. Interpolating to $h = \SI{53.0}{\centi\meter}$ (fraction $\xi = (53-50)/(55-50) = 0.600$):
+At $h = \SI{50.0}{\centi\meter}$, $\mathrm{TG}_{100}(\SI{10}{\minute}) = 0.800(21.3) = \SI{17.04}{\celsius}$; at $h = \SI{55.0}{\centi\meter}$, $\mathrm{TG}_{100}(\SI{10}{\minute}) = 0.800(17.5) = \SI{14.00}{\celsius}$. Interpolating to $h = \SI{53.0}{\centi\meter}$ (fraction $\xi = (53-50)/(55-50) = 0.600$):
 \[
-  \mathrm{TG}_{100}(\SI{53}{\centi\meter}, \SI{10}{\minute}) = 17.10 + 0.600(14.10 - 17.10) = \mathbf{\SI{15.30}{\celsius}} \quad (\text{matches \tref{tab:16:natl-1cm} entry }\SI{15.2}{\celsius}\text{ within }\SI{0.1}{\celsius})
+  \mathrm{TG}_{100}(\SI{53}{\centi\meter}, \SI{10}{\minute}) = 17.04 + 0.600(14.00 - 17.04) = \mathbf{\SI{15.22}{\celsius}} \quad (\text{matches the \tref{tab:16:natl-1cm} entry }\SI{15.2}{\celsius})
 \]
 2. \textbf{Scale to $t = \SI{14.0}{\minute}$ using $M_{14} = 1.247$ ($k_{\mathrm{start}} = 0.394, k_{\mathrm{room}} = 0.606$) from \tref{tab:16:doe-36}:}
 \[
-  \mathrm{TG}_{\mathrm{table}}(\SI{53}{\centi\meter}, \SI{100}{\watt}, \SI{14}{\minute}) = 15.30 \times 1.247 = \mathbf{\SI{19.08}{\celsius}}
+  \mathrm{TG}_{\mathrm{table}}(\SI{53}{\centi\meter}, \SI{100}{\watt}, \SI{14}{\minute}) = 15.22 \times 1.247 = \mathbf{\SI{18.98}{\celsius}}
 \]
 3. \textbf{Apply Superposition Eq.~\eref{eq:16:fast-superposition} for $T_{\mathrm{start}} = \SI{21.0}{\celsius}, T_{\mathrm{room}} = \SI{21.5}{\celsius}$:}
 \[
-  T_{\mathrm{pred}} = 21.00 + 19.08 + 0.606(21.50 - 21.00) - 0.18 = 40.08 + 0.30 - 0.18 = \mathbf{\SI{40.20}{\celsius} \longrightarrow \text{Submit }\SI{40.2}{\celsius}}
+  T_{\mathrm{pred}} = 21.00 + 18.98 + 0.606(21.50 - 21.00) - 0.18 = 39.98 + 0.30 - 0.18 = \mathbf{\SI{40.10}{\celsius} \longrightarrow \text{Submit }\SI{40.1}{\celsius}}
 \]
-\verifiedby{Exact formula evaluation $T_{\mathrm{pred}} = 21.0 + 15.30(1 - e^{-840/903})/(1 - e^{-600/903}) + 0.6055(0.50) - 0.18 = \SI{40.208}{\celsius}$; asserted in \texttt{check\_sec14\_16.py}.}
+\verifiedby{Exact formula evaluation $T_{\mathrm{pred}} = 21.0 + 15.216(1 - e^{-840/903})/(1 - e^{-600/903}) + 0.6055(0.50) - 0.18 = \SI{40.103}{\celsius}$; asserted in \texttt{check\_sec14\_16.py}.}
 \end{workedexample}
 
 \begin{twocol}[0.49]
@@ -424,7 +424,7 @@ At $h = \SI{50.0}{\centi\meter}$, $\mathrm{TG}_{100}(\SI{10}{\minute}) = \SI{17.
 \tiny$[\si{\centi\meter}]$ & & \tiny$[\si{\celsius}]$ & \tiny$[\si{\celsius}]$ & \tiny$[\si{\celsius}]$ & \tiny$[\si{\celsius}]$ & \tiny$[\si{\celsius}]$ & \tiny$[\si{\celsius}]$ & \tiny$[\si{\celsius}]$ \\
 \midrule
 $\mathbf{40}$ & A & $24.8$ & $26.5$ & $28.1$ & $29.6$ & $30.9$ & $32.2$ & $51.1$ \\
-\rowcolor{rowalt}$\mathbf{45}$ & A & $\mathbf{27.7}$ & $\mathbf{29.6}$ & $\mathbf{31.4}$ & $\mathbf{33.0}$ & $\mathbf{34.5}$ & $\mathbf{36.0}$ & $57.1$ \\
+\rowcolor{rowalt}$\mathbf{45}$ & A & $\mathbf{27.7}$ & $\mathbf{29.6}$ & $\mathbf{31.4}$ & $\mathbf{33.0}$ & $\mathbf{34.6}$ & $\mathbf{36.0}$ & $57.1$ \\
 $\mathbf{50}$ & B & $21.3$ & $22.8$ & $24.1$ & $25.4$ & $26.6$ & $27.7$ & $43.9$ \\
 \rowcolor{rowalt}$\mathbf{55}$ & B & $17.5$ & $18.7$ & $19.8$ & $20.9$ & $21.8$ & $22.7$ & $36.0$ \\
 $\mathbf{60}$ & C & $13.6$ & $14.5$ & $15.4$ & $16.2$ & $17.0$ & $17.7$ & $28.0$ \\
@@ -439,11 +439,11 @@ $\mathbf{60}$ & C & $13.6$ & $14.5$ & $15.4$ & $16.2$ & $17.0$ & $17.7$ & $28.0$
 \hdr{$h$} & \hdr{Slot} & \hdr{$\SI{10}{\minute}$} & \hdr{$\SI{11}{\minute}$} & \hdr{$\SI{12}{\minute}$} & \hdr{$\SI{13}{\minute}$} & \hdr{$\SI{14}{\minute}$} & \hdr{$\SI{15}{\minute}$} & \hdr{$\Delta T_{\mathrm{ss}}$} \\
 \tiny$[\si{\centi\meter}]$ & & \tiny$[\si{\celsius}]$ & \tiny$[\si{\celsius}]$ & \tiny$[\si{\celsius}]$ & \tiny$[\si{\celsius}]$ & \tiny$[\si{\celsius}]$ & \tiny$[\si{\celsius}]$ & \tiny$[\si{\celsius}]$ \\
 \midrule
-$\mathbf{40}$ & A & $19.8$ & $21.2$ & $22.4$ & $23.6$ & $24.7$ & $25.7$ & $40.8$ \\
-\rowcolor{rowalt}$\mathbf{45}$ & A & $\mathbf{22.2}$ & $\mathbf{23.7}$ & $\mathbf{25.1}$ & $\mathbf{26.5}$ & $\mathbf{27.7}$ & $\mathbf{28.8}$ & $45.7$ \\
-$\mathbf{50}$ & B & $17.1$ & $18.3$ & $19.4$ & $20.4$ & $21.3$ & $22.2$ & $35.2$ \\
-\rowcolor{rowalt}$\mathbf{55}$ & B & $14.1$ & $15.1$ & $16.0$ & $16.8$ & $17.6$ & $18.3$ & $29.0$ \\
-$\mathbf{60}$ & C & $10.9$ & $11.6$ & $12.3$ & $13.0$ & $13.6$ & $14.2$ & $22.5$ \\
+$\mathbf{40}$ & A & $19.8$ & $21.2$ & $22.5$ & $23.6$ & $24.7$ & $25.8$ & $40.9$ \\
+\rowcolor{rowalt}$\mathbf{45}$ & A & $\mathbf{22.2}$ & $\mathbf{23.7}$ & $\mathbf{25.1}$ & $\mathbf{26.4}$ & $\mathbf{27.6}$ & $\mathbf{28.8}$ & $45.6$ \\
+$\mathbf{50}$ & B & $17.0$ & $18.2$ & $19.3$ & $20.3$ & $21.3$ & $22.1$ & $35.1$ \\
+\rowcolor{rowalt}$\mathbf{55}$ & B & $14.0$ & $15.0$ & $15.8$ & $16.7$ & $17.5$ & $18.2$ & $28.8$ \\
+$\mathbf{60}$ & C & $10.9$ & $11.6$ & $12.3$ & $13.0$ & $13.6$ & $14.1$ & $22.4$ \\
 \rowcolor{rowalt}$\mathbf{65}$ & C & $8.5$ & $9.1$ & $9.6$ & $10.1$ & $10.6$ & $11.0$ & $17.5$ \\
 \bottomrule
 \end{tabularx}
@@ -651,15 +651,15 @@ At an invitational, Regional, State, or National tournament, the Event Superviso
 At an Invitational tournament, the ES announces (\texttt{Rule 5.II.a}): $h_{\mathrm{bulb}} = \SI{60.0}{\centi\meter}$, $t_{\mathrm{heat}} = \SI{12.0}{\minute}$, $T_{\mathrm{room}} = \SI{22.0}{\celsius}$, and a \textbf{$\SI{100}{\watt}$ clear $\mathrm{PAR38}$ pressed-glass flood heat lamp} ($\text{\O}\SI{12.1}{\centi\meter}$, narrow $\theta_{1/2}=\SI{22}{\degree}$ beam, $\kappa_{\mathrm{beam}}(\SI{60}{\centi\meter}) = 1.160$ from \tref{tab:16:mismatch-recovery}, $\kappa_{\mathrm{hood}} = \kappa_{\mathrm{draft}} = 1.000$). When the water cup is dispensed (\texttt{Rule 5.II.c}), $T_{\mathrm{start}} = \SI{22.0}{\celsius}$ and expected extraction cooling is $\Delta T_{\mathrm{cool}} = \SI{0.15}{\celsius}$. Compute (a)~the unadjusted $\mathrm{R40}$ table prediction, (b)~the $\mathrm{PAR38}$ mismatch-corrected prediction $T_{\mathrm{pred}}$, and (c)~the $\mathrm{PS}$ points saved by applying $\kappa_{\mathrm{beam}} = 1.160$.
 
 \textbf{Solution.}
-(a) From \tref{tab:16:doe-36} at $h = \SI{60.0}{\centi\meter}$, $P_{\mathrm{bulb}} = \SI{100}{\watt}$, $t = \SI{12.0}{\minute}$, the baseline $\mathrm{R40}$ temperature gain is $\mathrm{TG}_{\mathrm{R40}} = \SI{12.40}{\celsius}$, which would predict $T_{\mathrm{pred,unadj}} = 22.00 + 12.40 - 0.15 = \mathbf{\SI{34.25}{\celsius}}$.
+(a) From \tref{tab:16:doe-36} at $h = \SI{60.0}{\centi\meter}$, $P_{\mathrm{bulb}} = \SI{100}{\watt}$, $t = \SI{12.0}{\minute}$, the baseline $\mathrm{R40}$ temperature gain is $\mathrm{TG}_{\mathrm{R40}} = 0.800(13.6)(1.132) = \SI{12.32}{\celsius}$, which would predict $T_{\mathrm{pred,unadj}} = 22.00 + 12.32 - 0.15 = \mathbf{\SI{34.17}{\celsius}}$.
 
 (b) Applying the $\mathrm{PAR38}$ collimation factor $\kappa_{\mathrm{beam}}(\SI{60}{\centi\meter}) = 1.160$ from Eq.~\eref{eq:16:mismatch-recovery}:
 \[
-  \mathrm{TG}_{\mathrm{adj}} = 1.160 \times \SI{12.40}{\celsius} = \mathbf{\SI{14.384}{\celsius}} \implies T_{\mathrm{pred,adj}} = 22.00 + 14.384 - 0.15 = \mathbf{\SI{36.23}{\celsius} \longrightarrow \text{Submit }\SI{36.2}{\celsius}}
+  \mathrm{TG}_{\mathrm{adj}} = 1.160 \times \SI{12.32}{\celsius} = \mathbf{\SI{14.291}{\celsius}} \implies T_{\mathrm{pred,adj}} = 22.00 + 14.291 - 0.15 = \mathbf{\SI{36.14}{\celsius} \longrightarrow \text{Submit }\SI{36.1}{\celsius}}
 \]
 
-(c) When the true final temperature measures $T_{\mathrm{final}} = \SI{36.2}{\celsius}$, the mismatch-adjusted prediction earns $\mathrm{PE}_{\mathrm{adj}} = 1.0000$ ($\mathbf{\SI{20.00}{pts}}$), whereas the unadjusted $\mathrm{R40}$ prediction ($\SI{34.3}{\celsius}$, error $\SI{1.9}{\celsius}$) would earn $\mathrm{PE}_{\mathrm{unadj}} = 1 - 1.9/36.2 = 0.9475$ ($\SI{18.95}{pts}$)—saving $\mathbf{+\SI{1.05}{pts}}$ on $\mathrm{PS}$!
-\verifiedby{Ratio check $\Delta\mathrm{PS} = 20(\kappa_{\mathrm{beam}}-1)\mathrm{TG}_{\mathrm{R40}}/T_{\mathrm{final}} = 20(0.160)(12.40)/36.23 = \SI{1.095}{pts}$; asserted in \texttt{check\_sec14\_16.py}.}
+(c) When the true final temperature measures $T_{\mathrm{final}} = \SI{36.1}{\celsius}$, the mismatch-adjusted prediction earns $\mathrm{PE}_{\mathrm{adj}} = 1.0000$ ($\mathbf{\SI{20.00}{pts}}$), whereas the unadjusted $\mathrm{R40}$ prediction ($\SI{34.2}{\celsius}$, error $\SI{1.9}{\celsius}$) would earn $\mathrm{PE}_{\mathrm{unadj}} = 1 - 1.9/36.1 = 0.9474$ ($\SI{18.95}{pts}$)—saving $\mathbf{+\SI{1.05}{pts}}$ on $\mathrm{PS}$!
+\verifiedby{Ratio check $\Delta\mathrm{PS} = 20(\kappa_{\mathrm{beam}}-1)\mathrm{TG}_{\mathrm{R40}}/T_{\mathrm{final}} = 20(0.160)(12.32)/36.14 = \SI{1.091}{pts}$; asserted in \texttt{check\_sec14\_16.py}.}
 \end{workedexample}
 
 \begin{center}

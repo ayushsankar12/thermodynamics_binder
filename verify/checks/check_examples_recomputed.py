@@ -1333,11 +1333,12 @@ def sec16():
         chk("EX-16.2b-DSS", "sec16", "steady-state gain [C]", "57.21", dss),
         chk("EX-16.2b-TG900", "sec16", "15-min gain [C]", "36.09", dss * (1 - (11.60 / 16.17) ** 3)),
     ]
-    TG53 = 17.10 + 0.600 * (14.10 - 17.10)
+    TG53 = 0.800 * 21.3 + 0.600 * (0.800 * 17.5 - 0.800 * 21.3)
     out += [
-        chk("EX-16.3-TG53", "sec16", "interpolated TG_100(53 cm) [C]", "15.30", TG53),
-        chk("EX-16.3-PRED", "sec16", "prediction with table M14 = 1.247, k_room = 0.606 [C]", "40.20", 21.00 + TG53 * 1.247 + 0.606 * 0.50 - 0.18),
-        chk("EX-16.3-PREDX", "sec16", "prediction with exact M14 (verified-by line) [C]", "40.208", 21.00 + TG53 * Mt(14) + (1 - math.exp(-840 / 903.0)) * 0.50 - 0.18),
+        chk("EX-16.3-TG53", "sec16", "interpolated TG_100(53 cm) [C]", "15.22", TG53),
+        chk("EX-16.3-TG14", "sec16", "TG_table(53 cm, 100 W, 14 min) as displayed [C]", "18.98", 15.22 * 1.247),
+        chk("EX-16.3-PRED", "sec16", "prediction with table M14 = 1.247, k_room = 0.606 [C]", "40.10", 21.00 + 15.22 * 1.247 + 0.606 * 0.50 - 0.18),
+        chk("EX-16.3-PREDX", "sec16", "prediction with exact M14 (verified-by line) [C]", "40.103", 21.00 + TG53 * Mt(14) + (1 - math.exp(-840 / 903.0)) * 0.50 - 0.18),
     ]
     out += [
         chk("EX-16.4-A", "sec16", "open-extraction cooling [C]", "0.932", 0.05 + 0.0245 * 36),
@@ -1351,8 +1352,12 @@ def sec16():
         chk("EX-16.5-S", "sec16", "repeatability s [C]", "0.1414", sr),
         chk("EX-16.5-URUN", "sec16", "single-run uncertainty [C]", "0.1528", ur),
         chk("EX-16.5-PE", "sec16", "expected PE", "0.99755", 1 - math.sqrt(2 / math.pi) * ur / 49.700),
-        chk("EX-16.6-PRED", "sec16", "PAR38-adjusted prediction [C]", "36.23", 22.00 + 1.160 * 12.40 - 0.15),
-        chk("EX-16.6-SAVE", "sec16", "PS points saved", "1.05", 20 * 1.9 / 36.2),
+        chk("EX-16.6-TG", "sec16", "R40 gain at 60 cm, 100 W, 12 min [C]", "12.32", 0.800 * 13.6 * Mt(12)),
+        chk("EX-16.6-UNADJ", "sec16", "unadjusted prediction [C]", "34.17", 22.00 + 12.32 - 0.15),
+        chk("EX-16.6-PRED", "sec16", "PAR38-adjusted prediction [C]", "36.14", 22.00 + 1.160 * 12.32 - 0.15),
+        chk("EX-16.6-PE", "sec16", "unadjusted PE", "0.9474", 1 - 1.9 / 36.1),
+        chk("EX-16.6-SAVE", "sec16", "PS points saved", "1.05", 20 * 1.9 / 36.1),
+        chk("EX-16.6-DPS", "sec16", "verified-by ratio check [pts]", "1.091", 20 * 0.160 * 12.32 / 36.14),
     ]
     n = math.log(27.70 / 10.60) / math.log(45.50 / 25.50)
     out += [
