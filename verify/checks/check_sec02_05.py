@@ -175,19 +175,19 @@ def check_sec03_examples() -> tuple[str, bool, str]:
 def check_sec04_examples() -> tuple[str, bool, str]:
     """Verify all 7 worked examples and 5-stage water heating curve in §4 (src/sec04.tex)."""
     c_w = 4.184  # J/(g K)
-    c_ice = 2.093  # J/(g K)
+    c_ice = 2.09  # J/(g K) house value
     c_st = 2.080  # J/(g K)
     L_f = 333.55  # J/g
     L_v = 2256.4  # J/g
     R = 8.314462618
 
     # 5-stage water heating curve (-40 C to +160 C per kg)
-    q1 = c_ice * 40.0  # 83.72 kJ/kg
-    q2 = q1 + L_f  # 417.27 kJ/kg
-    q3 = q2 + c_w * 100.0  # 835.67 kJ/kg
-    q4 = q3 + L_v  # 3092.07 kJ/kg
-    q5 = q4 + c_st * 60.0  # 3216.87 kJ/kg
-    ok_curve = _close(q1, 83.72) and _close(q2, 417.27) and _close(q3, 835.67) and _close(q4, 3092.07) and _close(q5, 3216.87)
+    q1 = c_ice * 40.0  # 83.60 kJ/kg
+    q2 = q1 + L_f  # 417.15 kJ/kg
+    q3 = q2 + c_w * 100.0  # 835.55 kJ/kg
+    q4 = q3 + L_v  # 3091.95 kJ/kg
+    q5 = q4 + c_st * 60.0  # 3216.75 kJ/kg
+    ok_curve = _close(q1, 83.60) and _close(q2, 417.15) and _close(q3, 835.55) and _close(q4, 3091.95) and _close(q5, 3216.75)
 
     # ex:04.1: Calorimeter Calibration & Unknown Metal ID via Dulong-Petit
     C_cal = 100.0 * c_w * (60.00 - 35.38) / (35.38 - 20.00) - 150.0 * c_w  # 42.166 J/K
@@ -203,7 +203,7 @@ def check_sec04_examples() -> tuple[str, bool, str]:
     E_net_0 = E_avail_0 - (E_warm_ice + E_melt_ice)  # -16115.55 J
     m_ice_final = -E_net_0 / L_f  # 48.315 g
     m_liq_final = 360.0 - m_ice_final  # 311.685 g
-    ok_4_2 = _close(E_net_0, -16115.55) and _close(m_ice_final, 48.32, rel_tol=1e-3) and _close(m_liq_final, 311.68, rel_tol=1e-3)
+    ok_4_2 = _close(E_net_0, -16110.60) and _close(m_ice_final, 48.30, rel_tol=1e-4) and _close(m_liq_final, 311.70, rel_tol=1e-4)
 
     # ex:04.3: Three-Phase Ice + Water + Steam Mixture in Copper Calorimeter (Zone III)
     E_avail_3 = 200.0 * c_w * 50.0 + 25.0 * (c_st * 30.0 + L_v + 100.0 * c_w) - 38.50 * 10.0  # 109885.0 J
@@ -211,7 +211,7 @@ def check_sec04_examples() -> tuple[str, bool, str]:
     E_net_3 = E_avail_3 - E_need_3  # 81526.6 J
     C_tot_3 = 305.0 * c_w + 38.50  # 1314.62 J/K
     T_f_3 = E_net_3 / C_tot_3  # 62.0153 C
-    ok_4_3 = _close(E_net_3, 81526.6) and _close(T_f_3, 62.02, rel_tol=1e-3)
+    ok_4_3 = _close(E_net_3, 81529.0) and _close(T_f_3, 62.02, rel_tol=1e-4)
 
     # ex:04.4: Partial Steam Condensation (Zone IV Plateau at 100 C)
     E_avail_4 = 200.0 * c_w * 50.0 + 60.0 * (c_st * 30.0 + L_v + 100.0 * c_w) - 38.50 * 10.0  # 205687.0 J
@@ -219,7 +219,7 @@ def check_sec04_examples() -> tuple[str, bool, str]:
     E_100_l = (340.0 * c_w + 38.50) * 100.0  # 146106.0 J
     m_st_final = (E_net_4 - E_100_l) / L_v  # 13.8374 g
     m_liq_4 = 340.0 - m_st_final  # 326.1626 g
-    ok_4_4 = _close(E_net_4, 177328.6) and _close(m_st_final, 13.84, rel_tol=1e-3) and _close(m_liq_4, 326.16, rel_tol=1e-3)
+    ok_4_4 = _close(E_net_4, 177331.0) and _close(m_st_final, 13.84, rel_tol=1e-3) and _close(m_liq_4, 326.16, rel_tol=1e-3)
 
     # ex:04.5: Electrical Calorimetry with Regnault-Pfaundler Drift Correction
     dT_obs = 28.340 - 21.200  # 7.140 K
@@ -263,7 +263,7 @@ def check_sec04_examples() -> tuple[str, bool, str]:
     E_net_9 = E_avail_9 - E_need_9  # -246178.0 J
     M_tot_9 = 650.0
     T_f_9 = (E_net_9 + M_tot_9 * L_f) / (M_tot_9 * c_ice)  # -21.5888 C
-    ok_4_9 = _close(E_net_9, -246178.0) and _close(T_f_9, -21.59, rel_tol=1e-3)
+    ok_4_9 = _close(E_net_9, -246106.0) and _close(T_f_9, -21.57, rel_tol=2.4e-4)
 
     # ex:04.10: Four-Body Multi-Metal & Glycerol Mixture with Water Equivalent m_eq
     C_cal_10 = 15.0 * c_w  # 62.76 J/K

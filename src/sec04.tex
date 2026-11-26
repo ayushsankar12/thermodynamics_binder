@@ -47,16 +47,10 @@ where $C$ ($\si{\joule\per\kelvin}$) is the \textbf{total (extensive) heat capac
   \end{equation}
 \end{itemize}
 
-\begin{rulebox}[Steam Specific Heat Reconciliation Across NIST, OpenStax \& Ideal-Gas Limit \src{S04,S14,S16}]
+\begin{shortcut}[Which Steam $c_p$ to Use \src{S04,S14,S16}]
 \idxtopic{steam specific heat reconciliation!2080 vs.\ 2020 vs.\ 1864 J/(kg K)}
-Water vapor specific heat $c_{p,\mathrm{steam}}$ appears with \textbf{three different values} across standard references depending on temperature and pressure:
-\begin{enumerate}
-  \item \textbf{NIST Real Saturated Steam at $\SI{100.0}{\celsius}, \SI{101.325}{\kilo\pascal}$ \src{S16}:} $c_p = \mathbf{\SI{2080.0}{\joule\per\kilogram\per\kelvin}}$ ($C_{p,m} = \SI{37.47}{\joule\per\mole\per\kelvin}$), $c_v = \SI{1555.6}{\joule\per\kilogram\per\kelvin}$, $\gamma = 1.337$. Hydrogen-bond clustering near saturation elevates $c_p$ by $\sim 11\%$ above the ideal-gas value.
-  \item \textbf{OpenStax \emph{University Physics Vol.~2} Table~1.3 \src{S04}:} $c_p = \mathbf{\SI{2020}{\joule\per\kilogram\per\kelvin}}$ ($0.482\,\mathrm{kcal/(kg\cdot\si{\celsius})}$) and $c_v = \SI{1520}{\joule\per\kilogram\per\kelvin}$, representing slightly superheated steam at $\SI{1}{\text{atm}}$ averaged over $\SIrange{100}{150}{\celsius}$ (Lienhard 6e gives $\SI{2034}{\joule\per\kilogram\per\kelvin}$ at $\SI{110}{\celsius}$ \src{S14}).
-  \item \textbf{Dilute Ideal-Gas Limit at $\SI{298.15}{\kelvin}$ ($f = 3\text{ trans} + 3\text{ rot} = 6$) \src{S16}:} $C_{p,m}^\circ = \SI{33.58}{\joule\per\mole\per\kelvin} \implies c_p = \mathbf{\SI{1864}{\joule\per\kilogram\per\kelvin}}$ (exact $4R/M = \SI{1846}{\joule\per\kilogram\per\kelvin}$), $c_v = \SI{1403}{\joule\per\kilogram\per\kelvin}$, $\gamma = 1.329$.
-\end{enumerate}
-\textbf{Competition Rule:} If a problem does not give $c_{\mathrm{steam}}$, write down both the textbook value $\SI{2020}{\joule\per\kilogram\per\kelvin}$ (or $\SI{2010}{\joule\per\kilogram\per\kelvin}$) and the NIST saturation value $\SI{2080}{\joule\per\kilogram\per\kelvin}$; they differ by only $3\%$ on the sensible superheat step and negligible amounts compared to $L_v = \SI{2256.4}{\kilo\joule\per\kilogram}$.
-\end{rulebox}
+Use the house value $c_{\mathrm{steam}} = \SI{2.08}{\joule\per\gram\per\kelvin}$ (NIST, saturated steam at $\SI{100}{\celsius}$, $\SI{1}{\text{atm}}$) unless the test gives one. Other books list $\SI{2.02}{\joule\per\gram\per\kelvin}$ (OpenStax, averaged over $\SIrange{100}{150}{\celsius}$) or the dilute ideal-gas value $\SI{1.86}{\joule\per\gram\per\kelvin}$ at $\SI{25}{\celsius}$. On a superheat step the choice changes the answer by at most $\sim 3\%$, which is small next to $L_v = \SI{2256.4}{\joule\per\gram}$.
+\end{shortcut}
 
 \begin{center}
 \captionof{table}{Sourced thermophysical and calorimetry properties of 28 common solids and liquids at $\SI{20}{\celsius}$--$\SI{25}{\celsius}$, $\SI{1}{\text{atm}}$, cross-reconciling Lienhard 6e \src{S14}, NIST WebBook \src{S16,S17}, and OpenStax UP2 \src{S04}.}\label{tab:04:calorimetry}
@@ -85,7 +79,7 @@ Silicon ($\mathrm{Si}$, $M=28.085$) & 2329 & \textbf{705} & 705 & $19.79\;(2.38R
 Glass (Crown / Soda-Lime) & 2500 & \textbf{840} & 840 & --- & $\sim 1400$ & --- & --- & Pyrex borosilicate: $c_p = \SI{753}{\joule\per\kilogram\per\kelvin}$ \\
 Quartz Sand / Granite ($\mathrm{SiO_2}$) & 2650 & \textbf{790} & 840 & $44.4\;\text{(3-atom)}$ & 1670 & 142 & 2230 & Dry sand bulk $\rho \approx \SI{1600}{\kilogram\per\cubic\meter}$, $c_p \approx \SI{800}{\joule\per\kilogram\per\kelvin}$ \\
 Concrete / Brick (Dry) & 2300 & \textbf{880} & 840 & --- & --- & --- & --- & Gypsum drywall: $c_p = \SI{1090}{\joule\per\kilogram\per\kelvin}$ \\
-Ice Ih ($\mathrm{H_2O(s)}$ at $\SI{0}{\celsius}$) & 916.7 & \textbf{2093} & 2090 & $37.7\;\text{(at }\SI{0}{\celsius}\text{)}$ & 0.00 & \textbf{333.55} & --- & At $\SI{-20}{\celsius}$: $c_p = \SI{1960}{\joule\per\kilogram\per\kelvin}$; OS $L_f = \SI{334}{\kilo\joule\per\kilogram}$ \\
+Ice Ih ($\mathrm{H_2O(s)}$ at $\SI{0}{\celsius}$) & 916.7 & \textbf{2090} & 2090 & $37.7\;\text{(at }\SI{0}{\celsius}\text{)}$ & 0.00 & \textbf{333.55} & --- & At $\SI{-20}{\celsius}$: $c_p = \SI{1960}{\joule\per\kilogram\per\kelvin}$; OS $L_f = \SI{334}{\kilo\joule\per\kilogram}$ \\
 Polymers (\texttt{\#1 PET / \#5 PP}) & 1380/905 & \textbf{1200/1920} & --- & --- & 255/165 & --- & --- & Wood (oak/pine): $c_p \approx \SI{1700}{\joule\per\kilogram\per\kelvin}$ \\\midrule
 \multicolumn{9}{@{}l}{\textbf{Calorimetry Liquids at $\SI{20}{\celsius}$--$\SI{25}{\celsius}$, $\SI{1}{\text{atm}}$} ($c_p$ in $\si{\joule\per\kilogram\per\kelvin}$)} \\
 Water ($\mathrm{H_2O(\ell)}$, $M=18.015$) & 998.2 & \textbf{4184} & 4186 & $75.33\;(9.06R)$ & 0.00 & \textbf{333.55} & 100.0 & $L_v(\SI{100}{\celsius}) = \mathbf{2256.4}$ (OS: $2256$); $L_v(\SI{25}{\celsius}) = 2441.7$ \\
@@ -108,7 +102,7 @@ $-50.0$ & Ice Ih & $921.6$ & $1741$ & $2.76$ & --- & --- & $17.20$ & --- & $\alp
 $-30.0$ & Ice Ih & $919.6$ & $1882$ & $2.50$ & --- & --- & $14.45$ & --- & $c_p$ rises linearly with $T$ in ice \\
 $-20.0$ & Ice Ih & $918.7$ & $1960$ & $2.39$ & --- & --- & $13.27$ & --- & Standard freezer ice benchmark \\
 $-10.0$ & Ice Ih & $917.8$ & $2027$ & $2.30$ & --- & --- & $12.36$ & --- & $\alpha_{\mathrm{ice}} \approx 9\times \alpha_{\mathrm{water}}$! \\
-$0.0$ & Ice Ih & $916.7$ & $\mathbf{2093}$ & $2.22$ & --- & --- & $11.57$ & --- & $L_f = \SI{333.55}{\kilo\joule\per\kilogram}$ at $\SI{0.00}{\celsius}$ \\\midrule
+$0.0$ & Ice Ih & $916.7$ & $\mathbf{2090}$ & $2.22$ & --- & --- & $11.57$ & --- & $L_f = \SI{333.55}{\kilo\joule\per\kilogram}$ at $\SI{0.00}{\celsius}$ \\\midrule
 $0.0$ & Liquid & $999.84$ & $4217.6$ & $0.5610$ & $1.792$ & $1.792$ & $1.330$ & $13.48$ & $\beta_V = \mathbf{-0.68}$ (contracts on warming!) \\
 $3.984$ & Liquid & $\mathbf{999.97}$ & $4204.5$ & $0.5687$ & $1.568$ & $1.568$ & $1.353$ & $11.59$ & \textbf{Density maximum} ($\beta_V = 0.00$) \\
 $10.0$ & Liquid & $999.70$ & $4192.1$ & $0.5800$ & $1.306$ & $1.306$ & $1.384$ & $9.44$ & $\beta_V = +0.88$ \\
@@ -204,8 +198,8 @@ To measure $C_{\mathrm{cal}}$ experimentally before an unknown-sample run, pour 
   ylabel={Temperature $T$ ($\si{\celsius}$)},
   xmin=0, xmax=3350,
   ymin=-50, ymax=175,
-  xtick={0,83.7,417.3,835.7,3092.1,3216.9},
-  xticklabels={$0$, $83.7$, $417.3$, $835.7$, $3092.1$, $3217$},
+  xtick={0,83.6,417.2,835.6,3092.0,3216.8},
+  xticklabels={$0$, $83.6$, $417.2$, $835.6$, $3092.0$, $3217$},
   ytick={-40,0,50,100,160},
   grid=both,
   grid style={draw=gray!25},
@@ -216,11 +210,11 @@ To measure $C_{\mathrm{cal}}$ experimentally before an unknown-sample run, pour 
   % 5-stage water heating curve from -40 C to +160 C at 1 atm
   \addplot[ultra thick,rust,mark=*,mark size=1.8pt] coordinates {
     (0,-40)
-    (83.72,0)
-    (417.27,0)
-    (835.67,100)
-    (3092.07,100)
-    (3216.87,160)
+    (83.60,0)
+    (417.15,0)
+    (835.55,100)
+    (3091.95,100)
+    (3216.75,160)
   };
   % Stage labels
   \node[above right,font=\scriptsize\bfseries,navy] at (axis cs:5,-36) {1. Ice: $c_{\mathrm{ice}}\Delta T$};
@@ -233,7 +227,7 @@ To measure $C_{\mathrm{cal}}$ experimentally before an unknown-sample run, pour 
   \draw[dashed,navy!60] (axis cs:0,100) -- (axis cs:3350,100);
 \end{axis}
 \end{tikzpicture}
-\captionof{figure}{Five-stage quantitative heating curve for $\SI{1.000}{\kilogram}$ of $\mathrm{H_2O}$ at $\SI{1}{\text{atm}}$ from $\SI{-40}{\celsius}$ ice to $\SI{160}{\celsius}$ steam ($c_{\mathrm{ice}} = \SI{2.093}{\kilo\joule\per\kilogram\per\kelvin}$, $L_f = \SI{333.55}{\kilo\joule\per\kilogram}$, $c_w = \SI{4.184}{\kilo\joule\per\kilogram\per\kelvin}$, $L_v = \SI{2256.4}{\kilo\joule\per\kilogram}$, $c_{p,\mathrm{steam}} = \SI{2.080}{\kilo\joule\per\kilogram\per\kelvin}$) \src{S04,S16}. Note that boiling ($L_v$) absorbs $5.4\times$ more energy than heating liquid water from $\SI{0}{\celsius}$ to $\SI{100}{\celsius}$ ($\SI{418.4}{\kilo\joule\per\kilogram}$) and $6.76\times$ more than melting ice ($L_f$).}\label{fig:04:heating-curve}
+\captionof{figure}{Five-stage quantitative heating curve for $\SI{1.000}{\kilogram}$ of $\mathrm{H_2O}$ at $\SI{1}{\text{atm}}$ from $\SI{-40}{\celsius}$ ice to $\SI{160}{\celsius}$ steam ($c_{\mathrm{ice}} = \SI{2.09}{\kilo\joule\per\kilogram\per\kelvin}$, $L_f = \SI{333.55}{\kilo\joule\per\kilogram}$, $c_w = \SI{4.184}{\kilo\joule\per\kilogram\per\kelvin}$, $L_v = \SI{2256.4}{\kilo\joule\per\kilogram}$, $c_{p,\mathrm{steam}} = \SI{2.080}{\kilo\joule\per\kilogram\per\kelvin}$) \src{S04,S16}. Note that boiling ($L_v$) absorbs $5.4\times$ more energy than heating liquid water from $\SI{0}{\celsius}$ to $\SI{100}{\celsius}$ ($\SI{418.4}{\kilo\joule\per\kilogram}$) and $6.76\times$ more than melting ice ($L_f$).}\label{fig:04:heating-curve}
 \idxfig{water 5-stage heating curve from -40 C ice to 160 C steam}
 \end{center}
 
@@ -463,27 +457,27 @@ Dulong--Petit is only good to a few percent, so $M \approx \SI{65}{\gram\per\mol
 \end{workedexample}
 
 \begin{workedexample}[Partial-Melting Ice--Water Equilibrium (Zone II Plateau at $0\,^\circ\mathrm{C}$)]{Competition $\cdot$ Rule 5.c.i--ii}{ex:04.2}
-An insulated copper calorimeter of mass $m_{\mathrm{Cu}} = \SI{120.0}{\gram}$ ($c_{\mathrm{Cu}} = \SI{385}{\joule\per\kilogram\per\kelvin}$) contains $m_w = \SI{250.0}{\gram}$ of liquid water at $T_{w,i} = \SI{22.0}{\celsius}$ ($c_w = \SI{4184}{\joule\per\kilogram\per\kelvin}$). A block of subcooled ice of mass $m_{\mathrm{ice}} = \SI{110.0}{\gram}$ at $T_{\mathrm{ice},i} = \SI{-15.0}{\celsius}$ ($c_{\mathrm{ice}} = \SI{2093}{\joule\per\kilogram\per\kelvin}$, $L_f = \SI{333.55}{\kilo\joule\per\kilogram}$) is added. Determine the final equilibrium temperature $T_f$ and the exact final masses of liquid water and solid ice.
+An insulated copper calorimeter of mass $m_{\mathrm{Cu}} = \SI{120.0}{\gram}$ ($c_{\mathrm{Cu}} = \SI{385}{\joule\per\kilogram\per\kelvin}$) contains $m_w = \SI{250.0}{\gram}$ of liquid water at $T_{w,i} = \SI{22.0}{\celsius}$ ($c_w = \SI{4184}{\joule\per\kilogram\per\kelvin}$). A block of subcooled ice of mass $m_{\mathrm{ice}} = \SI{110.0}{\gram}$ at $T_{\mathrm{ice},i} = \SI{-15.0}{\celsius}$ ($c_{\mathrm{ice}} = \SI{2090}{\joule\per\kilogram\per\kelvin}$, $L_f = \SI{333.55}{\kilo\joule\per\kilogram}$) is added. Determine the final equilibrium temperature $T_f$ and the exact final masses of liquid water and solid ice.
 
 \textbf{Solution.}
 Using the deterministic 5-Zone Algorithm (\sref{sec:04.3.1}) relative to $\SI{0}{\celsius}$ liquid water:
 \begin{align*}
   E_{\mathrm{avail},0} &= (m_w c_w + m_{\mathrm{Cu}} c_{\mathrm{Cu}})(22.0 - 0) = \left[(0.2500)(4184) + (0.1200)(385)\right](22.0) = (\SI{1092.2}{\joule\per\kelvin})(22.0) = \SI{24028.4}{\joule}, \\
-  E_{\mathrm{warm,ice}} &= m_{\mathrm{ice}} c_{\mathrm{ice}}(0 - (-15.0)) = (0.1100)(2093)(15.0) = \SI{3453.45}{\joule}, \\
+  E_{\mathrm{warm,ice}} &= m_{\mathrm{ice}} c_{\mathrm{ice}}(0 - (-15.0)) = (0.1100)(2090)(15.0) = \SI{3448.50}{\joule}, \\
   E_{\mathrm{melt,ice}} &= m_{\mathrm{ice}} L_f = (0.1100)(\SI{333550}{\joule\per\kilogram}) = \SI{36690.50}{\joule}, \\
-  E_{\mathrm{net},0} &= E_{\mathrm{avail},0} - (E_{\mathrm{warm,ice}} + E_{\mathrm{melt,ice}}) = 24028.40 - (3453.45 + 36690.50) = \mathbf{-\SI{16115.55}{\joule}}.
+  E_{\mathrm{net},0} &= E_{\mathrm{avail},0} - (E_{\mathrm{warm,ice}} + E_{\mathrm{melt,ice}}) = 24028.40 - (3448.50 + 36690.50) = \mathbf{-\SI{16110.60}{\joule}}.
 \end{align*}
 Since $-M_{\mathrm{H_2O}} L_f = -\SI{120078}{\joule} \leq E_{\mathrm{net},0} \leq 0$, the system lies squarely in \textbf{Zone II} (\tref{tab:04:fivezones}): the final temperature is locked at the phase plateau $\mathbf{T_f = \SI{0.00}{\celsius}}$! The mass of ice remaining unmelted and the mass melted are:
 \[
-  m_{\mathrm{ice,final}} = \frac{-E_{\mathrm{net},0}}{L_f} = \frac{\SI{16115.55}{\joule}}{\SI{333.55}{\joule\per\gram}} = \mathbf{\SI{48.32}{\gram}}, \qquad
-  m_{\mathrm{melted}} = 110.0 - 48.32 = \SI{61.68}{\gram}, \qquad
-  m_{\mathrm{liq,final}} = 250.0 + 61.68 = \mathbf{\SI{311.68}{\gram}}.
+  m_{\mathrm{ice,final}} = \frac{-E_{\mathrm{net},0}}{L_f} = \frac{\SI{16110.60}{\joule}}{\SI{333.55}{\joule\per\gram}} = \mathbf{\SI{48.30}{\gram}}, \qquad
+  m_{\mathrm{melted}} = 110.0 - 48.30 = \SI{61.70}{\gram}, \qquad
+  m_{\mathrm{liq,final}} = 250.0 + 61.70 = \mathbf{\SI{311.70}{\gram}}.
 \]
-\verifiedby{Heat balance at $\SI{0}{\celsius}$: $Q_{\mathrm{warm,ice}} (\SI{3453.45}{\joule}) + m_{\mathrm{melted}} L_f (\SI{20574.95}{\joule}) = \SI{24028.40}{\joule} = E_{\mathrm{avail},0}$ (\texttt{check\_sec02\_05.py}).}
+\verifiedby{Heat balance at $\SI{0}{\celsius}$: $Q_{\mathrm{warm,ice}} (\SI{3448.50}{\joule}) + m_{\mathrm{melted}} L_f (\SI{20579.90}{\joule}) = \SI{24028.40}{\joule} = E_{\mathrm{avail},0}$ (\texttt{check\_sec02\_05.py}).}
 \end{workedexample}
 
 \begin{workedexample}[Three-Phase Ice + Water + Steam Mixture in a Copper Calorimeter]{National $\cdot$ Rule 5.c.i--ii}{ex:04.3}
-Inside an insulated copper calorimeter ($m_{\mathrm{Cu}} = \SI{100.0}{\gram}, c_{\mathrm{Cu}} = \SI{385}{\joule\per\kilogram\per\kelvin}$) initially equilibrated with $m_{\mathrm{ice}} = \SI{80.0}{\gram}$ of ice at $T_{\mathrm{ice},i} = \SI{-10.0}{\celsius}$ ($c_{\mathrm{ice}} = \SI{2093}{\joule\per\kilogram\per\kelvin}, L_f = \SI{333.55}{\kilo\joule\per\kilogram}$), an experimenter simultaneously introduces $m_w = \SI{200.0}{\gram}$ of warm liquid water at $T_{w,i} = \SI{50.0}{\celsius}$ ($c_w = \SI{4184}{\joule\per\kilogram\per\kelvin}$) and bubbles in $m_{\mathrm{st}} = \SI{25.0}{\gram}$ of superheated steam at $T_{\mathrm{st},i} = \SI{130.0}{\celsius}$ ($c_{\mathrm{st}} = \SI{2080}{\joule\per\kilogram\per\kelvin}, L_v = \SI{2256.4}{\kilo\joule\per\kilogram}$) at $\SI{1}{\text{atm}}$. Determine the final temperature $T_f$ and phase composition.
+Inside an insulated copper calorimeter ($m_{\mathrm{Cu}} = \SI{100.0}{\gram}, c_{\mathrm{Cu}} = \SI{385}{\joule\per\kilogram\per\kelvin}$) initially equilibrated with $m_{\mathrm{ice}} = \SI{80.0}{\gram}$ of ice at $T_{\mathrm{ice},i} = \SI{-10.0}{\celsius}$ ($c_{\mathrm{ice}} = \SI{2090}{\joule\per\kilogram\per\kelvin}, L_f = \SI{333.55}{\kilo\joule\per\kilogram}$), an experimenter simultaneously introduces $m_w = \SI{200.0}{\gram}$ of warm liquid water at $T_{w,i} = \SI{50.0}{\celsius}$ ($c_w = \SI{4184}{\joule\per\kilogram\per\kelvin}$) and bubbles in $m_{\mathrm{st}} = \SI{25.0}{\gram}$ of superheated steam at $T_{\mathrm{st},i} = \SI{130.0}{\celsius}$ ($c_{\mathrm{st}} = \SI{2080}{\joule\per\kilogram\per\kelvin}, L_v = \SI{2256.4}{\kilo\joule\per\kilogram}$) at $\SI{1}{\text{atm}}$. Determine the final temperature $T_f$ and phase composition.
 
 \textbf{Solution.}
 Apply the 5-Zone Algorithm (\sref{sec:04.3.1}) relative to $T_{\mathrm{ref}} = \SI{0}{\celsius}$ liquid water, with $M_{\mathrm{H_2O}} = 80.0 + 200.0 + 25.0 = \SI{305.0}{\gram} = \SI{0.3050}{\kilogram}$ and $C_{\mathrm{solids}} = m_{\mathrm{Cu}}c_{\mathrm{Cu}} = (0.1000)(385) = \SI{38.50}{\joule\per\kelvin}$:
@@ -491,14 +485,14 @@ Apply the 5-Zone Algorithm (\sref{sec:04.3.1}) relative to $T_{\mathrm{ref}} = \
   E_{\mathrm{avail},0} &= m_w c_w(50.0) + m_{\mathrm{st}}\!\left[c_{\mathrm{st}}(130.0 - 100.0) + L_v + 100.0\,c_w\right] + C_{\mathrm{solids}}(-10.0 - 0) \\
   &= (0.200)(4184)(50.0) + (0.025)\!\left[(2080)(30.0) + 2256400 + 418400\right] - (38.50)(10.0) \\
   &= 41840.0 + 68430.0 - 385.0 = \SI{109885.0}{\joule}, \\
-  E_{\mathrm{need,ice}\to 0\,\ell} &= m_{\mathrm{ice}}\!\left[c_{\mathrm{ice}}(10.0) + L_f\right] = (0.0800)\!\left[20930 + 333550\right] = \SI{28358.4}{\joule}, \\
-  E_{\mathrm{net},0} &= 109885.0 - 28358.4 = \mathbf{+\SI{81526.6}{\joule}}.
+  E_{\mathrm{need,ice}\to 0\,\ell} &= m_{\mathrm{ice}}\!\left[c_{\mathrm{ice}}(10.0) + L_f\right] = (0.0800)\!\left[20900 + 333550\right] = \SI{28356.0}{\joule}, \\
+  E_{\mathrm{net},0} &= 109885.0 - 28356.0 = \mathbf{+\SI{81529.0}{\joule}}.
 \end{align*}
 Compare $E_{\mathrm{net},0}$ against the liquid-boiling checkpoint $E_{\mathrm{100,\ell}} = (M_{\mathrm{H_2O}}c_w + C_{\mathrm{solids}})(100.0) = \left[(0.3050)(4184) + 38.50\right](100.0) = (\SI{1314.62}{\joule\per\kelvin})(100.0) = \SI{131462.0}{\joule}$. Since $0 < E_{\mathrm{net},0} < E_{\mathrm{100,\ell}}$, the mixture lands in \textbf{Zone III} (100\% liquid water, $\SI{305.0}{\gram}$) at:
 \[
-  T_f = \frac{E_{\mathrm{net},0}}{M_{\mathrm{H_2O}} c_w + C_{\mathrm{solids}}} = \frac{\SI{81526.6}{\joule}}{\SI{1314.62}{\joule\per\kelvin}} = \mathbf{\SI{62.02}{\celsius}}.
+  T_f = \frac{E_{\mathrm{net},0}}{M_{\mathrm{H_2O}} c_w + C_{\mathrm{solids}}} = \frac{\SI{81529.0}{\joule}}{\SI{1314.62}{\joule\per\kelvin}} = \mathbf{\SI{62.02}{\celsius}}.
 \]
-\verifiedby{$\sum Q_i$ at $T_f = \SI{62.0153}{\celsius}$ equals $\SI{0.00}{\joule}$ to machine precision (\texttt{check\_sec02\_05.py}).}
+\verifiedby{$\sum Q_i$ at $T_f = \SI{62.0172}{\celsius}$ equals $\SI{0.00}{\joule}$ to machine precision (\texttt{check\_sec02\_05.py}).}
 \end{workedexample}
 
 \begin{workedexample}[Partial Steam Condensation (Zone IV Plateau at $100\,^\circ\mathrm{C}$)]{National $\cdot$ Rule 5.c.i--ii}{ex:04.4}
@@ -508,14 +502,14 @@ Suppose in Example~\ref{ex:04.3} the mass of $\SI{130.0}{\celsius}$ superheated 
 Here $M_{\mathrm{H_2O}} = 80.0 + 200.0 + 60.0 = \SI{340.0}{\gram} = \SI{0.3400}{\kilogram}$ and $C_{\mathrm{solids}} = \SI{38.50}{\joule\per\kelvin}$:
 \begin{align*}
   E_{\mathrm{avail},0} &= 41840.0 + (0.0600)(2737200) - 385.0 = 41840.0 + 164232.0 - 385.0 = \SI{205687.0}{\joule}, \\
-  E_{\mathrm{net},0} &= 205687.0 - 28358.4 = \mathbf{\SI{177328.6}{\joule}}.
+  E_{\mathrm{net},0} &= 205687.0 - 28356.0 = \mathbf{\SI{177331.0}{\joule}}.
 \end{align*}
 The checkpoint for all-liquid water at $\SI{100.0}{\celsius}$ is $E_{\mathrm{100,\ell}} = \left[(0.3400)(4184) + 38.50\right](100.0) = \SI{146106.0}{\joule}$, while complete vaporization requires $E_{\mathrm{100,g}} = 146106.0 + (0.3400)(2256400) = \SI{913282.0}{\joule}$. Because $E_{\mathrm{100,\ell}} \leq E_{\mathrm{net},0} \leq E_{\mathrm{100,g}}$, the system lands in \textbf{Zone IV} (\tref{tab:04:fivezones}) at $\mathbf{T_f = \SI{100.0}{\celsius}}$! The mass of steam remaining uncondensed in equilibrium with liquid water is:
 \[
-  m_{\mathrm{steam,final}} = \frac{E_{\mathrm{net},0} - E_{\mathrm{100,\ell}}}{L_v} = \frac{177328.6 - 146106.0}{\SI{2256.4}{\joule\per\gram}} = \frac{\SI{31222.6}{\joule}}{\SI{2256.4}{\joule\per\gram}} = \mathbf{\SI{13.84}{\gram}},
+  m_{\mathrm{steam,final}} = \frac{E_{\mathrm{net},0} - E_{\mathrm{100,\ell}}}{L_v} = \frac{177331.0 - 146106.0}{\SI{2256.4}{\joule\per\gram}} = \frac{\SI{31225.0}{\joule}}{\SI{2256.4}{\joule\per\gram}} = \mathbf{\SI{13.84}{\gram}},
 \]
 and the final liquid water mass is $m_{\mathrm{liq,final}} = 340.0 - 13.84 = \mathbf{\SI{326.16}{\gram}}$ (so $60.0 - 13.84 = \SI{46.16}{\gram}$ of steam condensed).
-\verifiedby{Heat released by $\SI{60.0}{\gram}$ steam cooling to $\SI{100}{\celsius}$ ($\SI{3744.0}{\joule}$) + $\SI{46.1626}{\gram}$ condensing ($\SI{104161.4}{\joule}$) = $\SI{107905.4}{\joule}$ = heat needed to bring ice, water \& Cu to $\SI{100}{\celsius}$ (\texttt{check\_sec02\_05.py}).}
+\verifiedby{Heat released by $\SI{60.0}{\gram}$ steam cooling to $\SI{100}{\celsius}$ ($\SI{3744.0}{\joule}$) + $\SI{46.1616}{\gram}$ condensing ($\SI{104159.0}{\joule}$) = $\SI{107903.0}{\joule}$ = heat needed to bring ice, water \& Cu to $\SI{100}{\celsius}$ (\texttt{check\_sec02\_05.py}).}
 \end{workedexample}
 
 \begin{workedexample}[Electrical Calorimetry with Drift-Rate Cooling Correction]{National $\cdot$ Rule 5.c.i--ii}{ex:04.5}
@@ -583,20 +577,20 @@ In a Callendar--Barnes steady continuous-flow calorimeter (\ref{eq:04:flow}), an
 \end{workedexample}
 
 \begin{workedexample}[Zone I Sub-Zero Equilibrium: Cryogenic Ice Freezing All Liquid Water]{National $\cdot$ Rule 5.c.i--ii}{ex:04.9}
-A large block of deeply subcooled ice of mass $m_{\mathrm{ice}} = \SI{600.0}{\gram}$ at $T_{\mathrm{ice},i} = \SI{-40.0}{\celsius}$ ($c_{\mathrm{ice}} = \SI{2093}{\joule\per\kilogram\per\kelvin}, L_f = \SI{333.55}{\kilo\joule\per\kilogram}$) is placed inside a negligible-mass insulated pouch, and $m_w = \SI{50.0}{\gram}$ of liquid water at $T_{w,i} = \SI{20.0}{\celsius}$ ($c_w = \SI{4184}{\joule\per\kilogram\per\kelvin}$) is poured over it. Use the 5-Zone Algorithm (\tref{tab:04:fivezones}) to determine the final equilibrium state and final temperature $T_f$.
+A large block of deeply subcooled ice of mass $m_{\mathrm{ice}} = \SI{600.0}{\gram}$ at $T_{\mathrm{ice},i} = \SI{-40.0}{\celsius}$ ($c_{\mathrm{ice}} = \SI{2090}{\joule\per\kilogram\per\kelvin}, L_f = \SI{333.55}{\kilo\joule\per\kilogram}$) is placed inside a negligible-mass insulated pouch, and $m_w = \SI{50.0}{\gram}$ of liquid water at $T_{w,i} = \SI{20.0}{\celsius}$ ($c_w = \SI{4184}{\joule\per\kilogram\per\kelvin}$) is poured over it. Use the 5-Zone Algorithm (\tref{tab:04:fivezones}) to determine the final equilibrium state and final temperature $T_f$.
 
 \textbf{Solution.}
 Here $M_{\mathrm{H_2O}} = 600.0 + 50.0 = \SI{650.0}{\gram} = \SI{0.6500}{\kilogram}$ and $C_{\mathrm{solids}} = 0$. Relative to all-liquid water at $T_{\mathrm{ref}} = \SI{0}{\celsius}$ (\ref{eq:04:enet0}):
 \begin{align*}
   E_{\mathrm{avail},0} &= m_w c_w(20.0 - 0) = (0.0500)(4184)(20.0) = \SI{4184.0}{\joule}, \\
-  E_{\mathrm{need,ice}\to 0\,\ell} &= m_{\mathrm{ice}} c_{\mathrm{ice}}(40.0) + m_{\mathrm{ice}} L_f = (0.6000)(2093)(40.0) + (0.6000)(333550) = 50232.0 + 200130.0 = \SI{250362.0}{\joule}, \\
-  E_{\mathrm{net},0} &= 4184.0 - 250362.0 = \mathbf{-\SI{246178.0}{\joule}}.
+  E_{\mathrm{need,ice}\to 0\,\ell} &= m_{\mathrm{ice}} c_{\mathrm{ice}}(40.0) + m_{\mathrm{ice}} L_f = (0.6000)(2090)(40.0) + (0.6000)(333550) = 50160.0 + 200130.0 = \SI{250290.0}{\joule}, \\
+  E_{\mathrm{net},0} &= 4184.0 - 250290.0 = \mathbf{-\SI{246106.0}{\joule}}.
 \end{align*}
 Compare $E_{\mathrm{net},0}$ against the Zone~I boundary $-M_{\mathrm{H_2O}}L_f = -(0.6500)(333550) = -\SI{216807.5}{\joule}$. Since $E_{\mathrm{net},0} < -M_{\mathrm{H_2O}}L_f$, the mixture lies in \textbf{Zone I} (\tref{tab:04:fivezones}): all $\SI{50.0}{\gram}$ of liquid water cools to $\SI{0}{\celsius}$, freezes solid into ice, and the entire $\SI{650.0}{\gram}$ ice block equilibrates below $\SI{0}{\celsius}$ at:
 \[
-  T_f = \frac{E_{\mathrm{net},0} + M_{\mathrm{H_2O}}L_f}{M_{\mathrm{H_2O}}c_{\mathrm{ice}}} = \frac{-246178.0 + 216807.5}{(0.6500)(2093)} = \frac{-\SI{29370.5}{\joule}}{\SI{1360.45}{\joule\per\kelvin}} = \mathbf{-\SI{21.59}{\celsius}}.
+  T_f = \frac{E_{\mathrm{net},0} + M_{\mathrm{H_2O}}L_f}{M_{\mathrm{H_2O}}c_{\mathrm{ice}}} = \frac{-246106.0 + 216807.5}{(0.6500)(2090)} = \frac{-\SI{29298.5}{\joule}}{\SI{1358.50}{\joule\per\kelvin}} = \mathbf{-\SI{21.57}{\celsius}}.
 \]
-\verifiedby{Direct check from $\SI{0}{\celsius}$ ice: warming $\SI{600}{\gram}$ ice from $-\SI{40}{\celsius}$ to $\SI{0}{\celsius}$ absorbs $\SI{50232}{\joule}$, while cooling \& freezing $\SI{50}{\gram}$ water releases $4184 + 16677.5 = \SI{20861.5}{\joule}$ (deficit $-\SI{29370.5}{\joule}$) (\texttt{check\_sec02\_05.py}).}
+\verifiedby{Direct check from $\SI{0}{\celsius}$ ice: warming $\SI{600}{\gram}$ ice from $-\SI{40}{\celsius}$ to $\SI{0}{\celsius}$ absorbs $\SI{50160}{\joule}$, while cooling \& freezing $\SI{50}{\gram}$ water releases $4184 + 16677.5 = \SI{20861.5}{\joule}$ (deficit $-\SI{29298.5}{\joule}$) (\texttt{check\_sec02\_05.py}).}
 \end{workedexample}
 
 \begin{workedexample}[Four-Body Multi-Metal \& Glycerol Mixture with Water Equivalent $m_{\mathrm{eq}}$]{Competition $\cdot$ Rule 5.c.i--ii}{ex:04.10}

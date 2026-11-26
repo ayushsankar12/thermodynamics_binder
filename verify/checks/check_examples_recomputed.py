@@ -19,6 +19,17 @@ SIG_FULL = 5.670374419e-8     # W/(m^2 K^4)
 G0 = 9.80665                  # m/s^2
 
 
+
+# House constants (overhaul Phase 4): one value everywhere in examples.
+L_F = 333.55      # J/g
+L_V = 2256.4      # J/g at 100 C
+C_W = 4.184       # J/(g K)
+C_ICE = 2.09      # J/(g K)
+C_STEAM = 2.08    # J/(g K)
+R_H = 8.314       # J/(mol K) in examples
+SIG_H = 5.670e-8  # W/(m2 K4) in examples
+B_H = 2898.0      # um K in examples
+
 def _ptol(printed: str):
     """Value and rounding tolerance implied by a printed number such as '6.585e5' or '-1728.9'."""
     s = printed.strip().replace("−", "-").replace(" ", "")
@@ -246,17 +257,22 @@ def sec04():
     assert abs(cm - 385) < abs(cm - 388)
     # Ex 04.4 (energies relative to 0 C liquid; Cu at -10 C; steam h(130 C) = 2737.2 kJ/kg)
     Eav = 41840.0 + 0.0600 * 2737200 - 385.0
-    Enet = Eav - (80 * 2.093 * 10 + 80 * 333.55)
+    Enet = Eav - (80 * C_ICE * 10 + 80 * L_F)
     E100 = (0.3400 * 4184 + 38.50) * 100.0
     ms = (Enet - E100) / 2256.4
     out += [
-        chk("EX-04.4-ENET", "sec04", "net energy relative to 0 C liquid [J]", "177328.6", Enet),
+        chk("EX-04.4-ENET", "sec04", "net energy relative to 0 C liquid [J]", "177331.0", Enet),
         chk("EX-04.4-E100", "sec04", "all-liquid at 100 C checkpoint [J]", "146106.0", E100),
         chk("EX-04.4-E100G", "sec04", "all-vapor at 100 C checkpoint [J]", "913282.0", E100 + 0.3400 * 2256400),
         chk("EX-04.4-MS", "sec04", "uncondensed steam [g]", "13.84", ms),
         chk("EX-04.4-ML", "sec04", "final liquid [g]", "326.16", 340.0 - ms),
-        chk("EX-04.4-MCOND", "sec04", "condensed steam (verified-by line) [g]", "46.1626", 60.0 - ms),
-        chk("EX-04.4-QCOND", "sec04", "condensation heat (verified-by line) [J]", "104161.4", (60.0 - ms) * 2256.4),
+        chk("EX-04.4-MCOND", "sec04", "condensed steam (verified-by line) [g]", "46.1616", 60.0 - ms),
+        chk("EX-04.4-QCOND", "sec04", "condensation heat (verified-by line) [J]", "104159.0", (60.0 - ms) * 2256.4),
+        chk("EX-04.2-ENET", "sec04", "Ex 04.2 net energy [J]", "-16110.60", (0.25 * 4184 + 0.12 * 385) * 22 - (0.11 * C_ICE * 1000 * 15 + 0.11 * L_F * 1000)),
+        chk("EX-04.2-MICE", "sec04", "Ex 04.2 ice left [g]", "48.30", -((0.25 * 4184 + 0.12 * 385) * 22 - (0.11 * C_ICE * 1000 * 15 + 0.11 * L_F * 1000)) / L_F),
+        chk("EX-04.3-ENEED", "sec04", "Ex 04.3 ice to 0 C liquid [J]", "28356.0", 0.08 * (C_ICE * 1000 * 10 + L_F * 1000)),
+        chk("EX-04.3-TF", "sec04", "Ex 04.3 final T [C]", "62.02", (109885.0 - 0.08 * (C_ICE * 1000 * 10 + L_F * 1000)) / (0.305 * 4184 + 38.5)),
+        chk("FIG-4.x-Q4", "sec04", "heating curve q4 [kJ/kg]", "3091.95", C_ICE * 40 + L_F + C_W * 100 + L_V),
     ]
     c1 = (7200.0 / 7.220 - 55.0) / 0.4000
     c0 = (7200.0 / 7.140 - 55.0) / 0.4000
@@ -289,11 +305,11 @@ def sec04():
         chk("EX-04.8-CP", "sec04", "oil specific heat [J/(kg K)]", "2000", 24.0 / (1.5e-3 * 8.00)),
         chk("EX-04.8-QLOSS", "sec04", "heat loss [W]", "4.20", 33.00 - 1.800e-3 * 2000 * 8.00),
     ]
-    Enet9 = 0.0500 * 4184 * 20.0 - (0.6000 * 2093 * 40.0 + 0.6000 * 333550)
+    Enet9 = 0.0500 * 4184 * 20.0 - (0.6000 * C_ICE * 1000 * 40.0 + 0.6000 * 333550)
     out += [
-        chk("EX-04.9-ENET", "sec04", "net energy [J]", "-246178.0", Enet9),
+        chk("EX-04.9-ENET", "sec04", "net energy [J]", "-246106.0", Enet9),
         chk("EX-04.9-BOUND", "sec04", "Zone I boundary [J]", "-216807.5", -0.6500 * 333550),
-        chk("EX-04.9-TF", "sec04", "final temperature [C]", "-21.59", (Enet9 + 0.6500 * 333550) / (0.6500 * 2093)),
+        chk("EX-04.9-TF", "sec04", "final temperature [C]", "-21.57", (Enet9 + 0.6500 * 333550) / (0.6500 * C_ICE * 1000)),
     ]
     C = {"cal": 15.0 * 4.184, "gly": 350.0 * 2.427, "Al": 120.0 * 0.897, "Ag": 200.0 * 0.235}
     T0 = {"cal": 18.0, "gly": 18.0, "Al": 140.0, "Ag": 180.0}
@@ -749,10 +765,10 @@ def sec10():
         chk("EX-10.8-INC", "sec10", "3-D increase [%]", "13.8", 100 * (S / S1 - 1)),
         chk("EX-10.10-KX", "sec10", "cut-bar k_x with the stated 14.41 K [W/(m K)]", "167.0", 109.0 * 30.0 / 25.0 * 18.40 / 14.41),
     ]
-    num = 917.0 * 3.335e5 * (0.0800 ** 2 - 0.0200 ** 2)
+    num = 917.0 * L_F * 1000 * (0.0800 ** 2 - 0.0200 ** 2)
     out += [
-        chk("P10.1-DT", "sec10", "ice growth time [s]", "27613", num / (2 * 2.215 * 15.0)),
-        chk("P10.1-DTH", "sec10", "ice growth time [h]", "7.670", num / (2 * 2.215 * 15.0) / 3600),
+        chk("P10.1-DT", "sec10", "ice growth time [s]", "27618", num / (2 * 2.215 * 15.0)),
+        chk("P10.1-DTH", "sec10", "ice growth time [h]", "7.672", num / (2 * 2.215 * 15.0) / 3600),
         chk("P10.2-KPAR", "sec10", "in-plane k [W/(m K)]", "265.5", 2 / 3 * 398 + 1 / 3 * 0.350),
         chk("P10.2-KSER", "sec10", "through-plane k [W/(m K)]", "1.048", 1 / ((2 / 3) / 398 + (1 / 3) / 0.350)),
     ]
@@ -1481,15 +1497,16 @@ def sec17_20():
         chk("EX-18.5-LF", "sec18", "latent heat [kJ/kg]", "180.0", 250.0 * 288.0 / 0.400 / 1e3),
         chk("EX-18.5-SN", "sec18", "tin in liquid [g]", "162.80", 0.555 * 500.0 * 22.0 / 37.5),
     ]
-    tt = [7875.0 / 511.0, 83387.5 / 508.0, 104600.0 / 488.0, 564100.0 / 468.0]
+    tt = [0.250 * C_ICE * 1000 * 15.0 / 511.0, 83387.5 / 508.0, 104600.0 / 488.0, 564100.0 / 468.0]
     t5 = 1800.0 - sum(tt)
     Tf = 1270.0 - 1170.0 * math.exp(-t5 / 1300.0)
-    Vf = (250.0 / 18.01528) * 8.31446 * (Tf + 273.15) / 101325
+    Vf = (250.0 / 18.01528) * R_H * (Tf + 273.15) / 101325
     out += [
-        chk("EX-19.1-T", "sec19", "time to dry steam [s]", "1599.25", sum(tt)),
-        chk("EX-19.1-TF", "sec19", "final steam temperature [C]", "267.42", Tf),
-        chk("EX-19.1-VF", "sec19", "final steam volume [m3]", "0.61556", Vf),
-        chk("EX-19.1-W", "sec19", "boundary work [kJ]", "62.34", 101.325 * (Vf - 0.250 / 916.7)),
+        chk("EX-19.1-T", "sec19", "time to dry steam [s]", "1599.17", sum(tt)),
+        chk("EX-19.1-TF", "sec19", "final steam temperature [C]", "267.48", Tf),
+        chk("EX-19.1-VF", "sec19", "final steam volume [m3]", "0.61559", Vf),
+        chk("EX-19.1-W", "sec19", "boundary work [kJ]", "62.35", 101.325 * (Vf - 0.250 / 916.7)),
+        chk("EX-19.1-SUMH", "sec19", "enthalpy balance [kJ]", "847.01", (0.250 * C_ICE * 1000 * 15 + 83387.5 + 104600 + 564100 + 520 * (Tf - 100)) / 1000),
     ]
     QH = 2.00 * (0.92 * 1000.0 - 0.10 * SIG_FULL * (450.0 ** 4 - 300.0 ** 4))
     out += [
@@ -1549,14 +1566,37 @@ def sec17_20():
     return out
 
 
+def sec08_house():
+    # Ex 08.1 with house L_f = 333.55 kJ/kg, c_ice = 2.09 kJ/(kg K)
+    s1 = 2 * C_ICE * 1000 * math.log(273.15 / 253.15); s2 = 2 * L_F * 1000 / 273.15; s3 = 2 * 4184 * math.log(293.15 / 273.15)
+    Q = 2 * (C_ICE * 1000 * 20 + L_F * 1000 + 4184 * 20)
+    return [chk("EX-08.1-Q", "sec08", "Ex 08.1 heat to ice [kJ]", "918.06", Q / 1000),
+            chk("EX-08.1-S1", "sec08", "Ex 08.1 ice warming entropy [J/K]", "317.84", s1),
+            chk("EX-08.1-S2", "sec08", "Ex 08.1 melting entropy [J/K]", "2442.25", s2),
+            chk("EX-08.1-S3", "sec08", "Ex 08.1 water warming entropy [J/K]", "591.31", s3),
+            chk("EX-08.1-DSI", "sec08", "Ex 08.1 dS_ice [J/K]", "3351.40", s1 + s2 + s3),
+            chk("EX-08.1-DSL", "sec08", "Ex 08.1 dS_lake [J/K]", "-3131.71", -Q / 293.15),
+            chk("EX-08.1-DSU", "sec08", "Ex 08.1 dS_univ [J/K]", "219.69", s1 + s2 + s3 - Q / 293.15)]
+
+
+def sec20_house():
+    qw = 80 * C_ICE * 15
+    return [chk("EX-20.1-NAIVE", "sec20", "Case Study 1 naive T_f [C]", "-19.89", (12552.0 - qw - 80 * L_F) / 836.8),
+            chk("EX-20.1-MELT", "sec20", "Case Study 1 ice melted [g]", "30.11", (12552.0 - qw) / L_F),
+            chk("EX-20.1-ICE", "sec20", "Case Study 1 ice left [g]", "49.89", 80 - (12552.0 - qw) / L_F)]
+
+
 def sec01_extra():
-    # Ex 01.3 [printed 1.2] (as printed: L_f = 333.4, c_ice = 2.093)
-    Q12 = 50 * 2.093 * 20 + 50 * 333.4
-    Qav = 200 * 4.184 * 30 + 10 * 2256.4 + 10 * 4.184 * 100
-    return [chk("EX-01.3-TF", "sec01", "three-phase mix final T [C]", "30.42", (Qav - Q12) / (260.0 * 4.184))]
+    # Ex 01.3 [printed 1.2] (house constants: L_f = 333.55, c_ice = 2.09)
+    Q12 = 50 * C_ICE * 20 + 50 * L_F
+    Qav = 200 * C_W * 30 + 10 * L_V + 10 * C_W * 100
+    Tf = (Qav - Q12) / (260.0 * C_W)
+    return [chk("EX-01.3-Q12", "sec01", "ice warm + melt [J]", "18767.5", Q12),
+            chk("EX-01.3-TF", "sec01", "three-phase mix final T [C]", "30.41", Tf),
+            chk("EX-01.3-BAL", "sec01", "energy balance check [J]", "25130", Q12 + 50 * C_W * Tf)]
 
 
-SECTIONS = [sec00, sec01, sec02, sec03, sec04, sec05, sec06, sec07, sec08, sec09, sec10, sec11, sec12, sec13, sec14, sec15, sec16, sec17_20, sec01_extra]
+SECTIONS = [sec00, sec01, sec02, sec03, sec04, sec05, sec06, sec07, sec08, sec09, sec10, sec11, sec12, sec13, sec14, sec15, sec16, sec17_20, sec01_extra, sec08_house, sec20_house]
 
 
 def run_checks():

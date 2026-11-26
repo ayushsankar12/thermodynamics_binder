@@ -299,14 +299,14 @@ def run_checks() -> list[dict]:
     # §8: Second Law, Entropy, Enthalpy, Gibbs, Exergy & Third Law (ex:08.1 - 08.9)
     # =========================================================================
     # ex:08.1 — Melting Ice in a Lake vs Reversible Carnot Engine Between Finite Bodies
-    Q_ice_81 = 2.0 * (2090.0 * 20.0 + 334000.0 + 4184.0 * 20.0)
-    dS_ice_81 = 2.0 * 2090.0 * math.log(273.15 / 253.15) + 668000.0 / 273.15 + 2.0 * 4184.0 * math.log(293.15 / 273.15)
+    Q_ice_81 = 2.0 * (2090.0 * 20.0 + 333550.0 + 4184.0 * 20.0)  # house L_f
+    dS_ice_81 = 2.0 * 2090.0 * math.log(273.15 / 253.15) + 667100.0 / 273.15 + 2.0 * 4184.0 * math.log(293.15 / 273.15)
     dS_univ_81 = dS_ice_81 - Q_ice_81 / 293.15
     W_max_Cu_81 = (5.0 * 385.0) * (500.0 + 200.0 - 2.0 * math.sqrt(500.0 * 200.0)) * 1e-3
     results.append(_rec(
         "ex08_1", "sec08",
         "Ex 8.1: Ice-in-lake dS_univ (J/K) and finite-body Carnot W_max (kJ)",
-        219.92, dS_univ_81, 5e-4,
+        219.69, dS_univ_81, 5e-5,
         "Piecewise reversible warming/melting entropy integral and geometric-mean T_f,rev = sqrt(T_H*T_C)"
     ))
 

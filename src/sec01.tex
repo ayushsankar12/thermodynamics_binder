@@ -164,7 +164,7 @@ $q_P = \Delta H$ (coffee-cup);\quad $q_V = \Delta U$ (bomb) & $\Delta H = \Delta
 
 \begin{formulacard}[Deterministic 5-Zone Ice ($T_{\mathrm{ice}} \le 0\,^\circ\mathrm{C}$) + Liquid Water ($0\le T_w \le 100\,^\circ\mathrm{C}$) + Steam ($T_s \ge 100\,^\circ\mathrm{C}$) Algorithm {\src{S09,S13}}]
 \footnotesize
-\textbf{Reference Benchmarks ($\SI{1}{\atmosphere}$):} $c_{\mathrm{ice}} = \SI{2093}{\joule\per\kilogram\per\kelvin}$, $c_w = \SI{4184}{\joule\per\kilogram\per\kelvin}$, $c_{\mathrm{steam},P} = \SI{2080}{\joule\per\kilogram\per\kelvin}$, $L_f = \SI{333.4}{\kilojoule\per\kilogram}$ (OpenStax $\SI{334}{\kilojoule\per\kilogram}$), $L_v = \SI{2256.4}{\kilojoule\per\kilogram}$.\\
+\textbf{Reference Benchmarks ($\SI{1}{\atmosphere}$):} $c_{\mathrm{ice}} = \SI{2090}{\joule\per\kilogram\per\kelvin}$, $c_w = \SI{4184}{\joule\per\kilogram\per\kelvin}$, $c_{\mathrm{steam},P} = \SI{2080}{\joule\per\kilogram\per\kelvin}$, $L_f = \SI{333.55}{\kilojoule\per\kilogram}$ (OpenStax $\SI{334}{\kilojoule\per\kilogram}$; use the test's value if one is given), $L_v = \SI{2256.4}{\kilojoule\per\kilogram}$.\\
 \textbf{Step 1 --- Compute Energy Benchmarks Relative to $\SI{0}{\celsius}$ Liquid Water ($\Delta H_{\mathrm{ref}} = 0$ at $\SI{0}{\celsius}$ liquid):}
 \begin{itemize}
   \item Heat needed to warm subcooled ice to $\SI{0}{\celsius}$: $Q_1 = m_{\mathrm{ice}} c_{\mathrm{ice}}(0 - T_{\mathrm{ice}})$. \quad Heat needed to melt all ice at $\SI{0}{\celsius}$: $Q_2 = m_{\mathrm{ice}} L_f$.
@@ -185,10 +185,10 @@ $q_P = \Delta H$ (coffee-cup);\quad $q_V = \Delta U$ (bomb) & $\Delta H = \Delta
 \end{formulacard}
 
 \begin{workedexample}[Three-Phase Ice + Warm Water + Steam Calorimeter Check]{T2 $\cdot$ 75 s}{ex:01.3}
-Mix $m_{\mathrm{ice}} = \SI{50.0}{\gram}$ ice at $\SI{-20.0}{\celsius}$, $m_w = \SI{200.0}{\gram}$ liquid water at $\SI{30.0}{\celsius}$, and $m_s = \SI{10.0}{\gram}$ steam at $\SI{100.0}{\celsius}$ at $\SI{1}{\atmosphere}$ ($c_{\mathrm{ice}}=\SI{2.093}{\joule\per\gram\per\kelvin}, c_w=\SI{4.184}{\joule\per\gram\per\kelvin}, L_f=\SI{333.4}{\joule\per\gram}, L_v=\SI{2256.4}{\joule\per\gram}$). Find $T_f$.
-\textbf{Sol.:} $Q_1 = 50(2.093)(20) = \SI{2093}{\joule}$; $Q_2 = 50(333.4) = \SI{16670}{\joule}$, so $Q_1+Q_2 = \SI{18763}{\joule}$. Available heat to $\SI{0}{\celsius}$ liquid: $Q_{w\to 0} = 200(4.184)(30) = \SI{25104}{\joule}$; $Q_{s\to 0,\ell} = 10(2256.4) + 10(4.184)(100) = \SI{26748}{\joule}$, so $Q_{\mathrm{avail},0} = \SI{51852}{\joule} > \SI{18763}{\joule}$ (Zone 3: 100\% liquid). Total mass $M = \SI{260.0}{\gram}$:
-$T_f = (51852 - 18763)/[260.0 \times 4.184] = \SI{33089}{\joule}/(\SI{1087.84}{\joule\per\kelvin}) = \SI{30.42}{\celsius}$.
-\verifiedby{Direct energy balance at $30.417\,^\circ\mathrm{C}$: $Q_{\mathrm{gain,ice}} = 2093+16670+50(4.184)(30.417) = \SI{25126}{\joule}$; $Q_{\mathrm{loss},w+s} = \SI{25126}{\joule}$.}
+Mix $m_{\mathrm{ice}} = \SI{50.0}{\gram}$ ice at $\SI{-20.0}{\celsius}$, $m_w = \SI{200.0}{\gram}$ liquid water at $\SI{30.0}{\celsius}$, and $m_s = \SI{10.0}{\gram}$ steam at $\SI{100.0}{\celsius}$ at $\SI{1}{\atmosphere}$ ($c_{\mathrm{ice}}=\SI{2.09}{\joule\per\gram\per\kelvin}, c_w=\SI{4.184}{\joule\per\gram\per\kelvin}, L_f=\SI{333.55}{\joule\per\gram}, L_v=\SI{2256.4}{\joule\per\gram}$). Find $T_f$.
+\textbf{Sol.:} $Q_1 = 50(2.09)(20) = \SI{2090}{\joule}$; $Q_2 = 50(333.55) = \SI{16677.5}{\joule}$, so $Q_1+Q_2 = \SI{18767.5}{\joule}$. Available heat to $\SI{0}{\celsius}$ liquid: $Q_{w\to 0} = 200(4.184)(30) = \SI{25104}{\joule}$; $Q_{s\to 0,\ell} = 10(2256.4) + 10(4.184)(100) = \SI{26748}{\joule}$, so $Q_{\mathrm{avail},0} = \SI{51852}{\joule} > \SI{18767.5}{\joule}$ (Zone 3: 100\% liquid). Total mass $M = \SI{260.0}{\gram}$:
+$T_f = (51852 - 18767.5)/[260.0 \times 4.184] = \SI{33084.5}{\joule}/(\SI{1087.84}{\joule\per\kelvin}) = \SI{30.41}{\celsius}$.
+\verifiedby{Direct energy balance at $30.413\,^\circ\mathrm{C}$: $Q_{\mathrm{gain,ice}} = 2090+16677.5+50(4.184)(30.413) = \SI{25130}{\joule}$; $Q_{\mathrm{loss},w+s} = \SI{25130}{\joule}$.}
 \end{workedexample}
 \end{quicksheet}
 
@@ -224,7 +224,7 @@ Normal boil $T_b$ ($\SI{1}{\atmosphere}$, \si{\celsius}) & $99.974$ ($100.0$) & 
 Critical $T_c$ (\si{\kelvin} / \si{\celsius}) & $647.10$ / $373.95$ & $304.13$ / $30.98$ & $126.19$ / $-146.96$ & $5.195$ / $-267.95$\\
 Critical $P_c$ (\si{\mega\pascal} / $\mathrm{atm}$) & $22.064$ / $217.8$ & $7.377$ / $72.81$ & $3.396$ / $33.51$ & $0.228$ / $2.253$\\
 Critical $\rho_c$ (\si{\kilogram\per\cubic\meter}) & $322.0$ & $467.6$ & $313.3$ & $69.58$\\
-Fusion $L_f$ at $\SI{1}{\atmosphere}$ (\si{\kilojoule\per\kilogram}) & $333.4$ ($334$) & $196.1$ ($T_{\mathrm{tp}}$) & $25.7$ & ---\\
+Fusion $L_f$ at $\SI{1}{\atmosphere}$ (\si{\kilojoule\per\kilogram}) & $333.55$ & $196.1$ ($T_{\mathrm{tp}}$) & $25.7$ & ---\\
 Vapor.\ $L_v$ at $\SI{1}{\atmosphere}$ (\si{\kilojoule\per\kilogram}) & $2256.4$ & $571.1$ ($L_{\mathrm{sub}}$) & $199.1$ & $20.7$\\
 S--L slope $dP/dT$ ($\mathrm{MPa/K}$) & $\mathbf{-13.5}$ & $+4.7$ & $+4.4$ & $+>0$\\\bottomrule
 \end{tabularx}}

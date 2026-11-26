@@ -191,7 +191,7 @@ Figure~\ref{fig:19:coupled-router} illustrates how to decouple a complex multi-s
 \end{center}
 
 \begin{workedexample}[Template 1: Coupled Joule Heater + 5-Stage Ice-to-Steam Phase Change + Conductive Leak + Piston]{Rules 5.c.ii--iv}{ex:19.1}
-A vertical cylinder insulated on its sides except for a sight window of thermal resistance $R_{\mathrm{wall}} = \SI{2.50}{\kelvin\per\watt}$ to a $T_{\mathrm{room}} = \SI{20.0}{\celsius}$ room contains $m = \SI{0.250}{\kilogram}$ of ice initially at $T_1 = \SI{-15.0}{\celsius}$ under a frictionless piston maintaining constant absolute pressure $P_0 = \SI{101.325}{\kilo\pascal}$. An internal resistive heater ($V = \SI{48.0}{\volt}$, $R_e = \SI{4.608}{\ohm}$) is switched on for $t_{\mathrm{tot}} = \SI{1800.0}{\second}$ ($\SI{30.0}{\minute}$). Using $c_{\mathrm{ice}} = \SI{2100}{\joule\per\kilogram\per\kelvin}$, $L_f = \SI{333.55}{\kilo\joule\per\kilogram}$, $c_w = \SI{4184}{\joule\per\kilogram\per\kelvin}$, $L_v = \SI{2256.4}{\kilo\joule\per\kilogram}$ at $\SI{100.0}{\celsius}$, $c_{p,\mathrm{steam}} = \SI{2080}{\joule\per\kilogram\per\kelvin}$, and $\rho_{\mathrm{ice}} = \SI{916.7}{\kilogram\per\cubic\meter}$, find: (a)~the time required to reach $\SI{100.0}{\celsius}$ dry saturated steam, (b)~the final superheated steam temperature $T_f$ at $t = \SI{1800.0}{\second}$, and (c)~the total boundary work $W_{\mathrm{by}}$ done by the piston.
+A vertical cylinder insulated on its sides except for a sight window of thermal resistance $R_{\mathrm{wall}} = \SI{2.50}{\kelvin\per\watt}$ to a $T_{\mathrm{room}} = \SI{20.0}{\celsius}$ room contains $m = \SI{0.250}{\kilogram}$ of ice initially at $T_1 = \SI{-15.0}{\celsius}$ under a frictionless piston maintaining constant absolute pressure $P_0 = \SI{101.325}{\kilo\pascal}$. An internal resistive heater ($V = \SI{48.0}{\volt}$, $R_e = \SI{4.608}{\ohm}$) is switched on for $t_{\mathrm{tot}} = \SI{1800.0}{\second}$ ($\SI{30.0}{\minute}$). Using $c_{\mathrm{ice}} = \SI{2090}{\joule\per\kilogram\per\kelvin}$, $L_f = \SI{333.55}{\kilo\joule\per\kilogram}$, $c_w = \SI{4184}{\joule\per\kilogram\per\kelvin}$, $L_v = \SI{2256.4}{\kilo\joule\per\kilogram}$ at $\SI{100.0}{\celsius}$, $c_{p,\mathrm{steam}} = \SI{2080}{\joule\per\kilogram\per\kelvin}$, and $\rho_{\mathrm{ice}} = \SI{916.7}{\kilogram\per\cubic\meter}$, find: (a)~the time required to reach $\SI{100.0}{\celsius}$ dry saturated steam, (b)~the final superheated steam temperature $T_f$ at $t = \SI{1800.0}{\second}$, and (c)~the total boundary work $W_{\mathrm{by}}$ done by the piston.
 \par\smallskip\noindent
 \textbf{Solution.}
 Electrical heating power: $P_{\mathrm{elec}} = \frac{V^2}{R_e} = \frac{48.0^2}{4.608} = \mathbf{\SI{500.0}{\watt}}$ (constant). Because $P_0 = \text{const}$, enthalpy changes satisfy $\frac{dH}{dt} = \dot{Q}_{\mathrm{net}}(T) = P_{\mathrm{elec}} - \frac{T - T_{\mathrm{room}}}{R_{\mathrm{wall}}}$.
@@ -199,7 +199,7 @@ Electrical heating power: $P_{\mathrm{elec}} = \frac{V^2}{R_e} = \frac{48.0^2}{4
 (a)~\textbf{Stages 1--4 Time Budget to Reach $\SI{100.0}{\celsius}$ Dry Saturated Vapor:}
 \begin{itemize}
   \item \emph{Stage 1 (Warm ice $\SI{-15.0}{\celsius} \to \SI{0.0}{\celsius}$, mean $T_{\mathrm{avg},1} = \SI{-7.5}{\celsius} < T_{\mathrm{room}}$, so room leaks heat \textbf{into} cylinder!):}
-  $\Delta H_1 = m c_{\mathrm{ice}}\Delta T_1 = (0.250)(2100)(15.0) = \SI{7875.0}{\joule}$; $\dot{Q}_{\mathrm{net},1} = 500.0 - \frac{-7.5 - 20.0}{2.50} = 500.0 + 11.0 = \SI{511.0}{\watt} \implies t_1 = \frac{7875.0}{511.0} = \mathbf{\SI{15.411}{\second}}$.
+  $\Delta H_1 = m c_{\mathrm{ice}}\Delta T_1 = (0.250)(2090)(15.0) = \SI{7837.5}{\joule}$; $\dot{Q}_{\mathrm{net},1} = 500.0 - \frac{-7.5 - 20.0}{2.50} = 500.0 + 11.0 = \SI{511.0}{\watt} \implies t_1 = \frac{7837.5}{511.0} = \mathbf{\SI{15.338}{\second}}$.
   \item \emph{Stage 2 (Melt ice at $T_m = \SI{0.0}{\celsius}$):}
   $\Delta H_2 = m L_f = (0.250)(333550) = \SI{83387.5}{\joule}$; $\dot{Q}_{\mathrm{net},2} = 500.0 - \frac{0.0 - 20.0}{2.50} = \SI{508.0}{\watt} \implies t_2 = \frac{83387.5}{508.0} = \mathbf{\SI{164.149}{\second}}$.
   \item \emph{Stage 3 (Warm liquid water $\SI{0.0}{\celsius} \to \SI{100.0}{\celsius}$, mean $T_{\mathrm{avg},3} = \SI{50.0}{\celsius}$):}
@@ -207,15 +207,15 @@ Electrical heating power: $P_{\mathrm{elec}} = \frac{V^2}{R_e} = \frac{48.0^2}{4
   \item \emph{Stage 4 (Vaporize water at $T_b = \SI{100.0}{\celsius}$):}
   $\Delta H_4 = m L_v = (0.250)(2256400) = \SI{564100.0}{\joule}$; $\dot{Q}_{\mathrm{net},4} = 500.0 - \frac{100.0 - 20.0}{2.50} = \SI{468.0}{\watt} \implies t_4 = \frac{564100.0}{468.0} = \mathbf{\SI{1205.342}{\second}}$.
 \end{itemize}
-Total elapsed time to reach dry saturated steam at $\SI{100.0}{\celsius}$: $t_{1\dots 4} = 15.411 + 164.149 + 214.344 + 1205.342 = \mathbf{\SI{1599.25}{\second}}$ ($\SI{26.65}{\minute}$).
+Total elapsed time to reach dry saturated steam at $\SI{100.0}{\celsius}$: $t_{1\dots 4} = 15.338 + 164.149 + 214.344 + 1205.342 = \mathbf{\SI{1599.17}{\second}}$ ($\SI{26.65}{\minute}$).
 \par\noindent
-(b)~\textbf{Stage 5 (Superheating Steam During Remaining $t_5 = 1800.0 - 1599.246 = \SI{200.754}{\second}$):}
+(b)~\textbf{Stage 5 (Superheating Steam During Remaining $t_5 = 1800.0 - 1599.173 = \SI{200.827}{\second}$):}
 For isobaric steam warming with $C_{p,\mathrm{steam}} = m c_{p,\mathrm{steam}} = (0.250)(2080) = \SI{520.0}{\joule\per\kelvin}$, the exact lumped ODE $C_{p,\mathrm{steam}}\frac{dT}{dt} = P_{\mathrm{elec}} - \frac{T - T_{\mathrm{room}}}{R_{\mathrm{wall}}}$ has time constant $\tau_s = C_{p,\mathrm{steam}}R_{\mathrm{wall}} = (520.0)(2.50) = \SI{1300.0}{\second}$ and asymptote $T_{\mathrm{ss}} = 20.0 + (500.0)(2.50) = \SI{1270.0}{\celsius}$:
-$$T_f = T_{\mathrm{ss}} - (T_{\mathrm{ss}} - \SI{100.0}{\celsius})e^{-t_5/\tau_s} = 1270.0 - (1170.0)e^{-200.754/1300.0} = 1270.0 - 1002.58 = \mathbf{\SI{267.42}{\celsius}}\ (\SI{540.57}{\kelvin})$$
+$$T_f = T_{\mathrm{ss}} - (T_{\mathrm{ss}} - \SI{100.0}{\celsius})e^{-t_5/\tau_s} = 1270.0 - (1170.0)e^{-200.827/1300.0} = 1270.0 - 1002.52 = \mathbf{\SI{267.48}{\celsius}}\ (\SI{540.63}{\kelvin})$$
 (c)~\textbf{Total Isobaric Boundary Work $W_{\mathrm{by}} = P_0(V_f - V_i)$:}
-Initial ice volume: $V_i = \frac{\SI{0.250}{\kilogram}}{\SI{916.7}{\kilogram\per\cubic\meter}} = \SI{2.727e-4}{\cubic\meter}$. Final steam moles: $n = \frac{\SI{250.0}{\gram}}{\SI{18.01528}{\gram\per\mole}} = \SI{13.8771}{\mole}$, so ideal-gas steam volume at $T_f = \SI{540.57}{\kelvin}$ is $V_f = \frac{n R T_f}{P_0} = \frac{(13.8771)(8.31446)(540.57)}{101325} = \SI{0.61556}{\cubic\meter}$. Thus:
-$$W_{\mathrm{by}} = P_0(V_f - V_i) = (\SI{101.325}{\kilo\pascal})(\SI{0.61556}{\cubic\meter} - \SI{0.00027}{\cubic\meter}) = \mathbf{\SI{62.34}{\kilo\joule}}$$
-\verifiedby{Global enthalpy balance $\sum_{k=1}^5 \Delta H_k = 7.875 + 83.388 + 104.600 + 564.100 + 87.058 = \SI{847.02}{\kilo\joule}$ and Python check \texttt{sec19:ex19.1}.}
+Initial ice volume: $V_i = \frac{\SI{0.250}{\kilogram}}{\SI{916.7}{\kilogram\per\cubic\meter}} = \SI{2.727e-4}{\cubic\meter}$. Final steam moles: $n = \frac{\SI{250.0}{\gram}}{\SI{18.01528}{\gram\per\mole}} = \SI{13.8771}{\mole}$, so ideal-gas steam volume at $T_f = \SI{540.63}{\kelvin}$ is $V_f = \frac{n R T_f}{P_0} = \frac{(13.8771)(8.314)(540.63)}{101325} = \SI{0.61559}{\cubic\meter}$. Thus:
+$$W_{\mathrm{by}} = P_0(V_f - V_i) = (\SI{101.325}{\kilo\pascal})(\SI{0.61559}{\cubic\meter} - \SI{0.00027}{\cubic\meter}) = \mathbf{\SI{62.35}{\kilo\joule}}$$
+\verifiedby{Global enthalpy balance $\sum_{k=1}^5 \Delta H_k = 7.838 + 83.388 + 104.600 + 564.100 + 87.087 = \SI{847.01}{\kilo\joule}$ and Python check \texttt{sec19:ex19.1}.}
 \end{workedexample}
 
 \begin{workedexample}[Template 2: Wavelength-Selective Radiative Collector Driving a Carnot Engine \& Heat-Pump Cascade]{Rules 5.c.iii, 5.c.iv, 5.c.vi}{ex:19.2}

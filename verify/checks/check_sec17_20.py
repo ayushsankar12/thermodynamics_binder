@@ -546,7 +546,7 @@ def check_sec19() -> list[dict]:
 
     # Ex 19.1: Multi-stage heater + phase change + conductive leak + piston expansion
     m = 0.250
-    c_ice = 2100.0
+    c_ice = 2090.0  # house value
     c_w = 4184.0
     c_steam = 2080.0
     L_f = 333550.0
@@ -585,7 +585,7 @@ def check_sec19() -> list[dict]:
             "sec19:ex19.1:time_to_dry_steam",
             "sec19",
             "Total time to reach 100 C dry saturated steam t_1..4 [s]",
-            1599.246,
+            1599.173,
             t_used,
             1e-4,
             "Piecewise energy balance across subcooled ice, fusion, liquid warming, and vaporization",
@@ -596,7 +596,7 @@ def check_sec19() -> list[dict]:
             "sec19:ex19.1:final_superheated_temp",
             "sec19",
             "Final superheated steam temperature at t=1800 s [deg C]",
-            267.420,
+            267.476,
             T_final,
             1e-4,
             "Exact first-order ODE T_ss - (T_ss - 100)*exp(-t_5/(m*c_p*R_wall))",
@@ -605,7 +605,7 @@ def check_sec19() -> list[dict]:
 
     # Isobaric expansion work from 0 C ice (rho=916.7 kg/m^3) to ideal steam at T_final (540.57 K) and P=101325 Pa
     n_mol = (m * 1000.0) / 18.01528
-    R_gas = 8.314462618
+    R_gas = 8.314  # house value in examples
     V_init = m / 916.7
     V_final = n_mol * R_gas * (T_final + 273.15) / 101325.0
     W_by_kJ = 101325.0 * (V_final - V_init) / 1000.0
@@ -614,9 +614,9 @@ def check_sec19() -> list[dict]:
             "sec19:ex19.1:piston_boundary_work",
             "sec19",
             "Isobaric piston expansion work W_by [kJ]",
-            62.309,
+            62.3467,
             W_by_kJ,
-            1e-3,
+            1e-4,
             "P*(V_final - V_ice) using ideal gas steam volume at 540.57 K",
         )
     )
@@ -779,7 +779,7 @@ def check_sec20() -> list[dict]:
     out = []
 
     # Ex 20.1: Ice-water mixing two-phase plateau trap vs naive linear solve
-    m_ice, T_ice, c_ice, L_f = 80.0, -15.0, 2.10, 333.55
+    m_ice, T_ice, c_ice, L_f = 80.0, -15.0, 2.09, 333.55
     m_w, T_w, c_w = 120.0, 25.0, 4.184
     Q_avail = m_w * c_w * (T_w - 0.0)
     Q_warm_ice = m_ice * c_ice * (0.0 - T_ice)
@@ -791,7 +791,7 @@ def check_sec20() -> list[dict]:
             "sec20:ex20.1:naive_impossible_Tf",
             "sec20",
             "Naive un-gated equation false temperature T_f [deg C]",
-            -19.8996,
+            -19.8853,
             T_naive,
             1e-4,
             "Demonstrates false T_f < -15 C when skipping plateau inequality check",
@@ -802,7 +802,7 @@ def check_sec20() -> list[dict]:
             "sec20:ex20.1:true_melted_ice_mass",
             "sec20",
             "True mass of ice melted at 0.00 C two-phase plateau [g]",
-            30.07645,
+            30.11243,
             m_melted,
             1e-4,
             "(m_w*c_w*T_w - m_ice*c_ice*|T_ice|) / L_f",
