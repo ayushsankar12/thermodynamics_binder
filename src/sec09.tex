@@ -437,8 +437,8 @@ In reciprocating piston engines, let $V_1 = V_{\max}$ be the cylinder volume at 
     height=3.9cm,
     xlabel={Specific Volume $v$ ($\si{\cubic\meter\per\kilogram}$)},
     ylabel={Pressure $P$ ($\si{\kilo\pascal}$)},
-    xmin=0.1, xmax=1.6,
-    ymin=0, ymax=1150,
+    xmin=0, xmax=2.45,
+    ymin=0, ymax=1000,
     grid=both,
     grid style={gray!25},
     tick label style={font=\scriptsize},
@@ -448,18 +448,18 @@ In reciprocating piston engines, let $V_1 = V_{\max}$ be the cylinder volume at 
 % 1 -> 2: Isentropic compressor v=0.86 to 0.20 (P = 100*(0.86/x)^1.4 = 81.1/x^1.4)
 \addplot[navy, ultra thick, domain=0.20:0.86, samples=36] {81.1 * x^(-1.4)};
 % 2 -> 3: Isobaric combustor at P2 = 770 from v=0.20 to 0.52
-\draw[rust, ultra thick, -{Stealth[length=2mm]}] (axis cs:0.20,770) -- (axis cs:0.52,770)
-  node[midway, above, fill=white, inner sep=1pt] {$2\to 3$: $q_H$ in ($P_2$)};
-% 3 -> 4: Isentropic turbine v=0.52 to 1.45 (P = 770*(0.52/x)^1.4 = 308/x^1.4)
-\addplot[navy, ultra thick, domain=0.52:1.45, samples=36] {308 * x^(-1.4)};
-% 4 -> 1: Isobaric heat rejection at P1 = 100
-\draw[teal, ultra thick, -{Stealth[length=2mm]}] (axis cs:1.45,100) -- (axis cs:0.86,100)
-  node[midway, above, fill=white, inner sep=1pt] {$4\to 1$: $q_C$ out ($P_1$)};
+\draw[rust, ultra thick, -{Stealth[length=2mm]}] (axis cs:0.20,770) -- (axis cs:0.52,770);
+\node[anchor=west, rust, fill=white, inner sep=1pt] at (axis cs:0.62,850) {$2\to 3$: $q_H$ in at $P_2$};
+% 3 -> 4: Isentropic turbine v = 0.52 -> 2.235 (P v^1.4 = 770(0.52)^1.4 = 308.3; P = 100 kPa at v = 2.235)
+\addplot[navy, ultra thick, domain=0.52:2.235, samples=48] {308.25 * x^(-1.4)};
+% 4 -> 1: Isobaric heat rejection at P1 = 100 kPa, v = 2.235 -> 0.86
+\draw[teal, ultra thick, -{Stealth[length=2mm]}] (axis cs:2.235,100) -- (axis cs:0.86,100);
+\node[teal!70!black, inner sep=1pt] at (axis cs:1.1,160) {$4\to 1$: $q_C$ out};
 
 \fill[navy] (axis cs:0.86,100) circle (2pt) node[below left] {$1$};
-\fill[rust] (axis cs:0.20,770) circle (2pt) node[above left] {$2$};
-\fill[rust] (axis cs:0.52,770) circle (2pt) node[above right] {$3$};
-\fill[teal] (axis cs:1.45,100) circle (2pt) node[below right] {$4$};
+\fill[rust] (axis cs:0.20,770) circle (2pt) node[left] {$2$};
+\fill[rust] (axis cs:0.52,770) circle (2pt) node[above] {$3$};
+\fill[teal] (axis cs:2.235,100) circle (2pt) node[below] {$4$};
 \end{axis}
 
 % Right Panel: Regenerative Stirling Cycle on P-V
@@ -554,26 +554,28 @@ In reciprocating piston engines, let $V_1 = V_{\max}$ be the cylinder volume at 
     label style={font=\scriptsize\bfseries},
     title={\textbf{(a) Rankine Steam Power Cycle (Clockwise on $T$--$s$)}}
 ]
-% Saturation Dome
+% Saturation Dome (passes exactly through the cycle's saturated states at 318 K and 510 K)
 \addplot[slate, thick, smooth] coordinates {
-  (0.6,290) (1.3,373) (2.3,473) (3.3,573) (4.41,647) (5.7,573) (6.4,473) (7.35,373) (8.4,290)
+  (0.6,290) (0.84,318) (1.3,373) (2.3,473) (2.65,510) (3.3,573) (4.41,647) (5.7,573) (6.15,510) (6.4,473) (7.35,373) (8.05,318) (8.4,290)
 };
-% 1 -> 2: Pump (nearly vertical on liquid line from T=320 to 335 at s=1.0)
-\draw[navy, ultra thick, -{Stealth[length=1.8mm]}] (axis cs:1.05,318) -- (axis cs:1.05,355);
-% 2 -> 3: Boiler isobar (subcooled liquid -> two-phase plateau at 510 K -> superheated at 610 K)
-\draw[rust, ultra thick, -{Stealth[length=2mm]}] (axis cs:1.05,355) -- (axis cs:2.65,510) -- (axis cs:6.15,510) -- (axis cs:6.85,615)
-  node[pos=0.45, above, fill=white, inner sep=1pt] {$2\to 3$: Boiler $q_H$};
+% 1 -> 2: Pump: state 1 is saturated liquid ON the dome; temperature rise exaggerated for visibility
+\draw[navy, ultra thick, -{Stealth[length=1.8mm]}] (axis cs:0.84,318) -- (axis cs:0.84,330);
+% 2 -> 3: Boiler isobar: compressed liquid hugs the saturated-liquid line up to 510 K,
+% boils horizontally across the dome (s_f -> s_g at 510 K), then superheats to 615 K
+\addplot[rust, ultra thick, smooth, forget plot] coordinates {(0.84,330) (1.24,373) (2.25,473) (2.65,510)};
+\draw[rust, ultra thick, -{Stealth[length=2mm]}] (axis cs:2.65,510) -- (axis cs:6.15,510) .. controls (axis cs:6.45,540) and (axis cs:6.7,580) .. (axis cs:6.85,615);
+\node[rust, fill=white, inner sep=1pt] at (axis cs:4.4,535) {$2\to 3$: boiler $q_H$};
 % 3 -> 4s (isentropic) and 3 -> 4a (real turbine)
 \draw[navy, ultra thick, -{Stealth[length=2mm]}] (axis cs:6.85,615) -- (axis cs:6.85,318)
-  node[midway, left, fill=white, inner sep=1pt] {$3\to 4s$};
+  node[pos=0.72, left, fill=white, inner sep=1pt] {$3\to 4s$};
 \draw[amber, very thick, dashed, -{Stealth[length=2mm]}] (axis cs:6.85,615) -- (axis cs:7.35,318)
   node[midway, right, fill=white, inner sep=1pt] {$4a$};
 % 4 -> 1: Condenser at 318 K
-\draw[teal, ultra thick, -{Stealth[length=2mm]}] (axis cs:6.85,318) -- (axis cs:1.05,318)
-  node[midway, below, fill=white, inner sep=1pt] {$4\to 1$: Condenser $q_C$};
+\draw[teal, ultra thick, -{Stealth[length=2mm]}] (axis cs:6.85,318) -- (axis cs:0.84,318);
+\node[teal!70!black, inner sep=1pt] at (axis cs:3.9,345) {$4\to 1$: condenser $q_C$};
 
-\fill[teal] (axis cs:1.05,318) circle (2pt) node[below left] {$1$};
-\fill[navy] (axis cs:1.05,355) circle (2pt) node[above left] {$2$};
+\fill[teal] (axis cs:0.84,318) circle (2pt) node[below right] {$1$};
+\fill[navy] (axis cs:0.84,330) circle (2pt) node[left] {$2$};
 \fill[rust] (axis cs:6.85,615) circle (2pt) node[above] {$3$};
 \fill[teal] (axis cs:6.85,318) circle (2pt) node[below] {$4s$};
 \end{axis}

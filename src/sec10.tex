@@ -334,14 +334,14 @@ Increasing $r_o$ \textbf{increases} $R_{\mathrm{cond}}$ logarithmically, but \te
 \begin{tikzpicture}[font=\scriptsize]
   \begin{axis}[
     width=0.86\linewidth, height=5.0cm,
-    xlabel={Normalized Outer Insulation Radius $r_o / r_i$ (Lienhard Example 2.6: $r_i = \SI{2.5}{\milli\meter},\; k = \SI{0.074}{\watt\per\meter\per\kelvin},\; h = \SI{20}{\watt\per\square\meter\per\kelvin}$)},
-    ylabel={Thermal Resistance $R_t$ $(\si{\kelvin\per\watt\per\meter})$},
+    xlabel={Outer radius ratio $r_o / r_i$ [--]},
+    ylabel={$R$ for $\ell = \SI{1}{\meter}$ [\si{\kelvin\per\watt}]},
     xmin=1.0, xmax=4.5, ymin=0, ymax=4.5,
     xtick={1.0, 1.48, 2.0, 2.323, 3.0, 3.5, 4.0, 4.5},
     xticklabels={$1.0$, $1.48\ (r_{\mathrm{crit}})$, $2.0$, $2.32\ (r_{\mathrm{cross}})$, $3.0$, $3.5$, $4.0$, $4.5$},
     ytick={0, 1.0, 2.0, 3.0, 4.0},
     grid=both, major grid style={gray!30}, minor grid style={gray!15},
-    legend pos=north west, legend style={font=\scriptsize, fill=white, draw=navy},
+    legend style={at={(0.5,-0.24)}, anchor=north, legend columns=3, font=\footnotesize, fill=white, draw=navy, column sep=6pt},
     clip=true
   ]
     % R_cond = ln(x) / (2*pi*0.074) = 2.15076 * ln(x)
@@ -362,12 +362,12 @@ Increasing $r_o$ \textbf{increases} $R_{\mathrm{cond}}$ logarithmically, but \te
     \draw[rust, thick, dotted] (axis cs:2.3232,0) -- (axis cs:2.3232,3.1831);
     \fill[rust] (axis cs:1.0,3.1831) circle (2pt);
     \fill[rust] (axis cs:1.48,2.9936) circle (2.2pt) node[below right, text=rust, font=\bfseries\scriptsize] {Min $R_{\mathrm{tot}}=\SI{2.99}{\kelvin\per\watt}$ ($\dot{Q}_{\max}$ at $\mathrm{Bi}=1$)};
-    \fill[navy] (axis cs:2.3232,3.1831) circle (2pt) node[above right, text=navy, font=\bfseries\scriptsize] {Crossover $r_o/r_i = 2.323$};
+    \fill[navy] (axis cs:2.3232,3.1831) circle (2pt) node[above left, text=navy, font=\bfseries\scriptsize] {Crossover $r_o/r_i = 2.323$};
     \node[align=left, fill=boxbg, draw=slate, rounded corners=1pt, inner sep=2.5pt] at (axis cs:3.45,1.25)
       {\textbf{2027 9 oz Cup Regime:}\\$r_{\mathrm{cup}}=\SI{37.5}{\milli\meter} \gg r_{\mathrm{crit}}=\SI{4.0}{\milli\meter}$\\($\mathrm{Bi}_{\mathrm{cup}} \approx 9.4 > 1 \implies$ insulation\\always increases $R_{\mathrm{tot}}$!)};
   \end{axis}
 \end{tikzpicture}
-\captionof{figure}{Total cylindrical thermal resistance $R_{\mathrm{tot}}(r_o) = R_{\mathrm{cond}} + R_{\mathrm{conv}}$ versus radius ratio $r_o/r_i$ for Lienhard Example 2.6 \src{S12}. When $r_i < r_{\mathrm{crit}} = k/h$, resistance passes through a minimum at $r_o = r_{\mathrm{crit}}$ ($\mathrm{Bi}=1$) before crossing the bare-pipe resistance at $r_o/r_i = 2.323$.}
+\captionof{figure}{Total cylindrical thermal resistance $R_{\mathrm{tot}}(r_o) = R_{\mathrm{cond}} + R_{\mathrm{conv}}$ (per metre of length) versus radius ratio $r_o/r_i$ for Lienhard Example 2.6 ($r_i = \SI{2.5}{\milli\meter}$, $k = \SI{0.074}{\watt\per\meter\per\kelvin}$, $h = \SI{20}{\watt\per\square\meter\per\kelvin}$) \src{S12}. When $r_i < r_{\mathrm{crit}} = k/h$, resistance passes through a minimum at $r_o = r_{\mathrm{crit}}$ ($\mathrm{Bi}=1$) before crossing the bare-pipe resistance at $r_o/r_i = 2.323$.}
 \label{fig:10:cylindrical-rcrit}
 \idxfig{critical radius of insulation!resistance minimum curve}
 \end{center}
