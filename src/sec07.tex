@@ -208,13 +208,13 @@ One mole ($n = \SI{1.000}{\mole}$) of monatomic Helium ($\gamma = 5/3$, $C_{P,m}
   \item \textbf{(c) Minimum-work 2-leg path (Isobaric pre-cooling $1\to B$ at $\SI{1.00}{\bar}$, then adiabatic compression $B\to 2$):}
   To land on $(P_2, T_1)$ after adiabatic compression $B\to 2$, the gas must first be pre-cooled at $P_1$ to $T_B = T_1(P_1/P_2)^{2/5} = T_1 / 2.29740 = 0.435275\,T_1 = \SI{129.71}{\kelvin}$. Total work done on the gas is:
   \[
-    w_{\mathrm{on,\min}} = nC_{P,m}(T_1 - T_B) = nC_{P,m}T_1\left[1 - \left(\frac{P_1}{P_2}\right)^{2/5}\right] = \frac{5}{2}(2477.71)(1 - 0.435275) = \mathbf{+\SI{3498.0}{\joule}}
+    w_{\mathrm{on,\min}} = nC_{P,m}(T_1 - T_B) = nC_{P,m}T_1\left[1 - \left(\frac{P_1}{P_2}\right)^{2/5}\right] = \frac{5}{2}(2477.71)(1 - 0.435275) = \mathbf{+\SI{3498.1}{\joule}}
   \]
   \item \textbf{(d) $N=3$ intercooled adiabatic-isobaric stages (each stage has pressure ratio $r_s = (P_2/P_1)^{1/3} = 2.000$):}
   \[
     w_{\mathrm{on},N=3} = N\,nC_{P,m}T_1\left[\left(\frac{P_2}{P_1}\right)^{\frac{2}{5N}} - 1\right] = 3 \times \frac{5}{2}(2477.71)\left(2.000^{2/5} - 1\right) = 18582.8(1.319508 - 1) = \mathbf{+\SI{5937.4}{\joule}}
   \]
-  *(Note: In \texttt{2019 MIT E2 P4b(iv)}, the problem statement defined its multi-step path via pre-cooling steps $N\,nC_{P,m}T_1[1 - 2^{-2/5}] = \SI{4499.6}{\joule}$; as $N\to\infty$, both upper and lower staircases converge to the isothermal limit $\SI{5152.3}{\joule}$!)*
+  *(Note: In \texttt{2019 MIT E2 P4b(iv)}, the problem statement defined its multi-step path via pre-cooling steps $N\,nC_{P,m}T_1[1 - 2^{-2/5}] = \SI{4499.7}{\joule}$; as $N\to\infty$, both upper and lower staircases converge to the isothermal limit $\SI{5152.3}{\joule}$!)*
 \end{enumerate}
 \verifiedby{Limit check as $N\to\infty$: $\lim_{N\to\infty} N\frac{5}{2}RT_1[8^{2/(5N)} - 1] = \frac{5}{2}RT_1\cdot\frac{2}{5}\ln 8 = RT_1\ln 8 = \SI{5152.3}{\joule}$ (\texttt{check\_sec06\_09.py::ex07\_3}).}
 \end{workedexample}
@@ -461,16 +461,16 @@ Construct the complete cycle ledger for $\Delta U, W_{\mathrm{by}}, Q, \Delta H,
 \textbf{Leg} & \textbf{Process Type \& Endpoints} & $\Delta U$ ($\si{\joule}$) & $W_{\mathrm{by}}$ ($\si{\joule}$) & $Q = \Delta U + W_{\mathrm{by}}$ ($\si{\joule}$) & $\Delta H$ ($\si{\joule}$) & $\Delta S$ ($\si{\joule\per\kelvin}$) \\
 \midrule
 $1\to 2$ & Isochoric ($V=V_1, \SI{300}{\kelvin}\to\SI{900}{\kelvin}$) & $+12471.7$ & $0.0$ & $+12471.7$ & $+17460.4$ & $+22.836$ \\
-$2\to 3$ & Isothermal ($T=\SI{900}{\kelvin}, V_1\to 2V_1$) & $0.0$ & $+5186.1$ & $+5186.1$ & $0.0$ & $+5.763$ \\
+$2\to 3$ & Isothermal ($T=\SI{900}{\kelvin}, V_1\to 2V_1$) & $0.0$ & $+5186.8$ & $+5186.8$ & $0.0$ & $+5.763$ \\
 $3\to 4$ & Isochoric ($V=2V_1, \SI{900}{\kelvin}\to\SI{300}{\kelvin}$) & $-12471.7$ & $0.0$ & $-12471.7$ & $-17460.4$ & $-22.836$ \\
-$4\to 1$ & Isothermal ($T=\SI{300}{\kelvin}, 2V_1\to V_1$) & $0.0$ & $-1728.7$ & $-1728.7$ & $0.0$ & $-5.763$ \\
+$4\to 1$ & Isothermal ($T=\SI{300}{\kelvin}, 2V_1\to V_1$) & $0.0$ & $-1728.9$ & $-1728.9$ & $0.0$ & $-5.763$ \\
 \midrule
-\textbf{Cycle Sum} & \textbf{Closed Loop ($1\to 2\to 3\to 4\to 1$)} & $\mathbf{0.0}$ & $\mathbf{+3457.4}$ & $\mathbf{+3457.4}$ & $\mathbf{0.0}$ & $\mathbf{0.000}$ \\
+\textbf{Cycle Sum} & \textbf{Closed Loop ($1\to 2\to 3\to 4\to 1$)} & $\mathbf{0.0}$ & $\mathbf{+3457.9}$ & $\mathbf{+3457.9}$ & $\mathbf{0.0}$ & $\mathbf{0.000}$ \\
 \bottomrule
 \end{tabularx}
 \par\smallskip\noindent
-Notice that this cycle is a \textbf{Stirling cycle} with volume ratio $V_{\max}/V_{\min} = 2$: its net work is $W_{\mathrm{net,by}} = nR(T_H - T_C)\ln 2 = (1.000)(8.314463)(600.0)(0.693147) = \mathbf{+\SI{3457.4}{\joule}}$.
-\verifiedby{State-function sums $\sum\Delta U = \sum\Delta H = \sum\Delta S = 0$ and $\sum Q - \sum W_{\mathrm{by}} = 3457.40 - 3457.40 = \SI{0.00}{\joule}$ (\texttt{check\_sec06\_09.py::ex07\_6}).}
+Notice that this cycle is a \textbf{Stirling cycle} with volume ratio $V_{\max}/V_{\min} = 2$: its net work is $W_{\mathrm{net,by}} = nR(T_H - T_C)\ln 2 = (1.000)(8.314463)(600.0)(0.693147) = \mathbf{+\SI{3457.9}{\joule}}$.
+\verifiedby{State-function sums $\sum\Delta U = \sum\Delta H = \sum\Delta S = 0$ and $\sum Q - \sum W_{\mathrm{by}} = 3457.89 - 3457.89 = \SI{0.00}{\joule}$ (\texttt{check\_sec06\_09.py::ex07\_6}).}
 \end{workedexample}
 
 % ============================================================================
@@ -598,7 +598,7 @@ One of the highest-frequency conceptual and quantitative traps on Division~C exa
     h_2 = h_{f,\SI{100}{\celsius}} + x_2 h_{fg,\SI{100}{\celsius}} = h_1 \implies x_2 = \frac{h_1 - h_{f,\SI{100}{\celsius}}}{h_{fg,\SI{100}{\celsius}}} = \frac{632.18 - 419.06}{2256.4} = \frac{213.12}{2256.4} = \mathbf{0.09445} \quad (9.45\%\text{ flashes to steam!})
   \]
 \end{enumerate}
-\verifiedby{Max inversion temperatures \eref{eq:07:mu-jt}: $T_{\mathrm{inv,N_2}} = 2a/(Rb) = \SI{851.6}{\kelvin} > \SI{300}{\kelvin}$, whereas $T_{\mathrm{inv,He}} = \SI{34.97}{\kelvin} < \SI{300}{\kelvin}$ (\texttt{check\_sec06\_09.py::ex07\_7}).}
+\verifiedby{Max inversion temperatures \eref{eq:07:mu-jt}: $T_{\mathrm{inv,N_2}} = 2a/(Rb) = \SI{851.5}{\kelvin} > \SI{300}{\kelvin}$, whereas $T_{\mathrm{inv,He}} = \SI{34.97}{\kelvin} < \SI{300}{\kelvin}$ (\texttt{check\_sec06\_09.py::ex07\_7}).}
 \end{workedexample}
 
 % ============================================================================
@@ -693,7 +693,7 @@ An ideal gas undergoes a reversible Carnot cycle plotted on a $P$--$T$ diagram b
   \]
   \item \textbf{(b) Extracting heat capacity and molecular geometry from the $P$--$T$ adiabat \eref{eq:07:pt-adiabat-cv}:}
   \[
-    1 + \frac{C_{V,m}}{R} = \frac{\ln(P_2/P_1)}{\ln(T_2/T_1)} = \frac{\ln(3.000)}{\ln(390.0/298.0)} = \frac{1.098612}{0.269055} = \mathbf{4.0832 \approx 4.00}
+    1 + \frac{C_{V,m}}{R} = \frac{\ln(P_2/P_1)}{\ln(T_2/T_1)} = \frac{\ln(3.000)}{\ln(390.0/298.0)} = \frac{1.098612}{0.269053} = \mathbf{4.0833 \approx 4.00}
   \]
   \[
     \implies \boxed{C_{V,m} \approx 3R = \SI{24.94}{\joule\per\mole\per\kelvin}}, \qquad C_{P,m} \approx 4R = \SI{33.26}{\joule\per\mole\per\kelvin}, \qquad \gamma = \frac{4}{3} \approx 1.333, \qquad f = 6
@@ -701,13 +701,13 @@ An ideal gas undergoes a reversible Carnot cycle plotted on a $P$--$T$ diagram b
   Since $f = 6$ ($3$ translational $+ 3$ rotational degrees of freedom), the gas is a \textbf{nonlinear polyatomic molecule with $\ge 3$ atoms} (such as $\mathrm{H_2O}(g), \mathrm{NH_3}$, or $\mathrm{CH_4}$).
   \item \textbf{(c) Cycle heat and net work for $n = \SI{2.000}{\mole}$ with $P_2/P_3 = 600.0/300.0 = 2.000$:}
   \[
-    Q_H = nRT_H\ln\left(\frac{P_2}{P_3}\right) = (2.000)(8.314463)(390.0)\ln(2.000) = \mathbf{+\SI{4494.6}{\joule}}
+    Q_H = nRT_H\ln\left(\frac{P_2}{P_3}\right) = (2.000)(8.314463)(390.0)\ln(2.000) = \mathbf{+\SI{4495.3}{\joule}}
   \]
   \[
-    W_{\mathrm{net,by}} = \eta Q_H = \left(\frac{92.0}{390.0}\right)(4494.6) = \mathbf{+\SI{1060.3}{\joule}}, \qquad Q_C = Q_H - W_{\mathrm{net,by}} = \mathbf{\SI{3434.3}{\joule}}
+    W_{\mathrm{net,by}} = \eta Q_H = \left(\frac{92.0}{390.0}\right)(4495.3) = \mathbf{+\SI{1060.4}{\joule}}, \qquad Q_C = Q_H - W_{\mathrm{net,by}} = \mathbf{\SI{3434.8}{\joule}}
   \]
 \end{enumerate}
-\verifiedby{Direct cold-isotherm check: $Q_C = nRT_C\ln 2 = 2(8.314463)(298.0)\ln 2 = \SI{3434.3}{\joule}$ and $Q_H - Q_C = \SI{1060.3}{\joule}$ (\texttt{check\_sec06\_09.py::ex07\_9}).}
+\verifiedby{Direct cold-isotherm check: $Q_C = nRT_C\ln 2 = 2(8.314463)(298.0)\ln 2 = \SI{3434.8}{\joule}$ and $Q_H - Q_C = \SI{1060.4}{\joule}$ (\texttt{check\_sec06\_09.py::ex07\_9}).}
 \end{workedexample}
 
 \begin{formulacard}[Three-Stage Stop-Pin \& Spring-Loaded Piston-Cylinder Heating Protocol \src{S16,S33}]

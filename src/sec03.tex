@@ -200,7 +200,7 @@ At constant pressure, warming a solid or liquid increases the anharmonic average
     \draw[fill=boxbg,draw=navy,thick] (0.3,2.55) rectangle (3.5,2.8);
     \draw[fill=gray!45,draw=navy,thick] (0.3,2.3) rectangle (3.5,2.55);
     \node[right,font=\scriptsize] at (3.55,2.68) {Metal 2 ($\alpha_2$ higher, e.g., Brass $\num{19e-6}$)};
-    \node[right,font=\scriptsize] at (3.55,2.42) {Metal 1 ($\alpha_1$ lower, e.g., Invar $\num{0.9e-6}$)};
+    \node[right,font=\scriptsize] at (3.55,2.42) {Metal 1 ($\alpha_1$ lower, e.g., Invar $\num{1.2e-6}$)};
     \node[above,font=\bfseries\scriptsize,navy] at (1.9,2.82) {At $T_0$ ($\Delta T = 0$): flat, $L_1 = L_2 = L_0$};
     % Heated curved arc
     \draw[thick,navy,fill=boxbg] (0.5,0.85) arc (140:40:2.3cm) -- ++(-0.18,-0.15) arc (40:140:2.06cm) -- cycle;
@@ -325,12 +325,13 @@ At $T_0 = \SI{20.0}{\celsius}$, a circular brass collar ($\alpha_{\mathrm{brass}
 \textbf{Solution.}
 \textbf{(a)} Heating only the brass collar until $D_{\mathrm{brass}}(T) = D_{\mathrm{brass},0}(1 + \alpha_{\mathrm{brass}}\Delta T) = D_{\mathrm{steel},0} = \SI{5.000}{\centi\meter}$:
 \[
-  \Delta T = \frac{D_{\mathrm{steel},0} - D_{\mathrm{brass},0}}{\alpha_{\mathrm{brass}}\,D_{\mathrm{brass},0}} = \frac{\SI{0.010}{\centi\meter}}{(\SI{19.0e-6}{\per\celsius})(\SI{4.990}{\centi\meter})} = \SI{105.47}{\celsius} \implies T = 20.0 + 105.5 = \mathbf{\SI{125.5}{\celsius}}.
+  \Delta T = \frac{D_{\mathrm{steel},0} - D_{\mathrm{brass},0}}{\alpha_{\mathrm{brass}}\,D_{\mathrm{brass},0}} = \frac{\SI{0.010}{\centi\meter}}{(\SI{19.0e-6}{\per\celsius})(\SI{4.990}{\centi\meter})} = \SI{105.47}{\celsius} \implies T = 20.0 + 105.5 = \SI{125.5}{\celsius} \approx \mathbf{\SI{1.3e2}{\celsius}}.
 \]
 \textbf{(b)} Heating both together to $T = T_0 + \Delta T$ requires $D_{\mathrm{brass},0}(1 + \alpha_{\mathrm{brass}}\Delta T) = D_{\mathrm{steel},0}(1 + \alpha_{\mathrm{steel}}\Delta T)$:
 \[
-  \Delta T = \frac{D_{\mathrm{steel},0} - D_{\mathrm{brass},0}}{\alpha_{\mathrm{brass}} D_{\mathrm{brass},0} - \alpha_{\mathrm{steel}} D_{\mathrm{steel},0}} = \frac{0.010}{19.0\times 10^{-6}(4.990) - 12.0\times 10^{-6}(5.000)} = \frac{0.010}{\num{3.481e-5}} = \SI{287.27}{\celsius} \implies T = \mathbf{\SI{307.3}{\celsius}}.
+  \Delta T = \frac{D_{\mathrm{steel},0} - D_{\mathrm{brass},0}}{\alpha_{\mathrm{brass}} D_{\mathrm{brass},0} - \alpha_{\mathrm{steel}} D_{\mathrm{steel},0}} = \frac{0.010}{19.0\times 10^{-6}(4.990) - 12.0\times 10^{-6}(5.000)} = \frac{0.010}{\num{3.481e-5}} = \SI{287.27}{\celsius} \implies T = \SI{307.3}{\celsius} \approx \mathbf{\SI{3.1e2}{\celsius}}.
 \]
+\textbf{Sig figs:} the gap $5.000 - 4.990 = \SI{0.010}{\centi\meter}$ has only 2 significant figures, so both temperatures are reported to 2 (full values kept in the working).
 \verifiedby{At $T = \SI{307.27}{\celsius}$, $D_{\mathrm{brass}} = 4.990(1 + 19\times 10^{-6}\times 287.274) = \SI{5.01723}{\centi\meter} = D_{\mathrm{steel}}$ (\texttt{check\_sec02\_05.py}).}
 \end{workedexample}
 
@@ -346,18 +347,18 @@ The volumetric expansion coefficient of isotropic Pyrex glass is $\beta_{\mathrm
 \end{workedexample}
 
 \begin{workedexample}[Bimetallic Strip Curvature \& Tip Deflection (Brass--Invar)]{National $\cdot$ Rule 5.c.i}{ex:03.4}
-A bimetallic thermostat cantilever of length $L_0 = \SI{8.00}{\centi\meter}$ is fabricated by bonding a $\SI{0.50}{\milli\meter}$-thick brass strip ($\alpha_2 = \SI{19.0e-6}{\per\celsius}$) to a $\SI{0.50}{\milli\meter}$-thick Invar strip ($\alpha_1 = \SI{0.90e-6}{\per\celsius}$) at $\SI{20.0}{\celsius}$. When heated to $\SI{120.0}{\celsius}$ ($\Delta T = \SI{100.0}{\celsius}$), compute (a) the center-to-center spacing $d$ and radius of curvature $R_{\mathrm{curv}}$, and (b) the transverse tip deflection $\delta_{\mathrm{tip}} \approx L_0^2 / (2R_{\mathrm{curv}})$ using the small-sagitta chord geometry $L_0^2 \approx 2R_{\mathrm{curv}}\delta_{\mathrm{tip}}$.
+A bimetallic thermostat cantilever of length $L_0 = \SI{8.00}{\centi\meter}$ is fabricated by bonding a $\SI{0.50}{\milli\meter}$-thick brass strip ($\alpha_2 = \SI{19.0e-6}{\per\celsius}$) to a $\SI{0.50}{\milli\meter}$-thick Invar strip ($\alpha_1 = \SI{1.2e-6}{\per\celsius}$) at $\SI{20.0}{\celsius}$. When heated to $\SI{120.0}{\celsius}$ ($\Delta T = \SI{100.0}{\celsius}$), compute (a) the center-to-center spacing $d$ and radius of curvature $R_{\mathrm{curv}}$, and (b) the transverse tip deflection $\delta_{\mathrm{tip}} \approx L_0^2 / (2R_{\mathrm{curv}})$ using the small-sagitta chord geometry $L_0^2 \approx 2R_{\mathrm{curv}}\delta_{\mathrm{tip}}$.
 
 \textbf{Solution.}
 \textbf{(a)} Center-to-center spacing of two $\SI{0.50}{\milli\meter}$ layers is $d = \SI{0.50}{\milli\meter} = \SI{5.00e-4}{\meter}$. From (\ref{eq:03:bimetallic}):
 \[
-  R_{\mathrm{curv}} \approx \frac{d}{(\alpha_2 - \alpha_1)\Delta T} = \frac{\SI{5.00e-4}{\meter}}{(19.0 - 0.90)\times 10^{-6}\,\si{\per\celsius} \times \SI{100.0}{\celsius}} = \frac{\SI{5.00e-4}{\meter}}{\num{1.810e-3}} = \mathbf{\SI{0.2762}{\meter} = \SI{27.6}{\centi\meter}}.
+  R_{\mathrm{curv}} \approx \frac{d}{(\alpha_2 - \alpha_1)\Delta T} = \frac{\SI{5.00e-4}{\meter}}{(19.0 - 1.2)\times 10^{-6}\,\si{\per\celsius} \times \SI{100.0}{\celsius}} = \frac{\SI{5.00e-4}{\meter}}{\num{1.780e-3}} = \mathbf{\SI{0.2809}{\meter} = \SI{28.1}{\centi\meter}}.
 \]
 \textbf{(b)} By the Pythagorean circle-chord relation $(R_{\mathrm{curv}} - \delta_{\mathrm{tip}})^2 + L_0^2 \approx R_{\mathrm{curv}}^2 \implies \delta_{\mathrm{tip}} \approx \dfrac{L_0^2}{2R_{\mathrm{curv}}}$ (zero trigonometry required!):
 \[
-  \delta_{\mathrm{tip}} \approx \frac{(\SI{0.0800}{\meter})^2}{2(\SI{0.27624}{\meter})} = \mathbf{\SI{0.01158}{\meter} = \SI{1.16}{\centi\meter}} \quad (\text{bending toward the Invar side}).
+  \delta_{\mathrm{tip}} \approx \frac{(\SI{0.0800}{\meter})^2}{2(\SI{0.28090}{\meter})} = \mathbf{\SI{0.01139}{\meter} = \SI{1.14}{\centi\meter}} \quad (\text{bending toward the Invar side}).
 \]
-\verifiedby{Exact formula (\ref{eq:03:bimetallic}) gives $R_{\mathrm{curv}} = \SI{0.27652}{\meter}$, $\delta_{\mathrm{tip}} = \SI{1.157}{\centi\meter}$ (\texttt{check\_sec02\_05.py}).}
+\verifiedby{Exact formula (\ref{eq:03:bimetallic}) gives $R_{\mathrm{curv}} = \SI{0.28118}{\meter}$, $\delta_{\mathrm{tip}} = \SI{1.138}{\centi\meter}$ (\texttt{check\_sec02\_05.py}).}
 \end{workedexample}
 
 \begin{workedexample}[Joule's Falling-Weight Paddle-Wheel Experiment (\texttt{Rule 5.c.v})]{Competition $\cdot$ Rules 5.c.i, 5.c.v}{ex:03.5}
@@ -387,7 +388,7 @@ Attributing the 1780 ice calorimeter to Joseph Black or the $T^4$ theoretical pr
 
 \begin{devicebox}[Thermal Expansion \& Softening Limits Inside the 2027 Heat-Lamp Collector]
 \idxdev{plastic party cup thermal softening and expansion!PET vs.\ PP}
-Under a $\SIrange{100}{125}{\watt}$ heat lamp at $\SI{40}{\centi\meter}$ height, dry upper rim sections of the ES-provided 9~oz clear plastic party cup (\texttt{Rule 3.c, 4.g}) can reach $\SIrange{65}{80}{\celsius}$, while the water-wetted lower wall stays near $T_{\mathrm{water}} \approx \SIrange{30}{48}{\celsius}$. Because disposable clear cups are thermoformed from \texttt{\#1 PET} ($T_g \approx \SI{74}{\celsius}$, $\alpha_L \approx \SI{65e-6}{\per\kelvin}$) or \texttt{\#5 PP} ($\alpha_L \approx \SI{100e-6}{\per\kelvin}$)---and \texttt{\#6 PS} is banned under \texttt{Clarification \#6}---your cup cradle (\sref{sec:15}) must leave a $\ge\SI{1.5}{\milli\meter}$ radial clearance so thermal expansion never binds the cup during the 1-minute extraction window (\texttt{Rule 5.II.g}) \src{S01,S02}.
+Under a $\SIrange{100}{125}{\watt}$ heat lamp at $\SI{40}{\centi\meter}$ height, dry upper rim sections of the ES-provided 9~oz clear plastic party cup (\texttt{Rule 3.c, 4.g}) can reach $\SIrange{65}{80}{\celsius}$, while the water-wetted lower wall stays near $T_{\mathrm{water}} \approx \SIrange{30}{48}{\celsius}$. Clear party cups are made from \texttt{\#1 PET} ($T_g \approx \SI{74}{\celsius}$, $\alpha_L \approx \SI{65e-6}{\per\kelvin}$), \texttt{\#5 PP} ($\alpha_L \approx \SI{100e-6}{\per\kelvin}$), or \texttt{\#6 PS} (clear polystyrene, $\alpha_L \approx \SI{70e-6}{\per\kelvin}$, softens near $\SI{100}{\celsius}$). The ES's cup may be any of these: the polystyrene ban (FAQ \texttt{10/22/2026}) applies to \emph{your device}, not to the cup. Your cup cradle (\sref{sec:15}) must leave a $\ge\SI{1.5}{\milli\meter}$ radial clearance so thermal expansion never binds the cup during the 1-minute extraction window (\texttt{Rule 5.II.g}) \src{S01,S02}.
 \end{devicebox}
 
 \alsosee{\spref{sec:01.1} (\texttt{QS-01} Scales), \spref{sec:01.2} (\texttt{QS-02} Expansion), \spref{sec:01.14} (\texttt{QS-14} 8 Scientists), \spref{sec:04} (Calorimetry), \spref{sec:08} (Entropy \& 3rd Law), and \spref{sec:12} (Planck/Stefan--Boltzmann Radiation).}

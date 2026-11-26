@@ -6,7 +6,7 @@
 \scopebanner{REQUIRED}[All 2027 Written Syllabus Clauses 5.c.i--vii \& Part II Device Testing]
 
 \idxtopic{misconceptions and error catalog!overview}\idxerr{overview of classic thermodynamics traps}
-Empirical analysis of official answer keys across the $N = 8$ Division~C tournament corpus (\texttt{E1--E8}, \sref{sec:22}) \src{S25,S26,S27,S28,S29,S30,S31,S32} and physics education research (Meltzer 2004; Loverude et al.\ 2002 \src{S35}) proves that over $70\%$ of lost calculation points stem from \textbf{16 recurring conceptual, sign, unit, and phase-boundary traps} rather than unfamiliar physics. Exam writers deliberately construct multiple-choice distractors and multi-part FRQ pitfalls around these exact traps. This chapter organizes all 16 trap families into a fast **Symptom $\to$ Likely Cause $\to$ 5-Second Diagnostic $\to$ Exact Fix** lookup catalog, followed by a numerical multiplier reverse-diagnostic table and six worked diagnostic case studies.
+Empirical analysis of official answer keys across the $N = 8$ Division~C tournament corpus (\texttt{E1--E8}, \sref{sec:22}) \src{S25,S26,S27,S28,S29,S30,S31,S32} and physics education research (Meltzer 2004; Loverude et al.\ 2002 \src{S35}) show the same \textbf{conceptual, sign, unit, and phase-boundary traps} recurring across tests, and the answer keys build multiple-choice distractors around several of them (\sref{sec:22}). We have no statistic for how many points each trap costs; the 16 trap families below are our grouping of what the keys and that research show. This chapter organizes all 16 trap families into a fast **Symptom $\to$ Likely Cause $\to$ 5-Second Diagnostic $\to$ Exact Fix** lookup catalog, followed by a numerical multiplier reverse-diagnostic table and six worked diagnostic case studies.
 
 % ============================================================================
 \section{Master Diagnostic Catalog Part I: Foundations, Temperature Scales, Calorimetry \& Phase Traps (\texttt{ERR-01}--\texttt{ERR-06})}\label{sec:20.1}
@@ -245,7 +245,7 @@ $\mathbf{1000}$ ($10^3$) or $\mathbf{10^6}$ & $\mathbf{10^{-3}}$ or $\mathbf{10^
 \begin{workedexample}[Case Study 1 (\texttt{ERR-05}): The Ice--Water Two-Phase Plateau Bypass Trap]{\texttt{Cornell E1 Q30d, GGSO E4 Q9a} \src{S25,S28}}{ex:20.1}
 In an insulated calorimeter of negligible heat capacity, $m_{\mathrm{ice}} = \SI{80.0}{\gram}$ of subcooled ice at $T_{\mathrm{ice}} = \SI{-15.0}{\celsius}$ ($c_{\mathrm{ice}} = \SI{2.10}{\joule\per\gram\per\kelvin}$, $L_f = \SI{333.55}{\joule\per\gram}$) is mixed with $m_w = \SI{120.0}{\gram}$ of liquid water at $T_w = \SI{25.0}{\celsius}$ ($c_w = \SI{4.184}{\joule\per\gram\per\kelvin}$). Find the final equilibrium temperature $T_f$ and phase composition.
 \par\smallskip\noindent
-\textbf{\xmark\ Naive Trap Path (What $65\%$ of Contestants Write):} Assuming all ice melts to liquid at $T_f > \SI{0}{\celsius}$ and solving a single linear equation:
+\textbf{\xmark\ Naive Trap Path (the common wrong setup):} Assuming all ice melts to liquid at $T_f > \SI{0}{\celsius}$ and solving a single linear equation:
 $$m_{\mathrm{ice}}c_{\mathrm{ice}}(0 - (-15.0)) + m_{\mathrm{ice}}L_f + m_{\mathrm{ice}}c_w(T_f - 0) = m_w c_w(25.0 - T_f) \implies 2520.0 + 26684.0 + 334.72\,T_f = 12552.0 - 502.08\,T_f$$
 $$836.80\,T_f = -16652.0 \implies T_{f,\mathrm{naive}} = \mathbf{\SI{-19.90}{\celsius}} \quad (\text{\textbf{PHYSICALLY IMPOSSIBLE:} colder than the initial }\SI{-15.0}{\celsius}\text{ ice!})$$
 \textbf{\cmark\ Diagnostic \& Correct 3-Gate Energy-Budget Solution:}

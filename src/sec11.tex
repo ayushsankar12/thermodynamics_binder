@@ -310,11 +310,11 @@ A vertical side wall of a $30.0\times 30.0\times\SI{30.0}{\centi\meter}$ collect
 \]
 (b) By Churchill and Chu (\tref{tab:11:correlations}):
 \[
-  \overline{\mathrm{Nu}}_L = 0.68 + \frac{0.670(\num{3.3967e7})^{1/4}}{\left[1 + (0.492/0.711)^{9/16}\right]^{4/9}} = 0.68 + \frac{50.888}{1.2768} = \mathbf{40.54}, \qquad
-  \bar{h} = \frac{k_f}{L}\overline{\mathrm{Nu}}_L = \frac{0.0265}{0.300}(40.54) = \mathbf{\SI{3.581}{\watt\per\square\meter\per\kelvin}}
+  \overline{\mathrm{Nu}}_L = 0.68 + \frac{0.670(\num{3.3967e7})^{1/4}}{\left[1 + (0.492/0.711)^{9/16}\right]^{4/9}} = 0.68 + \frac{51.15}{1.3027} = \mathbf{39.94}, \qquad
+  \bar{h} = \frac{k_f}{L}\overline{\mathrm{Nu}}_L = \frac{0.0265}{0.300}(39.94) = \mathbf{\SI{3.53}{\watt\per\square\meter\per\kelvin}}
 \]
-(c) Convective heat loss: $\dot{Q}_{\mathrm{conv}} = \bar{h} A \Delta T = (3.581)(0.0900)(14.0) = \mathbf{\SI{4.51}{\watt}}$ (or $\SI{4.45}{\watt}$ using exact unrounded $\mathrm{Nu}_L - 0.68$ scaling).\\
-(d) Since laminar natural convection scales as $h \propto \Delta T^{1/4}$ ($\dot{Q} \propto \Delta T^{5/4}$), doubling $\Delta T$ increases $\dot{Q}$ by $2^{5/4} = \mathbf{2.378\times}$ (to $\SI{10.6}{\watt}$), \emph{not} $2.0\times$!
+(c) Convective heat loss: $\dot{Q}_{\mathrm{conv}} = \bar{h} A \Delta T = (3.528)(0.0900)(14.0) = \mathbf{\SI{4.45}{\watt}}$.\\
+(d) Doubling $\Delta T$ doubles $\mathrm{Ra}_L$ (same air properties), so $0.670\,\mathrm{Ra}_L^{1/4}$ grows by $2^{1/4}$: $\overline{\mathrm{Nu}}_L = 0.68 + (51.15)(1.1892)/1.3027 = 47.37$, $\bar{h} = \SI{4.18}{\watt\per\square\meter\per\kelvin}$, and $\dot{Q} = (4.18)(0.0900)(28.0) = \mathbf{\SI{10.5}{\watt}}$, a ratio of $2.37$, \emph{not} $2.0$. (The pure power law $\dot{Q} \propto \Delta T^{5/4}$ gives $2^{5/4} = 2.38$; the constant $0.68$ term pulls it slightly lower.)
 \verifiedby{Evaluated in \texttt{check\_sec10\_13.py} (\texttt{EX-11.1-RAL}, \texttt{EX-11.1-Q}): $\mathrm{Ra}_L = \num{3.3967e7}$, $\dot{Q}_{\mathrm{conv}} = \SI{4.446}{\watt}$.}
 \end{workedexample}
 

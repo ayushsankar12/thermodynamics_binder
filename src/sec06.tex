@@ -7,7 +7,7 @@
 
 \idxtopic{ideal gas law}\idxtopic{kinetic theory of gases}\idxtopic{Maxwell--Boltzmann distribution}\idxtopic{equipartition theorem}\idxtopic{van der Waals equation}\idxtopic{Dalton's law of partial pressures}\idxtopic{Graham's law of effusion}
 
-Gas-law and kinetic-theory items appear on $100\%$ of surveyed Division~C exams \src{S25,S26,S27,S28}, spanning foundational pressure/temperature unit traps through multi-compartment piston equilibrium and quantum heat-capacity freeze-out. Every governing relation in this chapter is presented in closed algebraic form under Rule~\texttt{5.d.iv} \src{S01,S06}.
+Gas-law items appear on nearly every exam in our 8-exam corpus (\sref{sec:22}) \src{S25,S26,S27,S28}, spanning foundational pressure/temperature unit traps through multi-compartment piston equilibrium and quantum heat-capacity freeze-out. Every governing relation in this chapter is presented in closed algebraic form under Rule~\texttt{5.d.iv} \src{S01,S06}.
 
 % ============================================================================
 \section{Macroscopic Gas Variables: Absolute vs.\ Gauge Pressure, Manometry \& STP Standards}\label{sec:06.1}
@@ -322,10 +322,10 @@ In thermal equilibrium at temperature $T$, James Clerk Maxwell (1860) and Ludwig
   Using $\langle v\rangle^2 = (1.5v_0)^2 = 2.25\,v_0^2$ yields $T_{\mathrm{false}} = \frac{2.25m_0 v_0^2}{3k_B} = \frac{3m_0 v_0^2}{4k_B} = 0.7500\,\frac{m_0 v_0^2}{k_B}$, underestimating $T_{\mathrm{actual}}$ by $10.0\%$ because $\mathrm{Var}(v) = \langle v^2\rangle - \langle v\rangle^2 = 0.25\,v_0^2 > 0$!\idxerr{substituting mean speed $\langle v\rangle$ instead of $v_{\mathrm{rms}}$ in temperature formula}
   \item \textbf{(b) Characteristic speeds and mean free path for $\mathrm{N_2}$ at $\SI{300.0}{\kelvin}, \SI{101.325}{\kilo\pascal}$:}
   \[
-    v_{\mathrm{mp}} = \sqrt{\frac{2RT}{M}} = \mathbf{\SI{422.09}{\meter\per\second}}, \qquad v_{\mathrm{avg}} = \sqrt{\frac{8RT}{\pi M}} = \mathbf{\SI{476.28}{\meter\per\second}}, \qquad v_{\mathrm{rms}} = \sqrt{\frac{3(8.314463)(300.0)}{0.0280134}} = \mathbf{\SI{516.95}{\meter\per\second}}
+    v_{\mathrm{mp}} = \sqrt{\frac{2RT}{M}} = \mathbf{\SI{422.00}{\meter\per\second}}, \qquad v_{\mathrm{avg}} = \sqrt{\frac{8RT}{\pi M}} = \mathbf{\SI{476.17}{\meter\per\second}}, \qquad v_{\mathrm{rms}} = \sqrt{\frac{3(8.314463)(300.0)}{0.0280134}} = \mathbf{\SI{516.84}{\meter\per\second}}
   \]
   \[
-    \lambda = \frac{k_B T}{\sqrt{2}\,\pi d^2 P} = \frac{(1.380649\times 10^{-23})(300.0)}{\sqrt{2}\,\pi (3.70\times 10^{-10})^2 (101325)} = \mathbf{\SI{6.721e-8}{\meter}} = \SI{67.21}{\nano\meter}, \qquad Z_{\mathrm{coll}} = \frac{v_{\mathrm{avg}}}{\lambda} = \mathbf{\SI{7.087e9}{\per\second}}
+    \lambda = \frac{k_B T}{\sqrt{2}\,\pi d^2 P} = \frac{(1.380649\times 10^{-23})(300.0)}{\sqrt{2}\,\pi (3.70\times 10^{-10})^2 (101325)} = \mathbf{\SI{6.721e-8}{\meter}} = \SI{67.21}{\nano\meter}, \qquad Z_{\mathrm{coll}} = \frac{v_{\mathrm{avg}}}{\lambda} = \mathbf{\SI{7.085e9}{\per\second}}
   \]
 \end{enumerate}
 \verifiedby{Number density $n_{\#} = P/(k_BT) = \SI{2.446e25}{\per\cubic\meter}$ gives $\lambda = 1/(\sqrt{2}\pi d^2 n_{\#}) = \SI{67.21}{\nano\meter}$ (\texttt{check\_sec06\_09.py::ex06\_4}).}
@@ -605,10 +605,10 @@ Consider $n = \SI{10.00}{\mole}$ of carbon dioxide ($\mathrm{CO_2}$, $a = \SI{0.
     P_{\mathrm{ideal}} = \frac{RT_1}{V_m} = \frac{(8.314463)(350.0)}{5.000\times 10^{-4}} = \SI{5.8201e6}{\pascal} = \mathbf{\SI{58.201}{\bar}}
   \]
   \[
-    P_{\mathrm{vdW}} = \frac{RT_1}{V_m - b} - \frac{a}{V_m^2} = \frac{(8.314463)(350.0)}{(5.000 - 0.4286)\times 10^{-4}} - \frac{0.3658}{(5.000\times 10^{-4})^2} = 6.3656\times 10^6 - 1.4632\times 10^6 = \SI{4.9024e6}{\pascal} = \mathbf{\SI{49.024}{\bar}}
+    P_{\mathrm{vdW}} = \frac{RT_1}{V_m - b} - \frac{a}{V_m^2} = \frac{(8.314463)(350.0)}{(5.000 - 0.4286)\times 10^{-4}} - \frac{0.3658}{(5.000\times 10^{-4})^2} = 6.3658\times 10^6 - 1.4632\times 10^6 = \SI{4.9026e6}{\pascal} = \mathbf{\SI{49.026}{\bar}}
   \]
   \[
-    Z_{\mathrm{vdW}} = \frac{P_{\mathrm{vdW}}}{P_{\mathrm{ideal}}} = \frac{49.024}{58.201} = \mathbf{0.8423} < 1 \quad (\text{attractions reduce } P \text{ by } \SI{9.18}{\bar} \text{ or } 15.8\%!)
+    Z_{\mathrm{vdW}} = \frac{P_{\mathrm{vdW}}}{P_{\mathrm{ideal}}} = \frac{49.026}{58.201} = \mathbf{0.8424} < 1 \quad (\text{attractions reduce } P \text{ by } \SI{9.18}{\bar} \text{ or } 15.8\%!)
   \]
   \item \textbf{(b) Adiabatic free-expansion cooling ($Q = 0, W_{\mathrm{by}} = 0 \implies \Delta U_{\mathrm{vdW}} = 0$):}
   \[

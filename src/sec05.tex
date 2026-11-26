@@ -465,15 +465,15 @@ Air inside a testing gymnasium of volume $V = \SI{1000}{\cubic\meter}$ is at $T_
 \textbf{Solution.}
 \textbf{(a)} From (\ref{eq:05:psychro}), $P_{v,1} = \mathrm{RH}_1\,P_{\mathrm{sat}}(\SI{30}{\celsius}) = (0.600)(\SI{4.2470}{\kilo\pascal}) = \mathbf{\SI{2.5482}{\kilo\pascal}}$ and dry-air partial pressure is $P_{a,1} = 101.325 - 2.5482 = \SI{98.7768}{\kilo\pascal}$, giving humidity ratio:
 \[
-  \omega_1 = 0.62198\,\frac{P_{v,1}}{P - P_{v,1}} = 0.62198\,\frac{2.5482}{98.7768} = \mathbf{\SI{0.016045}{\kilogram\per\kilogram}\;(\SI{16.05}{\gram\per\kilogram}\text{ dry air})}.
+  \omega_1 = 0.62198\,\frac{P_{v,1}}{P - P_{v,1}} = 0.62198\,\frac{2.5482}{98.7768} = \mathbf{\SI{0.016046}{\kilogram\per\kilogram}\;(\SI{16.05}{\gram\per\kilogram}\text{ dry air})}.
 \]
 \textbf{(b)} At the dew point, $P_{\mathrm{sat}}(T_{\mathrm{dp}}) = P_{v,1} = \SI{2.5482}{\kilo\pascal}$, which lies between $\SI{20}{\celsius}$ ($\SI{2.3393}{\kilo\pascal}$) and $\SI{25}{\celsius}$ ($\SI{3.1699}{\kilo\pascal}$). Linear interpolation gives $T_{\mathrm{dp}} \approx 20.0 + 5.0\frac{2.5482 - 2.3393}{3.1699 - 2.3393} = \mathbf{\SI{21.26}{\celsius}}$ (exact Antoine solution: $\SI{21.39}{\celsius}$).
-\textbf{(c)} Mass of dry air in the $\SI{1000}{\cubic\meter}$ room is $m_a = \dfrac{P_{a,1}V M_a}{RT_1} = \dfrac{(\SI{98776.8}{\pascal})(\SI{1000}{\cubic\meter})(\SI{0.028965}{\kilogram\per\mole})}{(\SI{8.31446}{\joule\per\mole\per\kelvin})(\SI{303.15}{\kelvin})} = \SI{1134.9}{\kilogram}$. Because $T_2 = \SI{15.0}{\celsius} < T_{\mathrm{dp}}$, the air becomes saturated at $\SI{15.0}{\celsius}$ ($P_{v,2} = P_{\mathrm{sat}}(\SI{15}{\celsius}) = \SI{1.7057}{\kilo\pascal}$):
+\textbf{(c)} Mass of dry air in the $\SI{1000}{\cubic\meter}$ room is $m_a = \dfrac{P_{a,1}V M_a}{RT_1} = \dfrac{(\SI{98776.8}{\pascal})(\SI{1000}{\cubic\meter})(\SI{0.028965}{\kilogram\per\mole})}{(\SI{8.31446}{\joule\per\mole\per\kelvin})(\SI{303.15}{\kelvin})} = \SI{1135.1}{\kilogram}$. Because $T_2 = \SI{15.0}{\celsius} < T_{\mathrm{dp}}$, the air becomes saturated at $\SI{15.0}{\celsius}$ ($P_{v,2} = P_{\mathrm{sat}}(\SI{15}{\celsius}) = \SI{1.7057}{\kilo\pascal}$):
 \[
-  \omega_2 = 0.62198\,\frac{1.7057}{101.325 - 1.7057} = \SI{0.010649}{\kilogram\per\kilogram} \implies
-  m_{\mathrm{cond}} = m_a(\omega_1 - \omega_2) = (\SI{1134.9}{\kilogram})(0.016045 - 0.010649) = \mathbf{\SI{6.124}{\kilogram}}.
+  \omega_2 = 0.62198\,\frac{1.7057}{101.325 - 1.7057} = \SI{0.010650}{\kilogram\per\kilogram} \implies
+  m_{\mathrm{cond}} = m_a(\omega_1 - \omega_2) = (\SI{1135.1}{\kilogram})(0.016046 - 0.010650) = \mathbf{\SI{6.125}{\kilogram}}.
 \]
-\verifiedby{Ideal-gas vapor check: $\Delta m_v = m_a(\omega_1 - \omega_2) = \SI{6.124}{\kilogram}$ (\texttt{check\_sec02\_05.py}).}
+\verifiedby{Ideal-gas vapor check: $\Delta m_v = m_a(\omega_1 - \omega_2) = \SI{6.125}{\kilogram}$ (\texttt{check\_sec02\_05.py}).}
 \end{workedexample}
 
 \begin{workedexample}[Adiabatic Crystallization of Supercooled Water \& Colligative Antifreeze Check]{Competition $\cdot$ Rule 5.c.ii}{ex:05.6}
@@ -490,7 +490,7 @@ Air inside a testing gymnasium of volume $V = \SI{1000}{\cubic\meter}$ is at $T_
 \[
   m_{\mathrm{CaCl_2}} = (\SI{0.2000}{\kilogram})(\SI{2.1587}{\mole\per\kilogram})(\SI{110.98}{\gram\per\mole}) = \mathbf{\SI{47.91}{\gram}}.
 \]
-\verifiedby{Energy released by freezing $\SI{30.106}{\gram}$ ice ($\SI{10041.6}{\joule}$) equals sensible warming of $\SI{200.0}{\gram}$ water by $\SI{12.0}{\kelvin}$ (\texttt{check\_sec02\_05.py}).}
+\verifiedby{Energy released by freezing $\SI{30.105}{\gram}$ ice ($\SI{10041.6}{\joule}$) equals sensible warming of $\SI{200.0}{\gram}$ water by $\SI{12.0}{\kelvin}$ (\texttt{check\_sec02\_05.py}).}
 \end{workedexample}
 
 \begin{workedexample}[Dry Ice ($\mathrm{CO_2(s)}$) Sublimation Bath \& Sealed-Vessel Triple-Point Liquefaction]{National $\cdot$ Rules 5.c.ii, 5.c.vi}{ex:05.7}
