@@ -1395,11 +1395,15 @@ def sec17_20():
         chk("EX-17.3-IRW", "sec17", "IR reading on water [C]", "44.21", (Ta ** 4 + 0.96 / 0.95 * (To ** 4 - Ta ** 4)) ** 0.25 - 273.15),
         chk("EX-17.3-IRF", "sec17", "IR reading on foil [C]", "23.03", (Ta ** 4 + 0.04 / 0.95 * (To ** 4 - Ta ** 4)) ** 0.25 - 273.15),
     ]
-    Teq = (185.0 * 46.50 + 0.450 * 21.50) / 185.45
+    Teq = (215.0 * 49.70 + 0.450 * 21.50) / 215.45
     Tb = 100.00 + 0.03686 * (-18.0) - 0.000020 * 18.0 ** 2
     out += [
-        chk("EX-17.4-TEQ", "sec17", "equilibrium after probe drain [C]", "46.439", Teq),
-        chk("EX-17.4-T2", "sec17", "reading at 2 tau [C]", "43.06", Teq - (Teq - 21.50) * math.exp(-2)),
+        chk("EX-17.4-TEQ", "sec17", "equilibrium after probe drain [C]", "49.641", Teq),
+        chk("EX-17.4-DRAIN", "sec17", "probe drain [C]", "-0.059", Teq - 49.70),
+        chk("EX-17.4-T2", "sec17", "reading at 2 tau [C]", "45.83", Teq - (Teq - 21.50) * math.exp(-2)),
+        chk("EX-17.4-LOSS2", "sec17", "premature-reading loss at 2 tau [C]", "3.81", (Teq - 21.50) * math.exp(-2)),
+        chk("EX-17.4-T5", "sec17", "reading at 5 tau [C]", "49.45", Teq - (Teq - 21.50) * math.exp(-5)),
+        chk("EX-17.4-WITHIN5", "sec17", "gap to T_eq at 5 tau [C]", "0.19", (Teq - 21.50) * math.exp(-5)),
         chk("EX-17.4-TB", "sec17", "boiling point at 742 mmHg [C]", "99.330", Tb),
         chk("EX-17.4-TTRUE", "sec17", "two-point calibrated reading [C]", "44.56", Tb * 44.50 / 99.20),
     ]

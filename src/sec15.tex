@@ -666,7 +666,7 @@ As proved in \sref{sec:14.3} from Hale \& Querry (1973) \src{S19}, liquid water 
   \delta_{\mathrm{th,water}}(t) = 2\sqrt{\alpha_w t} = 2\sqrt{(\SI{1.45e-7}{\square\meter\per\second})(\SI{600}{\second})} = \SI{0.01865}{\meter} = \SI{18.65}{\milli\meter}
 \end{equation}
 \idxformula{water thermal diffusion depth: \delta_{\mathrm{th}} = 2\sqrt{\alpha_w t} = 18.7\,\mathrm{mm}\text{ at }10\,\mathrm{min}}
-Because $\delta_{\mathrm{th}}(\SI{600}{\second}) = \SI{18.65}{\milli\meter}$ is barely half the $\SI{38.0}{\milli\meter}$ water depth, the top $\SIrange{5}{12}{\milli\meter}$ probe zone retains an effective stratified heat capacity of $C_{\mathrm{top,eff}} \approx \SI{215.0}{\joule\per\kelvin}$—yielding a measured top-layer temperature gain $\mathrm{TG}_{\mathrm{top}}$ that is \textbf{$\kappa_{\mathrm{strat}} = \mathrm{TG}_{\mathrm{top}}/\mathrm{TG}_{\mathrm{bulk}} \approx 1.45\times$ to $1.65\times$ higher} than a well-mixed cup!
+Because $\delta_{\mathrm{th}}(\SI{600}{\second}) = \SI{18.65}{\milli\meter}$ is barely half the $\SI{38.0}{\milli\meter}$ water depth, the top $\SIrange{5}{12}{\milli\meter}$ probe zone retains an effective stratified heat capacity of $C_{\mathrm{top,eff}} \approx \SI{215.0}{\joule\per\kelvin}$—yielding a measured top-layer temperature gain $\mathrm{TG}_{\mathrm{top}}$ that is \textbf{$\kappa_{\mathrm{strat}} = \mathrm{TG}_{\mathrm{top}}/\mathrm{TG}_{\mathrm{bulk}} \approx 1.56\times$ higher} than a well-mixed cup (Ex~\ref{ex:15.4}).
 
 \begin{formulacard}[Two-Node Stratification Factor $\kappa_{\mathrm{strat}}$ \& Sherwood--Nusselt Evaporative Heat Loss]
 \idxformula{stratification gain factor: \kappa_{\mathrm{strat}} = \mathrm{TG}_{\mathrm{top}}/\mathrm{TG}_{\mathrm{bulk}}}
@@ -675,7 +675,7 @@ Because $\delta_{\mathrm{th}}(\SI{600}{\second}) = \SI{18.65}{\milli\meter}$ is 
 $\kappa_{\mathrm{strat}}(t) \equiv \dfrac{\mathrm{TG}_{\mathrm{top}}(t)}{\mathrm{TG}_{\mathrm{bulk}}(t)} = \dfrac{T_{\mathrm{top}}(t) - T_{\mathrm{start}}}{T_{\mathrm{bulk}}(t) - T_{\mathrm{start}}}$
   & $\mathrm{TG}_{\mathrm{top}}$: ES-probed top-layer gain ($z \in [\SI{5}{\milli\meter}, \SI{12}{\milli\meter}]$); $\mathrm{TG}_{\mathrm{bulk}} = Q_{\mathrm{net}}/(m_w c_{p,w})$: well-mixed gain $[\si{\celsius}]$.
   & \RULEf
-  & For glazed top-down NIR heating: $\kappa_{\mathrm{strat}} \approx 1.58$ at $t=\SI{10}{\minute}$ and $1.48$ at $t=\SI{15}{\minute}$. \\
+  & Reference collector (modeled): $\kappa_{\mathrm{strat}} = 1.556$ at $t=\SI{10}{\minute}$ (Ex~\ref{ex:15.4}). \\
 $T_{\mathrm{mixed}} = \dfrac{C_{\mathrm{top}}T_{\mathrm{top}} + C_{\mathrm{bot}}T_{\mathrm{bot}}}{C_{\mathrm{top}} + C_{\mathrm{bot}}}$
   & $C_{\mathrm{top}} \approx \SI{215.0}{\joule\per\kelvin}$, $C_{\mathrm{bot}} \approx \SI{203.4}{\joule\per\kelvin}$, $C_{\mathrm{tot}} = \SI{418.4}{\joule\per\kelvin}$.
   & \CLSD
@@ -705,17 +705,11 @@ $m_{\mathrm{sat,hs}} = \dfrac{P_{\mathrm{sat}}(T_{\mathrm{hs}})\,V_{\mathrm{hs}}
     grid=both,
     grid style={gray!25, dashed},
     tick align=inside,
-    legend style={at={(0.98,0.03)}, anchor=south east, font=\scriptsize, fill=white, draw=navy, row sep=0.5pt}
+    legend style={at={(0.5,-0.30)}, anchor=north, legend columns=2, font=\scriptsize, fill=white, draw=navy, column sep=4pt}
 ]
 % ES Probe measurement zone (z = 4 to 12 mm)
-\fill[amber!16] (axis cs:20,3.0) rectangle (axis cs:56,12.0);
-\node[anchor=west, font=\scriptsize\bfseries, text=amber!85!black] at (axis cs:20.5,7.5) {ES Top-Layer Probe Zone ($z=\SIrange{4}{12}{\milli\meter}$)};
-
-% Curve 1: t = 15 min Glazed CPC (h=45 cm, 125 W)
-\addplot[very thick, color=navy, mark=*, mark size=1.6pt] coordinates {
-    (54.2, 0.5) (54.8, 3.0) (54.5, 6.0) (53.1, 10.0) (48.2, 16.0) (41.5, 24.0) (36.8, 32.0) (35.4, 38.0)
-};
-\addlegendentry{$t=\SI{15}{\minute}$ Glazed CPC}
+\fill[amber!16] (axis cs:20,4.0) rectangle (axis cs:56,12.0);
+\node[anchor=west, font=\scriptsize\bfseries, text=amber!85!black] at (axis cs:20.5,8.0) {ES probe zone ($z=\SIrange{4}{12}{\milli\meter}$)};
 
 % Curve 2: t = 10 min Glazed CPC (h=45 cm, 125 W)
 \addplot[very thick, color=teal!80!black, mark=square*, mark size=1.5pt] coordinates {
@@ -729,18 +723,12 @@ $m_{\mathrm{sat,hs}} = \dfrac{P_{\mathrm{sat}}(T_{\mathrm{hs}})\,V_{\mathrm{hs}}
 };
 \addlegendentry{$t=\SI{10}{\minute}$ Open (No Cap)}
 
-% Curve 4: t = 5 min Glazed CPC
-\addplot[thick, color=amber!90!black, dotted, mark=diamond*, mark size=1.5pt] coordinates {
-    (37.6, 0.5) (37.8, 4.0) (37.2, 8.0) (35.1, 14.0) (30.2, 22.0) (26.4, 30.0) (25.2, 38.0)
-};
-\addlegendentry{$t=\SI{5}{\minute}$ Glazed CPC}
-
 % Vertical line showing Well-Mixed Bulk crash at t = 10 min (T_bulk = 39.8 C)
 \draw[rust, very thick, dashdotted] (axis cs:39.8,0) -- (axis cs:39.8,38);
-\node[rotate=90, anchor=south, font=\scriptsize\bfseries, text=rust] at (axis cs:39.5,24) {Swirled Bulk Crash ($\SI{39.8}{\celsius}$)};
+\node[rotate=90, anchor=north, font=\scriptsize\bfseries, text=rust] at (axis cs:40.2,30) {Swirled: $\SI{39.8}{\celsius}$};
 \end{axis}
 \end{tikzpicture}
-\captionof{figure}{Vertical temperature profiles $T(z,t)$ inside the unstirred $\SI{9}{oz}$ cup ($h=\SI{45}{\centi\meter}, \SI{125}{\watt}$). Omitting the BoPET cap cools the top skin by $\SI{7.6}{\celsius}$ via evaporation; swirling crashes $T_{\mathrm{top}}$ from $\SI{49.7}{\celsius}$ to $\SI{39.8}{\celsius}$ \src{S02,S12,S19}.}\label{fig:15:stratification-profile}
+\captionof{figure}{Modeled vertical temperature profile $T(z)$ of the reference collector after $\SI{10}{\minute}$ in the unstirred $\SI{9}{oz}$ cup ($h=\SI{45}{\centi\meter}, \SI{125}{\watt}$, $T_{\mathrm{start}} = \SI{22.0}{\celsius}$; same model as Ex~\ref{ex:15.4} and \fref{fig:17:probe-depth-bias}). Omitting the BoPET cap cools the top skin by $\SI{7.6}{\celsius}$ via evaporation; swirling crashes $T_{\mathrm{top}}$ from $\SI{49.7}{\celsius}$ to $\SI{39.8}{\celsius}$ \src{S02,S12,S19}.}\label{fig:15:stratification-profile}
 \idxfig{vertical water temperature stratification profile T(z,t) in 9 oz cup}
 \end{center}
 \nextcol[0.48]
@@ -784,29 +772,6 @@ Because evaporation extracts latent heat directly from the top water skin, it de
 which requires only $Q_{\mathrm{sat,hs}} = L_v\Delta m_{\mathrm{sat,hs}} = (\SI{2406}{\joule\per\gram})(\SI{6.292e-3}{\gram}) = \mathbf{\SI{15.14}{\joule}}$ (reducing evaporative loss by $\mathbf{98.9\%}$!).
 \verifiedby{Ideal-gas vapor density $\rho_{v,\mathrm{sat}}(\SI{40}{\celsius}) = P_{\mathrm{sat}}M/(RT) = \SI{51.09}{\gram\per\cubic\meter}$ (NIST steam tables: $1/v_g = \SI{51.24}{\gram\per\cubic\meter}$, $0.3\%$ higher) \src{S09}; asserted in \texttt{check\_sec14\_16.py}.}
 \end{workedexample}
-
-\begin{center}
-\captionof{table}{Eight-layer vertical discretization of the $\SI{100.0}{\milli\liter}$ water column inside the tapered $\SI{9}{oz}$ cup ($h=\SI{45}{\centi\meter}, \SI{125}{\watt}$ lamp, $T_{\mathrm{start}}=\SI{22.0}{\celsius}$) \src{S09,S19}.}\label{tab:15:water-layers}
-\footnotesize\setlength{\tabcolsep}{2.8pt}\renewcommand{\arraystretch}{1.12}
-\begin{tabularx}{\linewidth}{@{}lrrrrrrrr>{\raggedright\arraybackslash}X@{}}
-\toprule
-\hdr{Water Layer $k$} & \hdr{Depth $z$} & \hdr{Mean $r_k$} & \hdr{Volume $\Delta V_k$} & \hdr{$C_k$} & \hdr{NIR Share} & \hdr{$T_k(\SI{5}{\minute})$} & \hdr{$T_k(\SI{10}{\minute})$} & \hdr{$T_k(\SI{15}{\minute})$} & \hdr{Physical Regime \& ES Probe Role} \\
- & \tiny$[\si{\milli\meter}]$ & \tiny$[\si{\centi\meter}]$ & \tiny$[\si{\milli\liter}]$ & \tiny$[\si{\joule\per\kelvin}]$ & \tiny$[\%]$ & \tiny$[\si{\celsius}]$ & \tiny$[\si{\celsius}]$ & \tiny$[\si{\celsius}]$ & \\
-\midrule
-\textbf{Layer~1 (Surface Skin)} & $0.0\text{--}2.0$ & $3.059$ & $5.88$ & $24.6$ & $\mathbf{57.3\%}$ & $37.6$ & $49.4$ & $54.2$ & Intense $\SI{1.44}{\micro\meter}$ \& $\SI{1.94}{\micro\meter}$ $\mathrm{O-H}$ overtone capture. \\
-\rowcolor{rowalt}\textbf{Layer~2 (Upper Core)} & $2.0\text{--}5.0$ & $3.032$ & $8.66$ & $36.2$ & $\mathbf{9.1\%}$ & $\mathbf{37.8}$ & $\mathbf{49.9}$ & $\mathbf{54.8}$ & \textbf{Peak ES Probe Zone (\texttt{Clarification \#4}).} \\
-\textbf{Layer~3 (Mid-Top)} & $5.0\text{--}10.0$ & $2.988$ & $14.03$ & $58.7$ & $\mathbf{6.0\%}$ & $\mathbf{37.2}$ & $\mathbf{49.1}$ & $\mathbf{53.9}$ & \textbf{Lower ES Probe Tip Zone ($z=\SIrange{5}{10}{\milli\meter}$).} \\
-\rowcolor{rowalt}\textbf{Layer~4 (Thermocline)} & $10.0\text{--}15.0$ & $2.933$ & $13.51$ & $56.5$ & $3.4\%$ & $35.1$ & $45.4$ & $50.1$ & Steepest conductive gradient ($\partial T/\partial z \approx \SI{-1.1}{\celsius\per\milli\meter}$). \\
-\textbf{Layer~5 (Upper-Mid)} & $15.0\text{--}20.0$ & $2.878$ & $13.01$ & $54.4$ & $2.5\%$ & $31.8$ & $40.2$ & $44.8$ & Molecular diffusion front reaches here at $t\approx\SI{600}{\second}$. \\
-\rowcolor{rowalt}\textbf{Layer~6 (Lower-Mid)} & $20.0\text{--}26.0$ & $2.817$ & $14.96$ & $62.6$ & $2.1\%$ & $28.4$ & $35.2$ & $39.6$ & Weak direct $\SI{0.97}{\micro\meter}$ band + downward conduction. \\
-\textbf{Layer~7 (Deep Bulk)} & $26.0\text{--}32.0$ & $2.751$ & $14.27$ & $59.7$ & $1.4\%$ & $26.1$ & $31.8$ & $36.2$ & Stays cool ($\rho = \SI{995.1}{\kilogram\per\cubic\meter}$ anchors buoyant stability). \\
-\rowcolor{rowalt}\textbf{Layer~8 (Cup Base)} & $32.0\text{--}38.0$ & $2.685$ & $15.68$ & $65.6$ & $5.8\%$\textsuperscript{a} & $25.2$ & $30.8$ & $35.4$ & Second-pass upward reflection from bottom foil mirror. \\
-\midrule
-\textbf{Total / Bulk Mixed} & $0.0\text{--}38.0$ & --- & $\mathbf{100.00}$ & $\mathbf{418.4}$ & $\mathbf{87.6\%}$\textsuperscript{a} & $\mathbf{31.1}$ & $\mathbf{39.8}$ & $\mathbf{44.7}$ & \textbf{Top Probe Readout = $\SI{49.7}{\celsius}$ vs.\ Bulk $\SI{39.8}{\celsius}$!} \\
-\bottomrule
-\multicolumn{10}{@{}l}{\scriptsize\textsuperscript{a}Includes $+5.0\%$ second-pass upward absorption from the concave shiny aluminum-foil mirror beneath the clear cup base.}
-\end{tabularx}
-\end{center}
 
 % ============================================================================
 \section{Non-Contact Cup Cradle, Zero-Water-Contact Clearance \& Decision Matrix}\label{sec:15.6}

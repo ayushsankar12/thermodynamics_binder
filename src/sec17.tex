@@ -383,16 +383,16 @@ When a thermometer probe of sensing-tip mass $m_p$, specific heat $c_p$, wetted 
 \end{itemize}
 \end{rulebox}
 
-Why does probe placement inside the $\SI{100}{\milli\liter}$ water column ($\SI{38}{\milli\meter}$ total fill depth in a standard $\SI{9}{oz}$ clear cup) shift the measured temperature $T_f$ by up to $\SIrange{4.0}{8.5}{\celsius}$?
+Why does probe placement inside the $\SI{100}{\milli\liter}$ water column ($\SI{38}{\milli\meter}$ total fill depth in a standard $\SI{9}{oz}$ clear cup) shift the measured temperature $T_f$ by up to about $\SI{19}{\celsius}$ (\fref{fig:17:probe-depth-bias})?
 \begin{enumerate}
   \item \textbf{Vertical Optical Deposition \& Hydrostatic Stability ($z$-Axis Bias):}
   As established by the Hale \& Querry (1973) and Kou et al.\ (1993) liquid-water near-IR absorption spectra (\sref{sec:14}, \sref{sec:15.3}) \src{S19,S20}, $>66\%$ of the $\SI{2400}{\kelvin}$ tungsten heat lamp's transmitted radiant energy is absorbed directly inside the \textbf{top $z = \SI{5}{\milli\meter}$} of water ($>72\%$ in the top $\SI{10}{\milli\meter}$). Because liquid water above $\SI{4}{\celsius}$ expands when heated ($\partial\rho/\partial T < 0$), the hot top water layer is less dense than the cooler water beneath it ($\partial\rho/\partial z > 0$ downward). This gravitationally stable density profile completely suppresses vertical natural-convection overturning ($\mathrm{Ra} < 0$), trapping heat in the upper $\SIrange{5}{15}{\milli\meter}$ stratum while heat trickles downward only via slow molecular conduction ($\alpha_w = \SI{1.45e-7}{\square\meter\per\second}$, diffusion depth $\delta_{\mathrm{th}} = \sqrt{4\alpha_w t} \approx \SI{18.7}{\milli\meter}$ after $\SI{10}{\minute}$) \src{S12}.
   \item \textbf{Uncovered Surface Evaporative Skin Cooling ($z = \SIrange{0}{1.5}{\milli\meter}$):}
-  The instant the cup is uncovered at the end of Heating Time (\texttt{Rule 5.II.g}), evaporative latent heat loss ($\dot{Q}_{\mathrm{evap}} \approx \SIrange{2.2}{4.4}{\watt}$, \sref{sec:15.4}) cools the uppermost $\SI{1}{\milli\meter}$ free-surface skin by $\SIrange{0.4}{0.9}{\celsius}$ within $\SIrange{15}{30}{\second}$. Consequently, the \textbf{peak water temperature} sits just below the evaporative surface boundary layer at depth $\mathbf{z_{\mathrm{opt}} = \SIrange{5}{12}{\milli\meter}}$ --- the exact zone targeted by an electronic probe tip under Clarification~\texttt{\#4}!
+  The instant the cup is uncovered at the end of Heating Time (\texttt{Rule 5.II.g}), evaporative latent heat loss ($\dot{Q}_{\mathrm{evap}} \approx \SIrange{2.2}{4.4}{\watt}$, \sref{sec:15.4}) cools the uppermost $\SI{1}{\milli\meter}$ free-surface skin by $\SIrange{0.4}{0.9}{\celsius}$ within $\SIrange{15}{30}{\second}$. Consequently, the \textbf{peak water temperature} sits just below the evaporative surface boundary layer at depth $\mathbf{z_{\mathrm{opt}} \approx \SIrange{3}{6}{\milli\meter}}$ (\fref{fig:15:stratification-profile}), inside the $\SIrange{4}{12}{\milli\meter}$ zone an electronic probe tip reaches when the ES follows the FAQ (10/06/2026).
   \item \textbf{Radial Sidewall Cooling Boundary Layer ($r$-Axis Bias):}
   Along the vertical plastic cup wall ($r = R_{\mathrm{water}} \approx \SI{33.8}{\milli\meter}$), radial heat loss to the ambient room cools a $\delta_T \approx \SIrange{3}{5}{\milli\meter}$ natural-convection boundary layer, creating a downward-sinking wall plume that feeds cool water to the cup bottom while leaving the central core ($r < \SI{12}{\milli\meter}$) $\SIrange{0.6}{1.8}{\celsius}$ warmer than the perimeter wall (\fref{fig:17:probe-depth-bias}).
   \item \textbf{Probe Stem Conduction Error at Ultra-Shallow Immersion ($z < \SI{4}{\milli\meter}$):} \idxtopic{stem conduction error in probe}
-  A stainless-steel probe sheath ($k_{\mathrm{ss}} \approx \SI{15}{\watt\per\meter\per\kelvin}$, diameter $d_p = \SI{3.2}{\milli\meter}$) acts as a conductive fin protruding into $\SI{22}{\celsius}$ room air. If immersed only $\SI{2}{\milli\meter}$ deep so part of the internal thermistor/RTD element sits above the waterline, axial stem conduction pulls the sensor reading down by $\SIrange{0.8}{2.5}{\celsius}$. Immersing the tip to $z = \SIrange{8}{12}{\milli\meter}$ ($2.5\text{--}4$ sheath diameters) submerges the entire active thermistor/thermocouple bead inside the peak isothermal stratum while minimizing stem-fin cooling.
+  A stainless-steel probe sheath ($k_{\mathrm{ss}} \approx \SI{15}{\watt\per\meter\per\kelvin}$, diameter $d_p = \SI{3.2}{\milli\meter}$) acts as a conductive fin protruding into $\SI{22}{\celsius}$ room air. If immersed only $\SI{2}{\milli\meter}$ deep so part of the internal thermistor/RTD element sits above the waterline, axial stem conduction pulls the sensor reading down by $\SIrange{0.8}{2.5}{\celsius}$. Immersing the tip to $z \approx \SIrange{6}{8}{\milli\meter}$ (about 2--2.5 sheath diameters) keeps the bead submerged and still in the hot top layer; at $\SI{10}{\milli\meter}$ the modeled profile already reads $\SI{1.3}{\celsius}$ lower (\fref{fig:17:probe-depth-bias}).
 \end{enumerate}
 
 \begin{center}
@@ -407,8 +407,8 @@ Why does probe placement inside the $\SI{100}{\milli\liter}$ water column ($\SI{
     \fill[rust!22] (-3.35,3.02) -- (3.35,3.02) -- (3.38,3.20) -- (-3.38,3.20) -- cycle;
 
     % Optimal ES target box (z = 5-12 mm, r < 10 mm)
-    \draw[rust, very thick, fill=amber!40] (-1.1,2.20) rectangle (1.1,2.85);
-    \node[font=\scriptsize\bfseries, text=rust, align=center] at (0,2.52) {CLARIF.\ \#4 TARGET ZONE\\[-1pt]$z=\SIrange{5}{12}{\milli\meter},\ r<\SI{10}{\milli\meter}$\\[-1pt]$\mathbf{T_{\mathrm{top}} = \SI{45.2}{\celsius}}$};
+    \draw[rust, very thick, fill=amber!40] (-1.0,2.20) rectangle (1.0,2.85);
+    \node[font=\scriptsize\bfseries, text=rust, align=right, anchor=east] at (-1.2,2.52) {ES target zone\\[-1pt]$z=\SIrange{4}{12}{\milli\meter}$};
 
     % Cup walls
     \draw[navy, ultra thick] (-3.75,4.8) -- (-2.60,0) -- (2.60,0) -- (3.75,4.8);
@@ -416,64 +416,60 @@ Why does probe placement inside the $\SI{100}{\milli\liter}$ water column ($\SI{
     \draw[teal, very thick] (-3.38,3.20) -- (3.38,3.20);
 
     % Layer labels
-    \node[font=\scriptsize, text=navy, align=center] at (0,0.65) {Bottom Cold Layer ($z=\SIrange{24}{38}{\milli\meter}$): $T_{\mathrm{bot}} = \SIrange{37.8}{39.2}{\celsius}$\\[-1pt](Bias if pushed to bottom: $\mathbf{-\SIrange{6.0}{7.4}{\celsius}}$!)};
-    \node[font=\scriptsize, text=navy] at (0,1.82) {Thermocline Transition ($z=\SIrange{12}{24}{\milli\meter}$): $T = \SIrange{40.5}{43.8}{\celsius}$};
+    \node[font=\scriptsize, text=navy, align=center] at (-0.35,0.70) {Lower water, $z=\SIrange{24}{38}{\milli\meter}$\\[-1pt]$T = \SIrange{30.8}{36.5}{\celsius}$};
+    \node[font=\scriptsize, text=navy, align=center] at (-0.35,1.80) {Thermocline, $z=\SIrange{10}{24}{\milli\meter}$\\[-1pt]$T = \SIrange{36.5}{48.4}{\celsius}$};
 
     % Radial wall cooling arrows
-    \draw[->, navy, thick, dashed] (-3.05,2.7) -- (-2.70,1.2);
-    \draw[->, navy, thick, dashed] (3.05,2.7) -- (2.70,1.2);
-    \node[font=\scriptsize, text=navy, rotate=78] at (-3.30,1.9) {Wall Plume $-\SI{1.4}{\celsius}$};
+    \draw[->, navy, thick, dashed] (-2.95,2.05) -- (-2.70,0.95);
+    \draw[->, navy, thick, dashed] (2.95,2.05) -- (2.70,0.95);
+
 
     % Probe A: Correct ES Center Top-Layer Probe
-    \draw[fill=slate!70, draw=black, thick] (-0.12,2.50) rectangle (0.12,5.35);
-    \fill[rust] (0,2.50) circle (2.2pt);
-    \node[anchor=south, font=\scriptsize\bfseries, fill=boxbg, draw=navy, inner sep=1.5pt] at (0,5.38) {Probe A (Correct Clarif.\ \#4 Center Tip)};
+    \draw[fill=slate!70, draw=black, thick] (-0.12,2.69) rectangle (0.12,5.35);
+    \fill[rust] (0,2.69) circle (2.2pt);
+    \node[anchor=south east, font=\scriptsize\bfseries, fill=boxbg, draw=navy, inner sep=1.5pt] at (1.85,5.38) {Probe A (ES): center, $z\approx\SI{6}{\milli\meter}$, $\SI{49.7}{\celsius}$};
 
     % Probe B: Deep/Wall Misplaced Probe
-    \draw[fill=midgray!60, draw=black, densely dashed] (2.05,0.25) rectangle (2.25,5.0);
+    \draw[fill=midgray!60, draw=black, densely dashed] (2.05,0.25) rectangle (2.25,5.95);
     \fill[navy] (2.15,0.25) circle (2.0pt);
-    \node[anchor=west, font=\scriptsize, text=rust, align=left] at (2.35,4.45) {Probe B (Bottom/Wall Error)\\[-1pt]Reads $\SI{38.4}{\celsius}$ ($-\SI{6.8}{\celsius}$ bias)};
-
-    % IR Cone at Top Surface
-    \draw[rust, dotted, thick] (-0.75,5.1) -- (-0.45,3.20) (0.75,5.1) -- (0.45,3.20);
-    \node[anchor=east, font=\scriptsize, text=rust, align=right] at (-0.8,4.35) {IR Gun Spot ($z=\SI{15}{\micro\meter}$ skin)\\[-1pt]$\varepsilon_w=0.96,\ T_{\mathrm{skin}}\approx\SI{44.6}{\celsius}$};
+    \node[anchor=south, font=\scriptsize\bfseries, text=rust, fill=white, draw=rust, inner sep=1.5pt] at (2.15,5.98) {Probe B (at the base): $\SI{30.8}{\celsius}$, $-\SI{18.9}{\celsius}$};
 
     % Depth scale on left
-    \draw[<->, black, semithick] (-4.1,3.20) -- (-4.1,0) node[midway, fill=white, inner sep=1pt, rotate=90] {Water Depth $\SI{38}{\milli\meter}$ ($\SI{100}{\milli\liter}$)};
+    \draw[<->, black, semithick] (-4.1,3.20) -- (-4.1,0);
     \draw[black] (-4.25,3.20) -- (-3.95,3.20) node[left=2pt] {$z=\SI{0}{\milli\meter}$};
-    \draw[black] (-4.25,2.52) -- (-3.95,2.52) node[left=2pt] {$z=\SI{8}{\milli\meter}$};
+    \draw[black] (-4.25,2.69) -- (-3.95,2.69) node[left=2pt] {$z=\SI{6}{\milli\meter}$};
     \draw[black] (-4.25,0) -- (-3.95,0) node[left=2pt] {$z=\SI{38}{\milli\meter}$};
   \end{scope}
 
   % Right panel: Vertical & Radial Temperature Profile Table / Mini-Plot
   \begin{scope}[shift={(5.5,0.2)}]
-    \draw[navy, thick, fill=boxbglight] (0,0) rectangle (6.5,5.0);
-    \node[anchor=north, font=\scriptsize\bfseries, fill=navy, text=white, minimum width=6.25cm, inner sep=2.5pt] at (3.25,5.0) {Measured Stratification Map $T(z,r)$ ($t=\SI{10}{\minute}$, $h=\SI{45}{\centi\meter}$)};
-    \node[anchor=north west, font=\scriptsize] at (0.12,4.42) {%
-      \setlength{\tabcolsep}{2.8pt}
+    \draw[navy, thick, fill=boxbglight] (0,-0.35) rectangle (6.5,5.0);
+    \node[anchor=north, font=\scriptsize\bfseries, fill=navy, text=white, minimum width=6.25cm, inner sep=2.5pt] at (3.25,5.0) {Modeled Profile $T(z)$ at Cup Center ($t=\SI{10}{\minute}$, $h=\SI{45}{\centi\meter}$)};
+    \node[anchor=north west, font=\scriptsize] at (0.35,4.45) {%
+      \setlength{\tabcolsep}{4pt}
       \renewcommand{\arraystretch}{1.12}
-      \begin{tabular}{@{}lcccc@{}}
+      \begin{tabular}{@{}lcc@{}}
       \toprule
-      \textbf{Depth $z$} & \textbf{Center} & \textbf{Mid-Rad} & \textbf{Cup Wall} & \textbf{Bias vs.\ Target} \\
-      $(\text{below }z=0)$ & $(r=\SI{0}{\milli\meter})$ & $(r=\SI{18}{\milli\meter})$ & $(r=\SI{32}{\milli\meter})$ & $(z=\SI{8}{\milli\meter},r=0)$ \\
+      \textbf{Probe tip depth $z$} & \textbf{$T$ at center} & \textbf{Bias vs.\ ES} \\
       \midrule
-      $\SI{0.02}{\milli\meter}$ (IR skin) & $\SI{44.6}{\celsius}$ & $\SI{44.3}{\celsius}$ & $\SI{43.1}{\celsius}$ & $-\SI{0.6}{\celsius}$ (evap) \\
-      $\mathbf{\SI{5}{\milli\meter}}$ \textbf{(Top)} & $\mathbf{\SI{45.1}{\celsius}}$ & $\SI{44.8}{\celsius}$ & $\SI{43.5}{\celsius}$ & $-\SI{0.1}{\celsius}$ \\
-      $\mathbf{\SI{8}{\milli\meter}}$ \textbf{(Peak)} & $\mathbf{\SI{45.2}{\celsius}}$ & $\SI{44.9}{\celsius}$ & $\SI{43.6}{\celsius}$ & $\mathbf{\SI{0.0}{\celsius}}$ \textbf{(Ref)} \\
-      $\mathbf{\SI{12}{\milli\meter}}$ \textbf{(Top)} & $\mathbf{\SI{44.8}{\celsius}}$ & $\SI{44.4}{\celsius}$ & $\SI{43.1}{\celsius}$ & $-\SI{0.4}{\celsius}$ \\
-      $\SI{20}{\milli\meter}$ (Mid) & $\SI{42.1}{\celsius}$ & $\SI{41.7}{\celsius}$ & $\SI{40.6}{\celsius}$ & $-\SI{3.1}{\celsius}$ \\
-      $\SI{30}{\milli\meter}$ (Low) & $\SI{39.4}{\celsius}$ & $\SI{39.1}{\celsius}$ & $\SI{38.3}{\celsius}$ & $-\SI{5.8}{\celsius}$ \\
-      $\SI{37}{\milli\meter}$ (Base) & $\SI{38.1}{\celsius}$ & $\SI{37.9}{\celsius}$ & $\SI{37.4}{\celsius}$ & $\mathbf{-\SI{7.1}{\celsius}}$ \\
+      $\SI{0.5}{\milli\meter}$ (skin; IR gun) & $\SI{49.4}{\celsius}$ & $-\SI{0.3}{\celsius}$ \\
+      $\SI{3}{\milli\meter}$ (peak) & $\SI{49.9}{\celsius}$ & $+\SI{0.2}{\celsius}$ \\
+      $\mathbf{\SI{6}{\milli\meter}}$ \textbf{(ES reading)} & $\mathbf{\SI{49.7}{\celsius}}$ & $\mathbf{\SI{0.0}{\celsius}}$ \textbf{(ref)} \\
+      $\SI{10}{\milli\meter}$ & $\SI{48.4}{\celsius}$ & $-\SI{1.3}{\celsius}$ \\
+      $\SI{16}{\milli\meter}$ & $\SI{43.2}{\celsius}$ & $-\SI{6.5}{\celsius}$ \\
+      $\SI{24}{\milli\meter}$ & $\SI{36.5}{\celsius}$ & $-\SI{13.2}{\celsius}$ \\
+      $\SI{32}{\milli\meter}$ & $\SI{32.0}{\celsius}$ & $-\SI{17.7}{\celsius}$ \\
+      $\SI{38}{\milli\meter}$ (base) & $\SI{30.8}{\celsius}$ & $\mathbf{-\SI{18.9}{\celsius}}$ \\
       \midrule
-      \textbf{Swirled Bulk} & $\SI{41.6}{\celsius}$ & $\SI{41.6}{\celsius}$ & $\SI{41.5}{\celsius}$ & $\mathbf{-\SI{3.6}{\celsius}}$ \textbf{Lost!} \\
+      Swirled (mixed; not allowed) & $\SI{39.8}{\celsius}$ & $\mathbf{-\SI{9.9}{\celsius}}$ \\
       \bottomrule
       \end{tabular}%
     };
-    \node[anchor=south, font=\scriptsize, text=rust, align=center] at (3.25,0.08) {\textbf{Calibration Rule:} Clamp practice probe at $z=\SI{8\pm 2}{\milli\meter},\ r=\SI{0}{\milli\meter}$!};
+    \node[anchor=south, font=\scriptsize\bfseries, text=rust, align=center] at (3.25,-0.30) {Modeled for the reference collector.\\[-1pt]Replace with our measured runs.};
   \end{scope}
 \end{tikzpicture}%
 }
-\captionof{figure}{Thermometer immersion depth ($z$) and radial placement ($r$) bias inside an unstirred, top-heated $\SI{9}{oz}$ cup containing $\SI{100}{\milli\liter}$ of water (\texttt{Official Clarifications \#1--\#4}). Top-down near-IR absorption creates a buoyantly stable hot upper stratum ($z = \SIrange{5}{12}{\milli\meter}$) that exceeds the swirled bulk average by $+\SI{3.6}{\celsius}$ and the bottom boundary by $+\SI{7.1}{\celsius}$ \src{S02,S05,S19}.}\label{fig:17:probe-depth-bias}
+\captionof{figure}{Modeled probe-depth bias in the reference collector's unstirred, top-heated $\SI{9}{oz}$ cup ($\SI{100}{\milli\liter}$ water, $t=\SI{10}{\minute}$, $h=\SI{45}{\centi\meter}$, $\SI{125}{\watt}$; same model as \fref{fig:15:stratification-profile} and Ex~\ref{ex:15.4}). The ES reads the top layer near the center (FAQ 10/06/2026): $\SI{49.7}{\celsius}$. A probe pushed to the base reads $\SI{18.9}{\celsius}$ low; swirled water would read the mixed $\SI{39.8}{\celsius}$, but swirling is not allowed (FAQs 09/30, 10/01 and 10/06/2026). Dashed arrows: the cooler wall plume (about $\SI{1.4}{\celsius}$ below the center at the same depth) \src{S02,S05,S19}. \textbf{How to read this:} find your probe depth in the table; the last column is how far that reading falls below the ES's.}\label{fig:17:probe-depth-bias}
 \idxfig{ES Thermometer Immersion Depth and Radial Placement Bias in Stratified Cup}
 \end{center}
 
@@ -501,15 +497,15 @@ To verify or calibrate team thermometers before building the 36-run DOE calibrat
 \end{enumerate}
 
 \begin{workedexample}[5$\tau_p$ Premature-Reading Audit, Probe Heat Drain \& Two-Point Barometric Calibration]{Rule 4.f \& 5.II.g}{ex:17.4}
-(a)~A stainless-sheathed digital probe ($\tau_p = \SI{3.20}{\second}$, effective tip heat capacity $C_p = \SI{0.450}{\joule\per\kelvin}$, initial room temperature $T_{p,0} = \SI{21.50}{\celsius}$) is inserted into the top stratified water layer ($C_{\mathrm{top}} = \SI{185.0}{\joule\per\kelvin}$, initial temperature $T_{w,0} = \SI{46.50}{\celsius}$). Compute the true equilibrium temperature $T_{\mathrm{eq}}$ after probe thermal drain, the premature reading if recorded at $t = \SI{6.40}{\second}$ ($2\tau_p$), and the settled reading at $t = 5\tau_p = \SI{16.0}{\second}$.
+(a)~A stainless-sheathed digital probe ($\tau_p = \SI{3.20}{\second}$, effective tip heat capacity $C_p = \SI{0.450}{\joule\per\kelvin}$, initial room temperature $T_{p,0} = \SI{21.50}{\celsius}$) is inserted into the top stratified water layer ($C_{\mathrm{top}} = \SI{215.0}{\joule\per\kelvin}$, initial temperature $T_{w,0} = \SI{49.70}{\celsius}$). Compute the true equilibrium temperature $T_{\mathrm{eq}}$ after probe thermal drain, the premature reading if recorded at $t = \SI{6.40}{\second}$ ($2\tau_p$), and the settled reading at $t = 5\tau_p = \SI{16.0}{\second}$.
 (b)~During pre-tournament calibration on a day when local barometric pressure is $P_{\mathrm{atm}} = \SI{742.0}{\milli\meter Hg}$, the probe reads $T_{\mathrm{read,ice}} = -\SI{0.30}{\celsius}$ in an ice bath and $T_{\mathrm{read,boil}} = \SI{98.90}{\celsius}$ in saturated steam. If the probe reads $T_{\mathrm{raw}} = \SI{44.20}{\celsius}$ in a trial cup, what is the true calibrated water temperature $T_{\mathrm{true}}$?
 \par\smallskip\noindent
 \textbf{Solution.}
-(a)~By \eref{eq:17:probedrain}, calorimetric equilibration between the $\SI{21.50}{\celsius}$ probe tip and the $\SI{46.50}{\celsius}$ top layer yields:
-$$T_{\mathrm{eq}} = \frac{185.0(46.50) + 0.450(21.50)}{185.0 + 0.450} = \frac{8612.175}{185.450} = \mathbf{\SI{46.439}{\celsius}} \quad (\Delta T_{\mathrm{drain}} = -\SI{0.061}{\celsius})$$
-Using \eref{eq:17:probestep} with $\Delta T_{\mathrm{step}} = 46.4393 - 21.50 = \SI{24.9393}{\celsius}$:
-$$T_p(2\tau_p = \SI{6.40}{\second}) = 46.4393 - 24.9393\,e^{-2} = \mathbf{\SI{43.06}{\celsius}} \quad (\text{premature reading loses }\mathbf{\SI{3.38}{\celsius}}\text{!})$$
-$$T_p(5\tau_p = \SI{16.0}{\second}) = 46.4393 - 24.9393\,e^{-5} = \mathbf{\SI{46.27}{\celsius}} \quad (\text{within }\SI{0.17}{\celsius}\text{ of }T_{\mathrm{eq}})$$
+(a)~By \eref{eq:17:probedrain}, calorimetric equilibration between the $\SI{21.50}{\celsius}$ probe tip and the $\SI{49.70}{\celsius}$ top layer yields:
+$$T_{\mathrm{eq}} = \frac{215.0(49.70) + 0.450(21.50)}{215.0 + 0.450} = \frac{10695.175}{215.450} = \mathbf{\SI{49.641}{\celsius}} \quad (\Delta T_{\mathrm{drain}} = -\SI{0.059}{\celsius})$$
+Using \eref{eq:17:probestep} with $\Delta T_{\mathrm{step}} = 49.6411 - 21.50 = \SI{28.1411}{\celsius}$:
+$$T_p(2\tau_p = \SI{6.40}{\second}) = 49.6411 - 28.1411\,e^{-2} = \mathbf{\SI{45.83}{\celsius}} \quad (\text{premature reading loses }\mathbf{\SI{3.81}{\celsius}}\text{!})$$
+$$T_p(5\tau_p = \SI{16.0}{\second}) = 49.6411 - 28.1411\,e^{-5} = \mathbf{\SI{49.45}{\celsius}} \quad (\text{within }\SI{0.19}{\celsius}\text{ of }T_{\mathrm{eq}})$$
 (b)~At $P_{\mathrm{atm}} = \SI{742.0}{\milli\meter Hg}$ ($\Delta P = -\SI{18.0}{\milli\meter Hg}$), \eref{eq:17:tboil} gives true steam temperature:
 $$T_{\mathrm{boil}}(\SI{742.0}{\milli\meter Hg}) = 100.00 + \num{0.03686}(-18.0) - \num{0.000020}(-18.0)^2 = 100.00 - 0.66348 - 0.00648 = \mathbf{\SI{99.330}{\celsius}}$$
 Applying the two-point linear calibration formula \eref{eq:17:2ptcal}:

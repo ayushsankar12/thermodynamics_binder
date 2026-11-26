@@ -204,9 +204,9 @@ def check_sec17() -> list[dict]:
     # Ex 17.4: 5*tau_p settling, probe thermal drain, and 2-point barometric calibration
     tau_p = 3.20
     C_p = 0.45
-    C_top = 185.0
+    C_top = 215.0  # house top-layer capacitance (Ex 15.4)
     T_p0 = 21.50
-    T_w0 = 46.50
+    T_w0 = 49.70  # reference-run top layer (Ex 15.4)
     T_eq = (C_top * T_w0 + C_p * T_p0) / (C_top + C_p)
     T_2tau = T_eq - (T_eq - T_p0) * math.exp(-2.0)
     T_5tau = T_eq - (T_eq - T_p0) * math.exp(-5.0)
@@ -215,7 +215,7 @@ def check_sec17() -> list[dict]:
             "sec17:ex17.4:probe_eq_temp",
             "sec17",
             "Equilibrium temperature after probe heat-capacity drain [deg C]",
-            46.43934,
+            49.64110,
             T_eq,
             1e-4,
             "Calorimetric energy balance (C_top*T_w0 + C_p*T_p0)/(C_top + C_p)",
@@ -226,7 +226,7 @@ def check_sec17() -> list[dict]:
             "sec17:ex17.4:probe_2tau_vs_5tau",
             "sec17",
             "Probe reading at 5*tau_p = 16.0 s [deg C]",
-            46.2713,
+            49.45149,
             T_5tau,
             1e-4,
             "First-order step response T_eq - (T_eq - T_p0)*exp(-5)",
