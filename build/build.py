@@ -95,7 +95,9 @@ def sync_style_files(workdir: Path):
 
 def run(cmd, cwd: Path):
     env = os.environ.copy()
-    env["TEXINPUTS"] = f"{BUILD_DIR};{cwd};" + env.get("TEXINPUTS", "")
+    # os.pathsep (';' on Windows, ':' on macOS/Linux); the trailing empty entry keeps kpathsea's default path.
+    sep = os.pathsep
+    env["TEXINPUTS"] = f"{BUILD_DIR}{sep}{cwd}{sep}" + env.get("TEXINPUTS", "")
     p = subprocess.run(cmd, cwd=cwd, env=env, capture_output=True, text=True, encoding="utf-8", errors="replace")
     return p.returncode, p.stdout + p.stderr
 

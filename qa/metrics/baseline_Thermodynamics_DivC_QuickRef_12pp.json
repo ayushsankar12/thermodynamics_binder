@@ -1,0 +1,171 @@
+{
+ "summary": {
+  "pdf": "Thermodynamics_DivC_QuickRef_12pp.pdf",
+  "pages": 12,
+  "median_words_per_page": 764.5,
+  "mean_words_per_page": 740.7,
+  "total_chars": 39398,
+  "share_chars_under_8pt": 0.9024,
+  "share_chars_under_8pt_nonscript": 0.899,
+  "chars_under_8pt_nonscript": 35419,
+  "share_chars_under_7p5pt": 0.9021,
+  "pages_mostly_under_8pt": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10,
+   11,
+   12
+  ],
+  "pages_under_250_words": [],
+  "min_font_pt": 5.18,
+  "literal_double_star_pages": [],
+  "empty_headings": [],
+  "figure_captions_without_how_to_read": [
+   {
+    "page": 7,
+    "caption": "Fig. 0.1. Comparison of isobaric (𝑛= 0), isothermal (𝑛= 1), adiabatic (𝑛= 𝛾), and isochori"
+   }
+  ]
+ },
+ "pages": [
+  {
+   "page": 1,
+   "words": 933,
+   "chars": 4514,
+   "min_font": 5.18,
+   "min_font_nonscript": 5.18,
+   "share_under_8pt": 0.9227,
+   "share_under_8pt_nonscript": 0.9227,
+   "share_under_7p5pt": 0.9227,
+   "low_words": false
+  },
+  {
+   "page": 2,
+   "words": 847,
+   "chars": 3187,
+   "min_font": 5.18,
+   "min_font_nonscript": 5.18,
+   "share_under_8pt": 0.8604,
+   "share_under_8pt_nonscript": 0.8569,
+   "share_under_7p5pt": 0.8604,
+   "low_words": false
+  },
+  {
+   "page": 3,
+   "words": 807,
+   "chars": 4263,
+   "min_font": 5.18,
+   "min_font_nonscript": 5.18,
+   "share_under_8pt": 0.935,
+   "share_under_8pt_nonscript": 0.9334,
+   "share_under_7p5pt": 0.9338,
+   "low_words": false
+  },
+  {
+   "page": 4,
+   "words": 757,
+   "chars": 3232,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.8982,
+   "share_under_8pt_nonscript": 0.8973,
+   "share_under_7p5pt": 0.8982,
+   "low_words": false
+  },
+  {
+   "page": 5,
+   "words": 777,
+   "chars": 3849,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.9213,
+   "share_under_8pt_nonscript": 0.9197,
+   "share_under_7p5pt": 0.9213,
+   "low_words": false
+  },
+  {
+   "page": 6,
+   "words": 772,
+   "chars": 3124,
+   "min_font": 5.18,
+   "min_font_nonscript": 5.18,
+   "share_under_8pt": 0.9024,
+   "share_under_8pt_nonscript": 0.9011,
+   "share_under_7p5pt": 0.9024,
+   "low_words": false
+  },
+  {
+   "page": 7,
+   "words": 562,
+   "chars": 2337,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.8626,
+   "share_under_8pt_nonscript": 0.8575,
+   "share_under_7p5pt": 0.8626,
+   "low_words": false
+  },
+  {
+   "page": 8,
+   "words": 720,
+   "chars": 3039,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.8993,
+   "share_under_8pt_nonscript": 0.8871,
+   "share_under_7p5pt": 0.8993,
+   "low_words": false
+  },
+  {
+   "page": 9,
+   "words": 831,
+   "chars": 3496,
+   "min_font": 5.18,
+   "min_font_nonscript": 5.18,
+   "share_under_8pt": 0.9268,
+   "share_under_8pt_nonscript": 0.9242,
+   "share_under_7p5pt": 0.9251,
+   "low_words": false
+  },
+  {
+   "page": 10,
+   "words": 570,
+   "chars": 2552,
+   "min_font": 5.18,
+   "min_font_nonscript": 5.18,
+   "share_under_8pt": 0.8746,
+   "share_under_8pt_nonscript": 0.8746,
+   "share_under_7p5pt": 0.8746,
+   "low_words": false
+  },
+  {
+   "page": 11,
+   "words": 701,
+   "chars": 3091,
+   "min_font": 5.18,
+   "min_font_nonscript": 5.18,
+   "share_under_8pt": 0.8955,
+   "share_under_8pt_nonscript": 0.8949,
+   "share_under_7p5pt": 0.8955,
+   "low_words": false
+  },
+  {
+   "page": 12,
+   "words": 611,
+   "chars": 2714,
+   "min_font": 5.18,
+   "min_font_nonscript": 5.18,
+   "share_under_8pt": 0.8847,
+   "share_under_8pt_nonscript": 0.8696,
+   "share_under_7p5pt": 0.8847,
+   "low_words": false
+  }
+ ]
+}

@@ -1,0 +1,3226 @@
+{
+ "summary": {
+  "pdf": "Thermodynamics_DivC_Binder_GRAYSCALE_PROOF.pdf",
+  "pages": 264,
+  "median_words_per_page": 692.0,
+  "mean_words_per_page": 766.2,
+  "total_chars": 867615,
+  "share_chars_under_8pt": 0.2633,
+  "share_chars_under_8pt_nonscript": 0.1864,
+  "chars_under_8pt_nonscript": 161715,
+  "share_chars_under_7p5pt": 0.2479,
+  "pages_mostly_under_8pt": [
+   6,
+   8,
+   9,
+   10,
+   15,
+   16,
+   18,
+   24,
+   40,
+   41,
+   52,
+   72,
+   96,
+   229,
+   230,
+   231,
+   232,
+   233,
+   234,
+   235,
+   236,
+   237,
+   238,
+   239,
+   240,
+   241,
+   242,
+   243,
+   244,
+   245,
+   246,
+   247,
+   258,
+   260,
+   261,
+   262,
+   263,
+   264
+  ],
+  "pages_under_250_words": [
+   5,
+   38,
+   68,
+   155,
+   172,
+   224,
+   244,
+   246
+  ],
+  "min_font_pt": 5.08,
+  "literal_double_star_pages": [
+   25,
+   26,
+   27,
+   32,
+   77,
+   105,
+   126,
+   185,
+   212
+  ],
+  "empty_headings": [
+   {
+    "page": 95,
+    "heading": "§9.3Master Comparison Atlas of Named Power & Refrigeration Cycles",
+    "reason": "followed by heading '§9.4Reciprocating Internal-Combustion Cycles:Air-S'"
+   },
+   {
+    "page": 212,
+    "heading": "§20.1Master Diagnostic Catalog Part I: Foundations, Temperature Scales, Calorime",
+    "reason": "followed by heading '§20.2Master Diagnostic Catalog Part II: Gas Laws, '"
+   },
+   {
+    "page": 212,
+    "heading": "§20.2Master Diagnostic Catalog Part II: Gas Laws, First/Second Laws, Cycles & En",
+    "reason": "followed by heading '§20.3MasterDiagnosticCatalogPartIII:HeatTransfer,M'"
+   },
+   {
+    "page": 212,
+    "heading": "§20.3MasterDiagnosticCatalogPartIII:HeatTransfer,Materials&2027CollectorTraps(ER",
+    "reason": "followed by heading '§20.4Rapid Wrong-Answer Factor Reverse-Diagnostic '"
+   },
+   {
+    "page": 235,
+    "heading": "§23.72027 Heat-Lamp Collector Pre-Block Sanity Checklist & 60-Second Partner Car",
+    "reason": "page end"
+   }
+  ],
+  "figure_captions_without_how_to_read": [
+   {
+    "page": 8,
+    "caption": "Fig. 0.1. Master 10-second thermodynamic model and equation router mapping any exam or dev"
+   },
+   {
+    "page": 9,
+    "caption": "Fig. 0.2. 50-minute hybrid event partner choreography showing how Partner B completes all "
+   },
+   {
+    "page": 16,
+    "caption": "Fig. 1.1. Four canonical ideal-gas processes through (𝑃0, 𝑉0, 𝑇0, 𝑆0) (𝛾= 1.4)."
+   },
+   {
+    "page": 23,
+    "caption": "Fig. 1.2. 2027 Heat-Lamp Optical Collector & Top-Layer Energy Balance."
+   },
+   {
+    "page": 25,
+    "caption": "Fig. 2.1. System classification and boundary ledger under the locked Physics sign conventi"
+   },
+   {
+    "page": 32,
+    "caption": "Fig. 3.1. Eight-scale thermometric alignment ladder across absolute zero, key dual-scale i"
+   },
+   {
+    "page": 34,
+    "caption": "Fig. 3.2. (a) Anomalous density maximum of liquid water at 𝑇= 3.984 ◦C (𝜌max = 999.97 kg/m"
+   },
+   {
+    "page": 34,
+    "caption": "Fig. 3.3. Chronological lifespan and discovery timeline of the exact 8 scientists specifie"
+   },
+   {
+    "page": 42,
+    "caption": "Fig. 4.1. Five-stage quantitative heating curve for 1.000 kg of H2O at 1 atm from −40 ◦C i"
+   },
+   {
+    "page": 43,
+    "caption": "Fig. 4.2. Deterministic 5-Zone decision tree for multi-phase H2O calorimetry at 1 atm, eli"
+   },
+   {
+    "page": 44,
+    "caption": "Fig. 4.3. Side-by-side comparison of (a) an open-to-atmosphere isobaric solution calorimet"
+   },
+   {
+    "page": 52,
+    "caption": "Fig. 5.1. Side-by-side 𝑃–𝑇phase diagrams (not to scale) comparing (a) H2O, where 𝜌ice < 𝜌l"
+   },
+   {
+    "page": 53,
+    "caption": "Fig. 5.2. Pure-substance 𝑃–𝑣saturation dome showing the saturated liquid curve ( 𝑓, 𝑥= 0),"
+   },
+   {
+    "page": 54,
+    "caption": "Fig. 5.3. Binary eutectic phase diagram modeled on the classic Pb–Sn system (𝑇𝑚,Pb = 327.5"
+   },
+   {
+    "page": 62,
+    "caption": "Fig. 6.1. Maxwell–Boltzmann molecular speed distribution 𝑓(𝑣) for N2 at 𝑇= 300 K and 𝑇= 90"
+   },
+   {
+    "page": 63,
+    "caption": "Fig. 6.2. Molar heat capacity 𝐶𝑉,𝑚/𝑅of diatomic hydrogen (H2) vs. log10(𝑇/K) showing quant"
+   },
+   {
+    "page": 65,
+    "caption": "Fig. 6.3. (a) Real-gas compressibility factor 𝑍= 𝑃𝑉/(𝑛𝑅𝑇) at 300 K showing attractive depr"
+   },
+   {
+    "page": 70,
+    "caption": "Fig. 7.1. Path dependence of boundary work 𝑊by vs. path independence of Δ𝑈= 𝑈𝐵−𝑈𝐴between s"
+   },
+   {
+    "page": 74,
+    "caption": "Fig. 7.2. The Polytropic Process Star 𝑃/𝑃0 = (𝑉/𝑉0)−𝑛passing through a common reference st"
+   },
+   {
+    "page": 76,
+    "caption": "Fig. 7.3. (a) Physical boundary distinction between closed-system Joule free expansion (Δ𝑈"
+   },
+   {
+    "page": 83,
+    "caption": "Fig. 8.1. Proof of logical equivalence between the Kelvin–Planck and Clausius statements v"
+   },
+   {
+    "page": 85,
+    "caption": "Fig. 8.2. Temperature–entropy (𝑇–𝑠) diagram of water showing the liquid–vapor saturation d"
+   },
+   {
+    "page": 88,
+    "caption": "Fig. 8.3. (a) Four-quadrant spontaneity plot of Δ𝐺(𝑇) = Δ𝐻−𝑇Δ𝑆showing temperature-independ"
+   },
+   {
+    "page": 94,
+    "caption": "Fig. 9.1. Paired (a) 𝑃–𝑉and (b) 𝑇–𝑆representations of the reversible Carnot heat engine cy"
+   },
+   {
+    "page": 96,
+    "caption": "Fig. 9.2. Paired 𝑃–𝑉indicator diagrams of (a) the air-standard Otto cycle (isochoric heat "
+   },
+   {
+    "page": 97,
+    "caption": "Fig. 9.3. Paired 𝑃–𝑉diagrams of (a) the Brayton gas-turbine cycle (2 isobars + 2 isentrope"
+   },
+   {
+    "page": 98,
+    "caption": "Fig. 9.4. Paired 𝑇–𝑠saturation-dome diagrams of (a) the Rankine vapor power cycle (clockwi"
+   },
+   {
+    "page": 106,
+    "caption": "Fig. 10.1. Series–parallel composite wall with interfacial contact resistance 𝑅𝑐= 1/(ℎ𝑐𝐴) "
+   },
+   {
+    "page": 107,
+    "caption": "Fig. 10.2. Total cylindrical thermal resistance 𝑅tot(𝑟𝑜) = 𝑅cond + 𝑅conv versus radius rat"
+   },
+   {
+    "page": 117,
+    "caption": "Fig. 11.1. (a) Hydrodynamic (𝛿𝑣) and thermal (𝛿𝑇) boundary-layer development along a heate"
+   },
+   {
+    "page": 119,
+    "caption": "Fig. 11.2. (a) Heat flux across an enclosed air gap (Δ𝑇= 15 K) versus gap width 𝛿, showing"
+   },
+   {
+    "page": 126,
+    "caption": "Fig. 12.1. Planck blackbody spectral exitance 𝑀𝜆,𝑏(𝜆, 𝑇) for the Sun (5778 K), the 2027 12"
+   },
+   {
+    "page": 128,
+    "caption": "Fig. 12.2. (a) Oppenheim surface-and-space radiation resistance network with an intermedia"
+   },
+   {
+    "page": 135,
+    "caption": "Fig. 13.1. Universal dimensionless lumped-capacitance forced heating curve 1 −𝑒−𝑡/𝜏and unf"
+   },
+   {
+    "page": 136,
+    "caption": "Fig. 13.2. Comparison of internal solid/liquid temperature profiles versus external bounda"
+   },
+   {
+    "page": 146,
+    "caption": "Fig. 14.1. Two-band spectral selectivity map comparing near-infrared lamp absorptance 𝛼NIR"
+   },
+   {
+    "page": 149,
+    "caption": "Fig. 14.2. Liquid water 1/𝑒optical penetration depth 𝛿𝑝(𝜆) = 1/𝜇𝑎(𝜆) across the near-IR he"
+   },
+   {
+    "page": 152,
+    "caption": "Fig. 14.3. Thermal conductivity 𝑘versus volumetric heat capacity 𝜌𝑐𝑝of Rule 3.b- compliant"
+   },
+   {
+    "page": 157,
+    "caption": "Fig. 15.1. Engineering cross-section of the reference 2027 two-piece heat-lamp collector i"
+   },
+   {
+    "page": 160,
+    "caption": "Fig. 15.2. Geometric-optics meridian ray tracing comparing (A) a 30◦straight conical funne"
+   },
+   {
+    "page": 160,
+    "caption": "Fig. 15.3. Net optical power ¤𝑄abs(ℎbulb) absorbed by the water across Regional, State, an"
+   },
+   {
+    "page": 162,
+    "caption": "Fig. 15.4. Four-node equivalent thermal resistance and capacitance (RC) circuit of the 202"
+   },
+   {
+    "page": 165,
+    "caption": "Fig. 15.5. Vertical temperature profiles 𝑇(𝑧, 𝑡) inside the unstirred 9 oz cup (ℎ= 45 cm, "
+   },
+   {
+    "page": 166,
+    "caption": "Fig. 15.6. Cross-section of the 9 oz party cup cradle showing the 3.80 cm waterline (100 m"
+   },
+   {
+    "page": 174,
+    "caption": "Fig. 16.1. Prediction Score PS = 20(1 −|Δ𝑇err|/𝑇final) versus prediction error"
+   },
+   {
+    "page": 177,
+    "caption": "Fig. 16.2. Master 2027 Temperature-Gain Nomogram TGtable(ℎbulb, 𝑡heat) across ℎbulb ∈[40 c"
+   },
+   {
+    "page": 179,
+    "caption": "Fig. 16.3. Post-lamp-off top-layer temperature drop −Δ𝑇cool(𝑡wait) during the Rule 5.II.g "
+   },
+   {
+    "page": 190,
+    "caption": "Fig. 17.1. First-order thermometer probe step response 1 −𝑒−𝑡/𝜏𝑝and fractional dynamic lag"
+   },
+   {
+    "page": 191,
+    "caption": "Fig. 17.2. Thermometer immersion depth (𝑧) and radial placement (𝑟) bias inside an unstirr"
+   },
+   {
+    "page": 200,
+    "caption": "Fig. 18.1. Linearized semi-log regression plot 𝑌= ln[(𝑇ss −𝑇(𝑡))/(𝑇ss −𝑇𝑖)] = −𝑡/𝜏for extr"
+   },
+   {
+    "page": 200,
+    "caption": "Fig. 18.2. Three diagnostic residual patterns 𝑟𝑘= 𝑇meas,𝑘−𝑇fit,𝑘versus time 𝑡𝑘. Pattern A "
+   },
+   {
+    "page": 206,
+    "caption": "Fig. 19.1. Multi-physics coupled problem decomposition map showing how an electrical or ra"
+   },
+   {
+    "page": 222,
+    "caption": "Fig. 21.1. Optimal two-partner tabletop layout exploiting 2027 Rule 2.c (detachable quick "
+   },
+   {
+    "page": 226,
+    "caption": "Fig. 22.1. OBSERVED Pareto distribution of written exam point weights across the seven 202"
+   }
+  ]
+ },
+ "pages": [
+  {
+   "page": 1,
+   "words": 735,
+   "chars": 4290,
+   "min_font": 5.48,
+   "min_font_nonscript": 6.28,
+   "share_under_8pt": 0.2811,
+   "share_under_8pt_nonscript": 0.0872,
+   "share_under_7p5pt": 0.1182,
+   "low_words": false
+  },
+  {
+   "page": 2,
+   "words": 1425,
+   "chars": 4617,
+   "min_font": 5.98,
+   "min_font_nonscript": 7.1,
+   "share_under_8pt": 0.1553,
+   "share_under_8pt_nonscript": 0.1321,
+   "share_under_7p5pt": 0.1507,
+   "low_words": false
+  },
+  {
+   "page": 3,
+   "words": 1512,
+   "chars": 5122,
+   "min_font": 6.58,
+   "min_font_nonscript": 7.12,
+   "share_under_8pt": 0.1687,
+   "share_under_8pt_nonscript": 0.1357,
+   "share_under_7p5pt": 0.1611,
+   "low_words": false
+  },
+  {
+   "page": 4,
+   "words": 1445,
+   "chars": 5268,
+   "min_font": 6.28,
+   "min_font_nonscript": 6.28,
+   "share_under_8pt": 0.2014,
+   "share_under_8pt_nonscript": 0.175,
+   "share_under_7p5pt": 0.1735,
+   "low_words": false
+  },
+  {
+   "page": 5,
+   "words": 102,
+   "chars": 340,
+   "min_font": 5.98,
+   "min_font_nonscript": 7.01,
+   "share_under_8pt": 0.3882,
+   "share_under_8pt_nonscript": 0.05,
+   "share_under_7p5pt": 0.0853,
+   "low_words": true
+  },
+  {
+   "page": 6,
+   "words": 937,
+   "chars": 4957,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.625,
+   "share_under_8pt_nonscript": 0.6109,
+   "share_under_7p5pt": 0.6183,
+   "low_words": false
+  },
+  {
+   "page": 7,
+   "words": 870,
+   "chars": 3975,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.3957,
+   "share_under_8pt_nonscript": 0.3489,
+   "share_under_7p5pt": 0.3708,
+   "low_words": false
+  },
+  {
+   "page": 8,
+   "words": 863,
+   "chars": 3881,
+   "min_font": 5.18,
+   "min_font_nonscript": 5.18,
+   "share_under_8pt": 0.9521,
+   "share_under_8pt_nonscript": 0.9474,
+   "share_under_7p5pt": 0.9521,
+   "low_words": false
+  },
+  {
+   "page": 9,
+   "words": 868,
+   "chars": 4202,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.5809,
+   "share_under_8pt_nonscript": 0.5121,
+   "share_under_7p5pt": 0.5236,
+   "low_words": false
+  },
+  {
+   "page": 10,
+   "words": 888,
+   "chars": 4627,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.7197,
+   "share_under_8pt_nonscript": 0.659,
+   "share_under_7p5pt": 0.6817,
+   "low_words": false
+  },
+  {
+   "page": 11,
+   "words": 805,
+   "chars": 3243,
+   "min_font": 5.98,
+   "min_font_nonscript": 5.98,
+   "share_under_8pt": 0.12,
+   "share_under_8pt_nonscript": 0.0552,
+   "share_under_7p5pt": 0.1181,
+   "low_words": false
+  },
+  {
+   "page": 12,
+   "words": 561,
+   "chars": 2515,
+   "min_font": 5.98,
+   "min_font_nonscript": 5.98,
+   "share_under_8pt": 0.1392,
+   "share_under_8pt_nonscript": 0.025,
+   "share_under_7p5pt": 0.0954,
+   "low_words": false
+  },
+  {
+   "page": 13,
+   "words": 694,
+   "chars": 2889,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.3444,
+   "share_under_8pt_nonscript": 0.2409,
+   "share_under_7p5pt": 0.3444,
+   "low_words": false
+  },
+  {
+   "page": 14,
+   "words": 569,
+   "chars": 2576,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.347,
+   "share_under_8pt_nonscript": 0.2826,
+   "share_under_7p5pt": 0.347,
+   "low_words": false
+  },
+  {
+   "page": 15,
+   "words": 646,
+   "chars": 2733,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.5152,
+   "share_under_8pt_nonscript": 0.4065,
+   "share_under_7p5pt": 0.4881,
+   "low_words": false
+  },
+  {
+   "page": 16,
+   "words": 415,
+   "chars": 1753,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.5043,
+   "share_under_8pt_nonscript": 0.4472,
+   "share_under_7p5pt": 0.486,
+   "low_words": false
+  },
+  {
+   "page": 17,
+   "words": 591,
+   "chars": 2695,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.2961,
+   "share_under_8pt_nonscript": 0.1696,
+   "share_under_7p5pt": 0.2776,
+   "low_words": false
+  },
+  {
+   "page": 18,
+   "words": 540,
+   "chars": 2447,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.5844,
+   "share_under_8pt_nonscript": 0.5219,
+   "share_under_7p5pt": 0.5664,
+   "low_words": false
+  },
+  {
+   "page": 19,
+   "words": 617,
+   "chars": 2845,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.4211,
+   "share_under_8pt_nonscript": 0.3244,
+   "share_under_7p5pt": 0.3993,
+   "low_words": false
+  },
+  {
+   "page": 20,
+   "words": 525,
+   "chars": 2523,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.22,
+   "share_under_8pt_nonscript": 0.1387,
+   "share_under_7p5pt": 0.22,
+   "low_words": false
+  },
+  {
+   "page": 21,
+   "words": 561,
+   "chars": 2501,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.4414,
+   "share_under_8pt_nonscript": 0.3447,
+   "share_under_7p5pt": 0.413,
+   "low_words": false
+  },
+  {
+   "page": 22,
+   "words": 497,
+   "chars": 2148,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.3669,
+   "share_under_8pt_nonscript": 0.2421,
+   "share_under_7p5pt": 0.3669,
+   "low_words": false
+  },
+  {
+   "page": 23,
+   "words": 473,
+   "chars": 2210,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.2864,
+   "share_under_8pt_nonscript": 0.0824,
+   "share_under_7p5pt": 0.2407,
+   "low_words": false
+  },
+  {
+   "page": 24,
+   "words": 854,
+   "chars": 4797,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.9441,
+   "share_under_8pt_nonscript": 0.9395,
+   "share_under_7p5pt": 0.9441,
+   "low_words": false
+  },
+  {
+   "page": 25,
+   "words": 704,
+   "chars": 3645,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.2576,
+   "share_under_8pt_nonscript": 0.186,
+   "share_under_7p5pt": 0.2414,
+   "low_words": false
+  },
+  {
+   "page": 26,
+   "words": 682,
+   "chars": 2946,
+   "min_font": 5.98,
+   "min_font_nonscript": 5.98,
+   "share_under_8pt": 0.1589,
+   "share_under_8pt_nonscript": 0.0339,
+   "share_under_7p5pt": 0.091,
+   "low_words": false
+  },
+  {
+   "page": 27,
+   "words": 981,
+   "chars": 3668,
+   "min_font": 5.98,
+   "min_font_nonscript": 7.17,
+   "share_under_8pt": 0.066,
+   "share_under_8pt_nonscript": 0.0025,
+   "share_under_7p5pt": 0.0564,
+   "low_words": false
+  },
+  {
+   "page": 28,
+   "words": 789,
+   "chars": 3932,
+   "min_font": 5.98,
+   "min_font_nonscript": 5.98,
+   "share_under_8pt": 0.0758,
+   "share_under_8pt_nonscript": 0.0142,
+   "share_under_7p5pt": 0.0664,
+   "low_words": false
+  },
+  {
+   "page": 29,
+   "words": 706,
+   "chars": 2966,
+   "min_font": 5.62,
+   "min_font_nonscript": 5.62,
+   "share_under_8pt": 0.1524,
+   "share_under_8pt_nonscript": 0.0553,
+   "share_under_7p5pt": 0.1524,
+   "low_words": false
+  },
+  {
+   "page": 30,
+   "words": 427,
+   "chars": 1714,
+   "min_font": 5.98,
+   "min_font_nonscript": 5.98,
+   "share_under_8pt": 0.1704,
+   "share_under_8pt_nonscript": 0.0513,
+   "share_under_7p5pt": 0.1301,
+   "low_words": false
+  },
+  {
+   "page": 31,
+   "words": 640,
+   "chars": 3417,
+   "min_font": 5.98,
+   "min_font_nonscript": 5.98,
+   "share_under_8pt": 0.1083,
+   "share_under_8pt_nonscript": 0.0577,
+   "share_under_7p5pt": 0.1083,
+   "low_words": false
+  },
+  {
+   "page": 32,
+   "words": 713,
+   "chars": 3578,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.1794,
+   "share_under_8pt_nonscript": 0.1151,
+   "share_under_7p5pt": 0.1794,
+   "low_words": false
+  },
+  {
+   "page": 33,
+   "words": 721,
+   "chars": 3202,
+   "min_font": 6.28,
+   "min_font_nonscript": 7.37,
+   "share_under_8pt": 0.0928,
+   "share_under_8pt_nonscript": 0.0034,
+   "share_under_7p5pt": 0.0928,
+   "low_words": false
+  },
+  {
+   "page": 34,
+   "words": 450,
+   "chars": 2060,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.3194,
+   "share_under_8pt_nonscript": 0.2466,
+   "share_under_7p5pt": 0.3146,
+   "low_words": false
+  },
+  {
+   "page": 35,
+   "words": 836,
+   "chars": 4591,
+   "min_font": 5.48,
+   "min_font_nonscript": 7.89,
+   "share_under_8pt": 0.0706,
+   "share_under_8pt_nonscript": 0.0024,
+   "share_under_7p5pt": 0.0211,
+   "low_words": false
+  },
+  {
+   "page": 36,
+   "words": 759,
+   "chars": 3767,
+   "min_font": 5.98,
+   "min_font_nonscript": 5.98,
+   "share_under_8pt": 0.1789,
+   "share_under_8pt_nonscript": 0.0308,
+   "share_under_7p5pt": 0.111,
+   "low_words": false
+  },
+  {
+   "page": 37,
+   "words": 767,
+   "chars": 3541,
+   "min_font": 5.98,
+   "min_font_nonscript": 6.58,
+   "share_under_8pt": 0.1282,
+   "share_under_8pt_nonscript": 0.0107,
+   "share_under_7p5pt": 0.1161,
+   "low_words": false
+  },
+  {
+   "page": 38,
+   "words": 176,
+   "chars": 716,
+   "min_font": 6.28,
+   "min_font_nonscript": 7.89,
+   "share_under_8pt": 0.1229,
+   "share_under_8pt_nonscript": 0.0293,
+   "share_under_7p5pt": 0.0335,
+   "low_words": true
+  },
+  {
+   "page": 39,
+   "words": 522,
+   "chars": 2662,
+   "min_font": 5.98,
+   "min_font_nonscript": 5.98,
+   "share_under_8pt": 0.1322,
+   "share_under_8pt_nonscript": 0.0503,
+   "share_under_7p5pt": 0.1322,
+   "low_words": false
+  },
+  {
+   "page": 40,
+   "words": 912,
+   "chars": 4012,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.6702,
+   "share_under_8pt_nonscript": 0.6453,
+   "share_under_7p5pt": 0.6702,
+   "low_words": false
+  },
+  {
+   "page": 41,
+   "words": 863,
+   "chars": 4045,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.5488,
+   "share_under_8pt_nonscript": 0.5258,
+   "share_under_7p5pt": 0.5488,
+   "low_words": false
+  },
+  {
+   "page": 42,
+   "words": 550,
+   "chars": 2581,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.1953,
+   "share_under_8pt_nonscript": 0.0763,
+   "share_under_7p5pt": 0.1953,
+   "low_words": false
+  },
+  {
+   "page": 43,
+   "words": 608,
+   "chars": 2961,
+   "min_font": 5.18,
+   "min_font_nonscript": 5.18,
+   "share_under_8pt": 0.2732,
+   "share_under_8pt_nonscript": 0.127,
+   "share_under_7p5pt": 0.2732,
+   "low_words": false
+  },
+  {
+   "page": 44,
+   "words": 517,
+   "chars": 2528,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.2017,
+   "share_under_8pt_nonscript": 0.0965,
+   "share_under_7p5pt": 0.2017,
+   "low_words": false
+  },
+  {
+   "page": 45,
+   "words": 768,
+   "chars": 3721,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.4174,
+   "share_under_8pt_nonscript": 0.3271,
+   "share_under_7p5pt": 0.4174,
+   "low_words": false
+  },
+  {
+   "page": 46,
+   "words": 791,
+   "chars": 3577,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.98,
+   "share_under_8pt": 0.1731,
+   "share_under_8pt_nonscript": 0.0288,
+   "share_under_7p5pt": 0.1731,
+   "low_words": false
+  },
+  {
+   "page": 47,
+   "words": 861,
+   "chars": 3811,
+   "min_font": 5.48,
+   "min_font_nonscript": 6.58,
+   "share_under_8pt": 0.1322,
+   "share_under_8pt_nonscript": 0.0241,
+   "share_under_7p5pt": 0.1322,
+   "low_words": false
+  },
+  {
+   "page": 48,
+   "words": 610,
+   "chars": 2806,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.98,
+   "share_under_8pt": 0.1639,
+   "share_under_8pt_nonscript": 0.0485,
+   "share_under_7p5pt": 0.1639,
+   "low_words": false
+  },
+  {
+   "page": 49,
+   "words": 453,
+   "chars": 2151,
+   "min_font": 5.98,
+   "min_font_nonscript": 7.89,
+   "share_under_8pt": 0.0944,
+   "share_under_8pt_nonscript": 0.006,
+   "share_under_7p5pt": 0.0414,
+   "low_words": false
+  },
+  {
+   "page": 50,
+   "words": 521,
+   "chars": 2787,
+   "min_font": 5.98,
+   "min_font_nonscript": 5.98,
+   "share_under_8pt": 0.1385,
+   "share_under_8pt_nonscript": 0.0538,
+   "share_under_7p5pt": 0.1385,
+   "low_words": false
+  },
+  {
+   "page": 51,
+   "words": 714,
+   "chars": 3472,
+   "min_font": 5.98,
+   "min_font_nonscript": 7.37,
+   "share_under_8pt": 0.0642,
+   "share_under_8pt_nonscript": 0.0017,
+   "share_under_7p5pt": 0.0642,
+   "low_words": false
+  },
+  {
+   "page": 52,
+   "words": 798,
+   "chars": 3536,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.5874,
+   "share_under_8pt_nonscript": 0.5252,
+   "share_under_7p5pt": 0.5642,
+   "low_words": false
+  },
+  {
+   "page": 53,
+   "words": 612,
+   "chars": 3274,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.442,
+   "share_under_8pt_nonscript": 0.4145,
+   "share_under_7p5pt": 0.442,
+   "low_words": false
+  },
+  {
+   "page": 54,
+   "words": 653,
+   "chars": 3148,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.1372,
+   "share_under_8pt_nonscript": 0.0619,
+   "share_under_7p5pt": 0.1372,
+   "low_words": false
+  },
+  {
+   "page": 55,
+   "words": 622,
+   "chars": 2971,
+   "min_font": 5.98,
+   "min_font_nonscript": 6.28,
+   "share_under_8pt": 0.1309,
+   "share_under_8pt_nonscript": 0.0162,
+   "share_under_7p5pt": 0.1114,
+   "low_words": false
+  },
+  {
+   "page": 56,
+   "words": 827,
+   "chars": 3702,
+   "min_font": 5.62,
+   "min_font_nonscript": 5.98,
+   "share_under_8pt": 0.1151,
+   "share_under_8pt_nonscript": 0.0262,
+   "share_under_7p5pt": 0.1116,
+   "low_words": false
+  },
+  {
+   "page": 57,
+   "words": 833,
+   "chars": 3801,
+   "min_font": 5.48,
+   "min_font_nonscript": 6.58,
+   "share_under_8pt": 0.1247,
+   "share_under_8pt_nonscript": 0.021,
+   "share_under_7p5pt": 0.1247,
+   "low_words": false
+  },
+  {
+   "page": 58,
+   "words": 579,
+   "chars": 2736,
+   "min_font": 5.62,
+   "min_font_nonscript": 6.58,
+   "share_under_8pt": 0.1246,
+   "share_under_8pt_nonscript": 0.0263,
+   "share_under_7p5pt": 0.0925,
+   "low_words": false
+  },
+  {
+   "page": 59,
+   "words": 648,
+   "chars": 3276,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.1487,
+   "share_under_8pt_nonscript": 0.0565,
+   "share_under_7p5pt": 0.1352,
+   "low_words": false
+  },
+  {
+   "page": 60,
+   "words": 712,
+   "chars": 3028,
+   "min_font": 5.98,
+   "min_font_nonscript": 6.28,
+   "share_under_8pt": 0.1651,
+   "share_under_8pt_nonscript": 0.0376,
+   "share_under_7p5pt": 0.1202,
+   "low_words": false
+  },
+  {
+   "page": 61,
+   "words": 587,
+   "chars": 2521,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.1555,
+   "share_under_8pt_nonscript": 0.0242,
+   "share_under_7p5pt": 0.1555,
+   "low_words": false
+  },
+  {
+   "page": 62,
+   "words": 624,
+   "chars": 2598,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.1855,
+   "share_under_8pt_nonscript": 0.0831,
+   "share_under_7p5pt": 0.1728,
+   "low_words": false
+  },
+  {
+   "page": 63,
+   "words": 740,
+   "chars": 2966,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.2188,
+   "share_under_8pt_nonscript": 0.0981,
+   "share_under_7p5pt": 0.2094,
+   "low_words": false
+  },
+  {
+   "page": 64,
+   "words": 730,
+   "chars": 3450,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.1238,
+   "share_under_8pt_nonscript": 0.0571,
+   "share_under_7p5pt": 0.1238,
+   "low_words": false
+  },
+  {
+   "page": 65,
+   "words": 565,
+   "chars": 2370,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.2004,
+   "share_under_8pt_nonscript": 0.1207,
+   "share_under_7p5pt": 0.2004,
+   "low_words": false
+  },
+  {
+   "page": 66,
+   "words": 652,
+   "chars": 3150,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.1867,
+   "share_under_8pt_nonscript": 0.0876,
+   "share_under_7p5pt": 0.1829,
+   "low_words": false
+  },
+  {
+   "page": 67,
+   "words": 624,
+   "chars": 2870,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.98,
+   "share_under_8pt": 0.1094,
+   "share_under_8pt_nonscript": 0.0282,
+   "share_under_7p5pt": 0.0993,
+   "low_words": false
+  },
+  {
+   "page": 68,
+   "words": 166,
+   "chars": 793,
+   "min_font": 6.58,
+   "min_font_nonscript": 8.07,
+   "share_under_8pt": 0.0441,
+   "share_under_8pt_nonscript": 0.0,
+   "share_under_7p5pt": 0.0189,
+   "low_words": true
+  },
+  {
+   "page": 69,
+   "words": 513,
+   "chars": 2381,
+   "min_font": 5.98,
+   "min_font_nonscript": 6.28,
+   "share_under_8pt": 0.147,
+   "share_under_8pt_nonscript": 0.0554,
+   "share_under_7p5pt": 0.1277,
+   "low_words": false
+  },
+  {
+   "page": 70,
+   "words": 649,
+   "chars": 2868,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.1635,
+   "share_under_8pt_nonscript": 0.0715,
+   "share_under_7p5pt": 0.1635,
+   "low_words": false
+  },
+  {
+   "page": 71,
+   "words": 751,
+   "chars": 3215,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.1135,
+   "share_under_8pt_nonscript": 0.0311,
+   "share_under_7p5pt": 0.1086,
+   "low_words": false
+  },
+  {
+   "page": 72,
+   "words": 692,
+   "chars": 2906,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.5124,
+   "share_under_8pt_nonscript": 0.4439,
+   "share_under_7p5pt": 0.5124,
+   "low_words": false
+  },
+  {
+   "page": 73,
+   "words": 680,
+   "chars": 3022,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.1251,
+   "share_under_8pt_nonscript": 0.0536,
+   "share_under_7p5pt": 0.1251,
+   "low_words": false
+  },
+  {
+   "page": 74,
+   "words": 611,
+   "chars": 2591,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.2127,
+   "share_under_8pt_nonscript": 0.1223,
+   "share_under_7p5pt": 0.2127,
+   "low_words": false
+  },
+  {
+   "page": 75,
+   "words": 842,
+   "chars": 3734,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.0948,
+   "share_under_8pt_nonscript": 0.0145,
+   "share_under_7p5pt": 0.0779,
+   "low_words": false
+  },
+  {
+   "page": 76,
+   "words": 658,
+   "chars": 2683,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.2583,
+   "share_under_8pt_nonscript": 0.1714,
+   "share_under_7p5pt": 0.2583,
+   "low_words": false
+  },
+  {
+   "page": 77,
+   "words": 742,
+   "chars": 3525,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.1665,
+   "share_under_8pt_nonscript": 0.0431,
+   "share_under_7p5pt": 0.1418,
+   "low_words": false
+  },
+  {
+   "page": 78,
+   "words": 637,
+   "chars": 2808,
+   "min_font": 5.48,
+   "min_font_nonscript": 6.28,
+   "share_under_8pt": 0.1852,
+   "share_under_8pt_nonscript": 0.0459,
+   "share_under_7p5pt": 0.1546,
+   "low_words": false
+  },
+  {
+   "page": 79,
+   "words": 694,
+   "chars": 2922,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.1283,
+   "share_under_8pt_nonscript": 0.0291,
+   "share_under_7p5pt": 0.1283,
+   "low_words": false
+  },
+  {
+   "page": 80,
+   "words": 805,
+   "chars": 3812,
+   "min_font": 5.48,
+   "min_font_nonscript": 7.01,
+   "share_under_8pt": 0.1435,
+   "share_under_8pt_nonscript": 0.0252,
+   "share_under_7p5pt": 0.133,
+   "low_words": false
+  },
+  {
+   "page": 81,
+   "words": 635,
+   "chars": 2831,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.1646,
+   "share_under_8pt_nonscript": 0.0484,
+   "share_under_7p5pt": 0.1533,
+   "low_words": false
+  },
+  {
+   "page": 82,
+   "words": 484,
+   "chars": 2308,
+   "min_font": 5.98,
+   "min_font_nonscript": 7.01,
+   "share_under_8pt": 0.1399,
+   "share_under_8pt_nonscript": 0.013,
+   "share_under_7p5pt": 0.1014,
+   "low_words": false
+  },
+  {
+   "page": 83,
+   "words": 684,
+   "chars": 3719,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.2189,
+   "share_under_8pt_nonscript": 0.125,
+   "share_under_7p5pt": 0.1702,
+   "low_words": false
+  },
+  {
+   "page": 84,
+   "words": 507,
+   "chars": 2090,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.1301,
+   "share_under_8pt_nonscript": 0.0292,
+   "share_under_7p5pt": 0.1301,
+   "low_words": false
+  },
+  {
+   "page": 85,
+   "words": 745,
+   "chars": 3233,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.2011,
+   "share_under_8pt_nonscript": 0.095,
+   "share_under_7p5pt": 0.2011,
+   "low_words": false
+  },
+  {
+   "page": 86,
+   "words": 678,
+   "chars": 3238,
+   "min_font": 5.48,
+   "min_font_nonscript": 6.28,
+   "share_under_8pt": 0.1106,
+   "share_under_8pt_nonscript": 0.054,
+   "share_under_7p5pt": 0.1056,
+   "low_words": false
+  },
+  {
+   "page": 87,
+   "words": 577,
+   "chars": 2511,
+   "min_font": 5.98,
+   "min_font_nonscript": 5.98,
+   "share_under_8pt": 0.1689,
+   "share_under_8pt_nonscript": 0.0514,
+   "share_under_7p5pt": 0.1362,
+   "low_words": false
+  },
+  {
+   "page": 88,
+   "words": 627,
+   "chars": 2816,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.2536,
+   "share_under_8pt_nonscript": 0.1456,
+   "share_under_7p5pt": 0.2166,
+   "low_words": false
+  },
+  {
+   "page": 89,
+   "words": 628,
+   "chars": 3101,
+   "min_font": 5.98,
+   "min_font_nonscript": 6.28,
+   "share_under_8pt": 0.1986,
+   "share_under_8pt_nonscript": 0.02,
+   "share_under_7p5pt": 0.1925,
+   "low_words": false
+  },
+  {
+   "page": 90,
+   "words": 737,
+   "chars": 3497,
+   "min_font": 5.48,
+   "min_font_nonscript": 6.28,
+   "share_under_8pt": 0.127,
+   "share_under_8pt_nonscript": 0.0117,
+   "share_under_7p5pt": 0.1075,
+   "low_words": false
+  },
+  {
+   "page": 91,
+   "words": 531,
+   "chars": 2360,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.1564,
+   "share_under_8pt_nonscript": 0.0831,
+   "share_under_7p5pt": 0.15,
+   "low_words": false
+  },
+  {
+   "page": 92,
+   "words": 420,
+   "chars": 2020,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.1059,
+   "share_under_8pt_nonscript": 0.0089,
+   "share_under_7p5pt": 0.0559,
+   "low_words": false
+  },
+  {
+   "page": 93,
+   "words": 696,
+   "chars": 3305,
+   "min_font": 5.98,
+   "min_font_nonscript": 6.28,
+   "share_under_8pt": 0.1089,
+   "share_under_8pt_nonscript": 0.0306,
+   "share_under_7p5pt": 0.1089,
+   "low_words": false
+  },
+  {
+   "page": 94,
+   "words": 605,
+   "chars": 2679,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.2673,
+   "share_under_8pt_nonscript": 0.1187,
+   "share_under_7p5pt": 0.2139,
+   "low_words": false
+  },
+  {
+   "page": 95,
+   "words": 640,
+   "chars": 2704,
+   "min_font": 5.98,
+   "min_font_nonscript": 6.28,
+   "share_under_8pt": 0.1206,
+   "share_under_8pt_nonscript": 0.0178,
+   "share_under_7p5pt": 0.1206,
+   "low_words": false
+  },
+  {
+   "page": 96,
+   "words": 804,
+   "chars": 3405,
+   "min_font": 5.18,
+   "min_font_nonscript": 5.18,
+   "share_under_8pt": 0.6203,
+   "share_under_8pt_nonscript": 0.5789,
+   "share_under_7p5pt": 0.6203,
+   "low_words": false
+  },
+  {
+   "page": 97,
+   "words": 598,
+   "chars": 2636,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.3054,
+   "share_under_8pt_nonscript": 0.1571,
+   "share_under_7p5pt": 0.3005,
+   "low_words": false
+  },
+  {
+   "page": 98,
+   "words": 748,
+   "chars": 3418,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.2156,
+   "share_under_8pt_nonscript": 0.117,
+   "share_under_7p5pt": 0.2016,
+   "low_words": false
+  },
+  {
+   "page": 99,
+   "words": 614,
+   "chars": 2777,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.1502,
+   "share_under_8pt_nonscript": 0.0432,
+   "share_under_7p5pt": 0.1502,
+   "low_words": false
+  },
+  {
+   "page": 100,
+   "words": 753,
+   "chars": 3364,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.1451,
+   "share_under_8pt_nonscript": 0.0369,
+   "share_under_7p5pt": 0.1451,
+   "low_words": false
+  },
+  {
+   "page": 101,
+   "words": 789,
+   "chars": 3558,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.1605,
+   "share_under_8pt_nonscript": 0.0295,
+   "share_under_7p5pt": 0.1605,
+   "low_words": false
+  },
+  {
+   "page": 102,
+   "words": 405,
+   "chars": 2001,
+   "min_font": 5.98,
+   "min_font_nonscript": 5.98,
+   "share_under_8pt": 0.1214,
+   "share_under_8pt_nonscript": 0.0005,
+   "share_under_7p5pt": 0.0755,
+   "low_words": false
+  },
+  {
+   "page": 103,
+   "words": 674,
+   "chars": 3507,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.98,
+   "share_under_8pt": 0.1805,
+   "share_under_8pt_nonscript": 0.079,
+   "share_under_7p5pt": 0.1708,
+   "low_words": false
+  },
+  {
+   "page": 104,
+   "words": 766,
+   "chars": 3662,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.0879,
+   "share_under_8pt_nonscript": 0.0172,
+   "share_under_7p5pt": 0.0863,
+   "low_words": false
+  },
+  {
+   "page": 105,
+   "words": 680,
+   "chars": 3140,
+   "min_font": 5.98,
+   "min_font_nonscript": 7.12,
+   "share_under_8pt": 0.0815,
+   "share_under_8pt_nonscript": 0.0127,
+   "share_under_7p5pt": 0.0815,
+   "low_words": false
+  },
+  {
+   "page": 106,
+   "words": 638,
+   "chars": 3284,
+   "min_font": 5.18,
+   "min_font_nonscript": 5.18,
+   "share_under_8pt": 0.2135,
+   "share_under_8pt_nonscript": 0.1224,
+   "share_under_7p5pt": 0.1845,
+   "low_words": false
+  },
+  {
+   "page": 107,
+   "words": 617,
+   "chars": 2930,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.1908,
+   "share_under_8pt_nonscript": 0.1154,
+   "share_under_7p5pt": 0.1908,
+   "low_words": false
+  },
+  {
+   "page": 108,
+   "words": 591,
+   "chars": 2645,
+   "min_font": 5.98,
+   "min_font_nonscript": 5.98,
+   "share_under_8pt": 0.1055,
+   "share_under_8pt_nonscript": 0.0253,
+   "share_under_7p5pt": 0.0873,
+   "low_words": false
+  },
+  {
+   "page": 109,
+   "words": 676,
+   "chars": 3125,
+   "min_font": 5.98,
+   "min_font_nonscript": 5.98,
+   "share_under_8pt": 0.1482,
+   "share_under_8pt_nonscript": 0.0451,
+   "share_under_7p5pt": 0.1482,
+   "low_words": false
+  },
+  {
+   "page": 110,
+   "words": 715,
+   "chars": 3311,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.2274,
+   "share_under_8pt_nonscript": 0.1199,
+   "share_under_7p5pt": 0.2274,
+   "low_words": false
+  },
+  {
+   "page": 111,
+   "words": 673,
+   "chars": 3086,
+   "min_font": 5.98,
+   "min_font_nonscript": 5.98,
+   "share_under_8pt": 0.1371,
+   "share_under_8pt_nonscript": 0.0642,
+   "share_under_7p5pt": 0.1371,
+   "low_words": false
+  },
+  {
+   "page": 112,
+   "words": 861,
+   "chars": 4086,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.1361,
+   "share_under_8pt_nonscript": 0.0768,
+   "share_under_7p5pt": 0.1265,
+   "low_words": false
+  },
+  {
+   "page": 113,
+   "words": 875,
+   "chars": 3857,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.2458,
+   "share_under_8pt_nonscript": 0.1872,
+   "share_under_7p5pt": 0.2458,
+   "low_words": false
+  },
+  {
+   "page": 114,
+   "words": 791,
+   "chars": 3590,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.1838,
+   "share_under_8pt_nonscript": 0.1203,
+   "share_under_7p5pt": 0.1593,
+   "low_words": false
+  },
+  {
+   "page": 115,
+   "words": 739,
+   "chars": 3418,
+   "min_font": 6.24,
+   "min_font_nonscript": 6.24,
+   "share_under_8pt": 0.2001,
+   "share_under_8pt_nonscript": 0.1498,
+   "share_under_7p5pt": 0.1975,
+   "low_words": false
+  },
+  {
+   "page": 116,
+   "words": 642,
+   "chars": 3372,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.98,
+   "share_under_8pt": 0.1711,
+   "share_under_8pt_nonscript": 0.0842,
+   "share_under_7p5pt": 0.1453,
+   "low_words": false
+  },
+  {
+   "page": 117,
+   "words": 650,
+   "chars": 3177,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.2886,
+   "share_under_8pt_nonscript": 0.1583,
+   "share_under_7p5pt": 0.2203,
+   "low_words": false
+  },
+  {
+   "page": 118,
+   "words": 637,
+   "chars": 3072,
+   "min_font": 5.98,
+   "min_font_nonscript": 5.98,
+   "share_under_8pt": 0.099,
+   "share_under_8pt_nonscript": 0.0156,
+   "share_under_7p5pt": 0.099,
+   "low_words": false
+  },
+  {
+   "page": 119,
+   "words": 623,
+   "chars": 2684,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.2243,
+   "share_under_8pt_nonscript": 0.1401,
+   "share_under_7p5pt": 0.2243,
+   "low_words": false
+  },
+  {
+   "page": 120,
+   "words": 711,
+   "chars": 3272,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.98,
+   "share_under_8pt": 0.1916,
+   "share_under_8pt_nonscript": 0.0758,
+   "share_under_7p5pt": 0.1831,
+   "low_words": false
+  },
+  {
+   "page": 121,
+   "words": 674,
+   "chars": 3289,
+   "min_font": 5.62,
+   "min_font_nonscript": 5.98,
+   "share_under_8pt": 0.1645,
+   "share_under_8pt_nonscript": 0.0882,
+   "share_under_7p5pt": 0.1645,
+   "low_words": false
+  },
+  {
+   "page": 122,
+   "words": 844,
+   "chars": 4167,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.1704,
+   "share_under_8pt_nonscript": 0.1231,
+   "share_under_7p5pt": 0.1608,
+   "low_words": false
+  },
+  {
+   "page": 123,
+   "words": 852,
+   "chars": 3638,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.2303,
+   "share_under_8pt_nonscript": 0.1592,
+   "share_under_7p5pt": 0.2303,
+   "low_words": false
+  },
+  {
+   "page": 124,
+   "words": 559,
+   "chars": 2473,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.2042,
+   "share_under_8pt_nonscript": 0.1314,
+   "share_under_7p5pt": 0.2022,
+   "low_words": false
+  },
+  {
+   "page": 125,
+   "words": 639,
+   "chars": 3266,
+   "min_font": 5.98,
+   "min_font_nonscript": 5.98,
+   "share_under_8pt": 0.1895,
+   "share_under_8pt_nonscript": 0.1041,
+   "share_under_7p5pt": 0.1598,
+   "low_words": false
+  },
+  {
+   "page": 126,
+   "words": 614,
+   "chars": 2848,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.2117,
+   "share_under_8pt_nonscript": 0.1468,
+   "share_under_7p5pt": 0.2117,
+   "low_words": false
+  },
+  {
+   "page": 127,
+   "words": 741,
+   "chars": 3621,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.1154,
+   "share_under_8pt_nonscript": 0.0461,
+   "share_under_7p5pt": 0.1016,
+   "low_words": false
+  },
+  {
+   "page": 128,
+   "words": 646,
+   "chars": 3043,
+   "min_font": 5.18,
+   "min_font_nonscript": 5.18,
+   "share_under_8pt": 0.2685,
+   "share_under_8pt_nonscript": 0.1804,
+   "share_under_7p5pt": 0.2685,
+   "low_words": false
+  },
+  {
+   "page": 129,
+   "words": 772,
+   "chars": 3388,
+   "min_font": 5.62,
+   "min_font_nonscript": 5.98,
+   "share_under_8pt": 0.1694,
+   "share_under_8pt_nonscript": 0.0841,
+   "share_under_7p5pt": 0.1694,
+   "low_words": false
+  },
+  {
+   "page": 130,
+   "words": 619,
+   "chars": 3084,
+   "min_font": 5.62,
+   "min_font_nonscript": 5.98,
+   "share_under_8pt": 0.1864,
+   "share_under_8pt_nonscript": 0.1057,
+   "share_under_7p5pt": 0.1864,
+   "low_words": false
+  },
+  {
+   "page": 131,
+   "words": 868,
+   "chars": 3945,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.201,
+   "share_under_8pt_nonscript": 0.1366,
+   "share_under_7p5pt": 0.1833,
+   "low_words": false
+  },
+  {
+   "page": 132,
+   "words": 817,
+   "chars": 3710,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.2836,
+   "share_under_8pt_nonscript": 0.1827,
+   "share_under_7p5pt": 0.2617,
+   "low_words": false
+  },
+  {
+   "page": 133,
+   "words": 662,
+   "chars": 2935,
+   "min_font": 5.18,
+   "min_font_nonscript": 5.18,
+   "share_under_8pt": 0.2031,
+   "share_under_8pt_nonscript": 0.1462,
+   "share_under_7p5pt": 0.2014,
+   "low_words": false
+  },
+  {
+   "page": 134,
+   "words": 644,
+   "chars": 3254,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.98,
+   "share_under_8pt": 0.1761,
+   "share_under_8pt_nonscript": 0.071,
+   "share_under_7p5pt": 0.1739,
+   "low_words": false
+  },
+  {
+   "page": 135,
+   "words": 637,
+   "chars": 3220,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.2161,
+   "share_under_8pt_nonscript": 0.1043,
+   "share_under_7p5pt": 0.1767,
+   "low_words": false
+  },
+  {
+   "page": 136,
+   "words": 572,
+   "chars": 2708,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.2256,
+   "share_under_8pt_nonscript": 0.1189,
+   "share_under_7p5pt": 0.1754,
+   "low_words": false
+  },
+  {
+   "page": 137,
+   "words": 656,
+   "chars": 2974,
+   "min_font": 5.98,
+   "min_font_nonscript": 5.98,
+   "share_under_8pt": 0.1315,
+   "share_under_8pt_nonscript": 0.0279,
+   "share_under_7p5pt": 0.1315,
+   "low_words": false
+  },
+  {
+   "page": 138,
+   "words": 773,
+   "chars": 3541,
+   "min_font": 5.98,
+   "min_font_nonscript": 5.98,
+   "share_under_8pt": 0.1533,
+   "share_under_8pt_nonscript": 0.074,
+   "share_under_7p5pt": 0.1533,
+   "low_words": false
+  },
+  {
+   "page": 139,
+   "words": 674,
+   "chars": 3170,
+   "min_font": 5.98,
+   "min_font_nonscript": 5.98,
+   "share_under_8pt": 0.2073,
+   "share_under_8pt_nonscript": 0.0899,
+   "share_under_7p5pt": 0.1962,
+   "low_words": false
+  },
+  {
+   "page": 140,
+   "words": 809,
+   "chars": 3987,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.161,
+   "share_under_8pt_nonscript": 0.1046,
+   "share_under_7p5pt": 0.1512,
+   "low_words": false
+  },
+  {
+   "page": 141,
+   "words": 812,
+   "chars": 3655,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.3007,
+   "share_under_8pt_nonscript": 0.2315,
+   "share_under_7p5pt": 0.3007,
+   "low_words": false
+  },
+  {
+   "page": 142,
+   "words": 753,
+   "chars": 3497,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.2108,
+   "share_under_8pt_nonscript": 0.0649,
+   "share_under_7p5pt": 0.1496,
+   "low_words": false
+  },
+  {
+   "page": 143,
+   "words": 801,
+   "chars": 3473,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.2413,
+   "share_under_8pt_nonscript": 0.1774,
+   "share_under_7p5pt": 0.2413,
+   "low_words": false
+  },
+  {
+   "page": 144,
+   "words": 718,
+   "chars": 3042,
+   "min_font": 5.18,
+   "min_font_nonscript": 5.18,
+   "share_under_8pt": 0.2314,
+   "share_under_8pt_nonscript": 0.1598,
+   "share_under_7p5pt": 0.2298,
+   "low_words": false
+  },
+  {
+   "page": 145,
+   "words": 515,
+   "chars": 2792,
+   "min_font": 5.98,
+   "min_font_nonscript": 5.98,
+   "share_under_8pt": 0.1411,
+   "share_under_8pt_nonscript": 0.0555,
+   "share_under_7p5pt": 0.1411,
+   "low_words": false
+  },
+  {
+   "page": 146,
+   "words": 612,
+   "chars": 2856,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.3757,
+   "share_under_8pt_nonscript": 0.264,
+   "share_under_7p5pt": 0.3386,
+   "low_words": false
+  },
+  {
+   "page": 147,
+   "words": 916,
+   "chars": 4529,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.0879,
+   "share_under_8pt_nonscript": 0.0132,
+   "share_under_7p5pt": 0.0713,
+   "low_words": false
+  },
+  {
+   "page": 148,
+   "words": 638,
+   "chars": 3099,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.1107,
+   "share_under_8pt_nonscript": 0.0394,
+   "share_under_7p5pt": 0.1023,
+   "low_words": false
+  },
+  {
+   "page": 149,
+   "words": 673,
+   "chars": 3069,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.1606,
+   "share_under_8pt_nonscript": 0.0688,
+   "share_under_7p5pt": 0.1382,
+   "low_words": false
+  },
+  {
+   "page": 150,
+   "words": 885,
+   "chars": 4161,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.1692,
+   "share_under_8pt_nonscript": 0.1009,
+   "share_under_7p5pt": 0.1557,
+   "low_words": false
+  },
+  {
+   "page": 151,
+   "words": 527,
+   "chars": 2527,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.1472,
+   "share_under_8pt_nonscript": 0.0768,
+   "share_under_7p5pt": 0.11,
+   "low_words": false
+  },
+  {
+   "page": 152,
+   "words": 606,
+   "chars": 2934,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.244,
+   "share_under_8pt_nonscript": 0.1438,
+   "share_under_7p5pt": 0.1933,
+   "low_words": false
+  },
+  {
+   "page": 153,
+   "words": 514,
+   "chars": 2847,
+   "min_font": 5.98,
+   "min_font_nonscript": 7.01,
+   "share_under_8pt": 0.0861,
+   "share_under_8pt_nonscript": 0.0042,
+   "share_under_7p5pt": 0.0527,
+   "low_words": false
+  },
+  {
+   "page": 154,
+   "words": 428,
+   "chars": 2158,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.0681,
+   "share_under_8pt_nonscript": 0.0463,
+   "share_under_7p5pt": 0.063,
+   "low_words": false
+  },
+  {
+   "page": 155,
+   "words": 235,
+   "chars": 1424,
+   "min_font": 6.22,
+   "min_font_nonscript": 7.17,
+   "share_under_8pt": 0.125,
+   "share_under_8pt_nonscript": 0.0723,
+   "share_under_7p5pt": 0.125,
+   "low_words": true
+  },
+  {
+   "page": 156,
+   "words": 731,
+   "chars": 3463,
+   "min_font": 5.98,
+   "min_font_nonscript": 7.01,
+   "share_under_8pt": 0.0661,
+   "share_under_8pt_nonscript": 0.0211,
+   "share_under_7p5pt": 0.052,
+   "low_words": false
+  },
+  {
+   "page": 157,
+   "words": 482,
+   "chars": 2102,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.3187,
+   "share_under_8pt_nonscript": 0.294,
+   "share_under_7p5pt": 0.3187,
+   "low_words": false
+  },
+  {
+   "page": 158,
+   "words": 837,
+   "chars": 3606,
+   "min_font": 5.98,
+   "min_font_nonscript": 5.98,
+   "share_under_8pt": 0.1295,
+   "share_under_8pt_nonscript": 0.0202,
+   "share_under_7p5pt": 0.1229,
+   "low_words": false
+  },
+  {
+   "page": 159,
+   "words": 819,
+   "chars": 4049,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.0916,
+   "share_under_8pt_nonscript": 0.0188,
+   "share_under_7p5pt": 0.0916,
+   "low_words": false
+  },
+  {
+   "page": 160,
+   "words": 737,
+   "chars": 3301,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.1887,
+   "share_under_8pt_nonscript": 0.1188,
+   "share_under_7p5pt": 0.1869,
+   "low_words": false
+  },
+  {
+   "page": 161,
+   "words": 794,
+   "chars": 3457,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.1675,
+   "share_under_8pt_nonscript": 0.0856,
+   "share_under_7p5pt": 0.1675,
+   "low_words": false
+  },
+  {
+   "page": 162,
+   "words": 672,
+   "chars": 3146,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.2921,
+   "share_under_8pt_nonscript": 0.1564,
+   "share_under_7p5pt": 0.254,
+   "low_words": false
+  },
+  {
+   "page": 163,
+   "words": 715,
+   "chars": 3438,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.2304,
+   "share_under_8pt_nonscript": 0.0713,
+   "share_under_7p5pt": 0.1899,
+   "low_words": false
+  },
+  {
+   "page": 164,
+   "words": 420,
+   "chars": 1967,
+   "min_font": 5.48,
+   "min_font_nonscript": 6.28,
+   "share_under_8pt": 0.1469,
+   "share_under_8pt_nonscript": 0.0219,
+   "share_under_7p5pt": 0.1469,
+   "low_words": false
+  },
+  {
+   "page": 165,
+   "words": 774,
+   "chars": 3411,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.212,
+   "share_under_8pt_nonscript": 0.0739,
+   "share_under_7p5pt": 0.209,
+   "low_words": false
+  },
+  {
+   "page": 166,
+   "words": 690,
+   "chars": 3100,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.2161,
+   "share_under_8pt_nonscript": 0.1042,
+   "share_under_7p5pt": 0.1768,
+   "low_words": false
+  },
+  {
+   "page": 167,
+   "words": 650,
+   "chars": 2841,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.98,
+   "share_under_8pt": 0.1225,
+   "share_under_8pt_nonscript": 0.044,
+   "share_under_7p5pt": 0.1225,
+   "low_words": false
+  },
+  {
+   "page": 168,
+   "words": 543,
+   "chars": 2502,
+   "min_font": 6.28,
+   "min_font_nonscript": 7.17,
+   "share_under_8pt": 0.0248,
+   "share_under_8pt_nonscript": 0.0044,
+   "share_under_7p5pt": 0.0248,
+   "low_words": false
+  },
+  {
+   "page": 169,
+   "words": 566,
+   "chars": 2618,
+   "min_font": 5.98,
+   "min_font_nonscript": 7.01,
+   "share_under_8pt": 0.081,
+   "share_under_8pt_nonscript": 0.0256,
+   "share_under_7p5pt": 0.0504,
+   "low_words": false
+  },
+  {
+   "page": 170,
+   "words": 907,
+   "chars": 4233,
+   "min_font": 5.98,
+   "min_font_nonscript": 7.01,
+   "share_under_8pt": 0.0593,
+   "share_under_8pt_nonscript": 0.0057,
+   "share_under_7p5pt": 0.0491,
+   "low_words": false
+  },
+  {
+   "page": 171,
+   "words": 866,
+   "chars": 4029,
+   "min_font": 5.98,
+   "min_font_nonscript": 7.01,
+   "share_under_8pt": 0.0846,
+   "share_under_8pt_nonscript": 0.0273,
+   "share_under_7p5pt": 0.0536,
+   "low_words": false
+  },
+  {
+   "page": 172,
+   "words": 203,
+   "chars": 892,
+   "min_font": 7.89,
+   "min_font_nonscript": 7.99,
+   "share_under_8pt": 0.0179,
+   "share_under_8pt_nonscript": 0.0,
+   "share_under_7p5pt": 0.0,
+   "low_words": true
+  },
+  {
+   "page": 173,
+   "words": 508,
+   "chars": 2643,
+   "min_font": 5.48,
+   "min_font_nonscript": 6.28,
+   "share_under_8pt": 0.1771,
+   "share_under_8pt_nonscript": 0.0484,
+   "share_under_7p5pt": 0.1529,
+   "low_words": false
+  },
+  {
+   "page": 174,
+   "words": 801,
+   "chars": 3508,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.2175,
+   "share_under_8pt_nonscript": 0.1243,
+   "share_under_7p5pt": 0.209,
+   "low_words": false
+  },
+  {
+   "page": 175,
+   "words": 615,
+   "chars": 3009,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.2692,
+   "share_under_8pt_nonscript": 0.0668,
+   "share_under_7p5pt": 0.2247,
+   "low_words": false
+  },
+  {
+   "page": 176,
+   "words": 448,
+   "chars": 2045,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.98,
+   "share_under_8pt": 0.1995,
+   "share_under_8pt_nonscript": 0.0328,
+   "share_under_7p5pt": 0.1897,
+   "low_words": false
+  },
+  {
+   "page": 177,
+   "words": 613,
+   "chars": 2760,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.2351,
+   "share_under_8pt_nonscript": 0.1533,
+   "share_under_7p5pt": 0.2351,
+   "low_words": false
+  },
+  {
+   "page": 178,
+   "words": 944,
+   "chars": 3612,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.255,
+   "share_under_8pt_nonscript": 0.165,
+   "share_under_7p5pt": 0.2331,
+   "low_words": false
+  },
+  {
+   "page": 179,
+   "words": 635,
+   "chars": 3315,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.2799,
+   "share_under_8pt_nonscript": 0.1828,
+   "share_under_7p5pt": 0.1671,
+   "low_words": false
+  },
+  {
+   "page": 180,
+   "words": 826,
+   "chars": 3685,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.1425,
+   "share_under_8pt_nonscript": 0.0445,
+   "share_under_7p5pt": 0.1365,
+   "low_words": false
+  },
+  {
+   "page": 181,
+   "words": 753,
+   "chars": 3623,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.1297,
+   "share_under_8pt_nonscript": 0.0215,
+   "share_under_7p5pt": 0.1129,
+   "low_words": false
+  },
+  {
+   "page": 182,
+   "words": 908,
+   "chars": 4272,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.1393,
+   "share_under_8pt_nonscript": 0.0459,
+   "share_under_7p5pt": 0.1088,
+   "low_words": false
+  },
+  {
+   "page": 183,
+   "words": 656,
+   "chars": 3095,
+   "min_font": 5.98,
+   "min_font_nonscript": 6.58,
+   "share_under_8pt": 0.1383,
+   "share_under_8pt_nonscript": 0.0074,
+   "share_under_7p5pt": 0.1137,
+   "low_words": false
+  },
+  {
+   "page": 184,
+   "words": 670,
+   "chars": 3826,
+   "min_font": 6.21,
+   "min_font_nonscript": 7.17,
+   "share_under_8pt": 0.0808,
+   "share_under_8pt_nonscript": 0.0217,
+   "share_under_7p5pt": 0.0808,
+   "low_words": false
+  },
+  {
+   "page": 185,
+   "words": 443,
+   "chars": 1832,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.1163,
+   "share_under_8pt_nonscript": 0.0224,
+   "share_under_7p5pt": 0.0988,
+   "low_words": false
+  },
+  {
+   "page": 186,
+   "words": 771,
+   "chars": 3779,
+   "min_font": 5.98,
+   "min_font_nonscript": 5.98,
+   "share_under_8pt": 0.0884,
+   "share_under_8pt_nonscript": 0.0172,
+   "share_under_7p5pt": 0.0884,
+   "low_words": false
+  },
+  {
+   "page": 187,
+   "words": 635,
+   "chars": 3006,
+   "min_font": 5.98,
+   "min_font_nonscript": 7.01,
+   "share_under_8pt": 0.0788,
+   "share_under_8pt_nonscript": 0.0096,
+   "share_under_7p5pt": 0.0649,
+   "low_words": false
+  },
+  {
+   "page": 188,
+   "words": 862,
+   "chars": 3785,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.1271,
+   "share_under_8pt_nonscript": 0.0338,
+   "share_under_7p5pt": 0.1244,
+   "low_words": false
+  },
+  {
+   "page": 189,
+   "words": 739,
+   "chars": 3707,
+   "min_font": 5.62,
+   "min_font_nonscript": 5.98,
+   "share_under_8pt": 0.1384,
+   "share_under_8pt_nonscript": 0.0229,
+   "share_under_7p5pt": 0.1284,
+   "low_words": false
+  },
+  {
+   "page": 190,
+   "words": 535,
+   "chars": 2398,
+   "min_font": 5.18,
+   "min_font_nonscript": 5.18,
+   "share_under_8pt": 0.2952,
+   "share_under_8pt_nonscript": 0.1572,
+   "share_under_7p5pt": 0.2494,
+   "low_words": false
+  },
+  {
+   "page": 191,
+   "words": 842,
+   "chars": 3633,
+   "min_font": 5.08,
+   "min_font_nonscript": 5.08,
+   "share_under_8pt": 0.2554,
+   "share_under_8pt_nonscript": 0.2213,
+   "share_under_7p5pt": 0.2428,
+   "low_words": false
+  },
+  {
+   "page": 192,
+   "words": 763,
+   "chars": 3662,
+   "min_font": 5.98,
+   "min_font_nonscript": 5.98,
+   "share_under_8pt": 0.089,
+   "share_under_8pt_nonscript": 0.0025,
+   "share_under_7p5pt": 0.089,
+   "low_words": false
+  },
+  {
+   "page": 193,
+   "words": 627,
+   "chars": 2854,
+   "min_font": 5.98,
+   "min_font_nonscript": 5.98,
+   "share_under_8pt": 0.1402,
+   "share_under_8pt_nonscript": 0.0494,
+   "share_under_7p5pt": 0.1356,
+   "low_words": false
+  },
+  {
+   "page": 194,
+   "words": 624,
+   "chars": 2761,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.151,
+   "share_under_8pt_nonscript": 0.033,
+   "share_under_7p5pt": 0.1474,
+   "low_words": false
+  },
+  {
+   "page": 195,
+   "words": 819,
+   "chars": 3935,
+   "min_font": 5.98,
+   "min_font_nonscript": 7.17,
+   "share_under_8pt": 0.0775,
+   "share_under_8pt_nonscript": 0.0081,
+   "share_under_7p5pt": 0.049,
+   "low_words": false
+  },
+  {
+   "page": 196,
+   "words": 604,
+   "chars": 2991,
+   "min_font": 5.98,
+   "min_font_nonscript": 5.98,
+   "share_under_8pt": 0.1117,
+   "share_under_8pt_nonscript": 0.0398,
+   "share_under_7p5pt": 0.0896,
+   "low_words": false
+  },
+  {
+   "page": 197,
+   "words": 765,
+   "chars": 3596,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.1157,
+   "share_under_8pt_nonscript": 0.0478,
+   "share_under_7p5pt": 0.1054,
+   "low_words": false
+  },
+  {
+   "page": 198,
+   "words": 623,
+   "chars": 2945,
+   "min_font": 5.98,
+   "min_font_nonscript": 5.98,
+   "share_under_8pt": 0.1501,
+   "share_under_8pt_nonscript": 0.0448,
+   "share_under_7p5pt": 0.1501,
+   "low_words": false
+  },
+  {
+   "page": 199,
+   "words": 602,
+   "chars": 2478,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.245,
+   "share_under_8pt_nonscript": 0.1445,
+   "share_under_7p5pt": 0.245,
+   "low_words": false
+  },
+  {
+   "page": 200,
+   "words": 689,
+   "chars": 3230,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.235,
+   "share_under_8pt_nonscript": 0.1012,
+   "share_under_7p5pt": 0.1734,
+   "low_words": false
+  },
+  {
+   "page": 201,
+   "words": 653,
+   "chars": 2791,
+   "min_font": 5.98,
+   "min_font_nonscript": 6.58,
+   "share_under_8pt": 0.1039,
+   "share_under_8pt_nonscript": 0.0262,
+   "share_under_7p5pt": 0.1039,
+   "low_words": false
+  },
+  {
+   "page": 202,
+   "words": 752,
+   "chars": 3376,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.1126,
+   "share_under_8pt_nonscript": 0.04,
+   "share_under_7p5pt": 0.1072,
+   "low_words": false
+  },
+  {
+   "page": 203,
+   "words": 451,
+   "chars": 1927,
+   "min_font": 5.98,
+   "min_font_nonscript": 5.98,
+   "share_under_8pt": 0.1448,
+   "share_under_8pt_nonscript": 0.0576,
+   "share_under_7p5pt": 0.0965,
+   "low_words": false
+  },
+  {
+   "page": 204,
+   "words": 552,
+   "chars": 2781,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.1129,
+   "share_under_8pt_nonscript": 0.0611,
+   "share_under_7p5pt": 0.1129,
+   "low_words": false
+  },
+  {
+   "page": 205,
+   "words": 631,
+   "chars": 2830,
+   "min_font": 5.98,
+   "min_font_nonscript": 5.98,
+   "share_under_8pt": 0.0979,
+   "share_under_8pt_nonscript": 0.0078,
+   "share_under_7p5pt": 0.0912,
+   "low_words": false
+  },
+  {
+   "page": 206,
+   "words": 822,
+   "chars": 3650,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.1767,
+   "share_under_8pt_nonscript": 0.0595,
+   "share_under_7p5pt": 0.1767,
+   "low_words": false
+  },
+  {
+   "page": 207,
+   "words": 775,
+   "chars": 3613,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.1223,
+   "share_under_8pt_nonscript": 0.0454,
+   "share_under_7p5pt": 0.1179,
+   "low_words": false
+  },
+  {
+   "page": 208,
+   "words": 762,
+   "chars": 3570,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.2137,
+   "share_under_8pt_nonscript": 0.0527,
+   "share_under_7p5pt": 0.1852,
+   "low_words": false
+  },
+  {
+   "page": 209,
+   "words": 766,
+   "chars": 3427,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.1182,
+   "share_under_8pt_nonscript": 0.0508,
+   "share_under_7p5pt": 0.1182,
+   "low_words": false
+  },
+  {
+   "page": 210,
+   "words": 584,
+   "chars": 2743,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.1998,
+   "share_under_8pt_nonscript": 0.0561,
+   "share_under_7p5pt": 0.1998,
+   "low_words": false
+  },
+  {
+   "page": 211,
+   "words": 413,
+   "chars": 1841,
+   "min_font": 5.98,
+   "min_font_nonscript": 5.98,
+   "share_under_8pt": 0.0837,
+   "share_under_8pt_nonscript": 0.0103,
+   "share_under_7p5pt": 0.0837,
+   "low_words": false
+  },
+  {
+   "page": 212,
+   "words": 690,
+   "chars": 3499,
+   "min_font": 5.98,
+   "min_font_nonscript": 6.21,
+   "share_under_8pt": 0.1258,
+   "share_under_8pt_nonscript": 0.0549,
+   "share_under_7p5pt": 0.1217,
+   "low_words": false
+  },
+  {
+   "page": 213,
+   "words": 900,
+   "chars": 4054,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.1307,
+   "share_under_8pt_nonscript": 0.0074,
+   "share_under_7p5pt": 0.1068,
+   "low_words": false
+  },
+  {
+   "page": 214,
+   "words": 883,
+   "chars": 3870,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.98,
+   "share_under_8pt": 0.1238,
+   "share_under_8pt_nonscript": 0.0085,
+   "share_under_7p5pt": 0.0912,
+   "low_words": false
+  },
+  {
+   "page": 215,
+   "words": 977,
+   "chars": 4697,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.1254,
+   "share_under_8pt_nonscript": 0.0126,
+   "share_under_7p5pt": 0.0871,
+   "low_words": false
+  },
+  {
+   "page": 216,
+   "words": 743,
+   "chars": 3052,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.1075,
+   "share_under_8pt_nonscript": 0.0206,
+   "share_under_7p5pt": 0.0888,
+   "low_words": false
+  },
+  {
+   "page": 217,
+   "words": 837,
+   "chars": 3576,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.13,
+   "share_under_8pt_nonscript": 0.0201,
+   "share_under_7p5pt": 0.1116,
+   "low_words": false
+  },
+  {
+   "page": 218,
+   "words": 638,
+   "chars": 2809,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.189,
+   "share_under_8pt_nonscript": 0.0918,
+   "share_under_7p5pt": 0.1826,
+   "low_words": false
+  },
+  {
+   "page": 219,
+   "words": 598,
+   "chars": 2895,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.1354,
+   "share_under_8pt_nonscript": 0.01,
+   "share_under_7p5pt": 0.0598,
+   "low_words": false
+  },
+  {
+   "page": 220,
+   "words": 618,
+   "chars": 3246,
+   "min_font": 5.48,
+   "min_font_nonscript": 7.17,
+   "share_under_8pt": 0.0647,
+   "share_under_8pt_nonscript": 0.02,
+   "share_under_7p5pt": 0.0613,
+   "low_words": false
+  },
+  {
+   "page": 221,
+   "words": 928,
+   "chars": 4749,
+   "min_font": 5.98,
+   "min_font_nonscript": 7.01,
+   "share_under_8pt": 0.1901,
+   "share_under_8pt_nonscript": 0.027,
+   "share_under_7p5pt": 0.0743,
+   "low_words": false
+  },
+  {
+   "page": 222,
+   "words": 847,
+   "chars": 4036,
+   "min_font": 5.26,
+   "min_font_nonscript": 5.26,
+   "share_under_8pt": 0.3848,
+   "share_under_8pt_nonscript": 0.3114,
+   "share_under_7p5pt": 0.3429,
+   "low_words": false
+  },
+  {
+   "page": 223,
+   "words": 925,
+   "chars": 4655,
+   "min_font": 5.98,
+   "min_font_nonscript": 7.01,
+   "share_under_8pt": 0.0556,
+   "share_under_8pt_nonscript": 0.02,
+   "share_under_7p5pt": 0.0432,
+   "low_words": false
+  },
+  {
+   "page": 224,
+   "words": 182,
+   "chars": 982,
+   "min_font": 7.89,
+   "min_font_nonscript": 7.99,
+   "share_under_8pt": 0.0102,
+   "share_under_8pt_nonscript": 0.0,
+   "share_under_7p5pt": 0.0,
+   "low_words": true
+  },
+  {
+   "page": 225,
+   "words": 584,
+   "chars": 3240,
+   "min_font": 6.22,
+   "min_font_nonscript": 6.28,
+   "share_under_8pt": 0.1744,
+   "share_under_8pt_nonscript": 0.0867,
+   "share_under_7p5pt": 0.1287,
+   "low_words": false
+  },
+  {
+   "page": 226,
+   "words": 713,
+   "chars": 3507,
+   "min_font": 5.98,
+   "min_font_nonscript": 6.14,
+   "share_under_8pt": 0.1312,
+   "share_under_8pt_nonscript": 0.0593,
+   "share_under_7p5pt": 0.1004,
+   "low_words": false
+  },
+  {
+   "page": 227,
+   "words": 775,
+   "chars": 3954,
+   "min_font": 5.98,
+   "min_font_nonscript": 5.98,
+   "share_under_8pt": 0.2178,
+   "share_under_8pt_nonscript": 0.0589,
+   "share_under_7p5pt": 0.1644,
+   "low_words": false
+  },
+  {
+   "page": 228,
+   "words": 325,
+   "chars": 1861,
+   "min_font": 6.21,
+   "min_font_nonscript": 6.28,
+   "share_under_8pt": 0.0478,
+   "share_under_8pt_nonscript": 0.0306,
+   "share_under_7p5pt": 0.0451,
+   "low_words": false
+  },
+  {
+   "page": 229,
+   "words": 708,
+   "chars": 3419,
+   "min_font": 5.18,
+   "min_font_nonscript": 5.18,
+   "share_under_8pt": 0.8131,
+   "share_under_8pt_nonscript": 0.7941,
+   "share_under_7p5pt": 0.8131,
+   "low_words": false
+  },
+  {
+   "page": 230,
+   "words": 698,
+   "chars": 3148,
+   "min_font": 5.18,
+   "min_font_nonscript": 5.18,
+   "share_under_8pt": 0.9679,
+   "share_under_8pt_nonscript": 0.9485,
+   "share_under_7p5pt": 0.9307,
+   "low_words": false
+  },
+  {
+   "page": 231,
+   "words": 708,
+   "chars": 2681,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.915,
+   "share_under_8pt_nonscript": 0.8993,
+   "share_under_7p5pt": 0.915,
+   "low_words": false
+  },
+  {
+   "page": 232,
+   "words": 1066,
+   "chars": 5555,
+   "min_font": 5.18,
+   "min_font_nonscript": 5.18,
+   "share_under_8pt": 0.8718,
+   "share_under_8pt_nonscript": 0.8673,
+   "share_under_7p5pt": 0.8718,
+   "low_words": false
+  },
+  {
+   "page": 233,
+   "words": 729,
+   "chars": 3419,
+   "min_font": 5.18,
+   "min_font_nonscript": 5.18,
+   "share_under_8pt": 0.9061,
+   "share_under_8pt_nonscript": 0.8906,
+   "share_under_7p5pt": 0.9061,
+   "low_words": false
+  },
+  {
+   "page": 234,
+   "words": 733,
+   "chars": 3383,
+   "min_font": 5.18,
+   "min_font_nonscript": 5.18,
+   "share_under_8pt": 0.5188,
+   "share_under_8pt_nonscript": 0.462,
+   "share_under_7p5pt": 0.4907,
+   "low_words": false
+  },
+  {
+   "page": 235,
+   "words": 1117,
+   "chars": 5157,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.6632,
+   "share_under_8pt_nonscript": 0.5934,
+   "share_under_7p5pt": 0.6614,
+   "low_words": false
+  },
+  {
+   "page": 236,
+   "words": 774,
+   "chars": 3825,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.542,
+   "share_under_8pt_nonscript": 0.4824,
+   "share_under_7p5pt": 0.4959,
+   "low_words": false
+  },
+  {
+   "page": 237,
+   "words": 823,
+   "chars": 3409,
+   "min_font": 5.18,
+   "min_font_nonscript": 5.18,
+   "share_under_8pt": 0.9671,
+   "share_under_8pt_nonscript": 0.9671,
+   "share_under_7p5pt": 0.9671,
+   "low_words": false
+  },
+  {
+   "page": 238,
+   "words": 621,
+   "chars": 3051,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.9728,
+   "share_under_8pt_nonscript": 0.9548,
+   "share_under_7p5pt": 0.9728,
+   "low_words": false
+  },
+  {
+   "page": 239,
+   "words": 842,
+   "chars": 3283,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.9769,
+   "share_under_8pt_nonscript": 0.9494,
+   "share_under_7p5pt": 0.9769,
+   "low_words": false
+  },
+  {
+   "page": 240,
+   "words": 650,
+   "chars": 3022,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.9765,
+   "share_under_8pt_nonscript": 0.9765,
+   "share_under_7p5pt": 0.9765,
+   "low_words": false
+  },
+  {
+   "page": 241,
+   "words": 731,
+   "chars": 2952,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.9543,
+   "share_under_8pt_nonscript": 0.9543,
+   "share_under_7p5pt": 0.9543,
+   "low_words": false
+  },
+  {
+   "page": 242,
+   "words": 692,
+   "chars": 2759,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.9746,
+   "share_under_8pt_nonscript": 0.9746,
+   "share_under_7p5pt": 0.9746,
+   "low_words": false
+  },
+  {
+   "page": 243,
+   "words": 653,
+   "chars": 2425,
+   "min_font": 5.18,
+   "min_font_nonscript": 5.18,
+   "share_under_8pt": 0.9662,
+   "share_under_8pt_nonscript": 0.9662,
+   "share_under_7p5pt": 0.9662,
+   "low_words": false
+  },
+  {
+   "page": 244,
+   "words": 36,
+   "chars": 139,
+   "min_font": 7.17,
+   "min_font_nonscript": 7.17,
+   "share_under_8pt": 0.5899,
+   "share_under_8pt_nonscript": 0.5899,
+   "share_under_7p5pt": 0.5899,
+   "low_words": true
+  },
+  {
+   "page": 245,
+   "words": 660,
+   "chars": 3096,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.9784,
+   "share_under_8pt_nonscript": 0.9784,
+   "share_under_7p5pt": 0.9784,
+   "low_words": false
+  },
+  {
+   "page": 246,
+   "words": 233,
+   "chars": 1217,
+   "min_font": 5.18,
+   "min_font_nonscript": 5.18,
+   "share_under_8pt": 1.0,
+   "share_under_8pt_nonscript": 1.0,
+   "share_under_7p5pt": 1.0,
+   "low_words": true
+  },
+  {
+   "page": 247,
+   "words": 1199,
+   "chars": 6550,
+   "min_font": 5.18,
+   "min_font_nonscript": 5.18,
+   "share_under_8pt": 0.9916,
+   "share_under_8pt_nonscript": 0.9916,
+   "share_under_7p5pt": 0.9916,
+   "low_words": false
+  },
+  {
+   "page": 248,
+   "words": 2743,
+   "chars": 6449,
+   "min_font": 5.98,
+   "min_font_nonscript": 7.17,
+   "share_under_8pt": 0.0152,
+   "share_under_8pt_nonscript": 0.0081,
+   "share_under_7p5pt": 0.0022,
+   "low_words": false
+  },
+  {
+   "page": 249,
+   "words": 3032,
+   "chars": 6654,
+   "min_font": 5.98,
+   "min_font_nonscript": 7.17,
+   "share_under_8pt": 0.0083,
+   "share_under_8pt_nonscript": 0.0068,
+   "share_under_7p5pt": 0.0029,
+   "low_words": false
+  },
+  {
+   "page": 250,
+   "words": 2684,
+   "chars": 6493,
+   "min_font": 5.98,
+   "min_font_nonscript": 7.17,
+   "share_under_8pt": 0.0015,
+   "share_under_8pt_nonscript": 0.0011,
+   "share_under_7p5pt": 0.0015,
+   "low_words": false
+  },
+  {
+   "page": 251,
+   "words": 2274,
+   "chars": 5652,
+   "min_font": 7.17,
+   "min_font_nonscript": 7.17,
+   "share_under_8pt": 0.0071,
+   "share_under_8pt_nonscript": 0.0071,
+   "share_under_7p5pt": 0.0009,
+   "low_words": false
+  },
+  {
+   "page": 252,
+   "words": 2654,
+   "chars": 5807,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.98,
+   "share_under_8pt": 0.1026,
+   "share_under_8pt_nonscript": 0.0052,
+   "share_under_7p5pt": 0.1021,
+   "low_words": false
+  },
+  {
+   "page": 253,
+   "words": 2602,
+   "chars": 5246,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.98,
+   "share_under_8pt": 0.1048,
+   "share_under_8pt_nonscript": 0.0238,
+   "share_under_7p5pt": 0.0846,
+   "low_words": false
+  },
+  {
+   "page": 254,
+   "words": 2147,
+   "chars": 5239,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.98,
+   "share_under_8pt": 0.0764,
+   "share_under_8pt_nonscript": 0.0101,
+   "share_under_7p5pt": 0.0712,
+   "low_words": false
+  },
+  {
+   "page": 255,
+   "words": 1891,
+   "chars": 5282,
+   "min_font": 5.98,
+   "min_font_nonscript": 7.17,
+   "share_under_8pt": 0.0585,
+   "share_under_8pt_nonscript": 0.0295,
+   "share_under_7p5pt": 0.0119,
+   "low_words": false
+  },
+  {
+   "page": 256,
+   "words": 2160,
+   "chars": 5163,
+   "min_font": 5.48,
+   "min_font_nonscript": 7.17,
+   "share_under_8pt": 0.0205,
+   "share_under_8pt_nonscript": 0.0151,
+   "share_under_7p5pt": 0.0089,
+   "low_words": false
+  },
+  {
+   "page": 257,
+   "words": 2066,
+   "chars": 4750,
+   "min_font": 7.17,
+   "min_font_nonscript": 7.17,
+   "share_under_8pt": 0.0055,
+   "share_under_8pt_nonscript": 0.0055,
+   "share_under_7p5pt": 0.0055,
+   "low_words": false
+  },
+  {
+   "page": 258,
+   "words": 2770,
+   "chars": 3946,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.7952,
+   "share_under_8pt_nonscript": 0.7648,
+   "share_under_7p5pt": 0.7869,
+   "low_words": false
+  },
+  {
+   "page": 259,
+   "words": 1273,
+   "chars": 3039,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.4278,
+   "share_under_8pt_nonscript": 0.3827,
+   "share_under_7p5pt": 0.4153,
+   "low_words": false
+  },
+  {
+   "page": 260,
+   "words": 799,
+   "chars": 3970,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.971,
+   "share_under_8pt_nonscript": 0.971,
+   "share_under_7p5pt": 0.971,
+   "low_words": false
+  },
+  {
+   "page": 261,
+   "words": 787,
+   "chars": 4132,
+   "min_font": 5.18,
+   "min_font_nonscript": 5.18,
+   "share_under_8pt": 0.9823,
+   "share_under_8pt_nonscript": 0.9823,
+   "share_under_7p5pt": 0.9823,
+   "low_words": false
+  },
+  {
+   "page": 262,
+   "words": 1081,
+   "chars": 4145,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.8934,
+   "share_under_8pt_nonscript": 0.8902,
+   "share_under_7p5pt": 0.8902,
+   "low_words": false
+  },
+  {
+   "page": 263,
+   "words": 1083,
+   "chars": 6059,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.9929,
+   "share_under_8pt_nonscript": 0.9929,
+   "share_under_7p5pt": 0.9929,
+   "low_words": false
+  },
+  {
+   "page": 264,
+   "words": 1066,
+   "chars": 3947,
+   "min_font": 5.48,
+   "min_font_nonscript": 5.48,
+   "share_under_8pt": 0.6129,
+   "share_under_8pt_nonscript": 0.5721,
+   "share_under_7p5pt": 0.5488,
+   "low_words": false
+  }
+ ]
+}

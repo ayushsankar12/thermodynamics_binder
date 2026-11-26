@@ -20,3 +20,9 @@ build/smoke/
 build/gray_work/
 src/$outdir/
 qa/renders/test_style*
+
+# Local Python venv (PyMuPDF etc.)
+.venv/
+
+# Scratch audit runs (baseline_* and final_* are kept)
+qa/metrics/committed_*

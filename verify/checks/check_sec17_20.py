@@ -390,7 +390,8 @@ def check_sec18() -> list[dict]:
     # Ex 18.2: Composite trapezoidal P-V work integration
     V_L = np.array([2.0, 3.0, 4.0, 5.0, 6.0])
     P_kPa = np.array([420.0, 310.0, 240.0, 195.0, 165.0])
-    W_trap = float(np.trapz(P_kPa, V_L))
+    _trap = getattr(np, "trapezoid", None) or np.trapz  # NumPy 2.x renamed trapz -> trapezoid
+    W_trap = float(_trap(P_kPa, V_L))
     out.append(
         _rec(
             "sec18:ex18.2:trapezoidal_pv_work",
