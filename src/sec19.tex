@@ -328,7 +328,7 @@ $$V_{\ell,0} = V_0 + A_c h_0 = \SI{50.000}{\cubic\centi\meter} + (\SI{0.0200}{\s
 (b)~As temperature increases by $\Delta T = \SI{50.00}{\kelvin}$ and pressure increases by $\Delta P = \SI{25.00}{\text{atm}}$, the liquid volume changes while the glass bulb and capillary container expand with volumetric coefficient $\beta_g = 3\alpha_g = 3(\num{3.25e-6}) = \SI{9.75e-6}{\per\kelvin}$. By Archetype~1 in Table~\ref{tab:19:archetypes}:
 $$\Delta V_{\mathrm{app}} = V_{\ell,0}\left[\left(\beta_\ell - 3\alpha_g\right)\Delta T - \kappa_{T,\mathrm{eff}}\,\Delta P\right] = (\SI{50.100}{\cubic\centi\meter})\left[(\num{9.50e-4} - \num{9.75e-6})(50.00) - (\num{8.20e-5})(25.00)\right]$$
 $$\Delta V_{\mathrm{app}} = (\SI{50.100}{\cubic\centi\meter})\left[\num{0.0470125} - \num{0.0020500}\right] = (\SI{50.100}{\cubic\centi\meter})(0.0449625) = \mathbf{\SI{+2.2526}{\cubic\centi\meter}}$$
-*(Notice that neglecting the glass bulb expansion $3\alpha_g\Delta T$ would overestimate $\Delta V_{\mathrm{app}}$ by $+\SI{0.0244}{\cubic\centi\meter}$ or $+\SI{1.22}{\centi\meter}$ of capillary height!)*
+\emph{(Notice that neglecting the glass bulb expansion $3\alpha_g\Delta T$ would overestimate $\Delta V_{\mathrm{app}}$ by $+\SI{0.0244}{\cubic\centi\meter}$ or $+\SI{1.22}{\centi\meter}$ of capillary height!)}
 \par\noindent
 (c)~New capillary column height reading (neglecting the tiny $2\alpha_g\Delta T = 0.03\%$ cross-sectional expansion of $A_c$):
 $$h_1 = h_0 + \frac{\Delta V_{\mathrm{app}}}{A_c} = \SI{5.00}{\centi\meter} + \frac{\SI{2.25262}{\cubic\centi\meter}}{\SI{0.0200}{\square\centi\meter}} = 5.00 + 112.631 = \mathbf{\SI{117.63}{\centi\meter}}$$
@@ -345,7 +345,7 @@ By the ideal-gas law $T = \frac{P V}{n R}$:
 $$T_1 = \frac{(\SI{120.0e3}{\pascal})(\SI{0.0100}{\cubic\meter})}{(0.500)(\SI{8.3144626}{\joule\per\mole\per\kelvin})} = \mathbf{\SI{288.65}{\kelvin}}, \qquad T_2 = \frac{(\SI{280.0e3}{\pascal})(\SI{0.0200}{\cubic\meter})}{(0.500)(\SI{8.3144626}{\joule\per\mole\per\kelvin})} = \mathbf{\SI{1347.05}{\kelvin}}$$
 (b)~Because $P(V)$ is a straight line from $(V_1, P_1)$ to $(V_2, P_2)$, the area under the $P$--$V$ path is a trapezoid \eref{eq:18:chordwork}:
 $$W_{\mathrm{by}} = \frac{P_1 + P_2}{2}\,(V_2 - V_1) = \frac{120.0 + 280.0}{2}\,\si{\kilo\pascal}\times(\SI{20.00}{\liter} - \SI{10.00}{\liter}) = (\SI{200.0}{\kilo\pascal})(\SI{10.00}{\liter}) = \mathbf{\SI{2000.0}{\joule}} = \mathbf{\SI{2.000}{\kilo\joule}}$$
-*(Physical Decomposition Check: Work against the constant baseline load $P_1$ is $P_1\Delta V = (\SI{120.0}{\kilo\pascal})(\SI{10.00}{\liter}) = \SI{1200.0}{\joule}$, and elastic potential energy stored in the spring is $\Delta E_{\mathrm{spring}} = \frac{1}{2}k_s(\Delta x)^2 = \frac{1}{2}(\SI{1600}{\newton\per\meter})(\SI{1.000}{\meter})^2 = \SI{800.0}{\joule}$; total $W_{\mathrm{by}} = 1200.0 + 800.0 = \SI{2000.0}{\joule}$!).*
+\emph{(Physical Decomposition Check: Work against the constant baseline load $P_1$ is $P_1\Delta V = (\SI{120.0}{\kilo\pascal})(\SI{10.00}{\liter}) = \SI{1200.0}{\joule}$, and elastic potential energy stored in the spring is $\Delta E_{\mathrm{spring}} = \frac{1}{2}k_s(\Delta x)^2 = \frac{1}{2}(\SI{1600}{\newton\per\meter})(\SI{1.000}{\meter})^2 = \SI{800.0}{\joule}$; total $W_{\mathrm{by}} = 1200.0 + 800.0 = \SI{2000.0}{\joule}$!).}
 \par\noindent
 (c)~For a diatomic ideal gas, $\Delta U = n C_{V,m}(T_2 - T_1) = \frac{5}{2}nR(T_2 - T_1) = \frac{5}{2}(P_2 V_2 - P_1 V_1)$:
 $$\Delta U = \frac{5}{2}\left[(\SI{280.0}{\kilo\pascal})(\SI{20.00}{\liter}) - (\SI{120.0}{\kilo\pascal})(\SI{10.00}{\liter})\right] = 2.5\left(5600.0 - 1200.0\right) = \mathbf{\SI{11000.0}{\joule}} = \mathbf{\SI{11.000}{\kilo\joule}}$$
@@ -375,18 +375,18 @@ With $\frac{\gamma - 1}{\gamma} = \frac{0.400}{1.400} = \frac{2}{7} \approx 0.28
 $$T_{f,1\text{-}stage} = T_1\left(\frac{P_3}{P_1}\right)^{(\gamma-1)/\gamma} = (\SI{300.0}{\kelvin})(9.000)^{2/7} = (300.0)(1.87344) = \mathbf{\SI{562.03}{\kelvin}}\ (\SI{288.88}{\celsius})$$
 For a steady-flow adiabatic compressor (shaft work $\dot{W}_{\mathrm{on,sh}} = \Delta H = n C_{P,m}\Delta T$, or closed-system adiabatic work $W_{\mathrm{on,closed}} = \Delta U = n C_{V,m}\Delta T = \frac{1}{\gamma}\Delta H$):
 $$W_{\mathrm{on,sh,1\text{-}stage}} = n C_{P,m}(T_{f,1} - T_1) = (2.000)(\SI{29.1006}{\joule\per\mole\per\kelvin})(562.033 - 300.0) = \mathbf{\SI{15250.6}{\joule}} = \mathbf{\SI{15.251}{\kilo\joule}}$$
-*(Closed-system piston work without flow work $\Delta(PV)$ is $W_{\mathrm{on,closed,1}} = \frac{15.2506}{1.400} = \mathbf{\SI{10.893}{\kilo\joule}}$).*
+\emph{(Closed-system piston work without flow work $\Delta(PV)$ is $W_{\mathrm{on,closed,1}} = \frac{15.2506}{1.400} = \mathbf{\SI{10.893}{\kilo\joule}}$).}
 \par\smallskip\noindent
 (b)~\textbf{Two-Stage Intercooled Compression Through Optimal $P_2 = \sqrt{P_1 P_3} = \sqrt{(100.0)(900.0)} = \mathbf{\SI{300.0}{\kilo\pascal}}$:}
 Each stage has pressure ratio $\frac{P_2}{P_1} = \frac{P_3}{P_2} = 3.000$, so both stages exit at identical temperature $T_{\mathrm{exit}}$:
 $$T_{\mathrm{exit}} = T_1(3.000)^{2/7} = (\SI{300.0}{\kelvin})(1.36874) = \mathbf{\SI{410.62}{\kelvin}}\ (\SI{137.47}{\celsius})$$
 Total two-stage steady-flow shaft work input:
 $$W_{\mathrm{on,sh,2\text{-}stage}} = 2\,n C_{P,m}(T_{\mathrm{exit}} - T_1) = 2(2.000)(\SI{29.1006}{\joule\per\mole\per\kelvin})(410.621 - 300.0) = \mathbf{\SI{12876.6}{\joule}} = \mathbf{\SI{12.877}{\kilo\joule}}$$
-*(Closed-system piston work: $W_{\mathrm{on,closed,2}} = \frac{12.8766}{1.400} = \mathbf{\SI{9.198}{\kilo\joule}}$).* The isobaric intercooler at $P_2 = \SI{300.0}{\kilo\pascal}$ cools the gas from $\SI{410.62}{\kelvin}$ back to $\SI{300.0}{\kelvin}$, rejecting heat $Q_{\mathrm{out,ic}} = n C_{P,m}(410.621 - 300.0) = \mathbf{\SI{6.438}{\kilo\joule}}$ and saving $15.251 - 12.877 = \mathbf{\SI{2.374}{\kilo\joule}}$ ($\mathbf{15.6\%}$) of compressor shaft work!
+\emph{(Closed-system piston work: $W_{\mathrm{on,closed,2}} = \frac{12.8766}{1.400} = \mathbf{\SI{9.198}{\kilo\joule}}$).} The isobaric intercooler at $P_2 = \SI{300.0}{\kilo\pascal}$ cools the gas from $\SI{410.62}{\kelvin}$ back to $\SI{300.0}{\kelvin}$, rejecting heat $Q_{\mathrm{out,ic}} = n C_{P,m}(410.621 - 300.0) = \mathbf{\SI{6.438}{\kilo\joule}}$ and saving $15.251 - 12.877 = \mathbf{\SI{2.374}{\kilo\joule}}$ ($\mathbf{15.6\%}$) of compressor shaft work!
 \par\smallskip\noindent
 (c)~\textbf{Reversible Isothermal Compression Lower Bound ($N \to \infty$ stages at $T_1 = \SI{300.0}{\kelvin}$):}
 $$W_{\mathrm{on,iso}} = n R T_1 \ln\!\left(\frac{P_3}{P_1}\right) = (2.000)(\SI{8.3144626}{\joule\per\mole\per\kelvin})(\SI{300.0}{\kelvin})\ln(9.000) = \mathbf{\SI{10961.2}{\joule}} = \mathbf{\SI{10.961}{\kilo\joule}}$$
-*(Ordering Check: $W_{\mathrm{on,iso}} = \SI{10.961}{\kilo\joule} < W_{\mathrm{on,sh,2\text{-}stage}} = \SI{12.877}{\kilo\joule} < W_{\mathrm{on,sh,1\text{-}stage}} = \SI{15.251}{\kilo\joule}$. Confirmed!)*
+\emph{(Ordering Check: $W_{\mathrm{on,iso}} = \SI{10.961}{\kilo\joule} < W_{\mathrm{on,sh,2\text{-}stage}} = \SI{12.877}{\kilo\joule} < W_{\mathrm{on,sh,1\text{-}stage}} = \SI{15.251}{\kilo\joule}$. Confirmed!)}
 \verifiedby{Exact equality of stage pressure ratios $P_2/P_1 = P_3/P_2 = 3.0$ and Python check \texttt{sec19:ex19.8}.}
 \end{workedexample}
 

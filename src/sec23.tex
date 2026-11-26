@@ -1,7 +1,7 @@
 % ============================================================================
 % src/sec23.tex — §23 Final Review & Last-Week Cram Layer (Target: 8 pp)
 % ============================================================================
-\binderchapter{23}{Final Review \& Last-Week Cram Layer}{§23 Final Review / Cram Layer}{sec:23}
+\binderchapter{23}{Final Review \& Last-Week Cram Layer}{Final Review / Cram Layer}{sec:23}
 \scopebanner{REQUIRED}[All 2027 Syllabus Clauses 5.c.i--vii \& Part II Heat-Lamp Collector Testing]
 
 \idxtopic{final review and last-week cram layer}
@@ -93,7 +93,7 @@ This standalone 8-page review layer condenses the highest-yield equations, const
 \texttt{[C37]} & $\Delta t_{\mathrm{rad,vac}} = \frac{m c}{3\,\varepsilon\,\sigma\,A}\!\left(\frac{1}{T_f^3} - \frac{1}{T_i^3}\right)$ & $T_i, T_f$ in \textbf{Kelvin}; $0\text{ K}$ vacuum surroundings & \TIERf\ Closed-form time to radiatively cool from $T_i$ to $T_f$ in vacuum (\texttt{E4 Q14d} iron cube). \\
 \rowcolor{rowalt}
 \texttt{[C38]} & $I(z) = I_0 e^{-\mu_a(\lambda) z}$; $\dot{Q}_{\mathrm{evap}} = \dot{m}_{\mathrm{evap}} L_v = g_m A_{\mathrm{surf}}\Delta m_{\mathrm{H_2O}} L_v$ & $\delta_p = 1/\mu_a$ ($<\SI{1}{\milli\meter}$ for $\lambda > \SI{1.4}{\micro\meter}$) & 2027 Collector: near-IR heats top water skin directly; BoPET cap blocks $\dot{Q}_{\mathrm{evap}} \approx \SI{2.5}{\watt}$! \\
-\texttt{[C39]} & $T_{\mathrm{pred}} = \mathrm{TG}_{\mathrm{tab}}(h, P_{\mathrm{bulb}}, t) + e^{-t/\tau}T_{\mathrm{start}} + (1 - e^{-t/\tau})T_{\mathrm{room}}$ & $T_{\mathrm{pred}}, T_{\mathrm{start}}, T_{\mathrm{room}}$ in $\si{\celsius}$ (\texttt{Rule 6.f}) & 2027 Collector 15-sec prediction formula ($\mathrm{PE} = 1 - |T_f - T_{\mathrm{pred}}|/T_f$ in $\si{\celsius}$). \\
+\texttt{[C39]} & $\TpredFormula$ & all in $\si{\celsius}$, reported to $\SI{0.1}{\celsius}$; $k_{\mathrm{room}}(t) = 1 - e^{-t/\tau}$ (\texttt{Rule 6.f}) & 2027 Collector 15-sec prediction formula ($\mathrm{PE} = 1 - |T_f - T_{\mathrm{pred}}|/T_f$ in $\si{\celsius}$). \\
 \rowcolor{rowalt}
 \texttt{[C40]} & $u_c(y) = \sqrt{\sum \!\left(\frac{\partial f}{\partial x_i}u(x_i)\right)^{\!2}}$; $\frac{u(x^n)}{|x^n|} = |n|\frac{u(x)}{|x|}$ & $u_A = s/\sqrt{n}$; $u_{B,\mathrm{res}} = \Delta_{\mathrm{res}}/(2\sqrt{3})$ & JCGM GUM uncertainty propagation; probe $99.3\%$ settling time $t_{\mathrm{settle}} = 5\tau_p$. \\
 \bottomrule
@@ -400,7 +400,7 @@ In Cornell 2027 (\texttt{E1 Q29}) \src{S25}, a Rankine steam cycle absorbs $q_{\
 \textbf{\sffamily\color{navy} PARTNER A (Lead Theorist: \texttt{5.c.ii, iv, vii})}
 \begin{enumerate}
   \item \textbf{At $t = 0{:}00$:} Unstaple/split written packet; place detached \texttt{QS-01, 03, 04, 06, 07, 08, 14} across desk (\fref{fig:21:workspace-layout}). Flag all \textbf{Tiebreaker (\texttt{TB})} items.
-  \item \textbf{At $t = 5{:}30$:} Cross-check Partner B's 15-second $T_{\mathrm{pred}}$ addition on Calculator \#1: $T_{\mathrm{pred}} = \mathrm{TG}_{\mathrm{tab}}(h, P, t) + k_{\mathrm{start}}\,T_{\mathrm{start}} + k_{\mathrm{room}}\,T_{\mathrm{room}}$. Confirm $T_{\mathrm{pred}}$ is written in \textbf{\si{\celsius}} (never Kelvin!) and handed to ES.
+  \item \textbf{Before heating minute 3:} Cross-check Partner B's prediction on Calculator \#1: $\TpredFormula$. Confirm $T_{\mathrm{pred}}$ is written in \textbf{\si{\celsius}} (never Kelvin!). \HandInRule
   \item \textbf{Pass 1 \& Pass 2 ($t = 2\text{--}\SI{38}{\minute}$):} Sweep phase diagrams (\texttt{QS-04}), 5-zone ice-water-steam calorimetry (\texttt{QS-03}), gas laws (\texttt{QS-05}), Carnot/Stirling/Rankine cycles (\texttt{QS-08}), and $\Delta S/\Delta H/\Delta G$/exergy (\texttt{QS-07}).
   \item \textbf{Pass 3 ($t = 38\text{--}\SI{47}{\minute}$):} Write symbolic governing equations on every remaining Tier 3 subpart + carry-forward values.
   \item \textbf{Final 3 Min ($t = 47\text{--}\SI{50}{\minute}$):} Audit Pages 1--5 for \textbf{units, requested sig figs, and $P_{\mathrm{abs}} = P_{\mathrm{gauge}} + P_{\mathrm{atm}}$}.
@@ -410,7 +410,7 @@ In Cornell 2027 (\texttt{E1 Q29}) \src{S25}, a Rankine steam cycle absorbs $q_{\
 \begin{enumerate}
   \item \textbf{Minutes $0\text{--}5$ (3-Min Setup):} Log ES-announced $h$ ($\SIrange{40}{65}{\centi\meter}$), $t_{\mathrm{heat}}$ ($\SIrange{10}{15}{\minute}$), $P_{\mathrm{bulb}}$ ($\SIrange{100}{125}{\watt}$), and $T_{\mathrm{room}}$. Set pedestal slot for height $h$; look up $\mathrm{TG}_{\mathrm{tab}}, k_{\mathrm{start}}, k_{\mathrm{room}}$ on \texttt{QS-13} / \sref{sec:16}.
   \item \textbf{Minute $5\text{--}6$ (1-Min Water Setup):} Log $T_{\mathrm{start}}$ (to $\SI{0.1}{\celsius}$); seat \SI{9}{oz} cup on 3-fin cradle ($\le \SI{12}{\second}$); lower reflector hood w/ unattached BoPET vapor cap (FAQ 10/21/2026 on items on the cup); center under lamp.
-  \item \textbf{Minute $6\text{--}9$ (Submit $T_{\mathrm{pred}}$):} Compute $T_{\mathrm{pred}}$ on Calculator \#2, verify w/ Partner A, and \textbf{submit $T_{\mathrm{pred}}$ in \si{\celsius} to ES immediately}.
+  \item \textbf{Heating minutes $0\text{--}3$ (submit $T_{\mathrm{pred}}$):} Compute $\TpredFormula$ on Calculator \#2, verify w/ Partner A. \textbf{\HandInRule}
   \item \textbf{Minutes $9\text{--}15$ \& $17\text{--}47$ ($\SI{40}{\minute}$ Written Sprint):} Sweep Pile B: 8 temperature scales \& energy units (\texttt{QS-01}), 8 named scientists (\texttt{QS-14}), conduction/convection/Newton heating (\texttt{QS-09, 10, 12}), and blackbody Stefan--Boltzmann/Wien (\texttt{QS-11}).
   \item \textbf{Lamp-Off Window ($\SI{1}{\minute}$):} Lift hood straight up (removing BoPET cap), lift cup smoothly onto Testing Surface \textbf{with ZERO swirl/tilt (FAQs 09/30--10/06/2026 on stirring and probe depth)} in $\le \SI{8}{\second}$!
 \end{enumerate}

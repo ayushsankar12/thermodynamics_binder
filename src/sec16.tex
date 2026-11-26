@@ -16,7 +16,7 @@ Under Rule~\texttt{6.b}, \textbf{all scoring calculations are performed strictly
 
 \begin{formulacard}[Official 2027 v2.0.0 Scoresheet Equations, Penalty Multipliers \& Marginal Point Loss]
 \idxformula{Final Score: \mathrm{FS} = \mathrm{ES} + \mathrm{TS} + \mathrm{PS}\text{ (max 100 pts)}}
-\idxformula{Temperature Gain and Score: \mathrm{TG} = T_f - T_i,\ \mathrm{TS} = 30 M_{\mathrm{pen}}(\mathrm{TG}/\mathrm{TG}_{\max})}
+\idxformula{Temperature Gain and Score: \mathrm{TG} = \max(0, T_f - T_i),\ \mathrm{TS} = 30 M_{\mathrm{pen}}(\mathrm{TG}/\mathrm{TG}_{\max})}
 \idxformula{Prediction Estimate and Score: \mathrm{PE} = 1 - |T_f - T_{\mathrm{pred}}|/T_f,\ \mathrm{PS} = 20 M_{\mathrm{pen}}(\mathrm{PE}/\mathrm{PE}_{\max})}
 \begin{ftab}
 $\mathrm{FS} = \mathrm{ES} + \mathrm{TS} + \mathrm{PS}$ \newline $M_{\mathrm{pen}} = (0.7)^{V_{\mathrm{constr}}}\times (0.9)^{V_{\mathrm{comp}}}$
@@ -168,10 +168,10 @@ where each parameter has a direct physical definition and pre-calibrated empiric
   \end{equation}
   \item \textbf{Starting-Water vs.\ Ambient-Room Coupling Weights $k_{\mathrm{start}}(t)$ and $k_{\mathrm{room}}(t)$:} When the ES source water bath $T_{\mathrm{start}}$ differs from the ambient room temperature $T_{\mathrm{room}}$ (e.g., cold tap water filled that morning, $T_{\mathrm{start}} < T_{\mathrm{room}}$), setting $\gamma_{\mathrm{loss}} = 1.00$ rearranges Eq.~\eref{eq:16:master-5var} into the \textbf{10-Second Linear Superposition Formula}:
   \begin{equation}\label{eq:16:fast-superposition}
-    \boxed{T_{\mathrm{pred}} = \mathrm{TG}_{\mathrm{table}}(h, P_{\mathrm{bulb}}, t) + k_{\mathrm{start}}(t)\,T_{\mathrm{start}} + k_{\mathrm{room}}(t)\,T_{\mathrm{room}} - \Delta T_{\mathrm{cool}}(t_{\mathrm{wait}}) = T_{\mathrm{start}} + \mathrm{TG}_{\mathrm{table}} + k_{\mathrm{room}}(t)\,(T_{\mathrm{room}} - T_{\mathrm{start}}) - \Delta T_{\mathrm{cool}}}
+    \boxed{\TpredFormula}
   \end{equation}
   \idxformula{10-second linear superposition prediction: T_{\mathrm{pred}} = \mathrm{TG}_{\mathrm{table}} + k_{\mathrm{start}}T_{\mathrm{start}} + k_{\mathrm{room}}T_{\mathrm{room}} - \Delta T_{\mathrm{cool}}}
-  where $k_{\mathrm{start}}(t) = e^{-t/\tau_{\mathrm{eff}}}$ and $k_{\mathrm{room}}(t) = 1 - e^{-t/\tau_{\mathrm{eff}}}$ satisfy $k_{\mathrm{start}}(t) + k_{\mathrm{room}}(t) = 1$ identically!
+  (all in $\si{\celsius}$, reported to $\SI{0.1}{\celsius}$), where $k_{\mathrm{room}}(t) = 1 - e^{-t/\tau_{\mathrm{eff}}}$ and $k_{\mathrm{start}}(t) = e^{-t/\tau_{\mathrm{eff}}} = 1 - k_{\mathrm{room}}(t)$, so the same formula can be written $T_{\mathrm{pred}} = \mathrm{TG}_{\mathrm{table}} + k_{\mathrm{start}}T_{\mathrm{start}} + k_{\mathrm{room}}T_{\mathrm{room}} - \Delta T_{\mathrm{cool}}$. \HandInRule
 \end{enumerate}
 
 \begin{center}
@@ -213,7 +213,7 @@ Because the room ($T_{\mathrm{room}} = \SI{23.2}{\celsius}$) is $\SI{3.6}{\celsi
 
 3. \textbf{Final Submitted Prediction $T_{\mathrm{pred}}$:}
 \[
-  T_{\mathrm{pred}} = T_{\mathrm{start}} + \mathrm{TG}_{\mathrm{table}} + \Delta T_{\mathrm{ambient-boost}} - \Delta T_{\mathrm{cool}} = 19.60 + 33.01 + 2.08 - 0.22 = \mathbf{\SI{54.47}{\celsius} \longrightarrow \text{Submit }\SI{54.5}{\celsius}}
+  T_{\mathrm{pred}} = T_{\mathrm{start}} + \mathrm{TG}_{\mathrm{table}} + k_{\mathrm{room}}(t)\,(T_{\mathrm{room}} - T_{\mathrm{start}}) - \Delta T_{\mathrm{cool}} = 19.60 + 33.01 + 2.08 - 0.22 = \mathbf{\SI{54.47}{\celsius} \longrightarrow \text{Submit }\SI{54.5}{\celsius}}
 \]
 \verifiedby{Direct superposition check: $\mathrm{TG}_{\mathrm{table}} + k_{\mathrm{start}}T_{\mathrm{start}} + k_{\mathrm{room}}T_{\mathrm{room}} - \Delta T_{\mathrm{cool}} = 33.006 + 0.42156(19.6) + 0.57844(23.2) - 0.22 = 33.006 + 8.263 + 13.420 - 0.22 = \SI{54.469}{\celsius}$; asserted in \texttt{check\_sec14\_16.py}.}
 \end{workedexample}
@@ -757,7 +757,7 @@ Execute these five steps in sequence during the \textbf{3-Minute Device Setup Ti
   \item \textbf{Set Pedestal Slot (\texttt{5.II.b}):} \textbf{Slot~A} ($\SIrange{40}{48}{\centi\meter}$) \textbar\ \textbf{Slot~B} ($\SIrange{49}{57}{\centi\meter}$) \textbar\ \textbf{Slot~C} ($\SIrange{58}{65}{\centi\meter}$). Center device crosshairs under cold bulb!
   \item \textbf{Lookup Base Gain \& Weights (\tref{tab:16:doe-36} / \tref{tab:16:natl-1cm}):} $\mathrm{TG}_{10\mathrm{m}}(h, P_{\mathrm{bulb}}) = \underline{\hspace{1.1cm}}\,\si{\celsius} \times M_t(t) \underline{\hspace{1.0cm}} \times \kappa_{\mathrm{beam}} \underline{\hspace{1.0cm}} = \mathbf{\mathrm{TG}_{\mathrm{table}}} = \underline{\hspace{1.2cm}}\,\si{\celsius}$. Record $k_{\mathrm{room}}(t) = \underline{\hspace{1.0cm}}$.
   \item \textbf{Insert Cup \& Record $T_{\mathrm{start}}$ (\texttt{5.II.c--d}):} $T_{\mathrm{start}} = \underline{\hspace{1.1cm}}\,\si{\celsius}$. Compute ambient offset $\Delta T_{\mathrm{amb}} = k_{\mathrm{room}}(T_{\mathrm{room}} - T_{\mathrm{start}}) = \underline{\hspace{1.1cm}}\,\si{\celsius}$.
-  \item \textbf{Compute \& Submit $T_{\mathrm{pred}}$ (\texttt{5.II.f}):} $T_{\mathrm{pred}} = T_{\mathrm{start}} + \mathrm{TG}_{\mathrm{table}} + \Delta T_{\mathrm{amb}} - \Delta T_{\mathrm{cool}}(\SI{0.20}{\celsius}) = \mathbf{\underline{\hspace{1.4cm}}\,\si{\celsius}}$. (\textit{Sanity check:} Verify $T_{\mathrm{start}} < T_{\mathrm{pred}} < \SI{65}{\celsius}$ and compare against \fref{fig:16:calibration-nomogram}; hand signed card to ES with $\ge\SI{8}{\minute}$ to spare!)
+  \item \textbf{Compute \& Submit $T_{\mathrm{pred}}$ (\texttt{5.II.f}):} $\TpredFormula = \mathbf{\underline{\hspace{1.4cm}}\,\si{\celsius}}$. (\textit{Sanity check:} Verify $T_{\mathrm{start}} < T_{\mathrm{pred}} < \SI{65}{\celsius}$ and compare against \fref{fig:16:calibration-nomogram}; \HandInRule)
 \end{enumerate}
 \end{devicebox}
 

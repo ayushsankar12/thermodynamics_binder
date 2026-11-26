@@ -214,7 +214,7 @@ One mole ($n = \SI{1.000}{\mole}$) of monatomic Helium ($\gamma = 5/3$, $C_{P,m}
   \[
     w_{\mathrm{on},N=3} = N\,nC_{P,m}T_1\left[\left(\frac{P_2}{P_1}\right)^{\frac{2}{5N}} - 1\right] = 3 \times \frac{5}{2}(2477.71)\left(2.000^{2/5} - 1\right) = 18582.8(1.319508 - 1) = \mathbf{+\SI{5937.4}{\joule}}
   \]
-  *(Note: In \texttt{2019 MIT E2 P4b(iv)}, the problem statement defined its multi-step path via pre-cooling steps $N\,nC_{P,m}T_1[1 - 2^{-2/5}] = \SI{4499.7}{\joule}$; as $N\to\infty$, both upper and lower staircases converge to the isothermal limit $\SI{5152.3}{\joule}$!)*
+  \emph{(Note: In \texttt{2019 MIT E2 P4b(iv)}, the problem statement defined its multi-step path via pre-cooling steps $N\,nC_{P,m}T_1[1 - 2^{-2/5}] = \SI{4499.7}{\joule}$; as $N\to\infty$, both upper and lower staircases converge to the isothermal limit $\SI{5152.3}{\joule}$!)}
 \end{enumerate}
 \verifiedby{Limit check as $N\to\infty$: $\lim_{N\to\infty} N\frac{5}{2}RT_1[8^{2/(5N)} - 1] = \frac{5}{2}RT_1\cdot\frac{2}{5}\ln 8 = RT_1\ln 8 = \SI{5152.3}{\joule}$ (\texttt{check\_sec06\_09.py::ex07\_3}).}
 \end{workedexample}
@@ -654,7 +654,7 @@ For an open control volume operating in steady state ($\Delta m_{\mathrm{cv}}/\D
 % ============================================================================
 \idxtopic{P--T and V--T diagram coordinate transformations}\idxtopic{spring-loaded and stop-pin piston-cylinder}\idxtopic{adiabatic tank blowdown and charging}
 
-Invitational and National exams frequently plot ideal-gas cycles on **$P$--$T$** or **$V$--$T$** axes (\texttt{2019 MIT E2 P2b TB \#4}) or couple a gas to mechanical stops and linear springs \src{S26,S28,S33}. Use the conversion matrix below to translate any path across all three thermodynamic planes before calculating work or heat.
+Invitational and National exams frequently plot ideal-gas cycles on \textbf{$P$--$T$} or \textbf{$V$--$T$} axes (\texttt{2019 MIT E2 P2b TB \#4}) or couple a gas to mechanical stops and linear springs \src{S26,S28,S33}. Use the conversion matrix below to translate any path across all three thermodynamic planes before calculating work or heat.
 
 \begin{formulacard}[Master $P$--$V \leftrightarrow P$--$T \leftrightarrow V$--$T$ Coordinate Transformation \& Slope Rules \src{S13,S26,S33}]
 \par\smallskip\noindent

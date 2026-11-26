@@ -683,12 +683,11 @@ The third 5-min gain is $\Delta_3 = 7.5(0.750) = \SI{5.625}{\celsius} \implies T
 
 \begin{formulacard}[3-Minute Setup Prediction Model \& Official Scoring Formulas (\RULEf\ 6.a--j) {\src{S01,S04}}]
 \footnotesize
-\textbf{1. Day-Of Final Water Temperature Prediction Equation (in $^\circ\mathrm{C}$, rounded to $\SI{0.1}{\celsius}$):}
+\textbf{1. Prediction (all in $^\circ\mathrm{C}$, report to $\SI{0.1}{\celsius}$):}
 \[
-  T_{\mathrm{pred}}(h, t_{\mathrm{heat}}, P_{\mathrm{lamp}}, T_i, T_{\mathrm{room}}) = T_i + s_{\mathrm{strat}}\!\left[\frac{P_{\mathrm{abs}}(h, P_{\mathrm{lamp}})}{G_{\mathrm{loss}}} - (T_i - T_{\mathrm{room}})\right]\!\big(1 - e^{-t_{\mathrm{heat}}/\tau}\big) - \Delta T_{\mathrm{cool}}(t_{\mathrm{wait}}),\quad
-  P_{\mathrm{abs}}(h) = P_{\mathrm{abs}}(h_{\mathrm{ref}})\!\left(\frac{P_{\mathrm{lamp}}}{P_{\mathrm{ref}}}\right)\!\left(\frac{h_{\mathrm{ref}} - z_{\mathrm{eff}}}{h - z_{\mathrm{eff}}}\right)^2
+  \boxed{\TpredFormula}
 \]
-where $C_{\mathrm{eff}} \approx \SI{418.4}{\joule\per\kelvin} + C_{\mathrm{cup}} \approx \SI{435}{\joule\per\kelvin}$, $\tau = C_{\mathrm{eff}}/G_{\mathrm{loss}} \approx \SIrange{900}{1400}{\second}$, $s_{\mathrm{strat}} = \mathrm{TG}_{\mathrm{top}}/\mathrm{TG}_{\mathrm{bulk}} \approx 1.25\text{--}1.38$ (top-layer stratification factor), and $\Delta T_{\mathrm{cool}} \approx (\SI{0.012}{\celsius\per\second})\,t_{\mathrm{wait}}$ is post-lamp cooling during cup removal.\\
+$\mathrm{TG}_{\mathrm{table}}(h, P, t)$: our calibration grid (App.~D), or for the reference collector \tref{tab:16:doe-36} / \fref{fig:16:calibration-nomogram}; $k_{\mathrm{room}}(t) = 1 - e^{-t/\tau}$ ($\tau = \SI{903}{\second}$ for the reference collector; use ours); $\Delta T_{\mathrm{cool}}$: our measured drop while the cup is carried to the ES. \HandInRule\\
 \textbf{2. Official 2027 Scoring \& Penalty Stacking (\RULEf\ 6.c--h \& Scoresheet v2.0.0):}
 \[
   \mathrm{FS} = \mathrm{ES} + \mathrm{TS} + \mathrm{PS}\ (\max 100),\quad

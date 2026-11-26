@@ -576,6 +576,15 @@
 \newcommand{\pref}[1]{\ifcompanion\else p.\,\pageref{#1}\fi}
 \newcommand{\spref}[1]{\S\ref{#1}\ifcompanion\else\ (p.\,\pageref{#1})\fi}
 \newcommand{\fref}[1]{Fig.~\ref{#1}}
+% ---------------------------------------------------------------------------
+% One definition per rule/formula used in several places (overhaul Phase 4).
+% Single prediction formula (math mode), all temperatures in degC, report to 0.1 degC.
+\newcommand{\TpredFormula}{T_{\mathrm{pred}} = T_{\mathrm{start}} + \mathrm{TG}_{\mathrm{table}}(h, P, t) + k_{\mathrm{room}}(t)\,(T_{\mathrm{room}} - T_{\mathrm{start}}) - \Delta T_{\mathrm{cool}}}
+% Single prediction hand-in rule (text mode).
+\newcommand{\HandInRule}{Hand in at heating minute~3; hard deadline before heating ends (Rule~\texttt{5.II.f}).}
+% Temperature gain (math mode).
+\newcommand{\TGFormula}{\mathrm{TG} = \max(0,\; T_{\mathrm{final}} - T_{\mathrm{start}})}
+
 \newcommand{\tref}[1]{Table~\ref{#1}}
 \newcommand{\eref}[1]{(\ref{#1})}
 \newcommand{\seesec}[1]{$\rightarrow$\,\sref{#1}}

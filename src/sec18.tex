@@ -113,7 +113,7 @@ Given any two independent intensive properties of water/steam (Appendix~A Table~
     \left(\frac{\Delta y}{\Delta T}\right)_{\mathrm{fwd}} = \frac{y(T + \Delta T) - y(T)}{\Delta T}, \qquad
     \left(\frac{\Delta y}{\Delta T}\right)_{\mathrm{bwd}} = \frac{y(T) - y(T - \Delta T)}{\Delta T}
   \end{equation}
-  *(Why central difference wins: The quadratic Taylor curvature terms $+\frac{1}{2}y''(T)\Delta T^2$ and $-\frac{1}{2}y''(T)\Delta T^2$ cancel identically when subtracting $y(T+\Delta T) - y(T-\Delta T)$, reducing table derivative error by $10\times\text{--}30\times$ compared to one-sided differences!)*
+  \emph{(Why central difference wins: The quadratic Taylor curvature terms $+\frac{1}{2}y''(T)\Delta T^2$ and $-\frac{1}{2}y''(T)\Delta T^2$ cancel identically when subtracting $y(T+\Delta T) - y(T-\Delta T)$, reducing table derivative error by $10\times\text{--}30\times$ compared to one-sided differences!)}
 \end{enumerate}
 \end{formulacard}
 
@@ -133,7 +133,7 @@ $$x = \frac{s - s_f}{s_g - s_f} = \frac{5.942025 - 1.1346}{7.5445 - 1.1346} = \f
 \end{align*}
 (c)~By \eref{eq:18:finitediff} with $\Delta T = \SI{5.0}{\kelvin}$, the central-difference saturation slope at $\SI{100.0}{\celsius}$ is $\left(\frac{\Delta P}{\Delta T}\right)_{\mathrm{central}} = \frac{120.90 - 84.609}{2(5.0)} = \SI{3.6291}{\kilo\pascal\per\kelvin}$. With $v_{fg} = v_g - v_f = 1.6718 - 0.0010435 = \SI{1.6707565}{\cubic\meter\per\kilogram}$, the Clapeyron equation yields:
 $$h_{fg} = T\,v_{fg}\left(\frac{\Delta P}{\Delta T}\right)_{\mathrm{central}} = (\SI{373.15}{\kelvin})(\SI{1.6707565}{\cubic\meter\per\kilogram})(\SI{3.6291}{\kilo\pascal\per\kelvin}) = \mathbf{\SI{2262.5}{\kilo\joule\per\kilogram}} \quad (\text{only } \mathbf{+0.27\%}\text{ from NIST }\SI{2256.4}{\kilo\joule\per\kilogram}\text{!})$$
-*(By contrast, a one-sided forward difference $\frac{120.90 - 101.42}{5.0} = \SI{3.896}{\kilo\pascal\per\kelvin}$ gives $\SI{2429}{\kilo\joule\per\kilogram}$, a $+7.6\%$ error!)*
+\emph{(By contrast, a one-sided forward difference $\frac{120.90 - 101.42}{5.0} = \SI{3.896}{\kilo\pascal\per\kelvin}$ gives $\SI{2429}{\kilo\joule\per\kilogram}$, a $+7.6\%$ error!)}
 \verifiedby{Lagrange 4-corner expansion $0.2(2782.3)+0.3(2824.4)+0.2(2776.1)+0.3(2819.5)=\SI{2804.85}{\kilo\joule\per\kilogram}$ and Python check \texttt{sec18:ex18.1}.}
 \end{workedexample}
 
@@ -191,13 +191,13 @@ Converting a curved exponential or power-law relationship into a straight line $
 $T(t) = T_{\mathrm{ss}} - (T_{\mathrm{ss}} - T_i)e^{-t/\tau}$ \newline ($\theta(t) = \dfrac{T(t) - T_{\mathrm{ss}}}{T_i - T_{\mathrm{ss}}} = e^{-t/\tau}$) &
 $X = t$ $[\si{\second}\text{ or }\si{\minute}]$ \newline $Y = \ln\!\left(\dfrac{T(t) - T_{\mathrm{ss}}}{T_i - T_{\mathrm{ss}}}\right)$ &
 $m = -\dfrac{1}{\tau}$ \newline $b = 0$ &
-$\tau = -\dfrac{1}{m} = R_{\mathrm{th}} C_{\mathrm{eff}}$ \newline *(If $Y = \ln|T_{\mathrm{ss}} - T(t)|$, then $b = \ln|T_{\mathrm{ss}} - T_i|$)* \\
+$\tau = -\dfrac{1}{m} = R_{\mathrm{th}} C_{\mathrm{eff}}$ \newline \emph{(If $Y = \ln|T_{\mathrm{ss}} - T(t)|$, then $b = \ln|T_{\mathrm{ss}} - T_i|$)} \\
 \rowcolor{rowalt}
 \textbf{2.~Clausius--Clapeyron Vapor Pressure} (\sref{sec:05}) \idxformula{Clausius-Clapeyron linear plot ln P vs 1/T} &
 $P_{\mathrm{sat}}(T) = P_0 \exp\!\left[-\dfrac{\Delta H_{\mathrm{vap}}}{R}\!\left(\dfrac{1}{T} - \dfrac{1}{T_0}\right)\right]$ &
 $X = \dfrac{1}{T}$ $[\si{\per\kelvin}]$ \newline $Y = \ln P_{\mathrm{sat}}$ &
 $m = -\dfrac{\Delta H_{\mathrm{vap}}}{R}$ \newline $b = \ln P_0 + \dfrac{\Delta H_{\mathrm{vap}}}{R T_0}$ &
-$\Delta H_{\mathrm{vap}} = -R\,m$ \newline *(If $Y = \log_{10} P$, then $\Delta H_{\mathrm{vap}} = -2.302585\,R\,m$!)* \\
+$\Delta H_{\mathrm{vap}} = -R\,m$ \newline \emph{(If $Y = \log_{10} P$, then $\Delta H_{\mathrm{vap}} = -2.302585\,R\,m$!)} \\
 \textbf{3.~Van't Hoff / Arrhenius Rate \& Equilibrium} (\sref{sec:08}) &
 $K_{\mathrm{eq}}(T) = \exp\!\left(-\dfrac{\Delta H^\circ}{R T} + \dfrac{\Delta S^\circ}{R}\right)$ \newline $k(T) = A e^{-E_a / (R T)}$ &
 $X = \dfrac{1}{T}$ $[\si{\per\kelvin}]$ \newline $Y = \ln K_{\mathrm{eq}}$ (or $\ln k$) &
@@ -351,7 +351,7 @@ Never rely on $R^2 > 0.99$ alone to validate a physical model! Always inspect th
     \text{\textbf{\% Diff}} = \frac{|x_1 - x_2|}{\tfrac{1}{2}(x_1 + x_2)}\times 100\%, \quad
     \text{\textbf{Rule 6.f }}\mathrm{PE} = 1 - \frac{|T_f - T_{\mathrm{pred}}|}{T_f}\ (^\circ\mathrm{C})
   \end{equation}
-  *(Use \textbf{Percent Error} when comparing an experimental value $x_{\mathrm{exp}}$ against an authoritative NIST reference $x_{\mathrm{true}}$; use \textbf{Percent Difference} when comparing two experimental trials $x_1, x_2$ of equal standing where neither is ``true''; use \textbf{Rule~\texttt{6.f} $\mathrm{PE}$} with measured $T_f$ in $\si{\celsius}$ in the denominator for 2027 Part~II scoring \src{S01}).*
+  \emph{(Use \textbf{Percent Error} when comparing an experimental value $x_{\mathrm{exp}}$ against an authoritative NIST reference $x_{\mathrm{true}}$; use \textbf{Percent Difference} when comparing two experimental trials $x_1, x_2$ of equal standing where neither is ``true''; use \textbf{Rule~\texttt{6.f} $\mathrm{PE}$} with measured $T_f$ in $\si{\celsius}$ in the denominator for 2027 Part~II scoring \src{S01}).}
   \item \textbf{Defensible Outlier Identification Without Cherry-Picking (Grubbs' Test \& Tukey IQR Fence) \src{S21}:}
   Never delete a data point merely because it lowers $R^2$! An outlier $x_{\mathrm{suspect}}$ in $N$ replicate trials ($s = \sqrt{\frac{1}{N-1}\sum (x_i - \bar{x})^2}$) may be excluded \textbf{only} if (1)~a physical anomaly was logged during the run (e.g., power flicker, spilled water, dislodged lid) \textbf{OR} (2)~it exceeds the two-sided \textbf{Grubbs' Test critical value $G_{\mathrm{crit}}(\alpha=0.05, N)$} (or lies outside the non-parametric \textbf{Tukey Fence} $[Q_1 - 1.5\,\mathrm{IQR},\ Q_3 + 1.5\,\mathrm{IQR}]$ where $\mathrm{IQR} = Q_3 - Q_1$), and both the raw and filtered fits are reported:
   \begin{equation}\label{eq:18:grubbs}
@@ -395,7 +395,7 @@ A team logs water temperature $T(t)$ inside their 2027 collector ($h = \SI{50.0}
 (a)~\textbf{Three-Point Equidistant $T_{\mathrm{ss}}$ Estimate ($t = 0, 4, \SI{8}{\minute} \implies T_1 = 22.00,\ T_2 = 31.32,\ T_3 = 38.45\,\si{\celsius}$):}
 By \eref{eq:18:3ptTss}:
 $$T_{\mathrm{ss,3pt}} = \frac{T_1 T_3 - T_2^2}{T_1 + T_3 - 2 T_2} = \frac{(22.00)(38.45) - (31.32)^2}{22.00 + 38.45 - 2(31.32)} = \frac{845.9000 - 980.9424}{-2.1900} = \frac{-135.0424}{-2.1900} = \mathbf{\SI{61.663}{\celsius}}$$
-*(Remarkably within $\SI{0.34}{\celsius}$ of the true $\SI{62.00}{\celsius}$ asymptote using only three points from the first 8 minutes!)*
+\emph{(Remarkably within $\SI{0.34}{\celsius}$ of the true $\SI{62.00}{\celsius}$ asymptote using only three points from the first 8 minutes!)}
 \par\smallskip\noindent
 (b)~\textbf{Semi-Log OLS Regression ($N = 6$ points):}
 From the table above, $\bar{t} = \SI{5.000}{\minute}$ and $\bar{Y} = \frac{-1.98552}{6} = -0.330920$. Evaluating the sums of squares \eref{eq:18:ols}:
@@ -435,7 +435,7 @@ $$m = \frac{S_{XY}}{S_{XX}} = \frac{-0.748562}{0.146673} = \mathbf{\SI{-5.10360}
 $$R^2 = \frac{S_{XY}^2}{S_{XX} S_{YY}} = \frac{0.560345}{0.560377} = \mathbf{0.999942}$$
 (b)~Because the horizontal variable was scaled as $X = 1000/T$, the Clausius--Clapeyron relation $\ln P = -\frac{\Delta H_{\mathrm{vap}}}{1000\,R}\left(\frac{1000}{T}\right) + b$ gives slope $m = -\frac{\Delta H_{\mathrm{vap}}}{1000\,R}$, so:
 $$\Delta H_{\mathrm{vap}} = -1000\,R\,m = -(1000)(\SI{8.3144626}{\joule\per\mole\per\kelvin})(-5.10360) = \SI{42434}{\joule\per\mole} = \mathbf{\SI{42.43}{\kilo\joule\per\mole}}$$
-*(Matching the arithmetic mean of NIST water $\Delta H_{\mathrm{vap}}(\SI{40}{\celsius}) = \SI{43.35}{\kilo\joule\per\mole}$ and $\Delta H_{\mathrm{vap}}(\SI{100}{\celsius}) = \SI{40.65}{\kilo\joule\per\mole}$, which is $\SI{42.00}{\kilo\joule\per\mole}$, within $1.0\%$!).* Setting $P_{\mathrm{sat}} = \SI{101.325}{\kilo\pascal}$ ($Y_0 = \ln(101.325) = 4.61833$):
+\emph{(Matching the arithmetic mean of NIST water $\Delta H_{\mathrm{vap}}(\SI{40}{\celsius}) = \SI{43.35}{\kilo\joule\per\mole}$ and $\Delta H_{\mathrm{vap}}(\SI{100}{\celsius}) = \SI{40.65}{\kilo\joule\per\mole}$, which is $\SI{42.00}{\kilo\joule\per\mole}$, within $1.0\%$!).} Setting $P_{\mathrm{sat}} = \SI{101.325}{\kilo\pascal}$ ($Y_0 = \ln(101.325) = 4.61833$):
 $$X_b = \frac{1000}{T_b} = \frac{Y_0 - b}{m} = \frac{4.61833 - 18.3040}{-5.10360} = 2.68158\,\si{\per\kelvin} \implies T_b = \frac{1000}{2.68158} = \mathbf{\SI{372.92}{\kelvin}} = \mathbf{\SI{99.77}{\celsius}}$$
 \verifiedby{Two-point check $\Delta H_{\mathrm{vap}} = R\ln(101.42/7.384)/(1/313.15 - 1/373.15) = \SI{42.42}{\kilo\joule\per\mole}$ and Python check \texttt{sec18:ex18.4}.}
 \end{workedexample}
@@ -449,13 +449,13 @@ $$X_b = \frac{1000}{T_b} = \frac{Y_0 - b}{m} = \frac{4.61833 - 18.3040}{-5.10360
 $$c_{\mathrm{solid}} = \frac{(\SI{250.0}{\watt})(\SI{112.0}{\second})}{(\SI{0.400}{\kilogram})(15.0 - (-25.0))\,\si{\kelvin}} = \frac{\SI{28000}{\joule}}{\SI{16.0}{\kilogram\cdot\kelvin}} = \mathbf{\SI{1750}{\joule\per\kilogram\per\kelvin}} = \mathbf{\SI{1.750}{\kilo\joule\per\kilogram\per\kelvin}}$$
 $$L_f = \frac{\dot{Q}_{\mathrm{in}}\,\Delta t_{\mathrm{fus}}}{m} = \frac{(\SI{250.0}{\watt})(\SI{288.0}{\second})}{\SI{0.400}{\kilogram}} = \frac{\SI{72000}{\joule}}{\SI{0.400}{\kilogram}} = \mathbf{\SI{180000}{\joule\per\kilogram}} = \mathbf{\SI{180.0}{\kilo\joule\per\kilogram}}$$
 $$c_{\mathrm{liq}} = \frac{(\SI{250.0}{\watt})(\SI{224.0}{\second})}{(\SI{0.400}{\kilogram})(65.0 - 15.0)\,\si{\kelvin}} = \frac{\SI{56000}{\joule}}{\SI{20.0}{\kilogram\cdot\kelvin}} = \mathbf{\SI{2800}{\joule\per\kilogram\per\kelvin}} = \mathbf{\SI{2.800}{\kilo\joule\per\kilogram\per\kelvin}}$$
-*(Sanity check: The liquid warming slope $\frac{50.0}{224.0} = \SI{0.2232}{\celsius\per\second}$ is shallower than the solid warming slope $\frac{40.0}{112.0} = \SI{0.3571}{\celsius\per\second}$ by the exact inverse ratio $\frac{c_{\mathrm{solid}}}{c_{\mathrm{liq}}} = \frac{1750}{2800} = 0.6250$!).*
+\emph{(Sanity check: The liquid warming slope $\frac{50.0}{224.0} = \SI{0.2232}{\celsius\per\second}$ is shallower than the solid warming slope $\frac{40.0}{112.0} = \SI{0.3571}{\celsius\per\second}$ by the exact inverse ratio $\frac{c_{\mathrm{solid}}}{c_{\mathrm{liq}}} = \frac{1750}{2800} = 0.6250$!).}
 \par\smallskip\noindent
 (b)~Applying the opposite-arm tie-line lever rule (Row~3 of Table~\ref{tab:18:graphs}) across $[w_\alpha, w_L] = [18.0, 55.5]\,\text{wt\%}$ with $w_0 = 40.0\,\text{wt\%}$:
 $$f_L = \frac{w_0 - w_\alpha}{w_L - w_\alpha} = \frac{40.0 - 18.0}{55.5 - 18.0} = \frac{22.0}{37.5} = \mathbf{0.58667}\ (\SI{58.67}{\percent}), \qquad f_\alpha = \frac{w_L - w_0}{w_L - w_\alpha} = \frac{55.5 - 40.0}{37.5} = \frac{15.5}{37.5} = \mathbf{0.41333}\ (\SI{41.33}{\percent})$$
 For a $m_{\mathrm{tot}} = \SI{500.0}{\gram}$ alloy sample, the total liquid phase mass is $m_L = f_L m_{\mathrm{tot}} = 0.58667(\SI{500.0}{\gram}) = \SI{293.33}{\gram}$ (and $m_\alpha = \SI{206.67}{\gram}$). Because the liquid phase has composition $w_L = \SI{55.5}{wt\%\ Sn}$, the mass of $\mathrm{Sn}$ inside the liquid phase is:
 $$m_{\mathrm{Sn,in\text{ }L}} = w_L\,m_L = (0.555)(\SI{293.333}{\gram}) = \mathbf{\SI{162.80}{\gram}}$$
-*(Global Tin Conservation Audit: Tin in solid $\alpha$ is $m_{\mathrm{Sn,in\text{ }\alpha}} = w_\alpha m_\alpha = (0.180)(\SI{206.667}{\gram}) = \SI{37.20}{\gram}$; total tin is $162.80 + 37.20 = \SI{200.00}{\gram} = 0.400 \times \SI{500.0}{\gram}$. Exact match!)*
+\emph{(Global Tin Conservation Audit: Tin in solid $\alpha$ is $m_{\mathrm{Sn,in\text{ }\alpha}} = w_\alpha m_\alpha = (0.180)(\SI{206.667}{\gram}) = \SI{37.20}{\gram}$; total tin is $162.80 + 37.20 = \SI{200.00}{\gram} = 0.400 \times \SI{500.0}{\gram}$. Exact match!)}
 \verifiedby{Global energy audit $Q_{\mathrm{tot}} = 28.0 + 72.0 + 56.0 = \SI{156.0}{\kilo\joule} = (\SI{250}{\watt})(\SI{624}{\second})$ and tin mass balance in Python check \texttt{sec18:ex18.5}.}
 \end{workedexample}
 

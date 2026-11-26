@@ -3,7 +3,7 @@
 %             2027 Radiative-Lamp Heating ODE, Newton Cooling & Penetration
 % Target: 10 pages | Figures: fig:13:lumped-heating, fig:13:biot-regimes
 % ============================================================================
-\binderchapter{13}{Transient Thermal Systems — Lumped Capacitance, 2027 Radiative-Lamp Heating ODE, Newton Cooling \& Semi-Infinite Penetration}{§13 Transient Thermal Systems}{sec:13}
+\binderchapter{13}{Transient Thermal Systems — Lumped Capacitance, 2027 Radiative-Lamp Heating ODE, Newton Cooling \& Semi-Infinite Penetration}{Transient Thermal Systems}{sec:13}
 \scopebanner{REQUIRED}[2027 Rule 5.c.iii \& Part II Device Heating-Curve Prediction (Biot/Fourier tagged \SUPPf) \textbar\ Sources: \src{S01}, \src{S12}, \src{S17}, \src{S25}]
 
 \idxtopic{transient heat transfer!lumped capacitance model}
@@ -436,7 +436,7 @@ Two students start with identical cups of black coffee of mass $m_c = \SI{200.0}
   \item \textbf{Student~A (Mix at $t=0$, then cool):} $T_{A,0} = \dfrac{200(85.0) + 25(5.0)}{225} = \SI{76.111}{\celsius} \implies T_A(\SI{10}{\minute}) = 20.0 + (76.111 - 20.0)(0.60653) = \mathbf{\SI{54.03}{\celsius}}$.
   \item \textbf{Student~B (Cool first, then mix at $t=\SI{10}{\minute}$):} $T_{B,\mathrm{pre}}(\SI{10}{\minute}) = 20.0 + (85.0 - 20.0)(0.60653) = \SI{59.424}{\celsius} \implies T_B(\SI{10}{\minute}) = \dfrac{200(59.424) + 25(5.0)}{225} = \mathbf{\SI{53.38}{\celsius}}$.
 \end{itemize}
-Student~A's coffee is warmer by $\Delta T = 54.033 - 53.377 = \mathbf{+\SI{0.66}{\celsius}}$! *(Note: Only if the cream were initially at room temperature $T_m = T_\infty = \SI{20.0}{\celsius}$ and $\tau$ remained unchanged would the two temperatures tie; if $T_m < T_\infty$, adding immediately always wins!)*
+Student~A's coffee is warmer by $\Delta T = 54.033 - 53.377 = \mathbf{+\SI{0.66}{\celsius}}$! \emph{(Note: Only if the cream were initially at room temperature $T_m = T_\infty = \SI{20.0}{\celsius}$ and $\tau$ remained unchanged would the two temperatures tie; if $T_m < T_\infty$, adding immediately always wins!)}
 \end{solution}
 
 \begin{problem}{P13.2}{Geometric Scaling of Cooling Time Across Sphere Radius ($\mathrm{Bi} \ll 1$ vs.\ $\mathrm{Bi} \gg 1$)}{13.1}{5.c.iii}{State / National}{60 s}{Dimensional Scaling}{confusing lumped $\tau \propto R^1$ with diffusive $t \propto R^2$}

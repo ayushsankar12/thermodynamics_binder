@@ -3,7 +3,7 @@
 %             Stefan-Boltzmann), View Factors, Radiation Shields & Selective Surfaces
 % Target: 8 pages | Figures: fig:12:planck-spectra, fig:12:shields-viewfactor
 % ============================================================================
-\binderchapter{12}{Thermal Radiation, Blackbody Laws, View Factors, Radiation Shields \& Two-Band Selective Surfaces}{§12 Thermal Radiation}{sec:12}
+\binderchapter{12}{Thermal Radiation, Blackbody Laws, View Factors, Radiation Shields \& Two-Band Selective Surfaces}{Thermal Radiation}{sec:12}
 \scopebanner{TIER-DEPENDENT}[2027 Rule 5.c.iii (All Levels Core) \& Rule 5.c.vi (States/Nationals: Radiant Exitance, Blackbody Radiation, Stefan--Boltzmann Law) \textbar\ Sources: \src{S01}, \src{S07}, \src{S12}, \src{S19}, \src{S25}]
 
 \idxtopic{radiation!Planck blackbody distribution}
@@ -75,7 +75,7 @@ Qualitative radiation mechanisms, shiny low-emissivity barriers, and 2027 heat-l
 \subsection{Planck Distribution, Wien's Displacement Law, and Lambertian Radiance}
 Every body above $\SI{0}{\kelvin}$ continuously emits electromagnetic thermal radiation (\SIrange{0.1}{1000}{\micro\meter}, Lienhard Table~1.2 p.~28 \src{S12}). An ideal \textbf{blackbody} (realized experimentally by a small aperture in an isothermal cavity or \emph{hohlraum}, where multiple internal reflections trap all incident rays) absorbs $100\%$ of incident radiation at all wavelengths and directions ($\alpha_\lambda = 1,\; \rho_\lambda = \tau_\lambda = 0$) and emits the maximum possible spectral flux allowed by thermodynamic equilibrium:
 \begin{enumerate}
-  \item \textbf{Wien's Displacement Law (1893) and the Wavelength--Frequency Peak Trap:} Differentiating Planck's distribution $M_{\lambda,b}(\lambda,T)$ with respect to $\lambda$ yields the transcendental equation $(5 - x)e^x = 5$ where $x = h c_0 / (\lambda_{\max} k_B T) = 4.96511423$, giving $\lambda_{\max} T = b_{\mathrm{Wien}} = \SI{2897.772}{\micro\meter\kelvin}$ \src{S07,S12}. As plotted in \fref{fig:12:planck-spectra}, this creates a crisp **three-spectrum wavelength separation** critical to the 2027 collector:
+  \item \textbf{Wien's Displacement Law (1893) and the Wavelength--Frequency Peak Trap:} Differentiating Planck's distribution $M_{\lambda,b}(\lambda,T)$ with respect to $\lambda$ yields the transcendental equation $(5 - x)e^x = 5$ where $x = h c_0 / (\lambda_{\max} k_B T) = 4.96511423$, giving $\lambda_{\max} T = b_{\mathrm{Wien}} = \SI{2897.772}{\micro\meter\kelvin}$ \src{S07,S12}. As plotted in \fref{fig:12:planck-spectra}, this creates a crisp \textbf{three-spectrum wavelength separation} critical to the 2027 collector:
   \begin{itemize}
     \item \textbf{Solar Spectrum ($T_\odot \approx \SI{5772}{\kelvin}$--$\SI{5778}{\kelvin}$):} $\lambda_{\max} = \frac{2897.8}{5778} = \SI{0.5015}{\micro\meter}$ ($\SI{502}{\nano\meter}$, visible green-yellow; $\sim 98\%$ of solar energy lies at $\lambda < \SI{2.7}{\micro\meter}$).
     \item \textbf{2027 Incandescent 100--125 W Heat-Lamp Tungsten Filament ($T_{\mathrm{fil}} \approx \SI{2400}{\kelvin}$):} $\lambda_{\max} = \frac{2897.8}{2400} = \mathbf{\SI{1.2074}{\micro\meter}}$ (\textbf{near-infrared}; for $T_{\mathrm{fil}} \in [\SI{2200}{\kelvin}, \SI{2500}{\kelvin}]$, $\lambda_{\max} \in [\SI{1.159}{\micro\meter}, \SI{1.317}{\micro\meter}]$). Exactly $25.0\%$ of total blackbody emission always lies at $\lambda < \lambda_{\max}$, and $75.0\%$ lies at $\lambda > \lambda_{\max}$.

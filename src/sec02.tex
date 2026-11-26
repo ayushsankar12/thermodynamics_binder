@@ -3,7 +3,7 @@
 %             Figures & Algebra-Only Math Toolkit
 % Target Page Budget: 6 pages | Figure: fig:02:boundaries
 % ============================================================================
-\binderchapter{2}{Notation, SI/Imperial Units, Sign Conventions, Significant Figures \& Algebra-Only Math Toolkit}{§2 Notation, Units \& Math Toolkit}{sec:02}
+\binderchapter{2}{Notation, SI/Imperial Units, Sign Conventions, Significant Figures \& Algebra-Only Math Toolkit}{Notation, Units \& Math Toolkit}{sec:02}
 \scopebanner{REQUIRED}[2027 Rules 5.I.b, 5.c.i, 5.d.i--iv (All Tournament Levels --- Foundational Sign, Unit \& Math Contract)]
 
 \idxtopic{sign conventions!First Law physics vs.\ chemistry}
@@ -28,7 +28,7 @@ $y = y_1 + (y_2 - y_1)\dfrac{x - x_1}{x_2 - x_1}$ & $(x_1, y_1), (x_2, y_2)$: ad
 \idxtopic{control volume vs.\ control mass}
 \idxtopic{boundary types!adiabatic, diathermal, rigid, movable}
 
-Every thermodynamic calculation begins by drawing an explicit **system boundary** (real or imaginary surface) separating the **system** from its **surroundings** (\fref{fig:02:boundaries}) \src{S12,S13,S16}. Sign errors and missing energy terms in written exams almost always trace to an unstated or shifting boundary.
+Every thermodynamic calculation begins by drawing an explicit \textbf{system boundary} (real or imaginary surface) separating the \textbf{system} from its \textbf{surroundings} (\fref{fig:02:boundaries}) \src{S12,S13,S16}. Sign errors and missing energy terms in written exams almost always trace to an unstated or shifting boundary.
 
 \begin{center}
 \begin{tikzpicture}[>=Stealth,font=\scriptsize,scale=0.95]
@@ -112,7 +112,7 @@ In physics and mechanical engineering textbooks (OpenStax \emph{University Physi
 \label{sec:02.2}
 \idxtopic{symbols!collision disambiguation table}
 
-Thermodynamics reuses several Latin and Greek letters for unrelated physical quantities with different dimensions. Before substituting numbers into any formula, check the symbol's **subscript and SI unit** (\tref{tab:02:symcollision}).
+Thermodynamics reuses several Latin and Greek letters for unrelated physical quantities with different dimensions. Before substituting numbers into any formula, check the symbol's \textbf{subscript and SI unit} (\tref{tab:02:symcollision}).
 
 \begin{center}
 \captionof{table}{High-risk symbol collisions in thermodynamics and heat transfer: how to disambiguate by context and SI units \src{S07,S12,S13}.}\label{tab:02:symcollision}
@@ -185,7 +185,7 @@ Never assume ``STP'' means $\SI{22.4}{\liter\per\mole}$ without checking the pre
 \label{sec:02.4}
 \idxtopic{significant figures!addition vs.\ multiplication vs.\ logarithms}
 
-Rule \texttt{5.I.b} requires all written answers to be reported in **metric units with appropriate significant figures unless otherwise specified** \src{S01,S06}:
+Rule \texttt{5.I.b} requires all written answers to be reported in \textbf{metric units with appropriate significant figures unless otherwise specified} \src{S01,S06}:
 \begin{enumerate}
   \item \textbf{Measurement Recording Rule:} Record all certain digits from instrument graduations plus \textbf{one (and only one) estimated digit} (typically $\pm 0.1$ of the smallest graduation for analog scales, or the last displayed digit on a digital thermometer) \src{S06}. Under 2027 Rules \texttt{4.f} and \texttt{5.II.c,g}, the ES thermometer reads to $\mathbf{\SI{0.1}{\celsius}}$ (e.g., $\SI{21.4}{\celsius}$ has 3 sig figs and 1 decimal place) \src{S01}.
   \item \textbf{Addition \& Subtraction (Decimal-Place Rule):} Round the result to the \textbf{least precise decimal column} among the terms.
@@ -321,7 +321,7 @@ Using gauge pressure $P_{\mathrm{gauge}}$ instead of $P_{\mathrm{abs}} = P_{\mat
 
 \begin{devicebox}[2027 Heat-Lamp Collector Scoring \& Unit Discipline (`Rule 6.a--f`)]
 \idxdev{scoring in Celsius!Rule 6.b--f Prediction Efficiency trap}
-Under 2027 Rule \texttt{6.b}, \textbf{all Part~II device scoring calculations are performed in degrees Celsius ($\si{\celsius}$), NOT kelvin!} Specifically, Temperature Gain is $\mathrm{TG} = T_{\mathrm{final}} - T_{\mathrm{start}}$ (in $\si{\celsius}$) and Prediction Efficiency is:
+Under 2027 Rule \texttt{6.b}, \textbf{all Part~II device scoring calculations are performed in degrees Celsius ($\si{\celsius}$), NOT kelvin!} Specifically, Temperature Gain is $\TGFormula$ (in $\si{\celsius}$) and Prediction Efficiency is:
 \[
   \mathrm{PE} = \max\!\left(0,\ 1 - \frac{|T_{\mathrm{final}} - T_{\mathrm{pred}}|}{T_{\mathrm{final}}}\right) \quad \text{with } T_{\mathrm{final}} \text{ and } T_{\mathrm{pred}} \text{ in } \mathbf{\si{\celsius}\text{ ( to }\SI{0.1}{\celsius}\text{)}} \src{S01,S04}.
 \]

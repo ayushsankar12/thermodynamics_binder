@@ -2,7 +2,7 @@
 % sec00.tex — §0 Competition Command Center (Target: 5 Pages)
 % Tab 1: CMD/QUICK | Figures: fig:00:router, fig:00:timeline
 % ============================================================================
-\binderchapter{0}{Competition Command Center}{§0 Competition Command Center}{sec:00}
+\binderchapter{0}{Competition Command Center}{Competition Command Center}{sec:00}
 \scopebanner{REQUIRED}[2027 Rules 1, 2.a--e, 3.a--h, 4.a--g, 5.I--II, 6.a--j \& the 11 official FAQs]
 
 \idxtopic{competition command center}
@@ -265,9 +265,10 @@ Convection, dead-air gap, or evaporative loss & \textbf{QS-10} (\sref{sec:01.10}
   \item \textbf{Dual Class III Calculator Deployment (\texttt{Rule 2.b}):}
     \begin{itemize}
       \item \textbf{Calculator 1 (Partner A):} Dedicated to Part I multi-step calorimetry, gas/cycle tables, and steam-table interpolation.
-      \item \textbf{Calculator 2 (Partner B):} Pre-loaded with the 2027 Collector $T_{\mathrm{pred}}(h_{\mathrm{bulb}}, t_{\mathrm{heat}}, P_{\mathrm{bulb}}, T_i, T_{\mathrm{amb}})$ solver; switches to Part I calculations at $t = \SI{8}{\minute}$.
+      \item \textbf{Calculator 2 (Partner B):} Pre-loaded with the 2027 Collector $T_{\mathrm{pred}}(h_{\mathrm{bulb}}, t_{\mathrm{heat}}, P_{\mathrm{bulb}}, T_i, T_{\mathrm{amb}})$ solver; switches to Part I once the prediction is handed in.
     \end{itemize}
-  \item \textbf{Two-Eye Prediction Verification ($t = \SI{7}{\minute}$):} Before Partner B hands the $T_{\mathrm{pred}}$ notecard to the ES, Partner A spends $\SI{20}{\second}$ verifying that (i) $T_{\mathrm{pred}} > T_i$, (ii) $T_{\mathrm{pred}}$ is in $\si{\celsius}$ to $\SI{0.1}{\celsius}$ (\texttt{5.II.f}, \texttt{6.b}), and (iii) the lookup row matches the ES-announced $(h_{\mathrm{bulb}}, t_{\mathrm{heat}}, P_{\mathrm{bulb}})$.
+  \item \textbf{Prediction and hand-in:} $\TpredFormula$, all in $\si{\celsius}$, reported to $\SI{0.1}{\celsius}$. \HandInRule
+  \item \textbf{Two-Eye Prediction Check (before heating minute 3):} Before Partner B hands the $T_{\mathrm{pred}}$ notecard to the ES, Partner A spends $\SI{20}{\second}$ verifying that (i) $T_{\mathrm{pred}} > T_i$, (ii) $T_{\mathrm{pred}}$ is in $\si{\celsius}$ to $\SI{0.1}{\celsius}$ (\texttt{5.II.f}, \texttt{6.b}), and (iii) the lookup row matches the ES-announced $(h_{\mathrm{bulb}}, t_{\mathrm{heat}}, P_{\mathrm{bulb}})$.
 \end{enumerate}
 \end{formulacard}
 \nextcol[0.485]
@@ -295,7 +296,7 @@ Convection, dead-air gap, or evaporative loss & \textbf{QS-10} (\sref{sec:01.10}
 \textbf{0.\ Block Start} ($t=\SI{0}{\minute}$) & OFF & Copy ES-announced $P_{\mathrm{bulb}}$ ($\si{\watt}$), bulb shape, $h_{\mathrm{bulb}}$ ($\si{\centi\meter}$), $t_{\mathrm{heat}}$ ($\si{\minute}$), $T_{\mathrm{room}}$ ($\si{\celsius}$), and $T_{\mathrm{bath}}$ ($\si{\celsius}$) onto \sref{app:D} worksheet. & \texttt{Rule 5.II.a}: ES announces parameters for all teams; verify whether $h_{\mathrm{bulb}}$ is Regional ($40\text{--}\SI{50}{\centi\meter}$), State ($40\text{--}\SI{55}{\centi\meter}$), or National ($40\text{--}\SI{65}{\centi\meter}$). \\
 \rowcolor{rowalt}\textbf{1.\ Device Setup} ($\le \SI{3}{\minute}$, \texttt{5.II.b}) & OFF & Unpack impounded collector; verify outer dimensions $\le \SI{29.5}{\centi\meter} < \SI{30.0}{\centi\meter}$ cube (\texttt{3.d}); fix any transit shift; receive ES cup of $\SI{100}{\milli\liter}$ water and $T_i$ (to $\SI{0.1}{\celsius}$, \texttt{5.II.c}). & \texttt{Rule 5.II.b}: Timer is \emph{not} paused for construction re-checks. \textbf{No device modifications allowed after this 3-min window ends} except inserting/removing cup. \\
 \textbf{2.\ Water Setup} ($\le \SI{1}{\minute}$, \texttt{5.II.d}) & OFF & Lift reflector cone lid (FAQs 10/22/2026 on inserting the cup); seat 9 oz cup into cork cradle; rest unattached clear BoPET film disc on rim (FAQ 10/21/2026 on items on the cup); close lid; center device under bulb (\texttt{4.d}); step back. & Verify \textbf{zero part of device/collar/film touches water} (\texttt{3.e}) and \textbf{zero tape, adhesive, rubber band, or clip is attached to cup} (FAQ 10/21/2026 on items on the cup \src{S02}). \\
-\rowcolor{rowalt}\textbf{3.\ Heating Time} ($\SIrange{10}{15}{\minute}$, \texttt{5.II.e--f}) & \textbf{ON} & Compute $T_{\mathrm{pred}} = T_i + \mathrm{TG}_{\mathrm{model}}(h_{\mathrm{bulb}}, t_{\mathrm{heat}}, P_{\mathrm{bulb}}, T_{\mathrm{room}}-T_i)$ (\sref{sec:16}); cross-check with Partner A; submit $T_{\mathrm{pred}}$ card ($\si{\celsius}$) by $t=\SI{8}{\minute}$; solve written exam. & \textbf{ZERO-TOLERANCE NO-TOUCH (\texttt{5.II.e}):} Touching device or lamp setup during Heating Time gives $\mathbf{\mathrm{TS}=0,\;\mathrm{PS}=0}$. Late prediction gives $\mathbf{\mathrm{PS}=0}$ (\texttt{5.II.f}). \\
+\rowcolor{rowalt}\textbf{3.\ Heating Time} ($\SIrange{10}{15}{\minute}$, \texttt{5.II.e--f}) & \textbf{ON} & Compute $\TpredFormula$ (\sref{sec:16}); cross-check with Partner A; \HandInRule{} Then solve the written exam. & \textbf{ZERO-TOLERANCE NO-TOUCH (\texttt{5.II.e}):} Touching device or lamp setup during Heating Time gives $\mathbf{\mathrm{TS}=0,\;\mathrm{PS}=0}$. Late prediction gives $\mathbf{\mathrm{PS}=0}$ (\texttt{5.II.f}). \\
 \textbf{4.\ Final Reading} ($\le \SI{1}{\minute}$, \texttt{5.II.g}) & OFF & As soon as ES turns lamp OFF, open lid, lift cup vertically \textbf{without swirling or shaking}, remove unattached BoPET cap completely, and set bare cup on Testing Surface in $\le \SI{20}{\second}$. & \texttt{Rule 5.II.g} \& FAQs 09/30--10/06/2026 on stirring and probe depth \src{S02}: Cup must be \textbf{completely separated from all device components} before reading; water is \textbf{never stirred/swirled}; ES probes top-center water layer. \\
 \rowcolor{rowalt}\textbf{5.\ Checklist Audit} (\texttt{5.II.h--i}) & OFF & Review ES Checklist \src{S04}: confirm Boxes 1, 2, 4 = \texttt{T}, Boxes 3 \& 5 = \texttt{0} (blank), and exact $T_i, T_{\mathrm{pred}}, T_f$. & \texttt{Rule 5.II.i} \& General Rule 4: Leave device in competition area if filing any Part II appeal. \\
 \bottomrule

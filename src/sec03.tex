@@ -3,7 +3,7 @@
 %             Thermal Expansion & The 8 Named Scientists (2027 Rule 5.c.v)
 % Target Page Budget: 8 pages | Figures: fig:03:scales, fig:03:bimetallic, fig:03:history
 % ============================================================================
-\binderchapter{3}{Thermal Foundations, Zeroth Law, Thermometry Scales, Thermal Expansion \& The 8 Named Scientists}{§3 Foundations, Scales, Expansion \& 8 Scientists}{sec:03}
+\binderchapter{3}{Thermal Foundations, Zeroth Law, Thermometry Scales, Thermal Expansion \& The 8 Named Scientists}{Foundations, Scales, Expansion \& 8 Scientists}{sec:03}
 \scopebanner{REQUIRED}[2027 Rules 5.c.i, 5.c.v (All Tournament Levels --- Minimum 6 Written Questions Combined)]
 
 \idxtopic{intensive vs.\ extensive properties}
@@ -42,7 +42,7 @@ Consider combining two identical homogeneous systems, each in equilibrium state 
   \item \textbf{State Functions vs.\ Path Functions:} A \emph{state function} ($P, T, V, U, H, S, G, F, \rho$) is an equilibrium property whose change $\Delta X = X_2 - X_1$ depends \textbf{only on the endpoints $(1, 2)$} and satisfies $\Delta X_{\mathrm{cycle}} = 0$ around any closed loop. A \emph{path function} (heat $Q$, work $W_{\mathrm{by}}$, entropy generation $S_{\mathrm{gen}}$) describes an energy or entropy transfer \emph{during a process} and depends on the specific path taken between states $1$ and $2$; around a cycle, $Q_{\mathrm{net}} = W_{\mathrm{net,by}} \neq 0$ \src{S13,S16}.
   \item \textbf{Four Pillars of Thermodynamic Equilibrium vs.\ Steady State:} True thermodynamic equilibrium requires simultaneous (1)~\emph{thermal equilibrium} ($\nabla T = 0$, no heat flux), (2)~\emph{mechanical equilibrium} ($\nabla P = 0$ except gravity), (3)~\emph{phase equilibrium} ($\mu_i^{(\alpha)} = \mu_i^{(\beta)}$ across phases), and (4)~\emph{chemical equilibrium} ($\Delta_r G = \sum \nu_i \mu_i = 0$). A metal bar held between a $\SI{100}{\celsius}$ boiling bath and a $\SI{0}{\celsius}$ ice bath has a time-independent temperature profile ($\partial T/\partial t = 0$), so it is in \textbf{steady state}, NOT thermal equilibrium (it conducts a steady heat rate $\dot{Q} > 0$ and continuously generates entropy $\dot{S}_{\mathrm{gen}} = \dot{Q}(1/T_C - 1/T_H) > 0$) \src{S12,S16}.
   \item \textbf{Quasistatic vs.\ Reversible Trap:} A \emph{quasistatic} process proceeds slowly enough ($t_{\mathrm{proc}} \gg t_{\mathrm{relax}}$) that the system passes through a locus of well-defined internal equilibrium states. A \emph{reversible} process is quasistatic \textbf{and} free of all dissipative entropy generation ($S_{\mathrm{gen}} = 0$: no friction, no unrestrained expansion, no finite $\Delta T$ heat transfer, no mixing). Every reversible process is quasistatic, but a quasistatic process with friction (e.g., slowly pushing a rough piston) or across a finite temperature difference is \textbf{irreversible} ($S_{\mathrm{gen}} > 0$) \src{S13,S16}.
-  \item \textbf{Zeroth Law of Thermodynamics (formulated by R.~H.~Fowler, 1931):} \emph{If body $A$ is in thermal equilibrium with body $C$, and body $B$ is separately in thermal equilibrium with body $C$, then $A$ and $B$ are in thermal equilibrium with each other} ($T_A = T_C \land T_B = T_C \implies T_A = T_B$) \src{S13}. This transitive equivalence relation defines **temperature** as the unique intensive property shared by all systems in mutual thermal equilibrium and validates using body $C$ as a **thermometer**.
+  \item \textbf{Zeroth Law of Thermodynamics (formulated by R.~H.~Fowler, 1931):} \emph{If body $A$ is in thermal equilibrium with body $C$, and body $B$ is separately in thermal equilibrium with body $C$, then $A$ and $B$ are in thermal equilibrium with each other} ($T_A = T_C \land T_B = T_C \implies T_A = T_B$) \src{S13}. This transitive equivalence relation defines \textbf{temperature} as the unique intensive property shared by all systems in mutual thermal equilibrium and validates using body $C$ as a \textbf{thermometer}.
 \end{itemize}
 
 \section{Thermometry \& Complete Eight-Scale Temperature Conversion System}
@@ -53,14 +53,14 @@ Consider combining two identical homogeneous systems, each in equilibrium state 
 \idxtopic{temperature scales!intersection points (-40, 574.59, +60)}
 
 \subsection{Operational Thermometry \& Constant-Volume Ideal-Gas Thermometer}
-Any physical property $X$ that varies monotonically with hotness (mercury/alcohol column length $L$, gas pressure $P$ at fixed volume, platinum RTD resistance $R(T) = R_0(1 + \alpha_R T_C)$, thermocouple Seebeck voltage) defines an empirical temperature scale. Because real materials expand nonlinearly at high/low temperatures, different liquid-in-glass thermometers calibrated at $\SI{0}{\celsius}$ and $\SI{100}{\celsius}$ disagree slightly at $\SI{50}{\celsius}$. However, all low-density gases inside a **constant-volume gas thermometer** converge to the exact same absolute thermodynamic temperature as reference pressure $P_{\mathrm{tp}} \to 0$ \src{S13}:
+Any physical property $X$ that varies monotonically with hotness (mercury/alcohol column length $L$, gas pressure $P$ at fixed volume, platinum RTD resistance $R(T) = R_0(1 + \alpha_R T_C)$, thermocouple Seebeck voltage) defines an empirical temperature scale. Because real materials expand nonlinearly at high/low temperatures, different liquid-in-glass thermometers calibrated at $\SI{0}{\celsius}$ and $\SI{100}{\celsius}$ disagree slightly at $\SI{50}{\celsius}$. However, all low-density gases inside a \textbf{constant-volume gas thermometer} converge to the exact same absolute thermodynamic temperature as reference pressure $P_{\mathrm{tp}} \to 0$ \src{S13}:
 \begin{equation}\label{eq:03:gastherm}
   T(\si{\kelvin}) = (\SI{273.16}{\kelvin}) \lim_{P_{\mathrm{tp}}\to 0} \frac{P}{P_{\mathrm{tp}}},
 \end{equation}
 where $P_{\mathrm{tp}}$ is the gas pressure when the bulb is immersed in a triple-point cell of pure water ($T_{\mathrm{tp}} = \SI{273.16}{\kelvin} = \SI{0.01}{\celsius}$, $P_{\mathrm{tp,H_2O}} = \SI{611.657}{\pascal}$).
 
 \subsection{Master Conversion Table \& Alignment Ladder for All 8 Competition Scales}
-Science Olympiad written exams regularly test not only the four modern scales ($\si{\kelvin}, \si{\celsius}, ^\circ\mathrm{F}, ^\circ\mathrm{R}$) but also the four classical historical scales (**R\'eaumur, Delisle, Newton, R\o mer**) \src{S25,S26}. Every linear scale $S$ with water freezing point $S_{\mathrm{ice}}$ ($\SI{0}{\celsius}$) and normal boiling point $S_{\mathrm{boil}}$ ($\SI{100}{\celsius}$) obeys the universal algebraic ratio (\fref{fig:03:scales}, \tref{tab:03:scales}):
+Science Olympiad written exams regularly test not only the four modern scales ($\si{\kelvin}, \si{\celsius}, ^\circ\mathrm{F}, ^\circ\mathrm{R}$) but also the four classical historical scales (\textbf{R\'eaumur, Delisle, Newton, R\o mer}) \src{S25,S26}. Every linear scale $S$ with water freezing point $S_{\mathrm{ice}}$ ($\SI{0}{\celsius}$) and normal boiling point $S_{\mathrm{boil}}$ ($\SI{100}{\celsius}$) obeys the universal algebraic ratio (\fref{fig:03:scales}, \tref{tab:03:scales}):
 \begin{equation}\label{eq:03:universalscale}
   \frac{T_S - S_{\mathrm{ice}}}{S_{\mathrm{boil}} - S_{\mathrm{ice}}} = \frac{T_C}{100} = \frac{T_K - 273.15}{100} = \frac{T_F - 32}{180} = \frac{T_R - 491.67}{180} = \frac{T_{\mathrm{R\acute{e}}}}{80} = \frac{150 - T_{\mathrm{De}}}{150} = \frac{T_N}{33} = \frac{T_{\text{R\o}} - 7.5}{52.5}.
 \end{equation}
@@ -213,7 +213,7 @@ At constant pressure, warming a solid or liquid increases the anharmonic average
 \idxfig{water 4 C density anomaly and bimetallic strip curvature}
 \end{center}
 
-\section{Historical Perspective of the Exact 8 Named Scientists (`2027 Rule 5.c.v`)}
+\section{Historical Perspective of the Exact 8 Named Scientists (Rule \texttt{5.c.v})}
 \label{sec:03.4}
 \idxtopic{Rule 5.c.v!exact 8 named scientists}
 \idxtopic{Kelvin (William Thomson)!1848 scale, 1851 dynamical theory, Joule-Thomson}
