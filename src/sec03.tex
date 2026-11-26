@@ -16,7 +16,7 @@
 \begin{ftab}
 $\dfrac{T - T_1}{T_2 - T_1} = \dfrac{X - X_1}{X_2 - X_1}$ & $X$: linear thermometric property ($L, P_V, R$); $(X_1,T_1), (X_2,T_2)$: fixed points & \RULEf & Universal two-point linear thermometer calibration; gas thermometer $T = \SI{273.16}{\kelvin}(P/P_{\mathrm{tp}})$ \src{S13} \\
 $\dfrac{T_C}{100} = \dfrac{T_F - 32}{180} = \dfrac{T_K - 273.15}{100}$ & $T_C$: Celsius; $T_F$: Fahrenheit; $T_K$: Kelvin; Rankine $T_R = 1.8\,T_K = T_F + 459.67$ & \RULEf & Primary four-scale conversions; interval rule $\Delta T_K = \Delta T_C = \tfrac{5}{9}\Delta T_F = \tfrac{5}{9}\Delta T_R$ \src{S08,S13} \\
-$T_{\mathrm{R\acute{e}}} = 0.8\,T_C;\quad T_{\mathrm{De}} = 150 - 1.5\,T_C$ & $T_{\mathrm{R\acute{e}}}$: R\'eaumur ($0^\circ/80^\circ$); $T_{\mathrm{De}}$: Delisle (\textbf{inverted} $150^\circ/0^\circ$); $T_N = 0.33\,T_C$; $T_{\mathrm{R\o}} = 0.525\,T_C + 7.5$ & \RULEf & Four historical competition scales (R\'eaumur, Delisle, Newton, R\o mer) \src{S25,S26} \\
+$T_{\mathrm{R\acute{e}}} = 0.8\,T_C;\quad T_{\mathrm{De}} = 150 - 1.5\,T_C$ & $T_{\mathrm{R\acute{e}}}$: R\'eaumur ($0^\circ/80^\circ$); $T_{\mathrm{De}}$: Delisle (\textbf{inverted} $150^\circ/0^\circ$); $T_N = 0.33\,T_C$; $T_{\text{R\o}} = 0.525\,T_C + 7.5$ & \RULEf & Four historical competition scales (R\'eaumur, Delisle, Newton, R\o mer) \src{S25,S26} \\
 $\Delta L = \alpha_L L_0 \Delta T;\quad \Delta A \approx 2\alpha_L A_0 \Delta T$ & $\alpha_L$: linear expansion coeff.\ $(\si{\per\kelvin})$; $L_0, A_0$: initial length $(\si{\meter})$, area $(\si{\square\meter})$ & \INCOMP & 1D rod/wire/hole/perimeter \& 2D isotropic plate/circular aperture expansion \src{S13,S14} \\
 $\Delta V = \beta_V V_0 \Delta T \approx 3\alpha_L V_0 \Delta T$ & $\beta_V$: volume expansion coeff.\ $(\si{\per\kelvin})$; $\Delta V_{\mathrm{over}} = (\beta_{\mathrm{liq}} - 3\alpha_{\mathrm{ves}})V_0\Delta T$ & \INCOMP & 3D solid/cavity/liquid expansion \& apparent liquid overflow from expanding vessel \src{S13} \\
 $\sigma = \dfrac{F}{A} = -E\alpha_L\Delta T;\quad R_{\mathrm{curv}} \approx \dfrac{d}{(\alpha_2-\alpha_1)\Delta T}$ & $E$: Young's modulus $(\si{\pascal})$; $d$: layer center spacing $(\si{\meter})$; $\alpha_2 > \alpha_1$ & \INCOMP & Clamped-rod thermal stress \& bimetallic strip radius of curvature \src{S13,S26} \\
@@ -62,7 +62,7 @@ where $P_{\mathrm{tp}}$ is the gas pressure when the bulb is immersed in a tripl
 \subsection{Master Conversion Table \& Alignment Ladder for All 8 Competition Scales}
 Science Olympiad written exams regularly test not only the four modern scales ($\si{\kelvin}, \si{\celsius}, ^\circ\mathrm{F}, ^\circ\mathrm{R}$) but also the four classical historical scales (**R\'eaumur, Delisle, Newton, R\o mer**) \src{S25,S26}. Every linear scale $S$ with water freezing point $S_{\mathrm{ice}}$ ($\SI{0}{\celsius}$) and normal boiling point $S_{\mathrm{boil}}$ ($\SI{100}{\celsius}$) obeys the universal algebraic ratio (\fref{fig:03:scales}, \tref{tab:03:scales}):
 \begin{equation}\label{eq:03:universalscale}
-  \frac{T_S - S_{\mathrm{ice}}}{S_{\mathrm{boil}} - S_{\mathrm{ice}}} = \frac{T_C}{100} = \frac{T_K - 273.15}{100} = \frac{T_F - 32}{180} = \frac{T_R - 491.67}{180} = \frac{T_{\mathrm{R\acute{e}}}}{80} = \frac{150 - T_{\mathrm{De}}}{150} = \frac{T_N}{33} = \frac{T_{\mathrm{R\o}} - 7.5}{52.5}.
+  \frac{T_S - S_{\mathrm{ice}}}{S_{\mathrm{boil}} - S_{\mathrm{ice}}} = \frac{T_C}{100} = \frac{T_K - 273.15}{100} = \frac{T_F - 32}{180} = \frac{T_R - 491.67}{180} = \frac{T_{\mathrm{R\acute{e}}}}{80} = \frac{150 - T_{\mathrm{De}}}{150} = \frac{T_N}{33} = \frac{T_{\text{R\o}} - 7.5}{52.5}.
 \end{equation}
 
 \begin{center}
@@ -77,7 +77,7 @@ Science Olympiad written exams regularly test not only the four modern scales ($
 \textbf{R\'eaumur} (1730) & $^\circ\mathrm{R\acute{e}}$ & $-218.52$ & $0.00$ & $0.008$ & $29.60$ & $80.00$ & $T_{\mathrm{R\acute{e}}} = \tfrac{4}{5}T_C = 0.8\,T_C$ & $T_C = \tfrac{5}{4}T_{\mathrm{R\acute{e}}} = 1.25\,T_{\mathrm{R\acute{e}}}$ & $+0.800$ \\
 \textbf{Delisle} (1732, \emph{inv.}) & $^\circ\mathrm{De}$ & $+559.725$ & $150.00$ & $149.985$ & $94.50$ & $0.00$ & $T_{\mathrm{De}} = \tfrac{3}{2}(100 - T_C)$ & $T_C = 100 - \tfrac{2}{3}T_{\mathrm{De}}$ & $\mathbf{-1.500}$ \\
 \textbf{Newton} (1701) & $^\circ\mathrm{N}$ & $-90.1395$ & $0.00$ & $0.0033$ & $12.21$ & $33.00$ & $T_N = \tfrac{33}{100}T_C = 0.33\,T_C$ & $T_C = \tfrac{100}{33}T_N$ & $+0.330$ \\
-\textbf{R\o mer} (1701) & $^\circ\mathrm{R\o}$ & $-135.904$ & $7.50$ & $7.50525$ & $26.925$ & $60.00$ & $T_{\mathrm{R\o}} = \tfrac{21}{40}T_C + 7.5$ & $T_C = \tfrac{40}{21}(T_{\mathrm{R\o}} - 7.5)$ & $+0.525$ \\\bottomrule
+\textbf{R\o mer} (1701) & $^\circ\text{R\o}$ & $-135.904$ & $7.50$ & $7.50525$ & $26.925$ & $60.00$ & $T_{\text{R\o}} = \tfrac{21}{40}T_C + 7.5$ & $T_C = \tfrac{40}{21}(T_{\text{R\o}} - 7.5)$ & $+0.525$ \\\bottomrule
 \end{tabularx}
 \end{center}
 
@@ -104,7 +104,7 @@ Science Olympiad written exams regularly test not only the four modern scales ($
     \node[fill=white,inner sep=1pt] at (16.6,\y) {\tro};
   }
   % Vertical thermometer stems
-  \foreach \x/\hdr in {3.6/{$\mathrm{K}$},5.5/{$^\circ\mathrm{C}$},7.4/{$^\circ\mathrm{F}$},9.3/{$^\circ\mathrm{R}$},11.2/{$^\circ\mathrm{R\acute{e}}$},13.1/{$^\circ\mathrm{De}$ (inv)},14.9/{$^\circ\mathrm{N}$},16.6/{$^\circ\mathrm{R\o}$}}{
+  \foreach \x/\hdr in {3.6/{$\mathrm{K}$},5.5/{$^\circ\mathrm{C}$},7.4/{$^\circ\mathrm{F}$},9.3/{$^\circ\mathrm{R}$},11.2/{$^\circ\mathrm{R\acute{e}}$},13.1/{$^\circ\mathrm{De}$ (inv)},14.9/{$^\circ\mathrm{N}$},16.6/{$^\circ\text{R\o}$}}{
     \draw[thick,navy] (\x,-0.35) -- (\x,5.9);
     \node[above,font=\sffamily\bfseries\scriptsize,fill=boxbg,draw=navy,rounded corners=1pt,inner sep=2pt] at (\x,5.95) {\hdr};
   }
@@ -119,7 +119,7 @@ Science Olympiad written exams regularly test not only the four modern scales ($
   \item \textbf{Kelvin $=$ Fahrenheit:} $T_C + 273.15 = 1.8T_C + 32 \implies T_C = \SI{301.4375}{\celsius} \implies \mathbf{\SI{574.5875}{\kelvin} = 574.5875\,^\circ\mathrm{F}}$.
   \item \textbf{Celsius $=$ Delisle:} $x = 150 - 1.5x \implies 2.5x = 150 \implies \mathbf{+60.0\,^\circ\mathrm{C} = +60.0\,^\circ\mathrm{De}}$ ($\SI{333.15}{\kelvin} = 140.0\,^\circ\mathrm{F}$).
   \item \textbf{Fahrenheit $=$ Delisle:} $1.8T_C + 32 = 150 - 1.5T_C \implies T_C = \SI{35.7576}{\celsius} \implies \mathbf{+96.3636\,^\circ\mathrm{F} = +96.3636\,^\circ\mathrm{De}}$.
-  \item \textbf{Celsius $=$ R\o mer:} $x = 0.525x + 7.5 \implies 0.475x = 7.5 \implies \mathbf{-15.7895\,^\circ\mathrm{C} = -15.7895\,^\circ\mathrm{R\o}}$.
+  \item \textbf{Celsius $=$ R\o mer:} $x = 0.525x + 7.5 \implies 0.475x = 7.5 \implies \mathbf{-15.7895\,^\circ\mathrm{C} = -15.7895\,^\circ\text{R\o}}$.
   \item \textbf{Celsius $=$ R\'eaumur $=$ Newton:} $\mathbf{0.0\,^\circ\mathrm{C} = 0.0\,^\circ\mathrm{R\acute{e}} = 0.0\,^\circ\mathrm{N}}$ (all three anchor zero at the ice point!).
 \end{itemize}
 \end{shortcut}
