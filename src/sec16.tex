@@ -281,6 +281,28 @@ $\mathbf{-4.0}$ & $-1.94$ & $-2.07$ & $-2.20$ & $-2.31$ & $-2.42$ & $-2.52$ & Co
 \section{Master 36-Condition DOE Matrix, Nomogram \& 1-cm National Interpolation}\label{sec:16.3}
 \idxtopic{36-condition DOE calibration table}\idxtopic{temperature-gain nomogram}\idxtopic{1-cm National height interpolation}
 
+\begin{center}
+\captionof{table}{\textbf{Reference collector (modeled), not our device}: the single source for every reference-design number in \sref{sec:13}, \sref{sec:15}, \sref{sec:16} and \sref{sec:17}. Each line names the model it comes from. \textbf{Modeled for the reference collector. Replace with our measured runs.}}\label{tab:16:reference-collector}
+\footnotesize\setlength{\tabcolsep}{3pt}\renewcommand{\arraystretch}{1.12}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.30\linewidth} >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}p{0.17\linewidth}@{}}
+\toprule
+\hdr{Quantity} & \hdr{Value} & \hdr{Used in} \\
+\midrule
+Lookup base: $\mathrm{TG}$ after $\SI{10}{\minute}$, $\SI{125}{\watt}$, $T_{\mathrm{start}} = T_{\mathrm{room}} = \SI{22.0}{\celsius}$ & $24.8$, $27.7$, $21.3$, $17.5$, $13.6$, $\SI{10.6}{\celsius}$ at $h = 40, 45, 50, 55, 60, \SI{65}{\centi\meter}$ (linear between) & \tref{tab:16:doe-36}, \fref{fig:16:calibration-nomogram} \\
+\rowcolor{rowalt}$\SI{100}{\watt}$ lamp & $0.800\times$ the $\SI{125}{\watt}$ gain & \sref{sec:16} \\
+Time constant & $\tau_{\mathrm{eff}} = \SI{903}{\second}$; $M_t$, $k_{\mathrm{room}}(t) = 1 - e^{-t/\tau}$ & \sref{sec:13}, \sref{sec:16} \\
+\rowcolor{rowalt}One-node fit at $h = \SI{45}{\centi\meter}$ & $P_{\mathrm{abs}} = \SI{24.0}{\watt}$, $C_{\mathrm{eff}} = \SI{380}{\joule\per\kelvin}$, $R_{\mathrm{th}} = \SI{2.376}{\kelvin\per\watt}$ $\Rightarrow$ $T = \SI{49.7}{\celsius}$ at $\SI{10}{\minute}$, $\SI{58.0}{\celsius}$ at $\SI{15}{\minute}$ & Ex~\ref{ex:13.2} \\
+Two-node lump at $\SI{45}{\centi\meter}$, $\SI{10}{\minute}$ & $C_{\mathrm{top}} = \SI{215.0}{\joule\per\kelvin}$ at $\SI{49.70}{\celsius}$; $C_{\mathrm{bot}} = \SI{203.4}{\joule\per\kelvin}$ at $\SI{29.34}{\celsius}$ $\Rightarrow$ mixed $\SI{39.80}{\celsius}$, $\kappa_{\mathrm{strat}} = 1.556$ & Ex~\ref{ex:15.4}, Ex~\ref{ex:17.4} \\
+\rowcolor{rowalt}Depth profile at $\SI{45}{\centi\meter}$, $\SI{10}{\minute}$ & $\SI{49.7}{\celsius}$ at $\SI{6}{\milli\meter}$ (ES reading) \ldots\ $\SI{30.8}{\celsius}$ at the base & \fref{fig:15:stratification-profile}, \fref{fig:17:probe-depth-bias} \\
+View factor at $h = \SI{40}{\centi\meter}$ & top plane ($z = \SI{30.0}{\centi\meter}$, $r = \SI{15.0}{\centi\meter}$) $0.665$; bare cup $0.0147$ $\Rightarrow$ \textbf{$45.1\times$ more power intercepted} & Ex~\ref{ex:12.2}, Ex~\ref{ex:15.1} \\
+\rowcolor{rowalt}Beam delivered to the water at $\SI{40}{\centi\meter}$ & 3-stage reflector $31.4\%$ vs.\ bare cup $2.30\%$ $\Rightarrow$ \textbf{$13.6\times$} & \tref{tab:15:optical-comparison} \\
+Power absorbed by the water at $\SI{40}{\centi\meter}$ & $\SI{21.5}{\watt}$ vs.\ bare cup $\SI{1.95}{\watt}$ $\Rightarrow$ \textbf{$11.0\times$} & \fref{fig:15:height-irradiance} \\
+\rowcolor{rowalt}Reflector stage half-angles & $\phi_1 = \SI{23.2}{\degree}$, $\phi_2 = \SI{33.5}{\degree}$, $\phi_3 = \SI{43.3}{\degree}$ & \tref{tab:15:cpc-frustums} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+
 To guarantee zero calculator-entry mistakes under tournament time pressure, \fref{fig:16:calibration-nomogram} provides the \textbf{Master Graphical Temperature-Gain Nomogram}, \tref{tab:16:doe-36} provides the \textbf{36-Condition Design-of-Experiments (DOE) Lookup Matrix} ($6\text{ heights} \times 2\text{ wattages} \times 3\text{ core durations}$, plus exact $1\text{-minute}$ time multipliers for $t = 10, 11, 12, 13, 14, 15\,\si{\minute}$), and \tref{tab:16:natl-1cm} provides the \textbf{26-Row $\SI{1}{\centi\meter}$-Increment National Lookup Table} covering every integer centimeter from $h = \SI{40}{\centi\meter}$ to $\SI{65}{\centi\meter}$ (\texttt{Rule 4.c.iii}).
 
 \begin{center}

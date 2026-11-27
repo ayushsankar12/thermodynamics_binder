@@ -290,7 +290,7 @@ $m c\dfrac{dT}{dt} = -\varepsilon\sigma A T^4 \implies \Delta t = \dfrac{m c}{3\
 \texttt{GGSO E4 Q14d} \src{S28} (\sref{sec:12}, \sref{sec:13}, Ex.~\ref{ex:19.7}) \\
 \textbf{5.~Intercooled Multi-Stage Gas Compression} &
 $N$-stage adiabatic compression + isobaric intercoolers back to $T_1$ &
-Optimal intermediate pressure: $P_{\mathrm{mid}} = \sqrt{P_1 P_2}$;\quad $W_{\mathrm{on,min}} = \dfrac{N\gamma}{\gamma-1}nRT_1\!\left[\left(\dfrac{P_2}{P_1}\right)^{\frac{\gamma-1}{N\gamma}} - 1\right]$ &
+Optimal intermediate pressure: $P_{\mathrm{mid}} = \sqrt{P_1 P_2}$;\quad $W_{\mathrm{in,min}} = \dfrac{N\gamma}{\gamma-1}nRT_1\!\left[\left(\dfrac{P_2}{P_1}\right)^{\frac{\gamma-1}{N\gamma}} - 1\right]$ &
 \texttt{MIT E2 P4b} (\texttt{TB \#1}) \src{S26} (\sref{sec:07}) \\
 \rowcolor{rowalt}
 \textbf{6.~Binary Eutectic Cooling + Phase-Fraction Calorimetry} &
@@ -367,26 +367,26 @@ $$\Delta t = (\num{3.74237e11})\left(\num{4.55539e-8} - \num{1.93864e-8}\right) 
 \end{workedexample}
 
 \begin{workedexample}[Template 8: Two-Stage Intercooled Adiabatic Gas Compression vs.\ Single-Stage Compression]{\texttt{MIT E2 P4b TB \#1} \src{S26}}{ex:19.8}
-An industrial compressor compresses $n = \SI{2.000}{\mole}$ of dry air (treated as a diatomic ideal gas with $\gamma = 1.400$, $C_{P,m} = \frac{7}{2}R = \SI{29.1006}{\joule\per\mole\per\kelvin}$) from intake state $P_1 = \SI{100.0}{\kilo\pascal}$, $T_1 = \SI{300.0}{\kelvin}$ to final discharge pressure $P_3 = \SI{900.0}{\kilo\pascal}$. Compare: (a)~the work input $W_{\mathrm{on,1\text{-}stage}}$ and final temperature $T_{f,1\text{-}stage}$ for a single reversible adiabatic compression from $P_1$ to $P_3$, versus (b)~the total work input $W_{\mathrm{on,2\text{-}stage}}$ and intercooler heat rejected $Q_{\mathrm{ic}}$ when compressed in \textbf{two reversible adiabatic stages} through the optimal geometric-mean intermediate pressure $P_2 = \sqrt{P_1 P_3}$ with isobaric intercooling back to $T_1 = \SI{300.0}{\kelvin}$ between stages, and (c)~the isothermal lower bound $W_{\mathrm{on,iso}}$ at $T_1 = \SI{300.0}{\kelvin}$.
+An industrial compressor compresses $n = \SI{2.000}{\mole}$ of dry air (treated as a diatomic ideal gas with $\gamma = 1.400$, $C_{P,m} = \frac{7}{2}R = \SI{29.1006}{\joule\per\mole\per\kelvin}$) from intake state $P_1 = \SI{100.0}{\kilo\pascal}$, $T_1 = \SI{300.0}{\kelvin}$ to final discharge pressure $P_3 = \SI{900.0}{\kilo\pascal}$. Compare: (a)~the work input $W_{\mathrm{in,1\text{-}stage}}$ and final temperature $T_{f,1\text{-}stage}$ for a single reversible adiabatic compression from $P_1$ to $P_3$, versus (b)~the total work input $W_{\mathrm{in,2\text{-}stage}}$ and intercooler heat rejected $Q_{\mathrm{ic}}$ when compressed in \textbf{two reversible adiabatic stages} through the optimal geometric-mean intermediate pressure $P_2 = \sqrt{P_1 P_3}$ with isobaric intercooling back to $T_1 = \SI{300.0}{\kelvin}$ between stages, and (c)~the isothermal lower bound $W_{\mathrm{in,iso}}$ at $T_1 = \SI{300.0}{\kelvin}$.
 \par\smallskip\noindent
 \textbf{Solution.}
 (a)~\textbf{Single-Stage Reversible Adiabatic Compression ($P_1 = \SI{100.0}{\kilo\pascal} \to P_3 = \SI{900.0}{\kilo\pascal}$, pressure ratio $r_p = 9.000$):}
 With $\frac{\gamma - 1}{\gamma} = \frac{0.400}{1.400} = \frac{2}{7} \approx 0.285714$:
 $$T_{f,1\text{-}stage} = T_1\left(\frac{P_3}{P_1}\right)^{(\gamma-1)/\gamma} = (\SI{300.0}{\kelvin})(9.000)^{2/7} = (300.0)(1.87344) = \mathbf{\SI{562.03}{\kelvin}}\ (\SI{288.88}{\celsius})$$
-For a steady-flow adiabatic compressor (shaft work $\dot{W}_{\mathrm{on,sh}} = \Delta H = n C_{P,m}\Delta T$, or closed-system adiabatic work $W_{\mathrm{on,closed}} = \Delta U = n C_{V,m}\Delta T = \frac{1}{\gamma}\Delta H$):
-$$W_{\mathrm{on,sh,1\text{-}stage}} = n C_{P,m}(T_{f,1} - T_1) = (2.000)(\SI{29.1006}{\joule\per\mole\per\kelvin})(562.033 - 300.0) = \mathbf{\SI{15250.6}{\joule}} = \mathbf{\SI{15.251}{\kilo\joule}}$$
-\emph{(Closed-system piston work without flow work $\Delta(PV)$ is $W_{\mathrm{on,closed,1}} = \frac{15.2506}{1.400} = \mathbf{\SI{10.893}{\kilo\joule}}$).}
+For a steady-flow adiabatic compressor (shaft work $\dot{W}_{\mathrm{on,sh}} = \Delta H = n C_{P,m}\Delta T$, or closed-system adiabatic work $W_{\mathrm{in,closed}} = \Delta U = n C_{V,m}\Delta T = \frac{1}{\gamma}\Delta H$):
+$$W_{\mathrm{in,sh,1\text{-}stage}} = n C_{P,m}(T_{f,1} - T_1) = (2.000)(\SI{29.1006}{\joule\per\mole\per\kelvin})(562.033 - 300.0) = \mathbf{\SI{15250.6}{\joule}} = \mathbf{\SI{15.251}{\kilo\joule}}$$
+\emph{(Closed-system piston work without flow work $\Delta(PV)$ is $W_{\mathrm{in,closed,1}} = \frac{15.2506}{1.400} = \mathbf{\SI{10.893}{\kilo\joule}}$).}
 \par\smallskip\noindent
 (b)~\textbf{Two-Stage Intercooled Compression Through Optimal $P_2 = \sqrt{P_1 P_3} = \sqrt{(100.0)(900.0)} = \mathbf{\SI{300.0}{\kilo\pascal}}$:}
 Each stage has pressure ratio $\frac{P_2}{P_1} = \frac{P_3}{P_2} = 3.000$, so both stages exit at identical temperature $T_{\mathrm{exit}}$:
 $$T_{\mathrm{exit}} = T_1(3.000)^{2/7} = (\SI{300.0}{\kelvin})(1.36874) = \mathbf{\SI{410.62}{\kelvin}}\ (\SI{137.47}{\celsius})$$
 Total two-stage steady-flow shaft work input:
-$$W_{\mathrm{on,sh,2\text{-}stage}} = 2\,n C_{P,m}(T_{\mathrm{exit}} - T_1) = 2(2.000)(\SI{29.1006}{\joule\per\mole\per\kelvin})(410.621 - 300.0) = \mathbf{\SI{12876.6}{\joule}} = \mathbf{\SI{12.877}{\kilo\joule}}$$
-\emph{(Closed-system piston work: $W_{\mathrm{on,closed,2}} = \frac{12.8766}{1.400} = \mathbf{\SI{9.198}{\kilo\joule}}$).} The isobaric intercooler at $P_2 = \SI{300.0}{\kilo\pascal}$ cools the gas from $\SI{410.62}{\kelvin}$ back to $\SI{300.0}{\kelvin}$, rejecting heat $Q_{\mathrm{out,ic}} = n C_{P,m}(410.621 - 300.0) = \mathbf{\SI{6.438}{\kilo\joule}}$ and saving $15.251 - 12.877 = \mathbf{\SI{2.374}{\kilo\joule}}$ ($\mathbf{15.6\%}$) of compressor shaft work!
+$$W_{\mathrm{in,sh,2\text{-}stage}} = 2\,n C_{P,m}(T_{\mathrm{exit}} - T_1) = 2(2.000)(\SI{29.1006}{\joule\per\mole\per\kelvin})(410.621 - 300.0) = \mathbf{\SI{12876.6}{\joule}} = \mathbf{\SI{12.877}{\kilo\joule}}$$
+\emph{(Closed-system piston work: $W_{\mathrm{in,closed,2}} = \frac{12.8766}{1.400} = \mathbf{\SI{9.198}{\kilo\joule}}$).} The isobaric intercooler at $P_2 = \SI{300.0}{\kilo\pascal}$ cools the gas from $\SI{410.62}{\kelvin}$ back to $\SI{300.0}{\kelvin}$, rejecting heat $Q_{\mathrm{out,ic}} = n C_{P,m}(410.621 - 300.0) = \mathbf{\SI{6.438}{\kilo\joule}}$ and saving $15.251 - 12.877 = \mathbf{\SI{2.374}{\kilo\joule}}$ ($\mathbf{15.6\%}$) of compressor shaft work!
 \par\smallskip\noindent
 (c)~\textbf{Reversible Isothermal Compression Lower Bound ($N \to \infty$ stages at $T_1 = \SI{300.0}{\kelvin}$):}
-$$W_{\mathrm{on,iso}} = n R T_1 \ln\!\left(\frac{P_3}{P_1}\right) = (2.000)(\SI{8.3144626}{\joule\per\mole\per\kelvin})(\SI{300.0}{\kelvin})\ln(9.000) = \mathbf{\SI{10961.2}{\joule}} = \mathbf{\SI{10.961}{\kilo\joule}}$$
-\emph{(Ordering Check: $W_{\mathrm{on,iso}} = \SI{10.961}{\kilo\joule} < W_{\mathrm{on,sh,2\text{-}stage}} = \SI{12.877}{\kilo\joule} < W_{\mathrm{on,sh,1\text{-}stage}} = \SI{15.251}{\kilo\joule}$. Confirmed!)}
+$$W_{\mathrm{in,iso}} = n R T_1 \ln\!\left(\frac{P_3}{P_1}\right) = (2.000)(\SI{8.3144626}{\joule\per\mole\per\kelvin})(\SI{300.0}{\kelvin})\ln(9.000) = \mathbf{\SI{10961.2}{\joule}} = \mathbf{\SI{10.961}{\kilo\joule}}$$
+\emph{(Ordering Check: $W_{\mathrm{in,iso}} = \SI{10.961}{\kilo\joule} < W_{\mathrm{in,sh,2\text{-}stage}} = \SI{12.877}{\kilo\joule} < W_{\mathrm{in,sh,1\text{-}stage}} = \SI{15.251}{\kilo\joule}$. Confirmed!)}
 \verifiedby{Exact equality of stage pressure ratios $P_2/P_1 = P_3/P_2 = 3.0$ and Python check \texttt{sec19:ex19.8}.}
 \end{workedexample}
 

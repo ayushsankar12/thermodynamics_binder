@@ -69,7 +69,7 @@ $h_{\mathrm{rad}} = 4\sigma T_m^3 \mathcal{F}_{1\to 2}, \quad R_{\mathrm{rad}} =
 \label{sec:12.1}
 
 \begin{tierbox}[2027 Rule \texttt{5.c.iii} (All Levels) vs.\ Rule \texttt{5.c.vi} (States \& Nationals Only) \src{S01}]
-Qualitative radiation mechanisms, shiny low-emissivity barriers, and 2027 heat-lamp collection appear at \textbf{all competition levels} under Rule \texttt{5.c.iii} and Part~II device testing. Quantitative calculations of \textbf{radiant exitance ($M$), Planck/Wien blackbody spectra, and the Stefan--Boltzmann law ($M = \varepsilon\sigma T^4$)} are explicitly listed under Rule \texttt{5.c.vi} (\emph{State and National levels only}, though frequent at major invitationals such as the 2026--2027 Cornell Invitational \src{S25}).
+Qualitative radiation mechanisms, shiny low-emissivity barriers, and 2027 heat-lamp collection appear at \textbf{all competition levels} under Rule \texttt{5.c.iii} and Part~II device testing. Quantitative calculations of \textbf{radiant exitance ($M$), Planck/Wien blackbody spectra, and the Stefan--Boltzmann law ($M_e = \varepsilon\sigma T^4$)} are explicitly listed under Rule \texttt{5.c.vi} (\emph{State and National levels only}, though frequent at major invitationals such as the 2026--2027 Cornell Invitational \src{S25}).
 \end{tierbox}
 
 \subsection{Planck Distribution, Wien's Displacement Law, and Lambertian Radiance}
@@ -390,7 +390,7 @@ A small electronic component of surface area $A = \SI{1.3345e-4}{\square\meter}$
 \textbf{1. Writing $(T_1 - T_2)^4$ instead of $(T_1^4 - T_2^4)$, or leaving $T$ in Celsius}
   & $318.15^4 - 295.15^4 = \num{2.659e9}\ \si{\kelvin\tothe{4}}$, whereas $(45 - 22)^4 = \num{2.798e5}$ (off by $\mathbf{9500\times}$!).
   & Convert $T_1, T_2$ to Kelvin first, raise each to the 4th power, then subtract. \\
-\textbf{2. Dividing hemispherical exitance $M = \sigma T^4$ by $2\pi\ \si{\steradian}$ instead of $\pi\ \si{\steradian}$ to get radiance $L$}
+\textbf{2. Dividing hemispherical exitance $M_b = \sigma T^4$ by $2\pi\ \si{\steradian}$ instead of $\pi\ \si{\steradian}$ to get radiance $L$}
   & Off by a factor of $2\times$; forgets the Lambertian $\cos\theta$ projected-area factor in $\int_0^{\pi/2}\cos\theta\sin\theta\,d\theta = 1/2$.
   & Diffuse radiance is always $L = M/\pi = \varepsilon\sigma T^4/\pi$ \src{S12,S25}. \\
 \textbf{3. Assuming visually white surfaces (white paper/paint) have low mid-IR emissivity $\varepsilon_{\mathrm{MIR}}$}

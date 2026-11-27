@@ -37,7 +37,7 @@ Every thermodynamic calculation begins by drawing an explicit \textbf{system bou
     \draw[thick,navy,fill=boxbglight,rounded corners=3pt] (0,0) rectangle (4.3,2.7);
     \draw[thick,dashed,rust] (0.25,0.25) rectangle (4.05,2.45);
     \node[font=\sffamily\bfseries\scriptsize,navy] at (2.15,2.2) {1. CLOSED SYSTEM (Control Mass)};
-    \node[align=center] at (2.15,1.45) {Fixed mass $m = \mathrm{const}$ ($\Delta m = 0$)\\Impermeable boundary ($\dot{m}=0$)\\$\Delta U = Q - W_{\mathrm{by}} = Q + W_{\mathrm{on}}$};
+    \node[align=center] at (2.15,1.45) {Fixed mass $m = \mathrm{const}$ ($\Delta m = 0$)\\Impermeable boundary ($\dot{m}=0$)\\$\Delta U = Q - W_{\mathrm{by}} = Q + w_{\mathrm{on}}$};
     \draw[->,very thick,rust] (-0.7,1.65) -- (0.25,1.65) node[midway,above,font=\bfseries] {$Q > 0$};
     \node[left,font=\scriptsize] at (-0.7,1.4) {(heat in)};
     \draw[->,very thick,teal] (4.05,1.65) -- (5.0,1.65) node[midway,above,font=\bfseries] {$W_{\mathrm{by}} > 0$};
@@ -87,21 +87,21 @@ Every physical wall or interface in a competition problem enforces a mathematica
 \idxformula{First Law (Physics)!$\Delta U = Q - W_{\mathrm{by}}$}
 \idxformula{First Law (Chemistry/IUPAC)!$\Delta U = q + w_{\mathrm{on}}$}
 
-In physics and mechanical engineering textbooks (OpenStax \emph{University Physics Vol.~2}, Lienhard 6e, MIT 2.005/16.Unified) \src{S12,S13}, thermodynamic engines are primary, so expansion work done \textbf{by} the gas is defined as positive ($W_{\mathrm{by}} > 0$) and subtracted from heat added ($\Delta U = Q - W_{\mathrm{by}}$). In chemistry textbooks (IUPAC, MIT 5.60) \src{S16}, all energy entering the system is defined as positive, so compression work done \textbf{on} the gas is positive ($w_{\mathrm{on}} > 0$) and added to heat ($\Delta U = q + w_{\mathrm{on}}$). Both conventions yield the \textbf{exact same physical $\Delta U$} because $W_{\mathrm{on}} = -W_{\mathrm{by}}$ (\tref{tab:02:signtrans}).
+In physics and mechanical engineering textbooks (OpenStax \emph{University Physics Vol.~2}, Lienhard 6e, MIT 2.005/16.Unified) \src{S12,S13}, thermodynamic engines are primary, so expansion work done \textbf{by} the gas is defined as positive ($W_{\mathrm{by}} > 0$) and subtracted from heat added ($\Delta U = Q - W_{\mathrm{by}}$). In chemistry textbooks (IUPAC, MIT 5.60) \src{S16}, all energy entering the system is defined as positive, so compression work done \textbf{on} the gas is positive ($w_{\mathrm{on}} > 0$) and added to heat ($\Delta U = q + w_{\mathrm{on}}$). Both conventions yield the \textbf{exact same physical $\Delta U$} because $w_{\mathrm{on}} = -W_{\mathrm{by}}$ (\tref{tab:02:signtrans}).
 
 \begin{center}
-\captionof{table}{Complete Physics ($\Delta U = Q - W_{\mathrm{by}}$) vs.\ Chemistry/IUPAC ($\Delta U = Q + W_{\mathrm{on}}$) sign translation across all 11 canonical processes \src{S13,S16}.}\label{tab:02:signtrans}
+\captionof{table}{Complete Physics ($\Delta U = Q - W_{\mathrm{by}}$) vs.\ Chemistry/IUPAC ($\Delta U = Q + w_{\mathrm{on}}$) sign translation across all 11 canonical processes \src{S13,S16}.}\label{tab:02:signtrans}
 \footnotesize\setlength{\tabcolsep}{3.5pt}\renewcommand{\arraystretch}{1.14}
 \begin{tabularx}{\linewidth}{@{}l c c c c X@{}}\toprule
-\textbf{Process / Physical Action} & $\boldsymbol{\Delta V}$ & \textbf{Heat $\boldsymbol{Q}$} & \textbf{Physics $\boldsymbol{W_{\mathrm{by}}}$} & \textbf{Chem $\boldsymbol{W_{\mathrm{on}}}$} & \textbf{Internal Energy Change $\boldsymbol{\Delta U}$ (Identical in Both!)} \\\midrule
+\textbf{Process / Physical Action} & $\boldsymbol{\Delta V}$ & \textbf{Heat $\boldsymbol{Q}$} & \textbf{Physics $\boldsymbol{W_{\mathrm{by}}}$} & \textbf{Chem $\boldsymbol{w_{\mathrm{on}}}$} & \textbf{Internal Energy Change $\boldsymbol{\Delta U}$ (Identical in Both!)} \\\midrule
 1. Isochoric heating (rigid tank) & $0$ & $>0$ & $0$ & $0$ & $\Delta U = +Q = +nC_{V,m}\Delta T > 0$ ($\Delta T > 0$) \\
 2. Isochoric cooling (rigid tank) & $0$ & $<0$ & $0$ & $0$ & $\Delta U = Q = nC_{V,m}\Delta T < 0$ ($\Delta T < 0$) \\
 3. Isobaric expansion ($P=\mathrm{const}$) & $>0$ & $+nC_{P,m}\Delta T > 0$ & $+P\Delta V > 0$ & $-P\Delta V < 0$ & $\Delta U = Q - P\Delta V = +nC_{V,m}\Delta T > 0$ \\
 4. Isobaric compression ($P=\mathrm{const}$) & $<0$ & $nC_{P,m}\Delta T < 0$ & $P\Delta V < 0$ & $-P\Delta V > 0$ & $\Delta U = Q - P\Delta V = nC_{V,m}\Delta T < 0$ \\
-5. Isothermal expansion (ideal gas) & $>0$ & $+nRT\ln(V_2/V_1) > 0$ & $+nRT\ln(V_2/V_1) > 0$ & $-nRT\ln(V_2/V_1) < 0$ & $\Delta U = 0 \implies Q = W_{\mathrm{by}} = -W_{\mathrm{on}} > 0$ \\
-6. Isothermal compression (ideal gas) & $<0$ & $nRT\ln(V_2/V_1) < 0$ & $nRT\ln(V_2/V_1) < 0$ & $-nRT\ln(V_2/V_1) > 0$ & $\Delta U = 0 \implies Q = W_{\mathrm{by}} = -W_{\mathrm{on}} < 0$ \\
-7. Adiabatic expansion ($Q=0$) & $>0$ & $0$ & $+\dfrac{P_1V_1-P_2V_2}{\gamma-1} > 0$ & $-\dfrac{P_1V_1-P_2V_2}{\gamma-1} < 0$ & $\Delta U = -W_{\mathrm{by}} = +W_{\mathrm{on}} < 0$ (gas cools, $\Delta T < 0$) \\
-8. Adiabatic compression ($Q=0$) & $<0$ & $0$ & $\dfrac{P_1V_1-P_2V_2}{\gamma-1} < 0$ & $-\dfrac{P_1V_1-P_2V_2}{\gamma-1} > 0$ & $\Delta U = -W_{\mathrm{by}} = +W_{\mathrm{on}} > 0$ (gas warms, $\Delta T > 0$) \\
+5. Isothermal expansion (ideal gas) & $>0$ & $+nRT\ln(V_2/V_1) > 0$ & $+nRT\ln(V_2/V_1) > 0$ & $-nRT\ln(V_2/V_1) < 0$ & $\Delta U = 0 \implies Q = W_{\mathrm{by}} = -w_{\mathrm{on}} > 0$ \\
+6. Isothermal compression (ideal gas) & $<0$ & $nRT\ln(V_2/V_1) < 0$ & $nRT\ln(V_2/V_1) < 0$ & $-nRT\ln(V_2/V_1) > 0$ & $\Delta U = 0 \implies Q = W_{\mathrm{by}} = -w_{\mathrm{on}} < 0$ \\
+7. Adiabatic expansion ($Q=0$) & $>0$ & $0$ & $+\dfrac{P_1V_1-P_2V_2}{\gamma-1} > 0$ & $-\dfrac{P_1V_1-P_2V_2}{\gamma-1} < 0$ & $\Delta U = -W_{\mathrm{by}} = +w_{\mathrm{on}} < 0$ (gas cools, $\Delta T < 0$) \\
+8. Adiabatic compression ($Q=0$) & $<0$ & $0$ & $\dfrac{P_1V_1-P_2V_2}{\gamma-1} < 0$ & $-\dfrac{P_1V_1-P_2V_2}{\gamma-1} > 0$ & $\Delta U = -W_{\mathrm{by}} = +w_{\mathrm{on}} > 0$ (gas warms, $\Delta T > 0$) \\
 9. Free expansion into vacuum ($P_{\mathrm{ext}}=0$) & $>0$ & $0$ & $0$ & $0$ & $\Delta U = 0$ ($\Delta T = 0$ for ideal gas; $\Delta S = nR\ln(V_2/V_1) > 0$) \\
 10. Clockwise $P$--$V$ cycle (heat engine) & $0_{\mathrm{cyc}}$ & $Q_H - Q_C > 0$ & $+\mathrm{Area} > 0$ & $-\mathrm{Area} < 0$ & $\Delta U_{\mathrm{cycle}} = 0 \implies W_{\mathrm{net,by}} = Q_H - Q_C > 0$ \\
 11. Counterclockwise $P$--$V$ cycle (refrig.) & $0_{\mathrm{cyc}}$ & $Q_C - Q_H < 0$ & $-\mathrm{Area} < 0$ & $+\mathrm{Area} > 0$ & $\Delta U_{\mathrm{cycle}} = 0 \implies W_{\mathrm{in}} = W_{\mathrm{net,on}} = Q_H - Q_C > 0$ \\\bottomrule

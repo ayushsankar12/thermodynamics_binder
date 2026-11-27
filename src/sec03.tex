@@ -329,8 +329,9 @@ At $T_0 = \SI{20.0}{\celsius}$, a circular brass collar ($\alpha_{\mathrm{brass}
 \]
 \textbf{(b)} Heating both together to $T = T_0 + \Delta T$ requires $D_{\mathrm{brass},0}(1 + \alpha_{\mathrm{brass}}\Delta T) = D_{\mathrm{steel},0}(1 + \alpha_{\mathrm{steel}}\Delta T)$:
 \[
-  \Delta T = \frac{D_{\mathrm{steel},0} - D_{\mathrm{brass},0}}{\alpha_{\mathrm{brass}} D_{\mathrm{brass},0} - \alpha_{\mathrm{steel}} D_{\mathrm{steel},0}} = \frac{0.010}{19.0\times 10^{-6}(4.990) - 12.0\times 10^{-6}(5.000)} = \frac{0.010}{\num{3.481e-5}} = \SI{287.27}{\celsius} \implies T = \SI{307.3}{\celsius} \approx \mathbf{\SI{3.1e2}{\celsius}}.
+  \Delta T = \frac{D_{\mathrm{steel},0} - D_{\mathrm{brass},0}}{\alpha_{\mathrm{brass}} D_{\mathrm{brass},0} - \alpha_{\mathrm{steel}} D_{\mathrm{steel},0}} = \frac{0.010}{19.0\times 10^{-6}(4.990) - 12.0\times 10^{-6}(5.000)} = \frac{0.010}{\num{3.481e-5}} = \SI{287.27}{\celsius}
 \]
+so $T = \SI{307.3}{\celsius} \approx \mathbf{\SI{3.1e2}{\celsius}}$ (2 s.f.).
 \textbf{Sig figs:} the gap $5.000 - 4.990 = \SI{0.010}{\centi\meter}$ has only 2 significant figures, so both temperatures are reported to 2 (full values kept in the working).
 \verifiedby{At $T = \SI{307.27}{\celsius}$, $D_{\mathrm{brass}} = 4.990(1 + 19\times 10^{-6}\times 287.274) = \SI{5.01723}{\centi\meter} = D_{\mathrm{steel}}$ (\texttt{check\_sec02\_05.py}).}
 \end{workedexample}

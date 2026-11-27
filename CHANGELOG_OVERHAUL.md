@@ -200,3 +200,55 @@ Source: the Thermodynamics – Div C FAQ page (`soinc.org/thermodynamics-div-c`)
 | `REVIEW_NEEDED.md` | — | section B: TS formula conflict (B1), multipliers and stacking (B2), TG/PE formulas (B3), tiebreak (B4), heights/times/setup windows (B5), notes rule and calculators (B6), cup-cover removal (B7), polystyrene consequence (B8), prediction deadline (B9) — **not changed in the binder**; A2: two-node lump vs. profile; C1–C2 | prompt Phase 3 |
 
 No numbers changed in Phase 3. `verify_all.py`: 1374/1374.
+
+---
+
+## Phase 4 — Consistency (in progress; paused 26 Nov 2026)
+
+### Part 1 (commit 9581da9): one prediction formula, one hand-in rule, TG = max(0, ·), render bugs
+| Change | Files | Old → New | Reason |
+|---|---|---|---|
+| New macros | `build/thermobinder.sty` (canonical) = `src/thermobinder.sty` | — → `\TpredFormula` (T_pred = T_start + TG_table(h, P, t) + k_room(t)·(T_room − T_start) − ΔT_cool), `\HandInRule` ("Hand in at heating minute 3; hard deadline before heating ends (Rule 5.II.f)."), `\TGFormula` | one definition per formula/rule |
+| Prediction formula | §0.4 card, §0.5 timeline, QS-13, §15 day-of list + choreography table, §16 boxed Eq., Ex 16.2, §16 day-of card, §21.2, §23 C39, §23.7 (×2), App D, Device Handbook | Device Handbook "S₀ + k_start·T_start"; QS-13 "T_i + s_strat[P_abs/G_loss − (T_i − T_room)](1 − e^(−t/τ)) − ΔT_cool" with C_eff ≈ 435 J/K, τ ≈ 900–1400 s, s_strat ≈ 1.25–1.38; §21 and §23 C39 forms without −ΔT_cool → **`\TpredFormula`** everywhere | single formula (prompt Phase 4) |
+| Hand-in rule | §0 (t = 7 min, t = 8 min), §15 ("immediately"), §16 ("≥ 8 min to spare"), §21.2 (t_heat = 3 min), §23 (t = 5:30; minutes 6–9 "immediately"), App D (t = 5 min), Device Handbook ("immediately") | → **`\HandInRule`** | single rule |
+| TG, PE | cover, App B, App C, §2, §16 index entry | TG = T_f − T_i → **max(0, T_f − T_i)**; PE → **max(0, 1 − \|T_f − T_pred\|/T_f)** (App B, App C) | match §16.1 |
+| Literal Markdown | `sec02, sec03, sec07, sec08, sec09, sec10, sec12, sec13, sec17, sec18, sec19, sec20` (36 lines) | `**…**` → `\textbf{…}`; `*(…)*` → `\emph{(…)}` | render bug |
+| §3.4 heading | `sec03.tex` | (\`2027 Rule 5.c.v\`) → (Rule `5.c.v`) | backticks printed |
+| Running heads | 12 `\binderchapter` short titles (§0, §2–§5, §10–§13, §21–§23) | "§10 Heat Conduction" → "Heat Conduction" (the head already prints "§10 ·") | "§10 · §10" doubled heads |
+| §20 intro | `sec20.tex` | "six worked diagnostic case studies" → **seven** | there are 7 |
+| App A | `appA.tex` | "Table A.4a / A.4b" under §A.2 → **Table A.2b / A.2c** | numbering |
+
+### Part 2 (commit f778d17): house constants L_f, c_ice, L_v, c_steam
+| Example / place | Old → New | Check |
+|---|---|---|
+| Ex 01.3 | L_f 333.4 → 333.55, c_ice 2.093 → 2.09; Q₁+Q₂ 18763 → 18767.5 J; **T_f 30.42 → 30.41 °C**; balance line 25126 → 25130 J at 30.413 °C | `EX-01.3-*` |
+| Ex 04.2 | c_ice 2093 → 2090; E_warm 3453.45 → 3448.50 J; E_net −16115.55 → −16110.60 J; **ice left 48.32 → 48.30 g**, melted 61.68 → 61.70 g, liquid 311.68 → 311.70 g | `EX-04.2-*`, `check_sec02_05` |
+| Ex 04.3 / 04.4 | E_need 28358.4 → 28356.0 J; E_net 81526.6 → 81529.0 J (T_f 62.02 °C unchanged; verified 62.0153 → 62.0172); Ex 04.4 E_net 177328.6 → 177331.0 J, condensed 46.1626 → 46.1616 g, 104161.4 → 104159.0 J (answers 13.84 g / 326.16 g unchanged) | `EX-04.3-*`, `EX-04.4-*` |
+| Ex 04.9 | c_ice 2093 → 2090; E_need 250362.0 → 250290.0 J; E_net −246178.0 → −246106.0 J; **T_f −21.59 → −21.57 °C** | `EX-04.9-*` |
+| Fig 4.x heating curve | stage energies 83.72/417.27/835.67/3092.07/3216.87 → **83.60/417.15/835.55/3091.95/3216.75 kJ/kg** (ticks and caption) | `FIG-4.x-Q4`, `check_sec02_05` |
+| Table 4.1, Table 4.x ice rows | 2093 → **2090** J/(kg·K) | — |
+| Ex 08.1 | L_f 334.0 → 333.55; Q 918.96 → 918.06 kJ; ΔS_ice terms 317.80/2445.54/591.36 → **317.84/2442.25/591.31** (the first and third were mis-rounded); ΔS_ice 3354.70 → 3351.40; ΔS_lake −3134.78 → −3131.71; **ΔS_univ 219.92 → 219.69 J/K** | `EX-08.1-*`, `ex08_1` |
+| P10.1 (Stefan ice growth) | L_f 333.5 → 333.55; **27613 s → 27618 s, 7.670 h → 7.672 h** | `P10.1-*` |
+| Ex 19.1 | c_ice 2100 → 2090, R 8.31446 → 8.314; t₁ 15.411 → 15.338 s; total 1599.25 → 1599.17 s; **T_f 267.42 → 267.48 °C**; V_f 0.61556 → 0.61559 m³; **W 62.34 → 62.35 kJ**; ΣΔH 847.02 → 847.01 kJ | `EX-19.1-*`, `ex19.1` |
+| Ex 20.1 (Case Study 1) | c_ice 2.10 → 2.09; naive T_f −19.90 → −19.89 °C; **melted 30.08 → 30.11 g** (150.11 g liquid, 49.89 g ice) | `EX-20.1-*`, `ex20.1` |
+| QS-03, QS-04, App A, §10 ice row, §18, §20, §21, §23 | 333.4/333.43/334 → **333.55**; 2093/2100/2.10/2.093 → **2090 / 2.09**; §21 L_v 2260 → **2256.4**; "use the test's value if one is given" added to QS-03 | — |
+| §4 steam c_p box | `rulebox` (rules only) listing 2080/2020/1864 → **`shortcut`**: use c_steam = 2.08 J/(g·K) unless the test gives one | box house style |
+
+### Part 3 (this commit): single device model, notation, layout regressions
+| Change | Files | Old → New | Reason |
+|---|---|---|---|
+| Reference-collector table | `sec16.tex` (start of §16.3, `tab:16:reference-collector`) | — → **"Reference collector (modeled), not our device"**: lookup base, 0.800 ratio, τ = 903 s, one-node fit (P_abs 24.0 W, C_eff 380 J/K, R 2.376 K/W ⇒ 49.7 / 58.0 °C), two-node lump (215.0 / 203.4 J/K ⇒ 39.80 °C, κ 1.556), depth profile, the three different "gain" ratios (45.1× intercepted, 13.6× delivered, 11.0× absorbed at 40 cm), stage half-angles; banner "Modeled for the reference collector. Replace with our measured runs." | one table for §13/§15/§16/§17 |
+| Stage angles | `sec15.tex` text, Table 15.3 | text 22°/28°/15° → **23.2°/33.5°/43.3°**; Table 15.3 stage-3 φ 15.2° → **43.3°** (its slope 0.943, unrolled radii 10.48/5.68 cm and arc 247.3° all give 43.3°; footnote replaced by φ = arctan s) | conflicting angles; Fig 15.1/15.2 labels still to redraw (Phase 9) |
+| τ line | `sec15.tex` formula card | τ = (215.0 J/K)(4.20 K/W) → **(380.0 J/K)(2.376 K/W) = 903 s, one-node fit** | 215 J/K is the two-node top capacitance; mixing models |
+| Table 15.4 ratio column | `sec15.tex` | 13.7× / 28.6× / 26.7× → **13.6× / 28.7× / 26.8×** (31.39/2.30, 37.35/1.30, 27.60/1.03); text "13.7× to 28.6× bare-cup power" → "13.6× to 28.7× the bare cup's share (40–50 cm)" | ratios did not match the printed capture values |
+| Checks | `verify/checks/check_reference_run.py` | 24 → **51** checks (table lines, ratios per row, angles, one-node values) | — |
+| Work notation | `sec02.tex`, `sec19.tex` | §2 W_on → **w_on** (chemistry only); §19 compressor W_on,* → **W_in,*** (work-input magnitude, as in COP) | W_by / w_on only |
+| Expansion α | QS-02, §0 router, App B | bare α → **α_L** (30) | α_L (expansion) vs α_abs vs α (diffusivity) |
+| Molarity | `appC.tex` glossary | Π = iMRT → **Π = icRT** (c = molarity) | bare M = molar mass only |
+| Exitance | `sec12.tex`, `sec23.tex` | M = σT⁴ → **M_b = σT⁴**; M = εσT⁴ → **M_e** | bare M = molar mass only |
+| Transmittance | `appA.tex` | τ= → **τ_opt=** | τ = time constant |
+| REVIEW A1 | `REVIEW_NEEDED.md` | device-model decision recorded | — |
+| Layout regressions from Phase 3 | `device_handbook.tex` module map, `sec15.tex` rule table + day-of table, `appD.tex` checklist, `sec14.tex` hazard table | long FAQ citations in non-wrapping `l` columns ("X columns too narrow", 270+ overfull boxes) → short forms ("FAQs", "FAQ 10/22") | Device Handbook overfull > 3 pt: 273 → 0 |
+| Ex 03.2, Ex 15.6b displays | `sec03.tex`, `sec15.tex` | displays added in Phase 2a overflowed by 14.6 pt / 9.6 pt → final step moved to text; Ex 15.6b uses `\tfrac` | overfull |
+
+Status after Part 3: `verify_all.py` **1419/1419**; draft of all sections compiles with **0** overfull boxes > 3 pt; QuickRef 12 pp and Device Handbook 49 pp build with 0 errors.

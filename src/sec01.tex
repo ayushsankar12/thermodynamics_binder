@@ -96,23 +96,23 @@ $\num{8.31446e7}$ & $\mathrm{erg/(mol\cdot K)}$ & CGS units ($\SI{1}{\joule} = \
 \begin{quicksheet}[QS-02 --- Thermal Expansion, Bimetallic Strips, Thermal Stress \& Water Anomaly]
 \label{sec:01.2}\markright{QS-02: Thermal Expansion \& Stress}
 \idxtopic{thermal expansion (linear, area, volume)}\idxtopic{bimetallic strip curvature}\idxtopic{thermal stress}\idxtopic{water 4 C density maximum}
-\idxformula{Linear expansion $\Delta L = \alpha L_0 \Delta T$}\idxformula{Thermal stress $\sigma = -E\alpha\Delta T$}\idxformula{Bimetallic curvature $R_{\mathrm{curv}}$}
+\idxformula{Linear expansion $\Delta L = \alpha_L L_0 \Delta T$}\idxformula{Thermal stress $\sigma = -E\alpha_L\Delta T$}\idxformula{Bimetallic curvature $R_{\mathrm{curv}}$}
 
 \begin{ftab}
-$\Delta L = \alpha L_0 \Delta T \implies L = L_0(1 + \alpha\Delta T)$ & $L_0$ (\si{\meter}), $\alpha$ (\si{\per\kelvin}), $\Delta T = T - T_0$ (\si{\kelvin} or \si{\celsius}) & $\alpha\Delta T \ll 1$ & 1D rod, tape, hole diameter, clearance\\
-$\Delta A = 2\alpha A_0 \Delta T$;\quad $\Delta V = \beta V_0 \Delta T \approx 3\alpha V_0 \Delta T$ & $A_0$ (\si{\square\meter}), $V_0$ (\si{\cubic\meter}), $\beta \approx 3\alpha$ (isotropic solid) & Isotropic & Plate/aperture area ($2\alpha$); solid/cavity volume ($3\alpha$)\\
+$\Delta L = \alpha_L L_0 \Delta T \implies L = L_0(1 + \alpha_L\Delta T)$ & $L_0$ (\si{\meter}), $\alpha_L$ (\si{\per\kelvin}), $\Delta T = T - T_0$ (\si{\kelvin} or \si{\celsius}) & $\alpha_L\Delta T \ll 1$ & 1D rod, tape, hole diameter, clearance\\
+$\Delta A = 2\alpha_L A_0 \Delta T$;\quad $\Delta V = \beta V_0 \Delta T \approx 3\alpha_L V_0 \Delta T$ & $A_0$ (\si{\square\meter}), $V_0$ (\si{\cubic\meter}), $\beta \approx 3\alpha_L$ (isotropic solid) & Isotropic & Plate/aperture area ($2\alpha_L$); solid/cavity volume ($3\alpha_L$)\\
 $\Delta V_{\mathrm{overflow}} = (\beta_{\mathrm{liq}} - 3\alpha_{\mathrm{cup}})V_0\Delta T$ & $\beta_{\mathrm{liq}}$ (\si{\per\kelvin}), $\alpha_{\mathrm{cup}}$ (\si{\per\kelvin}), $V_0$ (\si{\cubic\meter}) & Filled brim & Liquid overflowing a heated container\\
 $\rho(T) = \dfrac{\rho_0}{1 + \beta\Delta T} \approx \rho_0(1 - \beta\Delta T)$ & $\rho_0$ (\si{\kilogram\per\cubic\meter}), $\beta$ (\si{\per\kelvin}); mass $m$ fixed & $\beta\Delta T \ll 1$ & Buoyancy shift, hydrometer/barometer correction\\
-$\sigma_{\mathrm{th}} = \dfrac{F}{A} = -E\alpha\Delta T + E\dfrac{\delta_{\mathrm{gap}}}{L_0}$ & $E$ Young's modulus (\si{\pascal}), $\delta_{\mathrm{gap}}$ initial slack (\si{\meter}) & Rigid walls & Clamped rod buckling / rail thermal stress\\
+$\sigma_{\mathrm{th}} = \dfrac{F}{A} = -E\alpha_L\Delta T + E\dfrac{\delta_{\mathrm{gap}}}{L_0}$ & $E$ Young's modulus (\si{\pascal}), $\delta_{\mathrm{gap}}$ initial slack (\si{\meter}) & Rigid walls & Clamped rod buckling / rail thermal stress\\
 $R_{\mathrm{curv}} \approx \dfrac{d}{(\alpha_2 - \alpha_1)\Delta T}$ \ (general: $\dfrac{d\,[3(1+m)^2+(1+mn)(m^2+\tfrac{1}{mn})]}{6(\alpha_2-\alpha_1)\Delta T(1+m)^2}$) & $d$ layer thickness (\si{\meter}); Timoshenko: $m=t_1/t_2, n=E_1/E_2, d=t_1+t_2$ & Elastic strip & Bimetallic strip radius ($\theta = L/R_{\mathrm{curv}}$ rad)\\
-$\dfrac{\Delta P}{P_0} = \dfrac{1}{2}\alpha\Delta T \implies \Delta t_{\mathrm{clock}} = -\dfrac{1}{2}\alpha\Delta T \cdot t_{\mathrm{elapsed}}$ & $P_0 = 2\pi\sqrt{L_0/g}$ (\si{\second}); $\Delta t_{\mathrm{clock}} < 0$ runs slow & $\alpha\Delta T \ll 1$ & Metal pendulum clock losing/gaining time\\
+$\dfrac{\Delta P}{P_0} = \dfrac{1}{2}\alpha_L\Delta T \implies \Delta t_{\mathrm{clock}} = -\dfrac{1}{2}\alpha_L\Delta T \cdot t_{\mathrm{elapsed}}$ & $P_0 = 2\pi\sqrt{L_0/g}$ (\si{\second}); $\Delta t_{\mathrm{clock}} < 0$ runs slow & $\alpha_L\Delta T \ll 1$ & Metal pendulum clock losing/gaining time\\
 \end{ftab}
 
 \begin{twocol}[0.52]
 {\footnotesize\setlength{\tabcolsep}{3pt}\renewcommand{\arraystretch}{1.10}
 \rowcolors{2}{rowalt}{white}
 \begin{tabularx}{\linewidth}{@{}l r r r X@{}}\toprule
-\hdr{Material ($\SI{20}{\celsius}$)} & \hdr{$\alpha$ ($10^{-6}\,\text{K}^{-1}$)} & \hdr{$\beta$ ($10^{-6}\,\text{K}^{-1}$)} & \hdr{$E$ (\si{\giga\pascal})} & \hdr{Notes \src{S12,S13,S14}}\\\midrule
+\hdr{Material ($\SI{20}{\celsius}$)} & \hdr{$\alpha_L$ ($10^{-6}\,\text{K}^{-1}$)} & \hdr{$\beta$ ($10^{-6}\,\text{K}^{-1}$)} & \hdr{$E$ (\si{\giga\pascal})} & \hdr{Notes \src{S12,S13,S14}}\\\midrule
 Invar ($\mathrm{Fe\text{--}36Ni}$) & $1.2$ & $3.6$ & $141$ & Precision pendulums\\
 Fused quartz ($\mathrm{SiO_2}$) & $0.55$ & $1.65$ & $73$ & Thermal-shock proof\\
 Borosilicate (Pyrex) & $3.2$ & $9.6$ & $64$ & Lab beakers / lamps\\
@@ -120,7 +120,7 @@ Soda-lime glass & $9.0$ & $27$ & $70$ & Cracks under $\Delta T > \SI{60}{\kelvin
 Carbon steel / Iron & $12.0$ & $36$ & $200$ & Bridges, rails\\
 Stainless steel (304) & $17.3$ & $51.9$ & $193$ & Thermowells, probes\\
 Copper ($\mathrm{Cu}$) & $16.5$ & $49.5$ & $117$ & Calorimeter cups\\
-Yellow brass ($\mathrm{CuZn}$) & $19.0$ & $57.0$ & $105$ & Bimetallic high-$\alpha$ side\\
+Yellow brass ($\mathrm{CuZn}$) & $19.0$ & $57.0$ & $105$ & Bimetallic high-$\alpha_L$ side\\
 Aluminum ($\mathrm{Al}$) & $23.1$ & $69.3$ & $69$ & Reflector frames\\
 Lead ($\mathrm{Pb}$) & $28.9$ & $86.7$ & $16$ & Soft low-melting metal\\
 Ice Ih ($\SI{0}{\celsius}$) & $51.0$ & $153$ & $9.3$ & $\rho = \SI{916.7}{\kilogram\per\cubic\meter}$\\
